@@ -1,0 +1,318 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D1699CD0-EC5D-4BAC-AF4E-A145E417733B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DataInterfaces</RootNamespace>
+    <AssemblyName>DataInterfaces</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Libraries\CoreLib\Classes\Tools.cs" />
+    <Compile Include="Libraries\CoreLib\Interfaces\IFeed.cs" />
+    <Compile Include="Libraries\CoreLib\Interfaces\IWindowWrapper.cs" />
+    <Compile Include="Libraries\CoreLib\Interfaces\ISystemStatus.cs" />
+    <Compile Include="Libraries\IntegrationLib\Classes\PluginMetadataAttribute.cs" />
+    <Compile Include="Libraries\IntegrationLib\Classes\UserIdentity.cs" />
+    <Compile Include="Libraries\IntegrationLib\Classes\ServicePluginBase.cs" />
+    <Compile Include="Libraries\IntegrationLib\Interfaces\IUserIdentity.cs" />
+    <Compile Include="Libraries\IntegrationLib\Interfaces\IAuthenticationPlugin.cs" />
+    <Compile Include="Libraries\IntegrationLib\Interfaces\IServiceHook.cs" />
+    <Compile Include="Libraries\IntegrationLib\Interfaces\IServicePlugin.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Code\Behaviours\GridViewBehavior.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Extensions\DependencyObjectExtensions.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Extensions\FrameworkElementExtensions.cs" />
+    <Compile Include="Modules\Client\EventArgs.cs" />
+    <Compile Include="Modules\Client\Events.cs" />
+    <Compile Include="Modules\Client\Exceptions.cs" />
+    <Compile Include="Modules\Server\Delegates.cs" />
+    <Compile Include="Modules\Server\Exceptions.cs" />
+    <Compile Include="Libraries\SharedLib\Delegates.cs" />
+    <Compile Include="Libraries\SharedLib\Classes\ImageCacheManager.cs" />
+    <Compile Include="Libraries\IntegrationLib\Interfaces\IProvidePrincipal.cs" />
+    <Compile Include="Libraries\IntegrationLib\Classes\HttpCredentials.cs" />
+    <Compile Include="Modules\Client\Interfaces\IClientApplication.cs" />
+    <Compile Include="Modules\Client\Interfaces\IExecutionContext.cs" />
+    <Compile Include="Modules\Client\Interfaces\IExecutionContextSyncInfo.cs" />
+    <Compile Include="Libraries\CoreLib\Delegates.cs" />
+    <Compile Include="Libraries\CoreLib\Diagnostics\IProcessTrace.cs" />
+    <Compile Include="Libraries\CoreLib\Hooking\IHookBase.cs" />
+    <Compile Include="Libraries\CoreLib\Hooking\IKeyboardHook.cs" />
+    <Compile Include="Libraries\CoreLib\Hooking\IMouseHook.cs" />
+    <Compile Include="Libraries\CoreLib\Hooking\IShellHook.cs" />
+    <Compile Include="Libraries\CoreLib\Interfaces\IRegistryFile.cs" />
+    <Compile Include="Libraries\cyClone\Classes\Classes.cs" />
+    <Compile Include="Libraries\cyClone\Interfaces\IFileSystemEntryView.cs" />
+    <Compile Include="Libraries\GizmoShell\Delegates.cs" />
+    <Compile Include="Libraries\GizmoShell\Enumerations.cs" />
+    <Compile Include="Libraries\GizmoShell\EventArgs.cs" />
+    <Compile Include="Libraries\GizmoShell\Interfaces\IShellItemBase.cs" />
+    <Compile Include="Libraries\GizmoShell\Interfaces\IShellNotifyIcon.cs" />
+    <Compile Include="Libraries\GizmoShell\Interfaces\IWindowInfo.cs" />
+    <Compile Include="Libraries\IntegrationLib\Delegates.cs" />
+    <Compile Include="Libraries\IntegrationLib\Enumerations.cs" />
+    <Compile Include="Libraries\IntegrationLib\EventArgs.cs" />
+    <Compile Include="Libraries\IntegrationLib\Interfaces\IApplicationLicenseKey.cs" />
+    <Compile Include="Libraries\IntegrationLib\Interfaces\IConfigurableLicenseManager.cs" />
+    <Compile Include="Libraries\IntegrationLib\Interfaces\IIntegrationProvider.cs" />
+    <Compile Include="Libraries\IntegrationLib\Interfaces\ILicenseReservation.cs" />
+    <Compile Include="Libraries\IntegrationLib\Classes\Licensing.cs" />
+    <Compile Include="Libraries\IntegrationLib\Interfaces\IPlugin.cs" />
+    <Compile Include="Libraries\IntegrationLib\Interfaces\ILoginProvider.cs" />
+    <Compile Include="Libraries\SharedLib\Classes\Requests.cs" />
+    <Compile Include="Libraries\CoreLib\Classes\Extensions.cs" />
+    <Compile Include="Modules\Client\Interfaces\IClientInterface.cs" />
+    <Compile Include="Libraries\CoreLib\Diagnostics\ICoreProcess.cs" />
+    <Compile Include="Libraries\CoreLib\Diagnostics\ICoreProcessModule.cs" />
+    <Compile Include="Libraries\CoreLib\Diagnostics\IProcessKillInfo.cs" />
+    <Compile Include="Libraries\CoreLib\Diagnostics\IRemoteCoreProcess.cs" />
+    <Compile Include="Libraries\CoreLib\Enumerations.cs" />
+    <Compile Include="Libraries\CoreLib\Interfaces\IAbortHandle.cs" />
+    <Compile Include="Libraries\cyClone\Delegates.cs" />
+    <Compile Include="Libraries\cyClone\Enumerations.cs" />
+    <Compile Include="Libraries\cyClone\Interfaces\IMappingsConfiguration.cs" />
+    <Compile Include="Libraries\cyClone\Interfaces\IcyAction.cs" />
+    <Compile Include="Libraries\cyClone\Interfaces\IcyDiffList.cs" />
+    <Compile Include="Libraries\cyClone\Interfaces\IcyDirectoryInfo.cs" />
+    <Compile Include="Libraries\cyClone\Interfaces\IcyDriveInfo.cs" />
+    <Compile Include="Libraries\cyClone\Interfaces\IcyFileInfo.cs" />
+    <Compile Include="Libraries\cyClone\Interfaces\IcyFileSystemInfo.cs" />
+    <Compile Include="Libraries\cyClone\Interfaces\IcyHandleInfo.cs" />
+    <Compile Include="Libraries\cyClone\Interfaces\IcyMapping.cs" />
+    <Compile Include="Libraries\cyClone\Interfaces\IcyRemoteFileStream.cs" />
+    <Compile Include="Libraries\cyClone\Interfaces\IcyStreamsWriter.cs" />
+    <Compile Include="Libraries\cyClone\Interfaces\IcyStructure.cs" />
+    <Compile Include="Libraries\cyClone\Interfaces\IcySync.cs" />
+    <Compile Include="Libraries\cyClone\Interfaces\IEnumContextBase.cs" />
+    <Compile Include="Libraries\cyClone\Interfaces\IPatchBlock.cs" />
+    <Compile Include="Libraries\CoreLib\Hooking\Classes.cs" />
+    <Compile Include="Libraries\CoreLib\Hooking\Enumerations.cs" />
+    <Compile Include="Libraries\IntegrationLib\Interfaces\ISmartlaunchCommand.cs" />
+    <Compile Include="Libraries\IntegrationLib\Classes\UserProfileBase.cs" />
+    <Compile Include="Libraries\Localization\Attributes\LocalizedAttribute.cs" />
+    <Compile Include="Libraries\Localization\BaseExtenstions\BaseLocalizeExtension.cs" />
+    <Compile Include="Libraries\Localization\Converters\ResourceEnumConverter.cs" />
+    <Compile Include="Libraries\Localization\Engine\LocalizeDictionary.cs" />
+    <Compile Include="Libraries\Localization\Engine\ObjectDependencyManager.cs" />
+    <Compile Include="Libraries\Localization\Engine\OddsFormatType.cs" />
+    <Compile Include="Libraries\Localization\Extensions\LocBrushExtension.cs" />
+    <Compile Include="Libraries\Localization\Extensions\LocDoubleExtension.cs" />
+    <Compile Include="Libraries\Localization\Extensions\LocFlowDirectionExtension.cs" />
+    <Compile Include="Libraries\Localization\Extensions\LocImageExtension.cs" />
+    <Compile Include="Libraries\Localization\Extensions\LocTextLowerExtension.cs" />
+    <Compile Include="Libraries\Localization\Extensions\LocTextUpperExtension.cs" />
+    <Compile Include="Libraries\Localization\Extensions\LocThicknessExtension.cs" />
+    <Compile Include="Libraries\Localization\Extensions\LocTextExtension.cs" />
+    <Compile Include="Libraries\NetLib\Enumerations.cs" />
+    <Compile Include="Libraries\NetLib\IConnection.cs" />
+    <Compile Include="Modules\Server\Interfaces\ILicense.cs" />
+    <Compile Include="Libraries\SharedLib\Applications\IAppProfile.cs" />
+    <Compile Include="Libraries\SharedLib\Applications\ICategory.cs" />
+    <Compile Include="Libraries\SharedLib\Applications\IClonable.cs" />
+    <Compile Include="Libraries\SharedLib\Applications\IDeploymentProfile.cs" />
+    <Compile Include="Libraries\SharedLib\Applications\IItemVisualOptionsBase.cs" />
+    <Compile Include="Libraries\SharedLib\Applications\IPersonalUserFileBase.cs" />
+    <Compile Include="Libraries\SharedLib\Attributes.cs" />
+    <Compile Include="Libraries\SharedLib\Classes\BinarySerializationStreamAnalyzer.cs" />
+    <Compile Include="Libraries\SharedLib\Commands\CommandsEnumerations.cs" />
+    <Compile Include="Libraries\SharedLib\Dispatcher\Exceptions.cs" />
+    <Compile Include="Libraries\SharedLib\Dispatcher\ICommandParser.cs" />
+    <Compile Include="Libraries\SharedLib\Dispatcher\IMessageDispatcher.cs" />
+    <Compile Include="Libraries\SharedLib\Dispatcher\IOperation.cs" />
+    <Compile Include="Libraries\SharedLib\Dispatcher\ISyncOperation.cs" />
+    <Compile Include="Libraries\SharedLib\Enumerations.cs" />
+    <Compile Include="Libraries\SharedLib\Commands\ICommand.cs" />
+    <Compile Include="Libraries\SharedLib\Interfaces\IPluginConfiguration.cs" />
+    <Compile Include="Libraries\SharedLib\Interfaces\IRestriction.cs" />
+    <Compile Include="Libraries\SharedLib\Interfaces\ISecurityPolicy.cs" />
+    <Compile Include="Libraries\SharedLib\Logging\ILogProvider.cs" />
+    <Compile Include="Modules\Server\EventArgs.cs" />
+    <Compile Include="Libraries\SharedLib\EventArgs.cs" />
+    <Compile Include="Libraries\SharedLib\Container\IContainer.cs" />
+    <Compile Include="Libraries\SharedLib\Interfaces\IItemBase.cs" />
+    <Compile Include="Libraries\NetLib\INetwork.cs" />
+    <Compile Include="Libraries\IntegrationLib\Interfaces\IPluginManager.cs" />
+    <Compile Include="Libraries\SharedLib\Configuration\IApplicationModule.cs" />
+    <Compile Include="Libraries\SharedLib\Applications\IApplicationProfile.cs" />
+    <Compile Include="Libraries\SharedLib\Applications\IApplicationContainer.cs" />
+    <Compile Include="Libraries\SharedLib\Applications\ICDImage.cs" />
+    <Compile Include="Libraries\SharedLib\ViewModels\IHostManagerView.cs" />
+    <Compile Include="Libraries\SharedLib\Applications\IExecutable.cs" />
+    <Compile Include="Libraries\NetLib\IHostEntry.cs" />
+    <Compile Include="Libraries\IntegrationLib\Interfaces\ILicenseManagerPlugin.cs" />
+    <Compile Include="Libraries\IntegrationLib\Interfaces\ILicenseProfile.cs" />
+    <Compile Include="Libraries\SharedLib\Management\Management.cs" />
+    <Compile Include="Libraries\SharedLib\Media\IMediaObjects.cs" />
+    <Compile Include="Modules\Server\Interfaces\IServiceInterface.cs" />
+    <Compile Include="Libraries\SharedLib\Operations\IOperation.cs" />
+    <Compile Include="Libraries\SharedLib\Tasks\ITask.cs" />
+    <Compile Include="Libraries\SharedLib\User\IUserProfile.cs" />
+    <Compile Include="Libraries\IntegrationLib\Interfaces\IApplicationLicense.cs" />
+    <Compile Include="Libraries\SharedLib\Classes\Shared.cs" />
+    <Compile Include="Libraries\ServerQueryLib\ISQInterface.cs" />
+    <Compile Include="Libraries\SharedLib\User\IUserTimeStatus.cs" />
+    <Compile Include="Libraries\SharedLib\ViewModels\IMessageBoxModel.cs" />
+    <Compile Include="Libraries\SharedLib\ViewModels\ISplashWindowModelBase.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Code\Adonrners\BaseAdroner.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Code\Behaviours\CommandBehavior.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Code\Behaviours\CommandBehaviorBinding.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Code\Behaviours\SelectorKeyCommandBehavior.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Code\Behaviours\EventHandlerGenerator.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Code\Behaviours\GridViewColumnResize.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Code\Behaviours\PasswordBoxAssistant.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Code\Behaviours\SelectorDoubleClickCommandBehavior.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Code\Behaviours\TreeViewItemBehaviours.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Code\Classes.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Code\DependencyProperties.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Code\External\Actions\CommandDrivenGoToStateAction.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Code\External\Events\EventArgs\CloseRequestEventArgs.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Code\External\Events\EventArgs\UICompletedEventArgs.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Code\External\Events\WeakEvents\WeakEvent.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Code\External\Events\WeakEvents\WeakEventAction.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Code\External\Events\WeakEvents\WeakEventHelper.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Code\External\Events\WeakEvents\WeakEventProxy.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Code\External\EventToCommandArgs.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Code\External\SimpleCommands.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Code\External\Triggers\CompletedAwareCommandTrigger.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Code\External\Triggers\CompletedAwareGotoStateCommandTrigger.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Code\External\Triggers\EventToCommandTrigger.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Code\MarkupExtensions\FirstFocusedElementExtension.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Converters\Converters.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Enumerations\Enumerations.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Extensions\Extensions.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Extensions\Helpers.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Interfaces\Interfaces.cs" />
+    <Compile Include="Libraries\SkinLib\Interfaces\IUILayout.cs" />
+    <Compile Include="Libraries\SkinLib\Classes\UIConfiguration.cs" />
+    <Compile Include="Libraries\SkinLib\Classes\UIEventHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Libraries\SkinLib\Classes\UIHandler.cs" />
+    <Compile Include="Libraries\SkinLib\Classes\UILayout.cs" />
+    <Compile Include="Libraries\SkinLib\Interfaces\IUIComponent.cs" />
+    <Compile Include="Libraries\SkinLib\Classes\UIComponent.cs" />
+    <Compile Include="Libraries\SkinLib\Interfaces\IUIConfiguration.cs" />
+    <Compile Include="Libraries\SkinLib\Interfaces\IUIHandler.cs" />
+    <Compile Include="Libraries\TransformLib\IEncryptionKey.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Modules\Client\ClientInstance.cs" />
+    <Compile Include="Libraries\SharedLib\ViewModels\ICategoriesView.cs" />
+    <Compile Include="Modules\Client\Interfaces\IClientViewModel.cs" />
+    <Compile Include="Libraries\Manager\IManager.cs" />
+    <Compile Include="Libraries\Manager\IManagerViewModel.cs" />
+    <Compile Include="Modules\Server\Interfaces\IServiceViewModel.cs" />
+    <Compile Include="Modules\Manager\ManagerInstance.cs" />
+    <Compile Include="Modules\Server\ServerInstance.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

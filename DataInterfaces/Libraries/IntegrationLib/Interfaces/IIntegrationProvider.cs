@@ -1,0 +1,81 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using SharedLib.Dispatcher;
+using IntegrationLib;
+using System.Windows.Controls;
+using SharedLib.User;
+using Client;
+
+namespace IntegrationLib
+{
+    #region IIntegrationProvider
+    public interface IIntegrationProvider
+    {
+        /// <summary>
+        /// Gets if the integration available.
+        /// </summary>
+        bool IsAvailable { get; }
+
+        /// <summary>
+        /// Occours when Availability changes.
+        /// </summary>
+        event AvailabilityChangedDelegate AvailabilityChanged;
+
+        /// <summary>
+        /// Activates the plugin.
+        /// </summary>
+        /// <param name="ip">Server Ip Address string.</param>
+        /// <param name="port">Server Port.</param>
+        void Activate(string ip, int port);
+
+        /// <summary>
+        /// Deactivates the plugin.
+        /// </summary>
+        void Deactivate();
+
+        /// <summary>
+        /// Gets if provider is active.
+        /// </summary>
+        bool IsActivated { get; }
+    }
+    #endregion
+
+    #region IClientSideIntegrationProvider
+    /// <summary>
+    /// Base provider interface for the client side management software integration.
+    /// </summary>
+    public interface IClientSideIntegrationProvider : IIntegrationProvider, ILoginProvider
+    {
+        /// <summary>
+        /// Gets the Client instance.
+        /// </summary>
+        IClient Client { get; }
+
+        /// <summary>
+        /// Set the given user info for current user.
+        /// </summary>
+        /// <param name="profile">User Profile.</param>
+        void SetUserInfo(IUserProfile profile);
+
+        /// <summary>
+        /// Sets the given password for current user.
+        /// </summary>
+        /// <param name="password">Password string.</param>
+        void SetUserPassword(string password);
+
+        /// <summary>
+        /// Gets a new instance of user profile to be used with this provider.
+        /// </summary>
+        /// <returns>IUserProfile implemented class instance.</returns>
+        IUserProfile GetProfileInstance();
+
+        /// <summary>
+        /// Initiates manager login.
+        /// </summary>
+        /// <returns>True if login was done locally, false if login will occour from server side.</returns>
+        bool InitiateManagerLogin();
+    }
+    #endregion
+}
