@@ -306,6 +306,14 @@ namespace SharedLib.Commands
         /// Set user password.
         /// </summary>
         SetUserPassword=14,
+        /// <summary>
+        /// Integration providers login operation.
+        /// </summary>
+        IntegratedLogin=15,
+        /// <summary>
+        /// Integration provider logout operation.
+        /// </summary>
+        IntegratedLogout=16
     }
     #endregion
 

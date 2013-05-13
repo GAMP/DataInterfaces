@@ -169,6 +169,11 @@ namespace Client
         bool IsSecurityEnabled { get; set; }
 
         /// <summary>
+        /// Gets if Maintenance mode is enabled.
+        /// </summary>
+        bool IsInMaintenance { get; }
+
+        /// <summary>
         /// Gets or set client langauge.
         /// </summary>
         string Language { get; set; }

@@ -115,12 +115,6 @@ namespace SharedLib
     }
     #endregion
 
-    #region ManagerLoginEventArgs
-    public class ManagerLoginEventArgs : EventArgs
-    {
-    } 
-    #endregion
-
     #region LogEventArgs
     public class LogEventArgs : EventArgs
     {
@@ -163,5 +157,29 @@ namespace SharedLib
         }
         #endregion
     }
+    #endregion
+
+    #region MaintenanceEventArgs
+    [Serializable()]
+    public class MaintenanceEventArgs : EventArgs
+    {
+        #region Constructor
+        public MaintenanceEventArgs(bool enabled)
+        {
+            this.IsEnabled = enabled;
+        }
+        #endregion
+
+        #region Properties
+        /// <summary>
+        /// Gets if maintenance mod is enabled.
+        /// </summary>
+        public bool IsEnabled
+        {
+            get;
+            protected set;
+        }
+        #endregion
+    } 
     #endregion
 }

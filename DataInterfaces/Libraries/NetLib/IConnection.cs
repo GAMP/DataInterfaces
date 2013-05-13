@@ -59,7 +59,7 @@ namespace NetLib
         void ShutDown(System.Net.Sockets.SocketShutdown how);
         System.Net.Sockets.Socket Socket { get; }
     } 
-    #endregion
+    #endregion    
 
     #region ISmartLaunchConnection
     /// <summary>

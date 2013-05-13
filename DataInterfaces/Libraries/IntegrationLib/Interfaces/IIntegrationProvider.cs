@@ -72,10 +72,10 @@ namespace IntegrationLib
         IUserProfile GetProfileInstance();
 
         /// <summary>
-        /// Initiates manager login.
+        /// Initiates maintenance mode.
         /// </summary>
-        /// <returns>True if login was done locally, false if login will occour from server side.</returns>
-        bool InitiateManagerLogin();
+        /// <returns>True or False.</returns>
+        bool EnableMaintenanceMode();
     }
     #endregion
 }

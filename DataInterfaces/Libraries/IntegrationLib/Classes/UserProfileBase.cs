@@ -306,6 +306,7 @@ namespace IntegrationLib
         /// </summary>
         public virtual void Reset()
         {
+            this.Id = 0;
             this.Address = string.Empty;
             this.BirthDate = DateTime.MinValue;
             this.City = string.Empty;

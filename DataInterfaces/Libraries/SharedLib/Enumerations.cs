@@ -226,7 +226,9 @@ namespace SharedLib
         LoginFailed = 8,
         /// <summary>
         /// Login completed.
-        /// <remarks>This state is set when all login completed and all on login actions has been processed.</remarks>
+        /// <remarks>
+        /// This state is set when all login completed and all on login actions has been processed.
+        /// </remarks>
         /// </summary>
         LoginCompleted = 16 | LoggedIn,
     }
@@ -259,6 +261,7 @@ namespace SharedLib
         IdChange,
         SecurityState,
         OutOfOrderState,
+        Maintenance,
     }
     #endregion
 

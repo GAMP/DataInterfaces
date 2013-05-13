@@ -10,6 +10,5 @@ namespace SharedLib
     public delegate void StartUpDelegate(object sender, StartUpEventArgs e);
     public delegate void CurrentActivityDelegate(StartupModuleActivity current);
     public delegate void ContainerChangedDelegate(object sender,ContainerChangedEventArgs e);
-    public delegate void ManagerLoginDelegate(object sender,ManagerLoginEventArgs e);
     public delegate void LogMessageAddedDelegate(object sender,LogEventArgs e);
 }

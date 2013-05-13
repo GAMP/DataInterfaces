@@ -47,37 +47,41 @@ namespace CoreLib
         /// Application error occurred.
         /// </summary>
         Error = -514,
+        /// <summary>
+        /// Update exit code.
+        /// </summary>
+        Update=-515,
     }
     #endregion
 
     #region ServiceErrorCodes
     public enum ServiceErrorCodes : uint
     {
-        Success = 0,
-        Supported = 1,
-        Access_Denied = 2,
-        Dependent_Services_Running = 3,
-        Invalid_Service_Control = 4,
-        Service_Cannot_Accept_Control = 5,
-        Service_Not_Active = 6,
-        Service_Request_Timeout = 7,
-        Unknown_Failure = 8,
-        Path_Not_Found = 9,
-        Service_Already_Running = 10,
-        Service_Database_Locked = 11,
-        Service_Dependency_Deleted = 12,
-        Service_Dependency_Failure = 13,
-        Service_Disabled = 14,
-        Service_Logon_Failure = 15,
-        Service_Marked_For_Deletion = 16,
-        Service_No_Thread = 17,
-        Status_Circular_Dependency = 18,
-        Status_Duplicate_Name = 19,
-        Status_Invalid_Name = 20,
-        Status_Invalid_Parameter = 21,
-        Status_Invalid_Service_Account = 22,
-        Status_Service_Exists = 23,
-        Service_Already_Paused = 24
+        SUCCESS = 0,
+        SUPPORTED = 1,
+        ACCESS_DENIED = 2,
+        DEPENDENT_SERVICES_RUNNING = 3,
+        INVALID_SERVICE_CONTROL = 4,
+        SERVICE_CANNOT_ACCEPT_CONTROL = 5,
+        SERVICE_NOT_ACTIVE = 6,
+        SERVICE_REQUEST_TIMEOUT = 7,
+        UNKNOWN_FAILURE = 8,
+        PATH_NOT_FOUND = 9,
+        SERVICE_ALREADY_RUNNING = 10,
+        SERVICE_DATABASE_LOCKED = 11,
+        SERVICE_DEPENDENCY_DELETED = 12,
+        SERVICE_DEPENDENCY_FAILURE = 13,
+        SERVICE_DISABLED = 14,
+        SERVICE_LOGON_FAILURE = 15,
+        SERVICE_MARKED_FOR_DELETION = 16,
+        SERVICE_NO_THREAD = 17,
+        STATUS_CIRCULAR_DEPENDENCY = 18,
+        STATUS_DUPLICATE_NAME = 19,
+        STATUS_INVALID_NAME = 20,
+        STATUS_INVALID_PARAMETER = 21,
+        STATUS_INVALID_SERVICE_ACCOUNT = 22,
+        STATUS_SERVICE_EXISTS = 23,
+        SERVICE_ALREADY_PAUSED = 24
     }
     #endregion
 
