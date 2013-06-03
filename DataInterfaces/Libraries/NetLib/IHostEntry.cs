@@ -4,11 +4,33 @@ using System.Linq;
 using System.Text;
 using CoreLib;
 using SharedLib.Management;
+using Client;
+using SharedLib;
+using SharedLib.Dispatcher;
 
 namespace NetLib
 {
     public interface IHostEntry
     {
+        #region EVENTS
+        /// <summary>
+        /// Occours when host connection changed.
+        /// </summary>
+        event ConnectionChanged ConnectionChanged;
+
+        /// <summary>
+        /// Occurs when host out of order state changes.
+        /// </summary>
+        event EventHandler<OutOfOrderStateEventArgs> OrderStateChanged;
+
+        /// <summary>
+        /// Occours when host dispatcher changes.
+        /// </summary>
+        event DispatcherChangedDelegate DispatcherChanged;
+
+        event EventHandler<MaintenanceEventArgs> MaintenanceModeChanged;
+        #endregion
+
         /// <summary>
         /// Gets the host id.
         /// </summary>
@@ -32,12 +54,7 @@ namespace NetLib
         /// Attaches specified connection.
         /// </summary>
         /// <param name="clientconnection">Connection instance.</param>
-        void AttachConnection(IConnection clientconnection);
-
-        /// <summary>
-        /// Occours when host connection changed.
-        /// </summary>
-        event ConnectionChanged ConnectionChanged;
+        void AttachConnection(IConnection clientconnection);        
 
         /// <summary>
         ///Detaches ccurrent connection.
@@ -53,12 +70,7 @@ namespace NetLib
         /// <summary>
         /// Gets or sets host command dispatcher.
         /// </summary>
-        SharedLib.Dispatcher.IMessageDispatcher Dispatcher { get; set; }
-
-        /// <summary>
-        /// Occours when host dispatcher changes.
-        /// </summary>
-        event DispatcherChangedDelegate DispatcherChanged;
+        IMessageDispatcher Dispatcher { get; set; }
 
         /// <summary>
         /// Gets if valid dispatcher set for the host.

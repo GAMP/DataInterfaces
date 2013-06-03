@@ -345,15 +345,21 @@ namespace Client
     #region ApplicationRateEventArgs
     public class ApplicationRateEventArgs : EventArgs
     {
-        public ApplicationRateEventArgs(int applicationId)
+        public ApplicationRateEventArgs(int appId,IRating rating)
         {
-            this.ApplicationId = applicationId;
+            this.ApplicationId = appId;
+            this.NewRating = rating;
         }
 
         /// <summary>
         /// Gets the application id.
         /// </summary>
         public int ApplicationId
+        {
+            get;
+            protected set;
+        }
+        public IRating NewRating
         {
             get;
             protected set;

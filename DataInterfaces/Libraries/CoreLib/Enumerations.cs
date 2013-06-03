@@ -16,6 +16,7 @@ namespace CoreLib
         WindowsXp,
         WindowsVista,
         Windows7,
+        Windows8,
         Windows2000,
         WindowsMe,
         Windows98,
@@ -26,6 +27,7 @@ namespace CoreLib
         WindowsHomeServer,
         WindowsServer2008,
         WindowsServer2008R2,
+        WindowsServer2012,
     }
     #endregion
 

@@ -17,9 +17,7 @@ namespace SharedLib.Dispatcher
         {
             #region Validation
             if (cmd == null)
-            {
-                throw new ArgumentNullException("Cmd", "Command instance may not be null");
-            }
+                throw new ArgumentNullException("Cmd", "Command instance may not be null");            
             #endregion
 
             this.Command = cmd;

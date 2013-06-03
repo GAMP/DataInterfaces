@@ -49,7 +49,7 @@ namespace SharedLib.Commands
         /// <remarks>
         /// </remarks>
         /// </summary>
-        InvalidParamters = 64,
+        InvalidParameters = 64,
         /// <summary>
         /// State should be set when request or response sending failed.
         /// </summary>
@@ -126,7 +126,6 @@ namespace SharedLib.Commands
     #endregion
 
     #region RequestsType
-    [Flags()]
     public enum RequestsType : byte
     {
         /// <summary>
@@ -142,9 +141,21 @@ namespace SharedLib.Commands
         /// </summary>
         CommandStateUpdate = 2,
         /// <summary>
+        /// Encryption negotiation.
+        /// </summary>
+        NEGEncryption = 3,
+        /// <summary>
         /// Operation state update.
         /// </summary>
         OperationStateUpdate = 4,
+        /// <summary>
+        /// Compression negotiation.
+        /// </summary>
+        NEGCompression = 5,
+        /// <summary>
+        /// Protocol negotiation.
+        /// </summary>
+        NEGProtocol = 6,
         /// <summary>
         /// Operation update.
         /// </summary>
@@ -156,7 +167,7 @@ namespace SharedLib.Commands
         /// <summary>
         /// This state should be set when the operation does not have any completion so the other side would remove it from the operation list.
         /// </summary>
-        OperationDispose = 32,
+        OperationRelease = 32
     } 
     #endregion
 
@@ -183,7 +194,8 @@ namespace SharedLib.Commands
         TaskManagement = 14,
         EventNotification = 15,
         SecurityManagement = 16,
-        UserOperation = 17
+        UserOperation = 17,
+        UserDefined=18,
     } 
     #endregion    
 

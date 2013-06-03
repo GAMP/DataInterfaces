@@ -34,11 +34,11 @@ namespace SharedLib.Dispatcher.Exceptions
         {
             get 
             { 
-                return this.InnerException != null && 
-                this.InnerException is SocketException || 
-                this.InnerException.InnerException !=null && 
+                return (this.InnerException != null && 
+                this.InnerException is SocketException) || 
+                this.InnerException !=null && this.InnerException.InnerException !=null && 
                 this.InnerException.InnerException is SocketException ||
-                this.InnerException.InnerException.InnerException != null &&
+                this.InnerException != null && this.InnerException.InnerException !=null && this.InnerException.InnerException.InnerException != null &&
                 this.InnerException.InnerException.InnerException is SocketException;
             }
         }

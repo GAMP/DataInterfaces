@@ -24,67 +24,67 @@ namespace Client
     public interface IClient
     {
         #region Events
-       
+
         /// <summary>
         /// Occours when client shutting down.
         /// </summary>
         event ShutDownDelegate ShutDown;
-        
+
         /// <summary>
         /// Occours when client started up.
         /// </summary>
         event StartUpDelegate StartUp;
-        
+
         /// <summary>
         /// Occours when login state of user changes.
         /// </summary>
         event LoginStateChanagedDelegate LoginStateChange;
-        
+
         /// <summary>
         /// Occours when input lock state changes.
         /// </summary>
         event LockStateChangedDelegate LockStateChange;
-        
+
         /// <summary>
         /// Occours when integration availability changes.
         /// </summary>
         event AvailabilityChangedDelegate IntegrationAvailabilityChange;
-        
+
         /// <summary>
         /// Occours when client id changes.
         /// </summary>
         event ClientIdChangedDelegate IdChange;
-        
+
         /// <summary>
         /// Occours when a securtiy change occour.
         /// </summary>
         event SecurtyStateChangeDelegate SecurityStateChange;
-        
+
         /// <summary>
         /// Occours when execution context collection changes.
         /// </summary>
         event ExecutionContextCollectionEvent ExecutionContextCollectionChange;
-        
+
         /// <summary>
         /// Occours when execution context state changes.
         /// </summary>
         event ExecutionContextStateChangedDelegate ExecutionContextStateChage;
-        
+
         /// <summary>
         /// Occours on current initialization activity changes.
         /// </summary>
         event CurrentActivityDelegate ActivityChange;
-        
+
         /// <summary>
         /// Occours when Application container changes.
         /// </summary>
         event ContainerChangedDelegate ContainerChange;
-        
+
         /// <summary>
         /// Occours when out of order state changes.
         /// </summary>
         event OutOfOrderStateChangeDelegate OutOfOrderStateChange;
-        
+
         #endregion
 
         #region Properties
@@ -96,6 +96,11 @@ namespace Client
         {
             get;
         }
+
+        /// <summary>
+        /// Gets or sets if trace messages should be logged.
+        /// </summary>
+        bool LogTraceMessages { get; set; }
 
         /// <summary>
         /// Gets client version ifnormation.
@@ -306,6 +311,6 @@ namespace Client
         /// <param name="profile">User profile.</param>
         void SetUserInfo(IUserProfile profile);
 
-        #endregion        
+        #endregion
     }
 }

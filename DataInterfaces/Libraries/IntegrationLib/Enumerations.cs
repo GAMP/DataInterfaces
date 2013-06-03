@@ -50,7 +50,7 @@ namespace IntegrationLib
 
     #region LoginResult
     [Flags()]
-    public enum LoginResult : int
+    public enum SmartlaunchLoginResult : int
     {
         Sucess = 0,
         RequiredInfo = 1,
@@ -72,6 +72,57 @@ namespace IntegrationLib
     }
     #endregion
 
+    #region LoginResult
+    [Flags()]
+    public enum LoginResult
+    {
+        /// <summary>
+        /// Authentication was sucessfull.
+        /// </summary>
+        Sucess = 0,
+        /// <summary>
+        /// Account is disabled.
+        /// </summary>
+        AccountDisabled = 2,
+        /// <summary>
+        /// Username is invalid.
+        /// </summary>
+        InvalidUserName = 4,
+        /// <summary>
+        /// Password is invalid.
+        /// </summary>
+        InvalidPassword = 8,
+        /// <summary>
+        /// Generic error.
+        /// </summary>
+        Failed = 16,
+        /// <summary>
+        /// Login was denied.
+        /// </summary>
+        Denied = 32,
+        /// <summary>
+        /// Function timed out.
+        /// </summary>
+        TimedOut = 64,
+        /// <summary>
+        /// Login function cannot be executed.
+        /// </summary>
+        CantExecute = 128,
+        /// <summary>
+        /// User already logged in.
+        /// </summary>
+        AlreadyLoggedIn = 256,
+        /// <summary>
+        /// Login is already in progress.
+        /// </summary>
+        LoginInProgress = 512,
+        /// <summary>
+        /// Credentials pair is invalid.
+        /// </summary>
+        InvalidCredentials = InvalidPassword | InvalidUserName,
+    }
+    #endregion
+
     #region LogoutResult
     [Flags()]
     public enum LogoutResult
@@ -89,40 +140,5 @@ namespace IntegrationLib
         /// </summary>
         LoggedOutLocally = 2,
     }
-    #endregion
-
-    #region AuthenticationResult
-    [Flags()]
-    public enum AuthenticationResult
-    {
-        /// <summary>
-        /// Authentication was sucessfull.
-        /// </summary>
-        Sucess = 0,
-        /// <summary>
-        /// Account is disabled.
-        /// </summary>
-        AccountDisabled = 2,
-        /// <summary>
-        /// Username is invalid.
-        /// </summary>
-        IvnalidUserName = 4,
-        /// <summary>
-        /// Password is invalid.
-        /// </summary>
-        InvalidPassword = 8,
-        /// <summary>
-        /// Generic error.
-        /// </summary>
-        Error = 16,
-        /// <summary>
-        /// Login was denied.
-        /// </summary>
-        Denied = 32,
-        /// <summary>
-        /// Credentials pair is invalid.
-        /// </summary>
-        InvalidCredentials = InvalidPassword | IvnalidUserName,
-    } 
-    #endregion
+    #endregion    
 }

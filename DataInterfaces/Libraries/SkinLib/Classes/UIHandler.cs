@@ -1141,7 +1141,7 @@ namespace SkinLib
 
         #region Fields
         private static UIHandler instance;
-        private ObservableCollection<String> exceptions;
+        private ObservableCollection<Exception> exceptions;
         private List<Assembly> assemblies;
         private Dictionary<BindingSources, object> dataSources;
         private string skinPath;
@@ -1333,12 +1333,12 @@ namespace SkinLib
         /// <summary>
         /// Gets the list of exceptions thrown during load phase.
         /// </summary>
-        public ObservableCollection<String> Exceptions
+        public ObservableCollection<Exception> Exceptions
         {
             get
             {
                 if (this.exceptions == null)
-                    this.exceptions = new ObservableCollection<String>();
+                    this.exceptions = new ObservableCollection<Exception>();
                 return this.exceptions;
             }
         }
@@ -1524,7 +1524,7 @@ namespace SkinLib
             }
             catch (Exception ex)
             {
-                this.Exceptions.Add(ex.ToString());
+                this.Exceptions.Add(ex);
                 if (throwOnError)
                     throw ex;
                 return null;
@@ -1815,7 +1815,7 @@ namespace SkinLib
             }
             catch (Exception ex)
             {
-                this.Exceptions.Add(ex.ToString());
+                this.Exceptions.Add(ex);
             }
             return null;
         }

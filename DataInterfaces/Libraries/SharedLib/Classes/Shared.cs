@@ -44,7 +44,7 @@ namespace SharedLib
     [Serializable()]
     public class PropertyChange : PropertyChangedEventArgs
     {
-        #region Fileds
+        #region Fields
         private Object newValue, oldValue;
         #endregion
 

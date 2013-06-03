@@ -836,6 +836,7 @@ namespace SharedLib
     [Serializable()]
     public enum LogCategories : int
     {
+        None=0,
         Generic = 1,
         Network = 2,
         Database = 4,
@@ -1020,7 +1021,7 @@ namespace SharedLib
         /// <summary>
         /// No role.
         /// </summary>
-        [RoleAssignable(true)]
+        [RoleAssignable(false)]
         None = 0,
         /// <summary>
         /// Simple user.
@@ -1036,12 +1037,7 @@ namespace SharedLib
         /// Operator.
         /// </summary>
         [RoleAssignable(false)]
-        Operator = 4,
-        [RoleAssignable(true)]
-        /// <summary>
-        /// Administrator.
-        /// </summary>
-        Admin = 8
+        Operator = 4
     }
     #endregion
 

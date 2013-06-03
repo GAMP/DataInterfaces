@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Windows.Input;
 using System.Diagnostics;
+using System.Security;
 
 namespace CoreLib.Hooking
 {
@@ -67,6 +68,7 @@ namespace CoreLib.Hooking
         #endregion
 
         #region Properties
+        
         /// <summary>
         /// A virtual-key code. The code must be a value in the range 1 to 254. 
         /// </summary>
@@ -75,6 +77,7 @@ namespace CoreLib.Hooking
             get { return this.keyCode; }
             protected set { this.keyCode = value; }
         }
+        
         /// <summary>
         /// Gets the state of the key event.
         /// </summary>
@@ -83,6 +86,7 @@ namespace CoreLib.Hooking
             get { return this.state; }
             protected set { this.state = value; }
         }
+        
         /// <summary>
         /// The extended-key flag, event-injected flag, context code, and transition-state flag. This member is specified as follows. 
         /// An application can use the following values to test the keystroke flags. 
@@ -92,6 +96,7 @@ namespace CoreLib.Hooking
             get { return this.flags; }
             protected set { this.flags = value; }
         }
+        
         /// <summary>
         /// The time stamp for this message, equivalent to what GetMessageTime would return for this message.
         /// </summary>
@@ -100,6 +105,7 @@ namespace CoreLib.Hooking
             get { return this.time; }
             protected set { this.time = value; }
         }
+        
         /// <summary>
         /// Gets the key of the event.
         /// </summary>
@@ -107,6 +113,7 @@ namespace CoreLib.Hooking
         {
             get { return (Keys)this.KeyCode; }
         }
+        
         /// <summary>
         /// Gets the modifiers of the event.
         /// </summary>
@@ -115,6 +122,7 @@ namespace CoreLib.Hooking
             get { return this.modifiers; }
             private set { this.modifiers = value; }
         }
+        
         /// <summary>
         /// Gets if caps lock was on when event occurred.
         /// </summary>
@@ -123,6 +131,7 @@ namespace CoreLib.Hooking
             get;
             protected set;
         }
+        
         /// <summary>
         /// Additional information associated with the message. 
         /// </summary>
@@ -131,6 +140,7 @@ namespace CoreLib.Hooking
             get { return this.extraInfo; }
             protected set { this.extraInfo = value; }
         }
+
         /// <summary>
         /// A hardware scan code for the key. 
         /// </summary>
@@ -142,14 +152,18 @@ namespace CoreLib.Hooking
         #endregion
 
         #region Imports
+        
+        [SuppressUnmanagedCodeSecurity()]
         [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
         private static extern short GetAsyncKeyState(int vkey);
+        [SuppressUnmanagedCodeSecurity()]
         [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
         private static extern short GetKeyState(int nVirtKey);
 
         #endregion
 
         #region Functions
+
         private void GetModifers()
         {
             if (KeyboardHookEventArgs.IsKeyPushedDown(Keys.LShiftKey))
@@ -168,12 +182,13 @@ namespace CoreLib.Hooking
             {
                 this.Modifiers |= ModifierKeys.Windows;
             }
-
         }
+        
         public static bool IsKeyPushedDown(Keys vKey)
         {
             return 0 != (GetKeyState((int)vKey) & 0x8000);
         }
+        
         #endregion
 
         #region Ovverides

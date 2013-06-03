@@ -179,7 +179,7 @@ namespace SharedLib
                         ((ClassInfo)si).ReferencedObject = reader.ReadInt32();
                         //Use the referenced object definition for data retrieval rules
                         // -> this will overwrite the original values in the referenced object, but who cares - the values are trash anyway (for now).
-                        ((ClassInfo)serialObjects[((ClassInfo)si).ReferencedObject.Value]).ReadValueInfo(this);
+                        ((ClassInfo)serialObjects[((ClassInfo)si).ReferencedObject.Value]).ReadValueInfo(this);                     
                         break;
                     case RecordTypeEnumeration.SystemClassWithMembers:
                         //single structure, read in constructor

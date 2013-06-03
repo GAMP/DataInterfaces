@@ -89,12 +89,11 @@ namespace SharedLib.Dispatcher
         }
 
         /// <summary>
-        /// Gets or sets dispatcher id.
+        /// Gets dispatcher id.
         /// </summary>
         int Id
         {
             get;
-            set;
         }
 
         #endregion
@@ -105,7 +104,7 @@ namespace SharedLib.Dispatcher
 
         IDispatcherCommand SendRequest(CommandType cmdtype, params  object[] paramarray);
 
-        bool TrySerialzieAndSend(ref IDispatcherCommand cmd);
+        bool TrySend(IDispatcherCommand cmd);
 
         /// <summary>
         /// Sends the command.

@@ -66,5 +66,4 @@ namespace GizmoShell
         Delete = 53,
         DWMFlip3D = 54
     }
-
 }

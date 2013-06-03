@@ -1387,6 +1387,8 @@ namespace SkinInterfaces.Converters
                     return "Microsoft Windows 2000";
                 case OperatingSystems.Windows7:
                     return "Microsoft Windows 7";
+                case OperatingSystems.Windows8:
+                    return "Microsoft Windows 8";
                 case OperatingSystems.WindowsServer2003:
                     return "Microsoft Windows Server 2003";
                 case OperatingSystems.WindowsServer2003R2:
@@ -1395,6 +1397,8 @@ namespace SkinInterfaces.Converters
                     return "Microsoft Windows Server 2008";
                 case OperatingSystems.WindowsServer2008R2:
                     return "Microsoft Windows Server 2008 R2";
+                case OperatingSystems.WindowsServer2012:
+                    return "Microsoft Windows Server 2012";
                 case OperatingSystems.WindowsVista:
                     return "Microsoft Windows Vista";
                 default:
@@ -1536,6 +1540,26 @@ namespace SkinInterfaces.Converters
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return (bool)value ? Enum.Parse(EnumType, parameter.ToString()) : Enum.ToObject(EnumType, 0);
+        }
+    }
+    #endregion
+
+    #region StringEnvrionmentConverter
+    /// <summary>
+    /// Convertes string to environment expanded string.
+    /// </summary>
+    public class StringToEnvrionmentConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value != null && value is string)
+                return Environment.ExpandEnvironmentVariables(value.ToString());
+            return value;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
         }
     }
     #endregion

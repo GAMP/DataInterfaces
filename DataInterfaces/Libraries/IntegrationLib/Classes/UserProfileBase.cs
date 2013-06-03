@@ -265,12 +265,12 @@ namespace IntegrationLib
         }
 
         /// <summary>
-        /// When ovveriden indicates if user id Administrator [Manager]
+        /// When ovveriden indicates if user is administrator [Operator].
         /// </summary>
         [DataMember()]
         public virtual bool IsAdmin
         {
-            get { return this.Role == UserRoles.Admin; }
+            get { return this.Role == UserRoles.Operator; }
             set {}
         }
 
