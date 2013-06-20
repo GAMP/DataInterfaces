@@ -1123,4 +1123,31 @@ namespace SharedLib
         IncludeSubDirectories=16,
     }
     #endregion
+
+    #region UserSessionState
+    [Flags(),Serializable()]
+    public enum SessionState : int
+    {
+        /// <summary>
+        /// Session initialized.
+        /// </summary>
+        None = 0,
+        /// <summary>
+        /// Session is active.
+        /// </summary>
+        Active = 1,
+        /// <summary>
+        /// Session ended.
+        /// </summary>
+        Ended = 2,
+        /// <summary>
+        /// Session pending termination.
+        /// </summary>
+        Pending = 4 | Active,
+        /// <summary>
+        /// Sesstion paused and pending activation.
+        /// </summary>
+        Paused = 8 | Active,
+    } 
+    #endregion
 }

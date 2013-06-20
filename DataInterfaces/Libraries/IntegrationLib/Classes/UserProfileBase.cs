@@ -156,7 +156,6 @@ namespace IntegrationLib
         /// <summary>
         /// Gets or sets users group name.
         /// </summary>
-        [DataMember()]
         public virtual string GroupName
         {
             get { return this.groupName; }
@@ -184,6 +183,7 @@ namespace IntegrationLib
         /// <summary>
         /// Gets or sets users email address.
         /// </summary>
+        [DataMember()]
         public virtual string Email
         {
             get { return this.email; }
@@ -267,7 +267,6 @@ namespace IntegrationLib
         /// <summary>
         /// When ovveriden indicates if user is administrator [Operator].
         /// </summary>
-        [DataMember()]
         public virtual bool IsAdmin
         {
             get { return this.Role == UserRoles.Operator; }
@@ -277,7 +276,6 @@ namespace IntegrationLib
         /// <summary>
         /// When ovveriden indicates if user is guest.
         /// </summary>
-        [DataMember()]
         public virtual bool IsGuest
         {
             get { return this.Role == UserRoles.Guest; }

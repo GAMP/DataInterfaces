@@ -101,6 +101,8 @@
     <Compile Include="Libraries\IntegrationLib\Interfaces\IServiceHook.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\IServicePlugin.cs" />
     <Compile Include="Libraries\SharedLib\Applications\IRating.cs" />
+    <Compile Include="Libraries\SharedLib\Classes\InternalDate.cs" />
+    <Compile Include="Libraries\SharedLib\User\IUserSession.cs" />
     <Compile Include="Libraries\SkinInterfaces\Code\Behaviours\GridViewBehavior.cs" />
     <Compile Include="Libraries\SkinInterfaces\Extensions\DependencyObjectExtensions.cs" />
     <Compile Include="Libraries\SkinInterfaces\Extensions\FrameworkElementExtensions.cs" />

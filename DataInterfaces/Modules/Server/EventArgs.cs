@@ -343,16 +343,17 @@ namespace ServerService
     public class UserStateEventArgs : UserIdEventArgsBase
     {
         #region CONSTRUCTOR
-        public UserStateEventArgs(int userId,LoginState newState,LoginState oldState,IMessageDispatcher dispatcher)
+        public UserStateEventArgs(int userId,LoginState newState,LoginState oldState,IHostEntry host, IMessageDispatcher dispatcher)
             : base(userId)
         {
             #region VALIDATION
-            if (dispatcher == null)
-                throw new ArgumentNullException("Dispatcher", "Dispatcher may not be null"); 
+            if (host == null)
+                throw new ArgumentNullException("Host", "Host may not be null"); 
             #endregion
 
             this.NewState = newState;
             this.OldState = oldState;
+            this.HostEntry = host;
             this.Dispatcher = dispatcher;
         } 
         #endregion
@@ -372,6 +373,12 @@ namespace ServerService
         /// Gets old user state.
         /// </summary>
         public LoginState OldState
+        {
+            get;
+            protected set;
+        }
+
+        public IHostEntry HostEntry
         {
             get;
             protected set;
