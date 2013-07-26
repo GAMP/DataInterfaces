@@ -60,6 +60,7 @@ namespace SkinInterfaces
         {
             get;
         }
+
         /// <summary>
         /// Panel to display desktop items.
         /// </summary>
@@ -67,6 +68,7 @@ namespace SkinInterfaces
         {
             get;
         }
+
         /// <summary>
         /// Panel to display foreground items.
         /// </summary>
@@ -205,4 +207,26 @@ namespace SkinInterfaces
         ObservableCollection<ValidationError> ValidationErrors { get; }
     }
     #endregion
+
+    #region IOverlayDisplayWindow
+    /// <summary>
+    /// Overlay Window interface.
+    /// <remarks>
+    /// The purpose of the interface is to allow implementation of a window that would display an overlay over its contents.
+    /// </remarks>
+    /// </summary>
+    public interface IOverlayDisplayWindow
+    {
+        /// <summary>
+        /// Gets if the overlay is currently shown on window.
+        /// </summary>
+        bool IsOverlayShown
+        {
+            get;
+        }
+
+        void SetOverlay(UIElement content);
+
+    } 
+    #endregion    
 }

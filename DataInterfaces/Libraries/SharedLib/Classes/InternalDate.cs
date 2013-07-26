@@ -45,7 +45,7 @@ namespace SharedLib
         /// </summary>
         public static DateTime Now
         {
-            get { return CreationTime.Add(TimeSpan.FromMilliseconds(Environment.TickCount - CreationTickCount)); }
+            get { return InternalDate.CreationTime.Add(TimeSpan.FromMilliseconds(Environment.TickCount - CreationTickCount)); }
         }
 
         /// <summary>

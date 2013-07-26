@@ -53,7 +53,7 @@ namespace SkinInterfaces
         }
 
         /// <summary>
-        /// Saves and returns the elemtns restore visuals.
+        /// Saves and returns the elements restore visuals.
         /// </summary>
         public static RestoreVisuals SaveVisuals(this FrameworkElement element)
         {
@@ -203,16 +203,6 @@ namespace SkinInterfaces
             {
                 element.IsResizeEnabled(true);
             }
-        }
-
-        /// <summary>
-        /// Gets the supported visual states for this element.
-        /// </summary>
-        /// <param name="element"></param>
-        /// <returns></returns>
-        public static ElementVisualState SupportedVisualStates(this UIElement element)
-        {
-            return (ElementVisualState)element.GetValue(ExternalProperties.SupportedVisualStatesProperty);
         }
 
         /// <summary>

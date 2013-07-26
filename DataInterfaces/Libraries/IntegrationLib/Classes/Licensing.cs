@@ -163,7 +163,7 @@ namespace IntegrationLib
     [Serializable()]
     public abstract class ApplicationLicenseKeyBase : PropertyChangedNotificator, IApplicationLicenseKey
     {
-        #region Fileds
+        #region Fields
         private string value;
         #endregion
 
@@ -172,7 +172,7 @@ namespace IntegrationLib
         /// <summary>
         /// Gets or sets keys string value.
         /// </summary>
-        public String Value
+        public string Value
         {
             get { return this.value; }
             set
@@ -221,7 +221,7 @@ namespace IntegrationLib
         }
         #endregion
 
-        #region Fileds
+        #region Fields
         private Dictionary<int, IApplicationLicense> licenses;
         [NonSerialized()]
         private IMessageDispatcher dispatcher;
@@ -253,6 +253,7 @@ namespace IntegrationLib
             get { return this.dispatcher; }
             protected set { this.dispatcher = value; }
         }
+
         #endregion
     }
     #endregion
@@ -302,7 +303,7 @@ namespace IntegrationLib
     #region ConfigurableLicenseManagerBase
     public abstract class ConfigurableLicenseManagerBase : LicenseManagerBase, IConfigurableLicenseManager
     {
-        #region Fileds
+        #region Fields
         private IPluginSettings settings;
         #endregion
 
@@ -377,9 +378,7 @@ namespace IntegrationLib
         protected void ThrowIfSettingsTypeInvalid()
         {
             if (this.Settings.GetType() != this.GetSettingsInstance().GetType())
-            {
-                throw new ArgumentException("Settings","Plugin settings type is invalid.");
-            }
+                throw new ArgumentException("Settings","Plugin settings type is invalid.");           
         }
 
         #endregion

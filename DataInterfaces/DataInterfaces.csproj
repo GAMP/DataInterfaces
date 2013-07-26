@@ -268,9 +268,6 @@
     <Compile Include="Libraries\SkinInterfaces\Interfaces\Interfaces.cs" />
     <Compile Include="Libraries\SkinLib\Interfaces\IUILayout.cs" />
     <Compile Include="Libraries\SkinLib\Classes\UIConfiguration.cs" />
-    <Compile Include="Libraries\SkinLib\Classes\UIEventHandler.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Libraries\SkinLib\Classes\UIHandler.cs" />
     <Compile Include="Libraries\SkinLib\Classes\UILayout.cs" />
     <Compile Include="Libraries\SkinLib\Interfaces\IUIComponent.cs" />

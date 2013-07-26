@@ -84,7 +84,7 @@ namespace SkinInterfaces.Code
                 base.StateName = (String)o;
                 base.Invoke(base.StateName);
             }
-            catch (Exception ex)
+            catch 
             {
             }
         }

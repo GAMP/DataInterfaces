@@ -429,13 +429,6 @@ namespace SkinInterfaces.Converters
                     }
                     return Visibility.Collapsed;
                 }
-                if (type == 3)
-                {
-                    if ((supported & ElementVisualState.Closed) == ElementVisualState.Closed)
-                    {
-                        return Visibility.Visible;
-                    }
-                }
                 return Visibility.Collapsed;
             }
             catch
@@ -1004,37 +997,7 @@ namespace SkinInterfaces.Converters
             throw new NotImplementedException();
         }
     }
-    #endregion
-
-    #region UserTimeToStringConverter
-    public class UserTimeToStringConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (value != null & value is int)
-            {
-                TimeSpan dateDifference = TimeSpan.FromMinutes((int)value);
-                //return string.Format("{0:00}:{1:00}:{2:00}", dateDifference.TotalHours, dateDifference.Minutes, dateDifference.Seconds);
-                if (dateDifference.TotalDays != 0)
-                {
-                    return string.Format("{0} days, {1:D2} hrs, {2:D2} mins", dateDifference.Days, dateDifference.Hours, dateDifference.Minutes);
-                }
-                else
-                {
-                    return string.Format("{0:D2} hrs, {1:D2} mins", dateDifference.Hours, dateDifference.Minutes);
-                }
-            }
-            else
-            {
-                return value;
-            }
-        }
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-    #endregion
+    #endregion    
 
     #region NumberToRoundedConverter
     /// <summary>

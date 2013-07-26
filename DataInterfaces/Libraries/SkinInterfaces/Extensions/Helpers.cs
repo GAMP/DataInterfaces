@@ -18,11 +18,11 @@ namespace SkinInterfaces
         /// Sets visual state of object.
         /// </summary>
         /// <param name="VisualState"></param>
-        /// <param name="Target"></param>
+        /// <param name="target"></param>
         /// <remarks></remarks>
-        public static void SetVisualState(ElementVisualState VisualState, DependencyObject Target)
+        public static void SetVisualState(ElementVisualState VisualState, DependencyObject target)
         {
-            ((FrameworkElement)Target).SetValue(ExternalProperties.VisualStateProperty, VisualState);
+            target.SetValue(ExternalProperties.VisualStateProperty, VisualState);
         }
 
         /// <summary>
@@ -63,10 +63,10 @@ namespace SkinInterfaces
                         Child.SetValue(Canvas.ZIndexProperty, (int)Child.GetValue(Canvas.ZIndexProperty) - 1);
                     }
                 }
-                Canvas.SetZIndex((UIElement )Target, CurrentTopIndex);
+                Canvas.SetZIndex((UIElement)Target, CurrentTopIndex);
                 return true;
             }
-            catch 
+            catch
             {
                 return false;
             }
@@ -77,11 +77,11 @@ namespace SkinInterfaces
         /// </summary>
         /// <param name="child"></param>
         /// <returns></returns>
-        public static UserControl  FindParentControl(DependencyObject child)
+        public static UserControl FindParentControl(DependencyObject child)
         {
-            DependencyObject parent = VisualTreeHelper.GetParent(child); 
+            DependencyObject parent = VisualTreeHelper.GetParent(child);
             if (parent == null) return null;
-            UserControl  parentControl = parent as UserControl ;
+            UserControl parentControl = parent as UserControl;
             if (parentControl != null)
             {
                 return parentControl;
@@ -169,7 +169,7 @@ namespace SkinInterfaces
         /// </summary>
         /// <param name="element"></param>
         /// <returns></returns>
-        public  static ElementVisualState GetVisualState(DependencyObject element)
+        public static ElementVisualState GetVisualState(DependencyObject element)
         {
             return (ElementVisualState)element.GetValue(ExternalProperties.VisualStateProperty);
         }
@@ -179,9 +179,9 @@ namespace SkinInterfaces
         /// </summary>
         /// <param name="element"></param>
         /// <returns></returns>
-        public static  bool ZindexEnabled(DependencyObject element)
+        public static bool ZindexEnabled(DependencyObject element)
         {
-            return (bool)element.GetValue(ExternalProperties .AllowZindexProperty);
+            return (bool)element.GetValue(ExternalProperties.AllowZindexProperty);
         }
 
         /// <summary>
@@ -189,19 +189,19 @@ namespace SkinInterfaces
         /// </summary>
         /// <param name="element"></param>
         /// <returns></returns>
-        public static bool  Maximize(DependencyObject element)
+        public static bool Maximize(DependencyObject element)
         {
             //Find sender visual parent
-            DependencyObject VisualParent = VisualTreeHelper.GetParent(element );
+            DependencyObject VisualParent = VisualTreeHelper.GetParent(element);
             if (VisualParent == null)
             {
                 return false;
             }
             else
             {
-                ((FrameworkElement)element).Width = ((FrameworkElement)VisualParent).ActualWidth ;
+                ((FrameworkElement)element).Width = ((FrameworkElement)VisualParent).ActualWidth;
                 ((FrameworkElement)element).Height = ((FrameworkElement)VisualParent).ActualHeight;
-                ((FrameworkElement)element).Margin  = new Thickness (0,0,0,0);
+                ((FrameworkElement)element).Margin = new Thickness(0, 0, 0, 0);
                 return true;
             }
         }
@@ -213,16 +213,16 @@ namespace SkinInterfaces
         /// <returns></returns>
         public static bool Restore(DependencyObject element)
         {
-            RestoreVisuals oldvisuals = (RestoreVisuals )((FrameworkElement )element ).GetValue (InternalProperties .RestoreVisualsProperty);
+            RestoreVisuals oldvisuals = (RestoreVisuals)((FrameworkElement)element).GetValue(InternalProperties.RestoreVisualsProperty);
             if (oldvisuals != null)
             {
-                SkinHelper . SetRestoreVisuals((FrameworkElement)element, oldvisuals);
+                SkinHelper.SetRestoreVisuals((FrameworkElement)element, oldvisuals);
                 return true;
             }
             else
             {
                 return false;
-            }        
+            }
         }
 
         /// <summary>
@@ -242,7 +242,7 @@ namespace SkinInterfaces
             defaults.Opacity = element.Opacity;
             defaults.ActualHeight = element.ActualHeight;
             defaults.ActualWidth = element.ActualWidth;
-            element.SetValue(InternalProperties .RestoreVisualsProperty , defaults);
+            element.SetValue(InternalProperties.RestoreVisualsProperty, defaults);
             return defaults;
         }
 
@@ -251,7 +251,7 @@ namespace SkinInterfaces
         /// </summary>
         /// <param name="element"></param>
         /// <param name="visuals"></param>
-        public static void  SetRestoreVisuals(FrameworkElement element, RestoreVisuals visuals)
+        public static void SetRestoreVisuals(FrameworkElement element, RestoreVisuals visuals)
         {
             element.Width = visuals.Width;
             element.Height = visuals.Height;
@@ -272,7 +272,5 @@ namespace SkinInterfaces
                 element.Opacity = visuals.Opacity;
             }
         }
-   
     }
-
 }

@@ -1089,7 +1089,6 @@ namespace SharedLib
         /// Existing user enabled changed.
         /// </summary>
         Enabled,
-
     }
     #endregion
 
@@ -1149,5 +1148,31 @@ namespace SharedLib
         /// </summary>
         Paused = 8 | Active,
     } 
+    #endregion
+
+    #region ActionSource
+    public enum ActionSource
+    {
+        /// <summary>
+        /// Function called by user.
+        /// </summary>
+        User = 0,
+        /// <summary>
+        /// Function called by operator.
+        /// </summary>
+        Operator = 1,
+        /// <summary>
+        /// Function called on host connect.
+        /// </summary>
+        Connect = 2,
+        /// <summary>
+        /// Function called on host disconnect.
+        /// </summary>
+        Disconnect = 3,
+        /// <summary>
+        /// Function called by session mechanism.
+        /// </summary>
+        Session = 4,
+    }
     #endregion
 }

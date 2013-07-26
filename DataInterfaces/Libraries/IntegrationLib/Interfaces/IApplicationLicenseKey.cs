@@ -9,7 +9,7 @@ namespace IntegrationLib
     /// <summary>
     /// License Key interface.
     /// </summary>
-    public interface IApplicationLicenseKey
+    public interface IApplicationLicenseKey    
     {
         /// <summary>
         /// Gets the keys string representation.

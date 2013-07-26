@@ -32,8 +32,7 @@ namespace SkinLib
         public UIHandler()
         {
             AppDomain.CurrentDomain.AssemblyResolve += AssemblyResolveHandler;
-            ExternalProperties.DependencyPropertyChanged += EventHandlers.DependencyPropertyChangeHandler;
-            InternalProperties.DependencyPropertyChanged += EventHandlers.DependencyPropertyChangeHandler;
+            DependencyPropertyClassBase.DependencyPropertyChanged += this.DependencyPropertyChangeHandler;
             Microsoft.Win32.SystemEvents.DisplaySettingsChanged += new EventHandler(OnDisplaySettingsChanged);
             UIHandler.Current = this;
         }
@@ -53,7 +52,7 @@ namespace SkinLib
             public int cx;
             public int cy;
             public uint flags;
-        } 
+        }
         #endregion
 
         #region HWND
@@ -63,7 +62,7 @@ namespace SkinLib
             HWND_BOTTOM = 1,
             HWND_TOPMOST = -1,
             HWND_NOTOPMOST = -2,
-        } 
+        }
         #endregion
 
         #region WINDOW_MESSAGE
@@ -1054,7 +1053,7 @@ namespace SkinLib
             LM_GETIDEALHEIGHT = (WM_USER + 0x301),
             LM_SETITEM = (WM_USER + 0x302),
             LM_GETITEM = (WM_USER + 0x303)
-        } 
+        }
         #endregion
 
         #region POINT
@@ -1133,10 +1132,14 @@ namespace SkinLib
         #endregion
 
         #region Events
+
         /// <summary>
         /// Occurs on each window message sent to the main window.
         /// </summary>
         public event WindowMessageDlegeate MainWindowMessage;
+
+        public event EventHandler<EVisualStateArgs> VisualStateEvent;
+
         #endregion
 
         #region Fields
@@ -1938,5 +1941,198 @@ namespace SkinLib
         }
 
         #endregion
+
+
+        #region Event Handlers
+
+        private void DependencyPropertyChangeHandler(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            try
+            {
+                #region ACTIVE
+                if (object.ReferenceEquals(e.Property, InternalProperties.IsActiveElementProperty))
+                {
+                    if ((bool)e.NewValue == true)
+                    {
+                        if (this.CurrentLayout != null)
+                        {
+                            if (this.ActiveControl != null)
+                                this.ActiveControl.IsActive(false);
+                            this.ActiveControl = sender as UserControl;
+                        }
+                    }
+                }
+                #endregion
+
+                #region ALLOWZINDEX
+                else if (object.ReferenceEquals(e.Property, ExternalProperties.AllowZindexProperty))
+                {
+                    if ((bool)e.OldValue == false & (bool)e.NewValue == true)
+                    {
+                        ((FrameworkElement)sender).IsZIndexEnabled(true);
+                        ((FrameworkElement)sender).AddHandler(System.Windows.Controls.Button.MouseLeftButtonDownEvent,
+                            new RoutedEventHandler(this.ZindexChangeEvent), true);
+                    }
+                    else if ((bool)e.OldValue == true & (bool)e.NewValue == false)
+                    {
+                        ((FrameworkElement)sender).IsZIndexEnabled(false);
+                        ((FrameworkElement)sender).RemoveHandler(Button.MouseLeftButtonDownEvent,
+                            new RoutedEventHandler(this.ZindexChangeEvent));
+                    }
+                }
+                #endregion
+
+                #region VISUAL STATE
+                else if (object.ReferenceEquals(e.Property, ExternalProperties.VisualStateProperty))
+                {
+                    this.VisualStateChanged(sender as FrameworkElement, e);
+                }
+                #endregion
+            }
+            catch
+            {
+                //ignore for now
+            }
+        }
+
+        private void ZindexChangeEvent(object sender, RoutedEventArgs e)
+        {
+
+            //Find sender visual parent
+            Panel VisualParent = VisualTreeHelper.GetParent((DependencyObject)sender) as Panel;
+            if (VisualParent == null)
+            {
+                return;
+            }
+            UIElement CurrentTopObject = default(UIElement);
+            int CurrentTopIndex = 0;
+            foreach (UIElement Child in VisualParent.Children)
+            {
+                int UiElementZindex = (int)Child.GetValue(Canvas.ZIndexProperty);
+                if (UiElementZindex >= CurrentTopIndex)
+                {
+                    CurrentTopIndex = UiElementZindex;
+                    CurrentTopObject = Child;
+                }
+            }
+            if (CurrentTopIndex == 0)
+            {
+                CurrentTopIndex = 1;
+            }
+            else
+            {
+                foreach (UIElement Child in VisualParent.Children)
+                    Child.SetValue(Canvas.ZIndexProperty, (int)Child.GetValue(Canvas.ZIndexProperty) - 1);
+            }
+            Canvas.SetZIndex(sender as UIElement, CurrentTopIndex);
+            e.Handled = false;
+        }
+
+        private void VisualStateChanged(FrameworkElement sender, DependencyPropertyChangedEventArgs e)
+        {
+            EVisualStateArgs args = new EVisualStateArgs((ElementVisualState)e.NewValue, (ElementVisualState)e.OldValue);
+
+            #region MINIMIZED
+            if (args.NewState == ElementVisualState.Minimized || args.NewState == ElementVisualState.Closed)
+            {
+                sender.Freeze();
+
+                if (sender.RenderTransform == null || !(sender.RenderTransform is ScaleTransform))
+                    sender.RenderTransform = new ScaleTransform();
+
+                sender.RenderTransformOrigin = new System.Windows.Point(0.5, 0.5);
+
+                Storyboard storyBoard = new Storyboard();
+                DoubleAnimation opacityAnimation = new DoubleAnimation(0, TimeSpan.FromMilliseconds(this.DefaultAniDuration));
+                DoubleAnimation scaleYAnimation = new DoubleAnimation(0, TimeSpan.FromMilliseconds(this.DefaultAniDuration));
+                DoubleAnimation scaleXAnimation = new DoubleAnimation(0, TimeSpan.FromMilliseconds(this.DefaultAniDuration));
+                scaleYAnimation.From = (sender.RenderTransform as ScaleTransform).ScaleY;
+                scaleXAnimation.From = (sender.RenderTransform as ScaleTransform).ScaleX;
+
+                Storyboard.SetTarget(opacityAnimation, sender);
+                Storyboard.SetTargetProperty(opacityAnimation, new PropertyPath("Opacity"));
+                Storyboard.SetTarget(scaleYAnimation, sender);
+                Storyboard.SetTargetProperty(scaleYAnimation, new PropertyPath("(UIElement.RenderTransform).(ScaleTransform.ScaleY)"));
+                Storyboard.SetTarget(scaleXAnimation, sender);
+                Storyboard.SetTargetProperty(scaleXAnimation, new PropertyPath("(UIElement.RenderTransform).(ScaleTransform.ScaleX)"));
+
+                storyBoard.Children.Add(opacityAnimation);
+                storyBoard.Children.Add(scaleXAnimation);
+                storyBoard.Children.Add(scaleYAnimation);
+
+                storyBoard.FillBehavior = FillBehavior.HoldEnd;                
+                storyBoard.DecelerationRatio = 1;
+                storyBoard.Begin();
+
+                //If element not maximized then set the restore visuals
+                if ((sender.IsMaximized() == false))
+                    sender.SaveVisuals();
+
+            }
+            #endregion
+
+            #region NORMAL
+            else if (args.NewState == ElementVisualState.Normal)
+            {
+                if (sender.RenderTransform == null || !(sender.RenderTransform is ScaleTransform))
+                    sender.RenderTransform = new ScaleTransform();
+
+                sender.RenderTransformOrigin = new System.Windows.Point(0.5, 0.5);
+
+                Storyboard storyBoard = new Storyboard();
+                DoubleAnimation opacityAnimation = new DoubleAnimation(1, TimeSpan.FromMilliseconds(this.DefaultAniDuration));
+                DoubleAnimation scaleYAnimation = new DoubleAnimation(1, TimeSpan.FromMilliseconds(this.DefaultAniDuration));              
+                DoubleAnimation scaleXAnimation = new DoubleAnimation(1, TimeSpan.FromMilliseconds(this.DefaultAniDuration));
+                scaleYAnimation.From = (sender.RenderTransform as ScaleTransform).ScaleY;
+                scaleXAnimation.From = (sender.RenderTransform as ScaleTransform).ScaleX;
+
+                Storyboard.SetTarget(opacityAnimation, sender);
+                Storyboard.SetTargetProperty(opacityAnimation, new PropertyPath("Opacity"));
+                Storyboard.SetTarget(scaleYAnimation, sender);
+                Storyboard.SetTargetProperty(scaleYAnimation, new PropertyPath("(UIElement.RenderTransform).(ScaleTransform.ScaleY)"));
+                Storyboard.SetTarget(scaleXAnimation, sender);
+                Storyboard.SetTargetProperty(scaleXAnimation, new PropertyPath("(UIElement.RenderTransform).(ScaleTransform.ScaleX)"));
+
+                storyBoard.Children.Add(opacityAnimation);
+                storyBoard.Children.Add(scaleXAnimation);
+                storyBoard.Children.Add(scaleYAnimation);
+
+                storyBoard.FillBehavior = FillBehavior.Stop;
+                storyBoard.AccelerationRatio = 1;
+                storyBoard.Begin();
+
+            }
+            #endregion
+        }
+
+        #endregion
+
+        public int aniDuration = 300;
+        private int DefaultAniDuration
+        {
+            get { return this.aniDuration; }
+        }
+
+    }
+
+    public class EVisualStateArgs : RoutedEventArgs
+    {
+        public EVisualStateArgs(ElementVisualState n, ElementVisualState o)
+        {
+            this.NewState = n;
+            this.OldState = o;
+        }
+
+        public ElementVisualState NewState
+        {
+            get;
+            protected set;
+        }
+
+        public ElementVisualState OldState
+        {
+            get;
+            protected set;
+        }
     }
 }

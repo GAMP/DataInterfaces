@@ -44,7 +44,6 @@ namespace SkinInterfaces
     /// Represent visual state of our custom control or window.
     /// When changing this states the skin engine can react and perform the action needed to respond to the change.
     /// </summary>
-    [Flags()]
     public enum ElementVisualState : int
     {
         /// <summary>
@@ -58,11 +57,8 @@ namespace SkinInterfaces
         /// <summary>
         /// This value is set when control is minimized.
         /// </summary>
-        Minimized = 4,
-        /// <summary>
-        /// This value is set when control is closed.
-        /// </summary>
-        Closed = 8,
+        Minimized = 3,
+        Closed=4,
     } 
     #endregion
 

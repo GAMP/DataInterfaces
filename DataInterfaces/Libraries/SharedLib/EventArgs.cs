@@ -12,12 +12,15 @@ namespace SharedLib
     public class BaseEventArgs : EventArgs
     {
         #region Constructor
+
         public BaseEventArgs()
         {
         }
+
         #endregion
 
         #region Properties
+
         /// <summary>
         /// Gets or sets if the event should be canceled.
         /// </summary>
@@ -26,6 +29,7 @@ namespace SharedLib
             get;
             set;
         }
+
         #endregion
     }
     #endregion
@@ -42,21 +46,21 @@ namespace SharedLib
     public class ShutDownEventArgs : BaseEventArgs
     {
         #region Constructor
-        public ShutDownEventArgs()
-        {
-        }
+
         public ShutDownEventArgs(bool restarting = false, bool isCrashed = false)
         {
             this.IsRestarting = restarting;
             this.IsCrashed = isCrashed;
         }
+
         #endregion
 
-        #region Fileds
+        #region Fields
         private bool isRestarting, crashed;
         #endregion        
 
         #region Properties
+
         /// <summary>
         /// Gets if the client is restarting.
         /// </summary>
@@ -65,6 +69,7 @@ namespace SharedLib
             get { return this.isRestarting; }
             protected set { this.isRestarting = value; }
         }
+
         /// <summary>
         /// Indicates that event occurred due an application crash.
         /// </summary>
@@ -73,6 +78,7 @@ namespace SharedLib
             get { return this.crashed; }
             protected set { this.crashed = value; }
         }
+
         #endregion
     }
     #endregion
@@ -93,6 +99,7 @@ namespace SharedLib
         #endregion
 
         #region Properties
+
         /// <summary>
         /// Gets the instance of the new Application Container.
         /// <remarks>Can be equal to null.</remarks>
@@ -102,6 +109,7 @@ namespace SharedLib
             get;
             protected set;
         }
+
         /// <summary>
         /// Gets the instance of the old Application Container.
         /// <remarks>Will be null if container set for the fisrt time.</remarks>
@@ -111,6 +119,7 @@ namespace SharedLib
             get;
             protected set;
         }
+
         #endregion
     }
     #endregion
@@ -128,9 +137,7 @@ namespace SharedLib
         {
             #region Validation
             if (message == null)
-            {
-                throw new ArgumentNullException("Message", "Log message may not be null");
-            }
+                throw new ArgumentNullException("Message", "Log message may not be null");            
             #endregion
 
             this.Message = message;
@@ -139,6 +146,7 @@ namespace SharedLib
         #endregion
 
         #region Properties
+
         /// <summary>
         /// Gets the log message.
         /// </summary>
@@ -147,6 +155,7 @@ namespace SharedLib
             get;
             protected set;
         }
+
         /// <summary>
         /// Gets if message was added sucessfully to log storage.
         /// </summary>
@@ -155,6 +164,7 @@ namespace SharedLib
             get;
             protected set;
         }
+
         #endregion
     }
     #endregion
