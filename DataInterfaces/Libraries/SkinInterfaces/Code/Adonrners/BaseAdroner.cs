@@ -201,13 +201,6 @@ namespace SkinInterfaces.Code
                 adornedElement.Width = adornedElement.DesiredSize.Width;
             if (adornedElement.Height.Equals(Double.NaN))
                 adornedElement.Height = adornedElement.DesiredSize.Height;
-
-            //FrameworkElement parent = adornedElement.Parent as FrameworkElement;
-            //if (parent != null)
-            //{
-            //    adornedElement.MaxHeight = parent.ActualHeight;
-            //    adornedElement.MaxWidth = parent.ActualWidth;
-            //}
         }
         private DependencyObject ParentObject()
         {
@@ -282,7 +275,6 @@ namespace SkinInterfaces.Code
             Thumb hitThumb = sender as Thumb;
 
             if (adornedElement == null || hitThumb == null) return;
-            //FrameworkElement parentElement = adornedElement.Parent as FrameworkElement;
 
             // Ensure that the Width and Height are properly initialized after the resize.
             EnforceSize(adornedElement);
@@ -299,8 +291,7 @@ namespace SkinInterfaces.Code
             if (finalHeight <= (this.AdornedElement as FrameworkElement).MaxHeight && finalHeight >= (this.AdornedElement as FrameworkElement).MinHeight)
             {
                 adornedElement.Height = finalHeight; 
-            }
-          
+            }         
             
         }
         #endregion

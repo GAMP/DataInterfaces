@@ -17,6 +17,7 @@ using System.Collections;
 using SharedLib.ViewModels;
 using SharedLib;
 using CyClone.Core;
+using System.Windows.Markup;
 
 namespace SkinInterfaces.Converters
 {
@@ -1525,6 +1526,32 @@ namespace SkinInterfaces.Converters
             throw new NotImplementedException();
         }
     }
+    #endregion
+
+    #region HTMLToXAMLConverter
+    public class HTMLToFlowDocumentConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            try
+            {
+                if (!String.IsNullOrWhiteSpace(value as string))
+                {
+                    var doc = HTMLConverter.HtmlToXamlConverter.ConvertHtmlToXaml(value as string, true);
+                    FlowDocument document = (FlowDocument)XamlReader.Parse(doc);
+                    return document;
+                }
+            }
+            catch
+            { }
+            return null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    } 
     #endregion
 }
 

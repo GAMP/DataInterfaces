@@ -62,6 +62,30 @@ namespace SkinLib
             applicationListComponent;
         #endregion
 
+        #region Private Properties
+
+        internal Dictionary<string, UIComponent> ComponentDictionary
+        {
+            get
+            {
+                if (this.componentsDictionary == null)
+                    this.componentsDictionary = new Dictionary<string, UIComponent>();
+                return this.componentsDictionary;
+            }
+        }
+
+        internal Dictionary<string, FrameworkElement> UserControlDictionary
+        {
+            get
+            {
+                if (this.userControlsDictionary == null)
+                    this.userControlsDictionary = new Dictionary<string, FrameworkElement>();
+                return this.userControlsDictionary;
+            }
+        }
+        
+        #endregion
+
         #region Properties
 
         /// <summary>
@@ -119,29 +143,6 @@ namespace SkinLib
             }
         }
 
-        public Dictionary<string, UIComponent> ComponentDictionary
-        {
-            get
-            {
-                if (this.componentsDictionary == null)
-                    this.componentsDictionary = new Dictionary<string, UIComponent>();
-                return this.componentsDictionary;
-            }
-        }
-
-        /// <summary>
-        /// Dictionary containing the user control references.
-        /// </summary>
-        public Dictionary<string, FrameworkElement> UserControlDictionary
-        {
-            get
-            {
-                if (this.userControlsDictionary == null)
-                    this.userControlsDictionary = new Dictionary<string, FrameworkElement>();
-                return this.userControlsDictionary;
-            }
-        }
-
         /// <summary>
         /// Gets or sets the component that represents the main window.
         /// </summary>
@@ -150,7 +151,7 @@ namespace SkinLib
             get
             {
                 if (this.mainWindowComponent == null)
-                    this.mainWindowComponent = new UIComponent();
+                    this.mainWindowComponent = new UIComponent(this);
                 return this.mainWindowComponent;
             }
             set
@@ -168,7 +169,7 @@ namespace SkinLib
             get
             {
                 if (this.controlBoxComponent == null)
-                    this.controlBoxComponent = new UIComponent();
+                    this.controlBoxComponent = new UIComponent(this);
                 return this.controlBoxComponent;
             }
             set
@@ -186,7 +187,7 @@ namespace SkinLib
             get
             {
                 if (this.taskBarComponenet == null)
-                    this.taskBarComponenet = new UIComponent();
+                    this.taskBarComponenet = new UIComponent(this);
                 return this.taskBarComponenet;
             }
             set
@@ -204,7 +205,7 @@ namespace SkinLib
             get
             {
                 if (this.applicationListComponent == null)
-                    this.applicationListComponent = new UIComponent();
+                    this.applicationListComponent = new UIComponent(this);
                 return this.applicationListComponent;
             }
             set
@@ -379,7 +380,7 @@ namespace SkinLib
                 {
                     if (node.Name != "Modules")
                     {
-                        UIComponent Component = new UIComponent();
+                        UIComponent Component = new UIComponent(this);
                         Component.AssemblyName = node.Attributes["Assembly"].Value;
                         Component.Type = node.Attributes["Type"].Value;
                         Component.GUID = node.Attributes["GUID"].Value;
@@ -412,7 +413,7 @@ namespace SkinLib
         /// </summary>
         public UIComponent LoadComponenet(XmlElement ComponentNode)
         {
-            UIComponent Component = new UIComponent();
+            UIComponent Component = new UIComponent(this);
             Component.AssemblyName = ComponentNode.Attributes["Assembly"].Value;
             Component.Type = ComponentNode.Attributes["Type"].Value;
             Component.GUID = ComponentNode.Attributes["GUID"].Value;
@@ -432,26 +433,30 @@ namespace SkinLib
         private void LoadLayouts(XmlNode LayoutsNode)
         {
             this.Layouts.Clear();
-            foreach (XmlNode LayoutNode in LayoutsNode.ChildNodes)
+            foreach (XmlNode layoutNode in LayoutsNode.ChildNodes)
             {
-                //Create new configuration class
-                UILayout Layout = new UILayout(this);
-                Layout.XmlRepresentation = LayoutNode;
-                //Populate the class with xml data
-                Layout.Height = (double)new DoubleConverter().ConvertFromInvariantString(LayoutNode.Attributes["Height"].Value);
-                Layout.Width = (double)new DoubleConverter().ConvertFromInvariantString(LayoutNode.Attributes["Width"].Value);
-                Layout.IsDefault = bool.Parse(LayoutNode.Attributes["IsDefault"].Value);
-                Layout.Left = int.Parse(LayoutNode.Attributes["Left"].Value);
-                Layout.Top = int.Parse(LayoutNode.Attributes["Top"].Value.ToString());
-                Layout.Name = LayoutNode.Attributes["Name"].Value.ToString();
-                Layout.ResolutionWidth = int.Parse(LayoutNode.Attributes["ResolutionWidth"].Value);
-                Layout.ResolutionHeight = int.Parse(LayoutNode.Attributes["ResolutionHeight"].Value);
-                Layout.ImagePath = LayoutNode.Attributes["ImagePath"].Value.ToString();
-                //Set default name
-                if (Layout.Name == string.Empty)
-                    Layout.Name = "Configuration : " + this.Layouts.Count;
+                //Create new configuration class                
+                UILayout layout = new UILayout(this);
 
-                this.Layouts.Add(Layout);
+                //set xml
+                layout.XmlRepresentation = layoutNode;
+
+                //Populate the class with xml data
+                layout.Height = (double)new DoubleConverter().ConvertFromInvariantString(layoutNode.Attributes["Height"].Value);
+                layout.Width = (double)new DoubleConverter().ConvertFromInvariantString(layoutNode.Attributes["Width"].Value);
+                layout.IsDefault = bool.Parse(layoutNode.Attributes["IsDefault"].Value);
+                layout.Left = int.Parse(layoutNode.Attributes["Left"].Value);
+                layout.Top = int.Parse(layoutNode.Attributes["Top"].Value.ToString());
+                layout.Name = layoutNode.Attributes["Name"].Value.ToString();
+                layout.ResolutionWidth = int.Parse(layoutNode.Attributes["ResolutionWidth"].Value);
+                layout.ResolutionHeight = int.Parse(layoutNode.Attributes["ResolutionHeight"].Value);
+                layout.ImagePath = layoutNode.Attributes["ImagePath"].Value.ToString();
+
+                //Set default name
+                if (layout.Name == string.Empty)
+                    layout.Name = "Configuration : " + this.Layouts.Count;
+
+                this.Layouts.Add(layout);
             }
         }
 
@@ -508,10 +513,10 @@ namespace SkinLib
             #endregion
 
             #region Add Shell modules nodes
-            XmlNode MainWindowNode = xmlDocument.CreateElement("Components/Modules/MainWindow");
-            XmlNode ControlBox = xmlDocument.CreateElement("Components/Modules/ControlBox");
-            XmlNode TaskBar = xmlDocument.CreateElement("Components/Modules/TaskBar");
-            XmlNode AppList = xmlDocument.CreateElement("Components/Modules/ApplicationsList");
+            XmlElement MainWindowNode = xmlDocument.CreateElement("Components/Modules/MainWindow");
+            XmlElement ControlBox = xmlDocument.CreateElement("Components/Modules/ControlBox");
+            XmlElement TaskBar = xmlDocument.CreateElement("Components/Modules/TaskBar");
+            XmlElement AppList = xmlDocument.CreateElement("Components/Modules/ApplicationsList");
             #endregion
 
             #region Set components attributes
@@ -530,28 +535,26 @@ namespace SkinLib
             #region Add current layouts
             foreach (UILayout layout in this.Layouts)
             {
-                if ((layout.IsInitialized))
-                {
-                    layout.Accept();
-                }
+                if (layout.IsInitialized)
+                    layout.Accept();               
                 XmlNode ImportedNode = xmlDocument.ImportNode(layout.XmlRepresentation, true);
                 layoutsNode.AppendChild(ImportedNode);
             }
             #endregion
 
             #region Set Main Modules Attributes
-            ((XmlElement)MainWindowNode).SetAttribute("GUID", this.MainWindowComponent.GUID);
-            ((XmlElement)MainWindowNode).SetAttribute("Assembly", this.MainWindowComponent.AssemblyName);
-            ((XmlElement)MainWindowNode).SetAttribute("Type", this.MainWindowComponent.Type);
-            ((XmlElement)ControlBox).SetAttribute("GUID", this.ControlBoxComponent.GUID);
-            ((XmlElement)ControlBox).SetAttribute("Assembly", this.ControlBoxComponent.AssemblyName);
-            ((XmlElement)ControlBox).SetAttribute("Type", this.ControlBoxComponent.Type);
-            ((XmlElement)TaskBar).SetAttribute("GUID", this.TaskBarComponent.GUID);
-            ((XmlElement)TaskBar).SetAttribute("Assembly", this.TaskBarComponent.AssemblyName);
-            ((XmlElement)TaskBar).SetAttribute("Type", this.TaskBarComponent.Type);
-            ((XmlElement)AppList).SetAttribute("GUID", this.ApplicationListComponent.GUID);
-            ((XmlElement)AppList).SetAttribute("Assembly", this.ApplicationListComponent.AssemblyName);
-            ((XmlElement)AppList).SetAttribute("Type", this.ApplicationListComponent.Type);
+            MainWindowNode.SetAttribute("GUID", this.MainWindowComponent.GUID);
+            MainWindowNode.SetAttribute("Assembly", this.MainWindowComponent.AssemblyName);
+            MainWindowNode.SetAttribute("Type", this.MainWindowComponent.Type);
+            ControlBox.SetAttribute("GUID", this.ControlBoxComponent.GUID);
+            ControlBox.SetAttribute("Assembly", this.ControlBoxComponent.AssemblyName);
+            ControlBox.SetAttribute("Type", this.ControlBoxComponent.Type);
+            TaskBar.SetAttribute("GUID", this.TaskBarComponent.GUID);
+            TaskBar.SetAttribute("Assembly", this.TaskBarComponent.AssemblyName);
+            TaskBar.SetAttribute("Type", this.TaskBarComponent.Type);
+            AppList.SetAttribute("GUID", this.ApplicationListComponent.GUID);
+            AppList.SetAttribute("Assembly", this.ApplicationListComponent.AssemblyName);
+            AppList.SetAttribute("Type", this.ApplicationListComponent.Type);
             #endregion
 
             #region Add Assemblies
@@ -620,8 +623,6 @@ namespace SkinLib
                     if ((Instance != null) & !(Component.GUID == this.MainWindowComponent.GUID))
                     {
                         this.UserControlDictionary.Add(Component.GUID, Instance);
-                        if ((UIHandler.Current != null) & (Instance is IBindingTarget))
-                            UIHandler.Current.BindToData(Instance as IBindingTarget);
                         this.UserControls.Add(Instance);
                     }
                 }
@@ -638,8 +639,8 @@ namespace SkinLib
             {
                 this.ComponentDictionary.Add(Component.GUID, Component);
                 this.Components.Add(Component);
-                this.UserControlDictionary.Add(Component.GUID, Component.Element);
-                this.UserControls.Add(Component.Element);
+                this.UserControlDictionary.Add(Component.GUID, Component.Instance);
+                this.UserControls.Add(Component.Instance);
             }
         }
 
@@ -652,7 +653,7 @@ namespace SkinLib
                     this.ComponentDictionary.Remove(Component.GUID);
                     this.Components.Remove(Component);
                     this.UserControlDictionary.Remove(Component.GUID);
-                    this.UserControls.Remove(Component.Element);
+                    this.UserControls.Remove(Component.Instance);
                 }
             }
         }
@@ -668,5 +669,39 @@ namespace SkinLib
 
         #endregion
     }
+    #endregion
+
+    #region UIConfigurationChild
+    public abstract class UIConfigurationChild : PropertyChangedNotificator
+    {
+        #region Constructor
+        public UIConfigurationChild(UIConfiguration config)
+        {
+            if (config == null)
+                throw new ArgumentNullException("Config", "Configuration instance may not be null");
+            this.Configuration = config;
+        }
+        #endregion
+
+        #region Fields
+        private UIConfiguration configuration;
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Gets the parent configuration of this layout.
+        /// </summary>
+        public UIConfiguration Configuration
+        {
+            get { return this.configuration; }
+            protected set
+            {
+                this.configuration = value;
+                this.RaisePropertyChanged("Configuration");
+            }
+        }
+        #endregion
+    } 
     #endregion
 }

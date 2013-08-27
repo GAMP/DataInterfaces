@@ -31,10 +31,10 @@ namespace SkinLib
 
         public UIHandler()
         {
-            AppDomain.CurrentDomain.AssemblyResolve += AssemblyResolveHandler;
-            DependencyPropertyClassBase.DependencyPropertyChanged += this.DependencyPropertyChangeHandler;
-            Microsoft.Win32.SystemEvents.DisplaySettingsChanged += new EventHandler(OnDisplaySettingsChanged);
             UIHandler.Current = this;
+            DependencyPropertyClassBase.DependencyPropertyChanged += this.DependencyPropertyChangeHandler;
+            AppDomain.CurrentDomain.AssemblyResolve += AssemblyResolveHandler;
+            Microsoft.Win32.SystemEvents.DisplaySettingsChanged += new EventHandler(OnDisplaySettingsChanged);
         }
 
         #endregion
@@ -1112,8 +1112,7 @@ namespace SkinLib
             int Y,
             int nWidth,
             int nHeight,
-            bool bRepaint
-            );
+            bool bRepaint);
         #endregion
 
         #region GETWINDOWRECT
@@ -1138,20 +1137,17 @@ namespace SkinLib
         /// </summary>
         public event WindowMessageDlegeate MainWindowMessage;
 
-        public event EventHandler<EVisualStateArgs> VisualStateEvent;
-
         #endregion
 
         #region Fields
         private static UIHandler instance;
         private ObservableCollection<Exception> exceptions;
         private List<Assembly> assemblies;
-        private Dictionary<BindingSources, object> dataSources;
         private string skinPath;
         private Window mainWindow;
-        private IUILayout uiLayout;
-        private UIComponent uiComponent;
-        private UIConfiguration uiConfiguration;
+        private IUILayout currentLayout;
+        private UIComponent currentComponent;
+        private UIConfiguration currentConfiguration;
         private bool
             isLoaded,
             isBackground,
@@ -1160,6 +1156,7 @@ namespace SkinLib
         private UserControl
             currentControl,
             mouseOverControl;
+        private int animationDuration = 300;
         #endregion
 
         #region Properties
@@ -1174,41 +1171,37 @@ namespace SkinLib
         }
 
         /// <summary>
-        /// Gets the Skin Configuration Class instance.
+        /// Gets the skin configuration.
         /// </summary>
         public UIConfiguration UIConfiguration
         {
             get
             {
-                if ((this.uiConfiguration == null))
-                {
-                    this.uiConfiguration = new UIConfiguration();
-                }
-                return this.uiConfiguration;
+                if ((this.currentConfiguration == null))
+                    this.currentConfiguration = new UIConfiguration();
+                return this.currentConfiguration;
             }
-            set
+            protected set
             {
-                this.uiConfiguration = value;
+                this.currentConfiguration = value;
                 this.RaisePropertyChanged("UIConfiguration");
             }
         }
 
         /// <summary>
-        /// Currently used layout.
+        /// Gets current layout configuration.
         /// </summary>
         public IUILayout CurrentLayout
         {
             get
             {
-                if ((this.uiLayout == null))
-                {
+                if (this.currentLayout == null)
                     return this.DefaultLayout;
-                }
-                return this.uiLayout;
+                return this.currentLayout;
             }
             set
             {
-                this.uiLayout = value;
+                this.currentLayout = value;
                 this.RaisePropertyChanged("CurrentLayout");
             }
         }
@@ -1268,19 +1261,6 @@ namespace SkinLib
         }
 
         /// <summary>
-        /// Gets data sources dictionary.
-        /// </summary>
-        public Dictionary<BindingSources, object> DataSources
-        {
-            get
-            {
-                if (this.dataSources == null)
-                    this.dataSources = new Dictionary<BindingSources, object>();
-                return this.dataSources;
-            }
-        }
-
-        /// <summary>
         /// Gets if skin was previously loaded.
         /// </summary>
         public bool IsLoaded
@@ -1300,7 +1280,7 @@ namespace SkinLib
         public UserControl ActiveControl
         {
             get { return this.currentControl; }
-            internal set
+            protected set
             {
                 this.currentControl = value;
                 this.RaisePropertyChanged("ActiveControl");
@@ -1312,10 +1292,10 @@ namespace SkinLib
         /// </summary>
         public UIComponent CurrentComponent
         {
-            get { return this.uiComponent; }
+            get { return this.currentComponent; }
             protected set
             {
-                this.uiComponent = value;
+                this.currentComponent = value;
                 this.RaisePropertyChanged("CurrentComponent");
             }
         }
@@ -1403,39 +1383,6 @@ namespace SkinLib
 
         #endregion
 
-        #region Functions
-
-        #region Data
-        /// <summary>
-        /// Binds data to the control.
-        /// </summary>
-        /// <param name="target"></param>
-        /// <returns></returns>
-        /// <remarks></remarks>
-        public void BindToData(IBindingTarget target)
-        {
-            target.DataContext = this.GetDataReference(target.TargetType);
-        }
-
-        /// <summary>
-        /// Gets the data context for specified binding source type.
-        /// </summary>
-        /// <param name="dataSource">Data source type.</param>
-        /// <returns>Data context object.</returns>
-        public object GetDataReference(BindingSources dataSource)
-        {
-            if (this.DataSources.ContainsKey(dataSource))
-            {
-                return this.DataSources[dataSource];
-            }
-            else
-            {
-                throw new KeyNotFoundException("Specified data source not present in data sources store.");
-            }
-        }
-
-        #endregion
-
         #region Assemblies Functions
 
         /// <summary>
@@ -1449,18 +1396,20 @@ namespace SkinLib
             {
                 foreach (string FileName in this.UIConfiguration.Assemblies)
                 {
-                    string SkinAssemblyFile = Path.Combine(this.SkinPath, FileName);
-                    if (File.Exists(SkinAssemblyFile))
+                    string asemblyFile = Path.Combine(this.SkinPath, FileName);
+                    if (File.Exists(asemblyFile))
                     {
-                        if (this.IsAssemblyLoaded(SkinAssemblyFile) == true)
+                        if (this.IsAssemblyLoaded(asemblyFile) == true)
                             continue;
 
-                        System.IO.FileStream AssemblyFile = new System.IO.FileStream(SkinAssemblyFile, FileMode.Open, FileAccess.Read);
-                        byte[] assemblybuffer = new byte[AssemblyFile.Length];
-                        AssemblyFile.Read(assemblybuffer, 0, (int)AssemblyFile.Length);
-                        AssemblyFile.Close();
-                        AssemblyFile.Dispose();
-                        this.SkinAssemblies.Add(AppDomain.CurrentDomain.Load(assemblybuffer));
+                        using (System.IO.FileStream AssemblyFile = new System.IO.FileStream(asemblyFile, FileMode.Open, FileAccess.Read))
+                        {
+                            byte[] assemblybuffer = new byte[AssemblyFile.Length];
+                            AssemblyFile.Read(assemblybuffer, 0, (int)AssemblyFile.Length);
+                            AssemblyFile.Close();
+                            AssemblyFile.Dispose();
+                            this.SkinAssemblies.Add(AppDomain.CurrentDomain.Load(assemblybuffer));
+                        }
                     }
                     else
                     {
@@ -1483,7 +1432,7 @@ namespace SkinLib
         {
             foreach (Assembly loadedAssembly in this.SkinAssemblies)
             {
-                if (loadedAssembly.FullName == AssemblyName | loadedAssembly.ManifestModule.ScopeName == AssemblyName)
+                if (loadedAssembly.FullName == AssemblyName || loadedAssembly.ManifestModule.ScopeName == AssemblyName)
                     return loadedAssembly;
             }
             return null;
@@ -1519,9 +1468,9 @@ namespace SkinLib
                 var controlInstance = componentAssembly.CreateInstance(Component.Type, true) as FrameworkElement;
                 if (controlInstance != null)
                 {
-                    Component.Element = controlInstance;
-                    controlInstance.SetValue(SkinInterfaces.InternalProperties.UIComponentProperty, Component);
-                    controlInstance.SetValue(SkinInterfaces.ExternalProperties.GUIDProperty, Component.GUID);
+                    Component.Instance = controlInstance;
+                    controlInstance.SetValue(InternalProperties.UIComponentProperty, Component);
+                    controlInstance.SetValue(ExternalProperties.GUIDProperty, Component.GUID);
                 }
                 return controlInstance;
             }
@@ -1677,15 +1626,14 @@ namespace SkinLib
 
             #region Create Component
             UIComponent wincomp = this.UIConfiguration.MainWindowComponent;
-            var WindowInstance = this.CreateInstance<Window>(wincomp, true);
+            var mainWindow = this.CreateInstance<Window>(wincomp, true);
             #endregion
 
-            if (WindowInstance is IMainWindow)
+            if (mainWindow is IMainWindow)
             {
-                wincomp.Element = WindowInstance;
-                this.MainWindow = WindowInstance;
-                AttachMainWindowEvents(WindowInstance);
-                Application.Current.MainWindow = this.MainWindow;
+                AttachMainWindowEvents(mainWindow);
+                this.MainWindow = mainWindow;
+                Application.Current.MainWindow = mainWindow;
             }
             else
             {
@@ -1736,42 +1684,34 @@ namespace SkinLib
             }
         }
 
-        private void AttachMainWindowEvents(Window uiWindow)
+        private void AttachMainWindowEvents(Window window)
         {
-            if (uiWindow != null)
-            {
-                uiWindow.Activated += new EventHandler(OnMainWindowActivated);
-                uiWindow.Deactivated += new EventHandler(OnMainWindowDeactivated);
-                uiWindow.Loaded += new RoutedEventHandler(OnMainWindowLoaded);
-                uiWindow.Unloaded += new RoutedEventHandler(OnMainWindowUnLoaded);
-                uiWindow.Closing += new CancelEventHandler(OnMainWindowClosing);
-                uiWindow.SizeChanged += new SizeChangedEventHandler(OnMainWindowSizeChanged);
-                uiWindow.AddHandler(UIElement.MouseDownEvent, new MouseButtonEventHandler(MouseDownHandler), true);
-                uiWindow.AddHandler(UIElement.MouseMoveEvent, new MouseEventHandler(MouseOverHandler), true);
-            }
-            else
-            {
+            if (window == null)
                 throw new ArgumentNullException("Window", "UI Window instance may not be null.");
-            }
+
+            window.Activated += new EventHandler(OnMainWindowActivated);
+            window.Deactivated += new EventHandler(OnMainWindowDeactivated);
+            window.Loaded += new RoutedEventHandler(OnMainWindowLoaded);
+            window.Unloaded += new RoutedEventHandler(OnMainWindowUnLoaded);
+            window.Closing += new CancelEventHandler(OnMainWindowClosing);
+            window.SizeChanged += new SizeChangedEventHandler(OnMainWindowSizeChanged);
+            window.AddHandler(UIElement.MouseDownEvent, new MouseButtonEventHandler(MouseDownHandler), true);
+            window.AddHandler(UIElement.MouseMoveEvent, new MouseEventHandler(MouseOverHandler), true);
         }
 
-        private void DetachMainWindowEvents(Window uiWindow)
+        private void DetachMainWindowEvents(Window window)
         {
-            if (uiWindow != null)
-            {
-                uiWindow.Activated -= new EventHandler(OnMainWindowActivated);
-                uiWindow.Deactivated -= new EventHandler(OnMainWindowDeactivated);
-                uiWindow.Loaded -= new RoutedEventHandler(OnMainWindowLoaded);
-                uiWindow.Unloaded -= new RoutedEventHandler(OnMainWindowUnLoaded);
-                uiWindow.Closing -= new CancelEventHandler(OnMainWindowClosing);
-                uiWindow.SizeChanged -= new SizeChangedEventHandler(OnMainWindowSizeChanged);
-                uiWindow.RemoveHandler(UIElement.MouseDownEvent, new MouseButtonEventHandler(MouseDownHandler));
-                uiWindow.RemoveHandler(UIElement.MouseMoveEvent, new MouseEventHandler(MouseOverHandler));
-            }
-            else
-            {
+            if (window == null)
                 throw new ArgumentNullException("Window", "UI Window instance may not be null.");
-            }
+           
+            window.Activated -= new EventHandler(OnMainWindowActivated);
+            window.Deactivated -= new EventHandler(OnMainWindowDeactivated);
+            window.Loaded -= new RoutedEventHandler(OnMainWindowLoaded);
+            window.Unloaded -= new RoutedEventHandler(OnMainWindowUnLoaded);
+            window.Closing -= new CancelEventHandler(OnMainWindowClosing);
+            window.SizeChanged -= new SizeChangedEventHandler(OnMainWindowSizeChanged);
+            window.RemoveHandler(UIElement.MouseDownEvent, new MouseButtonEventHandler(MouseDownHandler));
+            window.RemoveHandler(UIElement.MouseMoveEvent, new MouseEventHandler(MouseOverHandler));
         }
 
         private void MakeTopMostSafe(Window window, bool make)
@@ -1802,8 +1742,6 @@ namespace SkinLib
 
         #endregion
 
-        #endregion
-
         #region Event Handlers
 
         private Assembly AssemblyResolveHandler(object sender, System.ResolveEventArgs args)
@@ -1828,7 +1766,7 @@ namespace SkinLib
             if (e.RightButton != MouseButtonState.Pressed)
             {
                 var originalParent = (FrameworkElement)SkinHelper.FindParentComponent((DependencyObject)e.OriginalSource);
-                if ((originalParent != null))
+                if (originalParent != null)
                 {
                     if ((this.UIConfiguration.UserControlDictionary.ContainsValue(originalParent)))
                     {
@@ -1842,7 +1780,7 @@ namespace SkinLib
         private void MouseOverHandler(object sender, MouseEventArgs e)
         {
             var originalParent = (FrameworkElement)SkinHelper.FindParentComponent((DependencyObject)e.OriginalSource);
-            if ((originalParent != null))
+            if (originalParent != null)
             {
                 if ((this.UIConfiguration.UserControlDictionary.ContainsValue(originalParent)))
                 {
@@ -1853,11 +1791,11 @@ namespace SkinLib
 
         private void OnMainWindowLoaded(object sender, RoutedEventArgs e)
         {
-            Window mainWindow = sender as Window;
-            if (mainWindow != null)
+            Window window = sender as Window;
+            if (window != null)
             {
                 //assign main window handle for late use
-                IntPtr handle = new WindowInteropHelper(mainWindow).Handle;
+                IntPtr handle = new WindowInteropHelper(window).Handle;
                 //get hwndSource
                 HwndSource source = HwndSource.FromHwnd(handle);
                 //set main window handle
@@ -1942,8 +1880,7 @@ namespace SkinLib
 
         #endregion
 
-
-        #region Event Handlers
+        #region DP Event Handlers
 
         private void DependencyPropertyChangeHandler(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
@@ -2043,9 +1980,9 @@ namespace SkinLib
                 sender.RenderTransformOrigin = new System.Windows.Point(0.5, 0.5);
 
                 Storyboard storyBoard = new Storyboard();
-                DoubleAnimation opacityAnimation = new DoubleAnimation(0, TimeSpan.FromMilliseconds(this.DefaultAniDuration));
-                DoubleAnimation scaleYAnimation = new DoubleAnimation(0, TimeSpan.FromMilliseconds(this.DefaultAniDuration));
-                DoubleAnimation scaleXAnimation = new DoubleAnimation(0, TimeSpan.FromMilliseconds(this.DefaultAniDuration));
+                DoubleAnimation opacityAnimation = new DoubleAnimation(0, TimeSpan.FromMilliseconds(this.DefaultAnimationDuration));
+                DoubleAnimation scaleYAnimation = new DoubleAnimation(0, TimeSpan.FromMilliseconds(this.DefaultAnimationDuration));
+                DoubleAnimation scaleXAnimation = new DoubleAnimation(0, TimeSpan.FromMilliseconds(this.DefaultAnimationDuration));
                 scaleYAnimation.From = (sender.RenderTransform as ScaleTransform).ScaleY;
                 scaleXAnimation.From = (sender.RenderTransform as ScaleTransform).ScaleX;
 
@@ -2060,7 +1997,7 @@ namespace SkinLib
                 storyBoard.Children.Add(scaleXAnimation);
                 storyBoard.Children.Add(scaleYAnimation);
 
-                storyBoard.FillBehavior = FillBehavior.HoldEnd;                
+                storyBoard.FillBehavior = FillBehavior.HoldEnd;
                 storyBoard.DecelerationRatio = 1;
                 storyBoard.Begin();
 
@@ -2080,9 +2017,9 @@ namespace SkinLib
                 sender.RenderTransformOrigin = new System.Windows.Point(0.5, 0.5);
 
                 Storyboard storyBoard = new Storyboard();
-                DoubleAnimation opacityAnimation = new DoubleAnimation(1, TimeSpan.FromMilliseconds(this.DefaultAniDuration));
-                DoubleAnimation scaleYAnimation = new DoubleAnimation(1, TimeSpan.FromMilliseconds(this.DefaultAniDuration));              
-                DoubleAnimation scaleXAnimation = new DoubleAnimation(1, TimeSpan.FromMilliseconds(this.DefaultAniDuration));
+                DoubleAnimation opacityAnimation = new DoubleAnimation(1, TimeSpan.FromMilliseconds(this.DefaultAnimationDuration));
+                DoubleAnimation scaleYAnimation = new DoubleAnimation(1, TimeSpan.FromMilliseconds(this.DefaultAnimationDuration));
+                DoubleAnimation scaleXAnimation = new DoubleAnimation(1, TimeSpan.FromMilliseconds(this.DefaultAnimationDuration));
                 scaleYAnimation.From = (sender.RenderTransform as ScaleTransform).ScaleY;
                 scaleXAnimation.From = (sender.RenderTransform as ScaleTransform).ScaleX;
 
@@ -2105,16 +2042,15 @@ namespace SkinLib
             #endregion
         }
 
-        #endregion
+        #endregion 
 
-        public int aniDuration = 300;
-        private int DefaultAniDuration
+        private int DefaultAnimationDuration
         {
-            get { return this.aniDuration; }
+            get { return this.animationDuration; }
         }
-
     }
 
+    #region EVisualStateArgs
     public class EVisualStateArgs : RoutedEventArgs
     {
         public EVisualStateArgs(ElementVisualState n, ElementVisualState o)
@@ -2134,5 +2070,6 @@ namespace SkinLib
             get;
             protected set;
         }
-    }
+    } 
+    #endregion
 }

@@ -12,27 +12,6 @@ using System.Collections.ObjectModel;
 
 namespace SkinInterfaces
 {
-    #region IBindingTarget
-    /// <summary>
-    /// By implementing this interface you can explicitly specify tha data source that
-    /// you want to recieve as DataContext upon module creation.
-    /// </summary>
-    public interface IBindingTarget
-    {
-        BindingSources TargetType
-        {
-            get;
-        }
-
-        object DataContext
-        {
-            get;
-            set;
-        }
-
-    }
-    #endregion
-
     #region ICustomComponent
     /// <summary>
     /// Interface that must be implemented by all skin componenents.
@@ -79,38 +58,30 @@ namespace SkinInterfaces
     }
     #endregion
 
-    #region IConfigurableComponent
+    #region IOverlayDisplayWindow
     /// <summary>
-    /// Interface for implementing custom settings inside of your controls.
+    /// Overlay Window interface.
+    /// <remarks>
+    /// The purpose of the interface is to allow implementation of a window that would display an overlay over its contents.
+    /// </remarks>
     /// </summary>
-    public interface IConfigurableComponent
+    public interface IOverlayDisplayWindow : IMainWindow
     {
         /// <summary>
-        /// This method is called when componenet is loaded or when new settings is passed to the custom componenent.
+        /// Gets if the overlay is currently shown on window.
         /// </summary>
-        /// <param name="settings">Settings Instance.</param>
-        void SetSettings(IComponentConfiguration settings);
-        /// <summary>
-        /// This method is called when the skin engine requires the settings from the componenet.
-        /// </summary>
-        /// <returns>IComponentConfiguration instance.</returns>
-        IComponentConfiguration GetSettings();
-        /// <summary>
-        /// This method is called when skin engine requires the settings of the componenet to be reset to the default values.
-        /// </summary>
-        void ResetSettings();
-    }
-    #endregion
+        bool IsOverlayShown
+        {
+            get;
+        }
 
-    #region IComponentConfiguration
-    /// <summary>
-    /// Component configuration interface.
-    /// </summary>
-    public interface IComponentConfiguration
-    {
-
+        /// <summary>
+        /// Sets overlay to specified UIElement.
+        /// </summary>
+        /// <param name="content">UIElement.</param>
+        void SetOverlay(UIElement content);
     }
-    #endregion
+    #endregion    
 
     #region IControlBox
     /// <summary>
@@ -192,10 +163,10 @@ namespace SkinInterfaces
         global::SkinInterfaces.DesktopItemViewType ItemType { get; }
         global::System.Windows.Media.ImageSource JumboIcon { get; }
         global::System.Windows.Media.ImageSource LargeIcon { get; }
+        global::System.Windows.Media.ImageSource SmallIcon { get; }
         int Left { get; set; }
         void Refresh();
-        bool ShellExecute();
-        global::System.Windows.Media.ImageSource SmallIcon { get; }
+        bool ShellExecute();       
         string ToolTip { get; }
         int Top { get; set; }
     }
@@ -206,27 +177,5 @@ namespace SkinInterfaces
     {
         ObservableCollection<ValidationError> ValidationErrors { get; }
     }
-    #endregion
-
-    #region IOverlayDisplayWindow
-    /// <summary>
-    /// Overlay Window interface.
-    /// <remarks>
-    /// The purpose of the interface is to allow implementation of a window that would display an overlay over its contents.
-    /// </remarks>
-    /// </summary>
-    public interface IOverlayDisplayWindow
-    {
-        /// <summary>
-        /// Gets if the overlay is currently shown on window.
-        /// </summary>
-        bool IsOverlayShown
-        {
-            get;
-        }
-
-        void SetOverlay(UIElement content);
-
-    } 
     #endregion    
 }

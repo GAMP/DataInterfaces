@@ -58,6 +58,9 @@ namespace SkinInterfaces
         /// This value is set when control is minimized.
         /// </summary>
         Minimized = 3,
+        /// <summary>
+        /// Same as minimized.
+        /// </summary>
         Closed=4,
     } 
     #endregion

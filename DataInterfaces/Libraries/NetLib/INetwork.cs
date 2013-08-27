@@ -6,18 +6,22 @@ using NetLib;
 
 namespace NetLib
 {
-    #region Delegates
-    public delegate void ConnectionChangedDelegate(object sender, ConnectionChangedArgs e);
-    #endregion
-    #region EventArguments
+    #region ConnectionChangedArgs
     public class ConnectionChangedArgs : EventArgs
     {
+        #region CONSTUCTOR
         public ConnectionChangedArgs(IConnection oldConnection, IConnection newConnection)
         {
             this.oldConnection = oldConnection;
             this.newConnection = newConnection;
-        }
-        private IConnection oldConnection, newConnection;
+        } 
+        #endregion
+
+        #region FIELDS
+        private IConnection oldConnection, newConnection; 
+        #endregion
+
+        #region PROPERTIES
         /// <summary>
         /// Gets the instance of old connection.
         /// <remarks>This value can be null if no connection existed.</remarks>
@@ -26,27 +30,38 @@ namespace NetLib
         {
             get { return this.oldConnection; }
         }
+
         /// <summary>
         /// Gets the instance of new connection.
         /// </summary>
         public IConnection NewConnection
         {
             get { return this.newConnection; }
-        }
+        } 
+        #endregion
     }
     #endregion
+
+    #region INetwork
     public interface INetwork
     {
-        event ConnectionChangedDelegate ConnectionChanged;
+        #region EVENTS
+        event EventHandler<ConnectionChangedArgs> ConnectionChanged;
+        #endregion
+
+        #region PROPERTIES
         IConnection StreamConnection
         {
             get;
             set;
         }
+
         IConnection DataGramConnection
         {
             get;
             set;
         }
-    }
+        #endregion
+    } 
+    #endregion
 }

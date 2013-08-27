@@ -2,75 +2,49 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.VisualBasic;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics;
+using System.Collections.ObjectModel;
+using System.Windows.Controls;
+using System.Xml;
+using System.Windows.Media;
+using System.Windows;
+using System.Windows.Data;
+using System.ComponentModel;
+using System.Linq;
+using SkinInterfaces;
+using System.IO;
+using System.Reflection;
+using SkinLib;
+using SharedLib;
 
 namespace SkinLib
 {
-    using Microsoft.VisualBasic;
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Data;
-    using System.Diagnostics;
-    using System.Collections.ObjectModel;
-    using System.Windows.Controls;
-    using System.Xml;
-    using System.Windows.Media;
-    using System.Windows;
-    using System.Windows.Data;
-    using System.ComponentModel;
-    using System.Linq;
-    using SkinInterfaces;
-    using System.IO;
-    using System.Reflection;
-    using SkinLib;
-    using SharedLib;
-
     /// <summary>
-    /// Represents a bindable class used for main ui operations.
+    /// Represents UI Layout configuration.
     /// </summary>
-    public class UILayout : PropertyChangedNotificator, IUILayout
+    public class UILayout :
+        UIConfigurationChild,
+        IUILayout
     {
         #region Constructor
 
         /// <summary>
         /// Creates a new instance of layout.
         /// </summary>
-        /// <remarks></remarks>
-        public UILayout()
-        {
-        }
-
-        /// <summary>
-        /// Creates a new instance of layout.
-        /// </summary>
-        /// <param name="Configuration">UIConfiguration instance.</param>
-        public UILayout(UIConfiguration Configuration)
-            : this()
+        /// <param name="config">UIConfiguration instance.</param>
+        public UILayout(UIConfiguration config):base(config)
         {
             #region Validation
-            if (Configuration == null)
+            if (config == null)
                 throw new ArgumentNullException("Configuration", "Layout configuration may not be null.");
             #endregion
 
-            this.Configuration = Configuration;
-        }
-
-        /// <summary>
-        /// Creates a new instance of layout from existing layout instance.
-        /// </summary>
-        /// <param name="Layout">Existing Layout instance</param>
-        public UILayout(UILayout Layout)
-            : this(Layout.Configuration)
-        {
-            this.Height = Layout.Height;
-            this.Width = Layout.Width;
-            this.IsDefault = Layout.IsDefault;
-            this.ImagePath = Layout.ImagePath;
-            this.Left = Layout.Left;
-            this.Top = Layout.Top;
-            this.XmlRepresentation = Layout.XmlRepresentation;
-            this.ResolutionHeight = Layout.ResolutionHeight;
-            this.ResolutionWidth = Layout.ResolutionWidth;
+            this.Configuration = config;
         }
 
         #endregion
@@ -90,17 +64,8 @@ namespace SkinLib
         private bool
             isDefault,
             mIsInitialized;
-        protected ListCollectionView controlsView;
         private Brush backroundBrush;
         private XmlNode xmlRepresentation;
-        private UIConfiguration configuration;
-        #endregion
-
-        #region Interface Properties
-        IUIConfiguration IUILayout.Configuration
-        {
-            get { return this.Configuration; }
-        }
         #endregion
 
         #region Properties
@@ -193,32 +158,8 @@ namespace SkinLib
             set
             {
                 this.top = value;
-                RaisePropertyChanged("Top");
+                this.RaisePropertyChanged("Top");
             }
-        }
-
-        /// <summary>
-        /// Gets user control collection view.
-        /// </summary>
-        public ListCollectionView UserControls
-        {
-            get
-            {
-                if (this.controlsView == null)
-                {
-                    this.controlsView = new ListCollectionView(this.Configuration.UserControls);
-                    this.controlsView.Filter = new Predicate<object>(FilterMainControls);
-                }
-                return this.controlsView;
-            }
-        }
-
-        /// <summary>
-        /// Gets the collection of user controls in this configuration.
-        /// </summary>
-        public ReadOnlyCollection<FrameworkElement> Controls
-        {
-            get { return new ReadOnlyCollection<FrameworkElement>(this.Configuration.UserControls); }
         }
 
         /// <summary>
@@ -243,7 +184,7 @@ namespace SkinLib
             set
             {
                 this.backroundBrush = value;
-                RaisePropertyChanged("Background");
+                this.RaisePropertyChanged("Background");
             }
         }
 
@@ -271,20 +212,7 @@ namespace SkinLib
                 this.xmlRepresentation = value;
                 this.RaisePropertyChanged("XmlRepresentation");
             }
-        }
-
-        /// <summary>
-        /// Gets the parent configuration of this layout.
-        /// </summary>
-        public UIConfiguration Configuration
-        {
-            get { return this.configuration; }
-            protected set
-            {
-                this.configuration = value;
-                this.RaisePropertyChanged("Configuration");
-            }
-        }
+        } 
 
         /// <summary>
         /// Gets if configuration was previously initialized.
@@ -299,17 +227,11 @@ namespace SkinLib
             }
         }
 
-        #endregion
+        #endregion   
 
         #region Functions
 
-        #region Loading
-
-        /// <summary>
-        /// Loads the user controls from XML node.
-        /// </summary>
-        /// <remarks></remarks>
-        public void Load()
+        public void Apply()
         {
             XmlElement ElementNode = (XmlElement)this.XmlRepresentation.SelectSingleNode("UserControls");
             foreach (XmlElement ChildElementNode in ElementNode.ChildNodes)
@@ -317,26 +239,30 @@ namespace SkinLib
                 //continue if no GUID specified
                 if (ChildElementNode.HasAttribute("GUID") == false)
                     continue;
+
                 //get GUID string
                 string GUIDString = ChildElementNode.Attributes["GUID"].Value;
+
                 //continue iof GUID is invalid
                 if (!this.Configuration.IsValidGUID(GUIDString))
                     continue;
+
                 //continue if no component exists
                 if (!this.Configuration.HasComponent(GUIDString))
                     continue;
+
                 //apply configuration
                 if (this.Configuration.UserControlDictionary.ContainsKey(GUIDString))
                 {
-                    UserControl controlInstance = this.Configuration.UserControlDictionary[GUIDString] as UserControl;
+                    var controlInstance = this.Configuration.UserControlDictionary[GUIDString];
                     if (controlInstance != null)
-                        this.LoadUserElement(controlInstance, ChildElementNode);
+                        this.ApplyToElement(controlInstance, ChildElementNode);
                 }
             }
             this.IsInitialized = true;
         }
 
-        private void LoadUserElement(UserControl Element, XmlElement ElementNode)
+        private void ApplyToElement(FrameworkElement Element, XmlElement ElementNode)
         {
             #region Enums
 
@@ -353,6 +279,7 @@ namespace SkinLib
             #endregion
 
             #region Thickness
+
             if (ElementNode.HasAttribute("Margin"))
                 Element.Margin = (Thickness)new ThicknessConverter().ConvertFromInvariantString(ElementNode.Attributes["Margin"].Value);
 
@@ -468,34 +395,25 @@ namespace SkinLib
             #endregion
 
             #region Dependency Properties
-            foreach (FieldInfo Field in typeof(ExternalProperties).GetFields())
+            foreach (FieldInfo field in typeof(ExternalProperties).GetFields())
             {
-                if (object.ReferenceEquals(Field.FieldType, typeof(DependencyProperty)))
+                if (object.ReferenceEquals(field.FieldType, typeof(DependencyProperty)))
                 {
-                    DependencyProperty CustomProperty = (DependencyProperty)Field.GetValue(null);
-                    TypeConverter Converter = TypeDescriptor.GetConverter(CustomProperty.PropertyType);
-                    if (ElementNode.HasAttribute(CustomProperty.Name))
+                    DependencyProperty protperty = (DependencyProperty)field.GetValue(null);
+                    TypeConverter converter = TypeDescriptor.GetConverter(protperty.PropertyType);
+                    if (ElementNode.HasAttribute(protperty.Name))
                     {
-                        Element.SetValue(CustomProperty, Converter.ConvertFrom(ElementNode.Attributes[CustomProperty.Name].Value));
+                        Element.SetValue(protperty, converter.ConvertFrom(ElementNode.Attributes[protperty.Name].Value));
                     }
                     else
                     {
-                        Element.SetValue(CustomProperty, CustomProperty.DefaultMetadata.DefaultValue);
+                        Element.SetValue(protperty, protperty.DefaultMetadata.DefaultValue);
                     }
                 }
             }
             #endregion
         }
 
-        #endregion
-
-        #region Saving
-
-        /// <summary>
-        /// Gets the XML representation of the layout.
-        /// </summary>
-        /// <returns></returns>
-        /// <remarks></remarks>
         public XmlNode ToXml()
         {
             XmlDocument XmlDoc = new XmlDocument();
@@ -521,86 +439,69 @@ namespace SkinLib
             return XmlDoc.FirstChild;
         }
 
-        protected XmlNode ToXml(FrameworkElement ChildObject)
+        protected XmlNode ToXml(FrameworkElement element)
         {
-            XmlDocument XmlDoc = new XmlDocument();
-            XmlElement ChildElement = XmlDoc.CreateElement(ChildObject.GetType().ToString());
-            XmlDoc.AppendChild(ChildElement);
+            XmlDocument document = new XmlDocument();
+            XmlElement child = document.CreateElement(element.GetType().ToString());
+            document.AppendChild(child);
 
             #region Base attributes saving
-            ChildElement.SetAttribute("Width", new DoubleConverter().ConvertToInvariantString(ChildObject.Width));
-            ChildElement.SetAttribute("Height", new DoubleConverter().ConvertToInvariantString(ChildObject.Height));
-            ChildElement.SetAttribute("HorizontalAlignment", ChildObject.HorizontalAlignment.ToString());
-            ChildElement.SetAttribute("VerticalAlignment", ChildObject.VerticalAlignment.ToString());
-            ChildElement.SetAttribute("Margin", new ThicknessConverter().ConvertToInvariantString(ChildObject.Margin));
-            ChildElement.SetAttribute("Visibility", ChildObject.Visibility.ToString());
-            ChildElement.SetAttribute("ZIndex", Canvas.GetZIndex(ChildObject).ToString());
-            ChildElement.SetAttribute("Row", Grid.GetRow(ChildObject).ToString());
-            ChildElement.SetAttribute("Column", Grid.GetColumn(ChildObject).ToString());
-            ChildElement.SetAttribute("RowSpan", Grid.GetRowSpan(ChildObject).ToString());
-            ChildElement.SetAttribute("ColumnSpan", Grid.GetColumnSpan(ChildObject).ToString());
-            ChildElement.SetAttribute("Top", Canvas.GetTop(ChildObject).ToString());
-            ChildElement.SetAttribute("Left", Canvas.GetLeft(ChildObject).ToString());
-            ChildElement.SetAttribute("MinWidth", new DoubleConverter().ConvertToInvariantString(ChildObject.MinWidth));
-            ChildElement.SetAttribute("MinHeight", new DoubleConverter().ConvertToInvariantString(ChildObject.MinHeight));
-            ChildElement.SetAttribute("MaxWidth", new DoubleConverter().ConvertToInvariantString(ChildObject.MaxWidth));
-            ChildElement.SetAttribute("MaxHeight", new DoubleConverter().ConvertToInvariantString(ChildObject.MaxHeight));
-            if (((FrameworkElement)ChildObject).VisualState() == SkinInterfaces.ElementVisualState.Minimized)
+            child.SetAttribute("Width", new DoubleConverter().ConvertToInvariantString(element.Width));
+            child.SetAttribute("Height", new DoubleConverter().ConvertToInvariantString(element.Height));
+            child.SetAttribute("HorizontalAlignment", element.HorizontalAlignment.ToString());
+            child.SetAttribute("VerticalAlignment", element.VerticalAlignment.ToString());
+            child.SetAttribute("Margin", new ThicknessConverter().ConvertToInvariantString(element.Margin));
+            child.SetAttribute("Visibility", element.Visibility.ToString());
+            child.SetAttribute("ZIndex", Canvas.GetZIndex(element).ToString());
+            child.SetAttribute("Row", Grid.GetRow(element).ToString());
+            child.SetAttribute("Column", Grid.GetColumn(element).ToString());
+            child.SetAttribute("RowSpan", Grid.GetRowSpan(element).ToString());
+            child.SetAttribute("ColumnSpan", Grid.GetColumnSpan(element).ToString());
+            child.SetAttribute("Top", Canvas.GetTop(element).ToString());
+            child.SetAttribute("Left", Canvas.GetLeft(element).ToString());
+            child.SetAttribute("MinWidth", new DoubleConverter().ConvertToInvariantString(element.MinWidth));
+            child.SetAttribute("MinHeight", new DoubleConverter().ConvertToInvariantString(element.MinHeight));
+            child.SetAttribute("MaxWidth", new DoubleConverter().ConvertToInvariantString(element.MaxWidth));
+            child.SetAttribute("MaxHeight", new DoubleConverter().ConvertToInvariantString(element.MaxHeight));
+            if (element.VisualState() == SkinInterfaces.ElementVisualState.Minimized)
             {
-                ChildElement.SetAttribute("Opacity", ((FrameworkElement)ChildObject).RestoreVisuals().Opacity.ToString());
+                child.SetAttribute("Opacity", ((FrameworkElement)element).RestoreVisuals().Opacity.ToString());
             }
             else
             {
-                ChildElement.SetAttribute("Opacity", ChildObject.Opacity.ToString());
+                child.SetAttribute("Opacity", element.Opacity.ToString());
             }
             #endregion
 
             #region Dependency properties saving
-            foreach (FieldInfo Field in typeof(ExternalProperties).GetFields())
+            foreach (FieldInfo field in typeof(ExternalProperties).GetFields())
             {
-                if (object.ReferenceEquals(Field.FieldType, typeof(DependencyProperty)))
+                if (object.ReferenceEquals(field.FieldType, typeof(DependencyProperty)))
                 {
-                    DependencyProperty CustomProperty = (DependencyProperty)Field.GetValue(null);
+                    DependencyProperty property = (DependencyProperty)field.GetValue(null);
+
                     //Check if object dependency property is set to default value 
-                    object ObjectPropertyValue = ChildObject.GetValue(CustomProperty);
+                    object propertyValue = element.GetValue(property);
+
                     //Only save this property configuration if not set to default value
-                    if (!(ObjectPropertyValue == CustomProperty.DefaultMetadata.DefaultValue))
-                    {
-                        ChildElement.SetAttribute(CustomProperty.Name, ObjectPropertyValue.ToString());
-                    }
+                    if (propertyValue != property.DefaultMetadata.DefaultValue)
+                        child.SetAttribute(property.Name, propertyValue.ToString());                   
                 }
             }
             #endregion
 
-            return XmlDoc.FirstChild;
+            return document.FirstChild;
         }
 
         /// <summary>
         /// Accepts the current Layout.
         /// </summary>
-        /// <remarks></remarks>
         public void Accept()
         {
             this.XmlRepresentation = this.ToXml();
             this.IsInitialized = false;
-        }
+        }      
 
-        #endregion
-
-        #endregion
-
-        #region Component Filter
-        private bool FilterMainControls(object Control)
-        {
-            if (Control is ICustomComponent)
-            {
-                return ((ICustomComponent)Control).Type == ComponentTypes.BaseControl;
-            }
-            else
-            {
-                return !(Control is Window);
-            }
-        }
         #endregion
     }
 }

@@ -90,6 +90,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Libraries\CoreLib\Classes\Tools.cs" />
+    <Compile Include="Libraries\CoreLib\Conversion\htmlcssparser.cs" />
+    <Compile Include="Libraries\CoreLib\Conversion\htmlfromxamlconverter.cs" />
+    <Compile Include="Libraries\CoreLib\Conversion\htmllexicalanalyzer.cs" />
+    <Compile Include="Libraries\CoreLib\Conversion\htmlparser.cs" />
+    <Compile Include="Libraries\CoreLib\Conversion\htmlschema.cs" />
+    <Compile Include="Libraries\CoreLib\Conversion\htmltokentype.cs" />
+    <Compile Include="Libraries\CoreLib\Conversion\htmltoxamlconverter.cs" />
     <Compile Include="Libraries\CoreLib\Interfaces\IFeed.cs" />
     <Compile Include="Libraries\CoreLib\Interfaces\IWindowWrapper.cs" />
     <Compile Include="Libraries\CoreLib\Interfaces\ISystemStatus.cs" />
