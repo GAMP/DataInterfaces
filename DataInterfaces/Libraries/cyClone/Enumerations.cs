@@ -35,7 +35,7 @@ namespace CyClone
     /// Specifies the characteristics of the storage being mounted. 
     /// </summary>
     [Flags()]
-    public enum DiskMediaType : int
+    public enum DiskMediaType
     {
         /// <summary>
         /// The mounted media is a floppy disk.
@@ -143,7 +143,7 @@ namespace CyClone
     /// </summary>
     /// <remarks></remarks>
     [Flags()]
-    public enum FileInfoLevel : int
+    public enum FileInfoLevel
     {
         /// <summary>
         /// None Flag
@@ -285,7 +285,7 @@ namespace CyClone
 
     #region FileSyncError
     [Flags()]
-    public enum FileSyncOperation : int
+    public enum FileSyncOperation
     {
         /// <summary>
         /// No error occurred.
@@ -323,6 +323,17 @@ namespace CyClone
         /// Destination stream could not be closed.
         /// </summary>
         DestinationStreamClose=128,
+    } 
+    #endregion
+
+    #region MappingFlags
+    [Flags()]
+    public enum MappingFlags
+    {
+        None = 0,
+        DirectAccess = 1,
+        IsReadOnly = 2,
+        UseCredentials = 4,
     } 
     #endregion
 }

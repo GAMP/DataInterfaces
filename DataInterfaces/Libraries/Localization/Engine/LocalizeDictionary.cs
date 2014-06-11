@@ -127,7 +127,6 @@ namespace Localization.Engine
                 {
                     this.language = DefaultLanguage;
                 }
-
                 return this.language;
             }
 

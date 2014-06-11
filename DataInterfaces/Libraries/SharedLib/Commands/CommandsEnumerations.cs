@@ -6,7 +6,6 @@ namespace SharedLib.Commands
     /// <summary>
     /// Represents a states of the commands.
     /// </summary>
-    /// <remarks></remarks>
     [Flags()]
     public enum CommandStates : uint
     {
@@ -37,7 +36,7 @@ namespace SharedLib.Commands
         /// </summary>
         Processed = 8,
         /// <summary>
-        /// Successfull completion state.
+        /// Queued command state.
         /// </summary>
         Queued = 16,
         /// <summary>
@@ -65,18 +64,25 @@ namespace SharedLib.Commands
         /// <summary>
         /// Occours when command data is not recognized.
         /// </summary>
-        Unrecongnized=1024,
+        Unrecongnized = 1024,
+        /// <summary>
+        /// Command cannot execute due authorozation.
+        /// </summary>
+        UnAuthorized = 2048,
         /// <summary>
         /// All states flag.
         /// </summary>
         AllStates = 65535,
-    } 
+    }
     #endregion
 
     #region OperationState
     [Flags()]
     public enum OperationState : uint
     {
+        /// <summary>
+        /// Default operation state.
+        /// </summary>
         Unknown = 0,
         /// <summary>
         /// This flag is set as soon as operation enters executing state.
@@ -85,16 +91,20 @@ namespace SharedLib.Commands
         /// <summary>
         /// This flags the operation completion.
         /// <remarks>This should be only set when operation has fully completed.
-        /// All the work as the operation command will be removed from command list.</remarks>
         /// </summary>
         Completed = 2,
-        Paused = 4,
-        Pausing = 8,
+        /// <summary>
+        /// Operation aborted.
+        /// </summary>
         Aborted = 16,
+        /// <summary>
+        /// Operation released.
+        /// </summary>
         Released = 32,
-        InProgress = 64,
+        /// <summary>
+        /// Operation update.
+        /// </summary>
         Update = 128,
-        Updating = 256,
         /// <summary>
         /// When calling an execute or update with invalid parameters this flag is used.
         /// </summary>
@@ -112,17 +122,11 @@ namespace SharedLib.Commands
         /// This flag is set when the operation was automatically aborted due disconnection.
         /// </summary>
         ConnectionLostAbort = 2048,
+        /// <summary>
+        /// Connection changed.
+        /// </summary>
         ConnectionChange = 4096,
-    } 
-    #endregion
-
-    #region OperationState
-    public enum OperationStateSupport : byte
-    {
-        Unknown = 0,
-        Abort = 1,
-        Pause=2,
-    } 
+    }
     #endregion
 
     #region RequestsType
@@ -133,7 +137,7 @@ namespace SharedLib.Commands
         /// </summary>
         Request = 0,
         /// <summary>
-        /// A new response command.
+        /// Response command.
         /// </summary>
         Response = 1,
         /// <summary>
@@ -157,6 +161,10 @@ namespace SharedLib.Commands
         /// </summary>
         NEGProtocol = 6,
         /// <summary>
+        /// Authentication negotiation.
+        /// </summary>
+        NEGAuthenticate = 7,
+        /// <summary>
         /// Operation update.
         /// </summary>
         OperationUpdate = 8,
@@ -167,8 +175,12 @@ namespace SharedLib.Commands
         /// <summary>
         /// This state should be set when the operation does not have any completion so the other side would remove it from the operation list.
         /// </summary>
-        OperationRelease = 32
-    } 
+        OperationRelease = 32,
+        /// <summary>
+        /// Indicates dispatcher pool event.
+        /// </summary>
+        PoolEvent = 9
+    }
     #endregion
 
     #region CommandType
@@ -177,27 +189,146 @@ namespace SharedLib.Commands
     /// </summary>
     public enum CommandType : byte
     {
+        /// <summary>
+        /// File system operation.
+        /// </summary>
+        [OperationType(typeof(FileOperations))]
         FileSystem = 0,
+
+        /// <summary>
+        /// System operation.
+        /// </summary>
+        [OperationType(typeof(SystemManagement))]
         SystemManagement = 1,
+
+        /// <summary>
+        /// Mappings operation.
+        /// </summary>
+        [OperationType(typeof(MappingsOperations))]
         MappingsManagement = 2,
+
+        /// <summary>
+        /// Power management operation.
+        /// </summary>
         PowerManagement = 3,
+
+        /// <summary>
+        /// Monitoring operation.
+        /// </summary>
+        [OperationType(typeof(SystemMonitorTypes))]
         SystemMonitoring = 4,
+
+        /// <summary>
+        /// Module operation.
+        /// </summary>
+        [OperationType(typeof(ModuleManagement))]
         ModuleManagement = 5,
-        CommandsManagement = 6,
+
+        /// <summary>
+        /// Input management operation.
+        /// </summary>
         InputManagement = 7,
+
+        /// <summary>
+        /// Settings operation,
+        /// </summary>
+        [OperationType(typeof(SettingsManagement))]
         SettingsManagement = 8,
+
+        /// <summary>
+        /// Applications operation.
+        /// </summary>
+        [OperationType(typeof(ApplicationManagement))]
         ApplicationsManagement = 9,
+
+        /// <summary>
+        /// Log operation.
+        /// </summary>
+        [OperationType(typeof(LogManagement))]
         Logging = 10,
+
+        /// <summary>
+        /// Benchmarking operation.
+        /// </summary>
+        [OperationType(typeof(BenchMarkingOperations))]
         BenchMarking = 11,
+
+        /// <summary>
+        /// Process operation.
+        /// </summary>
+        [OperationType(typeof(ProcessOperations))]
         ProcessManagement = 12,
+
+        /// <summary>
+        /// Imaging operation.
+        /// </summary>
+        [OperationType(typeof(ImagingOperations))]
         Imaging = 13,
+
+        /// <summary>
+        /// Task operation.
+        /// </summary>
+        [OperationType(typeof(TaskOperations))]
         TaskManagement = 14,
+
+        /// <summary>
+        /// Event operation.
+        /// </summary>
         EventNotification = 15,
+
+        /// <summary>
+        /// Security operation.
+        /// </summary>
+        [OperationType(typeof(SecurityOperations))]
         SecurityManagement = 16,
+
+        /// <summary>
+        /// User operation.
+        /// </summary>
+        [OperationType(typeof(UserOperations))]
         UserOperation = 17,
-        UserDefined=18,
-    } 
-    #endregion    
+
+        /// <summary>
+        /// User defined operation.
+        /// </summary>
+        UserDefined = 18,
+
+        /// <summary>
+        /// Manager to service operation.
+        /// </summary>
+        [OperationType(typeof(ManagerToServiceOpType))]
+        ManagerToService = 19,
+
+        /// <summary>
+        /// Service to manager ooperation.
+        /// </summary>
+        [OperationType(typeof(ServiceToManagerOpType))]
+        ServiceToManager = 20,
+    }
+    #endregion
+
+    #region ApplicationManagement
+    public enum ApplicationManagement : byte
+    {
+        SetContainer = 1,
+        AddApplication = 2,
+        RemoveApplication = 3,
+        UpdateApplication = 4,
+        SetApplicationRating = 5,
+        GetApplicationRating = 6,
+        SetApplicationStat = 7,
+        GetApplicationStat = 8,
+        ReserveLicenseBatch = 9,
+        ReleaseLicenseBatch = 10,
+    }
+    #endregion
+
+    #region BenchMarkingOperations
+    public enum BenchMarkingOperations
+    {
+        None = 0
+    }
+    #endregion
 
     #region MulticastOperations
     public enum MulticastOperations : byte
@@ -207,12 +338,12 @@ namespace SharedLib.Commands
         MulticastRecievePacket = 2,
         SelectStream = 4,
         MulticastPacketReceived = 8,
-    } 
+    }
     #endregion
 
     #region FileOperations
     /// <summary>
-    /// Identifies file operation.
+    /// Identifies file system operation.
     /// </summary>
     public enum FileOperations : byte
     {
@@ -249,14 +380,14 @@ namespace SharedLib.Commands
         FileExists = 32,
         DirectoryExists = 33,
         Unknown = 0,
-    } 
+    }
     #endregion
 
     #region MappingsOperations
     public enum MappingsOperations : byte
     {
         ProcessEvent = 0
-    } 
+    }
     #endregion
 
     #region UserOperations
@@ -289,43 +420,47 @@ namespace SharedLib.Commands
         /// <summary>
         /// Login command.
         /// </summary>
-        Login=7,
+        Login = 7,
         /// <summary>
         /// Logout command.
         /// </summary>
-        Logout=8,
+        Logout = 8,
         /// <summary>
         /// Group configuration command.
         /// </summary>
-        GetGroupConfiguration=9,
+        GetGroupConfiguration = 9,
         /// <summary>
         /// Get user profile information.
         /// </summary>
-        GetUserProfile=10,
+        GetUserProfile = 10,
         /// <summary>
         /// Set user profile information.
         /// </summary>
-        SetUserProfile=11,
+        SetUserProfile = 11,
         /// <summary>
         /// Get user avatar.
         /// </summary>
-        GetUserAvatar=12,
+        GetUserAvatar = 12,
         /// <summary>
         /// Set user avatar.
         /// </summary>
-        SetUserAvatar=13,
+        SetUserAvatar = 13,
         /// <summary>
         /// Set user password.
         /// </summary>
-        SetUserPassword=14,
+        SetUserPassword = 14,
         /// <summary>
         /// Integration providers login operation.
         /// </summary>
-        IntegratedLogin=15,
+        IntegratedLogin = 15,
         /// <summary>
         /// Integration provider logout operation.
         /// </summary>
-        IntegratedLogout=16
+        IntegratedLogout = 16,
+        /// <summary>
+        /// UI Notification operation.
+        /// </summary>
+        UINotify = 17,
     }
     #endregion
 
@@ -333,7 +468,7 @@ namespace SharedLib.Commands
     public enum ImagingOperations : byte
     {
         GetFileSystemEntryIcon = 1,
-    } 
+    }
     #endregion
 
     #region ContextEnumerationTypes
@@ -342,18 +477,18 @@ namespace SharedLib.Commands
         FindFirst = 1,
         FindNext = 2,
         Close = 3,
-    } 
+    }
     #endregion
 
     #region StreamOperationTypes
     public enum StreamOperationTypes : byte
     {
         SetLength = 0,
-        GetLength = 1,
         Seek = 2,
+        GetLength = 1,
         GetPosition = 3,
         Flush = 4,
-    } 
+    }
     #endregion
 
     #region SystemMonitorTypes
@@ -361,7 +496,7 @@ namespace SharedLib.Commands
     {
         Monitor = 1,
         HardDisk = 2,
-    } 
+    }
     #endregion
 
     #region ModuleManagement
@@ -371,7 +506,7 @@ namespace SharedLib.Commands
         ShutDownModule = 1,
         GetModuleInfo = 2,
         UpdateModule = 3,
-    } 
+    }
     #endregion
 
     #region SettingsManagement
@@ -384,34 +519,18 @@ namespace SharedLib.Commands
         SetReady = 4,
         LoadPlugins = 5,
         DenyConnection = 6,
-        SetNewsFeedList =7,
-        SetAppProfileList=8,
-        SetSecurityProfileList=9,
-        NotifyGroupChange=10,
-    } 
-    #endregion
-
-    #region ApplicationManagement
-    public enum ApplicationManagement : byte
-    {
-        SetContainer = 1,
-        AddApplication = 2,
-        RemoveApplication = 3,
-        UpdateApplication = 4,
-        SetApplicationRating = 5,
-        GetApplicationRating = 6,
-        SetApplicationStat = 7,
-        GetApplicationStat = 8,
-        ReserveLicenseBatch = 9,
-        ReleaseLicenseBatch = 10,
-    } 
+        SetNewsFeedList = 7,
+        SetAppProfileList = 8,
+        SetSecurityProfileList = 9,
+        NotifyGroupChange = 10,
+    }
     #endregion
 
     #region LogManagement
     public enum LogManagement : byte
     {
         AddLogMessage = 0,
-    } 
+    }
     #endregion
 
     #region SystemManagement
@@ -428,16 +547,9 @@ namespace SharedLib.Commands
         SetComputerName = 9,
         GetOsInfo = 10,
         GetMacAddress = 11,
-        SetOutOfOrderState =12,
-        GetOutOfOrderState=13,
-    } 
-    #endregion
-
-    #region BenchMarking
-    public enum BenchMarking : byte
-    {
-        Execute = 1,
-    } 
+        SetOutOfOrderState = 12,
+        GetOutOfOrderState = 13,
+    }
     #endregion
 
     #region ProcessOperations
@@ -468,4 +580,121 @@ namespace SharedLib.Commands
         SetSecurityList = 4,
     }
     #endregion
+
+    #region ManagerToServiceOpType
+    /// <summary>
+    /// Service operations on manager behalf.
+    /// </summary>
+    public enum ManagerToServiceOpType : int
+    {
+        LogGet = 2,
+        LogSet = 3,
+        LogRemove = 45,
+
+        HostGet = 1,
+        HostAdd = 47,
+        HostUpdate = 48,
+        HostRemove = 49,
+
+        HostPropertiesGet = 4,
+        HostPropertiesSet = 5,
+        HostPowerStateSet = 6,
+        HostModuleStateSet = 7,
+        HostLockStateSet = 8,
+        HostOrderStateSet = 9,
+        HostSecurityStateSet = 10,
+        HostByDispatcherGet = 0,
+
+        UserGroupGet = 11,
+        UserGroupAdd = 12,
+        UserGroupUpdate = 52,
+        UserGroupRemove = 53,
+
+        SecurityProfileGet = 13,
+        SecurityProfileAdd = 58,
+        SecurityProfileUpdate = 59,
+        SecurityProfileRemove = 60,
+
+        ApplicationGet = 15,
+        ApplicationSet = 16,
+
+        AppProfileGet = 17,
+        AppProfileAdd = 18,
+        AppProfileUpdate=55,
+        AppProfileRemove=56,
+        
+        HostGroupGet = 19,
+        HostGroupAdd = 20,
+        HostGroupUpdate = 50,
+        HostGroupRemove = 51,
+
+        FeedGet = 21,
+        FeedAdd = 22,
+        FeedRemove = 23,
+        FeedUpdate = 24,
+
+        UserGet = 25,
+        UserAdd = 26,
+        UserUpdate = 27,
+        UserRemove = 28,
+        UserRename = 29,
+        UserSetRole = 30,
+        UserSetPassword = 31,
+        UserSetPicture = 32,
+        UserGetPicture = 33,
+        UserSetEmail = 34,
+        UserSetGroup = 35,
+        UserLogin = 36,
+        UserLogout = 37,
+        UserEnable = 38,
+
+        SettingsGet = 39,
+        SettingsSet = 40,
+
+        LanguageGet = 41,
+        IntegrationProvidersGet = 42,
+        SkinGet = 43,
+        LicenseGet = 44,
+
+        SessionGet = 46,
+
+    }
+    #endregion
+
+    #region ServiceToManagerOpType
+    /// <summary>
+    /// Manager operations on service behalf.
+    /// </summary>
+    public enum ServiceToManagerOpType : byte
+    {
+        HostEvent = 0,
+        HostPropertiesEvent = 1,
+        LicenseReservationEvent = 2,
+        UserChangeEvent = 3,
+        UserStateChangeEvent = 4,
+        ContainerChangeEvent = 5,
+        LogChangedEvent = 6
+    }
+    #endregion
+
+    #region OperationTypeAttribute
+    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
+    public class OperationTypeAttribute : Attribute
+    {
+        public OperationTypeAttribute(Type operationEnum)
+        {
+            this.OperationEnum = operationEnum;
+        }
+
+        /// <summary>
+        /// Gets operation enum.
+        /// </summary>
+        public Type OperationEnum
+        {
+            get;
+            private set;
+        }
+    }
+    #endregion
 }
+

@@ -93,7 +93,7 @@ namespace IntegrationLib
         /// </summary>
         InvalidPassword = 8,
         /// <summary>
-        /// Generic error.
+        /// Generic internal error.
         /// </summary>
         Failed = 16,
         /// <summary>

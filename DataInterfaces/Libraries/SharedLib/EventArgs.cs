@@ -38,12 +38,11 @@ namespace SharedLib
     [Serializable()]
     public class StartUpEventArgs : EventArgs
     {
-
     }
     #endregion
 
     #region ShutDownEventArgs
-    public class ShutDownEventArgs : BaseEventArgs
+    public class ShutDownEventArgs : EventArgs
     {
         #region Constructor
 
@@ -56,8 +55,8 @@ namespace SharedLib
         #endregion
 
         #region Fields
-        private bool isRestarting, crashed;
-        #endregion        
+        private bool isRestarting, isCrashed;
+        #endregion
 
         #region Properties
 
@@ -75,49 +74,8 @@ namespace SharedLib
         /// </summary>
         public bool IsCrashed
         {
-            get { return this.crashed; }
-            protected set { this.crashed = value; }
-        }
-
-        #endregion
-    }
-    #endregion
-
-    #region ContainerChangedEventArgs
-    /// <summary>
-    /// Container change event arguments.
-    /// </summary>
-    [Serializable()]
-    public class ContainerChangedEventArgs : EventArgs
-    {
-        #region Constructor
-        public ContainerChangedEventArgs(IApplicationContainer oldContainer, IApplicationContainer newContainer)
-        {
-            this.OldContainer = oldContainer;
-            this.NewContainer = newContainer;
-        }
-        #endregion
-
-        #region Properties
-
-        /// <summary>
-        /// Gets the instance of the new Application Container.
-        /// <remarks>Can be equal to null.</remarks>
-        /// </summary>
-        public IApplicationContainer NewContainer
-        {
-            get;
-            protected set;
-        }
-
-        /// <summary>
-        /// Gets the instance of the old Application Container.
-        /// <remarks>Will be null if container set for the fisrt time.</remarks>
-        /// </summary>
-        public IApplicationContainer OldContainer
-        {
-            get;
-            protected set;
+            get { return this.isCrashed; }
+            protected set { this.isCrashed = value; }
         }
 
         #endregion
@@ -137,7 +95,7 @@ namespace SharedLib
         {
             #region Validation
             if (message == null)
-                throw new ArgumentNullException("Message", "Log message may not be null");            
+                throw new ArgumentNullException("Message", "Log message may not be null");
             #endregion
 
             this.Message = message;
@@ -190,6 +148,193 @@ namespace SharedLib
             protected set;
         }
         #endregion
+    }
+    #endregion
+
+    #region SelectedChangeEventArgs
+    public class SelectedChangeEventArgs<T> : EventArgs
+    {
+        protected SelectedChangeEventArgs()
+        { }
+
+        public SelectedChangeEventArgs(T current, T previous)
+        {
+            this.Current = current;
+            this.Previous = previous;
+        }
+
+        /// <summary>
+        /// Gets instance of current item.
+        /// </summary>
+        public T Current
+        {
+            get;
+            protected set;
+        }
+
+        /// <summary>
+        /// Gets instance of previous item.
+        /// </summary>
+        public T Previous
+        {
+            get;
+            protected set;
+        }
     } 
+    #endregion
+
+    #region ContainerChangedEventArgs
+    /// <summary>
+    /// Container change event arguments.
+    /// </summary>
+    [Serializable()]
+    public class ContainerChangedEventArgs : EventArgs
+    {
+        #region CONSTRUCTOR
+        public ContainerChangedEventArgs(IApplicationContainer oldContainer, IApplicationContainer newContainer)
+        {
+            this.OldContainer = oldContainer;
+            this.NewContainer = newContainer;
+        }
+        #endregion
+
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets the instance of the new Application Container.
+        /// <remarks>Can be equal to null.</remarks>
+        /// </summary>
+        public IApplicationContainer NewContainer
+        {
+            get;
+            protected set;
+        }
+
+        /// <summary>
+        /// Gets the instance of the old Application Container.
+        /// <remarks>Will be null if container set for the fisrt time.</remarks>
+        /// </summary>
+        public IApplicationContainer OldContainer
+        {
+            get;
+            protected set;
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #region ContainerItemEventArgs
+    [Serializable()]
+    public class ContainerItemEventArgs : EventArgs
+    {
+        #region CONSTRUCTOR
+
+        public ContainerItemEventArgs(ContainerItemEventType action)
+        {
+            this.Action = action;
+        }
+
+        public ContainerItemEventArgs(int containerId, IEnumerable<object> itemsList, ContainerItemEventType action):this(action)
+        {
+            this.NewItems = itemsList;
+            this.ContainerID = containerId;
+        }
+
+        public ContainerItemEventArgs(int containerId, IEnumerable<object> newItems, IEnumerable<object> oldItems, ContainerItemEventType action):this(containerId,newItems,action)
+        {
+            this.OldItems = oldItems;
+        }
+
+        #endregion
+
+        #region FIELDS
+        private ContainerItemEventType action;
+        private IEnumerable<object> newItems,oldItems;
+        private int containerId;
+        #endregion
+
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets the container id that raised the event.
+        /// </summary>
+        public int ContainerID
+        {
+            get { return this.containerId; }
+            protected set { this.containerId = value; }
+        }
+
+        /// <summary>
+        /// Gets the type of the event.
+        /// </summary>
+        public ContainerItemEventType Action
+        {
+            get { return this.action; }
+            protected set { this.action = value; }
+        }
+
+        /// <summary>
+        /// Gets the list of new items affected by this event.
+        /// </summary>
+        public IEnumerable<object> NewItems
+        {
+            get
+            {
+                if (this.newItems == null)
+                {
+                    this.newItems = new List<object>();
+                }
+                return this.newItems;
+            }
+            protected set { this.newItems = value; }
+        }
+
+        /// <summary>
+        /// Gets the list of olde items affected by this event.
+        /// </summary>
+        public IEnumerable<object> OldItems
+        {
+            get
+            {
+                if (this.oldItems == null)
+                {
+                    this.oldItems = new List<object>();
+                }
+                return this.oldItems;
+            }
+            protected set { this.oldItems = value; }
+        }
+
+        #endregion
+
+        #region OVVERIDES
+
+        public override string ToString()
+        {
+            try
+            {
+                StringBuilder builder = new StringBuilder();
+                builder.AppendLine(String.Format("Event Type:{0}", this.Action));
+                builder.AppendLine(String.Format("New Items Count:{0}", this.NewItems.Count()));
+                foreach (var item in this.NewItems)
+                {
+                    builder.AppendLine(item.ToString());
+                }
+                builder.AppendLine(String.Format("Old Items Count:{0}", this.OldItems.Count()));
+                foreach (var item in this.OldItems)
+                {
+                    builder.AppendLine(item.ToString());
+                }
+                return builder.ToString();
+            }
+            catch
+            {
+                return base.ToString();
+            }
+        }
+
+        #endregion
+    }
     #endregion
 }

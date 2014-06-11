@@ -6,7 +6,7 @@ namespace CyClone.Core
     #region IcySync
     public interface IcySync
     {
-        CyClone.Core.IcyFileSystemInfo CurrentFile { get; }
+        IcyFileSystemInfo CurrentFile { get; }
         long CurrentOffset { get; }
         event ErrorEventDelegate Error;
         event FileChangedDelegate FileChanged;

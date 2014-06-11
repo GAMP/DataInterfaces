@@ -32,16 +32,25 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -55,7 +64,8 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
     </Reference>
     <Reference Include="PresentationCore">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
@@ -73,7 +83,8 @@
     <Reference Include="System.Security" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq">
@@ -100,22 +111,41 @@
     <Compile Include="Libraries\CoreLib\Interfaces\IFeed.cs" />
     <Compile Include="Libraries\CoreLib\Interfaces\IWindowWrapper.cs" />
     <Compile Include="Libraries\CoreLib\Interfaces\ISystemStatus.cs" />
+    <Compile Include="Libraries\IntegrationLib\Classes\IAuthResult.cs" />
     <Compile Include="Libraries\IntegrationLib\Classes\PluginMetadataAttribute.cs" />
     <Compile Include="Libraries\IntegrationLib\Classes\UserIdentity.cs" />
     <Compile Include="Libraries\IntegrationLib\Classes\ServicePluginBase.cs" />
+    <Compile Include="Libraries\IntegrationLib\Interfaces\IExecutionDiversionPlugin.cs" />
+    <Compile Include="Libraries\IntegrationLib\Interfaces\IPluginModule.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\IUserIdentity.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\IAuthenticationPlugin.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\IServiceHook.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\IServicePlugin.cs" />
+    <Compile Include="Libraries\NetLib\IHostInfo.cs" />
+    <Compile Include="Libraries\SharedLib\Interfaces\INewsFeed.cs" />
     <Compile Include="Libraries\SharedLib\Applications\IRating.cs" />
     <Compile Include="Libraries\SharedLib\Classes\InternalDate.cs" />
+    <Compile Include="Libraries\SharedLib\IRemoteService.cs" />
+    <Compile Include="Libraries\SharedLib\Management\IHostGroup.cs" />
+    <Compile Include="Libraries\SharedLib\Management\ISecurityProfile.cs" />
+    <Compile Include="Libraries\SharedLib\Management\IUserGroup.cs" />
+    <Compile Include="Libraries\SharedLib\Management\IVariable.cs" />
+    <Compile Include="Libraries\SharedLib\ObjectFactories\IBusinessObjectsFactory.cs" />
     <Compile Include="Libraries\SharedLib\User\IUserSession.cs" />
+    <Compile Include="Libraries\SharedLib\ViewModels\IClosableView.cs" />
+    <Compile Include="Libraries\SharedLib\ViewModels\IMenuItemViewModel.cs" />
+    <Compile Include="Libraries\SharedLib\ViewModels\IView.cs" />
     <Compile Include="Libraries\SkinInterfaces\Code\Behaviours\GridViewBehavior.cs" />
     <Compile Include="Libraries\SkinInterfaces\Extensions\DependencyObjectExtensions.cs" />
     <Compile Include="Libraries\SkinInterfaces\Extensions\FrameworkElementExtensions.cs" />
+    <Compile Include="Libraries\SkinLib\Classes\UIConfigurationChild.cs" />
     <Compile Include="Modules\Client\EventArgs.cs" />
     <Compile Include="Modules\Client\Events.cs" />
     <Compile Include="Modules\Client\Exceptions.cs" />
+    <Compile Include="Modules\Manager\Enumerations.cs" />
+    <Compile Include="Modules\Manager\EventArgs.cs" />
+    <Compile Include="Modules\Manager\Interfaces\IGizmoService.cs" />
+    <Compile Include="Modules\Manager\Services\CurrentServiceChangedEventArgs.cs" />
     <Compile Include="Modules\Server\Delegates.cs" />
     <Compile Include="Modules\Server\Exceptions.cs" />
     <Compile Include="Libraries\SharedLib\Delegates.cs" />
@@ -232,7 +262,6 @@
     <Compile Include="Libraries\NetLib\IHostEntry.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\ILicenseManagerPlugin.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\ILicenseProfile.cs" />
-    <Compile Include="Libraries\SharedLib\Management\Management.cs" />
     <Compile Include="Libraries\SharedLib\Media\IMediaObjects.cs" />
     <Compile Include="Modules\Server\Interfaces\IServiceInterface.cs" />
     <Compile Include="Libraries\SharedLib\Operations\IOperation.cs" />
@@ -282,14 +311,14 @@
     <Compile Include="Libraries\SkinLib\Interfaces\IUIConfiguration.cs" />
     <Compile Include="Libraries\SkinLib\Interfaces\IUIHandler.cs" />
     <Compile Include="Libraries\TransformLib\IEncryptionKey.cs" />
+    <Compile Include="Modules\Server\Interfaces\IUserManagerService.cs" />
+    <Compile Include="Modules\Server\LicenseInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Modules\Client\ClientInstance.cs" />
     <Compile Include="Libraries\SharedLib\ViewModels\ICategoriesView.cs" />
     <Compile Include="Modules\Client\Interfaces\IClientViewModel.cs" />
-    <Compile Include="Libraries\Manager\IManager.cs" />
-    <Compile Include="Libraries\Manager\IManagerViewModel.cs" />
+    <Compile Include="Modules\Manager\Interfaces\IManagerViewModel.cs" />
     <Compile Include="Modules\Server\Interfaces\IServiceViewModel.cs" />
-    <Compile Include="Modules\Manager\ManagerInstance.cs" />
     <Compile Include="Modules\Server\ServerInstance.cs" />
   </ItemGroup>
   <ItemGroup>

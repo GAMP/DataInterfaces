@@ -10,12 +10,12 @@ namespace SharedLib.Dispatcher
     /// <summary>
     /// Dispatcher operation base class.
     /// </summary>
-    public class IOperationBase : ItemObject, IOperation
+    public class IOperationBase : IOperation
     {
-        #region Constructors
+        #region CONSTRUCTORS
         public IOperationBase(IDispatcherCommand cmd)
         {
-            #region Validation
+            #region VALIDATION
             if (cmd == null)
                 throw new ArgumentNullException("Cmd", "Command instance may not be null");            
             #endregion
@@ -25,7 +25,7 @@ namespace SharedLib.Dispatcher
         }
         #endregion
 
-        #region Events
+        #region EVENTS
 
         /// <summary>
         /// Occours when state of the operation has changed.
@@ -39,14 +39,13 @@ namespace SharedLib.Dispatcher
 
         #endregion
 
-        #region Fileds
-        private OperationStateSupport supportedStates;
+        #region FIELDS
         private OperationState state;
         private IDispatcherCommand command;
         private IMessageDispatcher dispatcher;
         #endregion
 
-        #region Properties
+        #region PROPERTIES
 
         /// <summary>
         /// Gets the command of this operation.
@@ -67,14 +66,6 @@ namespace SharedLib.Dispatcher
         }
 
         /// <summary>
-        /// Gets if operation can abort.
-        /// </summary>
-        public virtual bool CanAbort
-        {
-            get { return (this.SupportedStates & OperationStateSupport.Abort) == OperationStateSupport.Abort; }
-        }
-
-        /// <summary>
         /// Gets or sets the current state of the operation.
         /// </summary>
         public virtual OperationState State
@@ -83,68 +74,47 @@ namespace SharedLib.Dispatcher
             set
             {
                 this.state = value;
-                this.RaiseStateUpdate();
+                this.RaiseStateUpdate(value);
             }
         }
 
         /// <summary>
-        /// Gets the supported states of this operation.
-        /// </summary>
-        public OperationStateSupport SupportedStates
-        {
-            get { return this.supportedStates; }
-            protected set
-            {
-                this.supportedStates = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets the parameters count of the current operation.
+        /// Gets total parameters count of the current command.
         /// </summary>
         public int ParametersCount
         {
             get
             {
-                if (this.Command != null)
-                {
-                    return Command.ParamsArray.Length;
-                }
-                else
-                {
-                    return 0;
-                }
+                return this.Command != null ? this.Command.ParamsArray.Length : 0;
             }
         }
 
         /// <summary>
-        /// Gets the parameters count of the current operation.
+        /// Gets parameters count of the current operation.
         /// </summary>
         public int OpParametersCount
         {
             get
-            {
-                if (this.Command != null)
-                {
-                    if (this.ParametersCount <= 1)
-                    {
-                        return 0;
-                    }
-                    else
-                    {
-                        return Command.ParamsArray.Length - 1;
-                    }
-                }
-                else
-                {
-                    return 0;
-                }
+            {          
+                return this.ParametersCount > 1 ? this.ParametersCount -1 : 0;
             }
         }
 
         #endregion
 
-        #region Functions
+        #region VIRTUAL FUNCTIONS
+
+        public virtual void Abort() { this.RaiseStateUpdate(OperationState.Aborted); }
+
+        public virtual void Release() { this.RaiseStateUpdate(OperationState.Released); }
+
+        public virtual void Execute() { this.RaiseStateUpdate(OperationState.Completed); }
+
+        public virtual void Update(params object[] parameters) { this.RaiseOperationUpdate(parameters); }
+
+        #endregion
+
+        #region FUNCTIONS
 
         /// <summary>
         /// Raises operation update.
@@ -153,9 +123,7 @@ namespace SharedLib.Dispatcher
         public void RaiseOperationUpdate(params object[] param)
         {
             if (this.OperationUpdate != null)
-            {
-                this.OperationUpdate(this, param);
-            }
+                this.OperationUpdate(this, param);           
         }
 
         /// <summary>
@@ -167,9 +135,7 @@ namespace SharedLib.Dispatcher
         {
             this.state = state;
             if (this.StateChange != null)
-            {
-                this.StateChange(this, state, param);
-            }
+                this.StateChange(this, state, param);           
         }
 
         /// <summary>
@@ -246,7 +212,7 @@ namespace SharedLib.Dispatcher
 
         #endregion
 
-        #region Protected Functions
+        #region PROTECTED FUNCTIONS
 
         /// <summary>
         /// Raises and sets invalid parameters state state
@@ -280,30 +246,7 @@ namespace SharedLib.Dispatcher
             this.RaiseStateUpdate(OperationState.Completed, parameters);
         }
 
-        /// <summary>
-        /// Raises state update.
-        /// <remarks>Current operation state is raised.</remarks>
-        /// </summary>
-        protected void RaiseStateUpdate()
-        {
-            this.RaiseStateUpdate(this.State);
-        }
-
-        #endregion
-
-        #region Virtual Functions
-
-        public virtual void Abort(){this.RaiseStateUpdate(OperationState.Aborted);}
-
-        public virtual void Release(){this.RaiseStateUpdate(OperationState.Released);}
-
-        public virtual void Update(params object[] parameters) { }
-
-        public virtual void Execute(){ }
-
-        public virtual void Execute(params object[] param) { }
-
-        #endregion
+        #endregion        
     }
     #endregion
 }

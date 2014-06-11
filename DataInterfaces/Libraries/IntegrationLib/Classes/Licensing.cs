@@ -148,7 +148,7 @@ namespace IntegrationLib
             }
             else
             {
-                throw new ArgumentNullException("Key","License key may not be null.");
+                throw new ArgumentNullException("Key", "License key may not be null.");
             }
         }
 
@@ -211,14 +211,19 @@ namespace IntegrationLib
     public class LicenseReservation : ItemObject, ILicenseReservation
     {
         #region Constructor
+
         public LicenseReservation()
         { }
-        public LicenseReservation(int id, Dictionary<int, IApplicationLicense> licenses, IMessageDispatcher dispatcher)
+
+        public LicenseReservation(int id,
+            Dictionary<int, IApplicationLicense> licenses,
+            IMessageDispatcher dispatcher)
         {
             this.Id = id;
             this.Licenses = licenses;
             this.Dispatcher = dispatcher;
         }
+
         #endregion
 
         #region Fields
@@ -237,9 +242,7 @@ namespace IntegrationLib
             get
             {
                 if (this.licenses == null)
-                {
                     this.licenses = new Dictionary<int, IApplicationLicense>();
-                }
                 return this.licenses;
             }
             protected set { this.licenses = value; }
@@ -252,6 +255,24 @@ namespace IntegrationLib
         {
             get { return this.dispatcher; }
             protected set { this.dispatcher = value; }
+        }
+
+        /// <summary>
+        /// Gets application name.
+        /// </summary>
+        public string Application
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets executable name.
+        /// </summary>
+        public string Executable
+        {
+            get;
+            set;
         }
 
         #endregion
@@ -270,32 +291,32 @@ namespace IntegrationLib
         {
             //do nothing
         }
-        
+
         public virtual void Uninstall(IApplicationLicense license)
         {
             //do nothing
         }
-        
+
         public virtual IApplicationLicenseKey GetLicense(ILicenseProfile profile, ref bool additionHandled, Window owner)
         {
             return null;
         }
-        
+
         public virtual IApplicationLicenseKey EditLicense(IApplicationLicenseKey key, ILicenseProfile profile, ref bool additionHandled, Window owner)
         {
             return null;
         }
-        
+
         public virtual bool CanEdit
         {
             get { return false; }
         }
-        
+
         public virtual bool CanAdd
         {
             get { return true; }
         }
-        
+
         #endregion
     }
     #endregion
@@ -330,17 +351,13 @@ namespace IntegrationLib
         /// <param name="settings">IPluginSettings instance.</param>
         public void Initialize(IPluginSettings settings)
         {
-            if (settings != null)
-            {
-                this.Settings = settings;
-                this.OnInitialized(settings);
-            }
-            else
-            {
-                throw new NullReferenceException("Plugin settings cannot be null.");
-            }
+            if (settings == null)
+                throw new ArgumentNullException("Plugin settings may not be null");
+
+            this.Settings = settings;
+            this.OnInitialized(settings);
         }
-        
+
         /// <summary>
         /// Called once plugin was initialized to stored settings.
         /// </summary>
@@ -378,7 +395,7 @@ namespace IntegrationLib
         protected void ThrowIfSettingsTypeInvalid()
         {
             if (this.Settings.GetType() != this.GetSettingsInstance().GetType())
-                throw new ArgumentException("Settings","Plugin settings type is invalid.");           
+                throw new ArgumentException("Settings", "Plugin settings type is invalid");
         }
 
         #endregion

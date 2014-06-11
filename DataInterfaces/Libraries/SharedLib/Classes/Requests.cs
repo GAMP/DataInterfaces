@@ -10,7 +10,7 @@ namespace SharedLib
     #region Delegates
     public delegate string GetMacAddressDelegate();
     public delegate IPAddress GetIPAddressDelegate(IPVersion version);
-    public delegate byte[] CaptureWindowImageDelegate(IntPtr windowHandle,bool includeCursor);
+    public delegate byte[] CaptureWindowImageDelegate(IntPtr windowHandle, bool includeCursor);
     #endregion
 
     /// <summary>
@@ -22,21 +22,12 @@ namespace SharedLib
         /// <summary>
         /// Used for locking shared environment variabales expanding procedures.
         /// </summary>
-        public static object ENVIRONMENT_LOCK=new object();
+        public static object ENVIRONMENT_LOCK = new object();
         #endregion
 
         #region Events
-        
-        /// <summary>
-        /// Occours on MAC address request.
-        /// </summary>
         public static event GetMacAddressDelegate MacRequest;
-        
-        /// <summary>
-        /// Occours on IP Address request.
-        /// </summary>
-        public static event GetIPAddressDelegate IPAddressRequest ;
-
+        public static event GetIPAddressDelegate IPAddressRequest;
         public static event CaptureWindowImageDelegate CaptureRequest;
         #endregion
 
@@ -53,7 +44,7 @@ namespace SharedLib
                 return String.Empty;
             }
         }
-        
+
         public static IPAddress GetLocalIPAddress(IPVersion version)
         {
             if (SharedFunctions.IPAddressRequest != null)
@@ -65,7 +56,7 @@ namespace SharedLib
                 return IPAddress.None;
             }
         }
-        
+
         #endregion
 
         #region Environment
@@ -87,7 +78,7 @@ namespace SharedLib
                 throw new NullReferenceException("Application cannot be null.");
             }
         }
-        
+
         /// <summary>
         /// Sets dynamic variables for specified executable.
         /// </summary>
@@ -107,7 +98,7 @@ namespace SharedLib
                 throw new NullReferenceException("Executable cannot be null.");
             }
         }
-        
+
         /// <summary>
         /// Clears all dynamic varaibles from system.
         /// </summary>
@@ -119,11 +110,11 @@ namespace SharedLib
             Environment.SetEnvironmentVariable("ENTRYSOURCE", string.Empty);
             Environment.SetEnvironmentVariable("ENTRYDESTINATION", string.Empty);
         }
-        
+
         #endregion
 
         #region Extensions
-        
+
         /// <summary>
         /// Sets the dynamic environment variables to match this executable profile.
         /// </summary>
@@ -132,7 +123,7 @@ namespace SharedLib
         {
             SharedFunctions.SetDynamicVarriables(self);
         }
-        
+
         /// <summary>
         /// Unsets the dynmaic environment variables.
         /// </summary>
@@ -141,7 +132,7 @@ namespace SharedLib
         {
             SharedFunctions.UnsetDynamicVariables();
         }
-        
+
         /// <summary>
         /// Sets the dynamic environment variables to match this application profile.
         /// </summary>
@@ -150,7 +141,7 @@ namespace SharedLib
         {
             SharedFunctions.SetDynamicVarriables(self);
         }
-        
+
         /// <summary>
         /// Unsets the dynmaic environment variables.
         /// </summary>
@@ -159,11 +150,11 @@ namespace SharedLib
         {
             SharedFunctions.UnsetDynamicVariables();
         }
-        
+
         #endregion
 
         #region Imaging
-        
+
         public static byte[] CaptureWindowImage(IntPtr windowHandle, bool includeCursor)
         {
             try
@@ -173,13 +164,13 @@ namespace SharedLib
                     return SharedFunctions.CaptureRequest(windowHandle, includeCursor);
                 }
             }
-            catch 
+            catch
             {
                 return null;
             }
             return null;
         }
-        
-        #endregion        
-    }  
+
+        #endregion
+    }
 }

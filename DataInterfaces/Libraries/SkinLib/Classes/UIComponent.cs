@@ -38,7 +38,7 @@ namespace SkinLib
         #region Properties
 
         /// <summary>
-        /// Gets or sets components GUID.
+        /// Gets or sets component GUID.
         /// </summary>
         public string GUID
         {
@@ -51,7 +51,7 @@ namespace SkinLib
         }
 
         /// <summary>
-        /// Gets or sets components assembly.
+        /// Gets or sets component assembly name.
         /// </summary>
         public string AssemblyName
         {
@@ -64,7 +64,7 @@ namespace SkinLib
         }
 
         /// <summary>
-        /// Gets or sets components type.
+        /// Gets or sets component type.
         /// </summary>
         public string Type
         {
@@ -73,7 +73,7 @@ namespace SkinLib
         }
 
         /// <summary>
-        /// Gets or sets components title.
+        /// Gets or sets component title.
         /// </summary>
         public string Title
         {
@@ -86,7 +86,7 @@ namespace SkinLib
         }
 
         /// <summary>
-        /// Gets or sets components description.
+        /// Gets or sets component description.
         /// </summary>
         public string Description
         {

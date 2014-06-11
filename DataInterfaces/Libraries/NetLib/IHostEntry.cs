@@ -3,16 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CoreLib;
-using SharedLib.Management;
 using Client;
 using SharedLib;
 using SharedLib.Dispatcher;
+using SharedLib.Management;
 
 namespace NetLib
 {
+    /// <summary>
+    /// Remote host entry interface.
+    /// </summary>
     public interface IHostEntry
     {
         #region EVENTS
+
         /// <summary>
         /// Occours when host connection changed.
         /// </summary>
@@ -28,22 +32,14 @@ namespace NetLib
         /// </summary>
         event DispatcherChangedDelegate DispatcherChanged;
 
+        /// <summary>
+        /// Occurs when host maintenance mode changes.
+        /// </summary>
         event EventHandler<MaintenanceEventArgs> MaintenanceModeChanged;
+
         #endregion
 
-        /// <summary>
-        /// Gets the host id.
-        /// </summary>
-        int ID { get; }
-
-        /// <summary>
-        /// Gets the host connection.
-        /// </summary>
-        IConnection Connection
-        {
-            get;
-            set;
-        }
+        #region FUNCTIONS
 
         /// <summary>
         /// Attaches current connection.
@@ -54,7 +50,7 @@ namespace NetLib
         /// Attaches specified connection.
         /// </summary>
         /// <param name="clientconnection">Connection instance.</param>
-        void AttachConnection(IConnection clientconnection);        
+        void AttachConnection(IConnection clientconnection);
 
         /// <summary>
         ///Detaches ccurrent connection.
@@ -66,6 +62,20 @@ namespace NetLib
         /// </summary>
         /// <param name="clientconnection">Connection instance.</param>
         void DetachConnection(IConnection clientconnection);
+
+        #endregion
+
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets the host id.
+        /// </summary>
+        int ID { get; }
+
+        /// <summary>
+        /// Gets the host connection.
+        /// </summary>
+        IConnection Connection { get; set; }
 
         /// <summary>
         /// Gets or sets host command dispatcher.
@@ -88,11 +98,6 @@ namespace NetLib
         string IpAddress { get; set; }
 
         /// <summary>
-        /// Gets or sets if host is remote.
-        /// </summary>
-        bool IsRemote { get; set; }
-
-        /// <summary>
         /// Gets or sets hosts physical address.
         /// </summary>
         string MacAddress { get; set; }
@@ -113,15 +118,15 @@ namespace NetLib
         bool Registered { get; set; }
 
         /// <summary>
-        /// Checks if passed host matches current host.
-        /// </summary>
-        /// <param name="host">Host entry instance.</param>
-        /// <returns>True or false.</returns>
-        bool IsMatch(IHostEntry host);
-
-        /// <summary>
         /// Gets hosts group id.
         /// </summary>
         int GroupId { get; }
+
+        /// <summary>
+        /// Gets host info.
+        /// </summary>
+        IHostInfo Info { get; }
+
+        #endregion
     }
 }

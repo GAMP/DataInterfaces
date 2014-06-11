@@ -38,12 +38,10 @@ namespace SharedLib.Commands
         CommandStates State { get; set; }
         event StateChangeDelegate StateChange;
         CommandType Type { get; set; }
-        void UpdateState();
         void UpdateState(CommandStates state, params object[] paramarray);
         void UpdateState(CommandStates state, CommandStates resstates, params object[] paramarray);
         int SourceID { get; set; }
         int DestinationID { get; set; }
     } 
-    #endregion
-    
+    #endregion    
 }

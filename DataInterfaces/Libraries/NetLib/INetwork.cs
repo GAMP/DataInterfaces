@@ -12,13 +12,9 @@ namespace NetLib
         #region CONSTUCTOR
         public ConnectionChangedArgs(IConnection oldConnection, IConnection newConnection)
         {
-            this.oldConnection = oldConnection;
-            this.newConnection = newConnection;
+            this.OldConnection = oldConnection;
+            this.NewConnection = newConnection;
         } 
-        #endregion
-
-        #region FIELDS
-        private IConnection oldConnection, newConnection; 
         #endregion
 
         #region PROPERTIES
@@ -28,7 +24,8 @@ namespace NetLib
         /// </summary>
         public IConnection OldConnection
         {
-            get { return this.oldConnection; }
+            get;
+            protected set;
         }
 
         /// <summary>
@@ -36,7 +33,8 @@ namespace NetLib
         /// </summary>
         public IConnection NewConnection
         {
-            get { return this.newConnection; }
+            get;
+            protected set;
         } 
         #endregion
     }

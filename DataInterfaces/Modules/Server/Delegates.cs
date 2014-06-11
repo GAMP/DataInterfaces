@@ -5,6 +5,8 @@ using System.Text;
 using SharedLib.Tasks;
 using SharedLib;
 using NetLib;
+using SharedLib.Views;
+using SharedLib.ViewModels;
 
 namespace ServerService
 {

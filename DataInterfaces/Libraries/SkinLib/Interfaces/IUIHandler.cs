@@ -11,7 +11,7 @@ namespace SkinLib
 {
     public interface IUIHandler
     {
-        List<Assembly> SkinAssemblies
+        List<Assembly> Assemblies
         {
             get;
         }
@@ -19,7 +19,6 @@ namespace SkinLib
         IUILayout CurrentLayout
         {
             get;
-            set;
         }
 
         UserControl ActiveControl

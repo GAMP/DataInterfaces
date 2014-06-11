@@ -11,9 +11,27 @@ namespace CoreLib.Registry
     /// </summary>
     public interface IRegistryFile
     {
+        /// <summary>
+        /// Imports from file.
+        /// </summary>
+        /// <param name="filename">File name.</param>
         void Import(string filename);
+
+        /// <summary>
+        /// Exoirts to file.
+        /// </summary>
+        /// <param name="filename">File name.</param>
         void Export(string filename);
+        
+        /// <summary>
+        /// Imports from memory.
+        /// </summary>
         void Import();
+        
+        /// <summary>
+        /// Exoprts to stream.
+        /// </summary>
+        /// <param name="stream">Export stream.</param>
         void Export(Stream stream);
     }
 }

@@ -96,9 +96,23 @@ namespace SharedLib.Dispatcher
             get;
         }
 
+        int CompressionLevel
+        {
+            get;
+        }
+
+        bool IsCompressionEnabled
+        {
+            get;
+        }
+
         #endregion
 
         #region Functions
+
+        bool SetCompressionLevel(int level);
+
+        bool SetProtocolVersion(int version);
 
         IDispatcherCommand SendRequest(CommandType cmdtype, CommandStates resstates, params  object[] paramarray);
 

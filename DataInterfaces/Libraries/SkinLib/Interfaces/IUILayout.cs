@@ -21,6 +21,6 @@ namespace SkinLib
         int Left { get; set; }
         int Top { get; set; }
         System.Xml.XmlNode ToXml();
-        System.Xml.XmlNode XmlRepresentation { get; set; }
+        System.Xml.XmlNode Xml { get; set; }
     }
 }

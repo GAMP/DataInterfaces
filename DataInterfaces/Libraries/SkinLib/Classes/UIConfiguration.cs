@@ -9,6 +9,7 @@ using System.Xml;
 using System.IO;
 using System.ComponentModel;
 using SkinInterfaces;
+using System.Diagnostics;
 
 namespace SkinLib
 {
@@ -31,34 +32,35 @@ namespace SkinLib
         /// <param name="fileName"></param>
         /// <remarks></remarks>
         public UIConfiguration(string fileName)
+            : this()
         {
             if (string.IsNullOrWhiteSpace(fileName))
-                throw new ArgumentNullException("FileName","Configuration file name may not be null or empty");            
+                throw new ArgumentNullException("FileName", "Configuration file name may not be null or empty");
             this.FileName = fileName;
         }
 
         #endregion
 
-        #region Fileds
+        #region Fields
         private ObservableCollection<UIComponent> components;
         private ObservableCollection<FrameworkElement> userControls;
         private ObservableCollection<UILayout> layouts;
         private ObservableCollection<string> assemblies;
         [NonSerialized()]
-        private ObservableCollection<Exception> erors;
+        private ObservableCollection<Exception> errors;
         [NonSerialized()]
         private Dictionary<string, UIComponent> componentsDictionary;
         [NonSerialized()]
         private Dictionary<string, FrameworkElement> userControlsDictionary;
         [NonSerialized()]
         protected Dictionary<string, UILayout> layoutDictionary;
-        private string mFileName;
+        private string fileName;
         [NonSerialized()]
-        private XmlNode mXmlRepresentation;
-        private UIComponent 
-            mainWindowComponent, 
+        private XmlNode xml;
+        private UIComponent
+            mainWindowComponent,
             controlBoxComponent,
-            taskBarComponenet, 
+            taskBarComponenet,
             applicationListComponent;
         #endregion
 
@@ -83,20 +85,20 @@ namespace SkinLib
                 return this.userControlsDictionary;
             }
         }
-        
+
         #endregion
 
         #region Properties
 
         /// <summary>
-        /// Gets the file name of the loaded configuration.
+        /// Gets or sets file name.
         /// </summary>
         public string FileName
         {
-            get { return this.mFileName; }
+            get { return this.fileName; }
             set
             {
-                this.mFileName = value;
+                this.fileName = value;
                 this.RaisePropertyChanged("FileName");
             }
         }
@@ -124,6 +126,32 @@ namespace SkinLib
                 if (this.userControls == null)
                     this.userControls = new ObservableCollection<FrameworkElement>();
                 return this.userControls;
+            }
+        }
+
+        /// <summary>
+        /// Gets the list of the assemblies assigned to this configuration.
+        /// </summary>
+        public ObservableCollection<string> Assemblies
+        {
+            get
+            {
+                if (this.assemblies == null)
+                    this.assemblies = new ObservableCollection<string>();
+                return this.assemblies;
+            }
+        }
+
+        /// <summary>
+        /// Gets errors occured durring initialization or loading.
+        /// </summary>
+        public ObservableCollection<Exception> Errors
+        {
+            get
+            {
+                if (this.errors == null)
+                    this.errors = new ObservableCollection<Exception>();
+                return this.errors;
             }
         }
 
@@ -218,48 +246,14 @@ namespace SkinLib
         /// <summary>
         /// Gets or sets XML Node representing the class.
         /// </summary>
-        public XmlNode XmlRepresentation
+        public XmlNode Xml
         {
-            get { return this.mXmlRepresentation; }
+            get { return this.xml; }
             set
             {
-                this.mXmlRepresentation = value;
+                this.xml = value;
                 this.RaisePropertyChanged("XmlRepresentation");
             }
-        }
-
-        /// <summary>
-        /// Gets the list of the assemblies assigned to this configuration.
-        /// </summary>
-        public ObservableCollection<string> Assemblies
-        {
-            get
-            {
-                if (this.assemblies == null)
-                    this.assemblies = new ObservableCollection<string>();
-                return this.assemblies;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the errors in the current configuration.
-        /// </summary>
-        public ObservableCollection<Exception> Errors
-        {
-            get
-            {
-                if (this.erors == null)
-                    this.erors = new ObservableCollection<Exception>();
-                return this.erors;
-            }
-        }
-
-        /// <summary>
-        /// When ovveriden responsible of loading main ui modules.
-        /// </summary>
-        /// <param name="ModulesNode">Node containing main modules</param>
-        protected virtual void LoadModules(XmlNode ModulesNode)
-        {
         }
 
         #endregion
@@ -268,212 +262,351 @@ namespace SkinLib
 
         public void Load()
         {
-            XmlDocument XmlDocument = new XmlDocument();
-            XmlDocument.Load(this.FileName);
-            this.XmlRepresentation = XmlDocument;
+            #region INITIAL FILE LOAD
+
+            XmlDocument configuration = new XmlDocument();
+            configuration.Load(this.FileName);
+
+            //clone initial configuration
+            this.Xml = configuration.Clone();
+
+            #endregion
 
             #region COMPONENTS
-            //Check if configuration node exists
-            XmlNode ComponentsNode = XmlDocument.SelectSingleNode("Configuration/Components");
-            if ((ComponentsNode != null))
-            {
-                this.LoadComponents(ComponentsNode);
-            }
-            else
-            {
-                throw new Exception("Components XML node not found!");
-            }
+
+            //get components node
+            var componentsNode = configuration.SelectSingleNode("Configuration/Components");
+
+            //validate
+            if (componentsNode == null)
+                throw new ArgumentException("Skin components node not found in configuration file", "componentsNode");
+
+            //load components
+            this.LoadComponents(componentsNode);
+
             #endregion
 
-            #region LAYOUTS
-            XmlNode LayoutsNode = XmlDocument.SelectSingleNode("Configuration/Layouts");
-            if ((LayoutsNode != null))
-            {
-                this.LoadLayouts(LayoutsNode);
-            }
-            else
-            {
-                throw new Exception("Layout XML node not found!");
-            }
-            #endregion
+            #region MODULES
+
+            var modulesNode = configuration.SelectSingleNode("Configuration/Components/Modules");
+
+            //validate
+            if (componentsNode == null)
+                throw new ArgumentException("Skin modules node not found in configuration file", "modulesNode");
+
+            #region BUILT IN MODULES
+
+            //temporary variable to hold component result
+            UIComponent temComponent;
 
             #region MAINWINDOW
-            XmlElement MainWindow = (XmlElement)XmlDocument.SelectSingleNode("Configuration/Components/Modules/MainWindow");
-            if ((MainWindow != null))
-            {
-                UIComponent Componenet = this.LoadComponenet(MainWindow);
-                this.MainWindowComponent = Componenet;
-            }
-            else
-            {
-                throw new Exception("Main Window XML node not found!");
-            }
-            #endregion
 
-            #region CONTROLBOX
-            XmlElement ControlBox = (XmlElement)XmlDocument.SelectSingleNode("Configuration/Components/Modules/ControlBox");
-            if ((ControlBox != null))
+            var mainWindowNode = configuration.SelectSingleNode("Configuration/Components/Modules/MainWindow");
+
+            //validate
+            if (mainWindowNode == null)
+                throw new ArgumentException("Main window node not found in configuration file", "componentsNode");
+
+            //load main window
+            if (this.TryLoadComponenet(mainWindowNode, out temComponent))
             {
-                UIComponent Componenet = this.LoadComponenet(ControlBox);
-                this.ControlBoxComponent = Componenet;
+                this.MainWindowComponent = temComponent;
             }
-            else
-            {
-                throw new Exception("Control Box XML node not found!");
-            }
+
             #endregion
 
             #region TASKBAR
-            XmlElement TaskBarNode = (XmlElement)XmlDocument.SelectSingleNode("Configuration/Components/Modules/TaskBar");
-            if ((TaskBarNode != null))
+
+            var taskBarNode = (XmlElement)configuration.SelectSingleNode("Configuration/Components/Modules/TaskBar");
+
+            //validate
+            if (taskBarNode == null)
+                throw new ArgumentException("Taskbar node not found in configuration file", "taskBarNode");
+
+            if (this.TryLoadComponenet(taskBarNode, out temComponent))
             {
-                UIComponent Componenet = this.LoadComponenet(TaskBarNode);
-                this.TaskBarComponent = Componenet;
-                this.InternalAdd(Componenet);
+                this.TaskBarComponent = temComponent;
+                this.InternalAdd(temComponent);
             }
-            else
-            {
-                throw new Exception("TaskBar XML node not found!");
-            }
+
             #endregion
 
             #region APPLIST
-            XmlElement AppListNode = (XmlElement)XmlDocument.SelectSingleNode("Configuration/Components/Modules/ApplicationsList");
-            if ((AppListNode != null))
+
+            var applicationListNode = (XmlElement)configuration.SelectSingleNode("Configuration/Components/Modules/ApplicationsList");
+
+            //validate
+            if (applicationListNode == null)
+                throw new ArgumentException("ApplicationList node not found in configuration file", "applicationListNode");
+
+            if (this.TryLoadComponenet(applicationListNode, out temComponent))
             {
-                UIComponent Componenet = this.LoadComponenet(AppListNode);
-                this.ApplicationListComponent = Componenet;
-                this.InternalAdd(Componenet);
+                this.ApplicationListComponent = temComponent;
+                this.InternalAdd(temComponent);
             }
-            else
+
+
+            #endregion
+
+            #region CONTROLBOX
+
+            var controlBoxNode = (XmlElement)configuration.SelectSingleNode("Configuration/Components/Modules/ControlBox");
+
+            //validate
+            if (controlBoxNode == null)
+                throw new ArgumentException("Control box node not found in configuration file", "controlBoxNode");
+
+            if (this.TryLoadComponenet(controlBoxNode, out temComponent))
             {
-                throw new Exception("Application List XML node not found!");
+                this.ControlBoxComponent = temComponent;
             }
+
+            #endregion
+
+            #endregion
+
+            #endregion
+
+            #region LAYOUTS
+
+            var layoutsNode = configuration.SelectSingleNode("Configuration/Layouts");
+
+            //validate
+            if (layoutsNode == null)
+                throw new ArgumentException("Skin layouts node not found in configuration file", "layoutsNode");
+
+            this.LoadLayouts(layoutsNode);
+
             #endregion
 
             #region ASSEMBLIES
-            XmlNode AssembliesNode = XmlDocument.SelectSingleNode("Configuration/Assemblies");
-            if ((LayoutsNode != null))
-            {
-                this.LoadAssemblies(AssembliesNode);
-            }
-            else
-            {
-                throw new Exception("Assemblies XML node not found!");
-            }
-            #endregion
 
-            this.LoadModules(XmlDocument.SelectSingleNode("Configuration/Components/Modules"));
+            var assembliesNode = configuration.SelectSingleNode("Configuration/Assemblies");
+
+            //validate
+            if (assembliesNode == null)
+                throw new ArgumentException("Skin assemblies node not found in configuration file", "assembliesNode");
+
+            this.LoadAssemblies(assembliesNode);
+
+            #endregion
         }
 
         /// <summary>
         /// Loads the compoenents from given xml node.
         /// </summary>
-        /// <param name="ComponentsNode"></param>
-        private void LoadComponents(XmlNode ComponentsNode)
+        /// <param name="node">XML Node.</param>
+        private void LoadComponents(XmlNode node)
         {
+            #region VALIDATE
+            if (node == null)
+                throw new ArgumentNullException("node"); 
+            #endregion
+
+            #region CLEAR
             this.ComponentDictionary.Clear();
-            this.Components.Clear();
-            foreach (XmlElement node in ComponentsNode.ChildNodes)
-            {
-                try
-                {
-                    if (node.Name != "Modules")
-                    {
-                        UIComponent Component = new UIComponent(this);
-                        Component.AssemblyName = node.Attributes["Assembly"].Value;
-                        Component.Type = node.Attributes["Type"].Value;
-                        Component.GUID = node.Attributes["GUID"].Value;
-
-                        if (node.HasAttribute("Title"))
-                            Component.Title = node.Attributes["Title"].Value;
-                        if (node.HasAttribute("Description"))
-                            Component.Description = node.Attributes["Description"].Value;
-
-                        this.ComponentDictionary.Add(Component.GUID, Component);
-                        this.Components.Add(Component);
-                    }
-                }
-                catch
-                {
-                    //Log failed component loading
-                    continue;
-                }
-            }
-        }
-
-        private void InternalAdd(UIComponent Componenet)
-        {
-            this.ComponentDictionary.Add(Componenet.GUID, Componenet);
-            this.Components.Add(Componenet);
-        }
-
-        /// <summary>
-        /// Loads UIComponent from specified node.
-        /// </summary>
-        public UIComponent LoadComponenet(XmlElement ComponentNode)
-        {
-            UIComponent Component = new UIComponent(this);
-            Component.AssemblyName = ComponentNode.Attributes["Assembly"].Value;
-            Component.Type = ComponentNode.Attributes["Type"].Value;
-            Component.GUID = ComponentNode.Attributes["GUID"].Value;
-
-            if (ComponentNode.HasAttribute("Title"))
-                Component.Title = ComponentNode.Attributes["Title"].Value;
+            this.Components.Clear(); 
+            #endregion
            
-            if (ComponentNode.HasAttribute("Description"))
-                Component.Description = ComponentNode.Attributes["Description"].Value;
-            
-            return Component;
+            #region LOAD
+            //get all child nodes excluding modules node
+            foreach (XmlNode childNode in node.ChildNodes.Cast<XmlNode>().Where(x => String.Compare(x.Name, "Modules", true) != 0))
+            {
+                //check if node has any attributes
+                if (childNode.Attributes == null || childNode.Attributes.Count == 0)
+                    continue;
+
+                UIComponent uiComponent;
+                if (this.TryLoadComponenet(childNode, out uiComponent))
+                {
+                    //add to components list
+                    this.InternalAdd(uiComponent);
+                }
+                else
+                {
+                    //add load error
+                    this.Errors.Add(new Exception(String.Format("Could not load skin component from xml node {0}", childNode.OuterXml)));
+                }
+            } 
+            #endregion
         }
 
         /// <summary>
         /// Loads the layouts from the XML node.
         /// </summary>
-        private void LoadLayouts(XmlNode LayoutsNode)
+        private void LoadLayouts(XmlNode node)
         {
-            this.Layouts.Clear();
-            foreach (XmlNode layoutNode in LayoutsNode.ChildNodes)
+            #region VALIDATE
+            if (node == null)
+                throw new ArgumentNullException("node"); 
+            #endregion
+
+            #region CLEAR
+            this.Layouts.Clear(); 
+            #endregion
+
+            #region LOAD
+            foreach (XmlNode childNode in node.ChildNodes)
             {
-                //Create new configuration class                
-                UILayout layout = new UILayout(this);
+                try
+                {
+                    //check if node has any attributes
+                    if (childNode.Attributes == null || childNode.Attributes.Count == 0)
+                        continue;
 
-                //set xml
-                layout.XmlRepresentation = layoutNode;
+                    #region PROCESS EACH LAYOUT
 
-                //Populate the class with xml data
-                layout.Height = (double)new DoubleConverter().ConvertFromInvariantString(layoutNode.Attributes["Height"].Value);
-                layout.Width = (double)new DoubleConverter().ConvertFromInvariantString(layoutNode.Attributes["Width"].Value);
-                layout.IsDefault = bool.Parse(layoutNode.Attributes["IsDefault"].Value);
-                layout.Left = int.Parse(layoutNode.Attributes["Left"].Value);
-                layout.Top = int.Parse(layoutNode.Attributes["Top"].Value.ToString());
-                layout.Name = layoutNode.Attributes["Name"].Value.ToString();
-                layout.ResolutionWidth = int.Parse(layoutNode.Attributes["ResolutionWidth"].Value);
-                layout.ResolutionHeight = int.Parse(layoutNode.Attributes["ResolutionHeight"].Value);
-                layout.ImagePath = layoutNode.Attributes["ImagePath"].Value.ToString();
+                    //Create new configuration class                
+                    UILayout layout = new UILayout(this);
 
-                //Set default name
-                if (layout.Name == string.Empty)
-                    layout.Name = "Configuration : " + this.Layouts.Count;
+                    //set xml
+                    layout.Xml = childNode.Clone();
 
-                this.Layouts.Add(layout);
-            }
+                    #region LAYOUT PROPERTIES
+
+                    //Populate the class with xml data
+                    if (childNode.Attributes["Height"] != null)
+                    {
+                        layout.Height = (double)new DoubleConverter().ConvertFromInvariantString(childNode.Attributes["Height"].Value);
+                    }
+
+                    if (childNode.Attributes["Width"] != null)
+                    {
+                        layout.Width = (double)new DoubleConverter().ConvertFromInvariantString(childNode.Attributes["Width"].Value);
+                    }
+
+                    if (childNode.Attributes["IsDefault"] != null)
+                    {
+                        layout.IsDefault = bool.Parse(childNode.Attributes["IsDefault"].Value);
+                    }
+
+                    if (childNode.Attributes["Left"] != null)
+                    {
+                        layout.Left = int.Parse(childNode.Attributes["Left"].Value);
+                    }
+
+                    if (childNode.Attributes["Top"] != null)
+                    {
+                        layout.Top = int.Parse(childNode.Attributes["Top"].Value.ToString());
+                    }
+
+                    if (childNode.Attributes["Name"] != null)
+                    {
+                        layout.Name = childNode.Attributes["Name"].Value.ToString();
+                    }
+
+                    if (childNode.Attributes["ResolutionWidth"] != null)
+                    {
+                        layout.ResolutionWidth = int.Parse(childNode.Attributes["ResolutionWidth"].Value);
+                    }
+
+                    if (childNode.Attributes["ResolutionHeight"] != null)
+                    {
+                        layout.ResolutionHeight = int.Parse(childNode.Attributes["ResolutionHeight"].Value);
+                    }
+
+                    if (childNode.Attributes["ImagePath"] != null)
+                    {
+                        layout.ImagePath = childNode.Attributes["ImagePath"].Value;
+                    }
+
+                    #endregion
+
+                    //add to layouts collection
+                    this.Layouts.Add(layout);
+
+                    //set default name if required
+                    if (String.IsNullOrWhiteSpace(layout.Name))
+                        layout.Name = "UI Configuration " + this.Layouts.IndexOf(layout);
+
+                    #endregion
+                }
+                catch (Exception ex)
+                {
+                    //add load error
+                    this.Errors.Add(new Exception(String.Format("Could not load skin layout from xml node {0}", childNode.OuterXml), ex));
+                }
+            } 
+            #endregion
         }
 
         /// <summary>
         /// Load the assemblies File Names from the configuration file.
         /// </summary>
-        private void LoadAssemblies(XmlNode AssembliesNode)
+        private void LoadAssemblies(XmlNode node)
         {
-            this.Assemblies.Clear();
-            foreach (XmlElement AssemblyElement in AssembliesNode.ChildNodes)
+            #region VALIDATE
+            if (node == null)
+                throw new ArgumentNullException("node"); 
+            #endregion
+
+            #region CLEAR
+            this.Assemblies.Clear(); 
+            #endregion
+
+            #region LOAD
+            foreach (XmlNode childNode in node.ChildNodes)
             {
-                if ((AssemblyElement.HasAttribute("FileName")))
+                if (childNode.Attributes == null || childNode.Attributes.Count == 0)
+                    continue;
+
+                #region PROCESS EACH ASSEMBLY
+                var fileNameAttribute = childNode.Attributes["FileName"];
+                if (fileNameAttribute != null)
                 {
-                    string AssemblyFileName = AssemblyElement.Attributes["FileName"].Value;
-                    this.Assemblies.Add(AssemblyFileName);
+                    string assemblyFileName = fileNameAttribute.Value;
+                    this.Assemblies.Add(assemblyFileName);
                 }
+                #endregion
+            } 
+            #endregion
+        }
+
+        /// <summary>
+        /// Tries to load a component from specifed xml node.
+        /// </summary>
+        /// <param name="node">XML node.</param>
+        /// <param name="component">Loaded component.</param>
+        /// <returns>True for sucessfull load, otherwise false.</returns>
+        private bool TryLoadComponenet(XmlNode node, out UIComponent component)
+        {
+            if (node == null)
+                throw new ArgumentNullException("node");
+
+            component = null;
+
+            //check if there is attributes, if no attributes exists (eg invalid configuration or commented node) we cant proceed so return false
+            if (node.Attributes == null || node.Attributes.Count == 0)
+                return false;
+
+            //check if all required parameters present
+            if (node.Attributes["Assembly"] == null ||
+                node.Attributes["Type"] == null ||
+                node.Attributes["GUID"] == null)
+            {
+                return false;
             }
+
+            //validate parameters
+            if (!this.IsValidGUID(node.Attributes["GUID"].Value))
+                return false;
+
+            //create new ui component
+            var uiComponent = new UIComponent(this);
+            uiComponent.AssemblyName = node.Attributes["Assembly"].Value;
+            uiComponent.Type = node.Attributes["Type"].Value;
+            uiComponent.GUID = node.Attributes["GUID"].Value;
+
+            if (node.Attributes["Title"] != null)
+                uiComponent.Title = node.Attributes["Title"].Value;
+
+            if (node.Attributes["Description"] != null)
+                uiComponent.Description = node.Attributes["Description"].Value;
+
+            //assign out value
+            component = uiComponent;
+
+            return true;
         }
 
         /// <summary>
@@ -485,11 +618,10 @@ namespace SkinLib
         }
 
         /// <summary>
-        /// Saves the configuration to specified file.
+        /// Saves configuration to specified file.
         /// </summary>
-        /// <param name="FileName">Configuration file name.</param>
-        /// <remarks></remarks>
-        public void Save(string FileName)
+        /// <param name="fileName">File name.</param>
+        public void Save(string fileName)
         {
             #region Create New XML Document
             XmlDocument xmlDocument = new XmlDocument();
@@ -536,25 +668,30 @@ namespace SkinLib
             foreach (UILayout layout in this.Layouts)
             {
                 if (layout.IsInitialized)
-                    layout.Accept();               
-                XmlNode ImportedNode = xmlDocument.ImportNode(layout.XmlRepresentation, true);
+                    layout.Accept();
+                XmlNode ImportedNode = xmlDocument.ImportNode(layout.Xml, true);
                 layoutsNode.AppendChild(ImportedNode);
             }
             #endregion
 
-            #region Set Main Modules Attributes
+            #region MODULES
+
             MainWindowNode.SetAttribute("GUID", this.MainWindowComponent.GUID);
             MainWindowNode.SetAttribute("Assembly", this.MainWindowComponent.AssemblyName);
             MainWindowNode.SetAttribute("Type", this.MainWindowComponent.Type);
+
             ControlBox.SetAttribute("GUID", this.ControlBoxComponent.GUID);
             ControlBox.SetAttribute("Assembly", this.ControlBoxComponent.AssemblyName);
             ControlBox.SetAttribute("Type", this.ControlBoxComponent.Type);
+
             TaskBar.SetAttribute("GUID", this.TaskBarComponent.GUID);
             TaskBar.SetAttribute("Assembly", this.TaskBarComponent.AssemblyName);
             TaskBar.SetAttribute("Type", this.TaskBarComponent.Type);
+
             AppList.SetAttribute("GUID", this.ApplicationListComponent.GUID);
             AppList.SetAttribute("Assembly", this.ApplicationListComponent.AssemblyName);
             AppList.SetAttribute("Type", this.ApplicationListComponent.Type);
+
             #endregion
 
             #region Add Assemblies
@@ -575,19 +712,19 @@ namespace SkinLib
             #endregion
 
             #region Save document
-            xmlDocument.Save(FileName);
+            xmlDocument.Save(fileName);
             #endregion
         }
 
         /// <summary>
-        /// Checks if specified string is valid GUID.
+        /// Checks if specified string is valid guid.
         /// </summary>
-        /// <param name="GUIDString"></param>
-        /// <returns></returns>
-        public bool IsValidGUID(string GUIDString)
+        /// <param name="guid">Guid string.</param>
+        /// <returns>True or false.</returns>
+        public bool IsValidGUID(string guid)
         {
             Guid temp;
-            return !String.IsNullOrWhiteSpace(GUIDString) && Guid.TryParse(GUIDString, out temp);
+            return !String.IsNullOrWhiteSpace(guid) && Guid.TryParse(guid, out temp);
         }
 
         /// <summary>
@@ -595,35 +732,35 @@ namespace SkinLib
         /// </summary>
         public bool HasComponent(string guid)
         {
-            return this.ComponentDictionary.ContainsKey(guid);
+            return !String.IsNullOrWhiteSpace(guid) && this.ComponentDictionary.ContainsKey(guid);
         }
 
         /// <summary>
         /// Checks if configuration contains specified assembly file.
         /// </summary>
-        /// <param name="FileName"></param>
-        /// <returns></returns>
-        public bool HasAssembly(string FileName)
+        /// <param name="assemblyFileName"></param>
+        /// <returns>True if assembly exists, otherwise false.</returns>
+        public bool HasAssembly(string assemblyFileName)
         {
-            foreach (string AssemblyFile in this.Assemblies)
-                if (string.Compare(AssemblyFile, FileName, true) == 0)
-                    return true;
-            return false;
+            return this.Assemblies.Any(x => string.Compare(x, assemblyFileName, true) == 0);
         }
 
+        /// <summary>
+        /// Instanates configuration.
+        /// </summary>
         public void Instanate()
         {
             this.UserControlDictionary.Clear();
             this.UserControls.Clear();
-            foreach (UIComponent Component in this.Components)
+            foreach (var component in this.Components)
             {
                 try
                 {
-                    FrameworkElement Instance = (FrameworkElement)UIHandler.Current.CreateInstance(Component);
-                    if ((Instance != null) & !(Component.GUID == this.MainWindowComponent.GUID))
+                    var instance = UIHandler.Current.CreateInstance(component) as FrameworkElement;
+                    if (instance != null && component.GUID != this.MainWindowComponent.GUID)
                     {
-                        this.UserControlDictionary.Add(Component.GUID, Instance);
-                        this.UserControls.Add(Instance);
+                        this.UserControlDictionary.Add(component.GUID, instance);
+                        this.UserControls.Add(instance);
                     }
                 }
                 catch
@@ -633,75 +770,17 @@ namespace SkinLib
             }
         }
 
-        public void AddComponent(UIComponent Component)
+        /// <summary>
+        /// Adds UI component to internal collection.
+        /// </summary>
+        /// <param name="Componenet"></param>
+        private void InternalAdd(UIComponent Componenet)
         {
-            if (Component != null)
-            {
-                this.ComponentDictionary.Add(Component.GUID, Component);
-                this.Components.Add(Component);
-                this.UserControlDictionary.Add(Component.GUID, Component.Instance);
-                this.UserControls.Add(Component.Instance);
-            }
-        }
-
-        public void RemoveComonent(UIComponent Component)
-        {
-            if (Component != null)
-            {
-                if (this.ComponentDictionary.ContainsKey(Component.GUID))
-                {
-                    this.ComponentDictionary.Remove(Component.GUID);
-                    this.Components.Remove(Component);
-                    this.UserControlDictionary.Remove(Component.GUID);
-                    this.UserControls.Remove(Component.Instance);
-                }
-            }
-        }
-
-        public void RemoveComponent(string ComponentGUID)
-        {
-            if (this.ComponentDictionary.ContainsKey(ComponentGUID))
-            {
-                UIComponent component = this.ComponentDictionary[ComponentGUID];
-                this.RemoveComonent(component);
-            }
+            this.ComponentDictionary.Add(Componenet.GUID, Componenet);
+            this.Components.Add(Componenet);
         }
 
         #endregion
     }
-    #endregion
-
-    #region UIConfigurationChild
-    public abstract class UIConfigurationChild : PropertyChangedNotificator
-    {
-        #region Constructor
-        public UIConfigurationChild(UIConfiguration config)
-        {
-            if (config == null)
-                throw new ArgumentNullException("Config", "Configuration instance may not be null");
-            this.Configuration = config;
-        }
-        #endregion
-
-        #region Fields
-        private UIConfiguration configuration;
-        #endregion
-
-        #region Properties
-
-        /// <summary>
-        /// Gets the parent configuration of this layout.
-        /// </summary>
-        public UIConfiguration Configuration
-        {
-            get { return this.configuration; }
-            protected set
-            {
-                this.configuration = value;
-                this.RaisePropertyChanged("Configuration");
-            }
-        }
-        #endregion
-    } 
     #endregion
 }

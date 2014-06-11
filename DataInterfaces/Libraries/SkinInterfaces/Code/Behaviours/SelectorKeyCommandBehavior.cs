@@ -93,7 +93,6 @@ namespace SkinInterfaces
             {
                 Invoke(activatedItem, e);
             }
-
         }
 
         private static void OnCommandChanged(SelectorKeyUpCommandBehavior thisBehaviour, 

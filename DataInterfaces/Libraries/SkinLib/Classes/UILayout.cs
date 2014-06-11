@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.VisualBasic;
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Collections.ObjectModel;
@@ -15,7 +13,6 @@ using System.Windows.Media;
 using System.Windows;
 using System.Windows.Data;
 using System.ComponentModel;
-using System.Linq;
 using SkinInterfaces;
 using System.IO;
 using System.Reflection;
@@ -39,12 +36,6 @@ namespace SkinLib
         /// <param name="config">UIConfiguration instance.</param>
         public UILayout(UIConfiguration config):base(config)
         {
-            #region Validation
-            if (config == null)
-                throw new ArgumentNullException("Configuration", "Layout configuration may not be null.");
-            #endregion
-
-            this.Configuration = config;
         }
 
         #endregion
@@ -65,7 +56,7 @@ namespace SkinLib
             isDefault,
             mIsInitialized;
         private Brush backroundBrush;
-        private XmlNode xmlRepresentation;
+        private XmlNode xml;
         #endregion
 
         #region Properties
@@ -132,7 +123,7 @@ namespace SkinLib
             set
             {
                 this.height = value;
-                RaisePropertyChanged("Height");
+                this.RaisePropertyChanged("Height");
             }
         }
 
@@ -145,7 +136,7 @@ namespace SkinLib
             set
             {
                 this.left = value;
-                RaisePropertyChanged("Left");
+                this.RaisePropertyChanged("Left");
             }
         }
 
@@ -202,14 +193,14 @@ namespace SkinLib
         }
 
         /// <summary>
-        /// Gets or sets XML Node representing the class.
+        /// Gets or sets XML node representing the class.
         /// </summary>
-        public XmlNode XmlRepresentation
+        public XmlNode Xml
         {
-            get { return this.xmlRepresentation; }
+            get { return this.xml; }
             set
             {
-                this.xmlRepresentation = value;
+                this.xml = value;
                 this.RaisePropertyChanged("XmlRepresentation");
             }
         } 
@@ -233,107 +224,127 @@ namespace SkinLib
 
         public void Apply()
         {
-            XmlElement ElementNode = (XmlElement)this.XmlRepresentation.SelectSingleNode("UserControls");
-            foreach (XmlElement ChildElementNode in ElementNode.ChildNodes)
+            #region VALIDATE
+            if (this.Xml == null)
+                throw new ArgumentNullException("XML representation is null"); 
+            #endregion
+
+            var userControlsNode = this.Xml.SelectSingleNode("UserControls");
+
+            if (userControlsNode == null)
+                return;
+
+            //filter out xmlelement children, this can protect from trying to access comments (XmlComment) etc
+            foreach (XmlElement childNode in userControlsNode.ChildNodes.Cast<XmlNode>().Where(x=> x is XmlElement))
             {
-                //continue if no GUID specified
-                if (ChildElementNode.HasAttribute("GUID") == false)
-                    continue;
-
-                //get GUID string
-                string GUIDString = ChildElementNode.Attributes["GUID"].Value;
-
-                //continue iof GUID is invalid
-                if (!this.Configuration.IsValidGUID(GUIDString))
-                    continue;
-
-                //continue if no component exists
-                if (!this.Configuration.HasComponent(GUIDString))
-                    continue;
-
-                //apply configuration
-                if (this.Configuration.UserControlDictionary.ContainsKey(GUIDString))
+                try
                 {
-                    var controlInstance = this.Configuration.UserControlDictionary[GUIDString];
-                    if (controlInstance != null)
-                        this.ApplyToElement(controlInstance, ChildElementNode);
+                    if (childNode.Attributes == null || childNode.Attributes.Count == 0)
+                        return;
+
+                    //continue if no GUID specified
+                    if (childNode.HasAttribute("GUID") == false)
+                        continue;
+
+                    //get GUID string
+                    string guidString = childNode.Attributes["GUID"].Value;
+
+                    //continue iof GUID is invalid
+                    if (!this.Configuration.IsValidGUID(guidString))
+                        continue;
+
+                    //continue if no component exists
+                    if (!this.Configuration.HasComponent(guidString))
+                        continue;
+
+                    //apply configuration
+                    if (this.Configuration.UserControlDictionary.ContainsKey(guidString))
+                    {
+                        var controlInstance = this.Configuration.UserControlDictionary[guidString];
+                        if (controlInstance != null)
+                            this.ApplyToElement(controlInstance, childNode);
+                    }
+                }
+                catch(Exception ex)
+                {
+                    this.Configuration.Errors.Add(new Exception(String.Format("Could not apply component layout from xml node {0}", childNode.OuterXml), ex));
                 }
             }
             this.IsInitialized = true;
         }
 
-        private void ApplyToElement(FrameworkElement Element, XmlElement ElementNode)
+        private void ApplyToElement(FrameworkElement uiElement, XmlElement elementNode)
         {
             #region Enums
 
-            if (ElementNode.HasAttribute("Visibility"))
-                Element.Visibility = (Visibility)Enum.Parse(typeof(Visibility), ElementNode.Attributes["Visibility"].Value);
+            if (elementNode.HasAttribute("Visibility"))
+                uiElement.Visibility = (Visibility)Enum.Parse(typeof(Visibility), elementNode.Attributes["Visibility"].Value);
 
-            if (ElementNode.HasAttribute("HorizontalAlignment"))
-                Element.HorizontalAlignment = (HorizontalAlignment)
-                    Enum.Parse(typeof(HorizontalAlignment), ElementNode.Attributes["HorizontalAlignment"].Value);
+            if (elementNode.HasAttribute("HorizontalAlignment"))
+                uiElement.HorizontalAlignment = (HorizontalAlignment)
+                    Enum.Parse(typeof(HorizontalAlignment), elementNode.Attributes["HorizontalAlignment"].Value);
 
-            if (ElementNode.HasAttribute("VerticalAlignment"))
-                Element.VerticalAlignment = (VerticalAlignment)Enum.Parse(typeof(VerticalAlignment), ElementNode.Attributes["VerticalAlignment"].Value);
+            if (elementNode.HasAttribute("VerticalAlignment"))
+                uiElement.VerticalAlignment = (VerticalAlignment)Enum.Parse(typeof(VerticalAlignment), elementNode.Attributes["VerticalAlignment"].Value);
 
             #endregion
 
             #region Thickness
 
-            if (ElementNode.HasAttribute("Margin"))
-                Element.Margin = (Thickness)new ThicknessConverter().ConvertFromInvariantString(ElementNode.Attributes["Margin"].Value);
+            if (elementNode.HasAttribute("Margin"))
+                uiElement.Margin = (Thickness)new ThicknessConverter().ConvertFromInvariantString(elementNode.Attributes["Margin"].Value);
 
             #endregion
 
             #region Integers
 
-            if (ElementNode.HasAttribute("ZIndex"))
+            if (elementNode.HasAttribute("ZIndex"))
             {
                 int tempInt;
-                if (int.TryParse(ElementNode.Attributes["ZIndex"].Value.ToString(), out tempInt))
-                    Element.SetValue(Canvas.ZIndexProperty, tempInt);
+                if (int.TryParse(elementNode.Attributes["ZIndex"].Value.ToString(), out tempInt))
+                    uiElement.SetValue(Canvas.ZIndexProperty, tempInt);
             }
 
-            if (ElementNode.HasAttribute("Row"))
+            if (elementNode.HasAttribute("Row"))
             {
                 int tempInt;
-                if (int.TryParse(ElementNode.Attributes["Row"].Value.ToString(), out tempInt))
-                    Element.SetValue(Grid.RowProperty, tempInt);
+                if (int.TryParse(elementNode.Attributes["Row"].Value.ToString(), out tempInt))
+                    uiElement.SetValue(Grid.RowProperty, tempInt);
             }
 
-            if (ElementNode.HasAttribute("Column"))
+            if (elementNode.HasAttribute("Column"))
             {
                 int tempInt;
-                if (int.TryParse(ElementNode.Attributes["Column"].Value.ToString(), out tempInt))
-                    Element.SetValue(Grid.ColumnProperty, tempInt);
+                if (int.TryParse(elementNode.Attributes["Column"].Value.ToString(), out tempInt))
+                    uiElement.SetValue(Grid.ColumnProperty, tempInt);
             }
 
-            if (ElementNode.HasAttribute("ColumnSpan"))
+            if (elementNode.HasAttribute("ColumnSpan"))
             {
                 int tempInt;
-                if (int.TryParse(ElementNode.Attributes["ColumnSpan"].Value.ToString(), out tempInt))
-                    Element.SetValue(Grid.ColumnSpanProperty, tempInt);
+                if (int.TryParse(elementNode.Attributes["ColumnSpan"].Value.ToString(), out tempInt))
+                    uiElement.SetValue(Grid.ColumnSpanProperty, tempInt);
             }
 
-            if (ElementNode.HasAttribute("RowSpan"))
+            if (elementNode.HasAttribute("RowSpan"))
             {
                 int tempInt;
-                if (int.TryParse(ElementNode.Attributes["RowSpan"].Value.ToString(), out tempInt))
-                    Element.SetValue(Grid.RowSpanProperty, tempInt);
+                if (int.TryParse(elementNode.Attributes["RowSpan"].Value.ToString(), out tempInt))
+                    uiElement.SetValue(Grid.RowSpanProperty, tempInt);
             }
 
-            if (ElementNode.HasAttribute("Top"))
+            if (elementNode.HasAttribute("Top"))
             {
                 int tempInt;
-                if (int.TryParse(ElementNode.Attributes["Top"].Value.ToString(), out tempInt))
-                    Element.SetValue(Canvas.TopProperty, tempInt);
+                if (int.TryParse(elementNode.Attributes["Top"].Value.ToString(), out tempInt))
+                    uiElement.SetValue(Canvas.TopProperty, tempInt);
             }
 
-            if (ElementNode.HasAttribute("Left"))
+            if (elementNode.HasAttribute("Left"))
             {
                 int tempInt;
-                if (int.TryParse(ElementNode.Attributes["Left"].Value.ToString(), out tempInt))
-                    Element.SetValue(Canvas.LeftProperty, tempInt);
+                if (int.TryParse(elementNode.Attributes["Left"].Value.ToString(), out tempInt))
+                    uiElement.SetValue(Canvas.LeftProperty, tempInt);
             }
 
             #endregion
@@ -343,53 +354,53 @@ namespace SkinLib
             //create shared converter
             DoubleConverter doubleConverter = new DoubleConverter();
 
-            if (ElementNode.HasAttribute("Opacity"))
+            if (elementNode.HasAttribute("Opacity"))
             {
                 double tempDouble;
-                if (double.TryParse(doubleConverter.ConvertFromInvariantString(ElementNode.Attributes["Opacity"].Value).ToString(), out tempDouble))
-                    Element.Opacity = tempDouble;
+                if (double.TryParse(doubleConverter.ConvertFromInvariantString(elementNode.Attributes["Opacity"].Value).ToString(), out tempDouble))
+                    uiElement.Opacity = tempDouble;
             }
 
-            if (ElementNode.HasAttribute("Width"))
+            if (elementNode.HasAttribute("Width"))
             {
                 double tempDouble;
-                if (double.TryParse(doubleConverter.ConvertFromInvariantString(ElementNode.Attributes["Width"].Value).ToString(), out tempDouble))
-                    Element.Width = tempDouble;
+                if (double.TryParse(doubleConverter.ConvertFromInvariantString(elementNode.Attributes["Width"].Value).ToString(), out tempDouble))
+                    uiElement.Width = tempDouble;
             }
 
-            if (ElementNode.HasAttribute("Height"))
+            if (elementNode.HasAttribute("Height"))
             {
                 double tempDouble;
-                if (double.TryParse(doubleConverter.ConvertFromInvariantString(ElementNode.Attributes["Height"].Value).ToString(), out tempDouble))
-                    Element.Height = tempDouble;
+                if (double.TryParse(doubleConverter.ConvertFromInvariantString(elementNode.Attributes["Height"].Value).ToString(), out tempDouble))
+                    uiElement.Height = tempDouble;
             }
 
-            if (ElementNode.HasAttribute("MinHeight"))
+            if (elementNode.HasAttribute("MinHeight"))
             {
                 double tempDouble;
-                if (double.TryParse(doubleConverter.ConvertFromInvariantString(ElementNode.Attributes["MinHeight"].Value).ToString(), out tempDouble))
-                    Element.MinHeight = tempDouble;
+                if (double.TryParse(doubleConverter.ConvertFromInvariantString(elementNode.Attributes["MinHeight"].Value).ToString(), out tempDouble))
+                    uiElement.MinHeight = tempDouble;
             }
 
-            if (ElementNode.HasAttribute("MinWidth"))
+            if (elementNode.HasAttribute("MinWidth"))
             {
                 double tempDouble;
-                if (double.TryParse(doubleConverter.ConvertFromInvariantString(ElementNode.Attributes["MinWidth"].Value).ToString(), out tempDouble))
-                    Element.MinWidth = tempDouble;
+                if (double.TryParse(doubleConverter.ConvertFromInvariantString(elementNode.Attributes["MinWidth"].Value).ToString(), out tempDouble))
+                    uiElement.MinWidth = tempDouble;
             }
 
-            if (ElementNode.HasAttribute("MaxWidth"))
+            if (elementNode.HasAttribute("MaxWidth"))
             {
                 double tempDouble;
-                if (double.TryParse(doubleConverter.ConvertFromInvariantString(ElementNode.Attributes["MaxWidth"].Value).ToString(), out tempDouble))
-                    Element.MaxWidth = tempDouble;
+                if (double.TryParse(doubleConverter.ConvertFromInvariantString(elementNode.Attributes["MaxWidth"].Value).ToString(), out tempDouble))
+                    uiElement.MaxWidth = tempDouble;
             }
 
-            if (ElementNode.HasAttribute("MaxHeight"))
+            if (elementNode.HasAttribute("MaxHeight"))
             {
                 double tempDouble;
-                if (double.TryParse(doubleConverter.ConvertFromInvariantString(ElementNode.Attributes["MaxHeight"].Value).ToString(), out tempDouble))
-                    Element.MaxHeight = tempDouble;
+                if (double.TryParse(doubleConverter.ConvertFromInvariantString(elementNode.Attributes["MaxHeight"].Value).ToString(), out tempDouble))
+                    uiElement.MaxHeight = tempDouble;
             }
 
             #endregion
@@ -401,13 +412,13 @@ namespace SkinLib
                 {
                     DependencyProperty protperty = (DependencyProperty)field.GetValue(null);
                     TypeConverter converter = TypeDescriptor.GetConverter(protperty.PropertyType);
-                    if (ElementNode.HasAttribute(protperty.Name))
+                    if (elementNode.HasAttribute(protperty.Name))
                     {
-                        Element.SetValue(protperty, converter.ConvertFrom(ElementNode.Attributes[protperty.Name].Value));
+                        uiElement.SetValue(protperty, converter.ConvertFrom(elementNode.Attributes[protperty.Name].Value));
                     }
                     else
                     {
-                        Element.SetValue(protperty, protperty.DefaultMetadata.DefaultValue);
+                        uiElement.SetValue(protperty, protperty.DefaultMetadata.DefaultValue);
                     }
                 }
             }
@@ -416,27 +427,30 @@ namespace SkinLib
 
         public XmlNode ToXml()
         {
-            XmlDocument XmlDoc = new XmlDocument();
-            XmlElement XmlElement = XmlDoc.CreateElement("Layout");
-            XmlDoc.AppendChild(XmlElement);
-            XmlElement.SetAttribute("Name", this.Name);
-            XmlElement.SetAttribute("ImagePath", this.ImagePath);
-            XmlElement.SetAttribute("Width", new DoubleConverter().ConvertToInvariantString(this.Width.ToString()));
-            XmlElement.SetAttribute("Height", new DoubleConverter().ConvertToInvariantString(this.Height));
-            XmlElement.SetAttribute("IsDefault", this.IsDefault.ToString());
-            XmlElement.SetAttribute("ResolutionWidth", new DoubleConverter().ConvertToInvariantString(this.ResolutionWidth));
-            XmlElement.SetAttribute("ResolutionHeight", new DoubleConverter().ConvertToInvariantString(this.ResolutionHeight));
-            XmlElement.SetAttribute("Left", this.Left.ToString());
-            XmlElement.SetAttribute("Top", this.Top.ToString());
-            XmlElement UserControlsElement = XmlDoc.CreateElement("UserControls");
-            foreach (FrameworkElement Element in this.Configuration.UserControls)
+            XmlDocument xmlDocument = new XmlDocument();
+            XmlElement xmlElement = xmlDocument.CreateElement("Layout");
+            xmlDocument.AppendChild(xmlElement);
+
+            xmlElement.SetAttribute("Name", this.Name);
+            xmlElement.SetAttribute("ImagePath", this.ImagePath);
+            xmlElement.SetAttribute("Width", new DoubleConverter().ConvertToInvariantString(this.Width.ToString()));
+            xmlElement.SetAttribute("Height", new DoubleConverter().ConvertToInvariantString(this.Height));
+            xmlElement.SetAttribute("IsDefault", this.IsDefault.ToString());
+            xmlElement.SetAttribute("ResolutionWidth", new DoubleConverter().ConvertToInvariantString(this.ResolutionWidth));
+            xmlElement.SetAttribute("ResolutionHeight", new DoubleConverter().ConvertToInvariantString(this.ResolutionHeight));
+            xmlElement.SetAttribute("Left", this.Left.ToString());
+            xmlElement.SetAttribute("Top", this.Top.ToString());
+            
+            XmlElement UserControlsElement = xmlDocument.CreateElement("UserControls");
+            foreach (FrameworkElement uiElement in this.Configuration.UserControls)
             {
-                XmlNode ElementXml = this.ToXml(Element);
-                XmlNode ImportNode = XmlDoc.ImportNode(ElementXml, true);
+                XmlNode ElementXml = this.ToXml(uiElement);
+                XmlNode ImportNode = xmlDocument.ImportNode(ElementXml, true);
                 UserControlsElement.AppendChild(ImportNode);
             }
-            XmlDoc.SelectSingleNode("Layout").AppendChild(UserControlsElement);
-            return XmlDoc.FirstChild;
+
+            xmlDocument.SelectSingleNode("Layout").AppendChild(UserControlsElement);
+            return xmlDocument.FirstChild;
         }
 
         protected XmlNode ToXml(FrameworkElement element)
@@ -498,7 +512,7 @@ namespace SkinLib
         /// </summary>
         public void Accept()
         {
-            this.XmlRepresentation = this.ToXml();
+            this.Xml = this.ToXml();
             this.IsInitialized = false;
         }      
 

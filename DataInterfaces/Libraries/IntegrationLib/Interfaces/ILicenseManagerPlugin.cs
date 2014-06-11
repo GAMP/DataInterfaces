@@ -30,32 +30,29 @@ namespace IntegrationLib
         /// </summary>
         /// <param name="license">IApplicationLicense.</param>
         void Uninstall(IApplicationLicense license);
-        
+
         /// <summary>
         /// Gets the instance of the application license.
         /// </summary>
         /// <returns>IApplicationLicenseKey instance.</returns>
         IApplicationLicenseKey GetLicense(ILicenseProfile profile, ref bool additionHandled, Window owner);
-        
+
         /// <summary>
         /// Edit existing license key.
         /// </summary>
         /// <param name="key">License Key.</param>
         /// <returns>IApplicationLicenseKey instance.</returns>
         IApplicationLicenseKey EditLicense(IApplicationLicenseKey key, ILicenseProfile profile, ref bool additionHandled, Window owner);
-        
+
         /// <summary>
         /// Gets if licenses can be edited by this plugin.
         /// </summary>
-        bool CanEdit
-        {
-            get;
-        }
-        
+        bool CanEdit { get;}
+
         /// <summary>
         /// Gets if licenses can be added to this plugin.
         /// </summary>
         bool CanAdd { get; }
-    } 
+    }
     #endregion
 }

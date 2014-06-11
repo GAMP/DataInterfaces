@@ -11,6 +11,20 @@ namespace NetLib
     /// </summary>
     public interface IConnection
     {
+        #region EVENTS
+        event EndpointEventDelegate EndpointBound;
+        event EndpointEventDelegate EndpointConnected;
+        event EndpointEventDelegate EndpointConnecting;
+        event EndpointEventDelegate EndpointConnectionFailed;
+        event ConnectionEventDelegate EndpointDisconnected;
+        event ConnectionExceptionDelegate Exception;
+        event NewConnectionDelegate NewConnection;
+        event SentRecieveDelegate Received;
+        event SendingReceivingDelegate Receiving;
+        event SendingReceivingDelegate Sending;
+        event SentRecieveDelegate Sent; 
+        #endregion
+
         void Bind(System.Net.EndPoint localEP);
         void Bind(System.Net.IPAddress address, int port);
         void Bind(string address, int port);
@@ -22,12 +36,6 @@ namespace NetLib
         void Connect(System.Net.IPAddress address, int port);
         void Connect(string host, int port);
         void Disconnect(bool reuseSocket);
-        event EndpointEventDelegate EndpointBound;
-        event EndpointEventDelegate EndpointConnected;
-        event EndpointEventDelegate EndpointConnecting;
-        event EndpointEventDelegate EndpointConnectionFailed;
-        event ConnectionEventDelegate EndpointDisconnected;
-        event ConnectionExceptionDelegate Exception;
         bool IsChunckingEnabled { get; set; }
         bool IsChunkingSupported { get; }
         bool IsConnected { get; }
@@ -36,8 +44,7 @@ namespace NetLib
         bool KeepAlive { get; set; }
         uint KeepAliveInterval { get; set; }
         uint KeepAliveTimeOut { get; set; }
-        void Listen(int backlog);
-        event NewConnectionDelegate NewConnection;
+        void Listen(int backlog);        
         bool NoDelay { get; set; }
         void Receive();
         int Receive(byte[] buffer);
@@ -45,8 +52,6 @@ namespace NetLib
         int Receive(byte[] buffer, int size, System.Net.Sockets.SocketFlags socketFlags);
         int ReceiveBufferSize { get; set; }
         uint ReceiveChunkSize { get; set; }
-        event SentRecieveDelegate Received;
-        event SendingReceivingDelegate Receiving;
         int Send(byte[] buffer);
         int Send(byte[] buffer, int offset, int size, System.Net.Sockets.SocketFlags socketFlags);
         int Send(byte[] buffer, int size, System.Net.Sockets.SocketFlags socketFlags);
@@ -54,10 +59,8 @@ namespace NetLib
         int SendTo(byte[] buffer, ref EndPoint remoteEP);
         int SendBufferSize { get; set; }
         uint SendChunkSize { get; set; }
-        event SendingReceivingDelegate Sending;
-        event SentRecieveDelegate Sent;
         void ShutDown(System.Net.Sockets.SocketShutdown how);
-        System.Net.Sockets.Socket Socket { get; }
+        Socket Socket { get; }
     } 
     #endregion    
 

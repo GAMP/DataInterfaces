@@ -90,12 +90,20 @@ namespace CoreLib
     #region ValueSource
     /// <summary>
     /// Value source enumerations.
-    /// We need to have this value in order to be correctly convert the string and object values.
     /// </summary>
     public enum KeyValueSource : int
     {
-        RegistryFile,
+        /// <summary>
+        /// Indicates file source.
+        /// </summary>
+        File,
+        /// <summary>
+        /// Indicates registry source.
+        /// </summary>
         Registry,
+        /// <summary>
+        /// Indicates memory source.
+        /// </summary>
         Memory,
     }
     #endregion

@@ -7,6 +7,89 @@ using Localization;
 
 namespace SharedLib
 {
+    #region View Models Enumerations
+
+    #region ActionState
+    /// <summary>
+    /// Basic enumeration for actions or operations.
+    /// </summary>
+    public enum ActionState
+    {
+        Inactive,
+        Comparing,
+        Deploying,
+        Aborted,
+        Failed,
+        Compared,
+        Aborting,
+    }
+    #endregion
+
+    #region ManagementTypesEnum
+    public enum ManagementTypesEnum
+    {
+        Tasking = 0,
+        Registry = 1,
+        FileSystem = 2,
+        Processes = 3,
+        Information = 4,
+    }
+    #endregion
+
+    #region ManagerViewTypes
+    public enum ManagerViewTypes
+    {
+        Management = 0,
+        Screens = 1,
+        Log = 2,
+        Deployment = 3,
+        Settings = 4,
+        Applications = 5,
+        Users = 6,
+        NewsCenter = 7,
+        Statistics = 8,
+    }
+    #endregion
+
+    #region StartPageViewTypes
+    public enum StartPageViewTypes : int
+    {
+        Home = 0,
+        Applications = 1,
+        Favorites = 2,
+        ControlPanel = 3,
+        Media = 4,
+        GameServers = 5,
+    }
+    #endregion
+
+    #region ContextExecutionViewState
+    public enum ContextExecutionViewState : int
+    {
+        Initial = 0,
+        Working = 1,
+        Ready = 2,
+    }
+    #endregion
+
+    #region DialogType
+    /// <summary>
+    /// Dialogue types.
+    /// <remarks>
+    /// This is generaly used in view models to mark the current dialogue type.
+    /// </remarks>
+    /// </summary>
+    [Serializable()]
+    public enum DialogType : int
+    {
+        None = 0,
+        Add = 1,
+        Edit = 2,
+    }
+    #endregion
+
+    #endregion
+
     #region Know Folders Types
     /// <summary>
     /// This enumerato is used to combine multiple special folders to unique value.
@@ -97,7 +180,6 @@ namespace SharedLib
         FreeToPlay = 128,
         RequiresSubscription = 256,
         FreeTrial = 512,
-
     }
     #endregion
 
@@ -155,19 +237,6 @@ namespace SharedLib
         PostTermination = 64,
         [Description("Pre License Management")]
         PreLicenseManagement = 128,
-    }
-    #endregion
-
-    #region Action Codes
-    /// <summary>
-    /// Generic completion codes for actions.
-    /// </summary>
-    public enum ActionCodes : int
-    {
-        None = 0,
-        Success = 1,
-        Failure = 2,
-        Cancel = 3,
     }
     #endregion
 
@@ -391,47 +460,33 @@ namespace SharedLib
     }
     #endregion
 
-    #region ContextExecutionViewState
-    public enum ContextExecutionViewState : int
-    {
-        Initial = 0,
-        Working = 1,
-        Ready = 2,
-    }
-    #endregion
-
-    #region Schemes
+    #region ContainerItemEventType
     [Serializable()]
-    public enum Schemes : int
+    public enum ContainerItemEventType : int
     {
-        Unknown = 0,
-        Http = 1,
-        Ftp = 2,
-        Https = 3,
-        LocalFile = 4,
-        RemoteFile = 5,
-        Cftp = 6,
-        Sftp = 7,
-        File = 8,
+        /// <summary>
+        /// Occours when item is added to container.
+        /// <remarks>NewItems propery contains added items.</remarks>
+        /// </summary>
+        Added = 0,
+        /// <summary>
+        /// Occours when shared item is unasigned.
+        /// <remarks>NewItems propery contains unasigned items.</remarks>
+        /// </summary>
+        UnAssigned = 4,
+        /// <summary>
+        /// Occours when item is removed from container.
+        /// <remarks>NewItems propery contains removed items.</remarks>
+        /// </summary>
+        Removed = 8,
+        /// <summary>
+        /// Occours when item is replaced/updated.
+        /// </summary>
+        Replaced = 16,
     }
     #endregion
 
-    #region Personal User Files
-
-    public enum PufDeployStatus
-    {
-        Idle = 0,
-        Compressing = 1,
-        Stroing = 2,
-        Extracting = 3,
-    }
-
-    public enum PufActionType
-    {
-        Load = 1,
-        Store = 0,
-    }
-
+    #region PersonalUserFileType
     /// <summary>
     /// Personal user file types.
     /// </summary>
@@ -543,43 +598,7 @@ namespace SharedLib
             UserInfoTypes.PostCode |
             UserInfoTypes.Sex,
     }
-    #endregion
-
-    #region View Models Enumerations
-
-    public enum ManagementTypesEnum
-    {
-        Tasking = 0,
-        Registry = 1,
-        FileSystem = 2,
-        Processes = 3,
-        Information = 4,
-    }
-
-    public enum ManagerViewTypes
-    {
-        Management = 0,
-        Screens = 1,
-        Log = 2,
-        Deployment = 3,
-        Settings = 4,
-        Applications = 5,
-        Users = 6,
-        NewsCenter = 7,
-        Statistics = 8,
-    }
-
-    public enum StartPageViewTypes : int
-    {
-        Home = 0,
-        Applications = 1,
-        Favorites = 2,
-        ControlPanel = 3,
-        Media = 4,
-        GameServers = 5,
-    }
-
-    #endregion
+    #endregion    
 
     #region LoginUserActivity
     /// <summary>
@@ -591,29 +610,6 @@ namespace SharedLib
         SettingPersonalUserFile = 1,
         DeletingUserStorage = 2,
         TerminatingUserProcesses = 3,
-    }
-    #endregion
-
-    #region MediaType
-    [Flags()]
-    public enum MediaType
-    {
-        /// <summary>
-        /// Media type unknown.
-        /// </summary>
-        Unknown = 0,
-        /// <summary>
-        /// Media type video.
-        /// </summary>
-        Video = 1,
-        /// <summary>
-        /// Media type audio.
-        /// </summary>
-        Audio = 2,
-        /// <summary>
-        /// Media type image.
-        /// </summary>
-        Image = 4,
     }
     #endregion
 
@@ -697,7 +693,7 @@ namespace SharedLib
         [AgeRating(6)]
         KidsToAdaults = -28,
     }
-    #endregion
+    #endregion    
 
     #region DurationRange
     public enum DurationRange
@@ -823,6 +819,7 @@ namespace SharedLib
     [Serializable()]
     public enum EventTypes : int
     {
+        None=0,
         Information = 1,
         Warning = 2,
         Error = 4,
@@ -885,53 +882,8 @@ namespace SharedLib
         Junction,
         [Description("All Types")]
         AllTypes = 65535,
-
     }
-    #endregion
-
-    #region DialogType
-    /// <summary>
-    /// Dialogue types.
-    /// <remarks>
-    /// This is generaly used in view models to mark the current dialogue type.
-    /// </remarks>
-    /// </summary>
-    [Serializable()]
-    public enum DialogType : int
-    {
-        None = 0,
-        Add = 1,
-        Edit = 2,
-    }
-    #endregion
-
-    #region ClipBoardAction
-    /// <summary>
-    /// Clipboard actions enumeration.
-    /// </summary>
-    public enum ClipBoardAction
-    {
-        Cut,
-        Copy,
-        Paste,
-    }
-    #endregion
-
-    #region ActionState
-    /// <summary>
-    /// Basic enumeration for actions or operations.
-    /// </summary>
-    public enum ActionState
-    {
-        Inactive,
-        Comparing,
-        Deploying,
-        Aborted,
-        Failed,
-        Compared,
-        Aborting,
-    }
-    #endregion
+    #endregion    
 
     #region IPVersion
     public enum IPVersion : short
@@ -981,23 +933,27 @@ namespace SharedLib
         /// <summary>
         /// Host was connected.
         /// </summary>
-        Connected,
+        Connected=0,
         /// <summary>
         /// Host was initialized.
         /// </summary>
-        Initialized,
+        Initialized=1,
         /// <summary>
         /// Host was disconnected.
         /// </summary>
-        Disconnected,
+        Disconnected=2,
         /// <summary>
         /// Host was added.
         /// </summary>
-        Added,
+        Added=3,
         /// <summary>
         /// Host was removed.
         /// </summary>
-        Removed,
+        Removed=4,
+        /// <summary>
+        /// Host was updated.
+        /// </summary>
+        Updated=5,
     }
     #endregion
 
@@ -1041,16 +997,16 @@ namespace SharedLib
     }
     #endregion
 
-    #region ImageType
+    #region IMAGETYPE
     public enum ImageType
     {
-        Application,
-        Executable,
-        VisualOptions,
+        Application=0,
+        Executable=1,
+        VisualOptions=2,
     }
     #endregion
 
-    #region UserChangeType
+    #region USERCHANGETYPE
     public enum UserChangeType
     {
         /// <summary>
@@ -1089,41 +1045,14 @@ namespace SharedLib
         /// Existing user enabled changed.
         /// </summary>
         Enabled,
+        /// <summary>
+        /// Existing user picture changed.
+        /// </summary>
+        Picture,
     }
     #endregion
 
-    #region DeployOptionType
-    [Flags()]
-    public enum DeployOptionType : int
-    {
-        /// <summary>
-        /// Defailt option.
-        /// </summary>
-        None = 0,
-        /// <summary>
-        /// Marks deployment as ignored from cleanup procedures.
-        /// </summary>
-        IgnoreCleanup = 1,
-        /// <summary>
-        /// Indicates that deployment should be done only on repair procedures.
-        /// </summary>
-        RepairOnly = 2,
-        /// <summary>
-        /// Indicates direct access to the deployment source.
-        /// </summary>
-        DirectAccess = 4,
-        /// <summary>
-        /// Indicates mirroring of destination directory.
-        /// </summary>
-        Mirror=8,
-        /// <summary>
-        /// Indicates inclusion of sub directories.
-        /// </summary>
-        IncludeSubDirectories=16,
-    }
-    #endregion
-
-    #region UserSessionState
+    #region USERSESSIONSTATE
     [Flags(),Serializable()]
     public enum SessionState : int
     {
@@ -1150,7 +1079,7 @@ namespace SharedLib
     } 
     #endregion
 
-    #region ActionSource
+    #region ACTIONSOURCE
     public enum ActionSource
     {
         /// <summary>
@@ -1174,5 +1103,197 @@ namespace SharedLib
         /// </summary>
         Session = 4,
     }
+    #endregion
+
+    #region HOSTPROPERTYTYPE
+    public enum HostPropertyType
+    {
+        IpAddress = 0,
+        HostName = 1,
+        DispatcherId = 3,
+        IsConnected = 4,
+        Module = 5,
+        IsSecurityEnabled = 6,
+        Port=7,
+        OperatingSystem=8,
+        DataSent=9,
+        DataReceived=10,
+        IsLocked=11,
+        Id=12,
+        IsOutOfOrder=13,
+        IsMaintenanceMode = 14,
+        LoginState=15,
+        CurrentUserId=16,
+        CurrentUserName=17,
+        HostGroupId=18,
+        Number=19,
+        MacAddress=20,
+    } 
+    #endregion    
+
+    #region CONFIGURATIONSECTION
+    public enum ConfigurationSection
+    {
+        Unspecified=0,
+        General,
+        Server,
+        Client,
+        Profiles,
+        Operators,
+        Licensing,
+        Variables,
+        Plugins,
+        Api,
+        Network,
+        Database,
+        Integration,
+        FileSystem,
+        Shell,
+        Tasks,
+        Misc,
+        ComputerGroups,
+        UserGroups,
+        ApplicationGroups,
+        SecurityProfiles,
+        ClientSettings,
+    } 
+    #endregion
+
+    #region WEEKDAYS
+    [Flags()]
+    public enum WeekDays
+    {
+        None = 0,
+        Sunday = 1,
+        Monday = 2,
+        Tuesday = 4,
+        Wednesday = 8,
+        Thursday = 16,
+        Friday = 32,
+        Saturday = 64,
+    } 
+    #endregion
+
+    #region RATEACTION
+    public enum RateAction
+    {
+        None = 0,
+        GoTo = 1,
+    }
+    #endregion
+
+    #region DEPLOYOPTIONTYPE
+    [Flags()]
+    public enum DeployOptionType : int
+    {
+        /// <summary>
+        /// Defailt option.
+        /// </summary>
+        None = 0,
+        /// <summary>
+        /// Marks deployment as ignored from cleanup procedures.
+        /// </summary>
+        IgnoreCleanup = 1,
+        /// <summary>
+        /// Indicates that deployment should be done only on repair procedures.
+        /// </summary>
+        RepairOnly = 2,
+        /// <summary>
+        /// Indicates direct access to the deployment source.
+        /// </summary>
+        DirectAccess = 4,
+        /// <summary>
+        /// Indicates mirroring of destination directory.
+        /// </summary>
+        Mirror = 8,
+        /// <summary>
+        /// Indicates inclusion of sub directories.
+        /// </summary>
+        IncludeSubDirectories = 16,
+    }
+    #endregion
+
+    #region PERSONALUSERFILEOPTIONTYPE
+    [Flags()]
+    public enum PersonalUserFileOptionType
+    {
+        None = 0,
+        CleanUp = 1,
+        Store = 2,
+        IncludeSubDirectories = 4,
+    }
+    #endregion
+
+    #region EXECUTABLEOPTIONTYPE
+    [Flags()]
+    public enum ExecutableOptionType
+    {
+        None = 0,
+        AutoLaunch = 1,
+        MonitorChildren = 2,
+        MultiRun = 4,
+        KillChildren = 8,
+        CountAllInstances = 16
+    }
+    #endregion
+
+    #region APPOPTIONTYPE
+    [Flags()]
+    public enum AppOptionType
+    {
+        None = 0,
+        HaltOnError = 1,
+    }
+    #endregion
+
+    #region USERGROUPOPTIONTYPE
+    [Flags()]
+    public enum UserGroupOptionType
+    {
+        None = 0,
+        DisablePersonalStroage = 1,
+    }
+    #endregion
+
+    #region HOSTGROUPOPTIONTYPE
+    [Flags()]
+    public enum HostGroupOptionType
+    {
+        None = 0,
+        DisableShell = 1,
+    }
+    #endregion
+
+    #region PERIODOPTIONTYPE
+    [Flags()]
+    public enum PeriodOptionType
+    {
+        None = 0,
+    }
+    #endregion
+
+    #region PRODUCTOPTIONTYPE
+    public enum ProductOptionType
+    {
+        None = 0,
+        StockControl = 1,
+        AllowClientOrder = 2
+    }
+    #endregion
+
+    #region PRODUCTSTOCKOPTIONTYPE
+    [Flags()]
+    public enum ProductStockOptionType
+    {
+        None = 0,
+    } 
+    #endregion
+
+    #region BILLINGRATEOPTIONTYPE
+    [Flags()]
+    public enum BillingRateOptionType
+    {
+        None = 0,
+    } 
     #endregion
 }

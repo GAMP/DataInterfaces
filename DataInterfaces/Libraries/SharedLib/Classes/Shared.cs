@@ -10,6 +10,8 @@ using System.Windows.Data;
 using System.Reflection;
 using System.Runtime.Serialization;
 using IntegrationLib;
+using System.Xml.Serialization;
+using System.Diagnostics;
 
 namespace SharedLib
 {
@@ -17,25 +19,45 @@ namespace SharedLib
     [Serializable()]
     public class PropertyChangedNotificator : INotifyPropertyChanged
     {
-        #region Property Change Events
+        #region FIELDS
         [field: NonSerialized()]
         public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
+
+        #region FUNCTIONS
+
         protected void RaisePropertyChanged(string propertyName)
         {
-            try
+            //validate property name
+            if (string.IsNullOrWhiteSpace(propertyName))
+                throw new ArgumentNullException("propertyName");
+
+            //get handler instance
+            var handler = this.PropertyChanged;
+
+            //check if handler exists
+            if (handler != null)
             {
-                if (PropertyChanged != null)
+                //get property information
+                PropertyInfo propInfo = this.GetType().GetProperty(propertyName);
+
+                //create arguments
+                var args = new PropertyChange(propertyName, propInfo != null ? propInfo.GetValue(this, null) : null);
+
+                //check if already on UI thread
+                if (Application.Current != null && !Application.Current.Dispatcher.CheckAccess())
                 {
-                    PropertyInfo PropInfo = this.GetType().GetProperty(propertyName);
-                    if (PropInfo != null)
-                        PropertyChanged(this, new PropertyChange(propertyName, PropInfo.GetValue(this, null)));
+                    //invoke on UI thread
+                    Application.Current.Dispatcher.BeginInvoke(handler, this, args);
+                }
+                else
+                {
+                    //invoke on current thread
+                    handler(this, args);
                 }
             }
-            catch
-            {
-                return;
-            }
         }
+
         #endregion
     }
     #endregion
@@ -104,7 +126,7 @@ namespace SharedLib
         }
         #endregion
 
-        #region Fileds
+        #region Fields
         private int id;
         #endregion
 
@@ -190,6 +212,7 @@ namespace SharedLib
             }
         }
 
+        [XmlIgnore()]
         /// <summary>
         /// Gets or Sets items container.
         /// </summary>
@@ -575,6 +598,8 @@ namespace SharedLib
     /// <summary>
     /// Window creation and show parameters.
     /// </summary>
+    [Serializable()]
+    [DataContract()]
     public class WindowShowParams : PropertyChangedNotificator
     {
         #region Constructor
@@ -623,6 +648,7 @@ namespace SharedLib
         /// <summary>
         /// Gets the windows title.
         /// </summary>
+        [DataMember()]
         public string Title
         {
             get;
@@ -632,6 +658,7 @@ namespace SharedLib
         /// <summary>
         /// Gets or sets left position.
         /// </summary>
+        [DataMember()]
         public int Left
         {
             get;
@@ -641,6 +668,7 @@ namespace SharedLib
         /// <summary>
         /// Gets or sets top position.
         /// </summary>
+        [DataMember()]
         public int Top
         {
             get;
@@ -650,6 +678,7 @@ namespace SharedLib
         /// <summary>
         /// Gets or sets if window should be shown as dialog.
         /// </summary>
+        [DataMember()]
         public bool ShowDialog
         {
             get;
@@ -659,18 +688,27 @@ namespace SharedLib
         /// <summary>
         /// Gets or sets if window should be topmost.
         /// </summary>
+        [DataMember()]
         public bool TopMost
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Gets or sets window width.
+        /// </summary>
+        [DataMember()]
         public double Width
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Gets or sets window height.
+        /// </summary>
+        [DataMember()]
         public double Height
         {
             get;
@@ -689,18 +727,27 @@ namespace SharedLib
         /// <summary>
         /// Gets or sets if window will be draggable.
         /// </summary>
+        [DataMember()]
         public bool AllowDrag
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Gets or sets if window buttons should be added.
+        /// </summary>
+        [DataMember()]
         public bool NoButtons
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Gets or sets if window closing is allowed.
+        /// </summary>
+        [DataMember()]
         public bool AllowClosing
         {
             get;
@@ -710,6 +757,7 @@ namespace SharedLib
         /// <summary>
         /// Gets or sets startup location.
         /// </summary>
+        [DataMember()]
         public WindowStartupLocation StarupLocation
         {
             get;
@@ -719,6 +767,7 @@ namespace SharedLib
         /// <summary>
         /// Gets or sets size to content type.
         /// </summary>
+        [DataMember()]
         public SizeToContent SizeToContent
         {
             get;
@@ -728,6 +777,7 @@ namespace SharedLib
         /// <summary>
         /// Gets or sets Messagebox buttons type.
         /// </summary>
+        [DataMember()]
         public MessageBoxButton Buttons
         {
             get;
@@ -737,6 +787,7 @@ namespace SharedLib
         /// <summary>
         /// Gets or sets Messagebox icon image type.
         /// </summary>
+        [DataMember()]
         public MessageBoxImage Icon
         {
             get;
@@ -746,6 +797,7 @@ namespace SharedLib
         /// <summary>
         /// Gets or sets keyboard default button.
         /// </summary>
+        [DataMember()]
         public NotificationButtons DefaultButton
         {
             get { return this.defaultButton; }
@@ -759,6 +811,7 @@ namespace SharedLib
         /// <summary>
         /// Gets or sets if window should be show activated.
         /// </summary>
+        [DataMember()]
         public bool ShowActivated
         {
             get;
@@ -768,6 +821,7 @@ namespace SharedLib
         /// <summary>
         /// Gets or sets window maximum width.
         /// </summary>
+        [DataMember()]
         public double MaxWidth
         {
             get { return this.maxWidth; }
@@ -781,6 +835,7 @@ namespace SharedLib
         /// <summary>
         /// Gets or sets window maximum height.
         /// </summary>
+        [DataMember()]
         public double MaxHeight
         {
             get { return this.maxHeight; }

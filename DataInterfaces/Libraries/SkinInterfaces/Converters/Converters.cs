@@ -18,9 +18,240 @@ using SharedLib.ViewModels;
 using SharedLib;
 using CyClone.Core;
 using System.Windows.Markup;
+using IntegrationLib;
+using System.Reflection;
+using System.Windows.Media;
 
 namespace SkinInterfaces.Converters
 {
+    #region NULL
+
+    #region NullVisibilityConverter
+    /// <summary>
+    /// Converts Null to visibility.
+    /// This can be used in some components which doesnt need to be displayed if the value they bound to is null.
+    /// </summary>
+    public class NullVisibilityConverter : IValueConverter
+    {
+        #region IValueConverter Members
+
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            if (value == null)
+            {
+                return Visibility.Collapsed;
+            }
+            else
+            {
+                return Visibility.Visible;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #region NullToBoolConverter
+    public class NullToBoolConverter : IValueConverter
+    {
+        #region IValueConverter Members
+
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            if (value == null || string.IsNullOrEmpty(value as string))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #region NullToEnabledConverter
+    public class NullToEnabledConverter : IValueConverter
+    {
+        #region IValueConverter Members
+
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            try
+            {
+                if (value == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #endregion
+
+    #region BOOL
+
+    #region BoolToVisibilityConverter
+    /// <summary>
+    /// Converts bool value to visibility.
+    /// <remarks>If revert operation required specify truE as converter parameter.</remarks>
+    /// </summary>
+    public class BoolToVisibilityConverter : IValueConverter
+    {
+        #region IValueConverter Members
+
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            try
+            {
+                if (value is bool)
+                {
+                    #region Check for revert parameter
+                    bool revert = false;
+                    if (parameter != null)
+                    {
+                        bool temp;
+                        if (bool.TryParse(parameter.ToString(), out temp))
+                        {
+                            revert = temp;
+                        }
+                    }
+                    #endregion
+
+                    if ((bool)value == true)
+                    {
+                        return revert ? Visibility.Collapsed : Visibility.Visible;
+                    }
+                    else
+                    {
+                        return revert ? Visibility.Visible : Visibility.Collapsed;
+                    }
+                }
+                else
+                {
+                    return Visibility.Collapsed;
+                }
+            }
+            catch
+            {
+                return Visibility.Collapsed;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #region RevertBoolConverter
+    public class RevertBoolConverter : IValueConverter
+    {
+        #region IValueConverter Members
+
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            try
+            {
+                return !(bool)value;
+            }
+            catch
+            {
+                return value;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            try
+            {
+                return !(bool)value;
+            }
+            catch
+            {
+                return value;
+            }
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #region BoolToStringConverter
+    public class BoolToStringConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            bool val = (bool)value;
+            if (val)
+            {
+                return "Yes";
+            }
+            else
+            {
+                return "No";
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            string val = (string)value;
+            if (!String.IsNullOrWhiteSpace(val))
+            {
+                if (val.ToLower() == "yes")
+                {
+                    return true;
+                }
+                else if (val.ToLower() == "no")
+                {
+                    return false;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return "Unknown";
+            }
+        }
+    }
+    #endregion
+
+    #endregion
+
     #region PopupHorizontalOffsetConverter
     public class PopupHorizontalOffsetConverter : IMultiValueConverter
     {
@@ -215,118 +446,6 @@ namespace SkinInterfaces.Converters
                 return null;
             }
 
-        }
-
-        #endregion
-    }
-    #endregion
-
-    #region NullVisibilityConverter
-    /// <summary>
-    /// Converts Null to visibility.
-    /// This can be used in some components which doesnt need to be displayed if the value they bound to is null.
-    /// </summary>
-    public class NullVisibilityConverter : IValueConverter
-    {
-        #region IValueConverter Members
-
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            if (value == null)
-            {
-                return Visibility.Collapsed;
-            }
-            else
-            {
-                return Visibility.Visible;
-            }
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
-    }
-    #endregion
-
-    #region NullToBoolConverter
-    public class NullToBoolConverter : IValueConverter
-    {
-        #region IValueConverter Members
-
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            if (value == null || string.IsNullOrEmpty(value as string))
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
-    }
-    #endregion
-
-    #region BoolToVisibilityConverter
-    /// <summary>
-    /// Converts bool value to visibility.
-    /// <remarks>If revert operation required specify tru as converter parameter.</remarks>
-    /// </summary>
-    public class BoolToVisibilityConverter : IValueConverter
-    {
-        #region IValueConverter Members
-
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            try
-            {
-                if (value is bool)
-                {
-                    #region Check for revert parameter
-                    bool revert = false;
-                    if (parameter != null)
-                    {
-                        bool temp;
-                        if (bool.TryParse(parameter.ToString(), out temp))
-                        {
-                            revert = temp;
-                        }
-                    }
-                    #endregion
-
-                    if ((bool)value == true)
-                    {
-                        return revert ? Visibility.Collapsed : Visibility.Visible;
-                    }
-                    else
-                    {
-                        return revert ? Visibility.Visible : Visibility.Collapsed;
-                    }
-                }
-                else
-                {
-                    return Visibility.Collapsed;
-                }
-            }
-            catch
-            {
-                return Visibility.Collapsed;
-            }
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            throw new NotImplementedException();
         }
 
         #endregion
@@ -585,14 +704,7 @@ namespace SkinInterfaces.Converters
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (value != null)
-            {
-                return value;
-            }
-            else
-            {
-                return parameter;
-            }
+            return value != null ? value : parameter;
         }
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
@@ -998,7 +1110,7 @@ namespace SkinInterfaces.Converters
             throw new NotImplementedException();
         }
     }
-    #endregion    
+    #endregion
 
     #region NumberToRoundedConverter
     /// <summary>
@@ -1166,7 +1278,7 @@ namespace SkinInterfaces.Converters
             throw new NotImplementedException();
         }
     }
-    #endregion    
+    #endregion
 
     #region SplitStringConverter
     public class SplitStringConverter : IValueConverter
@@ -1239,39 +1351,6 @@ namespace SkinInterfaces.Converters
         {
             throw new NotImplementedException();
         }
-    }
-    #endregion
-
-    #region RevertBoolConverter
-    public class RevertBoolConverter : IValueConverter
-    {
-        #region IValueConverter Members
-
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            try
-            {
-                return !(bool)value;
-            }
-            catch
-            {
-                return value;
-            }
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            try
-            {
-                return !(bool)value;
-            }
-            catch
-            {
-                return value;
-            }
-        }
-
-        #endregion
     }
     #endregion
 
@@ -1376,81 +1455,6 @@ namespace SkinInterfaces.Converters
     }
     #endregion
 
-    #region BoolToStringConverter
-    public class BoolToStringConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            bool val = (bool)value;
-            if (val)
-            {
-                return "Yes";
-            }
-            else
-            {
-                return "No";
-            }
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            string val = (string)value;
-            if (!String.IsNullOrWhiteSpace(val))
-            {
-                if (val.ToLower() == "yes")
-                {
-                    return true;
-                }
-                else if (val.ToLower() == "no")
-                {
-                    return false;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                return "Unknown";
-            }
-        }
-    }
-    #endregion
-
-    #region NullToEnabledConverter
-    public class NullToEnabledConverter : IValueConverter
-    {
-        #region IValueConverter Members
-
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            try
-            {
-                if (value == null)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
-    }
-    #endregion
-
     #region EmptyStringToVisibilityConvert
     public class EmptyStringToVisibilityConvert : IValueConverter
     {
@@ -1545,6 +1549,127 @@ namespace SkinInterfaces.Converters
             catch
             { }
             return null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    #endregion
+
+    #region MetaDataIconConverter
+    public class MetaDataIconConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var metaData = value as IPluginMetadata;
+            if (metaData != null && metaData.HasIconResource)
+            {
+                string[] iconSplit = metaData.IconResource.Split(';');
+                if (iconSplit.Length >= 2)
+                {
+                    Assembly assembly = Assembly.Load(iconSplit[0]);
+                    if (assembly != null)
+                    {
+                        string resourceKey = iconSplit[1];
+                        //try to resolve from embeded resources
+                        var stream = assembly.GetManifestResourceStream(resourceKey);
+                        if (stream != null)
+                        {
+                            var image = new BitmapImage();
+                            image.BeginInit();
+                            image.StreamSource = stream;
+                            image.EndInit();
+                            return image;
+                        }
+                    }
+                }
+                else
+                {
+                    //try to resolve from application resources
+                    if (Application.Current != null)
+                        return Application.Current.TryFindResource(metaData.IconResource);
+                }
+            }
+            return Binding.DoNothing;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    #endregion
+
+    #region NullImageSourceConverter
+    public class NullImageSourceConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value == null || value is string && ((string)value).Length == 0)
+                return (ImageSource)null;
+            return value;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    #endregion
+
+    #region ImageSourceResourceConverter
+    public class ImageSourceResourceConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            string resourceString = value == null ? string.Empty : value.ToString();
+
+            if (!string.IsNullOrWhiteSpace(resourceString))
+            {
+                object foundResource = null;
+
+                //try to resolve from application resources
+                if (Application.Current != null)
+                {
+                    foundResource = Application.Current.TryFindResource(resourceString);
+                    
+                    
+                }
+
+                ////application resource not found? lets look in embeded resources
+                //if (foundResource == null)
+                //{
+                //    string[] iconSplit = resourceString.Split(';');
+                //    //check if enough parameters are present format should be [AssemblyName;AssemblyName.Resources.resource.png]
+                //    if (iconSplit.Length >= 2)
+                //    {
+                //        Assembly assembly = Assembly.Load(iconSplit[0]);
+                //        if (assembly != null)
+                //        {
+                //            string resourceKey = iconSplit[1];
+                //            //try to resolve from embeded resources
+                //            var stream = assembly.GetManifestResourceStream(resourceKey);
+                //            if (stream != null)
+                //            {
+                //                var image = new BitmapImage();
+                //                image.BeginInit();
+                //                image.StreamSource = stream;
+                //                image.EndInit();
+                //                return image;
+                //            }
+                //        }
+                //    }
+                //}
+
+                //return found resource
+                if (foundResource != null)
+                    return foundResource;
+            }
+
+            //return null image source
+            return (ImageSource)null;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

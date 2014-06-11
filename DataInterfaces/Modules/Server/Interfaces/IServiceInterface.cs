@@ -13,51 +13,26 @@ using SharedLib.Dispatcher;
 namespace ServerService
 {
     /// <summary>
-    /// Exposes Main Server Service interface.
+    /// Gizmo Service interface.
     /// </summary>
     public interface IService
     {
         #region EVENTS
 
-        /// <summary>
-        /// Occours on server startup.
-        /// </summary>
         event StartUpDelegate Startup;
 
-        /// <summary>
-        /// Occours on service shutdown.
-        /// </summary>
         event ShutDownDelegate Shutdown;
 
-        /// <summary>
-        /// Occours when host connection is sucessfully processed.
-        /// </summary>
+        event MappingsConfigurationChnagedDelegate MappingsChange;
+
         event HostEventDelegate HostEvent;
 
-        /// <summary>
-        /// Occours when mappings configuration changes.
-        /// </summary>
-        event MappingsConfigurationChnagedDelegate MappingsConfigurationChanged;
+        event EventHandler<HostPropertiesChangedEventArgs> HostPropertiesChange;
 
-        /// <summary>
-        /// Occours on current initialization activity change.
-        /// </summary>
-        event CurrentActivityDelegate ActivityChanged;
+        event ReservationEventDelegate ReservationChange;
 
-        /// <summary>
-        /// Occours when license reservation occours.
-        /// </summary>
-        event ReservationEventDelegate ReservationChanged;
-
-        /// <summary>
-        /// Occurs when user state changes.
-        /// </summary>
         event UserStateChangeDelegate UserStateChange;
 
-        /// <summary>
-        /// Occurs on user changed.
-        /// <remarks>This event is fired on a seperate thread without blocking execution.</remarks>
-        /// </summary>
         event UserProfileChangeDelegate UserProfileChange;
 
         #endregion
@@ -68,15 +43,7 @@ namespace ServerService
         /// Gets the service application container.
         /// </summary>
         IApplicationContainer ApplicationContainer { get; }
-
-        /// <summary>
-        /// Gets a new instance of host entry.
-        /// </summary>
-        /// <returns></returns>
-        IHostEntry GetHostClassInstance();
-
-        IEnumerable<IHostEntry> GetHostList();
-
+   
         /// <summary>
         /// Gets system status.
         /// </summary>
@@ -101,15 +68,29 @@ namespace ServerService
         /// Gets system hardware id.
         /// </summary>
         string HardwareId { get; }
-
-        /// <summary>
-        /// Gets read only user collection.
-        /// </summary>
-        ReadOnlyCollection<IUserProfile> Users { get; } 
-
+        
         #endregion
 
         #region FUNCTIONS
+
+        /// <summary>
+        /// Gets a new instance of host entry.
+        /// </summary>
+        /// <returns></returns>
+        IHostEntry GetHostClassInstance();
+
+        /// <summary>
+        /// Gets host entries.
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<IHostEntry> IHostEntryGet();
+
+        /// <summary>
+        /// Gets host entry by dispatcher.
+        /// </summary>
+        /// <param name="dispatcher">Dispatcher instance.</param>
+        /// <returns>Found host, null in case host not found.</returns>
+        IHostEntry HostGet(IMessageDispatcher dispatcher);
 
         /// <summary>
         /// Restarts the service.
@@ -120,8 +101,6 @@ namespace ServerService
         /// Stops the service.
         /// </summary>
         void Stop();
-
-        IHostEntry GetHost(IMessageDispatcher dispatcher);
 
         #endregion
     }

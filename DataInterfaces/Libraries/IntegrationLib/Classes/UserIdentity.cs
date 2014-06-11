@@ -25,7 +25,7 @@ namespace IntegrationLib
 
         public UserIdentity(string name, int userId, UserRoles role)
             : this(name, userId,role,"Basic")
-        {
+        {            
             this.UserId = userId;
             this.Role = role;
         }
@@ -99,7 +99,7 @@ namespace IntegrationLib
     #region AuthResult
     [DataContract()]
     [Serializable()]
-    public class AuthResult
+    public class AuthResult : IAuthResult
     {
         #region CONSTRUCTOR
 

@@ -278,21 +278,21 @@ namespace SharedLib.Dispatcher.Exceptions
     /// This exeception occours when command is not recognized.
     /// </summary>
     [Serializable]
-    public class CommandUnrecognized : DispatcherOperationExceptionBase
+    public class CommandUnrecognizedException : DispatcherOperationExceptionBase
     {
         #region Constructor
 
-        public CommandUnrecognized(string message, IDispatcherCommand cmd)
+        public CommandUnrecognizedException(string message, IDispatcherCommand cmd)
             : base(message)
         {
             this.Command = cmd;
         }
 
-        public CommandUnrecognized() : base() { }
+        public CommandUnrecognizedException() : base() { }
 
-        public CommandUnrecognized(string message, System.Exception inner) { }
+        public CommandUnrecognizedException(string message, System.Exception inner) { }
 
-        protected CommandUnrecognized(System.Runtime.Serialization.SerializationInfo info,
+        protected CommandUnrecognizedException(System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context)
             : base(info, context) { }
 

@@ -2,12 +2,11 @@
 using System.Windows.Input;
 namespace GizmoShell
 {
-    public interface IShellNotifyIcon : IShellItemBase
+    public interface IShellNotifyIcon
     {
         void PopupClicked();
         System.Windows.Media.ImageSource BaloonIcon { get; }
         uint CallBackMessage { get; }
-        void Dispose();
         void DoubleClick();
         void DoubleClick(MouseButton button);
         Guid Guid { get; }

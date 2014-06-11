@@ -291,7 +291,7 @@ namespace CoreLib.Hooking
         }
         #endregion
 
-        #region Fileds
+        #region Fields
         private Keys key = Keys.None;
         private ModifierKeys modifiers = ModifierKeys.None;
         private KeyState keyState;
@@ -327,14 +327,7 @@ namespace CoreLib.Hooking
         #region Functions
         public bool IsMatch(KeyboardHookEventArgs args)
         {
-            if ((args.Key == this.Key) & (args.Modifiers == this.Modifiers) & (args.State == this.State | this.State == KeyState.Any))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return args.Key == this.Key && (args.State == this.State || args.State == KeyState.Any) && args.Modifiers.HasFlag(this.Modifiers); 
         }
         #endregion
     } 

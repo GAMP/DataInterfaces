@@ -21,10 +21,10 @@ using System.Windows.Interop;
 using GizmoShell;
 using System.ComponentModel;
 using System.Threading;
+using System.Drawing;
 
 namespace SkinLib
 {
-    [Serializable()]
     public class UIHandler : PropertyChangedNotificator, IUIHandler
     {
         #region Constructor
@@ -32,9 +32,9 @@ namespace SkinLib
         public UIHandler()
         {
             UIHandler.Current = this;
-            DependencyPropertyClassBase.DependencyPropertyChanged += this.DependencyPropertyChangeHandler;
+            DependencyPropertyClassBase.DependencyPropertyChanged += DependencyPropertyChangeHandler;
             AppDomain.CurrentDomain.AssemblyResolve += AssemblyResolveHandler;
-            Microsoft.Win32.SystemEvents.DisplaySettingsChanged += new EventHandler(OnDisplaySettingsChanged);
+            Microsoft.Win32.SystemEvents.DisplaySettingsChanged += OnDisplaySettingsChanged;
         }
 
         #endregion
@@ -66,7 +66,7 @@ namespace SkinLib
         #endregion
 
         #region WINDOW_MESSAGE
-        public enum WINDOW_MESSAGE : int
+        private enum WINDOW_MESSAGE : int
         {
             WM_NULL = 0x0000,
             WM_CREATE = 0x0001,
@@ -1058,7 +1058,7 @@ namespace SkinLib
 
         #region POINT
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
-        public struct POINT
+        private struct POINT
         {
             public POINT(int x, int y)
             {
@@ -1072,7 +1072,7 @@ namespace SkinLib
 
         #region RECT
         [StructLayout(LayoutKind.Sequential)]
-        public struct RECT
+        private struct RECT
         {
             public int left;
             public int top;
@@ -1083,7 +1083,7 @@ namespace SkinLib
 
         #region MINMAXINFO
         [StructLayout(LayoutKind.Sequential)]
-        public struct MINMAXINFO
+        private struct MINMAXINFO
         {
             public POINT ptReserved;
             public POINT ptMaxSize;
@@ -1107,7 +1107,7 @@ namespace SkinLib
         ///If the function fails, the return value is zero. To get extended error information, call GetLastError.
         ///</returns>
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        public static extern bool MoveWindow(IntPtr hWnd,
+        private static extern bool MoveWindow(IntPtr hWnd,
             int X,
             int Y,
             int nWidth,
@@ -1125,7 +1125,7 @@ namespace SkinLib
         ///If the function fails, the return value is zero. To get extended error information, call GetLastError. 
         ///</returns>
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        public static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
+        private static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
         #endregion
 
         #endregion
@@ -1141,11 +1141,13 @@ namespace SkinLib
 
         #region Fields
         private static UIHandler instance;
-        private ObservableCollection<Exception> exceptions;
+        private List<Exception> exceptions;
         private List<Assembly> assemblies;
         private string skinPath;
         private Window mainWindow;
-        private IUILayout currentLayout;
+        private IntPtr mainWindowHandle;
+        private HwndSource hwndSource;
+        private UILayout currentLayout;
         private UIComponent currentComponent;
         private UIConfiguration currentConfiguration;
         private bool
@@ -1154,15 +1156,48 @@ namespace SkinLib
             isClosingAllowed,
             isMultiScreen;
         private UserControl
-            currentControl,
+            activeControl,
             mouseOverControl;
         private int animationDuration = 300;
+        #endregion
+
+        #region Interface
+        IUILayout IUIHandler.CurrentLayout
+        {
+            get { return this.CurrentLayout as IUILayout; }
+        }
         #endregion
 
         #region Properties
 
         /// <summary>
-        /// Gets an instance of the AppDomains current skin handler instance.
+        /// Gets the list of exceptions thrown during load phase.
+        /// </summary>
+        public List<Exception> Errors
+        {
+            get
+            {
+                if (this.exceptions == null)
+                    this.exceptions = new List<Exception>();
+                return this.exceptions;
+            }
+        }
+
+        /// <summary>
+        /// Gets the list of currently loaded skin assemblies.
+        /// </summary>
+        public List<Assembly> Assemblies
+        {
+            get
+            {
+                if (this.assemblies == null)
+                    this.assemblies = new List<Assembly>();
+                return this.assemblies;
+            }
+        }
+
+        /// <summary>
+        /// Gets an instance of the current UIHandler instance.
         /// </summary>
         public static UIHandler Current
         {
@@ -1171,13 +1206,13 @@ namespace SkinLib
         }
 
         /// <summary>
-        /// Gets the skin configuration.
+        /// Gets current UI configuration.
         /// </summary>
         public UIConfiguration UIConfiguration
         {
             get
             {
-                if ((this.currentConfiguration == null))
+                if (this.currentConfiguration == null)
                     this.currentConfiguration = new UIConfiguration();
                 return this.currentConfiguration;
             }
@@ -1190,8 +1225,11 @@ namespace SkinLib
 
         /// <summary>
         /// Gets current layout configuration.
+        /// <remarks>
+        /// Default layout returned if current layout not set.
+        /// Null returned if no default layout defined.</remarks>
         /// </summary>
-        public IUILayout CurrentLayout
+        public UILayout CurrentLayout
         {
             get
             {
@@ -1207,21 +1245,14 @@ namespace SkinLib
         }
 
         /// <summary>
-        /// Returns first Layout marked as default.
+        /// Returns first Layout marked as default from current UI configuration.
+        /// <remarks>Null returned if no default layout is set.</remarks>
         /// </summary>
-        public IUILayout DefaultLayout
+        public UILayout DefaultLayout
         {
             get
             {
-                if (this.UIConfiguration.Layouts != null)
-                {
-                    foreach (UILayout layout in this.UIConfiguration.Layouts)
-                    {
-                        if (layout.IsDefault == true)
-                            return layout;
-                    }
-                }
-                return null;
+                return this.UIConfiguration.Layouts.Where(x => x.IsDefault).FirstOrDefault();
             }
         }
 
@@ -1243,8 +1274,12 @@ namespace SkinLib
         /// </summary>
         public IntPtr MainWindowHandle
         {
-            get;
-            protected set;
+            get { return this.mainWindowHandle; }
+            protected set
+            {
+                this.mainWindowHandle = value;
+                this.RaisePropertyChanged("MainWindowHandle");
+            }
         }
 
         /// <summary>
@@ -1275,74 +1310,10 @@ namespace SkinLib
         }
 
         /// <summary>
-        /// Gets currently active control.
-        /// </summary>
-        public UserControl ActiveControl
-        {
-            get { return this.currentControl; }
-            protected set
-            {
-                this.currentControl = value;
-                this.RaisePropertyChanged("ActiveControl");
-            }
-        }
-
-        /// <summary>
-        /// Gets current component.
-        /// </summary>
-        public UIComponent CurrentComponent
-        {
-            get { return this.currentComponent; }
-            protected set
-            {
-                this.currentComponent = value;
-                this.RaisePropertyChanged("CurrentComponent");
-            }
-        }
-
-        /// <summary>
-        /// Gets the current mouse over control.
-        /// </summary>
-        public UserControl MouseOverControl
-        {
-            get { return this.mouseOverControl; }
-            protected set
-            {
-                this.mouseOverControl = value;
-                this.RaisePropertyChanged("MouseOverContol");
-            }
-        }
-
-        /// <summary>
-        /// Gets the list of exceptions thrown during load phase.
-        /// </summary>
-        public ObservableCollection<Exception> Exceptions
-        {
-            get
-            {
-                if (this.exceptions == null)
-                    this.exceptions = new ObservableCollection<Exception>();
-                return this.exceptions;
-            }
-        }
-
-        /// <summary>
-        /// Gets the list of currently loaded skin assemblies.
-        /// </summary>
-        public List<Assembly> SkinAssemblies
-        {
-            get
-            {
-                if (this.assemblies == null)
-                    this.assemblies = new List<Assembly>();
-                return this.assemblies;
-            }
-        }
-
-        /// <summary>
         /// Gets or sets if main window is in background mode.
-        /// <remarks>When window is in background it does not come in front of other windows ,
-        /// otherwise it becomes topmost window.</remarks>
+        /// <remarks>
+        /// When window is in background it does not come in front of other windows , otherwise it becomes topmost window.
+        /// </remarks>
         /// </summary>
         public bool IsBackground
         {
@@ -1356,7 +1327,7 @@ namespace SkinLib
         }
 
         /// <summary>
-        /// Gets or sets if closing main ui window is allowed.
+        /// Gets or sets if closing main UI window is allowed.
         /// </summary>
         public bool IsClosingAllowed
         {
@@ -1381,6 +1352,62 @@ namespace SkinLib
             }
         }
 
+        /// <summary>
+        /// Gets default visual state switch animation duration.
+        /// </summary>
+        private int DefaultAnimationDuration
+        {
+            get { return this.animationDuration; }
+        }
+
+        /// <summary>
+        /// Gets or sets main window HwndSource.
+        /// </summary>
+        private HwndSource HwnSource
+        {
+            get { return this.hwndSource; }
+            set { this.hwndSource = value; }
+        }
+
+        /// <summary>
+        /// Gets currently active control.
+        /// </summary>
+        public UserControl ActiveControl
+        {
+            get { return this.activeControl; }
+            protected set
+            {
+                this.activeControl = value;
+                this.RaisePropertyChanged("ActiveControl");
+            }
+        }
+
+        /// <summary>
+        /// Gets the current mouse over control.
+        /// </summary>
+        public UserControl MouseOverControl
+        {
+            get { return this.mouseOverControl; }
+            protected set
+            {
+                this.mouseOverControl = value;
+                this.RaisePropertyChanged("MouseOverControl");
+            }
+        }
+
+        /// <summary>
+        /// Gets current component.
+        /// </summary>
+        public UIComponent CurrentComponent
+        {
+            get { return this.currentComponent; }
+            protected set
+            {
+                this.currentComponent = value;
+                this.RaisePropertyChanged("CurrentComponent");
+            }
+        }
+
         #endregion
 
         #region Assemblies Functions
@@ -1389,103 +1416,96 @@ namespace SkinLib
         /// Loads the currently configured assemblies.
         /// </summary>
         /// <remarks></remarks>
-        public void LoadSkinAssemblies()
+        public void LoadAssemblies()
         {
-            this.SkinAssemblies.Clear();
-            if (Directory.Exists(this.SkinPath))
-            {
-                foreach (string FileName in this.UIConfiguration.Assemblies)
-                {
-                    string asemblyFile = Path.Combine(this.SkinPath, FileName);
-                    if (File.Exists(asemblyFile))
-                    {
-                        if (this.IsAssemblyLoaded(asemblyFile) == true)
-                            continue;
-
-                        using (System.IO.FileStream AssemblyFile = new System.IO.FileStream(asemblyFile, FileMode.Open, FileAccess.Read))
-                        {
-                            byte[] assemblybuffer = new byte[AssemblyFile.Length];
-                            AssemblyFile.Read(assemblybuffer, 0, (int)AssemblyFile.Length);
-                            AssemblyFile.Close();
-                            AssemblyFile.Dispose();
-                            this.SkinAssemblies.Add(AppDomain.CurrentDomain.Load(assemblybuffer));
-                        }
-                    }
-                    else
-                    {
-                        throw new FileNotFoundException("Skin assembly file not found.", FileName);
-                    }
-                }
-            }
-            else
-            {
+            if (!Directory.Exists(this.SkinPath))
                 throw new DirectoryNotFoundException(String.Format("Skin Directory {0} not found.", this.SkinPath));
+
+            this.Assemblies.Clear();
+
+            foreach (string assemblyFileName in this.UIConfiguration.Assemblies)
+            {
+                string asemblyFile = Path.Combine(this.SkinPath, assemblyFileName);
+
+                if (!File.Exists(asemblyFile))
+                    throw new FileNotFoundException("Skin assembly file not found.", assemblyFileName);
+
+                if (this.IsAssemblyLoaded(asemblyFile))
+                    continue;
+
+                using (System.IO.FileStream assemblyFileStream = new System.IO.FileStream(asemblyFile, FileMode.Open, FileAccess.Read))
+                {
+                    byte[] assemblybuffer = new byte[assemblyFileStream.Length];
+                    assemblyFileStream.Read(assemblybuffer, 0, (int)assemblyFileStream.Length);
+                    var loadedAssembly = AppDomain.CurrentDomain.Load(assemblybuffer);
+                    this.Assemblies.Add(loadedAssembly);
+                }
             }
         }
 
         /// <summary>
         /// Finds specified assembly in loaded assemblies.
         /// </summary>
-        /// <param name="AssemblyName">Assembly Name.</param>
-        /// <returns>Assembly found.</returns>
-        public Assembly FindAssembly(string AssemblyName)
+        /// <param name="assemblyName">Assembly Name.</param>
+        /// <returns>Assembly found, null is returned if assembly not found.</returns>
+        public Assembly FindAssembly(string assemblyName)
         {
-            foreach (Assembly loadedAssembly in this.SkinAssemblies)
-            {
-                if (loadedAssembly.FullName == AssemblyName || loadedAssembly.ManifestModule.ScopeName == AssemblyName)
-                    return loadedAssembly;
-            }
-            return null;
+            return this.Assemblies.Where(loadedAssembly => loadedAssembly.FullName == assemblyName || loadedAssembly.ManifestModule.ScopeName == assemblyName).FirstOrDefault();
         }
 
         /// <summary>
-        /// Checks if specified assembly is already loaded.
+        /// Checks if specified assembly is already loaded into current app domain.
         /// </summary>
-        /// <param name="AssemblyFileName">Assembly File Name.</param>
+        /// <param name="assemblyFileName">Assembly file name.</param>
         /// <returns>True or false.</returns>
-        public bool IsAssemblyLoaded(string AssemblyFileName)
+        public bool IsAssemblyLoaded(string assemblyFileName)
         {
-            Assembly[] LoaddedAssemblies = AppDomain.CurrentDomain.GetAssemblies();
-            foreach (Assembly Assembly in LoaddedAssemblies)
-            {
-                if (string.Compare(Assembly.ManifestModule.Name, Path.GetFileName(AssemblyFileName), true) == 0)
-                    return true;
-            }
-            return false;
+            string assemblyName = Path.GetFileName(assemblyFileName);
+            return AppDomain.CurrentDomain.GetAssemblies().Any(assembly => string.Compare(assembly.ManifestModule.ScopeName, assemblyName, true) == 0);
         }
 
         /// <summary>
-        /// Creates an instance of component from passed component class.
+        /// Creates component ui element.
         /// </summary>
-        public object CreateInstance(UIComponent Component, bool throwOnError = false)
+        /// <param name="uiComponent">UI component.</param>
+        /// <param name="throwOnError">Indicates if exceptions shold be thrown.</param>
+        /// <returns>UI element instance, null in case of failure.</returns>
+        public object CreateInstance(UIComponent uiComponent, bool throwOnError = false)
         {
             try
             {
-                Assembly componentAssembly = this.FindAssembly(Component.AssemblyName);
+                Assembly componentAssembly = this.FindAssembly(uiComponent.AssemblyName);
                 if (componentAssembly == null)
-                    throw new ArgumentException("Component assembly could not be resolved.");
+                    throw new ArgumentException(String.Format("Could not resolve component assembly {0}", uiComponent.AssemblyName));
 
-                var controlInstance = componentAssembly.CreateInstance(Component.Type, true) as FrameworkElement;
+                var controlInstance = componentAssembly.CreateInstance(uiComponent.Type, true) as FrameworkElement;
                 if (controlInstance != null)
                 {
-                    Component.Instance = controlInstance;
-                    controlInstance.SetValue(InternalProperties.UIComponentProperty, Component);
-                    controlInstance.SetValue(ExternalProperties.GUIDProperty, Component.GUID);
+                    uiComponent.Instance = controlInstance;
+                    controlInstance.SetValue(InternalProperties.UIComponentProperty, uiComponent);
+                    controlInstance.SetValue(ExternalProperties.GUIDProperty, uiComponent.GUID);
                 }
                 return controlInstance;
             }
             catch (Exception ex)
             {
-                this.Exceptions.Add(ex);
+                this.Errors.Add(ex);
                 if (throwOnError)
                     throw ex;
                 return null;
             }
         }
 
-        public T CreateInstance<T>(UIComponent component, bool throwOnError = false)
+        /// <summary>
+        /// Creates component ui element and casts it to specified type.
+        /// </summary>
+        /// <typeparam name="T">UI element type.</typeparam>
+        /// <param name="uiComponent">UI component.</param>
+        /// <param name="throwOnError">Indicates if exceptions shold be thrown.</param>
+        /// <returns>UI element instance, null in case of failure.</returns>
+        public T CreateInstance<T>(UIComponent uiComponent, bool throwOnError = false)
         {
-            return (T)this.CreateInstance(component, throwOnError);
+            return (T)this.CreateInstance(uiComponent, throwOnError);
         }
 
         #endregion
@@ -1559,7 +1579,7 @@ namespace SkinLib
                 ExtraPicture.Rect = new Rect(0, 0, 1, 1);
                 FirstGroup.Children.Add(ExtraPicture);
 
-                if ((this.CurrentLayout.Background != null))
+                if (this.CurrentLayout.Background != null)
                 {
                     ImageDrawing ExtraPicture2 = new ImageDrawing { ImageSource = ((ImageBrush)this.CurrentLayout.Background).ImageSource };
                     ExtraPicture2.Rect = new Rect(0, 0, 1, 1);
@@ -1619,26 +1639,22 @@ namespace SkinLib
         /// <remarks>If no windows windows found implementing IMainWindow this function fails and return false.</remarks>
         public void CreateMainWindow()
         {
-            #region Validation
             if (this.MainWindow != null)
-                throw new ArgumentException("Main Window Interface is already created.");
-            #endregion
+                throw new ArgumentException("Main window is already created.");
 
-            #region Create Component
             UIComponent wincomp = this.UIConfiguration.MainWindowComponent;
-            var mainWindow = this.CreateInstance<Window>(wincomp, true);
-            #endregion
 
-            if (mainWindow is IMainWindow)
-            {
-                AttachMainWindowEvents(mainWindow);
-                this.MainWindow = mainWindow;
-                Application.Current.MainWindow = mainWindow;
-            }
-            else
-            {
-                throw (new ArgumentException("Window is not implementing IMainWindow interface.", "MainWindowComponent"));
-            }
+            if (wincomp == null)
+                throw new ArgumentException("Main window component not specified.");
+
+            var mainWindow = this.CreateInstance<Window>(wincomp, true);
+
+            if (!(mainWindow is IMainWindow))
+                throw new ArgumentException("Main window is not implementing IMainWindow interface.", "MainWindowComponent");
+
+            this.AttachMainWindowEvents(mainWindow);
+            this.MainWindow = mainWindow;
+            Application.Current.MainWindow = mainWindow;
         }
 
         /// <summary>
@@ -1653,6 +1669,8 @@ namespace SkinLib
                 int width = default(int);
                 int height = default(int);
 
+                var primaryScreen = System.Windows.Forms.Screen.PrimaryScreen;
+
                 if (this.IsMultiScreen)
                 {
                     foreach (var Screen in System.Windows.Forms.Screen.AllScreens)
@@ -1660,12 +1678,31 @@ namespace SkinLib
                 }
                 else
                 {
-                    width = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
+                    width = primaryScreen.Bounds.Width;
                 }
 
-                height = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
+                height = primaryScreen.Bounds.Height;
 
                 UIHandler.MoveWindow(this.MainWindowHandle, 0, 0, width, height, true);
+            }
+        }
+
+        public void FitInIfRequired()
+        {
+            //get main window
+            var window = this.MainWindow;
+            if (window != null)
+            {
+                //get main screen
+                var primaryScreen = System.Windows.Forms.Screen.PrimaryScreen;
+
+                //if primary screen exists check window
+                if (primaryScreen != null)
+                {
+                    //check if widths/heights equals
+                    if (window.Width != primaryScreen.Bounds.Width || window.Height != primaryScreen.Bounds.Height)
+                        this.FitIn();
+                }
             }
         }
 
@@ -1682,6 +1719,7 @@ namespace SkinLib
                 this.DetachMainWindowEvents(this.MainWindow);
                 this.MainWindow = null;
             }
+
         }
 
         private void AttachMainWindowEvents(Window window)
@@ -1689,55 +1727,62 @@ namespace SkinLib
             if (window == null)
                 throw new ArgumentNullException("Window", "UI Window instance may not be null.");
 
-            window.Activated += new EventHandler(OnMainWindowActivated);
-            window.Deactivated += new EventHandler(OnMainWindowDeactivated);
-            window.Loaded += new RoutedEventHandler(OnMainWindowLoaded);
-            window.Unloaded += new RoutedEventHandler(OnMainWindowUnLoaded);
-            window.Closing += new CancelEventHandler(OnMainWindowClosing);
-            window.SizeChanged += new SizeChangedEventHandler(OnMainWindowSizeChanged);
+            window.Activated += OnMainWindowActivated;
+            window.Deactivated += OnMainWindowDeactivated;
+            window.Loaded += OnMainWindowLoaded;
+            window.Unloaded += OnMainWindowUnLoaded;
+            window.Closing += OnMainWindowClosing;
+            window.SizeChanged += OnMainWindowSizeChanged;
+            window.IsVisibleChanged += OnMainWindowIsVisibleChanged;
+            window.SourceInitialized += OnMainWindowSourceInitialized;
+
             window.AddHandler(UIElement.MouseDownEvent, new MouseButtonEventHandler(MouseDownHandler), true);
             window.AddHandler(UIElement.MouseMoveEvent, new MouseEventHandler(MouseOverHandler), true);
+
         }
 
         private void DetachMainWindowEvents(Window window)
         {
             if (window == null)
                 throw new ArgumentNullException("Window", "UI Window instance may not be null.");
-           
-            window.Activated -= new EventHandler(OnMainWindowActivated);
-            window.Deactivated -= new EventHandler(OnMainWindowDeactivated);
-            window.Loaded -= new RoutedEventHandler(OnMainWindowLoaded);
-            window.Unloaded -= new RoutedEventHandler(OnMainWindowUnLoaded);
-            window.Closing -= new CancelEventHandler(OnMainWindowClosing);
-            window.SizeChanged -= new SizeChangedEventHandler(OnMainWindowSizeChanged);
+
+            window.Activated -= OnMainWindowActivated;
+            window.Deactivated -= OnMainWindowDeactivated;
+            window.Loaded -= OnMainWindowLoaded;
+            window.Unloaded -= OnMainWindowUnLoaded;
+            window.Closing -= OnMainWindowClosing;
+            window.SizeChanged -= OnMainWindowSizeChanged;
+            window.IsVisibleChanged -= OnMainWindowIsVisibleChanged;
+            window.SourceInitialized += OnMainWindowSourceInitialized;
+
             window.RemoveHandler(UIElement.MouseDownEvent, new MouseButtonEventHandler(MouseDownHandler));
             window.RemoveHandler(UIElement.MouseMoveEvent, new MouseEventHandler(MouseOverHandler));
         }
 
         private void MakeTopMostSafe(Window window, bool make)
         {
-            if (window != null)
-            {
-                #region Create Delegate
-                Action<Window, bool> del = (win, makeTop) =>
-                {
-                    if (makeTop == true)
-                    {
-                        win.Topmost = false;
-                        win.Topmost = true;
-                        win.Activate();
-                    }
-                    else
-                    {
-                        win.Topmost = false;
-                    }
-                };
-                #endregion
+            if (window == null)
+                return;
 
-                #region Invoke
-                window.Dispatcher.BeginInvoke(del, window, make);
-                #endregion
-            }
+            #region Create Delegate
+            Action<Window, bool> del = (win, makeTop) =>
+            {
+                if (makeTop == true)
+                {
+                    win.Topmost = false;
+                    win.Topmost = true;
+                    win.Activate();
+                }
+                else
+                {
+                    win.Topmost = false;
+                }
+            };
+            #endregion
+
+            #region Invoke
+            window.Dispatcher.Invoke(del, window, make);
+            #endregion
         }
 
         #endregion
@@ -1748,7 +1793,7 @@ namespace SkinLib
         {
             try
             {
-                foreach (Assembly assembly in this.SkinAssemblies)
+                foreach (Assembly assembly in this.Assemblies)
                 {
                     if (assembly.GetName().ToString() == args.Name)
                         return assembly;
@@ -1756,7 +1801,7 @@ namespace SkinLib
             }
             catch (Exception ex)
             {
-                this.Exceptions.Add(ex);
+                this.Errors.Add(ex);
             }
             return null;
         }
@@ -1770,7 +1815,7 @@ namespace SkinLib
                 {
                     if ((this.UIConfiguration.UserControlDictionary.ContainsValue(originalParent)))
                     {
-                        UIComponent curComp = (UIComponent)originalParent.GetValue(SkinInterfaces.InternalProperties.UIComponentProperty);
+                        UIComponent curComp = (UIComponent)originalParent.GetValue(InternalProperties.UIComponentProperty);
                         this.CurrentComponent = curComp;
                     }
                 }
@@ -1780,34 +1825,43 @@ namespace SkinLib
         private void MouseOverHandler(object sender, MouseEventArgs e)
         {
             var originalParent = (FrameworkElement)SkinHelper.FindParentComponent((DependencyObject)e.OriginalSource);
-            if (originalParent != null)
+            if (originalParent != null && this.MouseOverControl != originalParent)
             {
-                if ((this.UIConfiguration.UserControlDictionary.ContainsValue(originalParent)))
+                if (this.UIConfiguration.UserControlDictionary.ContainsValue(originalParent))
                 {
                     this.MouseOverControl = (UserControl)originalParent;
                 }
             }
         }
 
-        private void OnMainWindowLoaded(object sender, RoutedEventArgs e)
+        private void OnMainWindowSourceInitialized(object sender, EventArgs e)
         {
             Window window = sender as Window;
-            if (window != null)
-            {
-                //assign main window handle for late use
-                IntPtr handle = new WindowInteropHelper(window).Handle;
-                //get hwndSource
-                HwndSource source = HwndSource.FromHwnd(handle);
-                //set main window handle
-                this.MainWindowHandle = handle;
-                //once main window is loaded we need to hook the wndproc and pass the messages to filters.
-                source.RemoveHook(new HwndSourceHook(WindowProc));
-                source.AddHook(new HwndSourceHook(WindowProc));
-            }
+
+            //get window handle
+            IntPtr handle = new WindowInteropHelper(window).Handle;
+
+            //set main window handle
+            this.MainWindowHandle = handle;
+
+            //get hwndSource
+            this.HwnSource = HwndSource.FromHwnd(handle);
+
+            //add window proc hook
+            this.HwnSource.AddHook(new HwndSourceHook(WindowProc));
+        }
+
+        private void OnMainWindowLoaded(object sender, RoutedEventArgs e)
+        {
         }
 
         private void OnMainWindowUnLoaded(object sender, RoutedEventArgs e)
         {
+            //remove window proc hook
+            if (this.HwnSource != null)
+                this.HwnSource.RemoveHook(new HwndSourceHook(WindowProc));
+
+            //reset main window handle
             this.MainWindowHandle = IntPtr.Zero;
         }
 
@@ -1828,9 +1882,19 @@ namespace SkinLib
 
         private void OnMainWindowSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            var screen = System.Windows.Forms.Screen.PrimaryScreen;
-            if (e.NewSize.Width < screen.Bounds.Width || e.NewSize.Height < screen.Bounds.Height)
-                this.FitIn();
+            this.FitInIfRequired();
+        }
+
+        private void OnDisplaySettingsChanged(object sender, EventArgs e)
+        {
+            this.FitInIfRequired();
+        }
+
+        private void OnMainWindowIsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            //if window becomes visible fit it in
+            if ((bool)e.NewValue == true)
+                this.FitInIfRequired();
         }
 
         private IntPtr WindowProc(IntPtr hwnd, int msg, System.IntPtr wParam, System.IntPtr lParam, ref bool handled)
@@ -1838,13 +1902,15 @@ namespace SkinLib
             try
             {
                 #region WND_PROC_EVENT
-                if (this.MainWindowMessage != null)
+                var handler = this.MainWindowMessage;
+                if (handler != null)
                 {
-                    foreach (WindowMessageDlegeate listener in this.MainWindowMessage.GetInvocationList())
+                    var message = System.Windows.Forms.Message.Create(hwnd, (int)msg, wParam, lParam);
+                    foreach (WindowMessageDlegeate listener in handler.GetInvocationList())
                     {
                         try
                         {
-                            listener.Invoke(System.Windows.Forms.Message.Create(hwnd, (int)msg, wParam, lParam));
+                            listener.Invoke(message);
                         }
                         catch (Exception ex)
                         {
@@ -1873,101 +1939,90 @@ namespace SkinLib
             return hwnd;
         }
 
-        private void OnDisplaySettingsChanged(object sender, EventArgs e)
-        {
-            this.FitIn();
-        }
-
         #endregion
 
         #region DP Event Handlers
 
         private void DependencyPropertyChangeHandler(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
-            try
+            #region ACTIVE
+            if (object.ReferenceEquals(e.Property, InternalProperties.IsActiveElementProperty))
             {
-                #region ACTIVE
-                if (object.ReferenceEquals(e.Property, InternalProperties.IsActiveElementProperty))
+                if ((bool)e.NewValue == true)
                 {
-                    if ((bool)e.NewValue == true)
+                    if (this.CurrentLayout != null)
                     {
-                        if (this.CurrentLayout != null)
-                        {
-                            if (this.ActiveControl != null)
-                                this.ActiveControl.IsActive(false);
-                            this.ActiveControl = sender as UserControl;
-                        }
+                        if (this.ActiveControl != null)
+                            this.ActiveControl.IsActive(false);
+                        this.ActiveControl = sender as UserControl;
                     }
                 }
-                #endregion
-
-                #region ALLOWZINDEX
-                else if (object.ReferenceEquals(e.Property, ExternalProperties.AllowZindexProperty))
-                {
-                    if ((bool)e.OldValue == false & (bool)e.NewValue == true)
-                    {
-                        ((FrameworkElement)sender).IsZIndexEnabled(true);
-                        ((FrameworkElement)sender).AddHandler(System.Windows.Controls.Button.MouseLeftButtonDownEvent,
-                            new RoutedEventHandler(this.ZindexChangeEvent), true);
-                    }
-                    else if ((bool)e.OldValue == true & (bool)e.NewValue == false)
-                    {
-                        ((FrameworkElement)sender).IsZIndexEnabled(false);
-                        ((FrameworkElement)sender).RemoveHandler(Button.MouseLeftButtonDownEvent,
-                            new RoutedEventHandler(this.ZindexChangeEvent));
-                    }
-                }
-                #endregion
-
-                #region VISUAL STATE
-                else if (object.ReferenceEquals(e.Property, ExternalProperties.VisualStateProperty))
-                {
-                    this.VisualStateChanged(sender as FrameworkElement, e);
-                }
-                #endregion
             }
-            catch
+            #endregion
+
+            #region ALLOWZINDEX
+            else if (object.ReferenceEquals(e.Property, ExternalProperties.AllowZindexProperty))
             {
-                //ignore for now
+                if ((bool)e.OldValue == false & (bool)e.NewValue == true)
+                {
+                    ((FrameworkElement)sender).IsZIndexEnabled(true);
+                    ((FrameworkElement)sender).AddHandler(System.Windows.Controls.Button.MouseLeftButtonDownEvent,
+                        new RoutedEventHandler(this.ZindexChangeEvent), true);
+                }
+                else if ((bool)e.OldValue == true & (bool)e.NewValue == false)
+                {
+                    ((FrameworkElement)sender).IsZIndexEnabled(false);
+                    ((FrameworkElement)sender).RemoveHandler(Button.MouseLeftButtonDownEvent,
+                        new RoutedEventHandler(this.ZindexChangeEvent));
+                }
             }
+            #endregion
+
+            #region VISUAL STATE
+            else if (object.ReferenceEquals(e.Property, ExternalProperties.VisualStateProperty))
+            {
+                this.VisualStateChanged(sender as FrameworkElement, e);
+            }
+            #endregion
         }
 
         private void ZindexChangeEvent(object sender, RoutedEventArgs e)
         {
+            //find sender visual parent
+            Panel visualParent = VisualTreeHelper.GetParent((DependencyObject)sender) as Panel;
 
-            //Find sender visual parent
-            Panel VisualParent = VisualTreeHelper.GetParent((DependencyObject)sender) as Panel;
-            if (VisualParent == null)
-            {
+            //if no parent found return
+            if (visualParent == null)
                 return;
-            }
-            UIElement CurrentTopObject = default(UIElement);
-            int CurrentTopIndex = 0;
-            foreach (UIElement Child in VisualParent.Children)
+
+            UIElement currentTopObject = default(UIElement);
+            int currentTopIndex = 0;
+
+            foreach (UIElement visualChild in visualParent.Children)
             {
-                int UiElementZindex = (int)Child.GetValue(Canvas.ZIndexProperty);
-                if (UiElementZindex >= CurrentTopIndex)
+                int UiElementZindex = (int)visualChild.GetValue(Canvas.ZIndexProperty);
+                if (UiElementZindex >= currentTopIndex)
                 {
-                    CurrentTopIndex = UiElementZindex;
-                    CurrentTopObject = Child;
+                    currentTopIndex = UiElementZindex;
+                    currentTopObject = visualChild;
                 }
             }
-            if (CurrentTopIndex == 0)
+            if (currentTopIndex == 0)
             {
-                CurrentTopIndex = 1;
+                currentTopIndex = 1;
             }
             else
             {
-                foreach (UIElement Child in VisualParent.Children)
+                foreach (UIElement Child in visualParent.Children)
                     Child.SetValue(Canvas.ZIndexProperty, (int)Child.GetValue(Canvas.ZIndexProperty) - 1);
             }
-            Canvas.SetZIndex(sender as UIElement, CurrentTopIndex);
+            Canvas.SetZIndex(sender as UIElement, currentTopIndex);
             e.Handled = false;
         }
 
         private void VisualStateChanged(FrameworkElement sender, DependencyPropertyChangedEventArgs e)
         {
-            EVisualStateArgs args = new EVisualStateArgs((ElementVisualState)e.NewValue, (ElementVisualState)e.OldValue);
+            UIModuleVisualStateChangeArgs args = new UIModuleVisualStateChangeArgs((ElementVisualState)e.NewValue, (ElementVisualState)e.OldValue);
 
             #region MINIMIZED
             if (args.NewState == ElementVisualState.Minimized || args.NewState == ElementVisualState.Closed)
@@ -2042,21 +2097,16 @@ namespace SkinLib
             #endregion
         }
 
-        #endregion 
-
-        private int DefaultAnimationDuration
-        {
-            get { return this.animationDuration; }
-        }
+        #endregion
     }
 
-    #region EVisualStateArgs
-    public class EVisualStateArgs : RoutedEventArgs
+    #region UIModuleVisualStateChangeArgs
+    public class UIModuleVisualStateChangeArgs : RoutedEventArgs
     {
-        public EVisualStateArgs(ElementVisualState n, ElementVisualState o)
+        public UIModuleVisualStateChangeArgs(ElementVisualState newState, ElementVisualState oldState)
         {
-            this.NewState = n;
-            this.OldState = o;
+            this.NewState = newState;
+            this.OldState = oldState;
         }
 
         public ElementVisualState NewState
@@ -2070,6 +2120,6 @@ namespace SkinLib
             get;
             protected set;
         }
-    } 
+    }
     #endregion
 }

@@ -46,7 +46,7 @@ namespace Client
         event LockStateChangedDelegate LockStateChange;
 
         /// <summary>
-        /// Occours when integration availability changes.
+        /// Occours when integration avaliability changes.
         /// </summary>
         event AvailabilityChangedDelegate IntegrationAvailabilityChange;
 
@@ -71,7 +71,7 @@ namespace Client
         event ExecutionContextStateChangedDelegate ExecutionContextStateChage;
 
         /// <summary>
-        /// Occours on current initialization activity changes.
+        /// Occours on current initialization activity change.
         /// </summary>
         event CurrentActivityDelegate ActivityChange;
 
@@ -84,6 +84,31 @@ namespace Client
         /// Occours when out of order state changes.
         /// </summary>
         event OutOfOrderStateChangeDelegate OutOfOrderStateChange;
+
+        /// <summary>
+        /// Occours once application was rated.
+        /// </summary>
+        event EventHandler<ApplicationRateEventArgs> ApplicationRated;
+
+        /// <summary>
+        /// Occours when App profile configuration changes.
+        /// </summary>
+        event EventHandler<ProfilesChangeEventArgs> AppProfilesChanged;
+
+        /// <summary>
+        /// Occurs when security profiles configuration changes.
+        /// </summary>
+        event EventHandler<ProfilesChangeEventArgs> SecurityProfilesChanged;
+
+        /// <summary>
+        /// Occours when group configuration changes.
+        /// </summary>
+        event EventHandler<EventArgs> GroupConfigurationChanged;
+
+        /// <summary>
+        /// Occurs when maintenace mode changes.
+        /// </summary>
+        event EventHandler<MaintenanceEventArgs> MaintenanceModeChanged;
 
         #endregion
 

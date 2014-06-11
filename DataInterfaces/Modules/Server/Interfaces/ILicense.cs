@@ -20,7 +20,6 @@ namespace ServerService
         bool Local { get; }
         int TotalCount { get; }
         int TrialCount { get; }
-        DateTime TrialExpires { get; }
-        void Validate(bool localy);
+        DateTime TrialExpires { get; }  
     }
 }
