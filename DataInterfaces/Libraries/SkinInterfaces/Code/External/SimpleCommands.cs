@@ -92,12 +92,6 @@ namespace SkinInterfaces.Code
     #region SimpleCommand
     public class SimpleCommand<T1, T2> : IExecutionChangedAwareCommand, ICompletionAwareCommand
     {
-        #region FIELDS
-        protected Func<T1, bool> canExecuteMethod;
-        protected Action<T2> executeMethod;
-        public event EventHandler CanExecuteChanged;
-        #endregion
-
         #region CONSTRUCTOR
 
         public SimpleCommand(Func<T1, bool> canExecuteMethod, Action<T2> executeMethod)
@@ -115,6 +109,12 @@ namespace SkinInterfaces.Code
         }
 
         #endregion
+
+        #region FIELDS
+        protected Func<T1, bool> canExecuteMethod;
+        protected Action<T2> executeMethod;
+        public event EventHandler CanExecuteChanged;
+        #endregion        
 
         #region PROPERTIES
         public WeakActionEvent<object> CommandCompleted { get; set; }

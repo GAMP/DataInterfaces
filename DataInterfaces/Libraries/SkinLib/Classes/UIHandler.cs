@@ -2016,6 +2016,7 @@ namespace SkinLib
                 foreach (UIElement Child in visualParent.Children)
                     Child.SetValue(Canvas.ZIndexProperty, (int)Child.GetValue(Canvas.ZIndexProperty) - 1);
             }
+
             Canvas.SetZIndex(sender as UIElement, currentTopIndex);
             e.Handled = false;
         }
@@ -2057,9 +2058,8 @@ namespace SkinLib
                 storyBoard.Begin();
 
                 //If element not maximized then set the restore visuals
-                if ((sender.IsMaximized() == false))
+                if (sender.IsMaximized() == false)
                     sender.SaveVisuals();
-
             }
             #endregion
 

@@ -130,8 +130,11 @@ namespace SkinInterfaces
         #endregion
 
         #region Abstract Members
+
         public abstract object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture);
+        
         public abstract object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture);
+        
         #endregion
     } 
     #endregion

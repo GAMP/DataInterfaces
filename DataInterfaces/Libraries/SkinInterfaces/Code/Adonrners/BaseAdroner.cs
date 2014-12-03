@@ -141,6 +141,7 @@ namespace SkinInterfaces.Code
         {
 
         } 
+
         #endregion
 
         #region Control Box Elements Events
@@ -157,6 +158,7 @@ namespace SkinInterfaces.Code
         {
             this.AnimateIn();
         }
+
         #endregion
 
         #region Animation

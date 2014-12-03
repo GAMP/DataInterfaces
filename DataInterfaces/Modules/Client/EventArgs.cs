@@ -9,6 +9,72 @@ using SharedLib;
 
 namespace Client
 {
+    #region UserPasswordChangeEventArgs
+    [Serializable()]
+    public class UserPasswordChangeEventArgs : EventArgs
+    {
+        #region CONSTRUCTOR
+        public UserPasswordChangeEventArgs(string newPassword)
+        {
+            this.NewPassword = newPassword;
+        }
+        #endregion
+
+        #region PROPERTIES
+        /// <summary>
+        /// Gets new password value.
+        /// </summary>
+        public string NewPassword
+        {
+            get;
+            protected set;
+        }
+        #endregion
+    } 
+    #endregion
+
+    #region UserProfileChangeArgs
+    [Serializable()]
+    public class UserProfileChangeArgs : EventArgs
+    {
+        #region CONSTRUCTOR
+        public UserProfileChangeArgs(IUserProfile newProfile, IUserProfile oldProfile)
+        {
+            if (newProfile == null)
+                throw new ArgumentNullException("newProfile");
+
+            if (oldProfile == null)
+                throw new ArgumentNullException("oldProfile");
+
+            this.NewProfile = newProfile;
+            this.OldProfile = oldProfile;
+        } 
+        #endregion
+
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets old profile value.
+        /// </summary>
+        public IUserProfile OldProfile
+        {
+            get;
+            protected set;
+        }
+
+        /// <summary>
+        /// Gets new profile value.
+        /// </summary>
+        public IUserProfile NewProfile
+        {
+            get;
+            protected set;
+        }
+
+        #endregion
+    } 
+    #endregion
+
     #region UserEventArgs
     /// <summary>
     ///User event arguments.
@@ -16,37 +82,30 @@ namespace Client
     [Serializable()]
     public class UserEventArgs : EventArgs
     {
-        #region Fileds
-        private IUserProfile profile;
-        private LoginState state, oldState;
-        private LoginResult failReason;
-        private UserInfoTypes requiredInfo = UserInfoTypes.None;
-        #endregion
-
-        #region Constructor
+        #region CONSTRUCTOR
         public UserEventArgs(IUserProfile profile,
             LoginState state,
             LoginState oldState = LoginState.LoggedOut,
             LoginResult failReason = LoginResult.Sucess,
             UserInfoTypes requiredInfo = UserInfoTypes.None)
-        {           
-                this.UserProfile = profile;
-                this.State = state;
-                this.OldState = oldState;
-                this.FailReason = failReason;
-                this.RequiredUserInformation = requiredInfo;          
+        {
+            this.UserProfile = profile;
+            this.State = state;
+            this.OldState = oldState;
+            this.FailReason = failReason;
+            this.RequiredUserInformation = requiredInfo;
         }
-        #endregion
+        #endregion    
 
-        #region Properties
+        #region PROPERTIES
 
         /// <summary>
         /// Gets the user profile that caused the event.
         /// </summary>
         public IUserProfile UserProfile
         {
-            get { return this.profile; }
-            protected set { this.profile = value; }
+            get;
+            protected set;
         }
 
         /// <summary>
@@ -54,11 +113,8 @@ namespace Client
         /// </summary>
         public LoginState State
         {
-            get { return this.state; }
-            protected set
-            {
-                this.state = value;
-            }
+            get;
+            protected set;
         }
 
         /// <summary>
@@ -66,34 +122,39 @@ namespace Client
         /// </summary>
         public LoginState OldState
         {
-            get { return this.oldState; }
-            protected set
-            {
-                this.oldState = value;
-            }
+            get;
+            protected set;
         }
 
         /// <summary>
         /// Gets the failure reason.
-        /// <remarks>This value is only set if error occurred otherwise equals to Sucess.</remarks>
+        /// <remarks>
+        /// This value is only set if error occurred otherwise equals to Sucess.
+        /// </remarks>
         /// </summary>
         public LoginResult FailReason
         {
-            get { return this.failReason; }
-            protected set { this.failReason = value; }
+            get;
+            protected set;
         }
 
         /// <summary>
-        /// Gets the information required for this profile.
+        /// Gets the information types required for this profile.
+        /// <remarks>
+        /// This property is only set when State property equals to LoggedIn.
+        /// </remarks>
         /// </summary>
         public UserInfoTypes RequiredUserInformation
         {
-            get { return this.requiredInfo; }
-            protected set { this.requiredInfo = value; }
+            get;
+            protected set;
         }
 
         /// <summary>
-        /// Indicates if user info rquired from user.
+        /// Gets if user info input rquired for user.
+        /// <remarks>
+        /// This property will return false if only password input required.
+        /// </remarks>
         /// </summary>
         public bool IsUserInfoRequired
         {
@@ -104,7 +165,7 @@ namespace Client
         }
 
         /// <summary>
-        /// Indicates if user password requried from user.
+        /// Gets if user password input requried for user.
         /// </summary>
         public bool IsUserPasswordRequired
         {
@@ -116,7 +177,7 @@ namespace Client
 
         #endregion
 
-        #region Ovverides
+        #region OVERRIDES
         public override string ToString()
         {
             StringBuilder builder = new StringBuilder();
@@ -137,35 +198,24 @@ namespace Client
     [Serializable()]
     public class LockStateEventArgs : EventArgs
     {
-        #region Constructor
-        public LockStateEventArgs(bool isLocked, bool oldState)
+        #region CONSTRUCTOR
+        public LockStateEventArgs(bool isLocked)
         {
             this.IsLocked = isLocked;
-            this.OldState = oldState;
         }
         #endregion
 
-        #region Fileds
-        private bool isLocked = false, oldState;
-        #endregion
+        #region PROPERTIES
 
-        #region Properties
         /// <summary>
         /// Gets if the lock is active.
         /// </summary>
         public bool IsLocked
         {
-            get { return this.isLocked; }
-            protected set { this.isLocked = value; }
+            get;
+            protected set;
         }
-        /// <summary>
-        /// Gets if lock was previously active.
-        /// </summary>
-        public bool OldState
-        {
-            get { return this.oldState; }
-            set { this.oldState = value; }
-        }
+        
         #endregion
     }
     #endregion
@@ -174,7 +224,7 @@ namespace Client
     [Serializable()]
     public class IdChangeEventArgs : EventArgs
     {
-        #region Constructor
+        #region CONSTRUCTOR
         public IdChangeEventArgs(int newId, int oldId)
         {
             this.NewId = newId;
@@ -182,17 +232,26 @@ namespace Client
         }
         #endregion
 
-        #region Properties
-        public int OldId
-        {
-            get;
-            protected set;
-        }
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets new id.
+        /// </summary>
         public int NewId
         {
             get;
             protected set;
         } 
+
+        /// <summary>
+        /// Gets old id.
+        /// </summary>
+        public int OldId
+        {
+            get;
+            protected set;
+        }
+        
         #endregion
     }
     #endregion
@@ -201,7 +260,7 @@ namespace Client
     [Serializable()]
     public class SecurityStateArgs : EventArgs
     {
-        #region Constructor
+        #region CONSTRUCTOR
 
         public SecurityStateArgs(bool isEnabled,bool wasEnabled)
         {
@@ -216,7 +275,7 @@ namespace Client
 
         #endregion
 
-        #region Properties
+        #region PROPERTIES
 
         /// <summary>
         /// Gets if security is currently enabled.
@@ -256,7 +315,7 @@ namespace Client
     [Serializable()]
     public class ExecutionContextStateArgs : EventArgs
     {
-        #region Constructor
+        #region CONSTRUCTOR
 
         public ExecutionContextStateArgs(ContextExecutionState newState,
             ContextExecutionState oldState,
@@ -275,36 +334,35 @@ namespace Client
 
         #endregion
 
-        #region Fileds
-        private ContextExecutionState oldState, newState;
-        private object stateObject;
-        #endregion
+        #region PROPERTIES
 
-        #region Properties
         /// <summary>
         /// Gets the instance of the state object.
         /// </summary>
         public object StateObject
         {
-            get { return this.stateObject; }
-            protected set { this.stateObject = value; }
+            get;
+            protected set;
         }
+        
         /// <summary>
-        /// Gets the new state of the executable.
+        /// Gets the new state.
         /// </summary>
         public ContextExecutionState NewState
         {
-            get { return this.newState; }
-            protected set { this.newState = value; }
+            get;
+            protected set;
         }
+        
         /// <summary>
-        /// Gets the old state of executable.
+        /// Gets the old state.
         /// </summary>
         public ContextExecutionState OldState
         {
-            get { return this.oldState; }
-            protected set { this.oldState = value; }
+            get;
+            protected set;
         }
+        
         #endregion
     }
     #endregion
@@ -313,75 +371,121 @@ namespace Client
     [Serializable()]
     public class OutOfOrderStateEventArgs : EventArgs
     {
-        #region Constructor
-        public OutOfOrderStateEventArgs(bool newState, bool oldState)
+        #region CONSTRUCTOR
+        public OutOfOrderStateEventArgs(bool newState)
         {
-            this.NewState = newState;
-            this.OldState = oldState;
+            this.IsOutOfOrder = newState;
         }
         #endregion
 
-        #region Properties
-        /// <summary>
-        /// Gets if out of order was prevously set.
-        /// </summary>
-        public bool OldState
-        {
-            get;
-            private set;
-        }
+        #region PROPERTIES
+        
         /// <summary>
         /// Gets if out of order is currently set.
         /// </summary>
-        public bool NewState
+        public bool IsOutOfOrder
         {
             get;
             private set;
         }
+
         #endregion
     }
     #endregion
 
     #region ApplicationRateEventArgs
+    [Serializable()]
     public class ApplicationRateEventArgs : EventArgs
     {
-        public ApplicationRateEventArgs(int appId,IRating rating)
+        #region CONSTRUCTOR
+        public ApplicationRateEventArgs(int appId, IRating overallRating,IRating userRating)
         {
+            if (overallRating == null)
+                throw new ArgumentNullException("overallRating");
+
+            if (userRating == null)
+                throw new ArgumentNullException("userRating");
+
             this.ApplicationId = appId;
-            this.NewRating = rating;
-        }
+            this.OverallRating = overallRating;
+            this.UserRating = userRating;
+        } 
+        #endregion
+
+        #region PROPERTIES
 
         /// <summary>
-        /// Gets the application id.
+        /// Gets rated application id.
         /// </summary>
         public int ApplicationId
         {
             get;
             protected set;
         }
-        public IRating NewRating
+
+        /// <summary>
+        /// Gets application overall rating.
+        /// </summary>
+        public IRating OverallRating
         {
             get;
             protected set;
         }
+
+        /// <summary>
+        /// Gets application user rating.
+        /// </summary>
+        public IRating UserRating
+        {
+            get;
+            protected set;
+        }
+
+        #endregion
     } 
     #endregion
 
     #region ProfilesChangeEventArgs
     public class ProfilesChangeEventArgs : EventArgs
     {
-        #region Constructor
+        #region CONSTRUCTOR
         public ProfilesChangeEventArgs(bool isInitial)
         {
             this.IsInitial = isInitial;
         } 
         #endregion
 
-        #region Properties
+        #region PROPERTIES
+        
         /// <summary>
         /// Gets if event was created by initial change of profiles.
         /// </summary>
         public bool IsInitial
+        {
+            get;
+            protected set;
+        } 
+
+        #endregion
+    } 
+    #endregion
+
+    #region ClientActivityEventArgs
+    [Serializable()]
+    public class ClientActivityEventArgs : EventArgs
+    {
+        #region CONSTRUCTOR
+        public ClientActivityEventArgs(StartupModuleActivity activity)
+        {
+            this.Activity = activity;
+        } 
+        #endregion
+
+        #region PROPERTIES
+        /// <summary>
+        /// Gets current client activity.
+        /// </summary>
+        public StartupModuleActivity Activity
         {
             get;
             protected set;

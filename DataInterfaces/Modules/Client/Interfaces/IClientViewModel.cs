@@ -18,7 +18,7 @@ namespace Client
     /// This interface exposes the class with the required functionality and data to the skin and plugins/component.
     /// </remarks>
     /// </summary>
-    public interface IClientViewModel : IClientViewModelBase
+    public interface IClientViewModel
     {
         /// <summary>
         /// Gets the Clients current category representation model.
@@ -61,16 +61,6 @@ namespace Client
         /// </summary>
         /// <param name="profile">Application Profile.</param>
         void NavigateToApplication(IApplicationProfile profile);
-
-    } 
-    #endregion
-
-    #region IClientViewModelBase
-    public interface IClientViewModelBase
-    {
-        void Initialize();
-        void Deinitialize();
-        void Refresh();
     } 
     #endregion
 }

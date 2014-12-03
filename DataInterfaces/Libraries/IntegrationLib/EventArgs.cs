@@ -25,21 +25,4 @@ namespace IntegrationLib
         #endregion
     } 
     #endregion
-
-    [Serializable()]
-    public class AuthenticationArgs : EventArgs
-    {
-        #region Properties
-
-        /// <summary>
-        /// Gets or sets credentials instance.
-        /// </summary>
-        public HttpCredentials Credentials
-        {
-            get;
-            protected set;
-        }
-
-        #endregion
-    }
 }

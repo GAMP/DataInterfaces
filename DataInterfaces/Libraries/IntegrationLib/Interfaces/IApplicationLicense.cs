@@ -13,7 +13,8 @@ namespace IntegrationLib
     /// </summary>
     public interface IApplicationLicense
     {
-        #region Properties
+        #region PROPERTIES
+
         /// <summary>
         /// Gets or sets licenses id.
         /// </summary>
@@ -73,7 +74,8 @@ namespace IntegrationLib
         /// </summary>
         /// <typeparam name="T">Class type.</typeparam>
         /// <returns>T Class cast.</returns>
-        T KeyAs<T>(); 
+        T KeyAs<T>();
+
         #endregion
     }
     #endregion

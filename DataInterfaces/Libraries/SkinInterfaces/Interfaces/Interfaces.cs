@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Media.Animation;
 using System;
 using System.Collections.ObjectModel;
+using SharedLib;
 
 namespace SkinInterfaces
 {
@@ -84,6 +85,7 @@ namespace SkinInterfaces
     #endregion    
 
     #region IControlBox
+
     /// <summary>
     /// Control box interface.
     /// </summary>
@@ -114,9 +116,11 @@ namespace SkinInterfaces
             get;
         }
     }
+
     #endregion
 
     #region ITaskBar
+
     /// <summary>
     /// System taskbar control interface.
     /// </summary>
@@ -149,6 +153,7 @@ namespace SkinInterfaces
             get;
         }
     }
+
     #endregion
 
     #region IDesktopItemView
@@ -160,7 +165,7 @@ namespace SkinInterfaces
         string FullPath { get; }
         bool IsHidden { get; }
         bool IsVirtual { get; }
-        global::SkinInterfaces.DesktopItemViewType ItemType { get; }
+        DesktopItemType ItemType { get; }
         global::System.Windows.Media.ImageSource JumboIcon { get; }
         global::System.Windows.Media.ImageSource LargeIcon { get; }
         global::System.Windows.Media.ImageSource SmallIcon { get; }

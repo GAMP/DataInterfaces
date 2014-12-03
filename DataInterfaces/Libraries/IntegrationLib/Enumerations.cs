@@ -113,9 +113,21 @@ namespace IntegrationLib
         /// </summary>
         AlreadyLoggedIn = 256,
         /// <summary>
-        /// Login is already in progress.
+        /// Login in progress.
         /// </summary>
         LoginInProgress = 512,
+        /// <summary>
+        /// Logout in progress.
+        /// </summary>
+        LogoutInProgress =1024,
+        /// <summary>
+        /// Invalid user id.
+        /// </summary>
+        InvalidUserId=2048,
+        /// <summary>
+        /// Invalid host id.
+        /// </summary>
+        InvalidHostId=4096,
         /// <summary>
         /// Credentials pair is invalid.
         /// </summary>

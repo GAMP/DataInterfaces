@@ -104,47 +104,47 @@ namespace SharedLib
         /// <summary>
         /// Desktop flag.
         /// </summary>
-        [GUIDAttribue("B4BFCC3A-DB2C-424C-B029-7FE99A87C641")]
+        [GUIDAttribute("B4BFCC3A-DB2C-424C-B029-7FE99A87C641")]
         [SpecialFolderAttribute(Environment.SpecialFolder.DesktopDirectory)]
         Desktop = 1,
         /// <summary>
         /// Downloads flag.
         /// </summary>
-        [GUIDAttribue("374DE290-123F-4565-9164-39C4925E467B")]
+        [GUIDAttribute("374DE290-123F-4565-9164-39C4925E467B")]
         Downloads = 2,
         /// <summary>
         /// Favorites flag.
         /// </summary>
-        [GUIDAttribue("1777F761-68AD-4D8A-87BD-30B759FA33DD")]
+        [GUIDAttribute("1777F761-68AD-4D8A-87BD-30B759FA33DD")]
         [SpecialFolderAttribute(Environment.SpecialFolder.Favorites)]
         Favorites = 4,
         /// <summary>
         /// My Music flag.
         /// </summary>
-        [GUIDAttribue("4BD8D571-6D19-48D3-BE97-422220080E43")]
+        [GUIDAttribute("4BD8D571-6D19-48D3-BE97-422220080E43")]
         [SpecialFolderAttribute(Environment.SpecialFolder.MyMusic)]
         Music = 8,
         /// <summary>
         /// My pictures flag.
         /// </summary>
-        [GUIDAttribue("33E28130-4E1E-4676-835A-98395C3BC3BB")]
+        [GUIDAttribute("33E28130-4E1E-4676-835A-98395C3BC3BB")]
         [SpecialFolderAttribute(Environment.SpecialFolder.MyPictures)]
         Pictures = 16,
         /// <summary>
         /// My videos flag.
         /// </summary>
-        [GUIDAttribue("18989B1D-99B5-455B-841C-AB7C74E4DDFC")]
+        [GUIDAttribute("18989B1D-99B5-455B-841C-AB7C74E4DDFC")]
         [SpecialFolderAttribute(Environment.SpecialFolder.MyVideos)]
         Videos = 32,
         /// <summary>
         /// Saved games flag.
         /// </summary>
-        [GUIDAttribue("4C5C32FF-BB9D-43b0-B5B4-2D72E54EAAA4")]
+        [GUIDAttribute("4C5C32FF-BB9D-43b0-B5B4-2D72E54EAAA4")]
         SavedGames = 64,
         /// <summary>
         /// Personal flag (Equals MyDocuments).
         /// </summary>
-        [GUIDAttribue("FDD39AD0-238F-46AF-ADB4-6C85480369C7")]
+        [GUIDAttribute("FDD39AD0-238F-46AF-ADB4-6C85480369C7")]
         [SpecialFolderAttribute(Environment.SpecialFolder.MyDocuments)]
         Personal = 128,
         /// <summary>
@@ -161,6 +161,23 @@ namespace SharedLib
     }
     #endregion
 
+    #region DesktopItemType
+    /// <summary>
+    /// Desktop item type enumeration.
+    /// </summary>
+    public enum DesktopItemType
+    {
+        /// <summary>
+        /// View is virtual.
+        /// </summary>
+        Virtual,
+        /// <summary>
+        /// View is file or virtual file.
+        /// </summary>
+        File,
+    }
+    #endregion
+
     #region Application Modes
     /// <summary>
     /// Game application modes.
@@ -171,8 +188,17 @@ namespace SharedLib
     {
         DefaultMode = 0,
         SinglePlayer = 1,
+
+        /// <summary>
+        /// Online multiplayer.
+        /// </summary>
         Online = 2,
+
+        /// <summary>
+        /// Lan Multiplayer.
+        /// </summary>
         Multiplayer = 4,
+        
         Settings = 8,
         Utility = 16,
         Game = 32,
@@ -180,6 +206,11 @@ namespace SharedLib
         FreeToPlay = 128,
         RequiresSubscription = 256,
         FreeTrial = 512,
+
+        SplitScreenMultiPlayer = 1024,
+
+        CoOpLan = 2048,
+        CoOpOnline = 4096,
     }
     #endregion
 
@@ -194,6 +225,18 @@ namespace SharedLib
         Maximized = 2,
         Hidden = 3,
         Normal = 4
+    }
+    #endregion
+
+    #region ModuleEnum
+    [Flags()]
+    public enum ModuleEnum
+    {
+        Unknown = 0,
+        Manager = 1,
+        Client = 2,
+        Service = 4,
+        Any = Manager | Client | Service,
     }
     #endregion
 
@@ -229,6 +272,7 @@ namespace SharedLib
         Login = 4,
         [Description("Logout")]
         Logout = 8,
+
         [Description("Pre Launch")]
         PreLaunch = 16,
         [Description("Pre Deploy")]
@@ -255,12 +299,16 @@ namespace SharedLib
     /// </summary>
     public enum ScriptTypes
     {
+        [CanUserAssignAttribute(true)]
         [Description("Batch")]
         Batch,
+        [CanUserAssignAttribute(true)]
         [Description("Visual Basic Script")]
         VbScript,
+        [CanUserAssignAttribute(true)]
         [Description("Autoit Script")]
         AutoItScript,
+        [CanUserAssignAttribute(true)]
         [Description("Registry Script")]
         RegistryScript,
     }
@@ -268,7 +316,7 @@ namespace SharedLib
 
     #region Login States
     /// <summary>
-    ///Login state enumeration.
+    /// Login state enumeration.
     /// </summary>
     [Flags()]
     public enum LoginState
@@ -277,42 +325,32 @@ namespace SharedLib
         /// Logged out.
         /// </summary>
         LoggedOut = 0,
+
         /// <summary>
         /// Logged in.
         /// </summary>
         LoggedIn = 1,
+
         /// <summary>
         /// Logging in.
         /// </summary>
         LoggingIn = 2,
+
         /// <summary>
         /// Logging out.
         /// </summary>
         LoggingOut = 4,
+
         /// <summary>
         /// Login failed.
         /// </summary>
         LoginFailed = 8,
         /// <summary>
+
+        ///<summary>
         /// Login completed.
-        /// <remarks>
-        /// This state is set when all login completed and all on login actions has been processed.
-        /// </remarks>
         /// </summary>
         LoginCompleted = 16 | LoggedIn,
-    }
-    #endregion
-
-    #region Sex
-    /// <summary>
-    /// Sex enumeration.
-    /// </summary>
-    [Flags()]
-    public enum Sex : int
-    {
-        Unspecified = 0,
-        Male = 1,
-        Female = 2,
     }
     #endregion
 
@@ -322,11 +360,7 @@ namespace SharedLib
     /// </summary>
     public enum ClientEventTypes : int
     {
-        Login,
-        Integration,
         LockState,
-        Startup,
-        Shutdown,
         IdChange,
         SecurityState,
         OutOfOrderState,
@@ -343,7 +377,7 @@ namespace SharedLib
         /// <summary>
         /// Context is in initial state.
         /// </summary>
-        Initial = 0,
+        Initial,
         /// <summary>
         /// User profile is being acquired from server.
         /// </summary>
@@ -585,6 +619,10 @@ namespace SharedLib
         /// </summary>
         UserName = 8192,
         /// <summary>
+        /// User group.
+        /// </summary>
+        UserGroup = 16384,
+        /// <summary>
         /// All user information.
         /// </summary>
         UserInformation = UserInfoTypes.Address |
@@ -598,7 +636,7 @@ namespace SharedLib
             UserInfoTypes.PostCode |
             UserInfoTypes.Sex,
     }
-    #endregion    
+    #endregion
 
     #region LoginUserActivity
     /// <summary>
@@ -693,7 +731,7 @@ namespace SharedLib
         [AgeRating(6)]
         KidsToAdaults = -28,
     }
-    #endregion    
+    #endregion
 
     #region DurationRange
     public enum DurationRange
@@ -713,28 +751,7 @@ namespace SharedLib
         Top,
         Bottom,
     }
-    #endregion
-
-    #region HostState
-    public enum HostState : sbyte
-    {
-        InOrder = 0,
-        OutOfOrder = 1,
-    }
-    #endregion
-
-    #region GroupOvverides
-    /// <summary>
-    /// Computer group configuration overrides.
-    /// </summary>
-    [Flags()]
-    public enum GroupOverrides : int
-    {
-        None = 0,
-        Applications = 1,
-        Security = 2,
-    }
-    #endregion
+    #endregion    
 
     #region StartupModuleActivity
     /// <summary>
@@ -819,7 +836,7 @@ namespace SharedLib
     [Serializable()]
     public enum EventTypes : int
     {
-        None=0,
+        None = 0,
         Information = 1,
         Warning = 2,
         Error = 4,
@@ -833,7 +850,7 @@ namespace SharedLib
     [Serializable()]
     public enum LogCategories : int
     {
-        None=0,
+        None = 0,
         Generic = 1,
         Network = 2,
         Database = 4,
@@ -851,39 +868,33 @@ namespace SharedLib
     }
     #endregion
 
-    #region ModuleEnum
-    [Flags()]
-    [Serializable()]
-    public enum ModuleEnum
-    {
-        Unknown = 0,
-        Manager = 1,
-        Client = 2,
-        Service = 4,
-        Any = Manager | Client | Service,
-    }
-    #endregion
-
     #region TaskType
     [Serializable()]
     public enum TaskType
     {
+        [CanUserAssign(true)]
         [Description("Process")]
         Process,
+        [CanUserAssign(true)]
         [Description("Script")]
         Script,
+        [CanUserAssign(false)]
         [Description("File System")]
         FileSystem,
+        [CanUserAssign(false)]
         [Description("Task Chain")]
         Chain,
+        [CanUserAssign(true)]
         [Description("Notification")]
         Notification,
+        [CanUserAssign(true)]
         [Description("Junction")]
         Junction,
+        [CanUserAssign(false)]
         [Description("All Types")]
         AllTypes = 65535,
     }
-    #endregion    
+    #endregion
 
     #region IPVersion
     public enum IPVersion : short
@@ -895,35 +906,39 @@ namespace SharedLib
 
     #region DriverType
     /// <summary>
-    /// System Driver type enumeration.
+    /// System driver type enumeration.
     /// </summary>
     [Flags()]
-    public enum DriverType : sbyte
+    public enum DriverType
     {
         /// <summary>
         /// Default value.
         /// </summary>
-        None = 0,
+        None = 0,        
         /// <summary>
-        /// CallBack Filter.
+        /// CallBack filter.
         /// </summary>
-        CallBackFilter = 1,
+        CallBackFilter = 1,        
         /// <summary>
         /// CallBack File System.
         /// </summary>
-        CallBackFileSystem = 2,
+        CallBackFileSystem = 2,        
         /// <summary>
         /// Raw Disk.
         /// </summary>
-        RawDisk = 3,
+        RawDisk = 4,
         /// <summary>
         /// Keyboard Driver.
         /// </summary>
-        Keyboard = 4,
+        KeyboardFilter = 8,
+        /// <summary>
+        /// Process filter driver.
+        /// </summary>
+        ProcessFilter = 16,        
         /// <summary>
         /// All driver type value.
         /// </summary>
-        All = DriverType.CallBackFileSystem | DriverType.CallBackFilter | DriverType.Keyboard | DriverType.RawDisk,
+        All = DriverType.CallBackFileSystem | DriverType.CallBackFilter | DriverType.KeyboardFilter | DriverType.ProcessFilter | DriverType.RawDisk,
     }
     #endregion
 
@@ -933,27 +948,27 @@ namespace SharedLib
         /// <summary>
         /// Host was connected.
         /// </summary>
-        Connected=0,
+        Connected = 0,
         /// <summary>
         /// Host was initialized.
         /// </summary>
-        Initialized=1,
+        Initialized = 1,
         /// <summary>
         /// Host was disconnected.
         /// </summary>
-        Disconnected=2,
+        Disconnected = 2,
         /// <summary>
         /// Host was added.
         /// </summary>
-        Added=3,
+        Added = 3,
         /// <summary>
         /// Host was removed.
         /// </summary>
-        Removed=4,
+        Removed = 4,
         /// <summary>
         /// Host was updated.
         /// </summary>
-        Updated=5,
+        Updated = 5,
     }
     #endregion
 
@@ -970,7 +985,7 @@ namespace SharedLib
     }
     #endregion
 
-    #region UserRoles
+    #region USERROLES
     [Flags()]
     public enum UserRoles
     {
@@ -997,12 +1012,25 @@ namespace SharedLib
     }
     #endregion
 
-    #region IMAGETYPE
-    public enum ImageType
+    #region SEX
+    /// <summary>
+    /// Sex enumeration.
+    /// </summary>
+    [Flags()]
+    public enum Sex : int
     {
-        Application=0,
-        Executable=1,
-        VisualOptions=2,
+        Unspecified = 0,
+        Male = 1,
+        Female = 2,
+    }
+    #endregion
+
+    #region IMAGETYPE
+    public enum ImageType : int
+    {
+        Application = 0,
+        Executable = 1,
+        VisualOptions = 2,
     }
     #endregion
 
@@ -1017,6 +1045,10 @@ namespace SharedLib
         /// Existing user removed.
         /// </summary>
         Removed,
+        /// <summary>
+        /// Existing user deleted.
+        /// </summary>
+        Deleted,
         /// <summary>
         /// Existing user updated.
         /// </summary>
@@ -1053,7 +1085,7 @@ namespace SharedLib
     #endregion
 
     #region USERSESSIONSTATE
-    [Flags(),Serializable()]
+    [Flags(), Serializable()]
     public enum SessionState : int
     {
         /// <summary>
@@ -1076,7 +1108,7 @@ namespace SharedLib
         /// Sesstion paused and pending activation.
         /// </summary>
         Paused = 8 | Active,
-    } 
+    }
     #endregion
 
     #region ACTIONSOURCE
@@ -1113,34 +1145,35 @@ namespace SharedLib
         DispatcherId = 3,
         IsConnected = 4,
         Module = 5,
-        IsSecurityEnabled = 6,
-        Port=7,
-        OperatingSystem=8,
-        DataSent=9,
-        DataReceived=10,
-        IsLocked=11,
-        Id=12,
-        IsOutOfOrder=13,
+        IsSecured = 6,
+        Port = 7,
+        OperatingSystem = 8,
+        DataSent = 9,
+        DataReceived = 10,
+        IsLocked = 11,
+        Id = 12,
+        IsOutOfOrder = 13,
         IsMaintenanceMode = 14,
-        LoginState=15,
-        CurrentUserId=16,
-        CurrentUserName=17,
-        HostGroupId=18,
-        Number=19,
-        MacAddress=20,
-    } 
-    #endregion    
+        LoginState = 15,
+        CurrentUserId = 16,
+        CurrentUserName = 17,
+        HostGroupId = 18,
+        Number = 19,
+        MacAddress = 20,
+        MaximumUsers =21,
+    }
+    #endregion
 
     #region CONFIGURATIONSECTION
     public enum ConfigurationSection
     {
-        Unspecified=0,
+        Unspecified = 0,
         General,
         Server,
         Client,
         Profiles,
         Operators,
-        Licensing,
+        Subscription,
         Variables,
         Plugins,
         Api,
@@ -1150,13 +1183,27 @@ namespace SharedLib
         FileSystem,
         Shell,
         Tasks,
-        Misc,
-        ComputerGroups,
+        ClientMisc,
+        ServerMisc,
+        HostGroups,
         UserGroups,
         ApplicationGroups,
         SecurityProfiles,
         ClientSettings,
-    } 
+    }
+    #endregion
+
+    #region GROUPOVERRIDES
+    /// <summary>
+    /// Computer group configuration overrides.
+    /// </summary>
+    [Flags()]
+    public enum GroupOverrides
+    {
+        None = 0,
+        Applications = 1,
+        Security = 2,
+    }
     #endregion
 
     #region WEEKDAYS
@@ -1171,14 +1218,13 @@ namespace SharedLib
         Thursday = 16,
         Friday = 32,
         Saturday = 64,
-    } 
+    }
     #endregion
 
-    #region RATEACTION
-    public enum RateAction
+    #region BILLPROFILERATEACTION
+    public enum BillProfileRateAction
     {
-        None = 0,
-        GoTo = 1,
+        GoTo = 0,
     }
     #endregion
 
@@ -1187,7 +1233,7 @@ namespace SharedLib
     public enum DeployOptionType : int
     {
         /// <summary>
-        /// Defailt option.
+        /// Default option.
         /// </summary>
         None = 0,
         /// <summary>
@@ -1255,6 +1301,25 @@ namespace SharedLib
     }
     #endregion
 
+    #region HOSTSTATE
+    [Flags()]
+    public enum HostState
+    {
+        /// <summary>
+        /// Default state.
+        /// </summary>
+        InOrder = 0,
+        /// <summary>
+        /// Host is out of order.
+        /// </summary>
+        OutOfOrder = 1,
+        /// <summary>
+        /// Host is locked.
+        /// </summary>
+        IsLocked = 2,
+    }
+    #endregion
+
     #region HOSTGROUPOPTIONTYPE
     [Flags()]
     public enum HostGroupOptionType
@@ -1269,24 +1334,39 @@ namespace SharedLib
     public enum PeriodOptionType
     {
         None = 0,
+        HasDayTimeRange = 1,
+        HasDateRange = 2,
     }
     #endregion
 
-    #region PRODUCTOPTIONTYPE
-    public enum ProductOptionType
+    #region STOCKOPTIONTYPE
+    public enum StockOptionType
     {
         None = 0,
-        StockControl = 1,
-        AllowClientOrder = 2
+        EnableStock = 1,
+        DisallowSaleIfOutOfStock = 2 | EnableStock,
+        DisallowSaleIfBundledOutOfStock = 4 | EnableStock,
+        Alert = 8 | EnableStock,
     }
     #endregion
 
-    #region PRODUCTSTOCKOPTIONTYPE
+    #region ORDEROPTIONTYPE
     [Flags()]
-    public enum ProductStockOptionType
+    public enum OrderOptionType
     {
+        /// <summary>
+        /// None.
+        /// </summary>
         None = 0,
-    } 
+        /// <summary>
+        /// Client order allowed.
+        /// </summary>
+        AllowOrder = 1,
+        /// <summary>
+        /// Disallow ability of order for non users.
+        /// </summary>
+        RestrictNonUsers = 2,
+    }
     #endregion
 
     #region BILLINGRATEOPTIONTYPE
@@ -1294,6 +1374,168 @@ namespace SharedLib
     public enum BillingRateOptionType
     {
         None = 0,
-    } 
+        IsStepBased = 1,
+    }
+    #endregion
+
+    #region TIMEOFFEREXPIRATIONOPTIONTYPE
+    [Flags()]
+    public enum TimeOfferExpirationOptionType
+    {
+        None = 0,
+        HasExpiration = 1,
+        ExpiresAtLogout = 2 | HasExpiration,
+        ExpiresAtDate = 4 | HasExpiration,
+    }
+    #endregion
+
+    #region TIMEOFFERUSAGEOPTIONTYPE
+    [Flags()]
+    public enum TimeOfferUsageOptionType
+    {
+        None = 0,
+        HasMaximumUsage = 1,
+        HasMaximumDailyUsage = 2 | HasMaximumUsage,
+        HasScheduledUsage = 4 | HasMaximumUsage,
+    }
+    #endregion
+
+    #region UNITOFMEASUREOPTIONTYPE
+    [Flags()]
+    public enum UnitOfMeasureOptionType
+    {
+        None = 0,
+    }
+    #endregion
+
+    #region DISCOUNTTYPEOPTIONTYPE
+    public enum DiscountTypeOptionType
+    {
+        Fixed = 0,
+        Percentage = 1,
+    }
+    #endregion
+
+    #region PAYMENTMETHODOPTIONTYPE
+    [Flags()]
+    public enum PaymentMethodOptionType
+    {
+        None = 0
+    }
+    #endregion
+
+    #region ROUNDOPTIONTYPE
+    public enum RoundOptionType
+    {
+        None = 0,
+    }
+    #endregion
+
+    #region BALANCETRANSACTIONTYPE
+    public enum BalanceTransactionType
+    {
+        /// <summary>
+        /// Deposit to an account.
+        /// </summary>
+        Deposit = 0,
+        /// <summary>
+        /// Withdraw from account.
+        /// </summary>
+        Withdraw = 1,
+        /// <summary>
+        /// Account charge.
+        /// </summary>
+        Charge = 2
+    }
+    #endregion
+
+    #region LOYALITYPOINTSTRANSACTIONTYPE
+    public enum LoyalityPointsTransactionType
+    {
+        /// <summary>
+        /// Points award.
+        /// </summary>
+        Award = 0,
+        /// <summary>
+        /// Points redeem.
+        /// </summary>
+        Redeem = 1,
+    }
+    #endregion
+
+    #region STOCKTRANSACTIONTYPE
+    public enum StockTransactionType
+    {
+        Add = 0,
+        Remove = 1
+    }
+    #endregion
+
+    #region ORDERSTATUS
+    public enum OrderStatus
+    {
+        Open = 0,
+        Canceled = 1,
+        Invoiced = 2,
+    }
+    #endregion
+
+    #region INVOICESTATUS
+    public enum InvoiceStatus
+    {
+        Outstanding = 0,
+        Paid = 1,
+    }
+    #endregion
+
+    #region TASKPROCESSOPTIONTYPE
+    [Flags()]
+    public enum TaskProcessOptionType
+    {
+        None = 0,
+        Wait = 1,
+        NoWindow = 2,
+    }
+    #endregion
+
+    #region TASKJUNCTIONOPTIONTYPE
+    [Flags()]
+    public enum TaskJunctionOptionType
+    {
+        None = 0,
+        DeleteDestination = 1,
+    }
+    #endregion
+
+    #region CLIENTTASKACTIVATIONTYPE
+    [Flags()]
+    public enum ClientTaskActivationType
+    {
+        [Description("Disabled")]
+        Disabled = 0,
+        [Description("Startup")]
+        Startup = 1,
+        [Description("Shutdown")]
+        Shutdown = 2,
+        [Description("Login")]
+        Login = 4,
+        [Description("Logout")]
+        Logout = 8,
+    }
+    #endregion
+
+    #region EXECUTABLETASKACTIVATIONTYPE
+    [Flags()]
+    public enum ExecutableTaskActivationType
+    {
+        [Description("Pre Launch")]
+        PreLaunch = 16,
+        [Description("Pre Deploy")]
+        PreDeploy = 32,
+        [Description("Post Termination")]
+        PostTermination = 64,
+        [Description("Pre License Management")]
+        PreLicenseManagement = 128,
+    }
     #endregion
 }

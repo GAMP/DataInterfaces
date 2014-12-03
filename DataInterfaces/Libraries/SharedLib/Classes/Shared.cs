@@ -28,10 +28,8 @@ namespace SharedLib
 
         protected void RaisePropertyChanged(string propertyName)
         {
-            //validate property name
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentNullException("propertyName");
-
+            //Null or empty  string propertyName should be allowed http://msdn.microsoft.com/en-us/library/system.componentmodel.inotifypropertychanged.propertychanged.aspx
+           
             //get handler instance
             var handler = this.PropertyChanged;
 
@@ -44,18 +42,40 @@ namespace SharedLib
                 //create arguments
                 var args = new PropertyChange(propertyName, propInfo != null ? propInfo.GetValue(this, null) : null);
 
-                //check if already on UI thread
-                if (Application.Current != null && !Application.Current.Dispatcher.CheckAccess())
-                {
-                    //invoke on UI thread
-                    Application.Current.Dispatcher.BeginInvoke(handler, this, args);
-                }
-                else
-                {
-                    //invoke on current thread
-                    handler(this, args);
-                }
+                handler(this,args);
+
+                ////check if already on UI thread
+                //if (Application.Current != null && !Application.Current.Dispatcher.CheckAccess())
+                //{
+                //    //invoke on UI thread
+                //    Application.Current.Dispatcher.BeginInvoke(handler, this, args);
+                //}
+                //else
+                //{
+                //    //invoke on current thread
+                //    handler(this, args);
+                //}
             }
+
+            this.OnPropertyChanged(propertyName);
+        }
+
+        protected void RaisePropertyChanged(PropertyChange args)
+        {
+            if (args == null)
+                throw new ArgumentNullException("args");
+
+            var handler = this.PropertyChanged;
+
+            if(handler !=null)  
+                handler(this, args);
+
+            this.OnPropertyChanged(args.PropertyName);
+        }
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+
         }
 
         #endregion
@@ -145,7 +165,7 @@ namespace SharedLib
 
         #region ViewModel Code
 
-        #region Fileds
+        #region Fields
         [NonSerialized()]
         protected bool isSelected = false;
         [NonSerialized()]
@@ -164,8 +184,6 @@ namespace SharedLib
         private bool isFocused = false;
         [NonSerialized()]
         private bool isVirtual;
-        [NonSerialized()]
-        protected System.Windows.Threading.Dispatcher uiDispatcher;
         #endregion
 
         #region Properties
@@ -298,19 +316,7 @@ namespace SharedLib
         {
             get
             {
-                if (this.uiDispatcher == null)
-                {
-                    if (Application.Current != null)
-                    {
-                        this.uiDispatcher = Application.Current.Dispatcher;
-                    }
-                }
-                return this.uiDispatcher;
-            }
-            set
-            {
-                this.uiDispatcher = value;
-                this.RaisePropertyChanged("UIDispatcher");
+                return Application.Current != null ? Application.Current.Dispatcher : null;
             }
         }
 

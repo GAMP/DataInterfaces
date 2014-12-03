@@ -6,8 +6,9 @@ using System.Text;
 namespace Client
 {
     /// <summary>
-    /// This class gives the developer access to the current Gizmo Client API instance.
+    /// Provides access to the current Gizmo Client instance.
     /// </summary>
+    [Obsolete("Client access will be handled by MEF in future releases.")]
     public static class ClientInstance
     {
         /// <summary>
@@ -18,6 +19,7 @@ namespace Client
             get;
             set;
         }
+        
         /// <summary>
         /// Gets or sets current client instance.
         /// </summary>
@@ -26,13 +28,5 @@ namespace Client
             get;
             set;
         }
-        /// <summary>
-        /// Gets if the Client insatance is loaded.
-        /// </summary>
-        public static bool IsLoaded
-        {
-            get { return ClientInstance.ViewModel != null & ClientInstance.Instance != null; }
-        }
-    
     }
 }

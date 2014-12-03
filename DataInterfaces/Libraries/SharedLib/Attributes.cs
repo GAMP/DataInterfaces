@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SharedLib
 {
-    #region RoleAttribute
+    #region RoleAssignableAttribute
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
     public class RoleAssignableAttribute : Attribute
     {
@@ -26,6 +26,36 @@ namespace SharedLib
             protected set;
         }
         #endregion
+    }
+    #endregion
+
+    #region CanUserAssignAttribute
+    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
+    public class CanUserAssignAttribute : Attribute
+    {
+        public CanUserAssignAttribute(bool assignable)
+        {
+            this.Assignable = assignable;
+        }
+
+        /// <summary>
+        /// Gets if item can be assigned by the user.
+        /// </summary>
+        public bool Assignable
+        {
+            get;
+            protected set;
+        }
+    } 
+    #endregion
+
+    #region IgnorePropertyModificationAttribute
+    /// <summary>
+    /// This attribute should be used on properties that not to be considered as modified during property change.
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
+    public class IgnorePropertyModificationAttribute : Attribute
+    {
     } 
     #endregion
 
@@ -33,16 +63,16 @@ namespace SharedLib
     /// <summary>
     /// GUID Attribute.
     /// </summary>
-    public class GUIDAttribue : Attribute
+    public class GUIDAttribute : Attribute
     {
         #region Constructor
-        public GUIDAttribue(string guid)
+        public GUIDAttribute(string guid)
         {
             this.Guid = new Guid(guid);
         }
         #endregion
 
-        #region Fileds
+        #region Fields
         private Guid guid;
         #endregion
 
@@ -70,16 +100,20 @@ namespace SharedLib
         #endregion
 
         #region Constructor
+
         public SpecialFolderAttribute()
         {
         }
+
         public SpecialFolderAttribute(System.Environment.SpecialFolder knownFolderType)
         {
             this.SpecialFolder = knownFolderType;
         }
+
         #endregion
 
         #region Properties
+
         /// <summary>
         /// Gets the folder type for this attribute.
         /// </summary>
@@ -88,6 +122,7 @@ namespace SharedLib
             get { return this.folderType; }
             protected set { this.folderType = value; }
         }
+
         #endregion
     }
     #endregion
@@ -111,6 +146,7 @@ namespace SharedLib
         #endregion
 
         #region Properties
+
         /// <summary>
         /// Gets attributes age value.
         /// </summary>
@@ -119,6 +155,7 @@ namespace SharedLib
             get;
             protected set;
         }
+
         #endregion
     }
     #endregion
@@ -148,7 +185,7 @@ namespace SharedLib
             this.RegistryPath = registryPath;
 
             //if value name is emty enum value should be used
-            this.ValuName = valueName;
+            this.ValueName = valueName;
 
             //set description
             this.Description = description;
@@ -173,7 +210,7 @@ namespace SharedLib
         /// <summary>
         /// Gets value name of security attribute.
         /// </summary>
-        public string ValuName
+        public string ValueName
         {
             get;
             protected set;
@@ -276,9 +313,9 @@ namespace SharedLib
         public override object GetValueForAttribute(bool enable)
         {
             var returnValue = base.GetValueForAttribute(enable);
-            if (!String.IsNullOrWhiteSpace(this.ValuName))
+            if (!String.IsNullOrWhiteSpace(this.ValueName))
             {
-                switch (this.ValuName)
+                switch (this.ValueName)
                 {
                     case "NoDriveAutoRun":
                         returnValue = (int)returnValue * (int)(Math.Pow(2, 26));
@@ -320,9 +357,9 @@ namespace SharedLib
         public override object GetValueForAttribute(bool enable)
         {
             var returnValue = base.GetValueForAttribute(enable);
-            if (!String.IsNullOrWhiteSpace(this.ValuName))
+            if (!String.IsNullOrWhiteSpace(this.ValueName))
             {
-                switch (this.ValuName)
+                switch (this.ValueName)
                 {
                     case "DisableCMD":
                         returnValue = (int)returnValue * 2;
@@ -407,6 +444,6 @@ namespace SharedLib
             this.Category = "Uninstall";
         }
         #endregion
-    } 
+    }
     #endregion
 }

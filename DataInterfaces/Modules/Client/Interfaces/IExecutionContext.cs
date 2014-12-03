@@ -37,7 +37,7 @@ namespace Client
         /// <summary>
         /// Occours when execution state changes.
         /// </summary>
-        event ExecutionContextStateChangedDelegate ExecutionStateChaged;
+        event EventHandler<ExecutionContextStateArgs> ExecutionStateChaged;
 
         /// <summary>
         /// Gets if aborting is initiated.

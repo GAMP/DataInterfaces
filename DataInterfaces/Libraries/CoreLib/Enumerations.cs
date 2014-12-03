@@ -6,6 +6,24 @@ using SharedLib;
 
 namespace CoreLib
 {
+    #region KnownArgumentType
+    /// <summary>
+    /// Enumeration of shared command line agument types.
+    /// </summary>
+    [Obsolete()]
+    public enum KnownArgumentType : int
+    {
+        Load = 0,
+        Connect = 1,
+        Exit = 2,
+        Login = 3,
+        Logout = 4,
+        Install = 5,
+        Uninstall = 6,
+        FirstRun = 7,
+    }
+    #endregion
+
     #region OperatingSystems
     /// <summary>
     /// Operating system type enumeration.
@@ -127,24 +145,7 @@ namespace CoreLib
         /// </summary>
         Ctrl_Shift = 2,
     }
-    #endregion
-
-    #region KnownArgumentType
-    /// <summary>
-    /// Enumeration of shared command line agument types.
-    /// </summary>
-    public enum KnownArgumentType : int
-    {
-        Load = 0,
-        Connect = 1,
-        Exit = 2,
-        Login = 3,
-        Logout = 4,
-        Install = 5,
-        Uninstall = 6,
-        FirstRun = 7,
-    }
-    #endregion
+    #endregion    
 
     #region RestrictionType
     /// <summary>
@@ -152,10 +153,15 @@ namespace CoreLib
     /// </summary>
     public enum RestrictionType : int
     {
+        [CanUserAssign(false)]
         Unset = 0,
+        [CanUserAssign(true)]
         FileName = 1,
+        [CanUserAssign(true)]
         ClassName = 2,
+        [CanUserAssign(true)]
         WindowName = 3,
+        [CanUserAssign(true)]
         TrayIcon = 4
     }
     #endregion

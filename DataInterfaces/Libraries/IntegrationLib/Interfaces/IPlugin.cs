@@ -10,7 +10,7 @@ namespace IntegrationLib
 {
     #region IPlugin
     /// <summary>
-    /// Plugin interface.
+    /// Generic plugin interface.
     /// </summary>
     public interface IPlugin
     {

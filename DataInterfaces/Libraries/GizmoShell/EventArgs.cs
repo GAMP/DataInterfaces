@@ -5,17 +5,14 @@ using System.Text;
 
 namespace GizmoShell
 {
+    #region UserIdleEventArgs
     public class UserIdleEventArgs : EventArgs
     {
         #region Constructor
         public UserIdleEventArgs(bool isIdle)
         {
             this.IsIdle = isIdle;
-        } 
-        #endregion
-
-        #region Fields
-        private bool isIdle;
+        }
         #endregion
 
         #region Properties
@@ -24,9 +21,10 @@ namespace GizmoShell
         /// </summary>
         public bool IsIdle
         {
-            get { return this.isIdle; }
-            protected set { this.isIdle = value; }
-        } 
+            get;
+            protected set;
+        }
         #endregion
-    }
+    } 
+    #endregion
 }

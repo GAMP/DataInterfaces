@@ -10,41 +10,19 @@ namespace SkinInterfaces
     /// Custom Control type numeration.
     /// </summary>
     [Flags()]
-    public enum ComponentTypes : int
+    public enum ComponentTypes 
     {
         BaseControl = 0,
         Gadget = 1,
     } 
     #endregion
-
-    #region BindingSources
-    /// <summary>
-    /// Availiable data sources enumeration.
-    /// </summary>
-    [Flags()]
-    public enum BindingSources : int
-    {
-        None = 0,
-        Users = 1,
-        Applications = 2,
-        ApplicationStats = 4,
-        SQServers = 16,
-        Rss = 32,
-        Desktop = 64,
-        TaskBar = 128,
-        SystemTray = 256,
-        MediaLibrary = 512,
-        ViewModel = 1024,
-        UserProfile = 2048,
-    } 
-    #endregion
-    
+   
     #region ElementVisualState
     /// <summary>
     /// Represent visual state of our custom control or window.
     /// When changing this states the skin engine can react and perform the action needed to respond to the change.
     /// </summary>
-    public enum ElementVisualState : int
+    public enum ElementVisualState
     {
         /// <summary>
         /// This value is set when control is in normal state.
@@ -69,7 +47,7 @@ namespace SkinInterfaces
     /// <summary>
     /// Restore visuals type enumeration.
     /// </summary>
-    public enum RestoreType : int
+    public enum RestoreType
     {
         None = 0,
         Width = 1,
@@ -77,49 +55,5 @@ namespace SkinInterfaces
         Margins = 4,
         Opacity = 8,
     } 
-    #endregion
-
-    #region HostAdornerState
-    /// <summary>
-    /// Represents Host Adorner States.
-    /// </summary>
-    public enum HostAdornerState : sbyte
-    {
-        /// <summary>
-        /// With this state Host Ardoner will only apper on the event of Adorned Element.
-        /// </summary>
-        Event,
-        /// <summary>
-        /// With this state Host Ardoner will always be visible over the Adorned Element.
-        /// </summary>
-        Always,
-    } 
-    #endregion
-
-    #region DesktopItemViewType
-    /// <summary>
-    /// Desktop item type enumeration.
-    /// </summary>
-    public enum DesktopItemViewType
-    {
-        /// <summary>
-        /// View is virtual.
-        /// </summary>
-        Virtual,
-        /// <summary>
-        /// View is file or virtual file.
-        /// </summary>
-        File,
-    } 
-    #endregion
-
-    #region MarginConverterParams
-    public enum MarginConverterParams : int
-    {
-        Top = 0,
-        Bottom = 1,
-        Left = 2,
-        Right = 3,
-    }
-    #endregion
+    #endregion    
 }

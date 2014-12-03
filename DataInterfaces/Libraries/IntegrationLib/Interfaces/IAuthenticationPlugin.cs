@@ -6,6 +6,7 @@ using System.Text;
 
 namespace IntegrationLib
 {
+    [Obsolete()]
     public interface IAuthenticationPlugin : IServicePlugin
     {
         AuthResult Authenticate(IDictionary<string, object> authHeaders, IMessageDispatcher dispatcher);

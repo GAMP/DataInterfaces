@@ -101,7 +101,7 @@ namespace CyClone
     {
         /// <summary>
         ///This is a supplementary flag, which specifies that the mounting point is local, visible in current or different user's session. For current session set AuthenticationID to nil / NULL / null / nothing. For other session set Authentication ID to the identifier of that session. 
-        //This flag can be combined with CBFS_SYMLINK_SIMPLE and CBFS_SYMLINK_NETWORK. 
+        ///This flag can be combined with CBFS_SYMLINK_SIMPLE and CBFS_SYMLINK_NETWORK. 
         /// </summary>
         SYMLINK_LOCAL = 0x10000000,
         /// <summary>
@@ -276,10 +276,10 @@ namespace CyClone
     /// <summary>
     /// Transport mode enumeration.
     /// </summary>
-    public enum TransportMode : sbyte
+    public enum TransportMode
     {
-        Unicast,
-        Multicast,
+        Unicast=0,
+        Multicast=1,
     }
     #endregion
 
@@ -331,8 +331,8 @@ namespace CyClone
     public enum MappingFlags
     {
         None = 0,
-        DirectAccess = 1,
-        IsReadOnly = 2,
+        IsReadOnly = 1,
+        DirectAccess = 2,
         UseCredentials = 4,
     } 
     #endregion

@@ -16,7 +16,7 @@ namespace IntegrationLib
     [DataContract()]
     public class UserProfileBase : ItemObject, IUserProfile
     {
-        #region FILEDS
+        #region FIELDS
         protected string
             userName = String.Empty,
             firstName = String.Empty,
@@ -35,8 +35,8 @@ namespace IntegrationLib
             birthDate,
             registered;
         protected UserRoles role;
-        protected Sex sex= Sex.Male;
-        protected bool isEnabled=true;
+        protected Sex sex = Sex.Male;
+        protected bool isEnabled = true;
         #endregion
 
         #region PROPERTIES
@@ -270,7 +270,7 @@ namespace IntegrationLib
         public virtual bool IsAdmin
         {
             get { return this.Role == UserRoles.Operator; }
-            set {}
+            set { }
         }
 
         /// <summary>
@@ -279,7 +279,7 @@ namespace IntegrationLib
         public virtual bool IsGuest
         {
             get { return this.Role == UserRoles.Guest; }
-            set {}
+            set { }
         }
 
         /// <summary>
@@ -294,7 +294,7 @@ namespace IntegrationLib
                 this.isEnabled = value;
                 this.RaisePropertyChanged("IsEnabled");
             }
-        }       
+        }
 
         #endregion
 
@@ -320,7 +320,7 @@ namespace IntegrationLib
             this.UserName = string.Empty;
             this.IsEnabled = false;
         }
-        #endregion        
+        #endregion
     }
     #endregion
 

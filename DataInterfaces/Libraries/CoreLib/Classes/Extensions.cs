@@ -15,6 +15,10 @@ namespace CoreLib
     /// </summary>
     public static class ByteExtensions
     {
+        /// <summary>
+        /// Checks if two byte array match.
+        /// </summary>
+        /// <returns>True or false.</returns>
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
         public static unsafe bool UnSafeEquals(this byte[] strA, byte[] strB)
         {
@@ -61,62 +65,13 @@ namespace CoreLib
         }
 
         /// <summary>
-        /// Extract the data buffer.
+        /// Gets index of specified byte sequence.
         /// </summary>
-        /// <param name="buffer">Input data buffer.</param>
-        /// <param name="offset">Offset in the input data buffer.</param>
-        /// <param name="count">Ammount of data in data buffer.</param>
-        /// <remarks>This function is usefull for extracting only the actual data that needs to be send to the other end.</remarks>
-        /// <returns></returns>
-        public static Byte[] ExtractBuffer(this byte[] buffer, int offset, int count)
-        {
-            int length = buffer.Length;
-            if (offset == 0 && count == length)
-            {
-                return buffer;
-            }
-            else
-            {
-                if ((length < offset) | ((length - offset) < count))
-                    throw new ArgumentException("Buffer does not contain data of specified ammount.");
-                
-                byte[] rsizedBuffer = new byte[count];
-                Buffer.BlockCopy(buffer, offset, rsizedBuffer, 0, count);
-                return rsizedBuffer;
-            }
-        }
-
-        /// <summary>
-        /// Checks if provded buffer has an specified data ammount from the passed offset.
-        /// </summary>
-        /// <param name="buffer"></param>
-        /// <param name="offset"></param>
-        /// <param name="count"></param>
-        /// <returns></returns>
-        public static bool HasAmmount(this byte[] buffer, int offset, int count)
-        {
-            if (buffer.Length < offset)
-            {
-                return false;
-            }
-            else
-            {
-                if ((buffer.Length - offset) < count)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
-            }
-        }
-
-        public static bool HasAmmount(this byte[] buffer, int offset, uint count)
-        {
-            return buffer.HasAmmount(offset, (int)count);
-        }
-
+        /// <param name="array">Byte array.</param>
+        /// <param name="pattern">Required pattern.</param>
+        /// <param name="startIndex">Start index.</param>
+        /// <param name="count">Count.</param>
+        /// <returns>Found index, -1 case not found.</returns>
         public static int IndexOfBytes(this byte[] array, byte[] pattern, int startIndex, int count)
         {
             int fidx = 0;
@@ -145,15 +100,16 @@ namespace CoreLib
             FieldInfo fieldInfo = type.GetField(value.ToString());
 
             // Get the stringvalue attributes
-            GUIDAttribue[] attribs = fieldInfo.GetCustomAttributes(
-                typeof(GUIDAttribue), false) as GUIDAttribue[];
+            GUIDAttribute[] attribs = fieldInfo.GetCustomAttributes(
+                typeof(GUIDAttribute), false) as GUIDAttribute[];
 
             // Return the first if there was a match.
             return attribs.Length > 0 ? attribs[0].Guid : Guid.Empty;
         }
 
         public static System.Environment.SpecialFolder GetSpecialFolderValue(this Enum value)
-        {      // Get the type
+        {
+            // Get the type
             Type type = value.GetType();
 
             // Get fieldinfo for this type
@@ -165,7 +121,18 @@ namespace CoreLib
 
             // Return the first if there was a match.
             return attribs.Length > 0 ? attribs[0].SpecialFolder : (System.Environment.SpecialFolder)65535;
+        }
 
+        /// <summary>
+        /// Gets the description of passed enumerator value.
+        /// </summary>
+        public static string GetEnumDescription(this Enum value)
+        {
+            FieldInfo fi = value.GetType().GetField(value.ToString());
+            DescriptionAttribute[] attributes =
+              (DescriptionAttribute[])fi.GetCustomAttributes
+              (typeof(DescriptionAttribute), false);
+            return (attributes.Length > 0) ? attributes[0].Description : value.ToString();
         }
 
         public static IEnumerable<Enum> GetFlags(this Enum value)
@@ -246,20 +213,6 @@ namespace CoreLib
             var memInfo = type.GetMember(enumVal.ToString());
             var attributes = memInfo[0].GetCustomAttributes(typeof(T), false);
             return attributes.Length > 0;
-        }
-
-        /// <summary>
-        /// Gets the description of passed enumerator value.
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public static string GetEnumDescription(this Enum value)
-        {
-            FieldInfo fi = value.GetType().GetField(value.ToString());
-            DescriptionAttribute[] attributes =
-              (DescriptionAttribute[])fi.GetCustomAttributes
-              (typeof(DescriptionAttribute), false);
-            return (attributes.Length > 0) ? attributes[0].Description : value.ToString();
         }
 
         /// <summary>
@@ -347,7 +300,6 @@ namespace CoreLib
                         ), ex);
             }
         }
-
     }
     #endregion
 
@@ -369,121 +321,23 @@ namespace CoreLib
             }
             return originalString;
         }
+    }
+    #endregion
+
+    #region DateTimeExtensions
+    public static class DateTimeExtensions
+    {
+        /// <summary>
+        /// Calculates the age in years of the current System.DateTime object today.
+        /// </summary>
+        /// <param name="birthDate">The date of birth</param>
+        /// <returns>Age in years today. 0 is returned for a future date of birth.</returns>
+        public static int Age(this DateTime birthDate)
+        {
+            var yearsOld = DateTime.Today.Year - birthDate.Year;
+            if (DateTime.Today < birthDate.AddYears(yearsOld)) yearsOld--;
+            return yearsOld;
+        }
     } 
     #endregion
-}
-
-namespace System.Linq.Expressions
-{
-    public static class ExpressionBuilder
-    {
-        private static MethodInfo containsMethod = typeof(string).GetMethod("Contains");
-        private static MethodInfo startsWithMethod = typeof(string).GetMethod("StartsWith", new Type[] { typeof(string) });
-        private static MethodInfo endsWithMethod = typeof(string).GetMethod("EndsWith", new Type[] { typeof(string) });
-
-        public static Expression<Func<T, bool>> GetExpression<T>(IList<Filter> filters)
-        {
-            if (filters.Count == 0)
-                return null;
-
-            ParameterExpression param = Expression.Parameter(typeof(T), "t");
-            Expression exp = null;
-
-            if (filters.Count == 1)
-                exp = GetExpression<T>(param, filters[0]);
-            else if (filters.Count == 2)
-                exp = GetExpression<T>(param, filters[0], filters[1]);
-            else
-            {
-                while (filters.Count > 0)
-                {
-                    var f1 = filters[0];
-                    var f2 = filters[1];
-
-                    if (exp == null)
-                        exp = GetExpression<T>(param, filters[0], filters[1]);
-                    else
-                        exp = Expression.AndAlso(exp, GetExpression<T>(param, filters[0], filters[1]));
-
-                    filters.Remove(f1);
-                    filters.Remove(f2);
-
-                    if (filters.Count == 1)
-                    {
-                        exp = Expression.AndAlso(exp, GetExpression<T>(param, filters[0]));
-                        filters.RemoveAt(0);
-                    }
-                }
-            }
-
-            return Expression.Lambda<Func<T, bool>>(exp, param);
-        }
-
-        private static Expression GetExpression<T>(ParameterExpression param, Filter filter)
-        {
-            MemberExpression member = Expression.Property(param, filter.PropertyName);
-            ConstantExpression constant = Expression.Constant(filter.Value);
-
-            switch (filter.Operation)
-            {
-                case Op.Equals:
-                    return Expression.Equal(member, constant);
-
-                case Op.GreaterThan:
-                    return Expression.GreaterThan(member, constant);
-
-                case Op.GreaterThanOrEqual:
-                    return Expression.GreaterThanOrEqual(member, constant);
-
-                case Op.LessThan:
-                    return Expression.LessThan(member, constant);
-
-                case Op.LessThanOrEqual:
-                    return Expression.LessThanOrEqual(member, constant);
-
-                case Op.Contains:
-                    return Expression.Call(member, containsMethod, constant);
-
-                case Op.StartsWith:
-                    return Expression.Call(member, startsWithMethod, constant);
-
-                case Op.EndsWith:
-                    return Expression.Call(member, endsWithMethod, constant);
-
-                case Op.NotEqual :
-                    return Expression.NotEqual(member, constant);
-            }
-
-            return null;
-        }
-
-        private static BinaryExpression GetExpression<T>(ParameterExpression param, Filter filter1, Filter filter2)
-        {
-            Expression bin1 = GetExpression<T>(param, filter1);
-            Expression bin2 = GetExpression<T>(param, filter2);
-            return Expression.AndAlso(bin1, bin2);
-        }
-    }
-
-    [Serializable()]
-    public class Filter
-    {
-        public string PropertyName { get; set; }
-        public Op Operation { get; set; }
-        public object Value { get; set; }
-    }
-
-    [Serializable()]
-    public enum Op
-    {
-        Equals,
-        GreaterThan,
-        LessThan,
-        GreaterThanOrEqual,
-        LessThanOrEqual,
-        Contains,
-        StartsWith,
-        EndsWith,
-        NotEqual
-    }
 }

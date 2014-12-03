@@ -7,33 +7,6 @@ using SharedLib.Logging;
 
 namespace SharedLib
 {
-    #region BaseEventArgs
-    [Serializable()]
-    public class BaseEventArgs : EventArgs
-    {
-        #region Constructor
-
-        public BaseEventArgs()
-        {
-        }
-
-        #endregion
-
-        #region Properties
-
-        /// <summary>
-        /// Gets or sets if the event should be canceled.
-        /// </summary>
-        public bool Cancel
-        {
-            get;
-            set;
-        }
-
-        #endregion
-    }
-    #endregion
-
     #region StartUpEventArgs
     [Serializable()]
     public class StartUpEventArgs : EventArgs
@@ -54,28 +27,24 @@ namespace SharedLib
 
         #endregion
 
-        #region Fields
-        private bool isRestarting, isCrashed;
-        #endregion
-
         #region Properties
 
         /// <summary>
-        /// Gets if the client is restarting.
+        /// Gets if application is restarting.
         /// </summary>
         public bool IsRestarting
         {
-            get { return this.isRestarting; }
-            protected set { this.isRestarting = value; }
+            get;
+            protected set;
         }
 
         /// <summary>
-        /// Indicates that event occurred due an application crash.
+        /// Gets if application is sutting down due to a crash.
         /// </summary>
         public bool IsCrashed
         {
-            get { return this.isCrashed; }
-            protected set { this.isCrashed = value; }
+            get;
+            protected set;
         }
 
         #endregion
@@ -132,10 +101,12 @@ namespace SharedLib
     public class MaintenanceEventArgs : EventArgs
     {
         #region Constructor
+        
         public MaintenanceEventArgs(bool enabled)
         {
             this.IsEnabled = enabled;
-        }
+        }       
+
         #endregion
 
         #region Properties
@@ -147,40 +118,9 @@ namespace SharedLib
             get;
             protected set;
         }
+
         #endregion
     }
-    #endregion
-
-    #region SelectedChangeEventArgs
-    public class SelectedChangeEventArgs<T> : EventArgs
-    {
-        protected SelectedChangeEventArgs()
-        { }
-
-        public SelectedChangeEventArgs(T current, T previous)
-        {
-            this.Current = current;
-            this.Previous = previous;
-        }
-
-        /// <summary>
-        /// Gets instance of current item.
-        /// </summary>
-        public T Current
-        {
-            get;
-            protected set;
-        }
-
-        /// <summary>
-        /// Gets instance of previous item.
-        /// </summary>
-        public T Previous
-        {
-            get;
-            protected set;
-        }
-    } 
     #endregion
 
     #region ContainerChangedEventArgs
@@ -308,7 +248,7 @@ namespace SharedLib
 
         #endregion
 
-        #region OVVERIDES
+        #region OVERRIDES
 
         public override string ToString()
         {

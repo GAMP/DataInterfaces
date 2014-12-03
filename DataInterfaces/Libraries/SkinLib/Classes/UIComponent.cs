@@ -121,7 +121,7 @@ namespace SkinLib
 
         #endregion
 
-        #region Ovverides
+        #region OVERRIDES
 
         public override string ToString()
         {

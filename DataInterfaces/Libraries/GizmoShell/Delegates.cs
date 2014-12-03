@@ -14,5 +14,4 @@ namespace GizmoShell
     public delegate void ShellNotifyIconEventDelegate(IShellNotifyIcon icon);
     public delegate void WindowMessageDlegeate(Message m);
     public delegate void ShellExceptionDelegate(Exception ex);
-
 }

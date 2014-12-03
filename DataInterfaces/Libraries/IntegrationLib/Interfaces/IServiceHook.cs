@@ -5,6 +5,9 @@ using System.Text;
 
 namespace IntegrationLib
 {
+    /// <summary>
+    /// Service hook plugin interface.
+    /// </summary>
     public interface IServiceHook : IServicePlugin
     {
     }

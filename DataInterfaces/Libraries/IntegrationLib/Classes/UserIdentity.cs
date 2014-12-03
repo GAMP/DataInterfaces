@@ -109,6 +109,9 @@ namespace IntegrationLib
             this.Result = result;
         }
 
+        public AuthResult(LoginResult result):this(result,null)
+        { }
+
         #endregion
 
         #region FIELDS
@@ -128,7 +131,7 @@ namespace IntegrationLib
         }
 
         /// <summary>
-        /// Authentication result.
+        /// Login result.
         /// </summary>
         [DataMember()]
         public LoginResult Result

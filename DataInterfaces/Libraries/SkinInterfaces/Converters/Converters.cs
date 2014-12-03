@@ -82,39 +82,6 @@ namespace SkinInterfaces.Converters
     }
     #endregion
 
-    #region NullToEnabledConverter
-    public class NullToEnabledConverter : IValueConverter
-    {
-        #region IValueConverter Members
-
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            try
-            {
-                if (value == null)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
-    }
-    #endregion
-
     #endregion
 
     #region BOOL
@@ -122,7 +89,7 @@ namespace SkinInterfaces.Converters
     #region BoolToVisibilityConverter
     /// <summary>
     /// Converts bool value to visibility.
-    /// <remarks>If revert operation required specify truE as converter parameter.</remarks>
+    /// <remarks>If revert operation required specify true as converter parameter.</remarks>
     /// </summary>
     public class BoolToVisibilityConverter : IValueConverter
     {
@@ -163,6 +130,62 @@ namespace SkinInterfaces.Converters
             catch
             {
                 return Visibility.Collapsed;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #region BoolToHiddenConverter
+    /// <summary>
+    /// Converts bool value to visibility.
+    /// <remarks>If revert operation required specify true as converter parameter.</remarks>
+    /// </summary>
+    public class BoolToHiddenConverter : IValueConverter
+    {
+        #region IValueConverter Members
+
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            try
+            {
+                if (value is bool)
+                {
+                    #region Check for revert parameter
+                    bool revert = false;
+                    if (parameter != null)
+                    {
+                        bool temp;
+                        if (bool.TryParse(parameter.ToString(), out temp))
+                        {
+                            revert = temp;
+                        }
+                    }
+                    #endregion
+
+                    if ((bool)value == true)
+                    {
+                        return revert ? Visibility.Hidden : Visibility.Visible;
+                    }
+                    else
+                    {
+                        return revert ? Visibility.Visible : Visibility.Hidden;
+                    }
+                }
+                else
+                {
+                    return Visibility.Hidden;
+                }
+            }
+            catch
+            {
+                return Visibility.Hidden;
             }
         }
 
@@ -353,105 +376,6 @@ namespace SkinInterfaces.Converters
     }
     #endregion
 
-    #region MarginConverter
-    public class MarginConverter : DependencyObject, IMultiValueConverter
-    {
-        private UserControl Control
-        {
-            get;
-            set;
-        }
-        #region IMultiValueConverter Members
-
-        public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            try
-            {
-                MarginConverterParams param = (MarginConverterParams)int.Parse(parameter.ToString());
-                this.Control = values[4] as UserControl;
-                if (param == MarginConverterParams.Top)
-                {
-                    if (values[0] != DependencyProperty.UnsetValue)
-                    {
-                        Double value = double.Parse(values[0].ToString());
-                        return value.ToString();
-                    }
-                }
-                if (param == MarginConverterParams.Bottom)
-                {
-                    if (values[1] != DependencyProperty.UnsetValue)
-                    {
-                        Double value = double.Parse(values[1].ToString());
-                        return value.ToString();
-                    }
-                }
-                if (param == MarginConverterParams.Left)
-                {
-                    if (values[2] != DependencyProperty.UnsetValue)
-                    {
-                        Double value = double.Parse(values[2].ToString());
-                        return value.ToString();
-                    }
-                }
-                if (param == MarginConverterParams.Right)
-                {
-                    if (values[3] != DependencyProperty.UnsetValue)
-                    {
-                        Double value = double.Parse(values[3].ToString());
-                        return value.ToString();
-                    }
-                }
-                return (0).ToString();
-            }
-            catch
-            {
-                return (0).ToString();
-            }
-
-        }
-
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, System.Globalization.CultureInfo culture)
-        {
-            try
-            {
-                Object[] data = new object[4];
-                MarginConverterParams param = (MarginConverterParams)int.Parse(parameter.ToString());
-
-                if (this.Control != null)
-                {
-                    Thickness margins = this.Control.Margin;
-                    if (param == MarginConverterParams.Top)
-                    {
-                        margins.Top = double.Parse(value.ToString());
-                    }
-                    if (param == MarginConverterParams.Bottom)
-                    {
-                        margins.Bottom = double.Parse(value.ToString());
-                    }
-                    if (param == MarginConverterParams.Left)
-                    {
-                        margins.Left = double.Parse(value.ToString());
-                    }
-                    if (param == MarginConverterParams.Right)
-                    {
-                        margins.Right = double.Parse(value.ToString());
-                    }
-                    this.Control.Margin = margins;
-                }
-
-                return data;
-            }
-            catch
-            {
-                return null;
-            }
-
-        }
-
-        #endregion
-    }
-    #endregion
-
     #region CountToVisibilityConverter
     public class CountToVisibilityConverter : IValueConverter
     {
@@ -499,13 +423,20 @@ namespace SkinInterfaces.Converters
             try
             {
                 if (value == null)
-                {
                     return false;
-                }
-                else
-                {
-                    return (int)value > 0;
-                }
+
+                int countValue;
+
+                if (!int.TryParse(value.ToString(), out countValue))
+                    return false;
+
+                bool reverseValue = false;
+
+                if (parameter != null)
+                    bool.TryParse(parameter.ToString(), out reverseValue);      
+
+                return reverseValue ? countValue <= 0 : countValue > 0;
+                
             }
             catch
             {
@@ -874,7 +805,6 @@ namespace SkinInterfaces.Converters
     #region EmptyPathConverter
     public class EmptyPathConverter : IValueConverter
     {
-
         #region IValueConverter Members
 
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
@@ -989,8 +919,9 @@ namespace SkinInterfaces.Converters
                         return 5;
                     case RegistryHive.DynData:
                         return 6;
+                    default :
+                        return 0;
                 }
-                return 0;
             }
             catch
             {
@@ -1072,7 +1003,6 @@ namespace SkinInterfaces.Converters
                 {
                     return value;
                 }
-
             }
             catch
             {
@@ -1118,7 +1048,6 @@ namespace SkinInterfaces.Converters
     /// </summary>
     public class NumberToRoundedConverter : IValueConverter
     {
-
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             double n;
@@ -1137,61 +1066,7 @@ namespace SkinInterfaces.Converters
             throw new NotImplementedException();
         }
     }
-    #endregion
-
-    #region FlagsEnumValueConverter
-    public class FlagsEnumValueConverter : IValueConverter
-    {
-        private int targetValue;
-
-        public FlagsEnumValueConverter()
-        {
-        }
-
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            int mask = (int)parameter;
-            this.targetValue = (int)value;
-            return ((mask & this.targetValue) != 0);
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            this.targetValue ^= (int)parameter;
-            return Enum.Parse(targetType, parameter.ToString());
-        }
-    }
-    #endregion
-
-    #region FlagsEnumValueVisibilityConverter
-    public class FlagsEnumValueVisibilityConverter : IValueConverter
-    {
-        private int targetValue;
-
-        public FlagsEnumValueVisibilityConverter()
-        {
-        }
-
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            int mask = (int)parameter;
-            this.targetValue = (int)value;
-            if (((mask & this.targetValue) != 0))
-            {
-                return Visibility.Visible;
-            }
-            else
-            {
-                return Visibility.Collapsed;
-            }
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-    #endregion
+    #endregion    
 
     #region BytesToMegabyesConverter
     /// <summary>
@@ -1199,7 +1074,6 @@ namespace SkinInterfaces.Converters
     /// </summary>
     public class BytesToMegabyesConverter : IValueConverter
     {
-
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value != null)
@@ -1501,10 +1375,12 @@ namespace SkinInterfaces.Converters
     public class EnumToBoolConverter : IValueConverter
     {
         public Type EnumType { get; set; }
+       
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return Object.Equals(value, Enum.Parse(EnumType, parameter.ToString()));
         }
+        
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return (bool)value ? Enum.Parse(EnumType, parameter.ToString()) : Enum.ToObject(EnumType, 0);
@@ -1634,8 +1510,6 @@ namespace SkinInterfaces.Converters
                 if (Application.Current != null)
                 {
                     foundResource = Application.Current.TryFindResource(resourceString);
-                    
-                    
                 }
 
                 ////application resource not found? lets look in embeded resources

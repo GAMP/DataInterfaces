@@ -13,25 +13,32 @@ namespace CyClone.Core
         {
             get;
         }
+
         string Name
         {
             get;
         }
+
         ulong AvailableFreeSpace
         {
             get;
         }
+        
         ulong TotalSize
         {
             get;
         }
+        
         string VolumeLabel
         {
             get;
         }
+        
         DriveType DriveType { get; }
+        
         string DriveFormat {get;}
     }
+
     public interface IcyRemoteDriveInfo : IcyDriveInfo
     {
         IMessageDispatcher Dispatcher

@@ -67,7 +67,7 @@ namespace IntegrationLib
         } 
         #endregion        
     } 
-    #endregion
+    #endregion    
 
     #region AuthPluginBase
     /// <summary>
