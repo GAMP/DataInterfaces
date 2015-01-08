@@ -17,10 +17,13 @@ namespace IntegrationLib
         #endregion
 
         #region Properties
+        /// <summary>
+        /// Gets availability state.
+        /// </summary>
         public bool IsAvailable
         {
             get;
-            set;
+            protected set;
         }
         #endregion
     } 

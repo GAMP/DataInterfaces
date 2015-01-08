@@ -15,6 +15,7 @@ namespace CoreLib.Hooking
     /// </summary>
     public class HookEventArgsBase : EventArgs
     {
+        #region PROPERTIES
         /// <summary>
         /// Marks event as handled.
         /// </summary>
@@ -23,6 +24,7 @@ namespace CoreLib.Hooking
             get;
             set;
         }
+        #endregion
     }
     #endregion
 
@@ -32,7 +34,7 @@ namespace CoreLib.Hooking
     /// </summary>
     public class KeyboardHookEventArgs : HookEventArgsBase
     {
-        #region Constructor
+        #region CONSTRUCTOR
         public KeyboardHookEventArgs(UInt32 keyCode,
             UInt32 scanCode,
             UInt32 flags,
@@ -55,22 +57,15 @@ namespace CoreLib.Hooking
         }
         #endregion
 
-        #region Fields
-        private KeyState state;
-        private IntPtr extraInfo;
-        private UInt32 keyCode, flags, time, scanCode;
-        private ModifierKeys modifiers = ModifierKeys.None;
-        #endregion
-
-        #region Properties
+        #region PROPERTIES
 
         /// <summary>
         /// A virtual-key code. The code must be a value in the range 1 to 254. 
         /// </summary>
         public UInt32 KeyCode
         {
-            get { return this.keyCode; }
-            protected set { this.keyCode = value; }
+            get;
+            protected set;
         }
 
         /// <summary>
@@ -78,8 +73,8 @@ namespace CoreLib.Hooking
         /// </summary>
         public KeyState State
         {
-            get { return this.state; }
-            protected set { this.state = value; }
+            get;
+            protected set;
         }
 
         /// <summary>
@@ -88,8 +83,8 @@ namespace CoreLib.Hooking
         /// </summary>
         public UInt32 Flags
         {
-            get { return this.flags; }
-            protected set { this.flags = value; }
+            get;
+            protected set;
         }
 
         /// <summary>
@@ -97,8 +92,8 @@ namespace CoreLib.Hooking
         /// </summary>
         public UInt32 Time
         {
-            get { return this.time; }
-            protected set { this.time = value; }
+            get;
+            protected set;
         }
 
         /// <summary>
@@ -114,8 +109,8 @@ namespace CoreLib.Hooking
         /// </summary>
         public ModifierKeys Modifiers
         {
-            get { return this.modifiers; }
-            private set { this.modifiers = value; }
+            get;
+            protected set;
         }
 
         /// <summary>
@@ -132,8 +127,8 @@ namespace CoreLib.Hooking
         /// </summary>
         public IntPtr ExtraInfo
         {
-            get { return this.extraInfo; }
-            protected set { this.extraInfo = value; }
+            get;
+            protected set;
         }
 
         /// <summary>
@@ -141,12 +136,13 @@ namespace CoreLib.Hooking
         /// </summary>
         public UInt32 ScanCode
         {
-            get { return this.scanCode; }
-            protected set { this.scanCode = value; }
+            get;
+            protected set;
         }
+
         #endregion
 
-        #region Imports
+        #region IMPORTS
 
         [SuppressUnmanagedCodeSecurity()]
         [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
@@ -157,7 +153,7 @@ namespace CoreLib.Hooking
 
         #endregion
 
-        #region Functions
+        #region FUNCTIONS
 
         private void GetModifers()
         {
@@ -201,7 +197,7 @@ namespace CoreLib.Hooking
     /// </summary>
     public class MouseHookEventArgs : HookEventArgsBase
     {
-        #region Constructor
+        #region CONSTRUCTOR
         public MouseHookEventArgs(int x, int y, int extra, int hitTest, IntPtr hWnd)
         {
             this.X = x;
@@ -212,7 +208,8 @@ namespace CoreLib.Hooking
         }
         #endregion
 
-        #region Properties
+        #region PROPERTIES
+
         /// <summary>
         /// The x-coordinate of the point.
         /// </summary>
@@ -221,6 +218,7 @@ namespace CoreLib.Hooking
             get;
             protected set;
         }
+
         /// <summary>
         /// The y-coordinate of the point.
         /// </summary>
@@ -229,6 +227,7 @@ namespace CoreLib.Hooking
             get;
             protected set;
         }
+
         /// <summary>
         /// Additional information associated with the message. 
         /// </summary>
@@ -237,6 +236,7 @@ namespace CoreLib.Hooking
             get;
             protected set;
         }
+
         /// <summary>
         /// The hit-test value. For a list of hit-test values, see the description of the WM_NCHITTEST message. 
         /// </summary>
@@ -245,6 +245,7 @@ namespace CoreLib.Hooking
             get;
             protected set;
         }
+
         /// <summary>
         /// A handle to the window that will receive the mouse message corresponding to the mouse event. 
         /// </summary>
@@ -253,6 +254,7 @@ namespace CoreLib.Hooking
             get;
             protected set;
         }
+
         #endregion
 
         #region OVERRIDES

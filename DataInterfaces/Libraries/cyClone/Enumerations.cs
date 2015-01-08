@@ -262,7 +262,7 @@ namespace CyClone
     /// <summary>
     /// Hash type enumeration.
     /// </summary>
-    public enum HashType : byte
+    public enum HashType
     {
         MD5 = 0,
         Adler32 = 1,

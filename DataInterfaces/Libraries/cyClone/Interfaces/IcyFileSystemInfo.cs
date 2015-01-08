@@ -63,6 +63,7 @@ namespace CyClone.Core
         /// <returns>True or false.</returns>
         bool IsEqual(IcyFileSystemInfo item);
     }
+
     public interface IcyRemoteFileSystemInfo : IcyFileSystemInfo
     {
         IMessageDispatcher Dispatcher

@@ -2,6 +2,7 @@
 
 namespace ServerQueryLib
 {
+    [Obsolete()]
     public interface ISQServer
     {
         /// <summary>

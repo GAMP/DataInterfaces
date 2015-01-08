@@ -275,6 +275,68 @@ namespace SkinInterfaces.Converters
 
     #endregion
 
+    #region TIMESPAN
+
+    #region DoubleSecondsToHoursConverter
+    public class DoubleSecondsToHoursConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            TimeSpan ts = TimeSpan.FromSeconds((double)value);
+            return String.Format("{0:D2}:{1:D2}:{2:D2}", ts.Hours, ts.Minutes, ts.Seconds);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+
+    }
+    #endregion
+
+    #region TimeSpanConverter
+    public class TimeSpanConverter : IValueConverter
+    {
+        #region IValueConverter Members
+
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            try
+            {
+
+                if (value is TimeSpan)
+                {
+                    TimeSpan span = (TimeSpan)value;
+                    string spanString = span.ToString();
+                    if (spanString.LastIndexOf(".") != -1)
+                    {
+                        return spanString.Substring(0, spanString.LastIndexOf("."));
+                    }
+                    else
+                    {
+                        return spanString;
+                    }
+                }
+                return value;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+    }
+
+    #endregion
+
+    #endregion
+
     #region PopupHorizontalOffsetConverter
     public class PopupHorizontalOffsetConverter : IMultiValueConverter
     {
@@ -759,48 +821,7 @@ namespace SkinInterfaces.Converters
 
         #endregion
     }
-    #endregion
-
-    #region TimeSpanConverter
-    public class TimeSpanConverter : IValueConverter
-    {
-        #region IValueConverter Members
-
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            try
-            {
-
-                if (value is TimeSpan)
-                {
-                    TimeSpan span = (TimeSpan)value;
-                    string spanString = span.ToString();
-                    if (spanString.LastIndexOf(".") != -1)
-                    {
-                        return spanString.Substring(0, spanString.LastIndexOf("."));
-                    }
-                    else
-                    {
-                        return spanString;
-                    }
-                }
-                return value;
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
-    }
-
-    #endregion
+    #endregion    
 
     #region EmptyPathConverter
     public class EmptyPathConverter : IValueConverter
@@ -1551,7 +1572,7 @@ namespace SkinInterfaces.Converters
             throw new NotImplementedException();
         }
     } 
-    #endregion
+    #endregion    
 }
 
 

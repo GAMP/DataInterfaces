@@ -17,7 +17,7 @@ namespace IntegrationLib
         /// <summary>
         /// Gets identity user role.
         /// </summary>
-        [Obsolete()]
+        [Obsolete("Roles will be removed in upcoming version.")]
         UserRoles Role { get; }
     }
 }

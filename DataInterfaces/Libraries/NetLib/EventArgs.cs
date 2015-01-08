@@ -19,8 +19,10 @@ namespace NetLib
         #region PROPERTIES
 
         /// <summary>
-        /// Gets the instance of old connection.
-        /// <remarks>This value can be null if no connection existed.</remarks>
+        /// Gets old connection.
+        /// <remarks>
+        /// This value can be null if no connection previously existed.
+        /// </remarks>
         /// </summary>
         public IConnection OldConnection
         {
@@ -29,7 +31,7 @@ namespace NetLib
         }
 
         /// <summary>
-        /// Gets the instance of new connection.
+        /// Gets new connection.
         /// </summary>
         public IConnection NewConnection
         {

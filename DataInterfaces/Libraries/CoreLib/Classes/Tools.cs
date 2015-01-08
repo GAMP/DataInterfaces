@@ -8,6 +8,7 @@ using System.Runtime.Serialization;
 using System.Reflection;
 using System.ComponentModel;
 using SharedLib;
+using System.Text.RegularExpressions;
 
 namespace CoreLib
 {
@@ -45,64 +46,45 @@ namespace CoreLib
     } 
     #endregion    
 
-    #region Reflection
+    #region Wildcard
     /// <summary>
-    /// Reflection helper class.
+    /// Represents a wildcard running on the
+    /// <see cref="System.Text.RegularExpressions"/> engine.
     /// </summary>
-    public static class Reflection
+    public class Wildcard : Regex
     {
-        #region Functions
         /// <summary>
-        /// Checks if specified membertype exists in the object.
+        /// Initializes a wildcard with the given search pattern.
         /// </summary>
-        /// <param name="Element">Object to search for memebers.</param>
-        /// <param name="PropertyName">Member name.</param>
-        /// <param name="MemberType">Member type we are looking for.</param>
-        /// <param name="IgnoreCase">String compare case option.</param>
-        /// <returns>True or false.</returns>
-        /// <remarks></remarks>
-        public static bool PropertyExists(object Element, string PropertyName, MemberTypes MemberType = MemberTypes.Property, bool IgnoreCase = true)
+        /// <param name="pattern">The wildcard pattern to match.</param>
+        public Wildcard(string pattern)
+            : base(WildcardToRegex(pattern))
         {
-            try
-            {
-                System.Type ObjType = Element.GetType();
-                System.Reflection.MemberInfo[] MemberItems = null;
-                switch (MemberType)
-                {
-                    case MemberTypes.Property:
-                        MemberItems = ObjType.GetProperties();
-                        break;
-                    case MemberTypes.Method:
-                        MemberItems = ObjType.GetMethods();
-                        break;
-                    case MemberTypes.Event:
-                        MemberItems = ObjType.GetEvents();
-                        break;
-                    case MemberTypes.Constructor:
-                        MemberItems = ObjType.GetConstructors();
-                        break;
-                    case MemberTypes.Field:
-                        MemberItems = ObjType.GetFields();
-                        break;
-                    case MemberTypes.NestedType:
-                        MemberItems = ObjType.GetNestedTypes();
-                        break;
-                }
-                foreach (PropertyInfo property in MemberItems)
-                {
-                    if (property.MemberType == MemberType && string.Compare(property.Name, PropertyName, IgnoreCase) == 0)
-                    {
-                        return true;
-                    }
-                }
-            }
-            catch
-            {
-
-            }
-            return false;
         }
-        #endregion
-    }  
-    #endregion       
+
+        /// <summary>
+        /// Initializes a wildcard with the given search pattern and options.
+        /// </summary>
+        /// <param name="pattern">The wildcard pattern to match.</param>
+        /// <param name="options">A combination of one or more
+        /// <see cref="System.Text.RegexOptions"/>.</param>
+        public Wildcard(string pattern, RegexOptions options)
+            : base(WildcardToRegex(pattern), options)
+        {
+        }
+
+        /// <summary>
+        /// Converts a wildcard to a regex.
+        /// </summary>
+        /// <param name="pattern">The wildcard pattern to convert.</param>
+        /// <returns>A regex equivalent of the given wildcard.</returns>
+        public static string WildcardToRegex(string pattern)
+        {
+            return "^" + Regex.Escape(pattern).
+             Replace("\\*", ".*").
+             Replace("\\?", ".") + "$";
+        }
+
+    }
+    #endregion
 }

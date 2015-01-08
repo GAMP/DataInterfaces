@@ -10,18 +10,19 @@ using SharedLib.ViewModels;
 namespace ServerService
 {
     #region Delegates
-   
-    public delegate void CurrentManagementViewTypeChangedDelegate(ManagementTypesEnum oldType, ManagementTypesEnum newType);
-   
-    public delegate void CommandExecuteDelegate(object parameter, IHostManagerView manager);
-   
-    public delegate void ReservationEventDelegate(object sender, ReservationEventArgs e);
-   
-    public delegate void HostEventDelegate(object sender, HostEventArgs e);
-   
-    public delegate void UserProfileChangeDelegate(object sender,UserProfileChangeEventArgs e);
 
-    public delegate void UserStateChangeDelegate(object sender,UserStateEventArgs e);
+    [Obsolete()]
+    public delegate void CurrentManagementViewTypeChangedDelegate(ManagementTypesEnum oldType, ManagementTypesEnum newType);
+    [Obsolete()]
+    public delegate void HostEventDelegate(object sender, HostEventArgs e);
+    [Obsolete()]
+    public delegate void UserStateChangeDelegate(object sender, UserStateEventArgs e);
+    [Obsolete()]
+    public delegate void CommandExecuteDelegate(object parameter, IHostManagerView manager);
+    [Obsolete()]
+    public delegate void ReservationEventDelegate(object sender, ReservationEventArgs e);
+    [Obsolete()]
+    public delegate void UserProfileChangeDelegate(object sender, UserProfileChangeEventArgs e);
 
     #endregion
 }

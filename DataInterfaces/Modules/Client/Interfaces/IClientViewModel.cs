@@ -8,6 +8,7 @@ using SharedLib.Applications;
 using System.Collections;
 using SkinLib;
 using SharedLib;
+using Client.ViewModels;
 
 namespace Client
 {
@@ -21,15 +22,15 @@ namespace Client
     public interface IClientViewModel
     {
         /// <summary>
-        /// Gets the Clients current category representation model.
+        /// Gets StartPageViewModel.
         /// </summary>
-        ICategoryView StartPageView
+        IStartPageViewModel StartPageView
         {
             get;
         }
 
         /// <summary>
-        /// Gets the instance of the client.
+        /// Gets client instance.
         /// </summary>
         IClient Client
         {
@@ -37,7 +38,7 @@ namespace Client
         }
 
         /// <summary>
-        /// Gets the instance of UIHandler.
+        /// Gets UIHandler instance.
         /// </summary>
         IUIHandler SkinHandler
         {

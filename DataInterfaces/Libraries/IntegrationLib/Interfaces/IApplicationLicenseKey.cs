@@ -15,6 +15,7 @@ namespace IntegrationLib
         /// Gets the keys string representation.
         /// </summary>
         string KeyString { get; }
+
         /// <summary>
         /// Returns if the key value is valid.
         /// </summary>

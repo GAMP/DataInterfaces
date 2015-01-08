@@ -101,7 +101,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Libraries\CoreLib\Diagnostics\Classes\KillProcessInvokeInfo.cs" />
+    <Compile Include="Libraries\CoreLib\Diagnostics\Classes\TraceWriter.cs" />
     <Compile Include="Libraries\cyClone\Exceptions.cs" />
+    <Compile Include="Libraries\IntegrationLib\Interfaces\IClientSideIntegrationProvider.cs" />
+    <Compile Include="Libraries\IntegrationLib\Interfaces\IPluginModule.cs" />
+    <Compile Include="Libraries\SharedLib\Dispatcher\Extensions.cs" />
     <Compile Include="Libraries\System\Linq\Expression\ExpressionBuilder.cs" />
     <Compile Include="Libraries\CoreLib\Classes\Tools.cs" />
     <Compile Include="Libraries\CoreLib\Conversion\htmlcssparser.cs" />
@@ -114,7 +118,6 @@
     <Compile Include="Libraries\CoreLib\Diagnostics\Delegates.cs" />
     <Compile Include="Libraries\CoreLib\Diagnostics\Interfaces\ICoreProcessStartInfo.cs" />
     <Compile Include="Libraries\CoreLib\EventArgs.cs" />
-    <Compile Include="Libraries\CoreLib\Hooking\Delegates.cs" />
     <Compile Include="Libraries\CoreLib\Hooking\EventArgs.cs" />
     <Compile Include="Libraries\CoreLib\Interfaces\IFeed.cs" />
     <Compile Include="Libraries\CoreLib\Interfaces\IWindowWrapper.cs" />
@@ -128,7 +131,6 @@
     <Compile Include="Libraries\IntegrationLib\Interfaces\IClientPlugin.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\IDispatcherPrincipal.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\IExecutionDiversionPlugin.cs" />
-    <Compile Include="Libraries\IntegrationLib\Interfaces\IPluginModule.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\IUserIdentity.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\IAuthenticationPlugin.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\IServiceHook.cs" />
@@ -153,6 +155,8 @@
     <Compile Include="Libraries\SkinLib\Classes\UIConfigurationChild.cs" />
     <Compile Include="Modules\Client\EventArgs.cs" />
     <Compile Include="Modules\Client\Exceptions.cs" />
+    <Compile Include="Modules\Client\Interfaces\IApplicationView.cs" />
+    <Compile Include="Modules\Client\Interfaces\IStartPageViewModel.cs" />
     <Compile Include="Modules\Service\Delegates.cs" />
     <Compile Include="Modules\Service\Exceptions.cs" />
     <Compile Include="Libraries\SharedLib\Delegates.cs" />
@@ -247,7 +251,7 @@
     <Compile Include="Libraries\SharedLib\Dispatcher\Interfaces\ISyncOperation.cs" />
     <Compile Include="Libraries\SharedLib\Enumerations.cs" />
     <Compile Include="Libraries\SharedLib\Commands\Interfaces\ICommand.cs" />
-    <Compile Include="Libraries\SharedLib\Interfaces\IPluginConfiguration.cs" />
+    <Compile Include="Libraries\SharedLib\Plugins\Interfaces\IPluginConfiguration.cs" />
     <Compile Include="Libraries\SharedLib\Interfaces\IRestriction.cs" />
     <Compile Include="Libraries\SharedLib\Interfaces\ISecurityPolicy.cs" />
     <Compile Include="Libraries\SharedLib\Logging\Interfaces\ILogProvider.cs" />
@@ -256,7 +260,6 @@
     <Compile Include="Libraries\SharedLib\Container\Interfaces\IContainer.cs" />
     <Compile Include="Libraries\SharedLib\Interfaces\IItemBase.cs" />
     <Compile Include="Libraries\NetLib\Interfaces\INetwork.cs" />
-    <Compile Include="Libraries\IntegrationLib\Interfaces\IPluginManager.cs" />
     <Compile Include="Libraries\SharedLib\Configuration\Interfaces\IApplicationModule.cs" />
     <Compile Include="Libraries\SharedLib\Applications\IApplicationProfile.cs" />
     <Compile Include="Libraries\SharedLib\Applications\IApplicationContainer.cs" />

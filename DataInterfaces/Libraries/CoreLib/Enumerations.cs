@@ -28,7 +28,7 @@ namespace CoreLib
     /// <summary>
     /// Operating system type enumeration.
     /// </summary>
-    public enum OperatingSystems : int
+    public enum OperatingSystems
     {
         Unknown = 0,
         WindowsXp,
@@ -53,7 +53,7 @@ namespace CoreLib
     /// <summary>
     /// Process exit codes.
     /// </summary>
-    public enum ProcessExitCode : int
+    public enum ProcessExitCode
     {
         /// <summary>
         /// Application was shutdown.
@@ -72,44 +72,13 @@ namespace CoreLib
         /// </summary>
         Update=-515,
     }
-    #endregion
-
-    #region ServiceErrorCodes
-    public enum ServiceErrorCodes : uint
-    {
-        SUCCESS = 0,
-        SUPPORTED = 1,
-        ACCESS_DENIED = 2,
-        DEPENDENT_SERVICES_RUNNING = 3,
-        INVALID_SERVICE_CONTROL = 4,
-        SERVICE_CANNOT_ACCEPT_CONTROL = 5,
-        SERVICE_NOT_ACTIVE = 6,
-        SERVICE_REQUEST_TIMEOUT = 7,
-        UNKNOWN_FAILURE = 8,
-        PATH_NOT_FOUND = 9,
-        SERVICE_ALREADY_RUNNING = 10,
-        SERVICE_DATABASE_LOCKED = 11,
-        SERVICE_DEPENDENCY_DELETED = 12,
-        SERVICE_DEPENDENCY_FAILURE = 13,
-        SERVICE_DISABLED = 14,
-        SERVICE_LOGON_FAILURE = 15,
-        SERVICE_MARKED_FOR_DELETION = 16,
-        SERVICE_NO_THREAD = 17,
-        STATUS_CIRCULAR_DEPENDENCY = 18,
-        STATUS_DUPLICATE_NAME = 19,
-        STATUS_INVALID_NAME = 20,
-        STATUS_INVALID_PARAMETER = 21,
-        STATUS_INVALID_SERVICE_ACCOUNT = 22,
-        STATUS_SERVICE_EXISTS = 23,
-        SERVICE_ALREADY_PAUSED = 24
-    }
-    #endregion
+    #endregion    
 
     #region ValueSource
     /// <summary>
     /// Value source enumerations.
     /// </summary>
-    public enum KeyValueSource : int
+    public enum KeyValueSource
     {
         /// <summary>
         /// Indicates file source.
@@ -151,7 +120,7 @@ namespace CoreLib
     /// <summary>
     /// Restriction type enumeration.
     /// </summary>
-    public enum RestrictionType : int
+    public enum RestrictionType
     {
         [CanUserAssign(false)]
         Unset = 0,

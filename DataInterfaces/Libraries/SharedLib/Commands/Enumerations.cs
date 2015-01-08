@@ -585,7 +585,7 @@ namespace SharedLib.Commands
     /// <summary>
     /// Service operations on manager behalf.
     /// </summary>
-    public enum ManagerToServiceOpType : int
+    public enum ManagerToServiceOpType
     {
         LogGet,
         LogGetById,
@@ -762,14 +762,15 @@ namespace SharedLib.Commands
     /// <summary>
     /// Manager operations on service behalf.
     /// </summary>
-    public enum ServiceToManagerOpType : byte
+    public enum ServiceToManagerOpType
     {
         HostEvent = 0,
         HostPropertiesEvent = 1,
         LicenseReservationEvent = 2,
         UserChangeEvent = 3,
         UserStateChangeEvent = 4,
-        LogChangedEvent = 5
+        UserSessionChangeEvent=5,
+        LogChangedEvent = 6,
     }
     #endregion
 

@@ -5,9 +5,9 @@ using System.Text;
 
 namespace GizmoShell
 {
-    public enum ApplicationCommandType : int
+    #region ApplicationCommandType
+    public enum ApplicationCommandType
     {
-        //Windows 2000
         BrowserBackward = 1,
         BrowserForward = 2,
         BrowserRefresh = 3,
@@ -31,7 +31,6 @@ namespace GizmoShell
         BassUp = 21,
         TrebleDown = 22,
         TrebleUp = 23,
-        //Windows XP
         MicrophoneVolumeMute = 24,
         MicrophoneVolumeDown = 25,
         MicrophoneVolumeUp = 26,
@@ -61,9 +60,8 @@ namespace GizmoShell
         MediaRewind = 50,
         MediaChannelUp = 51,
         MediaChannelDown = 52,
-
-        //Windows Vista
         Delete = 53,
         DWMFlip3D = 54
-    }
+    } 
+    #endregion
 }

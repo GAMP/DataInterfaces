@@ -5,6 +5,7 @@ using System.Text;
 
 namespace CoreLib.Hooking
 {
+    #region KeyState
     /// <summary>
     /// Enumeration representing key state.
     /// </summary>
@@ -21,7 +22,7 @@ namespace CoreLib.Hooking
         /// <summary>
         /// Any key state.
         /// </summary>
-        Any= 2,
-    }
-
+        Any = 2,
+    } 
+    #endregion
 }

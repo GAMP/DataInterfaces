@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Client.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,6 @@ namespace SharedLib.ViewModels
     /// Interface to expose the categories views model.
     /// </summary>
     public interface ICategoryView
-    {        
+    {
     }
 }

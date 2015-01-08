@@ -387,6 +387,7 @@ namespace ServerService
         #endregion
 
         #region PROPERTIES
+
         public int? OldGroupId
         {
             get;
@@ -398,6 +399,7 @@ namespace ServerService
             get;
             protected set;
         }
+
         #endregion
     }
     #endregion
@@ -468,6 +470,7 @@ namespace ServerService
         #endregion
 
         #region PROPERTIES
+
         /// <summary>
         /// Gets old picture.
         /// </summary>
@@ -485,6 +488,7 @@ namespace ServerService
             get;
             protected set;
         }
+
         #endregion
     } 
     #endregion
@@ -654,6 +658,23 @@ namespace ServerService
     #region LOGCHANGEEVENTARGS
     public class LogChangeEventArgs
     {
+    } 
+    #endregion
+
+    #region USERSESSIONCHNAGEDEVENTARGS
+    public class UserSessionChnagedEventArgs : EventArgs
+    {
+        public int UserId
+        {
+            get;
+            protected set;
+        }
+
+        public int HostId
+        {
+            get;
+            protected set;
+        }
     } 
     #endregion
 }

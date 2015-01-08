@@ -77,9 +77,13 @@ namespace IntegrationLib
     public enum LoginResult
     {
         /// <summary>
-        /// Authentication was sucessfull.
+        /// Login was sucessfull.
         /// </summary>
         Sucess = 0,
+        /// <summary>
+        /// Invalid parameters specified.
+        /// </summary>
+        InvalidParameters = 1,
         /// <summary>
         /// Account is disabled.
         /// </summary>
@@ -119,7 +123,7 @@ namespace IntegrationLib
         /// <summary>
         /// Logout in progress.
         /// </summary>
-        LogoutInProgress =1024,
+        LogoutInProgress = 1024,
         /// <summary>
         /// Invalid user id.
         /// </summary>
@@ -128,6 +132,10 @@ namespace IntegrationLib
         /// Invalid host id.
         /// </summary>
         InvalidHostId=4096,
+        /// <summary>
+        /// Maximum sessions reached.
+        /// </summary>
+        MaximumSessionsReached=8192,
         /// <summary>
         /// Credentials pair is invalid.
         /// </summary>
@@ -153,4 +161,12 @@ namespace IntegrationLib
         LoggedOutLocally = 2,
     }
     #endregion    
+
+    #region MoveResult
+    [Flags()]
+    public enum MoveResult
+    {
+        Sucess = 0,
+    } 
+    #endregion
 }

@@ -11,6 +11,7 @@ namespace System.Linq.Expressions
         private static MethodInfo containsMethod = typeof(string).GetMethod("Contains");
         private static MethodInfo startsWithMethod = typeof(string).GetMethod("StartsWith", new Type[] { typeof(string) });
         private static MethodInfo endsWithMethod = typeof(string).GetMethod("EndsWith", new Type[] { typeof(string) });
+        private static MethodInfo hasFlagMethod = typeof(Enum).GetMethod("HasFlag", new Type[] { typeof(Enum) });
 
         public static Expression<Func<T, bool>> GetExpression<T>(IList<Filter> filters)
         {
@@ -83,6 +84,10 @@ namespace System.Linq.Expressions
 
                 case Op.NotEqual:
                     return Expression.NotEqual(member, constant);
+
+                case Op.HasFlag:
+                    constant = Expression.Constant(filter.Value, typeof(Enum));
+                    return Expression.Call(member, hasFlagMethod, constant);
             }
 
             return null;
@@ -115,6 +120,7 @@ namespace System.Linq.Expressions
         Contains,
         StartsWith,
         EndsWith,
-        NotEqual
+        NotEqual,
+        HasFlag
     }
 }
