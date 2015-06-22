@@ -113,7 +113,7 @@ namespace SharedLib
     #endregion
 
     #region VIEWMODELS
-   
+
     #region StartPageViewTypes
     public enum StartPageViewTypes
     {
@@ -149,8 +149,35 @@ namespace SharedLib
         Add = 1,
         Edit = 2,
     }
-    #endregion 
+    #endregion
 
+    #endregion
+
+    #region QUEUESTATUS
+    /// <summary>
+    /// Generic queue status codes.
+    /// </summary>
+    public enum QueueStatus
+    {
+        Queued = 0,
+        Active = 1,
+        Paused = 2,
+        Canceled = 3,
+        Failed = 4,
+        Completed = 5,
+    }
+    #endregion
+
+    #region QUEUEPRIORITY
+    /// <summary>
+    /// Generic queue priorities.
+    /// </summary>
+    public enum QueuePriority
+    {
+        Low = 0,
+        Medium = 1,
+        High = 2,
+    }
     #endregion
 
     #region KnownFolderTypes
@@ -239,7 +266,7 @@ namespace SharedLib
         /// </summary>
         File,
     }
-    #endregion        
+    #endregion
 
     #region ModuleEnum
     [Flags()]
@@ -266,7 +293,7 @@ namespace SharedLib
         Manager = 4,
         Global = ModuleScopes.Client | ModuleScopes.Server | ModuleScopes.Manager,
     }
-    #endregion    
+    #endregion
 
     #region LicenseReservationType
     [Flags]
@@ -275,7 +302,7 @@ namespace SharedLib
         FirstAvailable = 0,
         OneFromEach = 1,
     }
-    #endregion    
+    #endregion
 
     #region LoginState
     /// <summary>
@@ -475,7 +502,7 @@ namespace SharedLib
         /// </summary>
         Replaced = 16,
     }
-    #endregion    
+    #endregion
 
     #region LogoutAction
     public enum LogoutAction
@@ -488,7 +515,7 @@ namespace SharedLib
         StandBy = 4,
         AdminMode = 5,
     }
-    #endregion    
+    #endregion
 
     #region LoginUserActivity
     /// <summary>
@@ -603,7 +630,7 @@ namespace SharedLib
         Top,
         Bottom,
     }
-    #endregion    
+    #endregion
 
     #region StartupModuleActivity
     /// <summary>
@@ -678,7 +705,7 @@ namespace SharedLib
         /// </summary>
         Reserved,
     }
-    #endregion        
+    #endregion
 
     #region IPVersion
     public enum IPVersion
@@ -698,15 +725,15 @@ namespace SharedLib
         /// <summary>
         /// Default value.
         /// </summary>
-        None = 0,        
+        None = 0,
         /// <summary>
         /// CallBack filter.
         /// </summary>
-        CallBackFilter = 1,        
+        CallBackFilter = 1,
         /// <summary>
         /// CallBack File System.
         /// </summary>
-        CallBackFileSystem = 2,        
+        CallBackFileSystem = 2,
         /// <summary>
         /// Raw Disk.
         /// </summary>
@@ -718,7 +745,7 @@ namespace SharedLib
         /// <summary>
         /// Process filter driver.
         /// </summary>
-        ProcessFilter = 16,        
+        ProcessFilter = 16,
         /// <summary>
         /// All driver type value.
         /// </summary>
@@ -795,6 +822,8 @@ namespace SharedLib
         ApplicationGroups,
         SecurityProfiles,
         ClientSettings,
+        HostLayoutGroups,
+        Hosts,
     }
     #endregion
 
@@ -887,6 +916,10 @@ namespace SharedLib
         /// </summary>
         Deleted,
         /// <summary>
+        /// User undeleted.
+        /// </summary>
+        Undelted,
+        /// <summary>
         /// Existing user updated.
         /// </summary>
         Updated,
@@ -952,30 +985,30 @@ namespace SharedLib
     {
         IpAddress = 0,
         HostName = 1,
-        DispatcherId = 3,
-        IsConnected = 4,
-        Module = 5,
-        IsSecured = 6,
-        Port = 7,
-        OperatingSystem = 8,
-        DataSent = 9,
-        DataReceived = 10,
-        IsLocked = 11,
-        Id = 12,
-        IsOutOfOrder = 13,
-        IsMaintenanceMode = 14,
-        LoginState = 15,
-        CurrentUserId = 16,
-        CurrentUserName = 17,
-        HostGroupId = 18,
-        Number = 19,
-        MacAddress = 20,
-        MaximumUsers = 21,
+        DispatcherId = 2,
+        IsConnected = 3,
+        Module = 4,
+        IsSecured = 5,
+        Port = 6,
+        OperatingSystem = 7,
+        DataSent = 8,
+        DataReceived = 9,
+        IsLocked = 10,
+        Id = 11,
+        IsOutOfOrder = 12,
+        IsMaintenanceMode = 13,
+        HostGroupId = 14,
+        Number = 15,
+        MacAddress = 16,
+        MaximumUsers = 17,
+        Name = 18,
+        IconId = 19,
+        State = 20,
     }
     #endregion
 
     #region STORABLE ENUMERATIONS
-   
+
     #region LOG
 
     #region LOGCATEGORIES
@@ -1148,7 +1181,7 @@ namespace SharedLib
         /// Session is moving.
         /// </summary>
         Move = 16 | Active
-        
+
     }
     #endregion
 
@@ -1278,7 +1311,6 @@ namespace SharedLib
     /// <summary>
     /// Game application modes.
     /// </summary>
-    /// <remarks></remarks>
     [Flags()]
     public enum ApplicationModes
     {
@@ -1293,10 +1325,12 @@ namespace SharedLib
         /// <summary>
         /// Online multiplayer.
         /// </summary>
+        [IsGameModeAttibute()]
         Online = 2,
         /// <summary>
         /// Lan Multiplayer.
         /// </summary>
+        [IsGameModeAttibute()]
         Multiplayer = 4,
         /// <summary>
         /// Settings.
@@ -1329,14 +1363,17 @@ namespace SharedLib
         /// <summary>
         /// Split screen.
         /// </summary>
+        [IsGameModeAttibute()]
         SplitScreenMultiPlayer = 1024,
         /// <summary>
         /// Lan co-op.
         /// </summary>
+        [IsGameModeAttibute()]
         CoOpLan = 2048,
         /// <summary>
         /// Online co-op.
         /// </summary>
+        [IsGameModeAttibute()]
         CoOpOnline = 4096,
     }
     #endregion
@@ -1466,12 +1503,97 @@ namespace SharedLib
     }
     #endregion
 
-    #region DISCOUNTTYPEOPTIONTYPE
-    public enum DiscountTypeOptionType
+    #region DISCOUNTAMMOUNTTYPE
+    public enum DiscountAmmountType
     {
+        /// <summary>
+        /// Discount fixed ammount.
+        /// </summary>
         Fixed = 0,
+        /// <summary>
+        /// Discount percentage.
+        /// </summary>
         Percentage = 1,
+        /// <summary>
+        /// Discount bonus.
+        /// </summary>
+        Bonus = 2
     }
+    #endregion
+
+    #region DISCOUNTINPUTTRIGGER
+    /// <summary>
+    /// Type of discount input trigger.
+    /// </summary>
+    public enum DiscountInputTrigger
+    {
+        /// <summary>
+        /// None.
+        /// </summary>
+        Unspecified = 0,
+        /// <summary>
+        /// Money.
+        /// </summary>
+        Money = 1,
+        /// <summary>
+        /// Prodcut count.
+        /// </summary>
+        Count = 2,
+    }
+    #endregion
+
+    #region DISCOUNTAMMOUNTTRIGGER
+    /// <summary>
+    /// Type of ammount triggers.
+    /// </summary>
+    public enum DiscountAmmountTrigger
+    {
+        /// <summary>
+        /// Discount triggered by ammount of specific item.
+        /// </summary>
+        Item = 0,
+        /// <summary>
+        /// Discount triggered by total ammount of order.
+        /// </summary>
+        Order = 1,
+    }
+    #endregion
+
+    #region DISCOUNTTARGETTYPE
+    /// <summary>
+    /// Discount target type.
+    /// </summary>
+    public enum DiscountTargetType
+    {
+        Unspecified = 0,
+        ProductGroups = 1,
+        Product = 2,
+    }
+    #endregion
+
+    #region DISCOUNTCALCTRIGGER
+    /// <summary>
+    /// Defines how the discount creteria is calculated.
+    /// </summary>
+    public enum DiscountCalcTrigger
+    {
+        /// <summary>
+        /// All dsicounted products must be of same.
+        /// </summary>
+        Product = 0,
+        /// <summary>
+        /// All discounted products must be from same group.
+        /// </summary>
+        ProductGroup = 1,
+        /// <summary>
+        /// Irrelavant of group or product type.
+        /// </summary>
+        Sum = 2,
+        /// <summary>
+        /// Total products bught independent of prodcuts targeted by discount.
+        /// </summary>
+        OrderSum=3,
+    } 
     #endregion
 
     #region PAYMENTMETHODOPTIONTYPE
@@ -1616,7 +1738,7 @@ namespace SharedLib
         [Description("Pre License Management")]
         PreLicenseManagement = 128,
     }
-    #endregion 
+    #endregion
 
     #endregion
 }

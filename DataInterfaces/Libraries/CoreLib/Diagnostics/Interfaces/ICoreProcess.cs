@@ -98,6 +98,7 @@ namespace CoreLib.Diagnostics
         {
             get;
         }
+
         /// <summary>
         /// Gets the cpu usage of process.
         /// </summary>
@@ -105,25 +106,29 @@ namespace CoreLib.Diagnostics
         {
             get;
         }
+        
         /// <summary>
         /// Updates the cpu usage from specified parameters.
         /// </summary>
         /// <param name="userTime">User time.</param>
         /// <param name="kernelTime">Kernel time.</param>
         /// <param name="span">Time span.</param>
-        void UpdateCpuUsage(TimeSpan userTime,
-            TimeSpan kernelTime,
-            TimeSpan span);
+        void UpdateCpuUsage(TimeSpan userTime, TimeSpan kernelTime, TimeSpan span);
+        
         /// <summary>
         /// Gets total processor time.
         /// </summary>
         TimeSpan TotalProcessorTime
-        { get; }
+        {
+            get;
+        }
+        
         /// <summary>
         /// Gets user processor time.
         /// </summary>
         TimeSpan UserProcessorTime
         { get; }
+
         /// <summary>
         /// Gets the current directory of process.
         /// </summary>
@@ -131,6 +136,7 @@ namespace CoreLib.Diagnostics
         {
             get;
         }
+
         /// <summary>
         /// Gets the process command line.
         /// </summary>
@@ -138,11 +144,21 @@ namespace CoreLib.Diagnostics
         {
             get;
         }
+
         /// <summary>
         /// Checks if Process handle can be obtained in current thread context.
         /// </summary>
         bool IsAccessable { get; }
+
+        /// <summary>
+        /// Gets or sets if process exit event should be hooked.
+        /// </summary>
         bool HookExited { get; set; }
+
+        /// <summary>
+        /// Gets processor count.
+        /// </summary>
+        int ProcessorCount { get; }
     }
     #endregion    
 }

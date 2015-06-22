@@ -8,6 +8,21 @@ namespace CyClone.Core
     public interface IcySync
     {
         /// <summary>
+        /// Occurs when the source file is changed during the synchronization routine.
+        /// </summary>
+        event EventHandler<FileChangedEventArgs> FileChanged;
+
+        /// <summary>
+        /// Occurs on synchronization error.
+        /// </summary>
+        event EventHandler<ExceptionEventArgs> Error;
+
+        /// <summary>
+        /// Occurs when progress being made.
+        /// </summary>
+        event EventHandler<SyncProgressEventArgs> Progress;
+
+        /// <summary>
         /// Gets current file info.
         /// </summary>
         IcyFileSystemInfo CurrentFile { get; }
@@ -16,16 +31,6 @@ namespace CyClone.Core
         /// Gets current offset in current file.
         /// </summary>
         long CurrentOffset { get; }
-
-        /// <summary>
-        /// Occurs on exception.
-        /// </summary>
-        event ExceptionEventDelegate Error;
-
-        /// <summary>
-        /// Occurs on file change.
-        /// </summary>
-        event FileChangedDelegate FileChanged;
 
         /// <summary>
         /// Gets or sets read buffer size.
@@ -41,6 +46,19 @@ namespace CyClone.Core
         /// Gets or sets write buffer size.
         /// </summary>
         int WriteBufferSize { get; set; }
+
+        /// <summary>
+        /// Gets or sets the ammount of time to wait before retrying.
+        /// </summary>
+        /// <remarks>
+        /// Ammount is in milliseconds.
+        /// </remarks>
+        int RetryWait { get; set; }
+
+        /// <summary>
+        /// Gets or sets ammount of retries.
+        /// </summary>
+        int RetryCount { get; set; }
     } 
     #endregion
 }

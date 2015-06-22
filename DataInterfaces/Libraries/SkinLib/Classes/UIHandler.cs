@@ -27,7 +27,7 @@ namespace SkinLib
 {
     public class UIHandler : PropertyChangedNotificator, IUIHandler
     {
-        #region Constructor
+        #region CONSTRUCTOR
 
         public UIHandler()
         {
@@ -39,7 +39,7 @@ namespace SkinLib
 
         #endregion
 
-        #region Interop
+        #region INTEROP
 
         #region WINDOWPOS
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
@@ -1130,12 +1130,17 @@ namespace SkinLib
 
         #endregion
 
-        #region Events
+        #region EVENTS
 
         /// <summary>
         /// Occurs on each window message sent to the main window.
         /// </summary>
         public event WindowMessageDlegeate MainWindowMessage;
+
+        /// <summary>
+        /// Occurs when visual state of ui module changes;
+        /// </summary>
+        public event EventHandler<UIModuleVisualStateChangeArgs> UIModuleVisualStateChanged;
 
         #endregion
 
@@ -1162,10 +1167,17 @@ namespace SkinLib
         #endregion
 
         #region Interface
+
         IUILayout IUIHandler.CurrentLayout
         {
-            get { return this.CurrentLayout as IUILayout; }
+            get { return this.CurrentLayout; }
         }
+       
+        IUIConfiguration IUIHandler.UIConfiguration
+        {
+            get { return this.UIConfiguration; }
+        }
+
         #endregion
 
         #region Properties
@@ -1785,6 +1797,11 @@ namespace SkinLib
             #endregion
         }
 
+        public void MakeTopMost(bool make)
+        {
+            this.MakeTopMostSafe(this.MainWindow, make);
+        }
+
         #endregion
 
         #region Event Handlers
@@ -2023,7 +2040,19 @@ namespace SkinLib
 
         private void VisualStateChanged(FrameworkElement sender, DependencyPropertyChangedEventArgs e)
         {
-            UIModuleVisualStateChangeArgs args = new UIModuleVisualStateChangeArgs((ElementVisualState)e.NewValue, (ElementVisualState)e.OldValue);
+            #region EVENT
+
+            var args = new UIModuleVisualStateChangeArgs(sender, (ElementVisualState)e.NewValue, (ElementVisualState)e.OldValue);
+            var handler = this.UIModuleVisualStateChanged;
+            if (handler != null)
+            {
+                handler(this, args);
+
+                if (args.Handled)
+                    return;
+            } 
+
+            #endregion
 
             #region MINIMIZED
             if (args.NewState == ElementVisualState.Minimized || args.NewState == ElementVisualState.Closed)
@@ -2099,27 +2128,4 @@ namespace SkinLib
 
         #endregion
     }
-
-    #region UIModuleVisualStateChangeArgs
-    public class UIModuleVisualStateChangeArgs : RoutedEventArgs
-    {
-        public UIModuleVisualStateChangeArgs(ElementVisualState newState, ElementVisualState oldState)
-        {
-            this.NewState = newState;
-            this.OldState = oldState;
-        }
-
-        public ElementVisualState NewState
-        {
-            get;
-            protected set;
-        }
-
-        public ElementVisualState OldState
-        {
-            get;
-            protected set;
-        }
-    }
-    #endregion
 }

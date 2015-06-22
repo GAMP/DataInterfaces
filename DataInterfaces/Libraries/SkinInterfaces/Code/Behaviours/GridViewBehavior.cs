@@ -602,5 +602,4 @@ namespace SkinInterfaces
 
         #endregion
     }
-
 }

@@ -112,34 +112,11 @@ namespace SharedLib.Dispatcher
 
         public virtual void Update(params object[] parameters) { this.RaiseOperationUpdate(parameters); }
 
+        public virtual void Update(byte[] data) { this.RaiseOperationUpdate(); }
+
         #endregion
 
         #region FUNCTIONS
-
-        /// <summary>
-        /// Raises operation update.
-        /// </summary>
-        /// <param name="param">Parameters.</param>
-        public void RaiseOperationUpdate(params object[] param)
-        {
-            var handler = this.OperationUpdate;
-            if (handler != null)
-                handler(this, param);           
-        }
-
-        /// <summary>
-        /// Raises state update and sets it as current state.
-        /// </summary>
-        /// <param name="state">New state.</param>
-        /// <param name="param">Parameters.</param>
-        public void RaiseStateUpdate(OperationState state, params object[] param)
-        {
-            this.state = state;
-
-            var handler = this.StateChange;
-            if (handler != null)
-                handler(this, state, param);           
-        }
 
         /// <summary>
         /// Checks if the current operation command has a valid paramters count.
@@ -217,36 +194,70 @@ namespace SharedLib.Dispatcher
 
         #region PROTECTED FUNCTIONS
 
-        /// <summary>
-        /// Raises and sets invalid parameters state state
-        /// </summary>
+        public void RaiseOperationUpdateWithParam(object param)
+        {
+            var handler = this.OperationUpdate;
+            if (handler != null)
+                handler(this, param);
+        }
+
+        public void RaiseStateUpdateWithParam(OperationState state, object param)
+        {
+            this.state = state;
+
+            var handler = this.StateChange;
+            if (handler != null)
+                handler(this, state, param);
+        }
+        
+        public void RaiseOperationUpdate(params object[] param)
+        {
+            this.RaiseOperationUpdateWithParam(param);
+        }
+        
+        public void RaiseStateUpdate(OperationState state, params object[] param)
+        {
+            this.RaiseStateUpdateWithParam(state, param);
+        }       
+        
         protected void RaiseInvalidParams(params object[] parameters)
         {
-            this.RaiseStateUpdate(OperationState.InvalidParameters, parameters);
+            this.RaiseStateUpdateWithParam(OperationState.InvalidParameters, parameters);
+        }
+        
+        protected void RaiseInvalidParamsWithParam(object parameters)
+        {
+            this.RaiseStateUpdateWithParam(OperationState.InvalidParameters, parameters);
         }
 
-        /// <summary>
-        ///Raises and sets starter state
-        /// </summary>
         protected void RaiseStarted(params object[] parameters)
         {
-            this.RaiseStateUpdate(OperationState.Started, parameters);
+            this.RaiseStateUpdateWithParam(OperationState.Started, parameters);
         }
 
-        /// <summary>
-        /// Raises and sets failed state.
-        /// </summary>
+        protected void RaiseStartedWithParam(object parameters)
+        {
+            this.RaiseStateUpdateWithParam(OperationState.Started, parameters);
+        }
+        
         protected void RaiseFailed(params object[] parameters)
         {
-            this.RaiseStateUpdate(OperationState.Failed, parameters);
+            this.RaiseStateUpdateWithParam(OperationState.Failed, parameters);
         }
 
-        /// <summary>
-        /// Raises and set completed state.
-        /// </summary>
+        protected void RaiseFailedWithParam(object parameters)
+        {
+            this.RaiseStateUpdateWithParam(OperationState.Failed, parameters);
+        }
+        
         protected void RaiseCompleted(params object[] parameters)
         {
-            this.RaiseStateUpdate(OperationState.Completed, parameters);
+            this.RaiseStateUpdateWithParam(OperationState.Completed, parameters);
+        }
+
+        protected void RaiseCompletedWithParam(object parameters)
+        {
+            this.RaiseStateUpdateWithParam(OperationState.Completed, parameters);
         }
 
         #endregion        

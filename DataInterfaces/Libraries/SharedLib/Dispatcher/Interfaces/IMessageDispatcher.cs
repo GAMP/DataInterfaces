@@ -28,7 +28,7 @@ namespace SharedLib.Dispatcher
     /// </summary>
     public interface IMessageDispatcher
     {
-        #region Properties
+        #region PROPERTIES
         
         /// <summary>
         /// Gets the list of active outgoing commands.
@@ -72,7 +72,7 @@ namespace SharedLib.Dispatcher
         }
 
         /// <summary>
-        /// Checks if this dispatcher has an active connection.
+        /// Checks if this dispatcher has an active connection thus is valid.
         /// </summary>
         bool IsValid
         {
@@ -95,11 +95,17 @@ namespace SharedLib.Dispatcher
             get;
         }
 
+        /// <summary>
+        /// Gets compression level.
+        /// </summary>
         int CompressionLevel
         {
             get;
         }
 
+        /// <summary>
+        /// Gets if compression is enabled.
+        /// </summary>
         bool IsCompressionEnabled
         {
             get;
@@ -107,50 +113,39 @@ namespace SharedLib.Dispatcher
 
         #endregion
 
-        #region Functions
+        #region FUNCTIONS
 
+        /// <summary>
+        /// Sets compression level.
+        /// </summary>
+        /// <param name="level">Level.</param>
+        /// <returns>True for scuccess otherwise false.</returns>
         bool SetCompressionLevel(int level);
 
-        bool SetProtocolVersion(int version);
+        /// <summary>
+        /// Sets protocol version.
+        /// </summary>
+        /// <param name="level">Version.</param>
+        /// <returns>True for scuccess otherwise false.</returns>
+        bool SetProtocolVersion(int version); 
 
-        IDispatcherCommand SendRequest(CommandType cmdtype, CommandStates resstates, params  object[] paramarray);
-
-        IDispatcherCommand SendRequest(CommandType cmdtype, params  object[] paramarray);
-
+        /// <summary>
+        /// Tires to send command.
+        /// </summary>
+        /// <param name="cmd">Command instance.</param>
+        /// <returns>True for sucess otherwise false.</returns>
         bool TrySend(IDispatcherCommand cmd);
 
         /// <summary>
         /// Sends the command.
         /// </summary>
-        /// <param name="cmd"></param>
+        /// <param name="cmd">Command instance.</param>
         void Send(IDispatcherCommand cmd);
-
-        /// <summary>
-        /// Gets a new instance of request command.
-        /// </summary>
-        /// <param name="cmdtype">Command type.</param>
-        /// <param name="resstates">Respond states that this command should send back.</param>
-        /// <param name="parameters">Command parameters.</param>
-        /// <returns>IDispatcherCommand command instance.</returns>
-        IDispatcherCommand GetRequestCommand(CommandType cmdtype, CommandStates resstates, params Object[] parameters);      
-
-        IDispatcherCommand GetResponseCommand(IDispatcherCommand cmd, CommandStates resstates, params Object[] parameters);
-
-        ISyncOperation CreateSyncOperation(CommandType cmdType, int timeout, params object[] paramArray);
-
-        ISyncOperation CreateSyncOperation(CommandType cmdType, params object[] paramArray);
 
         /// <summary>
         /// Resetd the dispatcher and aborts the active operations.
         /// </summary>
         void Reset();
-
-        /// <summary>
-        /// Tries to parse the command.
-        /// </summary>
-        /// <param name="cmd">Command to parse.</param>
-        /// <returns></returns>
-        bool TryParse(IDispatcherCommand cmd);
 
         /// <summary>
         /// Ataches a new connection to this dispatcher.
@@ -169,27 +164,95 @@ namespace SharedLib.Dispatcher
         /// </summary>
         void DetachCurrent();
 
+        [Obsolete()]
+        IDispatcherCommand SendRequest(CommandType cmdtype, CommandStates resstates, params object[] paramarray);
+
+        [Obsolete()]
+        IDispatcherCommand SendRequest(CommandType cmdtype, params object[] paramarray);
+
+        /// <summary>
+        /// Gets a new instance of request command.
+        /// </summary>
+        /// <param name="cmdtype">Command type.</param>
+        /// <param name="resstates">Respond states that this command should send back.</param>
+        /// <param name="parameters">Command parameters.</param>
+        /// <returns>Command instance.</returns>
+        IDispatcherCommand GetRequestCommand(CommandType cmdtype, CommandStates resstates, params object[] parameters);
+
+        /// <summary>
+        /// Gets new instance of response command.
+        /// </summary>
+        /// <param name="cmd">Source command.</param>
+        /// <param name="resstates">Response states.</param>
+        /// <param name="parameters">Parameters.</param>
+        /// <returns>Command instance.</returns>
+        IDispatcherCommand GetResponseCommand(IDispatcherCommand cmd, CommandStates resstates, params object[] parameters);
+
+        /// <summary>
+        /// Gets new instance of response command with single parameters.
+        /// </summary>
+        /// <param name="cmd">Source command.</param>
+        /// <param name="resstates">Response states.</param>
+        /// <param name="parameters">Parameters.</param>
+        /// <returns>Command instance.</returns>
+        IDispatcherCommand GetResponseCommandWithParam(IDispatcherCommand cmd, CommandStates responseStates, object parameters);
+
+        #region SYNC OPERATION
+
+        /// <summary>
+        /// Creates sync operation with single parameter.
+        /// </summary>
+        /// <param name="cmdType">Operation type.</param>
+        /// <param name="timeout">Operation timeout.</param>
+        /// <param name="parameters">Operation parameters.</param>
+        ISyncOperation CreateSyncOperationWithParam(CommandType cmdType, int timeout, object parameters=null);
+
+        /// <summary>
+        /// Creates sync operation with single parameters.
+        /// </summary>
+        /// <param name="cmdType">Operation type.</param>
+        /// <param name="timeout">Operation timeout.</param>
+        /// <param name="parameters">Operation parameters.</param>
+        ISyncOperation CreateSyncOperationWithParam(CommandType cmdType, object parameters=null);
+
+        /// <summary>
+        /// Creates sync operation with multiple parameters.
+        /// </summary>
+        /// <param name="cmdType">Operation type.</param>
+        /// <param name="timeout">Operation timeout.</param>
+        /// <param name="parameters">Operation parameters.</param>
+        ISyncOperation CreateSyncOperation(CommandType cmdType, int timeout, params object[] parameters);
+
+        /// <summary>
+        /// Creates sync operation with multiple parameters.
+        /// </summary>
+        /// <param name="cmdType">Operation type.</param>
+        /// <param name="parameters">Operation parameters.</param>
+        ISyncOperation CreateSyncOperation(CommandType cmdType, params object[] parameters);       
+        
         #endregion
 
-        #region Events
+        #endregion
+
+        #region EVENTS
         
         /// <summary>
-        /// Occours when a connection attached to this command dispatcher.
+        /// Occurs when connection attached to this command dispatcher.
         /// </summary>
         event ConnectionDelegate ConnectionAttached;
 
         /// <summary>
-        /// Occours when connection detached from this dispatcher.
+        /// Occurs when connection detached from this dispatcher.
         /// </summary>
         event ConnectionDelegate ConnectionDetached;
 
         /// <summary>
-        /// Occours when state of the connection attached to this dispatcher is changed.
+        /// Occurs when state of the connection attached to this dispatcher changes.
         /// </summary>
         event ConnectionStateDelegate ConnectionStateChanged;
 
         /// <summary>
-        /// Occours when Unhandeled exception occours in this dispatcher.
+        /// Occurs on dispatcher exception.
         /// </summary>
         event DispatcherExceptionDelegate DispatcherException; 
 

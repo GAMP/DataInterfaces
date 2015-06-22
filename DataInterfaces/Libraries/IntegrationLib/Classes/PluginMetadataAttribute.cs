@@ -16,6 +16,9 @@ namespace IntegrationLib
     {
         #region Constructor
 
+        public PluginMetadataAttribute()
+        { }
+
         public PluginMetadataAttribute(string name, string version)
             : base(typeof(IPlugin))
         {

@@ -9,6 +9,29 @@ using System.Windows;
 
 namespace SkinInterfaces.Code
 {
+    #region ICompletionAwareCommand
+    /// <summary>
+    /// Interface that is used for ICommands that notify when they are completed.
+    /// </summary>
+    public interface ICompletionAwareCommand
+    {
+        /// <summary>
+        /// Notifies that the command has completed
+        /// </summary>
+        WeakActionEvent<object> CommandCompleted { get; set; }
+    }
+    #endregion
+
+    #region IExecutionChangedAwareCommand
+    /// <summary>
+    /// Interface that is used for ICommands that notify when can execute status changes.
+    /// </summary>
+    public interface IExecutionChangedAwareCommand : ICommand
+    {
+        void RaiseCanExecuteChanged();
+    }
+    #endregion
+
     #region SimpleCommand
     public class SimpleCommand : ICommand
     {
@@ -70,26 +93,7 @@ namespace SkinInterfaces.Code
     }
     #endregion
 
-    #region ICompletionAwareCommand
-    /// <summary>
-    /// Interface that is used for ICommands that notify when they are
-    /// completed
-    /// </summary>
-    public interface ICompletionAwareCommand
-    {
-        /// <summary>
-        /// Notifies that the command has completed
-        /// </summary>
-        WeakActionEvent<object> CommandCompleted { get; set; }
-    }
-
-    public interface IExecutionChangedAwareCommand : ICommand
-    {
-        void RaiseCanExecuteChanged();
-    }
-    #endregion
-
-    #region SimpleCommand
+    #region SimpleCommand<T1, T2>
     public class SimpleCommand<T1, T2> : IExecutionChangedAwareCommand, ICompletionAwareCommand
     {
         #region CONSTRUCTOR
@@ -110,10 +114,13 @@ namespace SkinInterfaces.Code
 
         #endregion
 
+        #region EVENTS
+        public event EventHandler CanExecuteChanged; 
+        #endregion
+
         #region FIELDS
         protected Func<T1, bool> canExecuteMethod;
-        protected Action<T2> executeMethod;
-        public event EventHandler CanExecuteChanged;
+        protected Action<T2> executeMethod;       
         #endregion        
 
         #region PROPERTIES
@@ -136,7 +143,6 @@ namespace SkinInterfaces.Code
             WeakActionEvent<object> completedHandler = CommandCompleted;
             if (completedHandler != null)
                 completedHandler.Invoke(parameter);
-
         }
 
         public virtual bool CanExecute(object parameter)

@@ -56,7 +56,13 @@ namespace SharedLib
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
     public class IgnorePropertyModificationAttribute : Attribute
     {
-    } 
+    }
+    #endregion
+
+    #region IsGameModeAttibute
+    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
+    public sealed class IsGameModeAttibute : Attribute
+    { } 
     #endregion
 
     #region GUIDAttribue

@@ -35,6 +35,8 @@ namespace CoreLib
         WindowsVista,
         Windows7,
         Windows8,
+        Windows81,
+        Windows10,
         Windows2000,
         WindowsMe,
         Windows98,
@@ -369,5 +371,13 @@ namespace CoreLib
         Hibernate = 8,
         Logoff = 16,
     }
+    #endregion
+
+    #region LogicalOperator
+    public enum LogicalOperator
+    {
+        And,
+        Or,
+    } 
     #endregion
 }

@@ -17,7 +17,7 @@ namespace SkinLib
     [Serializable()]
     public class UIConfiguration : PropertyChangedNotificator, IUIConfiguration
     {
-        #region Constructor
+        #region CONSTRUCTOR
 
         /// <summary>
         /// Creates a new configuration instance.
@@ -41,7 +41,7 @@ namespace SkinLib
 
         #endregion
 
-        #region Fields
+        #region FIELDS
         private ObservableCollection<UIComponent> components;
         private ObservableCollection<FrameworkElement> userControls;
         private ObservableCollection<UILayout> layouts;
@@ -64,7 +64,7 @@ namespace SkinLib
             applicationListComponent;
         #endregion
 
-        #region Private Properties
+        #region PRIVATE PROPERTIES
 
         internal Dictionary<string, UIComponent> ComponentDictionary
         {
@@ -88,7 +88,7 @@ namespace SkinLib
 
         #endregion
 
-        #region Properties
+        #region PROPERTIES
 
         /// <summary>
         /// Gets or sets file name.
@@ -127,7 +127,7 @@ namespace SkinLib
                     this.userControls = new ObservableCollection<FrameworkElement>();
                 return this.userControls;
             }
-        }
+        }     
 
         /// <summary>
         /// Gets the list of the assemblies assigned to this configuration.
@@ -158,9 +158,6 @@ namespace SkinLib
         /// <summary>
         /// Gets or sets a list of the layouts present in this configuration.
         /// </summary>
-        /// <value></value>
-        /// <returns></returns>
-        /// <remarks></remarks>
         public ObservableCollection<UILayout> Layouts
         {
             get
@@ -252,13 +249,53 @@ namespace SkinLib
             set
             {
                 this.xml = value;
-                this.RaisePropertyChanged("XmlRepresentation");
+                this.RaisePropertyChanged("Xml");
             }
         }
 
         #endregion
 
-        #region Loading Functions
+        #region EXPLICIT INTERFACE
+
+        IEnumerable<IUILayout> IUIConfiguration.Layouts
+        {
+            get { return this.Layouts; }
+        }
+ 
+        IEnumerable<IUIComponent> IUIConfiguration.Components
+        {
+            get
+            {
+                return this.Components;
+            }
+        }
+
+        IEnumerable<FrameworkElement> IUIConfiguration.UserControls
+        {
+            get
+            {
+                return this.UserControls;
+            }
+        }
+
+        IUIComponent IUIConfiguration.MainWindowComponent
+        {
+            get { return this.MainWindowComponent; }
+        }
+
+        IUIComponent IUIConfiguration.TaskBarComponent
+        {
+            get { return this.TaskBarComponent; }
+        }
+
+        IUIComponent IUIConfiguration.ApplicationListComponent
+        {
+            get { return this.ApplicationListComponent; }
+        }
+
+        #endregion
+
+        #region FUNCTIONS
 
         public void Load()
         {
@@ -400,14 +437,14 @@ namespace SkinLib
         {
             #region VALIDATE
             if (node == null)
-                throw new ArgumentNullException("node"); 
+                throw new ArgumentNullException("node");
             #endregion
 
             #region CLEAR
             this.ComponentDictionary.Clear();
-            this.Components.Clear(); 
+            this.Components.Clear();
             #endregion
-           
+
             #region LOAD
             //get all child nodes excluding modules node
             foreach (XmlNode childNode in node.ChildNodes.Cast<XmlNode>().Where(x => String.Compare(x.Name, "Modules", true) != 0))
@@ -427,7 +464,7 @@ namespace SkinLib
                     //add load error
                     this.Errors.Add(new Exception(String.Format("Could not load skin component from xml node {0}", childNode.OuterXml)));
                 }
-            } 
+            }
             #endregion
         }
 
@@ -438,11 +475,11 @@ namespace SkinLib
         {
             #region VALIDATE
             if (node == null)
-                throw new ArgumentNullException("node"); 
+                throw new ArgumentNullException("node");
             #endregion
 
             #region CLEAR
-            this.Layouts.Clear(); 
+            this.Layouts.Clear();
             #endregion
 
             #region LOAD
@@ -526,7 +563,7 @@ namespace SkinLib
                     //add load error
                     this.Errors.Add(new Exception(String.Format("Could not load skin layout from xml node {0}", childNode.OuterXml), ex));
                 }
-            } 
+            }
             #endregion
         }
 
@@ -537,11 +574,11 @@ namespace SkinLib
         {
             #region VALIDATE
             if (node == null)
-                throw new ArgumentNullException("node"); 
+                throw new ArgumentNullException("node");
             #endregion
 
             #region CLEAR
-            this.Assemblies.Clear(); 
+            this.Assemblies.Clear();
             #endregion
 
             #region LOAD
@@ -558,7 +595,7 @@ namespace SkinLib
                     this.Assemblies.Add(assemblyFileName);
                 }
                 #endregion
-            } 
+            }
             #endregion
         }
 

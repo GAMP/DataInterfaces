@@ -8,6 +8,9 @@ using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Collections;
 using System.Windows.Data;
+using System.Text;
+using System.Runtime.InteropServices;
+using System.Security;
 
 namespace CoreLib
 {
@@ -21,48 +24,43 @@ namespace CoreLib
         /// Checks if two byte array match.
         /// </summary>
         /// <returns>True or false.</returns>
-        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
-        public static unsafe bool UnSafeEquals(this byte[] strA, byte[] strB)
+        // Copyright (c) 2008-2013 Hafthor Stefansson
+        // Distributed under the MIT/X11 software license
+        // Ref: http://www.opensource.org/licenses/mit-license.php.
+        public static unsafe bool UnSafeEquals(this byte[] a1, byte[] a2)
         {
-            int length = strA.Length;
-            if (length != strB.Length)
-            {
+            if (a1 == null || a2 == null || a1.Length != a2.Length)
                 return false;
-            }
-            fixed (byte* str = strA)
+
+            fixed (byte* p1 = a1, p2 = a2)
             {
-                byte* chPtr = str;
-                fixed (byte* str2 = strB)
+                byte* x1 = p1, x2 = p2;
+                int l = a1.Length;
+                for (int i = 0; i < l / 8; i++, x1 += 8, x2 += 8)
+                    if (*((long*)x1) != *((long*)x2))
+                        return false;
+
+                if ((l & 4) != 0)
                 {
-                    byte* chPtr2 = str2;
-                    byte* chPtr3 = chPtr;
-                    byte* chPtr4 = chPtr2;
-                    while (length >= 10)
-                    {
-                        if ((((*(((int*)chPtr3)) != *(((int*)chPtr4))) ||
-                            (*(((int*)(chPtr3 + 2))) != *(((int*)(chPtr4 + 2)))))
-                            || ((*(((int*)(chPtr3 + 4))) != *(((int*)(chPtr4 + 4))))
-                            || (*(((int*)(chPtr3 + 6))) != *(((int*)(chPtr4 + 6))))))
-                            || (*(((int*)(chPtr3 + 8))) != *(((int*)(chPtr4 + 8)))))
-                        {
-                            break;
-                        }
-                        chPtr3 += 10;
-                        chPtr4 += 10;
-                        length -= 10;
-                    }
-                    while (length > 0)
-                    {
-                        if (*(((int*)chPtr3)) != *(((int*)chPtr4)))
-                        {
-                            break;
-                        }
-                        chPtr3 += 2;
-                        chPtr4 += 2;
-                        length -= 2;
-                    }
-                    return (length <= 0);
+                    if (*((int*)x1) != *((int*)x2))
+                        return false;
+                    x1 += 4;
+                    x2 += 4;
                 }
+
+                if ((l & 2) != 0)
+                {
+                    if (*((short*)x1) != *((short*)x2))
+                        return false;
+                    x1 += 2;
+                    x2 += 2;
+                }
+
+                if ((l & 1) != 0)
+                    if (*((byte*)x1) != *((byte*)x2))
+                        return false;
+
+                return true;
             }
         }
 
@@ -84,6 +82,23 @@ namespace CoreLib
             });
             return (result < 0) ? -1 : result - fidx + 1;
         }
+
+        /// <summary>
+        /// Converts byte array to hexademical string.
+        /// </summary>
+        /// <param name="bytes">Byte array.</param>
+        /// <param name="upperCase">Indicates uppercase conversion.</param>
+        /// <returns>Byte array hexademical string.</returns>
+        public static string ToHex(this byte[] bytes, bool upperCase)
+        {
+            StringBuilder result = new StringBuilder(bytes.Length * 2);
+
+            for (int i = 0; i < bytes.Length; i++)
+                result.Append(bytes[i].ToString(upperCase ? "X2" : "x2"));
+
+            return result.ToString();
+        }
+
     }
     #endregion
 
@@ -161,7 +176,8 @@ namespace CoreLib
                     results.Add(values[i]);
                     bits -= mask;
                 }
-            } if (bits != 0L)
+            }
+            if (bits != 0L)
                 return Enumerable.Empty<Enum>();
             if (Convert.ToUInt64(value) != 0L)
                 return results.Reverse<Enum>();
@@ -340,7 +356,7 @@ namespace CoreLib
             if (DateTime.Today < birthDate.AddYears(yearsOld)) yearsOld--;
             return yearsOld;
         }
-    } 
+    }
     #endregion
 
     #region ListExtensions
@@ -502,7 +518,7 @@ namespace CoreLib
             }
             return -1;
         }
-    } 
+    }
     #endregion
 
     #region CollectionViewExtension

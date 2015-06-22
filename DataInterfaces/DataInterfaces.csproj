@@ -56,17 +56,13 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;RELEASE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="PresentationCore">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
@@ -82,10 +78,6 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -98,14 +90,34 @@
     <Reference Include="WindowsBase">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Condition=" '$(TargetFrameworkVersion)' == 'v4.0' " Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Condition=" '$(TargetFrameworkVersion)' == 'v4.6' " Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <RequiredTargetFramework>4.5.1</RequiredTargetFramework>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Libraries\CoreLib\Diagnostics\Classes\KillProcessInvokeInfo.cs" />
     <Compile Include="Libraries\CoreLib\Diagnostics\Classes\TraceWriter.cs" />
     <Compile Include="Libraries\cyClone\Exceptions.cs" />
+    <Compile Include="Libraries\GizmoDALV2\Enumerations.cs" />
+    <Compile Include="Libraries\GizmoDALV2\EventArgs.cs" />
+    <Compile Include="Libraries\GizmoDALV2\Interfaces\IEntityEventArgs.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\IClientSideIntegrationProvider.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\IPluginModule.cs" />
     <Compile Include="Libraries\SharedLib\Dispatcher\Extensions.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Converters\EmptyStringToNullConverter.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Converters\EmptyStringToVisibilityConvert.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Converters\EqualsToVisibilityConverter.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Converters\NullToBoolConverter.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Converters\NullVisibilityConverter.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Converters\StringToEnvrionmentConverter.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Converters\ZeroToNullConverter.cs" />
+    <Compile Include="Libraries\SkinLib\Classes\UIModuleVisualStateChangeArgs.cs" />
     <Compile Include="Libraries\System\Linq\Expression\ExpressionBuilder.cs" />
     <Compile Include="Libraries\CoreLib\Classes\Tools.cs" />
     <Compile Include="Libraries\CoreLib\Conversion\htmlcssparser.cs" />
@@ -158,6 +170,7 @@
     <Compile Include="Modules\Client\Interfaces\IApplicationView.cs" />
     <Compile Include="Modules\Client\Interfaces\IStartPageViewModel.cs" />
     <Compile Include="Modules\Service\Delegates.cs" />
+    <Compile Include="Modules\Service\Enumerations.cs" />
     <Compile Include="Modules\Service\Exceptions.cs" />
     <Compile Include="Libraries\SharedLib\Delegates.cs" />
     <Compile Include="Libraries\SharedLib\Classes\ImageCacheManager.cs" />
@@ -346,7 +359,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Libraries\SharedLib\ObjectFactories\Interfaces\" />
+    <Folder Include="obj\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

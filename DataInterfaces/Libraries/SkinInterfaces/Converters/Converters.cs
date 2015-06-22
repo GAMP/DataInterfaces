@@ -24,66 +24,6 @@ using System.Windows.Media;
 
 namespace SkinInterfaces.Converters
 {
-    #region NULL
-
-    #region NullVisibilityConverter
-    /// <summary>
-    /// Converts Null to visibility.
-    /// This can be used in some components which doesnt need to be displayed if the value they bound to is null.
-    /// </summary>
-    public class NullVisibilityConverter : IValueConverter
-    {
-        #region IValueConverter Members
-
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            if (value == null)
-            {
-                return Visibility.Collapsed;
-            }
-            else
-            {
-                return Visibility.Visible;
-            }
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
-    }
-    #endregion
-
-    #region NullToBoolConverter
-    public class NullToBoolConverter : IValueConverter
-    {
-        #region IValueConverter Members
-
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            if (value == null || string.IsNullOrEmpty(value as string))
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
-    }
-    #endregion
-
-    #endregion
-
     #region BOOL
 
     #region BoolToVisibilityConverter
@@ -337,6 +277,104 @@ namespace SkinInterfaces.Converters
 
     #endregion
 
+    #region BytesConverter
+    public class BytesConverter : IValueConverter
+    {
+        #region IValueConverter Members
+
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            try
+            {
+                long bytes = long.Parse(value.ToString());
+                return FormatBytes(bytes);
+            }
+            catch
+            {
+                return value;
+            }
+        }
+
+        public string FormatBytes(long bytes)
+        {
+            const int scale = 1024;
+            string[] orders = new string[] { "GB", "MB", "KB", "Bytes" };
+            long max = (long)Math.Pow(scale, orders.Length - 1);
+
+            foreach (string order in orders)
+            {
+                if (bytes > max)
+                    return string.Format("{0:##.00} {1}", decimal.Divide(bytes, max), order);
+
+                max /= scale;
+            }
+            return "0 Bytes";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #region BytesToMegabyesConverter
+    /// <summary>
+    /// Converts bytes value ammount to megabytes.
+    /// </summary>
+    public class BytesToMegabyesConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value != null)
+            {
+                var bytes = 0;
+                if (int.TryParse(value.ToString(), out bytes))
+                {
+                    return bytes / 1024 / 1024;
+                }
+                else
+                {
+                    return value;
+                }
+            }
+            else
+            {
+                return value;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value != null)
+            {
+                var megaBytes = 0;
+                if (int.TryParse(value.ToString(), out megaBytes))
+                {
+                    if (megaBytes > 0)
+                    {
+                        return megaBytes * 1024 * 1024;
+                    }
+                    else
+                    {
+                        return megaBytes;
+                    }
+                }
+                else
+                {
+                    return value;
+                }
+            }
+            else
+            {
+                return value;
+            }
+        }
+    }
+    #endregion
+
     #region PopupHorizontalOffsetConverter
     public class PopupHorizontalOffsetConverter : IMultiValueConverter
     {
@@ -372,7 +410,6 @@ namespace SkinInterfaces.Converters
                                 return (Double)(popupCenter - contentCenter);
                             }
                         }
-
                     }
                 }
             }
@@ -443,22 +480,17 @@ namespace SkinInterfaces.Converters
     {
         #region IValueConverter Members
 
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public virtual object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
             try
             {
                 if (value == null)
-                {
-                    return Visibility.Collapsed;
-                }
+                    return Visibility.Collapsed;  
+
                 else if ((int)value > 0)
-                {
                     return Visibility.Visible;
-                }
-                else
-                {
-                    return Visibility.Collapsed;
-                }
+                
+                return Visibility.Collapsed;               
             }
             catch
             {
@@ -473,6 +505,16 @@ namespace SkinInterfaces.Converters
 
         #endregion
     }
+    #endregion
+
+    #region CountToHiddenConverter
+    public class CountToHiddenConverter : CountToVisibilityConverter
+    {
+        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return (Visibility)base.Convert(value, targetType, parameter, culture) == Visibility.Collapsed ? Visibility.Hidden : Visibility.Visible;
+        }
+    } 
     #endregion
 
     #region CountToBoolConverter
@@ -758,48 +800,7 @@ namespace SkinInterfaces.Converters
             throw new NotImplementedException();
         }
     }
-    #endregion
-
-    #region BytesConverter
-    public class BytesConverter : IValueConverter
-    {
-        #region IValueConverter Members
-
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            try
-            {
-                long bytes = long.Parse(value.ToString());
-                return FormatBytes(bytes);
-            }
-            catch
-            {
-                return value;
-            }
-        }
-        public string FormatBytes(long bytes)
-        {
-            const int scale = 1024;
-            string[] orders = new string[] { "GB", "MB", "KB", "Bytes" };
-            long max = (long)Math.Pow(scale, orders.Length - 1);
-
-            foreach (string order in orders)
-            {
-                if (bytes > max)
-                    return string.Format("{0:##.##} {1}", decimal.Divide(bytes, max), order);
-
-                max /= scale;
-            }
-            return "0 Bytes";
-        }
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
-    }
-    #endregion
+    #endregion 
 
     #region DateTimeToDateConverter
     /// <summary>
@@ -989,14 +990,7 @@ namespace SkinInterfaces.Converters
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (value != null)
-            {
-                return value.ToString().ToLower();
-            }
-            else
-            {
-                return value;
-            }
+            return value == null ? value : value.ToString().ToLower();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
@@ -1014,21 +1008,7 @@ namespace SkinInterfaces.Converters
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            try
-            {
-                if (value != null)
-                {
-                    return value.ToString().ToUpper();
-                }
-                else
-                {
-                    return value;
-                }
-            }
-            catch
-            {
-                return value;
-            }
+            return value == null ? value : value.ToString().ToUpper();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
@@ -1087,62 +1067,7 @@ namespace SkinInterfaces.Converters
             throw new NotImplementedException();
         }
     }
-    #endregion    
-
-    #region BytesToMegabyesConverter
-    /// <summary>
-    /// Converts bytes value ammount to megabytes.
-    /// </summary>
-    public class BytesToMegabyesConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (value != null)
-            {
-                var bytes = 0;
-                if (int.TryParse(value.ToString(), out bytes))
-                {
-                    return bytes / 1024 / 1024;
-                }
-                else
-                {
-                    return value;
-                }
-            }
-            else
-            {
-                return value;
-            }
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (value != null)
-            {
-                var megaBytes = 0;
-                if (int.TryParse(value.ToString(), out megaBytes))
-                {
-                    if (megaBytes > 0)
-                    {
-                        return megaBytes * 1024 * 1024;
-                    }
-                    else
-                    {
-                        return megaBytes;
-                    }
-                }
-                else
-                {
-                    return value;
-                }
-            }
-            else
-            {
-                return value;
-            }
-        }
-    }
-    #endregion
+    #endregion        
 
     #region IOPathConverter
     /// <summary>
@@ -1327,6 +1252,10 @@ namespace SkinInterfaces.Converters
                     return "Microsoft Windows 7";
                 case OperatingSystems.Windows8:
                     return "Microsoft Windows 8";
+                case OperatingSystems.Windows81:
+                    return "Microsoft Windows 8.1";
+                case OperatingSystems.Windows10:
+                    return "Microsoft Windows 10";
                 case OperatingSystems.WindowsServer2003:
                     return "Microsoft Windows Server 2003";
                 case OperatingSystems.WindowsServer2003R2:
@@ -1348,29 +1277,7 @@ namespace SkinInterfaces.Converters
             throw new NotImplementedException();
         }
     }
-    #endregion
-
-    #region EmptyStringToVisibilityConvert
-    public class EmptyStringToVisibilityConvert : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (String.IsNullOrWhiteSpace(value as string))
-            {
-                return Visibility.Collapsed;
-            }
-            else
-            {
-                return Visibility.Visible;
-            }
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-    #endregion
+    #endregion    
 
     #region DefaultButtonConverter
     public class DefaultButtonConverter : BindableParametersConverter
@@ -1399,35 +1306,15 @@ namespace SkinInterfaces.Converters
        
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return Object.Equals(value, Enum.Parse(EnumType, parameter.ToString()));
+            return Object.Equals(value, Enum.Parse(parameter.GetType(), parameter.ToString()));
         }
         
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (bool)value ? Enum.Parse(EnumType, parameter.ToString()) : Enum.ToObject(EnumType, 0);
+            return (bool)value ? Enum.Parse(parameter.GetType(), parameter.ToString()) : Enum.ToObject(EnumType, 0);
         }
     }
-    #endregion
-
-    #region StringEnvrionmentConverter
-    /// <summary>
-    /// Convertes string to environment expanded string.
-    /// </summary>
-    public class StringToEnvrionmentConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (value != null && value is string)
-                return Environment.ExpandEnvironmentVariables(value.ToString());
-            return value;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-    #endregion
+    #endregion    
 
     #region HTMLToXAMLConverter
     public class HTMLToFlowDocumentConverter : IValueConverter
@@ -1521,7 +1408,7 @@ namespace SkinInterfaces.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            string resourceString = value == null ? string.Empty : value.ToString();
+            string resourceString = value as string;
 
             if (!string.IsNullOrWhiteSpace(resourceString))
             {
@@ -1529,34 +1416,7 @@ namespace SkinInterfaces.Converters
 
                 //try to resolve from application resources
                 if (Application.Current != null)
-                {
-                    foundResource = Application.Current.TryFindResource(resourceString);
-                }
-
-                ////application resource not found? lets look in embeded resources
-                //if (foundResource == null)
-                //{
-                //    string[] iconSplit = resourceString.Split(';');
-                //    //check if enough parameters are present format should be [AssemblyName;AssemblyName.Resources.resource.png]
-                //    if (iconSplit.Length >= 2)
-                //    {
-                //        Assembly assembly = Assembly.Load(iconSplit[0]);
-                //        if (assembly != null)
-                //        {
-                //            string resourceKey = iconSplit[1];
-                //            //try to resolve from embeded resources
-                //            var stream = assembly.GetManifestResourceStream(resourceKey);
-                //            if (stream != null)
-                //            {
-                //                var image = new BitmapImage();
-                //                image.BeginInit();
-                //                image.StreamSource = stream;
-                //                image.EndInit();
-                //                return image;
-                //            }
-                //        }
-                //    }
-                //}
+                    foundResource = Application.Current.TryFindResource(resourceString);              
 
                 //return found resource
                 if (foundResource != null)
@@ -1564,7 +1424,7 @@ namespace SkinInterfaces.Converters
             }
 
             //return null image source
-            return (ImageSource)null;
+            return null;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

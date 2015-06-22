@@ -1,32 +1,14 @@
 ﻿using System;
 using SharedLib.Commands;
 using System.Threading.Tasks;
+using System.Threading;
+
 namespace SharedLib.Dispatcher
 {
     #region ISyncOperation
     public interface ISyncOperation
     {
         #region Functions
-        /// <summary>
-        /// Aborts the operation.
-        /// </summary>
-        void Abort();
-
-        /// <summary>
-        /// Aborts operation and waits for abort completion.
-        /// </summary>
-        void AbortEx();
-
-        /// <summary>
-        /// Releases the operation.
-        /// </summary>
-        void Release();
-
-        /// <summary>
-        /// Sends operation update.
-        /// </summary>
-        /// <param name="param">Operation parameters.</param>
-        void SendUpdate(params object[] param);
 
         /// <summary>
         /// Starts the operation.
@@ -39,9 +21,68 @@ namespace SharedLib.Dispatcher
         void StartEx();
 
         /// <summary>
-        /// Async operation start.
+        /// Starts the operation and waits for start completion asynchronously.
         /// </summary>
-        Task StartExAsync();
+        Task StartAsync();
+
+        /// <summary>
+        /// Starts the operation and waits for start completion asynchronously.
+        /// <param name="token">Cancellation token.</param>
+        /// </summary>
+        Task StartAsync(CancellationToken token);
+
+        /// <summary>
+        /// Aborts the operation.
+        /// </summary>
+        void Abort();
+
+        /// <summary>
+        /// Aborts operation and waits for abort completion.
+        /// </summary>
+        void AbortEx();
+
+        /// <summary>
+        /// Aborts operation and waits for abort completion asynchronously.
+        /// </summary>
+        Task AbortAsync();
+
+        /// <summary>
+        /// Aborts operation and waits for abort completion asynchronously.
+        /// <param name="token">Cancellation token.</param>
+        /// </summary>
+        Task AbortAsync(CancellationToken token);
+
+        /// <summary>
+        /// Releases the operation.
+        /// </summary>
+        void Release();
+
+        /// <summary>
+        /// Releases the operation and waits for release completion asynchronously.
+        /// </summary>
+        Task ReleaseAsync();
+
+        /// <summary>
+        /// Releases the operation and waits for release completion asynchronously.
+        /// <param name="token">Cancellation token.</param>
+        /// </summary>
+        Task ReleaseAsync(CancellationToken token);
+
+        /// <summary>
+        /// Sends operation update.
+        /// </summary>
+        /// <param name="param">Operation parameters.</param>
+        void SendUpdate(params object[] param);
+
+        /// <summary>
+        /// Sends operation update asynchronously.
+        /// </summary>
+        /// <param name="param">Update parameters.</param>
+        Task SendUpdateAsync(params object[] param);
+
+        void SendUpdate(object param);
+
+        Task SendUpdateAsync(object param);
 
         /// <summary>
         /// Waits for operation completion.
@@ -52,19 +93,45 @@ namespace SharedLib.Dispatcher
         /// <summary>
         /// Waits for operation completion.
         /// </summary>
-
         void WaitCompleteEx();
+
+        /// <summary>
+        /// Waits for operation completion asynchronously.
+        /// </summary>
+        Task WaitCompleteAsync();
+
+        /// <summary>
+        /// Waits for operation completion asynchronously.
+        /// <param name="token">Cancellation token.</param>
+        /// </summary>
+        Task WaitCompleteAsync(CancellationToken token);
+
         /// <summary>
         /// Waits for operation update.
         /// </summary>
         /// <returns>True if operation update received false if operation timed out.</returns>
-
         bool WaitUpdate();
 
         /// <summary>
         /// Waits for operation update.
         /// </summary>
         void WaitUpdateEx();
+
+        /// <summary>
+        /// Waits for operation update asynchronously.
+        /// </summary>
+        Task WaitUpdateAsync();
+
+        /// <summary>
+        /// Waits for operation update asynchronously.
+        /// <param name="token">Cancellation token.</param>
+        /// </summary>
+        Task WaitUpdateAsync(CancellationToken token);
+
+        /// <summary>
+        /// Validates operation state and throws appropriate exception.
+        /// </summary>
+        void Validate();
 
         #endregion
 
@@ -82,9 +149,11 @@ namespace SharedLib.Dispatcher
         IDispatcherCommand Command { get; }
 
         /// <summary>
-        /// Gets the instance of last data received.
+        /// Gets the instance of last response data received.
         /// </summary>
         object[] Data { get; }
+
+        object DataObject { get; }
 
         /// <summary>
         /// Gets the message dispatcher of this operation.
@@ -115,6 +184,7 @@ namespace SharedLib.Dispatcher
         /// Gets if operation was previously started.
         /// </summary>
         bool IsStarted { get; }
+
 
         #endregion
     }

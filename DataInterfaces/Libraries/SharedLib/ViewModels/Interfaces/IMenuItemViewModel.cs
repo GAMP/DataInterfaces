@@ -62,6 +62,16 @@ namespace SharedLib.ViewModels
         /// </summary>
         string Shortcut { get; set; }
 
+        /// <summary>
+        /// Gets or sets if icon resource represents vector icon.
+        /// </summary>
+        bool IsVectorIcon { get; set; }
+
+        /// <summary>
+        /// Gets or sets if men should be hidden if command cannot execute.
+        /// </summary>
+        bool CantExecuteHide { get; set; }
+
         void Refresh();
     }
 }

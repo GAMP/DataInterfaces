@@ -11,11 +11,11 @@ namespace SharedLib.Dispatcher
         /// <summary>
         /// Throws argument exception if specified dispatcher is null.
         /// </summary>
-        /// <param name="dispathcer">Dispathcer instance.</param>
-        public static void ThrowDispatcherNull(this IMessageDispatcher dispathcer)
+        /// <param name="dispatcher">Dispathcer instance.</param>
+        public static void ThrowDispatcherNull(this IMessageDispatcher dispatcher)
         {
-            if (dispathcer == null)
-                throw new ArgumentNullException("Dispatcher", "Dispatcher instance may not be null");
+            if (dispatcher == null)
+                throw new ArgumentNullException(nameof(dispatcher), "Dispatcher instance may not be null");
         }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace SharedLib.Dispatcher
             dispatcher.ThrowDispatcherNull();
 
             if (!dispatcher.IsValid)
-                throw new Exception("No connections is present. Command dispatcher is in invalid state.");
+                throw new ArgumentException("No connections is present. Command dispatcher is in invalid state.");
         }
 
     }

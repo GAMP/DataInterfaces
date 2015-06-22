@@ -373,4 +373,64 @@ namespace SharedLib.Dispatcher.Exceptions
         #endregion
     }
     #endregion
+
+    #region PoolDispatchFailedException
+    [Serializable()]
+    public class PoolDispatchFailedException : DispatcherOperationExceptionBase
+    {
+        #region Constructor
+
+        public PoolDispatchFailedException(Exception inner)
+            : base("Operation exception was not handeled.", inner)
+        {
+        }
+
+        public PoolDispatchFailedException(string message)
+            : base(message)
+        { }
+
+        public PoolDispatchFailedException() : base() { }
+
+        public PoolDispatchFailedException(string message, System.Exception inner)
+            : base(message, inner)
+        { }
+
+        protected PoolDispatchFailedException(System.Runtime.Serialization.SerializationInfo info,
+            System.Runtime.Serialization.StreamingContext context)
+            : base(info, context)
+        { }
+
+        #endregion
+    } 
+    #endregion
+
+    #region PoolProcesFailedException
+    [Serializable()]
+    public class PoolProcessFailedException : DispatcherOperationExceptionBase
+    {
+        #region Constructor
+
+        public PoolProcessFailedException(Exception inner)
+            : base("Operation exception was not handeled.", inner)
+        {
+        }
+
+        public PoolProcessFailedException(string message)
+            : base(message)
+        { }
+
+        public PoolProcessFailedException() : base() { }
+
+        public PoolProcessFailedException(string message, System.Exception inner)
+            : base(message, inner)
+        { }
+
+        protected PoolProcessFailedException(System.Runtime.Serialization.SerializationInfo info,
+            System.Runtime.Serialization.StreamingContext context)
+            : base(info, context)
+        { }
+
+        #endregion
+    } 
+    #endregion
 }

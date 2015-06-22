@@ -12,63 +12,48 @@ namespace SharedLib.Commands
         /// <summary>
         /// None state.
         /// <remarks >
-        /// This should be set in responses if command not requires any call back.
+        /// This should be set in responses if command not requires any callback.
         /// </remarks>
         /// </summary>
         None = 0,
-        /// <summary>
-        /// This can be set when command is sent (if required).
-        /// </summary>
-        Sent = 1,
-        /// <summary>
-        /// This can be set when command is received (if required).
-        /// </summary>
-        Received = 2,
-        /// <summary>
-        /// Can be set when IOperation class processing data.
-        /// <remarks >
-        /// Can be set multiple times between state changes.
-        /// </remarks>
-        /// </summary>
-        Processing = 4,
-        /// <summary>
-        /// Aborted state. Should be set in IOperation class when operation is sucessfully aborted.
-        /// </summary>
-        Processed = 8,
-        /// <summary>
-        /// Queued command state.
-        /// </summary>
-        Queued = 16,
+        
         /// <summary>
         /// Command is not supported.
         /// </summary>
         NotSupported = 32,
+        
         /// <summary>
         /// Invalid command parameters specified.
         /// <remarks>
         /// </remarks>
         /// </summary>
         InvalidParameters = 64,
+        
         /// <summary>
         /// State should be set when request or response sending failed.
         /// </summary>
         SendFailed = 128,
+        
         /// <summary>
         /// Occours when command carries an operation or a state update and requested command is not present.
         /// </summary>
         RequestNotFound = 256,
+        
         /// <summary>
         /// This state is set when operation exception is unhandled.
         /// </summary>
         UnhandledOperationException = 512,
+        
         /// <summary>
         /// Occours when command data is not recognized.
         /// </summary>
         Unrecongnized = 1024,
+        
         /// <summary>
-        /// Command cannot execute due authorozation.
+        /// Command cannot execute due to authorozation.
         /// </summary>
         UnAuthorized = 2048,
+        
         /// <summary>
         /// All states flag.
         /// </summary>
@@ -84,31 +69,38 @@ namespace SharedLib.Commands
         /// Default operation state.
         /// </summary>
         Unknown = 0,
+       
         /// <summary>
         /// This flag is set as soon as operation enters executing state.
         /// </summary>
         Started = 1,
+        
         /// <summary>
         /// This flags the operation completion.
         /// <remarks>This should be only set when operation has fully completed.
         /// </summary>
         Completed = 2,
+        
         /// <summary>
         /// Operation aborted.
         /// </summary>
         Aborted = 16,
+        
         /// <summary>
         /// Operation released.
         /// </summary>
         Released = 32,
+        
         /// <summary>
         /// Operation update.
         /// </summary>
         Update = 128,
+        
         /// <summary>
         /// When calling an execute or update with invalid parameters this flag is used.
         /// </summary>
         InvalidParameters = 512,
+        
         /// <summary>
         /// This is set when operation is failed in case of critical exception for example.
         /// <remarks>
@@ -118,10 +110,12 @@ namespace SharedLib.Commands
         /// </remarks>
         /// </summary>
         Failed = 1024,
+        
         /// <summary>
         /// This flag is set when the operation was automatically aborted due disconnection.
         /// </summary>
         ConnectionLostAbort = 2048,
+        
         /// <summary>
         /// Connection changed.
         /// </summary>
@@ -136,50 +130,56 @@ namespace SharedLib.Commands
         /// A new request command.
         /// </summary>
         Request = 0,
+       
         /// <summary>
         /// Response command.
         /// </summary>
         Response = 1,
-        /// <summary>
-        /// Command state update.
-        /// </summary>
-        CommandStateUpdate = 2,
+        
         /// <summary>
         /// Encryption negotiation.
         /// </summary>
         NEGEncryption = 3,
-        /// <summary>
-        /// Operation state update.
-        /// </summary>
-        OperationStateUpdate = 4,
+        
         /// <summary>
         /// Compression negotiation.
         /// </summary>
         NEGCompression = 5,
+        
         /// <summary>
         /// Protocol negotiation.
         /// </summary>
         NEGProtocol = 6,
+        
         /// <summary>
         /// Authentication negotiation.
         /// </summary>
         NEGAuthenticate = 7,
+        
+        /// <summary>
+        /// Command state update.
+        /// </summary>
+        CommandStateUpdate = 2,
+        
+        /// <summary>
+        /// Operation state update.
+        /// </summary>
+        OperationStateUpdate = 4,
+        
         /// <summary>
         /// Operation update.
         /// </summary>
         OperationUpdate = 8,
+        
         /// <summary>
         /// Operation abort.
         /// </summary>
         OperationAbort = 16,
+        
         /// <summary>
         /// This state should be set when the operation does not have any completion so the other side would remove it from the operation list.
         /// </summary>
         OperationRelease = 32,
-        /// <summary>
-        /// Indicates dispatcher pool event.
-        /// </summary>
-        PoolEvent = 9
     }
     #endregion
 
@@ -347,6 +347,7 @@ namespace SharedLib.Commands
     /// </summary>
     public enum FileOperations : byte
     {
+        Unknown = 0,
         MulticastTransfer = 1,
         GetFilesList = 2,
         GetDrivesInfos = 3,
@@ -379,7 +380,6 @@ namespace SharedLib.Commands
         GetDirectorySize = 31,
         FileExists = 32,
         DirectoryExists = 33,
-        Unknown = 0,
     }
     #endregion
 
@@ -561,6 +561,7 @@ namespace SharedLib.Commands
         ListProcess = 4,
         ListProcessById = 5,
         GetProcessModuleInfo = 6,
+        GetSystemTimes = 7
     }
     #endregion
 
@@ -587,11 +588,14 @@ namespace SharedLib.Commands
     /// </summary>
     public enum ManagerToServiceOpType
     {
+        #region LOG
         LogGet,
         LogGetById,
         LogAdd,
         LogRemove,
+        #endregion
 
+        #region HOST
         HostGet,
         HostAdd,
         HostUpdate,
@@ -602,8 +606,8 @@ namespace SharedLib.Commands
         HostModuleStateSet,
         HostLockStateSet,
         HostOrderStateSet,
-        HostSecurityStateSet,
-        HostByDispatcherGet,
+        HostSecurityStateSet, 
+        #endregion
 
         #region USERGROUP
         UserGroupGet,
@@ -636,6 +640,9 @@ namespace SharedLib.Commands
 
         #region APP
         AppGet,
+        AppGetWithoutExe,
+        AppExeGetWithDeployment,
+        AppGetByUsage,
         AppGetGraph,
         AppAdd,
         AppUpdate,
@@ -645,12 +652,17 @@ namespace SharedLib.Commands
         AppRename, 
         #endregion
 
+        #region APPSTAT
+        AppStatGet, 
+        #endregion
+
         #region DEPLOYMENT
         DeploymentGet,
         DeploymentAdd,
         DeploymentUpdate,
         DeploymentRemove, 
         DeploymentGetDependentApp,
+        DeploymentGetByAppExe,
         #endregion
 
         #region PERSONAL FILE
@@ -680,19 +692,43 @@ namespace SharedLib.Commands
         HostGroupGet,
         HostGroupAdd,
         HostGroupUpdate,
-        HostGroupRemove, 
+        HostGroupRemove,
         #endregion
 
+        #region HOSTLAYOUTGROUP
+        HostLayoutGroupGet,
+        HostLayoutGroupAdd,
+        HostLayoutGroupUpdate,
+        HostLayoutGroupRemove,
+        HostLayoutGroupImageSet,
+        HostLayoutGroupImageGet,
+        #endregion
+
+        #region NEWS
         NewsFeedGet,
         NewsFeedAdd,
         NewsFeedRemove,
         NewsFeedUpdate,
+        #endregion
+
+        #region FEED
+        FeedGet,
+        FeedAdd,
+        FeedUpdate,
+        FeeedRemove, 
+        #endregion
+
+        #region SESSION
+        SessionGet,
+        #endregion
 
         #region USER
         UserGet,
         UserAdd,
         UserUpdate,
         UserRemove,
+        UserDelete,
+        UserUndelete,
         UserRename,
         UserSetPassword,
         UserSetPicture,
@@ -701,59 +737,73 @@ namespace SharedLib.Commands
         UserSetGroup,
         UserLogin,
         UserLogout,
-        UserDisable, 
+        UserDisable,
         #endregion
 
+        #region USER OPERATOR
         UserOperatorGet,
         UserOperatorCreate,
         UserOperatorUpdate,
         UserOperatorRemove,
-        UserOperatorDelete,
+        UserOperatorDelete, 
+        #endregion
 
         #region PLUGINLIB
-        PluginLibGet = 87787,
-        PluginLibUpdate = 124, 
+        PluginLibGet,
+        PluginLibUpdate, 
         PluginLibGetFiles,
         #endregion
 
         #region VARIABLE
-        VariableGet = 100,
-        VariableAdd = 101,
-        VariableUpdate = 102,
-        VariableRemove = 103, 
+        VariableGet,
+        VariableAdd,
+        VariableUpdate,
+        VariableRemove, 
         #endregion
 
         #region MAPPING
         MappingGet,
         MappingAdd,
         MappingUpdate,
-        MappingRemove, 
+        MappingRemove,
         #endregion
 
+        #region ICON
+        IconGet,
+        IconAdd,
+        IconUpdate,
+        IconRemove,
+        #endregion
+
+        #region CONFIGURATION
         ConfigurationGet,
         ConfigurationSet,
-
         LanguageGet,
         IntegrationProvidersGet,
         SkinGet,
         SystemLicenseGet,
+        #endregion        
 
-        SessionGet,
-
+        #region TASK
         TaskGet,
         TaskAdd,
         TaskRemove,
         TaskUpdate,
+        #endregion
 
+        #region CLIENT TASK
         ClientTaskGet,
         ClientTaskAdd,
         ClientTaskRemove,
         ClientTaskUpdate,
+        #endregion
 
+        #region APP EXE TASK
         AppExeTaskGet,
         AppExeTaskAdd,
         AppExeTaskRemove,
-        AppExeTaskUpdate,
+        AppExeTaskUpdate, 
+        #endregion
 
     }
     #endregion
@@ -771,6 +821,7 @@ namespace SharedLib.Commands
         UserStateChangeEvent = 4,
         UserSessionChangeEvent=5,
         LogChangedEvent = 6,
+        EntityEvent=7,
     }
     #endregion
 

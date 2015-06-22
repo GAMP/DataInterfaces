@@ -8,5 +8,6 @@ namespace CoreLib.Diagnostics
         string ModuleName { get; }
         string FileName { get; }
         string FileVersion { get; }
+        byte[] IconData { get; }
     }
 }

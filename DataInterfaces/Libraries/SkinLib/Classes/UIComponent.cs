@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using SharedLib;
 using System.Windows;
+using System.Runtime.Serialization;
 
 namespace SkinLib
 {
@@ -13,19 +14,19 @@ namespace SkinLib
     /// </summary>
     [Serializable()]
     public class UIComponent :
-        UIConfigurationChild, 
+        UIConfigurationChild,
         IUIComponent
     {
-        #region Constructor
+        #region CONSTRUCTOR
 
-        public UIComponent(UIConfiguration config):base(config)
+        public UIComponent(UIConfiguration config) : base(config)
         {
         }
 
         #endregion
 
-        #region Fields
-        private string 
+        #region FIELDS
+        private string
             guid,
             assemblyName,
             type,
@@ -34,8 +35,8 @@ namespace SkinLib
         [NonSerialized()]
         private FrameworkElement element;
         #endregion
-      
-        #region Properties
+
+        #region PROPERTIES
 
         /// <summary>
         /// Gets or sets component GUID.
@@ -127,7 +128,7 @@ namespace SkinLib
         {
             return this.Type;
         }
-        
+
         #endregion
     }
 }

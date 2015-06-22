@@ -52,7 +52,7 @@ namespace ServerService
         }
         #endregion
     }
-    #endregion 
+    #endregion
 
     #region USERSTATEEVENTARGS
     [Obsolete()]
@@ -119,11 +119,11 @@ namespace ServerService
         #endregion
     }
     #endregion
-    
+
     #endregion
 
     #region BASE ABSTRACT
-    
+
     #region UserIdEventArgsBase
     [Serializable()]
     [DataContract()]
@@ -177,7 +177,7 @@ namespace ServerService
         }
         #endregion
     }
-    #endregion 
+    #endregion
 
     #endregion
 
@@ -188,15 +188,12 @@ namespace ServerService
         #region CONSTRUCTOR
         public ReservationEventArgs(ILicenseReservation reservation, bool released)
         {
-            if (reservation != null)
-            {
-                this.Released = released;
-                this.Reservation = reservation;
-            }
-            else
-            {
-                throw new Exception("Reservation cannot be null.");
-            }
+            if (reservation == null)
+                throw new ArgumentNullException("reservation");
+
+            this.Released = released;
+            this.Reservation = reservation;
+
         }
         #endregion
 
@@ -454,7 +451,7 @@ namespace ServerService
 
         #endregion
     }
-    #endregion    
+    #endregion
 
     #region USERPICTURECHANGEDEVENTARGS
     [Serializable()]
@@ -490,13 +487,14 @@ namespace ServerService
         }
 
         #endregion
-    } 
+    }
     #endregion
 
     #region HOSTIDEVENTARGS
     [Serializable()]
     public class HostIdEventArgs : HostIdArgs
     {
+        #region CONSTRUCTOR
         public HostIdEventArgs(int hostId, HostEventType type, object parameters)
             : base(hostId)
         {
@@ -507,18 +505,38 @@ namespace ServerService
         public HostIdEventArgs(int hostId, HostEventType type)
             : this(hostId, type, null)
         { }
+        #endregion
 
+        #region PROPERTIES
+        /// <summary>
+        /// Gets type.
+        /// </summary>
         public HostEventType Type
         {
             get;
             private set;
         }
 
+        /// <summary>
+        /// Gets parameters.
+        /// </summary>
         public object Parameters
         {
             get;
-            private set;
+            protected set;
         }
+
+        /// <summary>
+        /// Gets parameters as array.
+        /// </summary>
+        public object[] ParametersArray
+        {
+            get
+            {
+                return this.Parameters as object[];
+            }
+        }
+        #endregion
     }
     #endregion
 
@@ -534,7 +552,8 @@ namespace ServerService
         /// <param name="hostId">Host id.</param>
         /// <param name="type">Property type.</param>
         /// <param name="value">Property value.</param>
-        public HostPropertiesChangedEventArgs(int hostId, HostPropertyType type, object value):base(hostId)
+        public HostPropertiesChangedEventArgs(int hostId, HostPropertyType type, object value)
+            : base(hostId)
         {
             this.Properties = new Dictionary<HostPropertyType, object>();
             this.Properties.Add(type, value);
@@ -560,18 +579,18 @@ namespace ServerService
         /// </summary>
         public IDictionary<HostPropertyType, object> Properties
         {
-            get 
+            get
             {
                 if (this.properties == null)
                     this.properties = new Dictionary<HostPropertyType, object>();
-                return this.properties; 
+                return this.properties;
             }
-            private set 
+            private set
             {
-                this.properties = value; 
+                this.properties = value;
             }
         }
-        
+
         #endregion
 
         #region FUNCTIONS
@@ -658,7 +677,7 @@ namespace ServerService
     #region LOGCHANGEEVENTARGS
     public class LogChangeEventArgs
     {
-    } 
+    }
     #endregion
 
     #region USERSESSIONCHNAGEDEVENTARGS
@@ -675,6 +694,6 @@ namespace ServerService
             get;
             protected set;
         }
-    } 
-    #endregion
+    }
+    #endregion    
 }

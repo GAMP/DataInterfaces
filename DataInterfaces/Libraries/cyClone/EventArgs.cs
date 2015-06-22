@@ -102,7 +102,7 @@ namespace CyClone.Core
         public IcyFileSystemInfo Current
         {
             get;
-            protected set;
+            set;
         }
 
         /// <summary>
@@ -111,31 +111,85 @@ namespace CyClone.Core
         public long CurrentOffset
         {
             get;
-            protected set;
+            set;
         }
 
         /// <summary>
         /// Progress of synchronization for current entry.
         /// </summary>
-        public uint Progress
+        public double Progress
         {
             get;
-            protected set;
+            set;
         }
 
         /// <summary>
         /// Total progress of synchronization.
         /// </summary>
-        public uint TotalProgress
+        public double TotalProgress
+        {
+            get;
+            set;
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #region StructureSyncProgressEventArgs
+    [Serializable()]
+    public class StructureSyncProgressEventArgs : SyncProgressEventArgs
+    {
+        #region CONSTRUCTOR
+        public StructureSyncProgressEventArgs()
+        { }
+        #endregion
+
+        #region PROPERTIES
+        /// <summary>
+        /// Total ammount of entries left to be processed.
+        /// </summary>
+        public int EntriesLeft
+        {
+            get;
+            set;
+        }
+        #endregion
+    } 
+    #endregion
+
+    #region FileChangedEventArgs
+    [Serializable()]
+    public class FileChangedEventArgs : EventArgs
+    {
+        #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance of FileChangedEventArgs.
+        /// </summary>
+        /// <param name="currentFile">Current file.</param>
+        /// <param name="previousFile">Previous file.</param>
+        public FileChangedEventArgs(IcyFileSystemInfo currentFile, IcyFileSystemInfo previousFile)
+        {
+            this.CurrentFile = currentFile;
+            this.PreviousFile = previousFile;
+        }
+        #endregion
+
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets current file.
+        /// </summary>
+        public IcyFileSystemInfo CurrentFile
         {
             get;
             protected set;
         }
 
         /// <summary>
-        /// Total ammount of entries left to be processed.
+        /// Gets previous file.
         /// </summary>
-        public uint EntriesLeft
+        public IcyFileSystemInfo PreviousFile
         {
             get;
             protected set;
@@ -143,5 +197,5 @@ namespace CyClone.Core
 
         #endregion
     }
-    #endregion   
+    #endregion
 }

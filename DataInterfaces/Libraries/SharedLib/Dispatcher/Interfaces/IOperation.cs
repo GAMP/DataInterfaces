@@ -68,6 +68,8 @@ namespace SharedLib.Dispatcher
         /// <param name="parameters">Update parameters.</param>
         void Update(params object[] parameters);
 
+        void Update(byte[] data);
+
         /// <summary>
         /// Execute the operation.
         /// </summary>
@@ -84,7 +86,11 @@ namespace SharedLib.Dispatcher
         /// </summary>
         /// <param name="state">New state.</param>
         /// <param name="param">Parameters.</param>
-        void RaiseStateUpdate(OperationState state, params object[] param); 
+        void RaiseStateUpdate(OperationState state, params object[] param);
+
+        void RaiseOperationUpdateWithParam(object param);
+
+        void RaiseStateUpdateWithParam(OperationState state, object param);
         #endregion
     }
     #endregion

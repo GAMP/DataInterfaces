@@ -327,6 +327,26 @@ namespace SkinInterfaces
             }
         }
 
+        public static childItem FindVisualChild<childItem>(DependencyObject obj) where childItem : DependencyObject
+        {
+            for (int i = 0; i <= VisualTreeHelper.GetChildrenCount(obj) - 1; i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
+
+                if (child != null && child is childItem)
+                    return (childItem)child;
+                else
+                {
+                    childItem childOfChild = FindVisualChild<childItem>(child);
+
+                    if (childOfChild != null)
+                        return childOfChild;
+                }
+            }
+
+            return null;
+        }
+
         public static void AddPropertyChangedHandler(this DependencyObject obj, DependencyProperty property, EventHandler handler)
         {
             var desc = DependencyPropertyDescriptor.FromProperty(property, obj.GetType());
