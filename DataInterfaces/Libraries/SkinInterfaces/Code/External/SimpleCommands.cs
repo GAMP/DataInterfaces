@@ -9,29 +9,6 @@ using System.Windows;
 
 namespace SkinInterfaces.Code
 {
-    #region ICompletionAwareCommand
-    /// <summary>
-    /// Interface that is used for ICommands that notify when they are completed.
-    /// </summary>
-    public interface ICompletionAwareCommand
-    {
-        /// <summary>
-        /// Notifies that the command has completed
-        /// </summary>
-        WeakActionEvent<object> CommandCompleted { get; set; }
-    }
-    #endregion
-
-    #region IExecutionChangedAwareCommand
-    /// <summary>
-    /// Interface that is used for ICommands that notify when can execute status changes.
-    /// </summary>
-    public interface IExecutionChangedAwareCommand : ICommand
-    {
-        void RaiseCanExecuteChanged();
-    }
-    #endregion
-
     #region SimpleCommand
     public class SimpleCommand : ICommand
     {

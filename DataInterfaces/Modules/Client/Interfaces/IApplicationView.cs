@@ -1,5 +1,7 @@
 ﻿using SharedLib.Applications;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Client.ViewModels
 {
@@ -20,5 +22,10 @@ namespace Client.ViewModels
         /// Gets application porofile of this application view model.
         /// </summary>
         IApplicationProfile Profile { get; }
+
+        /// <summary>
+        /// Gets executables view models.
+        /// </summary>
+        IEnumerable<IExecutableViewModel> Executables { get; }
     }
 }

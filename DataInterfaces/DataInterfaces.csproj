@@ -110,6 +110,7 @@
     <Compile Include="Libraries\IntegrationLib\Interfaces\IClientSideIntegrationProvider.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\IPluginModule.cs" />
     <Compile Include="Libraries\SharedLib\Dispatcher\Extensions.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Code\SizeObserver.cs" />
     <Compile Include="Libraries\SkinInterfaces\Converters\EmptyStringToNullConverter.cs" />
     <Compile Include="Libraries\SkinInterfaces\Converters\EmptyStringToVisibilityConvert.cs" />
     <Compile Include="Libraries\SkinInterfaces\Converters\EqualsToVisibilityConverter.cs" />
@@ -117,6 +118,8 @@
     <Compile Include="Libraries\SkinInterfaces\Converters\NullVisibilityConverter.cs" />
     <Compile Include="Libraries\SkinInterfaces\Converters\StringToEnvrionmentConverter.cs" />
     <Compile Include="Libraries\SkinInterfaces\Converters\ZeroToNullConverter.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Interfaces\ICompletionAwareCommand.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Interfaces\IExecutionChangedAwareCommand.cs" />
     <Compile Include="Libraries\SkinLib\Classes\UIModuleVisualStateChangeArgs.cs" />
     <Compile Include="Libraries\System\Linq\Expression\ExpressionBuilder.cs" />
     <Compile Include="Libraries\CoreLib\Classes\Tools.cs" />
@@ -168,6 +171,7 @@
     <Compile Include="Modules\Client\EventArgs.cs" />
     <Compile Include="Modules\Client\Exceptions.cs" />
     <Compile Include="Modules\Client\Interfaces\IApplicationView.cs" />
+    <Compile Include="Modules\Client\Interfaces\IExecutableViewModel.cs" />
     <Compile Include="Modules\Client\Interfaces\IStartPageViewModel.cs" />
     <Compile Include="Modules\Service\Delegates.cs" />
     <Compile Include="Modules\Service\Enumerations.cs" />

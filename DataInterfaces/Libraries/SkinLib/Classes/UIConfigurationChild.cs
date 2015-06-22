@@ -7,9 +7,10 @@ using System.Text;
 namespace SkinLib
 {
     #region UIConfigurationChild
+    [Serializable()]
     public abstract class UIConfigurationChild : PropertyChangedNotificator
     {
-        #region Constructor
+        #region CONSTRUCTOR
         public UIConfigurationChild(UIConfiguration config)
         {
             if (config == null)
@@ -19,11 +20,11 @@ namespace SkinLib
         }
         #endregion
 
-        #region Fields
+        #region FIELDS
         private UIConfiguration configuration;
         #endregion
 
-        #region Properties
+        #region PROPERTIES
 
         /// <summary>
         /// Gets the parent configuration of this layout.
