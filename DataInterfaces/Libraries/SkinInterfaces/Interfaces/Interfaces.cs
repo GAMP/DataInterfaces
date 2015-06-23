@@ -81,6 +81,11 @@ namespace SkinInterfaces
         /// </summary>
         /// <param name="content">UIElement.</param>
         void SetOverlay(UIElement content);
+
+        /// <summary>
+        /// Clears the overlay content.
+        /// </summary>
+        void ClearOverlay();
     }
     #endregion    
 
