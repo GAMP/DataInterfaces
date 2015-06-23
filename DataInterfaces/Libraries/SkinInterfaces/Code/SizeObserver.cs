@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 
-namespace SkinInterfaces.Code
+namespace SkinInterfaces
 {
     public static class SizeObserver
     {

@@ -15,7 +15,7 @@ namespace SharedLib.Dispatcher
         public static void ThrowDispatcherNull(this IMessageDispatcher dispatcher)
         {
             if (dispatcher == null)
-                throw new ArgumentNullException(nameof(dispatcher), "Dispatcher instance may not be null");
+                throw new ArgumentNullException("dispatcher", "Dispatcher instance may not be null");
         }
 
         /// <summary>

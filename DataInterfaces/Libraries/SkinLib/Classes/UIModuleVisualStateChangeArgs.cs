@@ -14,7 +14,7 @@ namespace SkinLib
         public UIModuleVisualStateChangeArgs(FrameworkElement module, ElementVisualState newState, ElementVisualState oldState)
         {
             if (module == null)
-                throw new ArgumentNullException(nameof(module));
+                throw new ArgumentNullException("module");
 
             this.Module = module;
             this.NewState = newState;
