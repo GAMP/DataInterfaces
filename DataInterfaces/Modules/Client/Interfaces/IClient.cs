@@ -16,6 +16,7 @@ using SharedLib.Management;
 using SharedLib.Dispatcher;
 using SharedLib.User;
 using System.ComponentModel;
+using System.Threading.Tasks;
 
 namespace Client
 {
@@ -212,7 +213,7 @@ namespace Client
         /// Gets client module shell hook instance.
         /// </summary>
         [Obsolete("Will be replaced or updated in new releases. Do not use.")]
-        IShellHook ShellHook { get; }        
+        IShellHook ShellHook { get; }
 
         /// <summary>
         /// Gets or sets if security is enabled.
@@ -366,6 +367,46 @@ namespace Client
         /// </summary>
         /// <param name="profile">User profile.</param>
         void SetUserInfo(IUserProfile profile);
+
+        /// <summary>
+        /// Logins user asynchronously.
+        /// </summary>
+        /// <param name="username">Username.</param>
+        /// <param name="password">Password.</param>
+        /// <returns>Login result.</returns>
+        /// <remarks>
+        /// By default null or empty passwords are allowed.
+        /// </remarks>
+        Task<LoginResult> LoginAsync(string username, string password);
+
+        /// <summary>
+        /// Logins user.
+        /// </summary>
+        /// <param name="username">Username.</param>
+        /// <param name="password">Password.</param>
+        /// <returns>Login result.</returns>
+        /// <remarks>
+        /// By default null or empty passwords are allowed.
+        /// </remarks>
+        LoginResult Login(string username, string password);
+
+        /// <summary>
+        /// Logs out current user asynchronously.
+        /// </summary>
+        /// <returns>Logout task.</returns>
+        Task LogoutAsync();
+
+        /// <summary>
+        /// Logs out current user.
+        /// </summary>
+        void Logout();
+
+        /// <summary>
+        /// Gets execution context.
+        /// </summary>
+        /// <param name="executableId">Executable id.</param>
+        /// <returns>IExecutionContext instance, null in case executable not found.</returns>
+        IExecutionContext GetExecutionContext(int executableId);
 
         #endregion
     }
