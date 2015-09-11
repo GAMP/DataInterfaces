@@ -11,6 +11,11 @@ namespace SkinLib
     public interface IUIConfiguration
     {
         /// <summary>
+        /// Gets configuration file name.
+        /// </summary>
+        string FileName { get; }
+
+        /// <summary>
         /// Gets user controls.
         /// </summary>
         IEnumerable<FrameworkElement> UserControls

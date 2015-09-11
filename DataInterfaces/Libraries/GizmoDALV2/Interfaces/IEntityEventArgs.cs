@@ -16,5 +16,15 @@ namespace GizmoDALV2
         {
             get;
         }
+
+        IEnumerable<object> AddedItems
+        {
+            get;
+        }
+
+        IEnumerable<object> RemovedItems
+        {
+            get;
+        }
     }
 }

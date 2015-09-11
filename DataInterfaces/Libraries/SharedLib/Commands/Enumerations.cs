@@ -380,6 +380,9 @@ namespace SharedLib.Commands
         GetDirectorySize = 31,
         FileExists = 32,
         DirectoryExists = 33,
+        JunctionCreate =34,
+        JunctionDelete=35,
+        JunctionExist=36,
     }
     #endregion
 
@@ -786,6 +789,7 @@ namespace SharedLib.Commands
 
         #region TASK
         TaskGet,
+        TaskGetById,
         TaskAdd,
         TaskRemove,
         TaskUpdate,

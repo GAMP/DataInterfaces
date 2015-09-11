@@ -35,10 +35,10 @@ namespace CoreLib.Hooking
     public class KeyboardHookEventArgs : HookEventArgsBase
     {
         #region CONSTRUCTOR
-        public KeyboardHookEventArgs(UInt32 keyCode,
-            UInt32 scanCode,
-            UInt32 flags,
-            UInt32 time,
+        public KeyboardHookEventArgs(uint keyCode,
+            uint scanCode,
+            uint flags,
+            uint time,
             IntPtr extraInfo,
             KeyState state,
             bool getModifiers = true)
@@ -62,7 +62,7 @@ namespace CoreLib.Hooking
         /// <summary>
         /// A virtual-key code. The code must be a value in the range 1 to 254. 
         /// </summary>
-        public UInt32 KeyCode
+        public uint KeyCode
         {
             get;
             protected set;
@@ -81,7 +81,7 @@ namespace CoreLib.Hooking
         /// The extended-key flag, event-injected flag, context code, and transition-state flag. This member is specified as follows. 
         /// An application can use the following values to test the keystroke flags. 
         /// </summary>
-        public UInt32 Flags
+        public uint Flags
         {
             get;
             protected set;
@@ -90,7 +90,7 @@ namespace CoreLib.Hooking
         /// <summary>
         /// The time stamp for this message, equivalent to what GetMessageTime would return for this message.
         /// </summary>
-        public UInt32 Time
+        public uint Time
         {
             get;
             protected set;
@@ -134,7 +134,7 @@ namespace CoreLib.Hooking
         /// <summary>
         /// A hardware scan code for the key. 
         /// </summary>
-        public UInt32 ScanCode
+        public uint ScanCode
         {
             get;
             protected set;

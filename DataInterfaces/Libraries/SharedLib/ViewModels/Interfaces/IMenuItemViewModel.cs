@@ -8,12 +8,12 @@ namespace SharedLib.ViewModels
     public interface IMenuBinder
     {
         /// <summary>
-        /// Gets current child items.
+        /// Gets child items.
         /// </summary>
         IEnumerable<IMenuBinder> Children { get; }
 
         /// <summary>
-        /// Gets execution command.
+        /// Gets or sets command.
         /// </summary>
         IExecutionChangedAwareCommand Command { get; set; }
 
@@ -21,6 +21,11 @@ namespace SharedLib.ViewModels
         /// Gets icon resource.
         /// </summary>
         string IconResource { get; set; }
+
+        /// <summary>
+        /// Gets or sets if icon resource represents vector icon.
+        /// </summary>
+        bool IsVectorIcon { get; set; }
 
         /// <summary>
         /// Gets the display header.
@@ -63,15 +68,13 @@ namespace SharedLib.ViewModels
         string Shortcut { get; set; }
 
         /// <summary>
-        /// Gets or sets if icon resource represents vector icon.
-        /// </summary>
-        bool IsVectorIcon { get; set; }
-
-        /// <summary>
-        /// Gets or sets if men should be hidden if command cannot execute.
+        /// Gets or sets if menu should be hidden if command cannot execute.
         /// </summary>
         bool CantExecuteHide { get; set; }
 
+        /// <summary>
+        /// Refresh menu binder.
+        /// </summary>
         void Refresh();
     }
 }

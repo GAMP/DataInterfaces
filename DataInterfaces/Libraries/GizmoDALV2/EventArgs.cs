@@ -74,6 +74,16 @@ namespace GizmoDALV2
             protected set { this.removedItems = value; }
         }
 
+        IEnumerable<object> IEntityEventArgs.RemovedItems
+        {
+            get { return this.RemovedItems.Cast<object>(); }
+        }
+
+        IEnumerable<object> IEntityEventArgs.AddedItems
+        {
+            get { return this.Addedtems.Cast<object>(); }
+        }
+
         /// <summary>
         /// Gets added items.
         /// </summary>

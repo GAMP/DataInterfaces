@@ -168,6 +168,25 @@ namespace SharedLib.Dispatcher
         }
 
         /// <summary>
+        /// Tries to obtain parameter at specified index.
+        /// </summary>
+        /// <typeparam name="T">Parameter type.</typeparam>
+        /// <param name="index">Parameter index.</param>
+        /// <param name="parameter">Parameter value.</param>
+        /// <returns>True or false.</returns>
+        public bool TryGetParameterAt<T>(int index,out T parameter)
+        {
+            parameter = default(T);
+
+            if (!this.HasOpParametersBetween(0, index))
+                return false;
+
+            parameter = (T)this.Command.ParamsArray[index];
+
+            return true;
+        }
+
+        /// <summary>
         /// Gets the parameter at specified index.
         /// </summary>
         /// <typeparam name="T">Parameter type.</typeparam>

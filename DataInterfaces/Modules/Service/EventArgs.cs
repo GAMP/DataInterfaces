@@ -193,7 +193,6 @@ namespace ServerService
 
             this.Released = released;
             this.Reservation = reservation;
-
         }
         #endregion
 

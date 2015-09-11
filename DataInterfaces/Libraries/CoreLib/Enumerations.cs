@@ -40,6 +40,7 @@ namespace CoreLib
         Windows2000,
         WindowsMe,
         Windows98,
+        Windows98SE,
         WindowsNT,
         Windows95,
         WindowsServer2003,
@@ -48,6 +49,8 @@ namespace CoreLib
         WindowsServer2008,
         WindowsServer2008R2,
         WindowsServer2012,
+        WindowsServer2012R2,
+        WindowsServer10,
     }
     #endregion
 

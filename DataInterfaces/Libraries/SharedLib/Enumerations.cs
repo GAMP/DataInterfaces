@@ -42,24 +42,31 @@ namespace SharedLib
     public enum TaskType
     {
         [CanUserAssign(true)]
+        [Localized("TASK_PROCESS")]
         [Description("Process")]
         Process,
         [CanUserAssign(true)]
+        [Localized("TASK_SCRIPT")]
         [Description("Script")]
         Script,
+        [Obsolete()]
         [CanUserAssign(false)]
         [Description("File System")]
         FileSystem,
+        [Obsolete()]
         [CanUserAssign(false)]
         [Description("Task Chain")]
         Chain,
         [CanUserAssign(true)]
+        [Localized("TASK_NOTIFICATION")]
         [Description("Notification")]
         Notification,
         [CanUserAssign(true)]
+        [Localized("TASK_JUNCTION")]
         [Description("Junction")]
         Junction,
         [CanUserAssign(false)]
+        [Localized("ALL")]
         [Description("All Types")]
         AllTypes = 65535,
     }
@@ -174,8 +181,20 @@ namespace SharedLib
     /// </summary>
     public enum QueuePriority
     {
+        /// <summary>
+        /// Low priority.
+        /// </summary>
+        [Localized("LOW")]
         Low = 0,
+        /// <summary>
+        /// Medium priority.
+        /// </summary>
+        [Localized("MEDIUM")]
         Medium = 1,
+        /// <summary>
+        /// High priority.
+        /// </summary>
+        [Localized("HIGH")]
         High = 2,
     }
     #endregion
@@ -819,6 +838,8 @@ namespace SharedLib
         ServerMisc,
         HostGroups,
         UserGroups,
+        Pos,
+        Billing,
         ApplicationGroups,
         SecurityProfiles,
         ClientSettings,
@@ -1181,7 +1202,6 @@ namespace SharedLib
         /// Session is moving.
         /// </summary>
         Move = 16 | Active
-
     }
     #endregion
 
@@ -1213,10 +1233,11 @@ namespace SharedLib
     }
     #endregion
 
-    #region BILLPROFILERATEACTION
-    public enum BillProfileRateAction
+    #region BILLRATEACTION
+    public enum BillRateAction
     {
         GoTo = 0,
+        Charge=1,
     }
     #endregion
 
@@ -1396,6 +1417,27 @@ namespace SharedLib
     }
     #endregion
 
+    #region CREDITLIMITOPTIONTYPE
+    [Flags()]
+    public enum CreditLimitOptionType
+    {
+        /// <summary>
+        /// None.
+        /// </summary>
+        None = 0,
+
+        /// <summary>
+        /// Enable credit limit.
+        /// </summary>
+        EnableCreditLimit = 1,
+        
+        /// <summary>
+        /// Enable per user credit limit.
+        /// </summary>
+        EnablePerUserCreditLimit = 2,
+    }
+    #endregion
+
     #region HOSTSTATE
     [Flags()]
     public enum HostState
@@ -1473,9 +1515,9 @@ namespace SharedLib
     }
     #endregion
 
-    #region TIMEOFFEREXPIRATIONOPTIONTYPE
+    #region PORDUCTTIMEEXPIRATIONOPTIONTYPE
     [Flags()]
-    public enum TimeOfferExpirationOptionType
+    public enum PorductTimeExpirationOptionType
     {
         None = 0,
         HasExpiration = 1,
@@ -1712,6 +1754,7 @@ namespace SharedLib
     [Flags()]
     public enum ClientTaskActivationType
     {
+        [Obsolete()]
         [Description("Disabled")]
         Disabled = 0,
         [Description("Startup")]

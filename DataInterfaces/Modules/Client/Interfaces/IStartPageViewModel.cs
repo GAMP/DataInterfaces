@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SharedLib;
+using System;
 
 namespace Client.ViewModels
 {
@@ -7,7 +8,7 @@ namespace Client.ViewModels
         /// <summary>
         /// Gets or sets current page view type.
         /// </summary>
-        SharedLib.StartPageViewTypes CurrentViewType { get; set; }
+        StartPageViewTypes CurrentViewType { get; set; }
 
         /// <summary>
         /// Select current application view model by application profile.

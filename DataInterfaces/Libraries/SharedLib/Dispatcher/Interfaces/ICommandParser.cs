@@ -18,11 +18,13 @@ namespace SharedLib.Dispatcher
         /// <param name="cmd">Command to parse.</param>
         /// <returns>True or false.</returns>
         bool TryParse(IDispatcherCommand cmd);
+        
         /// <summary>
         /// Parses the command and throws exception in case of error.
         /// </summary>
         /// <param name="cmd"></param>
         void Parse(IExecutionCommand cmd);
+       
         /// <summary>
         /// Tries to parse command.
         /// </summary>
@@ -42,10 +44,12 @@ namespace SharedLib.Dispatcher
         {
             throw new NotImplementedException();
         }
+
         public virtual void Parse(IExecutionCommand cmd)
         {
             throw new NotImplementedException();
         }
+
         public virtual bool TryParse(IExecutionCommand cmd)
         {
             throw new NotImplementedException();

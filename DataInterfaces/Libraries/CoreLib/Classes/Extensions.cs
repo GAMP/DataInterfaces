@@ -11,6 +11,8 @@ using System.Windows.Data;
 using System.Text;
 using System.Runtime.InteropServices;
 using System.Security;
+using Localization;
+using System.Runtime.Serialization;
 
 namespace CoreLib
 {
@@ -146,10 +148,19 @@ namespace CoreLib
         public static string GetEnumDescription(this Enum value)
         {
             FieldInfo fi = value.GetType().GetField(value.ToString());
-            DescriptionAttribute[] attributes =
-              (DescriptionAttribute[])fi.GetCustomAttributes
-              (typeof(DescriptionAttribute), false);
+            var attributes = (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
             return (attributes.Length > 0) ? attributes[0].Description : value.ToString();
+        }
+
+        /// <summary>
+        /// Gets the description of passed enumerator value.
+        /// </summary>
+        public static string GetLocalizationKey(this Enum value)
+        {
+            FieldInfo fi = value.GetType().GetField(value.ToString());
+            var attributes = (LocalizedAttribute[])fi.GetCustomAttributes
+              (typeof(LocalizedAttribute), false);
+            return (attributes.Length > 0) ? attributes[0].ResourceKey : value.ToString();
         }
 
         public static IEnumerable<Enum> GetFlags(this Enum value)
@@ -317,6 +328,24 @@ namespace CoreLib
                         typeof(T).Name
                         ), ex);
             }
+        }
+
+        /// <summary>
+        /// Gets EnumMemberAttribute value from specified enumeration.
+        /// </summary>
+        /// <param name="value">EnumMemberAttribute value.</param>
+        /// <returns>EnumMemberAttribute value, enum string value if no EnumMemberAttribute attribute defined.</returns>
+        public static string ToEnumString(this Enum value)
+        {
+            if (value == null)
+                return null;
+
+            FieldInfo fi = value.GetType().GetField(value.ToString());
+            var attributes = (EnumMemberAttribute[])fi.GetCustomAttributes(typeof(EnumMemberAttribute), false);
+            if (attributes.Length > 0)
+                return attributes[0].Value;
+            else
+                return value.ToString();
         }
     }
     #endregion
