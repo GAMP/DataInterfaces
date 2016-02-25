@@ -78,7 +78,7 @@ namespace IntegrationLib
         /// </summary>
         public bool HasIconResource
         {
-            get { return !String.IsNullOrWhiteSpace(this.IconResource); }
+            get { return !string.IsNullOrWhiteSpace(this.IconResource); }
         }
 
         #endregion

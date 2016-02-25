@@ -19,10 +19,9 @@ namespace Localization
         /// <param name="resource_key">Resource key.</param>
         public LocalizedAttribute(string resource_key,bool localize=true)
         {
-            if (String.IsNullOrWhiteSpace(resource_key))
-            {
+            if (string.IsNullOrWhiteSpace(resource_key))
                 throw new ArgumentNullException("ResourceKey", "Resource key may not be null or empty.");
-            }
+        
             this.ResourceKey = resource_key;
             this.Localize = localize;
         } 

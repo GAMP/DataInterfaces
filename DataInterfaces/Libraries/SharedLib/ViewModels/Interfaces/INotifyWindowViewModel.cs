@@ -18,7 +18,7 @@ namespace SharedLib.ViewModels
         void ShowDialogAsync(IntPtr owner);
         bool WasClosed { get; }
         bool WasShown { get; }
-        System.Windows.Window Window { get; }
+        Window Window { get; }
         IntPtr WindowHandle { get; }
         event EventHandler<EventArgs> Closed;
     } 

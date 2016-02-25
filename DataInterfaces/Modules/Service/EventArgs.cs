@@ -674,25 +674,52 @@ namespace ServerService
     #endregion
 
     #region LOGCHANGEEVENTARGS
-    public class LogChangeEventArgs
+    public class LogChangeEventArgs : EventArgs
     {
     }
     #endregion
 
-    #region USERSESSIONCHNAGEDEVENTARGS
-    public class UserSessionChnagedEventArgs : EventArgs
+    #region USERSESSIONCHANGEDEVENTARGS
+    [Serializable()]
+    [DataContract()]
+    public class UserSessionChangedEventArgs : UserIdEventArgsBase
     {
-        public int UserId
-        {
-            get;
-            protected set;
-        }
+        #region CONSTRUCTOR
+        public UserSessionChangedEventArgs(int userId) : base(userId)
+        { }
+        #endregion
 
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets host id.
+        /// </summary>
+        [DataMember()]
         public int HostId
         {
             get;
             protected set;
         }
+
+        /// <summary>
+        /// Gets old state.
+        /// </summary>
+        [DataMember()]
+        public SessionState OldState
+        {
+            get; protected set;
+        }
+
+        /// <summary>
+        /// Gets new state.
+        /// </summary>
+        [DataMember()]
+        public SessionState NewState
+        {
+            get; protected set;
+        } 
+        
+        #endregion
     }
     #endregion    
 }

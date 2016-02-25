@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -10,13 +10,14 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DataInterfaces</RootNamespace>
     <AssemblyName>DataInterfaces</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation />
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -51,6 +52,7 @@
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <UseVSHostingProcess>true</UseVSHostingProcess>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -60,24 +62,28 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="PresentationCore">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.identitymodel.services" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -87,32 +93,75 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Condition=" '$(TargetFrameworkVersion)' == 'v4.0' " Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Condition=" '$(TargetFrameworkVersion)' == 'v4.6' " Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <RequiredTargetFramework>4.5.1</RequiredTargetFramework>
-    </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Libraries\CoreLib\Diagnostics\Classes\KillProcessInvokeInfo.cs" />
-    <Compile Include="Libraries\CoreLib\Diagnostics\Classes\TraceWriter.cs" />
+    <Compile Include="Libraries\CoreLib\Diagnostics\KillProcessInvokeInfo.cs" />
+    <Compile Include="Libraries\CoreLib\Diagnostics\TraceWriter.cs" />
+    <Compile Include="Libraries\CoreLib\Queue\QueueEntryBase.cs" />
+    <Compile Include="Libraries\CoreLib\Queue\QueueEventArgs.cs" />
     <Compile Include="Libraries\cyClone\Exceptions.cs" />
     <Compile Include="Libraries\GizmoDALV2\Enumerations.cs" />
     <Compile Include="Libraries\GizmoDALV2\EventArgs.cs" />
     <Compile Include="Libraries\GizmoDALV2\Interfaces\IEntityEventArgs.cs" />
+    <Compile Include="Libraries\IntegrationLib\Classes\AuthResult.cs" />
+    <Compile Include="Libraries\IntegrationLib\Classes\ClaimsUserIdentity.cs" />
+    <Compile Include="Libraries\IntegrationLib\Classes\ClaimsUserPrincipal.cs" />
+    <Compile Include="Libraries\IntegrationLib\Classes\DbCredentials.cs" />
+    <Compile Include="Libraries\IntegrationLib\Classes\DispatcherPrincipal.cs" />
+    <Compile Include="Libraries\IntegrationLib\Classes\UserPrincipal.cs" />
+    <Compile Include="Libraries\SharedLib\Dispatcher\CommandParserBase.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Converters\BoolToHiddenConverter.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Libraries\System\ComponentModel\DataAnnotations\EmailNullEmptyAttribute.cs" />
+    <Compile Include="Libraries\System\ComponentModel\DataAnnotations\PhoneNullEmptyAttribute.cs" />
+    <Compile Include="Libraries\System\ComponentModel\DataAnnotations\UrlNullEmptyAttribute.cs" />
+    <Compile Include="Modules\Client\Classes\ClientHookPluginBase.cs" />
+    <Compile Include="Modules\Service\Classes\GizmoServiceAuthPluginBase.cs" />
+    <Compile Include="Modules\Service\Classes\GizmoServiceHookPluginBase.cs" />
+    <Compile Include="Modules\Service\Classes\GizmoServiceModuleBase.cs" />
+    <Compile Include="Modules\Service\Classes\GizmoServicePluginBase.cs" />
+    <Compile Include="Modules\Manager\Classes\ManagerDispatcherPrincipal.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\IClientSideIntegrationProvider.cs" />
+    <Compile Include="Modules\Service\Interfaces\IGizmoServiceAuthenticationPlugin.cs" />
+    <Compile Include="Modules\Service\Interfaces\IGizmoServiceHookPlugin.cs" />
+    <Compile Include="Modules\Service\Interfaces\IGizmoServiceModulePlugin.cs" />
+    <Compile Include="Modules\Service\Interfaces\IGizmoServicePlugin.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\IPluginModule.cs" />
+    <Compile Include="Libraries\SharedLib\ApplicationInfo.cs" />
+    <Compile Include="Libraries\SharedLib\Classes\PropertyChangeNotifier.cs" />
+    <Compile Include="Libraries\SharedLib\Classes\WindowShowParams.cs" />
+    <Compile Include="Libraries\SharedLib\Configuration\Configuration.cs" />
+    <Compile Include="Libraries\SharedLib\Extensions.cs" />
+    <Compile Include="Libraries\SharedLib\Interfaces\ICheckable.cs" />
+    <Compile Include="Libraries\SharedLib\Interfaces\IDisplayOrder.cs" />
+    <Compile Include="Libraries\SharedLib\Interfaces\ISourceConverter.cs" />
+    <Compile Include="Libraries\SharedLib\Interfaces\IUseOrder.cs" />
+    <Compile Include="Libraries\SharedLib\ViewModels\Interfaces\IWizardItemViewModel.cs" />
+    <Compile Include="Libraries\SharedLib\ViewModels\Interfaces\IWizardSwitchValidate.cs" />
+    <Compile Include="Libraries\SharedLib\Classes\PropertyChanged.cs" />
+    <Compile Include="Libraries\SharedLib\Services\IMessageService.cs" />
+    <Compile Include="Libraries\SharedLib\Services\MessageService.cs" />
+    <Compile Include="Libraries\SharedLib\ViewModels\Interfaces\IClosableView.cs" />
+    <Compile Include="Libraries\SharedLib\ViewModels\Interfaces\ISelectViewModelBase.cs" />
+    <Compile Include="Libraries\SharedLib\ViewModels\Interfaces\ITreeItemViewModel.cs" />
+    <Compile Include="Libraries\SharedLib\ViewModels\Interfaces\IValidateViewModelBase.cs" />
+    <Compile Include="Libraries\SharedLib\ViewModels\Interfaces\IView.cs" />
     <Compile Include="Libraries\SharedLib\Dispatcher\Extensions.cs" />
-    <Compile Include="Libraries\SkinInterfaces\Code\SizeObserver.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Behaviours\TextboxBehavior.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Converters\BindableParametersConverter.cs" />
+    <Compile Include="Libraries\SkinInterfaces\ClaimAwareCommand.cs" />
+    <Compile Include="Libraries\SkinInterfaces\DeferredAction.cs" />
+    <Compile Include="Libraries\SkinInterfaces\WeakEventAction.cs" />
+    <Compile Include="Libraries\SkinInterfaces\RestoreVisuals.cs" />
+    <Compile Include="Libraries\SkinInterfaces\SizeObserver.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Converters\BoolAndConverter.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Converters\BoolToGridRowVisibilityConverter.cs" />
     <Compile Include="Libraries\SkinInterfaces\Converters\EmptyStringToNullConverter.cs" />
     <Compile Include="Libraries\SkinInterfaces\Converters\EmptyStringToVisibilityConvert.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Converters\EmptyStringToZeroConverter.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Converters\EnumToBoolConverter.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Converters\EqualsToBoolConverter.cs" />
     <Compile Include="Libraries\SkinInterfaces\Converters\EqualsToVisibilityConverter.cs" />
     <Compile Include="Libraries\SkinInterfaces\Converters\NullToBoolConverter.cs" />
     <Compile Include="Libraries\SkinInterfaces\Converters\NullVisibilityConverter.cs" />
@@ -121,8 +170,9 @@
     <Compile Include="Libraries\SkinInterfaces\Interfaces\ICompletionAwareCommand.cs" />
     <Compile Include="Libraries\SkinInterfaces\Interfaces\IExecutionChangedAwareCommand.cs" />
     <Compile Include="Libraries\SkinLib\Classes\UIModuleVisualStateChangeArgs.cs" />
+    <Compile Include="Libraries\System\ComponentModel\DataAnnotations\IPV4Annotation.cs" />
     <Compile Include="Libraries\System\Linq\Expression\ExpressionBuilder.cs" />
-    <Compile Include="Libraries\CoreLib\Classes\Tools.cs" />
+    <Compile Include="Libraries\CoreLib\Tools.cs" />
     <Compile Include="Libraries\CoreLib\Conversion\htmlcssparser.cs" />
     <Compile Include="Libraries\CoreLib\Conversion\htmlfromxamlconverter.cs" />
     <Compile Include="Libraries\CoreLib\Conversion\htmllexicalanalyzer.cs" />
@@ -134,22 +184,21 @@
     <Compile Include="Libraries\CoreLib\Diagnostics\Interfaces\ICoreProcessStartInfo.cs" />
     <Compile Include="Libraries\CoreLib\EventArgs.cs" />
     <Compile Include="Libraries\CoreLib\Hooking\EventArgs.cs" />
-    <Compile Include="Libraries\CoreLib\Interfaces\IFeed.cs" />
     <Compile Include="Libraries\CoreLib\Interfaces\IWindowWrapper.cs" />
     <Compile Include="Libraries\CoreLib\Interfaces\ISystemStatus.cs" />
-    <Compile Include="Libraries\IntegrationLib\Classes\ClientPluginBase.cs" />
+    <Compile Include="Modules\Client\Classes\ClientPluginBase.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\IAuthResult.cs" />
     <Compile Include="Libraries\IntegrationLib\Classes\PluginMetadataAttribute.cs" />
     <Compile Include="Libraries\IntegrationLib\Classes\UserIdentity.cs" />
-    <Compile Include="Libraries\IntegrationLib\Classes\ServicePluginBase.cs" />
-    <Compile Include="Libraries\IntegrationLib\Interfaces\IClientHook.cs" />
-    <Compile Include="Libraries\IntegrationLib\Interfaces\IClientPlugin.cs" />
+    <Compile Include="Modules\Service\Classes\ServicePluginBase.cs" />
+    <Compile Include="Modules\Client\Interfaces\IClientHook.cs" />
+    <Compile Include="Modules\Client\Interfaces\IClientPlugin.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\IDispatcherPrincipal.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\IExecutionDiversionPlugin.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\IUserIdentity.cs" />
-    <Compile Include="Libraries\IntegrationLib\Interfaces\IAuthenticationPlugin.cs" />
-    <Compile Include="Libraries\IntegrationLib\Interfaces\IServiceHook.cs" />
-    <Compile Include="Libraries\IntegrationLib\Interfaces\IServicePlugin.cs" />
+    <Compile Include="Modules\Service\Interfaces\IServiceAuthenticationPlugin.cs" />
+    <Compile Include="Modules\Service\Interfaces\IServiceHookPlugin.cs" />
+    <Compile Include="Modules\Service\Interfaces\IServicePlugin.cs" />
     <Compile Include="Libraries\NetLib\Delegates.cs" />
     <Compile Include="Libraries\NetLib\EventArgs.cs" />
     <Compile Include="Libraries\SharedLib\Dispatcher\Delegates.cs" />
@@ -163,7 +212,7 @@
     <Compile Include="Libraries\SharedLib\ObjectFactories\IBusinessObjectsFactory.cs" />
     <Compile Include="Libraries\SharedLib\User\Interfaces\IUserSession.cs" />
     <Compile Include="Libraries\SharedLib\ViewModels\Interfaces\IMenuItemViewModel.cs" />
-    <Compile Include="Libraries\SkinInterfaces\Code\Behaviours\GridViewBehavior.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Behaviours\GridViewBehavior.cs" />
     <Compile Include="Libraries\SkinInterfaces\Converters\FlagsEnumValueConverter.cs" />
     <Compile Include="Libraries\SkinInterfaces\Converters\FlagsEnumValueVisibilityConverter.cs" />
     <Compile Include="Libraries\SkinInterfaces\Converters\NullToEnabledConverter.cs" />
@@ -173,8 +222,13 @@
     <Compile Include="Modules\Client\Interfaces\IApplicationView.cs" />
     <Compile Include="Modules\Client\Interfaces\IExecutableViewModel.cs" />
     <Compile Include="Modules\Client\Interfaces\IStartPageViewModel.cs" />
+    <Compile Include="Modules\Manager\Enumerations.cs" />
+    <Compile Include="Modules\Manager\EventArgs.cs" />
+    <Compile Include="Modules\Manager\Interfaces\ICompositionService.cs" />
+    <Compile Include="Modules\Manager\Interfaces\IManagerViewModel.cs" />
+    <Compile Include="Modules\Manager\Interfaces\IRemoteGizmoService.cs" />
+    <Compile Include="Libraries\SharedLib\Interfaces\IRemoteService.cs" />
     <Compile Include="Modules\Service\Delegates.cs" />
-    <Compile Include="Modules\Service\Enumerations.cs" />
     <Compile Include="Modules\Service\Exceptions.cs" />
     <Compile Include="Libraries\SharedLib\Delegates.cs" />
     <Compile Include="Libraries\SharedLib\Classes\ImageCacheManager.cs" />
@@ -189,7 +243,6 @@
     <Compile Include="Libraries\CoreLib\Hooking\Interfaces\IShellHook.cs" />
     <Compile Include="Libraries\CoreLib\Interfaces\IRegistryFile.cs" />
     <Compile Include="Libraries\cyClone\EventArgs.cs" />
-    <Compile Include="Libraries\cyClone\Interfaces\IFileSystemEntryView.cs" />
     <Compile Include="Libraries\GizmoShell\Delegates.cs" />
     <Compile Include="Libraries\GizmoShell\Enumerations.cs" />
     <Compile Include="Libraries\GizmoShell\EventArgs.cs" />
@@ -207,7 +260,7 @@
     <Compile Include="Libraries\IntegrationLib\Interfaces\IPlugin.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\ILoginProvider.cs" />
     <Compile Include="Libraries\SharedLib\Classes\Requests.cs" />
-    <Compile Include="Libraries\CoreLib\Classes\Extensions.cs" />
+    <Compile Include="Libraries\CoreLib\Extensions.cs" />
     <Compile Include="Modules\Client\Interfaces\IClient.cs" />
     <Compile Include="Libraries\CoreLib\Diagnostics\Interfaces\ICoreProcess.cs" />
     <Compile Include="Libraries\CoreLib\Diagnostics\Interfaces\ICoreProcessModule.cs" />
@@ -232,7 +285,7 @@
     <Compile Include="Libraries\cyClone\Interfaces\IcySync.cs" />
     <Compile Include="Libraries\cyClone\Interfaces\IEnumContextBase.cs" />
     <Compile Include="Libraries\cyClone\Interfaces\IPatchBlock.cs" />
-    <Compile Include="Libraries\CoreLib\Hooking\Classes.cs" />
+    <Compile Include="Libraries\CoreLib\Hooking\KeyHook.cs" />
     <Compile Include="Libraries\CoreLib\Hooking\Enumerations.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\ISmartlaunchCommand.cs" />
     <Compile Include="Libraries\IntegrationLib\Classes\UserProfileBase.cs" />
@@ -251,6 +304,7 @@
     <Compile Include="Libraries\Localization\Extensions\LocThicknessExtension.cs" />
     <Compile Include="Libraries\Localization\Extensions\LocTextExtension.cs" />
     <Compile Include="Libraries\NetLib\Interfaces\IConnection.cs" />
+    <Compile Include="Modules\Service\Interfaces\IGizmoService.cs" />
     <Compile Include="Modules\Service\Interfaces\ILicense.cs" />
     <Compile Include="Libraries\SharedLib\Applications\IAppProfile.cs" />
     <Compile Include="Libraries\SharedLib\Applications\ICategory.cs" />
@@ -286,7 +340,7 @@
     <Compile Include="Libraries\NetLib\Interfaces\IHostEntry.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\ILicenseManagerPlugin.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\ILicenseProfile.cs" />
-    <Compile Include="Modules\Service\Interfaces\IServiceInterface.cs" />
+    <Compile Include="Modules\Service\Interfaces\IService.cs" />
     <Compile Include="Libraries\SharedLib\Dispatcher\Interfaces\IOperation.cs" />
     <Compile Include="Libraries\SharedLib\Tasks\ITask.cs" />
     <Compile Include="Libraries\SharedLib\User\Interfaces\IUserProfile.cs" />
@@ -296,30 +350,21 @@
     <Compile Include="Libraries\SharedLib\User\Interfaces\IUserTimeStatus.cs" />
     <Compile Include="Libraries\SharedLib\ViewModels\Interfaces\IMessageBoxModel.cs" />
     <Compile Include="Libraries\SharedLib\ViewModels\Interfaces\INotifyWindowViewModel.cs" />
-    <Compile Include="Libraries\SkinInterfaces\Code\Adonrners\BaseAdroner.cs" />
-    <Compile Include="Libraries\SkinInterfaces\Code\Behaviours\CommandBehavior.cs" />
-    <Compile Include="Libraries\SkinInterfaces\Code\Behaviours\CommandBehaviorBinding.cs" />
-    <Compile Include="Libraries\SkinInterfaces\Code\Behaviours\SelectorKeyCommandBehavior.cs" />
-    <Compile Include="Libraries\SkinInterfaces\Code\Behaviours\EventHandlerGenerator.cs" />
-    <Compile Include="Libraries\SkinInterfaces\Code\Behaviours\GridViewColumnResize.cs" />
-    <Compile Include="Libraries\SkinInterfaces\Code\Behaviours\PasswordBoxAssistant.cs" />
-    <Compile Include="Libraries\SkinInterfaces\Code\Behaviours\SelectorDoubleClickCommandBehavior.cs" />
-    <Compile Include="Libraries\SkinInterfaces\Code\Behaviours\TreeViewItemBehaviours.cs" />
-    <Compile Include="Libraries\SkinInterfaces\Code\Classes.cs" />
-    <Compile Include="Libraries\SkinInterfaces\Code\DependencyProperties.cs" />
-    <Compile Include="Libraries\SkinInterfaces\Code\External\Actions\CommandDrivenGoToStateAction.cs" />
-    <Compile Include="Libraries\SkinInterfaces\Code\External\Events\EventArgs\CloseRequestEventArgs.cs" />
-    <Compile Include="Libraries\SkinInterfaces\Code\External\Events\EventArgs\UICompletedEventArgs.cs" />
-    <Compile Include="Libraries\SkinInterfaces\Code\External\Events\WeakEvents\WeakEvent.cs" />
-    <Compile Include="Libraries\SkinInterfaces\Code\External\Events\WeakEvents\WeakEventAction.cs" />
-    <Compile Include="Libraries\SkinInterfaces\Code\External\Events\WeakEvents\WeakEventHelper.cs" />
-    <Compile Include="Libraries\SkinInterfaces\Code\External\Events\WeakEvents\WeakEventProxy.cs" />
-    <Compile Include="Libraries\SkinInterfaces\Code\External\EventToCommandArgs.cs" />
-    <Compile Include="Libraries\SkinInterfaces\Code\External\SimpleCommands.cs" />
-    <Compile Include="Libraries\SkinInterfaces\Code\External\Triggers\CompletedAwareCommandTrigger.cs" />
-    <Compile Include="Libraries\SkinInterfaces\Code\External\Triggers\CompletedAwareGotoStateCommandTrigger.cs" />
-    <Compile Include="Libraries\SkinInterfaces\Code\External\Triggers\EventToCommandTrigger.cs" />
-    <Compile Include="Libraries\SkinInterfaces\Code\MarkupExtensions\FirstFocusedElementExtension.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Adonrners\BaseAdroner.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Behaviours\CommandBehavior.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Behaviours\CommandBehaviorBinding.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Behaviours\SelectorKeyCommandBehavior.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Behaviours\EventHandlerGenerator.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Behaviours\GridViewColumnResize.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Behaviours\PasswordBoxAssistant.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Behaviours\SelectorDoubleClickCommandBehavior.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Behaviours\TreeViewItemBehaviours.cs" />
+    <Compile Include="Libraries\SkinInterfaces\VirtualToggleButton.cs" />
+    <Compile Include="Libraries\SkinInterfaces\DependencyProperties.cs" />
+    <Compile Include="Libraries\SkinInterfaces\EventToCommandArgs.cs" />
+    <Compile Include="Libraries\SkinInterfaces\SimpleCommand.cs" />
+    <Compile Include="Libraries\SkinInterfaces\EventToCommandTrigger.cs" />
+    <Compile Include="Libraries\SkinInterfaces\MarkupExtensions\FirstFocusedElementExtension.cs" />
     <Compile Include="Libraries\SkinInterfaces\Converters\Converters.cs" />
     <Compile Include="Libraries\SkinInterfaces\Enumerations\Enumerations.cs" />
     <Compile Include="Libraries\SkinInterfaces\Extensions\Extensions.cs" />

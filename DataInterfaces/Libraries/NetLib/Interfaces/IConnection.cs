@@ -136,7 +136,7 @@ namespace NetLib
         /// </summary>
         /// <param name="data">Command string data.</param>
         /// <param name="useEol">Enables or disables end of line seperator.</param>
-        /// <returns>Integer ammount of data sent over the connection. Returns 0 in case of disconnection.</returns>
+        /// <returns>Integer amount of data sent over the connection. Returns 0 in case of disconnection.</returns>
         int Send(string data, bool useEol = true);
         
         /// <summary>
@@ -144,7 +144,7 @@ namespace NetLib
         /// </summary>
         /// <param name="command">Command.</param>
         /// <param name="arguments">Command parameters.</param>
-        /// <returns>Integer ammount of data sent over the connection. Returns 0 in case of disconnection.</returns>
+        /// <returns>Integer amount of data sent over the connection. Returns 0 in case of disconnection.</returns>
         int Send(string command, params string[] arguments);
         
         /// <summary>

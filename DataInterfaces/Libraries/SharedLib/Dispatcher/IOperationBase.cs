@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using SharedLib.Commands;
+using SharedLib.Dispatcher.Exceptions;
 
 namespace SharedLib.Dispatcher
 {
@@ -15,10 +16,8 @@ namespace SharedLib.Dispatcher
         #region CONSTRUCTORS
         public IOperationBase(IDispatcherCommand cmd)
         {
-            #region VALIDATION
             if (cmd == null)
-                throw new ArgumentNullException("Cmd", "Command instance may not be null");            
-            #endregion
+                throw new ArgumentNullException(nameof(cmd));
 
             this.Command = cmd;
             this.Dispatcher = cmd.Dispatcher;
@@ -112,7 +111,7 @@ namespace SharedLib.Dispatcher
 
         public virtual void Update(params object[] parameters) { this.RaiseOperationUpdate(parameters); }
 
-        public virtual void Update(byte[] data) { this.RaiseOperationUpdate(); }
+        public virtual void Update(byte[] data) { this.RaiseOperationUpdate(data); }
 
         #endregion
 
@@ -154,6 +153,9 @@ namespace SharedLib.Dispatcher
         /// </summary>
         /// <typeparam name="T">Parameter type.</typeparam>
         /// <param name="index">Paramter index.</param>
+        /// <remarks>
+        /// If there are no parameter at specified index default value of T type is returned.
+        /// </remarks>
         /// <returns>Parameter of type T.</returns>
         public T GetParameterAt<T>(int index)
         {
@@ -229,9 +231,9 @@ namespace SharedLib.Dispatcher
                 handler(this, state, param);
         }
         
-        public void RaiseOperationUpdate(params object[] param)
+        public void RaiseOperationUpdate(params object[] parameters)
         {
-            this.RaiseOperationUpdateWithParam(param);
+            this.RaiseOperationUpdateWithParam(parameters);
         }
         
         public void RaiseStateUpdate(OperationState state, params object[] param)
@@ -244,9 +246,9 @@ namespace SharedLib.Dispatcher
             this.RaiseStateUpdateWithParam(OperationState.InvalidParameters, parameters);
         }
         
-        protected void RaiseInvalidParamsWithParam(object parameters)
+        protected void RaiseInvalidParamsWithParam(object param)
         {
-            this.RaiseStateUpdateWithParam(OperationState.InvalidParameters, parameters);
+            this.RaiseStateUpdateWithParam(OperationState.InvalidParameters, param);
         }
 
         protected void RaiseStarted(params object[] parameters)
@@ -254,9 +256,9 @@ namespace SharedLib.Dispatcher
             this.RaiseStateUpdateWithParam(OperationState.Started, parameters);
         }
 
-        protected void RaiseStartedWithParam(object parameters)
+        protected void RaiseStartedWithParam(object param)
         {
-            this.RaiseStateUpdateWithParam(OperationState.Started, parameters);
+            this.RaiseStateUpdateWithParam(OperationState.Started, param);
         }
         
         protected void RaiseFailed(params object[] parameters)
@@ -264,9 +266,9 @@ namespace SharedLib.Dispatcher
             this.RaiseStateUpdateWithParam(OperationState.Failed, parameters);
         }
 
-        protected void RaiseFailedWithParam(object parameters)
+        protected void RaiseFailedWithParam(object param)
         {
-            this.RaiseStateUpdateWithParam(OperationState.Failed, parameters);
+            this.RaiseStateUpdateWithParam(OperationState.Failed, param);
         }
         
         protected void RaiseCompleted(params object[] parameters)
@@ -274,9 +276,17 @@ namespace SharedLib.Dispatcher
             this.RaiseStateUpdateWithParam(OperationState.Completed, parameters);
         }
 
-        protected void RaiseCompletedWithParam(object parameters)
+        protected void RaiseCompletedWithParam(object param)
         {
-            this.RaiseStateUpdateWithParam(OperationState.Completed, parameters);
+            this.RaiseStateUpdateWithParam(OperationState.Completed, param);
+        }
+
+        /// <summary>
+        /// Throws access denied exception.
+        /// </summary>
+        protected void ThrowAccessDenied()
+        {
+            throw new AccessDeniedException();
         }
 
         #endregion        

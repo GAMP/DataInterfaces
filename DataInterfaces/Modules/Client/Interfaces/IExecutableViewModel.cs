@@ -1,11 +1,7 @@
 ﻿using SharedLib.Applications;
-using SkinInterfaces.Code;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using SkinInterfaces;
 
-namespace Client
+namespace Client.ViewModels
 {
     public interface IExecutableViewModel
     {

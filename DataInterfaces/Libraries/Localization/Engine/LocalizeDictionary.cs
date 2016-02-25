@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Globalization;
 using System.Reflection;
 using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Markup;
 using System.IO;
-using System.Diagnostics;
 using CoreLib;
 
 [assembly: XmlnsDefinition("http://schemas.root-project.org/xaml/presentation", "Localization.Engine")]

@@ -24,147 +24,22 @@ using System.Windows.Media;
 
 namespace SkinInterfaces.Converters
 {
-    #region BOOL
-
-    #region BoolToVisibilityConverter
-    /// <summary>
-    /// Converts bool value to visibility.
-    /// <remarks>If revert operation required specify true as converter parameter.</remarks>
-    /// </summary>
-    public class BoolToVisibilityConverter : IValueConverter
-    {
-        #region IValueConverter Members
-
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            try
-            {
-                if (value is bool)
-                {
-                    #region Check for revert parameter
-                    bool revert = false;
-                    if (parameter != null)
-                    {
-                        bool temp;
-                        if (bool.TryParse(parameter.ToString(), out temp))
-                        {
-                            revert = temp;
-                        }
-                    }
-                    #endregion
-
-                    if ((bool)value == true)
-                    {
-                        return revert ? Visibility.Collapsed : Visibility.Visible;
-                    }
-                    else
-                    {
-                        return revert ? Visibility.Visible : Visibility.Collapsed;
-                    }
-                }
-                else
-                {
-                    return Visibility.Collapsed;
-                }
-            }
-            catch
-            {
-                return Visibility.Collapsed;
-            }
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
-    }
-    #endregion
-
-    #region BoolToHiddenConverter
-    /// <summary>
-    /// Converts bool value to visibility.
-    /// <remarks>If revert operation required specify true as converter parameter.</remarks>
-    /// </summary>
-    public class BoolToHiddenConverter : IValueConverter
-    {
-        #region IValueConverter Members
-
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            try
-            {
-                if (value is bool)
-                {
-                    #region Check for revert parameter
-                    bool revert = false;
-                    if (parameter != null)
-                    {
-                        bool temp;
-                        if (bool.TryParse(parameter.ToString(), out temp))
-                        {
-                            revert = temp;
-                        }
-                    }
-                    #endregion
-
-                    if ((bool)value == true)
-                    {
-                        return revert ? Visibility.Hidden : Visibility.Visible;
-                    }
-                    else
-                    {
-                        return revert ? Visibility.Visible : Visibility.Hidden;
-                    }
-                }
-                else
-                {
-                    return Visibility.Hidden;
-                }
-            }
-            catch
-            {
-                return Visibility.Hidden;
-            }
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
-    }
-    #endregion
-
     #region RevertBoolConverter
+    /// <summary>
+    /// Reverts bool value.
+    /// </summary>
     public class RevertBoolConverter : IValueConverter
     {
         #region IValueConverter Members
 
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            try
-            {
-                return !(bool)value;
-            }
-            catch
-            {
-                return value;
-            }
+            return !(bool)value;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            try
-            {
-                return !(bool)value;
-            }
-            catch
-            {
-                return value;
-            }
+            return !(bool)value;
         }
 
         #endregion
@@ -211,8 +86,6 @@ namespace SkinInterfaces.Converters
             }
         }
     }
-    #endregion
-
     #endregion
 
     #region TIMESPAN
@@ -322,7 +195,7 @@ namespace SkinInterfaces.Converters
 
     #region BytesToMegabyesConverter
     /// <summary>
-    /// Converts bytes value ammount to megabytes.
+    /// Converts bytes value amount to megabytes.
     /// </summary>
     public class BytesToMegabyesConverter : IValueConverter
     {
@@ -485,12 +358,15 @@ namespace SkinInterfaces.Converters
             try
             {
                 if (value == null)
-                    return Visibility.Collapsed;  
+                    return Visibility.Collapsed;
 
-                else if ((int)value > 0)
+                if (value is int? && (int?)(value) > 0)
                     return Visibility.Visible;
-                
-                return Visibility.Collapsed;               
+
+                if (value is int && (int)(value) > 0)
+                    return Visibility.Visible;
+
+                return Visibility.Collapsed;
             }
             catch
             {
@@ -514,7 +390,7 @@ namespace SkinInterfaces.Converters
         {
             return (Visibility)base.Convert(value, targetType, parameter, culture) == Visibility.Collapsed ? Visibility.Hidden : Visibility.Visible;
         }
-    } 
+    }
     #endregion
 
     #region CountToBoolConverter
@@ -537,10 +413,10 @@ namespace SkinInterfaces.Converters
                 bool reverseValue = false;
 
                 if (parameter != null)
-                    bool.TryParse(parameter.ToString(), out reverseValue);      
+                    bool.TryParse(parameter.ToString(), out reverseValue);
 
                 return reverseValue ? countValue <= 0 : countValue > 0;
-                
+
             }
             catch
             {
@@ -941,7 +817,7 @@ namespace SkinInterfaces.Converters
                         return 5;
                     case RegistryHive.DynData:
                         return 6;
-                    default :
+                    default:
                         return 0;
                 }
             }
@@ -1103,7 +979,6 @@ namespace SkinInterfaces.Converters
     #region SplitStringConverter
     public class SplitStringConverter : IValueConverter
     {
-
         #region IValueConverter Members
 
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
@@ -1297,24 +1172,7 @@ namespace SkinInterfaces.Converters
             throw new NotImplementedException();
         }
     }
-    #endregion
-
-    #region EnumToBoolConverter
-    public class EnumToBoolConverter : IValueConverter
-    {
-        public Type EnumType { get; set; }
-       
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return Object.Equals(value, Enum.Parse(parameter.GetType(), parameter.ToString()));
-        }
-        
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return (bool)value ? Enum.Parse(parameter.GetType(), parameter.ToString()) : Enum.ToObject(EnumType, 0);
-        }
-    }
-    #endregion    
+    #endregion  
 
     #region HTMLToXAMLConverter
     public class HTMLToFlowDocumentConverter : IValueConverter
@@ -1416,7 +1274,7 @@ namespace SkinInterfaces.Converters
 
                 //try to resolve from application resources
                 if (Application.Current != null)
-                    foundResource = Application.Current.TryFindResource(resourceString);              
+                    foundResource = Application.Current.TryFindResource(resourceString);
 
                 //return found resource
                 if (foundResource != null)
@@ -1431,8 +1289,8 @@ namespace SkinInterfaces.Converters
         {
             throw new NotImplementedException();
         }
-    } 
-    #endregion    
+    }
+    #endregion
 }
 
 

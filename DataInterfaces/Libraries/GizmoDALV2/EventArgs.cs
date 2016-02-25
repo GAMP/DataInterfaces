@@ -13,6 +13,7 @@ namespace GizmoDALV2
     public class EntityEventArgs<T> : EventArgs, IEntityEventArgs
     {
         #region CONSTRUCTOR
+
         public EntityEventArgs(EntityEventType type, T addedItem, T removedItem)
             : this(type)
         {

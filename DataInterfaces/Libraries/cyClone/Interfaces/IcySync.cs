@@ -48,15 +48,15 @@ namespace CyClone.Core
         int WriteBufferSize { get; set; }
 
         /// <summary>
-        /// Gets or sets the ammount of time to wait before retrying.
+        /// Gets or sets the amount of time to wait before retrying.
         /// </summary>
         /// <remarks>
-        /// Ammount is in milliseconds.
+        /// Amount is in milliseconds.
         /// </remarks>
         int RetryWait { get; set; }
 
         /// <summary>
-        /// Gets or sets ammount of retries.
+        /// Gets or sets amount of retries.
         /// </summary>
         int RetryCount { get; set; }
     } 

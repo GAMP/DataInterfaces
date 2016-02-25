@@ -9,6 +9,7 @@ namespace IntegrationLib
     public class HttpCredentials
     {
         #region Properties
+
         /// <summary>
         /// Gets credentials username.
         /// </summary>
@@ -24,8 +25,9 @@ namespace IntegrationLib
         /// </summary>
         public bool IsEmpty
         {
-            get { return String.IsNullOrWhiteSpace(this.Username) & String.IsNullOrWhiteSpace(this.Password); }
+            get { return string.IsNullOrWhiteSpace(this.Username) & string.IsNullOrWhiteSpace(this.Password); }
         }
+
         #endregion
     }
     #endregion

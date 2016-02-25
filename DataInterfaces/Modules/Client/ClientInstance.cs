@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Client.ViewModels;
+using System;
 
 namespace Client
 {
     /// <summary>
     /// Provides access to the current Gizmo Client instance.
     /// </summary>
-    [Obsolete("Client access will be handled by MEF in future releases.")]
+    [Obsolete("Is still safe to use but will be handled by MEF in future releases.")]
     public static class ClientInstance
     {
         /// <summary>

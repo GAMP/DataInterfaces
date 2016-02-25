@@ -1,7 +1,5 @@
-﻿using SkinInterfaces.Code;
-using System;
+﻿using SkinInterfaces;
 using System.Collections.Generic;
-using System.Windows.Input;
 
 namespace SharedLib.ViewModels
 {

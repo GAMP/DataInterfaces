@@ -234,27 +234,27 @@ namespace CyClone
         /// <summary>
         /// Gnereic comparison flag.
         /// </summary>
-        ComparisonBasic = FileInfoLevel.LastWriteTime | FileInfoLevel.Length | ComparisonSimple,
+        ComparisonBasic = LastWriteTime | Length | ComparisonSimple,
         /// <summary>
         /// Generic date time stamping flag.
         /// </summary>
-        DateTimeStamps = FileInfoLevel.LastWriteTime | FileInfoLevel.LastAccessTime | FileInfoLevel.CreationTime,
+        DateTimeStamps = LastWriteTime | LastAccessTime | CreationTime,
         /// <summary>
         /// Simple comparison mode.
         /// </summary>
-        ComparisonSimple = FileInfoLevel.Length | FileInfoLevel.Attributes | FileInfoLevel.File | FileInfoLevel.Directory,
+        ComparisonSimple = Length | Attributes | File | Directory,
         /// <summary>
         /// Advanced comparison mode.
         /// </summary>
-        ComparisonAdvanced = ComparisonBasic | FileInfoLevel.Hash,
+        ComparisonAdvanced = ComparisonBasic | Hash,
         /// <summary>
         /// Basic length collection flag.
         /// </summary>
-        LengthBasic = FileInfoLevel.Length | FileInfoLevel.File | FileInfoLevel.Directory,
+        LengthBasic = Length | File | Directory,
         /// <summary>
         /// Basic comparison without attributes.
         /// </summary>
-        ComparisonBasicNoAttributes = LengthBasic | FileInfoLevel.LastWriteTime,
+        ComparisonBasicNoAttributes = LengthBasic | LastWriteTime,
     }
     #endregion
 

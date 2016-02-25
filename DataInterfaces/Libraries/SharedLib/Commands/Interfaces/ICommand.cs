@@ -11,20 +11,13 @@ namespace SharedLib.Commands
     /// <param name="resstates">Response states of this command.</param>
     /// <param name="parameters">New parameters.</param>
     public delegate void StateChangeDelegate(IDispatcherCommand sender, CommandStates state, params object[] parameters);
-    #endregion
-
-    #region IExecutionCommand
-    public interface IExecutionCommand
-    {
-
-    } 
-    #endregion
+    #endregion       
 
     #region IDispatcherCommand
     /// <summary>
     /// IDispatcherCommand command interface.
     /// </summary>
-    public interface IDispatcherCommand : IExecutionCommand
+    public interface IDispatcherCommand
     {
         /// <summary>
         /// Gets or sets command unique id.

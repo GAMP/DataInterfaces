@@ -8,7 +8,7 @@ namespace Client.ViewModels
     /// <summary>
     /// Application profile view model interface.
     /// </summary>
-    public interface IApplicationView
+    public interface IApplicationViewModel
     {
         /// <summary>
         /// Gets if view model has accessible executables.

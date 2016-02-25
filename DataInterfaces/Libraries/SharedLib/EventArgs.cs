@@ -277,4 +277,154 @@ namespace SharedLib
         #endregion
     }
     #endregion
+
+    #region SelectedChangeEventArgs
+    /// <summary>
+    /// Generic selected changed event args.
+    /// </summary>
+    /// <typeparam name="T">Item type.</typeparam>
+    public class SelectedChangeEventArgs<T> : EventArgs
+    {
+        #region CONSTRUCTOR
+
+        protected SelectedChangeEventArgs()
+        { }
+
+        public SelectedChangeEventArgs(T current, T previous)
+        {
+            this.Current = current;
+            this.Previous = previous;
+        }
+
+        #endregion
+
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets instance of current item.
+        /// </summary>
+        public T Current
+        {
+            get;
+            protected set;
+        }
+
+        /// <summary>
+        /// Gets instance of previous item.
+        /// </summary>
+        public T Previous
+        {
+            get;
+            protected set;
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #region CurrentChangedEventArgs
+    /// <summary>
+    /// Generic current changed event args.
+    /// </summary>
+    /// <typeparam name="T">Item type.</typeparam>
+    public class CurrentChangedEventArgs<T> : SelectedChangeEventArgs<T>
+    {
+        #region CONSTRUCTOR
+
+        protected CurrentChangedEventArgs() : base()
+        {
+        }
+
+        public CurrentChangedEventArgs(T current, T previous) : base(current, previous)
+        {
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #region MessageLogEventArgs
+    [Serializable()]
+    public class MessageLogEventArgs : EventArgs
+    {
+        #region CONSTRUCTOR
+
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="message">Message.</param>
+        public MessageLogEventArgs(string message)
+        {
+            if (string.IsNullOrWhiteSpace(message))
+                throw new ArgumentNullException(nameof(message));
+        }
+
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="message">Message.</param>
+        /// <param name="endpoint">Endpoint.</param>
+        /// <param name="type">Event type.</param>
+        /// <param name="exception">Exception.</param>
+        public MessageLogEventArgs(string message, string endpoint, EventTypes type, Exception exception):
+            this(message)
+        {
+            this.Endpoint = endpoint;
+            this.EventType = type;
+            this.Exception = exception;
+            this.Time = InternalDate.Now;
+        }
+        
+        #endregion
+
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets message.
+        /// </summary>
+        public string Message
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets endpoint.
+        /// </summary>
+        public string Endpoint
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets event type.
+        /// </summary>
+        public EventTypes EventType
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets exception.
+        /// </summary>
+        public Exception Exception
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets time.
+        /// </summary>
+        public DateTime Time
+        {
+            get;
+            protected set;
+        }
+        
+        #endregion
+    }
+    #endregion
 }

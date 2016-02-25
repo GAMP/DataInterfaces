@@ -4,7 +4,7 @@ namespace SharedLib.ViewModels
 {
     public interface IMessageBoxModel
     {
-        global::SkinInterfaces.Code.SimpleCommand<object, object> ButtonCommand { get; }
+        global::SkinInterfaces.SimpleCommand<object, object> ButtonCommand { get; }
         global::System.Windows.MessageBoxButton Buttons { get; }
         global::SharedLib.NotificationButtons DefaultButton { get; set; }
         bool HideButtons { get; set; }

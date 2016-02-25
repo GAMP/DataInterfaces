@@ -1,27 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using SharedLib;
-using System.Collections.ObjectModel;
 using System.Reflection;
 using SkinInterfaces;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows;
-using System.Windows.Data;
 using System.IO;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
-using System.Windows.Threading;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.Windows.Interop;
 using GizmoShell;
-using System.ComponentModel;
-using System.Threading;
-using System.Drawing;
 
 namespace SkinLib
 {
@@ -1144,7 +1137,7 @@ namespace SkinLib
 
         #endregion
 
-        #region Fields
+        #region FIELDS
         private static UIHandler instance;
         private List<Exception> exceptions;
         private List<Assembly> assemblies;
@@ -1166,7 +1159,7 @@ namespace SkinLib
         private int animationDuration = 300;
         #endregion
 
-        #region Interface
+        #region INTERFACE
 
         IUILayout IUIHandler.CurrentLayout
         {
@@ -1180,7 +1173,7 @@ namespace SkinLib
 
         #endregion
 
-        #region Properties
+        #region PROPERTIES
 
         /// <summary>
         /// Gets the list of exceptions thrown during load phase.
@@ -1422,7 +1415,7 @@ namespace SkinLib
 
         #endregion
 
-        #region Assemblies Functions
+        #region ASSEMBLIES FUNCTIONS
 
         /// <summary>
         /// Loads the currently configured assemblies.
@@ -1445,13 +1438,25 @@ namespace SkinLib
                 if (this.IsAssemblyLoaded(asemblyFile))
                     continue;
 
-                using (System.IO.FileStream assemblyFileStream = new System.IO.FileStream(asemblyFile, FileMode.Open, FileAccess.Read))
+
+                Assembly loadedAssembly;
+
+                try
                 {
-                    byte[] assemblybuffer = new byte[assemblyFileStream.Length];
-                    assemblyFileStream.Read(assemblybuffer, 0, (int)assemblyFileStream.Length);
-                    var loadedAssembly = AppDomain.CurrentDomain.Load(assemblybuffer);
-                    this.Assemblies.Add(loadedAssembly);
+                    using (FileStream assemblyFileStream = new FileStream(asemblyFile, FileMode.Open, FileAccess.Read))
+                    {
+                        byte[] assemblybuffer = new byte[assemblyFileStream.Length];
+                        assemblyFileStream.Read(assemblybuffer, 0, (int)assemblyFileStream.Length);
+                        loadedAssembly = AppDomain.CurrentDomain.Load(assemblybuffer);
+                    }
                 }
+                catch (FileLoadException)
+                {
+                    //try to unsafe load in case of failure
+                    loadedAssembly = Assembly.UnsafeLoadFrom(asemblyFile);
+                }
+
+                this.Assemblies.Add(loadedAssembly);
             }
         }
 
@@ -1522,7 +1527,7 @@ namespace SkinLib
 
         #endregion
 
-        #region Background Functions
+        #region BACKGROUND FUNCTIONS
 
         public bool SetBackground(string imageFileName = null)
         {
@@ -1643,7 +1648,7 @@ namespace SkinLib
 
         #endregion
 
-        #region Main Window Functions
+        #region MAIN WINDOW FUNCTIONS
 
         /// <summary>
         /// Creates a main interface window.
@@ -1731,7 +1736,6 @@ namespace SkinLib
                 this.DetachMainWindowEvents(this.MainWindow);
                 this.MainWindow = null;
             }
-
         }
 
         private void AttachMainWindowEvents(Window window)
@@ -1804,7 +1808,7 @@ namespace SkinLib
 
         #endregion
 
-        #region Event Handlers
+        #region EVENT HANDLERS
 
         private Assembly AssemblyResolveHandler(object sender, System.ResolveEventArgs args)
         {
@@ -1958,7 +1962,7 @@ namespace SkinLib
 
         #endregion
 
-        #region DP Event Handlers
+        #region DP EVENT HANDLERS
 
         private void DependencyPropertyChangeHandler(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {

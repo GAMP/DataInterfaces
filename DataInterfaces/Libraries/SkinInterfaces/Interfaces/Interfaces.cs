@@ -1,13 +1,6 @@
 ﻿using System.Windows.Controls.Primitives;
 using System.Windows.Controls;
 using System.Windows;
-using System.Windows.Input;
-using System.Windows.Documents;
-using System.Windows.Media;
-using System.ComponentModel;
-using System.Runtime.InteropServices;
-using System.Windows.Media.Animation;
-using System;
 using System.Collections.ObjectModel;
 using SharedLib;
 

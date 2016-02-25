@@ -27,6 +27,6 @@ namespace Client.ViewModels
         /// </summary>
         /// <param name="appId">Application profile id.</param>
         /// <returns>Application view model, Throws ArgumentException in case no application found with specified id.</returns>
-        IApplicationView GetView(int appId);
+        IApplicationViewModel GetView(int appId);
     }
 }

@@ -147,7 +147,7 @@ namespace CyClone.Core
 
         #region PROPERTIES
         /// <summary>
-        /// Total ammount of entries left to be processed.
+        /// Total amount of entries left to be processed.
         /// </summary>
         public int EntriesLeft
         {

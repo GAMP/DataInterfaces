@@ -101,8 +101,5 @@ namespace SharedLib
         } 
 
         #endregion
-
-        #region Internal Functions
-        #endregion
     } 
 }

@@ -13,7 +13,7 @@ namespace CoreLib.Hooking
     /// <summary>
     /// Hook event arguments base class.
     /// </summary>
-    public class HookEventArgsBase : EventArgs
+    public abstract class HookEventArgsBase : EventArgs
     {
         #region PROPERTIES
         /// <summary>

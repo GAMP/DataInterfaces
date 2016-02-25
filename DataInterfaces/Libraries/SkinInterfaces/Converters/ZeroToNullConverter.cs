@@ -1,20 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Windows.Data;
 
 namespace SkinInterfaces.Converters
 {
+    /// <summary>
+    /// Converts zero values to null.
+    /// </summary>
     public class ZeroToNullConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if(value ==null)
-            {
+            bool isOneWay = false;
+
+            if (parameter != null)
+                bool.TryParse(parameter.ToString(), out isOneWay);
+
+            if(!isOneWay && value ==null)
                 return 0;
-            }
+         
             return value;
         }
 
@@ -22,9 +26,8 @@ namespace SkinInterfaces.Converters
         {
             int intValue = 0;
             if (value != null && int.TryParse(value.ToString(), out intValue))
-            {
                 return intValue == 0 ? null : value;
-            }
+           
             return value;
         }
     }

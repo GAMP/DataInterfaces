@@ -1,5 +1,4 @@
 ﻿using System;
-using SharedLib.Dispatcher;
 using SharedLib.Commands;
 using System.Net.Sockets;
 
@@ -426,6 +425,36 @@ namespace SharedLib.Dispatcher.Exceptions
         { }
 
         protected PoolProcessFailedException(System.Runtime.Serialization.SerializationInfo info,
+            System.Runtime.Serialization.StreamingContext context)
+            : base(info, context)
+        { }
+
+        #endregion
+    }
+    #endregion
+
+    #region AccessDeniedException
+    [Serializable()]
+    public class AccessDeniedException : Exception
+    {
+        #region Constructor
+
+        public AccessDeniedException(Exception inner)
+            : base("Access denied.", inner)
+        {
+        }
+
+        public AccessDeniedException(string message)
+            : base(message)
+        { }
+
+        public AccessDeniedException() : base() { }
+
+        public AccessDeniedException(string message, Exception inner)
+            : base(message, inner)
+        { }
+
+        protected AccessDeniedException(System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context)
             : base(info, context)
         { }

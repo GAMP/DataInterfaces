@@ -10,7 +10,7 @@ using SkinLib;
 using SharedLib;
 using Client.ViewModels;
 
-namespace Client
+namespace Client.ViewModels
 {
     #region IClientViewModel
     /// <summary>

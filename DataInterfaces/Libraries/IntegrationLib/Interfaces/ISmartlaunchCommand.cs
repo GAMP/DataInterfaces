@@ -7,7 +7,7 @@ using SharedLib.Commands;
 namespace IntegrationLib
 {
     #region ISmartlaunchCommand
-    public interface ISmartlaunchCommand : IExecutionCommand
+    public interface ISmartlaunchCommand
     {
         /// <summary>
         /// Gets command string.
