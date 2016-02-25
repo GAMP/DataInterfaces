@@ -7,28 +7,21 @@ using System.Windows.Data;
 
 namespace SkinInterfaces.Converters
 {
-    public class ZeroToNullConverter : IValueConverter
+    /// <summary>
+    /// Converts empty string value to zero.
+    /// </summary>
+    public class EmptyStringToZeroConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            bool isOneWay = false;
-
-            if (parameter != null)
-                bool.TryParse(parameter.ToString(), out isOneWay);
-
-            if(!isOneWay && value ==null)
-            {
-                return 0;
-            }
             return value;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            int intValue = 0;
-            if (value != null && int.TryParse(value.ToString(), out intValue))
+            if (value == null || string.IsNullOrWhiteSpace(value.ToString()))
             {
-                return intValue == 0 ? null : value;
+                return 0;
             }
             return value;
         }

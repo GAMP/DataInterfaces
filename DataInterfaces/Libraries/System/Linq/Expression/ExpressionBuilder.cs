@@ -13,13 +13,15 @@ namespace System.Linq.Expressions
         private static MethodInfo endsWithMethod = typeof(string).GetMethod("EndsWith", new Type[] { typeof(string) });
         private static MethodInfo hasFlagMethod = typeof(Enum).GetMethod("HasFlag", new Type[] { typeof(Enum) });
 
-        public static Expression<Func<T, bool>> GetExpression<T>(IList<Filter> filters)
+        public static Expression<Func<T, bool>> GetExpression<T>(IEnumerable<Filter> filter)
         {
-            if (filters.Count == 0)
-                return null;
+            if (filter == null || filter.Count() == 0)
+                return ExpressionBuilder.True<T>();
 
             ParameterExpression param = Expression.Parameter(typeof(T), "t");
             Expression exp = null;
+
+            var filters = filter.ToList();
 
             if (filters.Count == 1)
                 exp = GetExpression<T>(param, filters[0]);
@@ -99,6 +101,37 @@ namespace System.Linq.Expressions
             Expression bin2 = GetExpression<T>(param, filter2);
             return Expression.AndAlso(bin1, bin2);
         }
+
+        /// <summary>
+        /// Gets the expression that is always true.
+        /// </summary>
+        /// <typeparam name="T">Type.</typeparam>
+        /// <returns>True expression.</returns>
+        public static Expression<Func<T, bool>> True<T>() { return x => true; }
+
+        /// <summary>
+        /// Gets the expression that is always false.
+        /// </summary>
+        /// <typeparam name="T">Type.</typeparam>
+        /// <returns>False expression.</returns>
+        public static Expression<Func<T, bool>> False<T>() { return x => false; }
+
+        public static Expression<Func<T, bool>> Or<T>(this Expression<Func<T, bool>> expr1,
+                                                            Expression<Func<T, bool>> expr2)
+        {
+            var invokedExpr = Expression.Invoke(expr2, expr1.Parameters.Cast<Expression>());
+            return Expression.Lambda<Func<T, bool>>
+                  (Expression.OrElse(expr1.Body, invokedExpr), expr1.Parameters);
+        }
+
+        public static Expression<Func<T, bool>> And<T>(this Expression<Func<T, bool>> expr1,
+                                                             Expression<Func<T, bool>> expr2)
+        {
+            var invokedExpr = Expression.Invoke(expr2, expr1.Parameters.Cast<Expression>());
+            return Expression.Lambda<Func<T, bool>>
+                  (Expression.AndAlso(expr1.Body, invokedExpr), expr1.Parameters);
+        }
+
     }
 
     [Serializable()]

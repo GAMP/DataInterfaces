@@ -3,34 +3,26 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Windows.Controls;
 using System.Windows.Data;
 
 namespace SkinInterfaces.Converters
 {
-    public class ZeroToNullConverter : IValueConverter
+    public class BoolToGridRowVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            bool isOneWay = false;
-
-            if (parameter != null)
-                bool.TryParse(parameter.ToString(), out isOneWay);
-
-            if(!isOneWay && value ==null)
+            bool boolValue;
+            if(value!=null && bool.TryParse(value.ToString(),out boolValue))
             {
-                return 0;
+               return boolValue == true ? DataGridRowDetailsVisibilityMode.Visible : DataGridRowDetailsVisibilityMode.Collapsed;
             }
             return value;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            int intValue = 0;
-            if (value != null && int.TryParse(value.ToString(), out intValue))
-            {
-                return intValue == 0 ? null : value;
-            }
-            return value;
+            throw new NotImplementedException();
         }
     }
 }

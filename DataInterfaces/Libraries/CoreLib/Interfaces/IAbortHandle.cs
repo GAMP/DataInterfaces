@@ -12,7 +12,7 @@ namespace CoreLib.Threading
         /// </summary>
         void AbortWait();
         /// <summary>
-        /// Aborts and waits for specified ammount of time.
+        /// Aborts and waits for specified amount of time.
         /// </summary>
         /// <param name="miliSeconds"></param>
         void AbortWait(int miliSeconds);

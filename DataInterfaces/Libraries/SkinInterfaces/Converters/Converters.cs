@@ -322,7 +322,7 @@ namespace SkinInterfaces.Converters
 
     #region BytesToMegabyesConverter
     /// <summary>
-    /// Converts bytes value ammount to megabytes.
+    /// Converts bytes value amount to megabytes.
     /// </summary>
     public class BytesToMegabyesConverter : IValueConverter
     {
@@ -487,9 +487,12 @@ namespace SkinInterfaces.Converters
                 if (value == null)
                     return Visibility.Collapsed;  
 
-                else if ((int)value > 0)
-                    return Visibility.Visible;
-                
+                if(value is int? && (int?)(value) > 0)
+                    return  Visibility.Visible;
+              
+                if (value is int && (int)(value) > 0)
+                    return Visibility.Visible ;               
+
                 return Visibility.Collapsed;               
             }
             catch
@@ -1297,24 +1300,7 @@ namespace SkinInterfaces.Converters
             throw new NotImplementedException();
         }
     }
-    #endregion
-
-    #region EnumToBoolConverter
-    public class EnumToBoolConverter : IValueConverter
-    {
-        public Type EnumType { get; set; }
-       
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return Object.Equals(value, Enum.Parse(parameter.GetType(), parameter.ToString()));
-        }
-        
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return (bool)value ? Enum.Parse(parameter.GetType(), parameter.ToString()) : Enum.ToObject(EnumType, 0);
-        }
-    }
-    #endregion    
+    #endregion  
 
     #region HTMLToXAMLConverter
     public class HTMLToFlowDocumentConverter : IValueConverter
