@@ -78,7 +78,6 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -94,6 +93,12 @@
     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Condition=" '$(TargetFrameworkVersion)' == 'v4.0' " Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Condition=" '$(TargetFrameworkVersion)' == 'v4.6' " Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <RequiredTargetFramework>4.5.1</RequiredTargetFramework>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Libraries\CoreLib\Diagnostics\Classes\KillProcessInvokeInfo.cs" />
@@ -105,15 +110,9 @@
     <Compile Include="Libraries\IntegrationLib\Interfaces\IClientSideIntegrationProvider.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\IPluginModule.cs" />
     <Compile Include="Libraries\SharedLib\Dispatcher\Extensions.cs" />
-    <Compile Include="Libraries\SkinInterfaces\Code\Behaviours\TextboxBehavior.cs" />
     <Compile Include="Libraries\SkinInterfaces\Code\SizeObserver.cs" />
-    <Compile Include="Libraries\SkinInterfaces\Converters\BoolAndConverter.cs" />
-    <Compile Include="Libraries\SkinInterfaces\Converters\BoolToGridRowVisibilityConverter.cs" />
     <Compile Include="Libraries\SkinInterfaces\Converters\EmptyStringToNullConverter.cs" />
     <Compile Include="Libraries\SkinInterfaces\Converters\EmptyStringToVisibilityConvert.cs" />
-    <Compile Include="Libraries\SkinInterfaces\Converters\EmptyStringToZeroConverter.cs" />
-    <Compile Include="Libraries\SkinInterfaces\Converters\EnumToBoolConverter.cs" />
-    <Compile Include="Libraries\SkinInterfaces\Converters\EqualsToBoolConverter.cs" />
     <Compile Include="Libraries\SkinInterfaces\Converters\EqualsToVisibilityConverter.cs" />
     <Compile Include="Libraries\SkinInterfaces\Converters\NullToBoolConverter.cs" />
     <Compile Include="Libraries\SkinInterfaces\Converters\NullVisibilityConverter.cs" />

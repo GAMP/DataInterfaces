@@ -1,20 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using SharedLib;
+using System.Collections.ObjectModel;
 using System.Reflection;
 using SkinInterfaces;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows;
+using System.Windows.Data;
 using System.IO;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.Windows.Interop;
 using GizmoShell;
+using System.ComponentModel;
+using System.Threading;
+using System.Drawing;
 
 namespace SkinLib
 {
@@ -1438,25 +1445,13 @@ namespace SkinLib
                 if (this.IsAssemblyLoaded(asemblyFile))
                     continue;
 
-
-                Assembly loadedAssembly;
-
-                try
+                using (System.IO.FileStream assemblyFileStream = new System.IO.FileStream(asemblyFile, FileMode.Open, FileAccess.Read))
                 {
-                    using (FileStream assemblyFileStream = new FileStream(asemblyFile, FileMode.Open, FileAccess.Read))
-                    {
-                        byte[] assemblybuffer = new byte[assemblyFileStream.Length];
-                        assemblyFileStream.Read(assemblybuffer, 0, (int)assemblyFileStream.Length);
-                        loadedAssembly = AppDomain.CurrentDomain.Load(assemblybuffer);
-                    }
+                    byte[] assemblybuffer = new byte[assemblyFileStream.Length];
+                    assemblyFileStream.Read(assemblybuffer, 0, (int)assemblyFileStream.Length);
+                    var loadedAssembly = AppDomain.CurrentDomain.Load(assemblybuffer);
+                    this.Assemblies.Add(loadedAssembly);
                 }
-                catch (FileLoadException)
-                {
-                    //try to unsafe load in case of failure
-                    loadedAssembly = Assembly.UnsafeLoadFrom(asemblyFile);
-                }
-
-                this.Assemblies.Add(loadedAssembly);
             }
         }
 

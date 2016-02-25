@@ -26,7 +26,7 @@ namespace ServerService
         #region PROPERTIES
 
         /// <summary>
-        /// Gets total amount of licenses.
+        /// Gets total ammount of licenses.
         /// </summary>
         [DataMember()]
         public int TotalCount
@@ -38,7 +38,7 @@ namespace ServerService
         }
 
         /// <summary>
-        /// Gets the amount of licenses.
+        /// Gets the ammount of licenses.
         /// </summary>
         [DataMember()]
         public int Count
@@ -47,7 +47,7 @@ namespace ServerService
         }
 
         /// <summary>
-        /// Gets the amount of trial licenses.
+        /// Gets the ammount of trial licenses.
         /// </summary>
         [DataMember()]
         public int TrialCount

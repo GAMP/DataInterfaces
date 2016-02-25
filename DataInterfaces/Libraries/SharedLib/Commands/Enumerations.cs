@@ -809,55 +809,6 @@ namespace SharedLib.Commands
         AppExeTaskUpdate, 
         #endregion
 
-        MonetaryUnitAdd,
-        MonetaryUnitUpdate,
-        MonetratyUnitRemove,
-        MonetraryUnitGet,
-
-        TaxGet,
-        TaxAdd,
-        TaxUpdate,
-        TaxRemove,
-
-        ProductGroupGet,
-        ProductGroupAdd,
-        ProductGroupUpdate,
-        ProductGroupRemove,
-
-        ProductGet,
-        ProductGetBasic,
-        ProductAdd,
-        ProductUpdate,
-        ProductUpdateBasic, 
-
-        BillProfileGet,
-        BillProfileAdd,
-        BillPorfileUpdate,
-        BillProfileRemove,
-
-        PaymentMethodGet,
-        PaymentMethodAdd,
-        PaymentMethodUpdate,
-        PaymentMethodRemove,
-
-        DepositTransactionGet,
-        DepositBalanceGet,
-        DepositAdd,
-        DepositWithdraw,
-
-        PointsGetBalance,
-
-        StockTransactionGet,
-        StockAdd,
-        StockRemove,
-        StockSet,
-        StockGet,
-
-        ProductOrderCancel,
-        ProductOrderInvoice,
-        InvoiceGet,
-        InvoicePaymentAdd,
-        InvoicePaymentGet,
     }
     #endregion
 

@@ -11,12 +11,7 @@ namespace SkinInterfaces.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            bool isOneWay = false;
-
-            if (parameter != null)
-                bool.TryParse(parameter.ToString(), out isOneWay);
-
-            if(!isOneWay && value ==null)
+            if(value ==null)
             {
                 return 0;
             }

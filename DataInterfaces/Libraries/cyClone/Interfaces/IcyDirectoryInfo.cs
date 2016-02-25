@@ -57,7 +57,7 @@ namespace CyClone.Core
         List<IcyFileSystemInfo> GetFileSystemInfos(string searchPattern, SearchOption searchOption);
         /// <summary>
         /// Gets the total size of the directory including subdirectories.
-        /// <remarks>This propery is called in synchronous manner and can take large amount of time to return.</remarks>
+        /// <remarks>This propery is called in synchronous manner and can take large ammount of time to return.</remarks>
         /// </summary>
         ulong TotalSize
         {

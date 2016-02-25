@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using SharedLib.Commands;
-using SharedLib.Dispatcher.Exceptions;
 
 namespace SharedLib.Dispatcher
 {
@@ -16,8 +15,10 @@ namespace SharedLib.Dispatcher
         #region CONSTRUCTORS
         public IOperationBase(IDispatcherCommand cmd)
         {
+            #region VALIDATION
             if (cmd == null)
-                throw new ArgumentNullException(nameof(cmd));
+                throw new ArgumentNullException("Cmd", "Command instance may not be null");            
+            #endregion
 
             this.Command = cmd;
             this.Dispatcher = cmd.Dispatcher;
@@ -111,7 +112,7 @@ namespace SharedLib.Dispatcher
 
         public virtual void Update(params object[] parameters) { this.RaiseOperationUpdate(parameters); }
 
-        public virtual void Update(byte[] data) { this.RaiseOperationUpdate(data); }
+        public virtual void Update(byte[] data) { this.RaiseOperationUpdate(); }
 
         #endregion
 
@@ -153,9 +154,6 @@ namespace SharedLib.Dispatcher
         /// </summary>
         /// <typeparam name="T">Parameter type.</typeparam>
         /// <param name="index">Paramter index.</param>
-        /// <remarks>
-        /// If there are no parameter at specified index default value of T type is returned.
-        /// </remarks>
         /// <returns>Parameter of type T.</returns>
         public T GetParameterAt<T>(int index)
         {
@@ -231,9 +229,9 @@ namespace SharedLib.Dispatcher
                 handler(this, state, param);
         }
         
-        public void RaiseOperationUpdate(params object[] parameters)
+        public void RaiseOperationUpdate(params object[] param)
         {
-            this.RaiseOperationUpdateWithParam(parameters);
+            this.RaiseOperationUpdateWithParam(param);
         }
         
         public void RaiseStateUpdate(OperationState state, params object[] param)
@@ -246,9 +244,9 @@ namespace SharedLib.Dispatcher
             this.RaiseStateUpdateWithParam(OperationState.InvalidParameters, parameters);
         }
         
-        protected void RaiseInvalidParamsWithParam(object param)
+        protected void RaiseInvalidParamsWithParam(object parameters)
         {
-            this.RaiseStateUpdateWithParam(OperationState.InvalidParameters, param);
+            this.RaiseStateUpdateWithParam(OperationState.InvalidParameters, parameters);
         }
 
         protected void RaiseStarted(params object[] parameters)
@@ -256,9 +254,9 @@ namespace SharedLib.Dispatcher
             this.RaiseStateUpdateWithParam(OperationState.Started, parameters);
         }
 
-        protected void RaiseStartedWithParam(object param)
+        protected void RaiseStartedWithParam(object parameters)
         {
-            this.RaiseStateUpdateWithParam(OperationState.Started, param);
+            this.RaiseStateUpdateWithParam(OperationState.Started, parameters);
         }
         
         protected void RaiseFailed(params object[] parameters)
@@ -266,9 +264,9 @@ namespace SharedLib.Dispatcher
             this.RaiseStateUpdateWithParam(OperationState.Failed, parameters);
         }
 
-        protected void RaiseFailedWithParam(object param)
+        protected void RaiseFailedWithParam(object parameters)
         {
-            this.RaiseStateUpdateWithParam(OperationState.Failed, param);
+            this.RaiseStateUpdateWithParam(OperationState.Failed, parameters);
         }
         
         protected void RaiseCompleted(params object[] parameters)
@@ -276,17 +274,9 @@ namespace SharedLib.Dispatcher
             this.RaiseStateUpdateWithParam(OperationState.Completed, parameters);
         }
 
-        protected void RaiseCompletedWithParam(object param)
+        protected void RaiseCompletedWithParam(object parameters)
         {
-            this.RaiseStateUpdateWithParam(OperationState.Completed, param);
-        }
-
-        /// <summary>
-        /// Throws access denied exception.
-        /// </summary>
-        protected void ThrowAccessDenied()
-        {
-            throw new AccessDeniedException();
+            this.RaiseStateUpdateWithParam(OperationState.Completed, parameters);
         }
 
         #endregion        

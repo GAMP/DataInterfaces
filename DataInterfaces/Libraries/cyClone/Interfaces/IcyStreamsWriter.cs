@@ -61,7 +61,7 @@ namespace CyClone.Core
         {
             get;
         }
-        long LastWriteAmount
+        long LastWriteAmmount
         {
             get;
         }

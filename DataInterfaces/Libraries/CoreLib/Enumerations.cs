@@ -375,4 +375,12 @@ namespace CoreLib
         Logoff = 16,
     }
     #endregion
+
+    #region LogicalOperator
+    public enum LogicalOperator
+    {
+        And,
+        Or,
+    } 
+    #endregion
 }

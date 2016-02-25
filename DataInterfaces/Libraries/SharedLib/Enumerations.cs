@@ -634,15 +634,11 @@ namespace SharedLib
     #region DurationRange
     public enum DurationRange
     {
-        [Localized("PERIOD_TODAY")]
         Today = 0,
-        [Localized("PERIOD_WEEK")]
         Weeek = 1,
-        [Localized("PERIOD_MONTH")]
         Month = 2,
-        [Localized("PERIOD_YEAR")]
         Year = 3,
-        [Localized("PERIOD_UNLIMITED")]
+        Decade = 4,
         Unlimited = 5,
     }
     #endregion
@@ -650,9 +646,7 @@ namespace SharedLib
     #region FilterResultDirection
     public enum FilterResultDirection
     {
-        [Localized("FILTER_TOP")]
         Top,
-        [Localized("FILTER_BOTTOM")]
         Bottom,
     }
     #endregion
@@ -808,7 +802,7 @@ namespace SharedLib
     }
     #endregion
 
-    #region FREESPACEALLOCATIONS
+    #region FreeSpaceAllocations
     public enum FreeSpaceAllocations
     {
         Zero = 0,
@@ -825,70 +819,32 @@ namespace SharedLib
     public enum ConfigurationSection
     {
         Unspecified = 0,
-        [Localized("CFG_SECTION_GENERAL")]
         General,
-        [Localized("CFG_SECTION_SERVER")]
         Server,
-        [Localized("CFG_SECTION_CLIENT")]
         Client,
-        [Localized("CFG_SECTION_PROFILES")]
         Profiles,
-        [Localized("CFG_SECTION_OPERATORS")]
         Operators,
-        [Localized("CFG_SECTION_SUBSCRIPTION")]
         Subscription,
-        [Localized("CFG_SECTION_VARIABLES")]
         Variables,
-        [Localized("CFG_SECTION_PLUGINS")]
         Plugins,
-        [Localized("CFG_SECTION_API")]
         Api,
-        [Localized("CFG_SECTION_NETWORK")]
         Network,
-        [Localized("CFG_SECTION_DATABSE")]
         Database,
-        [Localized("CFG_SECTION_INTEGRATION")]
         Integration,
-        [Localized("CFG_SECTION_FILE_SYSTEM")]
         FileSystem,
-        [Localized("CFG_SECTION_SHELL")]
         Shell,
-        [Localized("CFG_SECTION_TASKS")]
         Tasks,
-        [Localized("CFG_SECTION_CLIENT_MISC")]
         ClientMisc,
-        [Localized("CFG_SECTION_SERVER_MISC")]
         ServerMisc,
-        [Localized("CFG_SECTION_HOST_GROUPS")]
         HostGroups,
-        [Localized("CFG_SECTION_USER_GROUPS")]
         UserGroups,
-        [Localized("CFG_SECTION_APP_GROUPS")]
-        ApplicationGroups,
-        [Localized("CFG_SECTION_SECURITY_PROFILES")]
-        SecurityProfiles,
-        [Localized("CFG_CLIENT_SETTINGS")]
-        ClientSettings,
-        [Localized("CFG_HOST_LAYOUT_GROUPS")]
-        HostLayoutGroups,
-        [Localized("CFG_SECTION_HOSTS")]
-        Hosts,
-        [Localized("CFG_SECTION_FINANCIAL")]
-        Financial,
-        [Localized("CFG_SECTION_BILLING")]
+        Pos,
         Billing,
-        [Localized("CFG_SECTION_MONETARY_UNITS")]
-        MonetaryUnits,
-        [Localized("CFG_SECTION_TAX")]
-        Tax,
-        [Localized("CFG_SECTION_PRODUCTS")]
-        Products,
-        [Localized("CFG_SECTION_PRODUCT_GROUPS")]
-        ProductGroups,
-        [Localized("CFG_SECTION_CURRENCIES")]
-        Currencies,
-        [Localized("CFG_SECTION_BILLING_PROFILES")]
-        BillingProfiles,
+        ApplicationGroups,
+        SecurityProfiles,
+        ClientSettings,
+        HostLayoutGroups,
+        Hosts,
     }
     #endregion
 
@@ -1074,6 +1030,8 @@ namespace SharedLib
 
     #region STORABLE ENUMERATIONS
 
+    #region LOG
+
     #region LOGCATEGORIES
     [Flags()]
     [Serializable()]
@@ -1112,6 +1070,8 @@ namespace SharedLib
         Event = 8,
         All = Information | Warning | Error | Event
     }
+    #endregion
+
     #endregion
 
     #region USERINFOTYPES
@@ -1273,13 +1233,11 @@ namespace SharedLib
     }
     #endregion
 
-    #region BILLRATESTEPACTION
-    public enum BillRateStepAction
+    #region BILLRATEACTION
+    public enum BillRateAction
     {
-        [Localized("STEP_ACTION_CHARGE")]
-        Charge = 0,
-        [Localized("STEP_ACTION_LOOP_TO")]
-        LoopTo = 1,
+        GoTo = 0,
+        Charge=1,
     }
     #endregion
 
@@ -1472,7 +1430,7 @@ namespace SharedLib
         /// Enable credit limit.
         /// </summary>
         EnableCreditLimit = 1,
-
+        
         /// <summary>
         /// Enable per user credit limit.
         /// </summary>
@@ -1519,39 +1477,13 @@ namespace SharedLib
     #endregion
 
     #region STOCKOPTIONTYPE
-    [Flags()]
     public enum StockOptionType
     {
         None = 0,
         EnableStock = 1,
-        DisallowSaleIfOutOfStock = 2,
-        Alert = 4,
-        TargetDifferentProduct = 8,
-    }
-    #endregion
-
-    #region BUNDLESTOCKOPTIONTYPE
-    [Flags()]
-    public enum BundleStockOptionType
-    {
-        /// <summary>
-        /// By default bundled products stock will be counted
-        /// </summary>
-        None = 0,
-        /// <summary>
-        /// Bundle has its own stock control.
-        /// </summary>
-        SelfStockCount = 1
-    }
-    #endregion
-
-    #region PRODUCTBUNDLEOPTIONTYPE
-    /// <summary>
-    /// Defines how product behaves in a bundle.
-    /// </summary>
-    public enum ProductBundleOptionType
-    {
-        None,
+        DisallowSaleIfOutOfStock = 2 | EnableStock,
+        DisallowSaleIfBundledOutOfStock = 4 | EnableStock,
+        Alert = 8 | EnableStock,
     }
     #endregion
 
@@ -1571,28 +1503,12 @@ namespace SharedLib
         /// Disallow ability of order for non users.
         /// </summary>
         RestrictNonCustomers = 2,
-        /// <summary>
-        /// Restricts product sale.
-        /// </summary>
-        RestrictSale = 4
     }
     #endregion
 
-    #region PURCHASEOPTIONTYPE
-    /// <summary>
-    /// Points money option type.
-    /// </summary>
-    public enum PurchaseOptionType
-    {
-        [Localized("AND")]
-        And = 0,
-        [Localized("OR")]
-        Or = 1
-    }
-    #endregion
-
-    #region BILLRATEOPTIONTYPE
-    public enum BillRateOptionType
+    #region BILLINGRATEOPTIONTYPE
+    [Flags()]
+    public enum BillingRateOptionType
     {
         None = 0,
         IsStepBased = 1,
@@ -1604,29 +1520,20 @@ namespace SharedLib
     public enum PorductTimeExpirationOptionType
     {
         None = 0,
-        ExpiresAtLogout = 1,
-        ExpiresAtDate = 2,
-        ExpireAfterDays = 4
+        HasExpiration = 1,
+        ExpiresAtLogout = 2 | HasExpiration,
+        ExpiresAtDate = 4 | HasExpiration,
     }
     #endregion
 
-    #region PRODUCTTIMEUSAGEOPTIONTYPE
+    #region TIMEOFFERUSAGEOPTIONTYPE
     [Flags()]
-    public enum ProductTimeUsageOptionType
+    public enum TimeOfferUsageOptionType
     {
         None = 0,
         HasMaximumUsage = 1,
-        HasMaximumDailyUsage = 2,
-    }
-    #endregion
-
-    #region EXPIREFROMOPTIONTYPE
-    public enum ExpireFromOptionType
-    {
-        [Localized("EXPIRE_FROM_PURCHASE")]
-        Purchase = 0,
-        [Localized("EXPIRE_FROM_USE")]
-        Use = 1
+        HasMaximumDailyUsage = 2 | HasMaximumUsage,
+        HasScheduledUsage = 4 | HasMaximumUsage,
     }
     #endregion
 
@@ -1638,11 +1545,11 @@ namespace SharedLib
     }
     #endregion
 
-    #region DISCOUNTAMOUNTTYPE
-    public enum DiscountAmountType
+    #region DISCOUNTAMMOUNTTYPE
+    public enum DiscountAmmountType
     {
         /// <summary>
-        /// Discount fixed amount.
+        /// Discount fixed ammount.
         /// </summary>
         Fixed = 0,
         /// <summary>
@@ -1677,18 +1584,18 @@ namespace SharedLib
     }
     #endregion
 
-    #region DISCOUNTAMOUNTTRIGGER
+    #region DISCOUNTAMMOUNTTRIGGER
     /// <summary>
-    /// Type of amount triggers.
+    /// Type of ammount triggers.
     /// </summary>
-    public enum DiscountAmountTrigger
+    public enum DiscountAmmountTrigger
     {
         /// <summary>
-        /// Discount triggered by amount of specific item.
+        /// Discount triggered by ammount of specific item.
         /// </summary>
         Item = 0,
         /// <summary>
-        /// Discount triggered by total amount of order.
+        /// Discount triggered by total ammount of order.
         /// </summary>
         Order = 1,
     }
@@ -1727,8 +1634,8 @@ namespace SharedLib
         /// <summary>
         /// Total products bught independent of prodcuts targeted by discount.
         /// </summary>
-        OrderSum = 3,
-    }
+        OrderSum=3,
+    } 
     #endregion
 
     #region PAYMENTMETHODOPTIONTYPE
@@ -1737,16 +1644,6 @@ namespace SharedLib
     {
         None = 0
     }
-    #endregion
-
-    #region PaymentMethodType
-    public enum PaymentMethodType
-    {
-        Cash = -1,
-        CreditCard = -2,
-        Balance = -3,
-        Points = -4,           
-    } 
     #endregion
 
     #region ROUNDOPTIONTYPE
@@ -1770,11 +1667,7 @@ namespace SharedLib
         /// <summary>
         /// Account charge.
         /// </summary>
-        Charge = 2,
-        /// <summary>
-        /// Credit an amount to account.
-        /// </summary>
-        Credit = 3
+        Charge = 2
     }
     #endregion
 
@@ -1796,9 +1689,7 @@ namespace SharedLib
     public enum StockTransactionType
     {
         Add = 0,
-        Remove = 1,
-        Sale = 2,
-        Set,
+        Remove = 1
     }
     #endregion
 
@@ -1806,17 +1697,16 @@ namespace SharedLib
     public enum OrderStatus
     {
         Open = 0,
-        Invoiced = 1,
-        Canceled=2
+        Canceled = 1,
+        Invoiced = 2,
     }
     #endregion
 
     #region INVOICESTATUS
     public enum InvoiceStatus
     {
-        Unpaid = 0,
-        PartialyPaid = 1,
-        Paid = 2,
+        Outstanding = 0,
+        Paid = 1,
     }
     #endregion
 
@@ -1890,14 +1780,6 @@ namespace SharedLib
         PostTermination = 64,
         [Description("Pre License Management")]
         PreLicenseManagement = 128,
-    }
-    #endregion
-
-    #region LOGICALOPERATOR
-    public enum LogicalOperator
-    {
-        And,
-        Or,
     }
     #endregion
 
