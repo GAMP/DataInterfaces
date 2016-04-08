@@ -16,7 +16,6 @@ namespace SharedLib.Configuration
     [DataContract()]
     public abstract class ConfigBase 
     {
-        #region FUNCTIONS
         /// <summary>
         /// Sets all properties to default values.
         /// </summary>
@@ -25,15 +24,25 @@ namespace SharedLib.Configuration
             foreach (PropertyDescriptor property in TypeDescriptor.GetProperties(this))
                 property.ResetValue(this);      
         }
-        #endregion
 
+        /// <summary>
+        /// Setst default value for specified property.
+        /// </summary>
+        /// <param name="propertyName">Property name.</param>
         public void SetDefault(string propertyName)
         {
+            if (string.IsNullOrWhiteSpace(propertyName))
+                throw new ArgumentNullException(nameof(propertyName));
+
             var property = TypeDescriptor.GetProperties(this)[propertyName];
             if(property.CanResetValue(this))
                 property.ResetValue(this);
         }
 
+        /// <summary>
+        /// Gets validation results.
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<IGrouping<string,ValidationResult>> GetValidationResults()
         {
             //create new validation contect
@@ -54,9 +63,14 @@ namespace SharedLib.Configuration
             return resultsByPropertyNames;
         }
 
+        /// <summary>
+        /// Gets names of the properties with invalid values.
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<string> GetInvalidPropertyNames()
         {
-            return this.GetValidationResults().Select(x => x.Key);
+            return this.GetValidationResults()
+                .Select(x => x.Key);
         }
 
         /// <summary>
@@ -67,7 +81,9 @@ namespace SharedLib.Configuration
         /// </summary>
         public void ResetInvalidProperties()
         {
-            this.GetInvalidPropertyNames().ToList().ForEach(x => this.SetDefault(x));
+            this.GetInvalidPropertyNames()
+                .ToList()
+                .ForEach(x => this.SetDefault(x));
         }
     } 
     #endregion
@@ -1186,11 +1202,11 @@ namespace SharedLib.Configuration
         {
             int result;
 
-            result = String.Compare(this.HostName, other.HostName, true);
+            result = string.Compare(this.HostName, other.HostName, true);
             if (result != 0)
                 return result;
 
-            result = String.Compare(this.FriendlyName, other.FriendlyName, true);
+            result = string.Compare(this.FriendlyName, other.FriendlyName, true);
             if (result != 0)
                 return result;
 

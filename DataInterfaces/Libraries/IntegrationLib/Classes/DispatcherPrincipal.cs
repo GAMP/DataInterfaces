@@ -20,10 +20,6 @@ namespace IntegrationLib
             this.Dispacther = dispatcher;
         }
 
-        public DispatcherPrincipal()
-        {
-        }
-
         #endregion
 
         #region PROPERTIES
@@ -37,6 +33,9 @@ namespace IntegrationLib
             private set;
         }
 
+        /// <summary>
+        /// Gets user identity.
+        /// </summary>
         public IUserIdentity UserIdentity
         {
             get { return this.Identity as IUserIdentity; }

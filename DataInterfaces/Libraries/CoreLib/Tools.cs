@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System.Runtime.Serialization;
-using System.Reflection;
-using System.ComponentModel;
-using SharedLib;
 using System.Text.RegularExpressions;
+using Microsoft.Win32;
 
 namespace CoreLib
 {
@@ -86,5 +81,84 @@ namespace CoreLib
         }
 
     }
+    #endregion
+
+    #region IEFeatures
+    public static class IEFeatures
+    {
+        #region FEATURES
+        private static readonly string FEATURE_BROWSER_EMULATION = @"SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION";
+        #endregion
+
+        /// <summary>
+        /// Set FEATURE_BROWSER_EMULATION for specified process name.
+        /// </summary>
+        /// <param name="version">
+        /// Required emulation version.
+        /// </param>
+        public static void SetEmulationVersion(string processName, int version)
+        {
+            if (string.IsNullOrWhiteSpace(processName))
+                throw new ArgumentNullException(processName);
+
+            using (var key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(FEATURE_BROWSER_EMULATION, true))
+            {
+                key.SetValue(processName, version, RegistryValueKind.DWord);
+            }
+        }
+
+        /// <summary>
+        /// Set FEATURE_BROWSER_EMULATION for current process.
+        /// </summary>
+        /// <param name="version">
+        /// Required emulation version.
+        /// </param>
+        public static void SetEmulationVersion(int version)
+        {
+            SetEmulationVersion(AppDomain.CurrentDomain.FriendlyName, version);
+        }
+
+        /// <summary>
+        /// Gets FEATURE_BROWSER_EMULATION for specified process.
+        /// </summary>
+        /// <param name="processName">Process name.</param>
+        /// <returns>
+        /// Emulation version value, null if no version set.
+        /// </returns>
+        public static int? GetEmulationVersion(string processName)
+        {
+            return GetFeatureValue(processName, FEATURE_BROWSER_EMULATION);
+        }
+
+        /// <summary>
+        /// Gets FEATURE_BROWSER_EMULATION for current process.
+        /// </summary>
+        /// <returns>
+        /// Emulation version value, null if no version set.
+        /// </returns>
+        public static int? GetEmulationVersion()
+        {
+            return GetEmulationVersion(AppDomain.CurrentDomain.FriendlyName);
+        }
+
+        public static int? GetFeatureValue(string processName, string feature)
+        {
+            if (string.IsNullOrWhiteSpace(processName))
+                throw new ArgumentNullException(processName);
+
+            if (string.IsNullOrWhiteSpace(feature))
+                throw new ArgumentNullException(feature);
+
+            using (var key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(feature, true))
+            {
+                return (int?)key.GetValue(processName);
+            }
+        }
+
+        public static int? GetFeatureValueCurrent(string feature)
+        {
+            return GetFeatureValue(AppDomain.CurrentDomain.FriendlyName, feature);
+        }
+    } 
     #endregion
 }

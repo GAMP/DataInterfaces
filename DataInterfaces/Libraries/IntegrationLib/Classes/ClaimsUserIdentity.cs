@@ -13,12 +13,18 @@ namespace IntegrationLib
     public class ClaimsUserIdentity : ClaimsIdentity, IUserIdentity
     {
         #region CONSTRUCTOR
-        public ClaimsUserIdentity(int userId, UserRoles role, IEnumerable<Claim> claims)
-            : base(claims)
+
+        public ClaimsUserIdentity(int userId)
         {
-            this.Role = role;
             this.UserId = userId;
         }
+
+        public ClaimsUserIdentity(int userId, IEnumerable<Claim> claims)
+            : base(claims)
+        {
+            this.UserId = userId;
+        }
+
         #endregion
 
         #region PROPERTIES
@@ -32,13 +38,12 @@ namespace IntegrationLib
             private set;
         }
 
-        /// <summary>
-        /// Gets user role.
-        /// </summary>
         public UserRoles Role
         {
-            get;
-            private set;
+            get
+            {
+                return UserRoles.None;
+            }
         }
 
         #endregion

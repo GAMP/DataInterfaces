@@ -1,14 +1,21 @@
 ﻿using SkinInterfaces;
+using System;
 using System.Collections.Generic;
 
 namespace SharedLib.ViewModels
 {
-    public interface IMenuBinder
+    /// <summary>
+    /// Menu viewmodel interface.
+    /// Used by viewmodel classes that are exposed for binding with menus.
+    /// </summary>
+    public interface IMenuItemViewModel
     {
+        #region PROPERTIES
+
         /// <summary>
         /// Gets child items.
         /// </summary>
-        IEnumerable<IMenuBinder> Children { get; }
+        IEnumerable<IMenuItemViewModel> Children { get; }
 
         /// <summary>
         /// Gets or sets command.
@@ -53,7 +60,7 @@ namespace SharedLib.ViewModels
         /// <summary>
         /// Gets menu parent id.
         /// </summary>
-        int ParentId { get; }
+        int? ParentId { get; }
 
         /// <summary>
         /// Gets or sets command parameter.
@@ -68,11 +75,34 @@ namespace SharedLib.ViewModels
         /// <summary>
         /// Gets or sets if menu should be hidden if command cannot execute.
         /// </summary>
-        bool CantExecuteHide { get; set; }
+        bool CantExecuteHide { get; set; } 
+
+        #endregion
+
+        #region FUNCTIONS
 
         /// <summary>
         /// Refresh menu binder.
         /// </summary>
         void Refresh();
+
+        /// <summary>
+        /// Deferr resfresh.
+        /// </summary>
+        void DeferrRefresh();
+
+        /// <summary>
+        /// Deferr resfresh.
+        /// </summary>
+        /// <param name="delay">Delay.</param>
+        void DeferrRefresh(TimeSpan delay);
+
+        /// <summary>
+        /// Deferr resfresh.
+        /// </summary>
+        /// <param name="delay">Delay in milliseconds.</param>
+        void DeferrRefresh(int delay); 
+
+        #endregion
     }
 }

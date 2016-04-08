@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace SharedLib.ViewModels
 {
@@ -43,5 +44,5 @@ namespace SharedLib.ViewModels
         /// </summary>
         TItemType SelectedItem { get; set; }
     } 
-    #endregion
+    #endregion        
 }

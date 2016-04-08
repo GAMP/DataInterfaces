@@ -367,5 +367,7 @@ namespace SharedLib.Views
         double ActualWidth {get;}
 
         double ActualHeight { get; }
+
+        event RoutedEventHandler Loaded;
     }
 }

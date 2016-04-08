@@ -54,7 +54,6 @@ namespace IntegrationLib
     /// </summary>
     public interface IPluginSettings
     {
-
     }
     #endregion
 

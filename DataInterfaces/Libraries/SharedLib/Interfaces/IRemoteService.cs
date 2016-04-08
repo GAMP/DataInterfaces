@@ -27,6 +27,25 @@ namespace SharedLib
         bool IsConnected { get; }
 
         /// <summary>
+        /// Gets message dispatcher.
+        /// </summary>
+        IMessageDispatcher Dispatcher { get; }
+
+        /// <summary>
+        /// Gets total bytes sent.
+        /// </summary>
+        ulong BytesSent { get; }
+
+        /// <summary>
+        /// Gets total bytes received.
+        /// </summary>
+        ulong BytesReceived { get; }
+
+        #endregion
+
+        #region FUNCTIONS
+
+        /// <summary>
         /// Connects to service.
         /// </summary>
         void Connect();
@@ -46,11 +65,6 @@ namespace SharedLib
         /// </summary>
         Task DisconnectAsync();
 
-        /// <summary>
-        /// Gets message dispatcher.
-        /// </summary>
-        IMessageDispatcher Dispatcher { get; } 
-        
         #endregion
     }
 }

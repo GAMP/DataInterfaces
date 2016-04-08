@@ -1591,6 +1591,18 @@ namespace SharedLib
     }
     #endregion
 
+    #region PRODUCTSORTOPTIONTYPE
+    public enum ProductSortOptionType
+    {
+        [Localized("DEFAULT")]
+        Default = 0,
+        [Localized("NAME")]
+        Name = 1,
+        [Localized("CREATION_TIME")]
+        Created = 2
+    } 
+    #endregion
+
     #region BILLRATEOPTIONTYPE
     public enum BillRateOptionType
     {
@@ -1771,24 +1783,28 @@ namespace SharedLib
     }
     #endregion
 
-    #region BALANCETRANSACTIONTYPE
-    public enum BalanceTransactionType
+    #region DEPOSITTRANSACTIONTYPE
+    public enum DepositTransactionType
     {
         /// <summary>
         /// Deposit to an account.
         /// </summary>
+        [Localized("DEPOSIT_TRANSACTION_DEPOSIT")]
         Deposit = 0,
         /// <summary>
         /// Withdraw from account.
         /// </summary>
+        [Localized("DEPOSIT_TRANSACTION_WITHDRAW")]
         Withdraw = 1,
         /// <summary>
         /// Account charge.
         /// </summary>
+        [Localized("DEPOSIT_TRANSACTION_CHARGE")]
         Charge = 2,
         /// <summary>
         /// Credit an amount to account.
         /// </summary>
+        [Localized("DEPOSIT_TRANSACTION_CREDIT")]
         Credit = 3
     }
     #endregion
@@ -1810,9 +1826,13 @@ namespace SharedLib
     #region STOCKTRANSACTIONTYPE
     public enum StockTransactionType
     {
+        [Localized("STOCK_TRANSACTION_ADD")]
         Add = 0,
+        [Localized("STOCK_TRANSACTION_REMOVE")]
         Remove = 1,
+        [Localized("STOCK_TRANSACTION_SALE")]
         Sale = 2,
+        [Localized("STOCK_TRANSACTION_SET")]
         Set,
     }
     #endregion
@@ -1820,17 +1840,23 @@ namespace SharedLib
     #region ORDERSTATUS
     public enum OrderStatus
     {
-        Open = 0,
+        [Localized("ORDER_STATUS_ON_HOLD")]
+        OnHold = 0,
+        [Localized("ORDER_STATUS_INVOICED")]
         Invoiced = 1,
-        Canceled=2
+        [Localized("ORDER_STATUS_CANCELED")]
+        Canceled =2
     }
     #endregion
 
     #region INVOICESTATUS
     public enum InvoiceStatus
     {
+        [Localized("INVOICE_STATUS_UNPAID")]
         Unpaid = 0,
+        [Localized("INVOICE_STATUS_PARTIALY_PAID")]
         PartialyPaid = 1,
+        [Localized("INVOICE_STATUS_PAID")]
         Paid = 2,
     }
     #endregion

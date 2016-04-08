@@ -2,16 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace System.Linq.Expressions
 {
+    #region ExpressionBuilder
     public static class ExpressionBuilder
     {
+        #region STATIC FIELDS
         private static MethodInfo containsMethod = typeof(string).GetMethod("Contains");
         private static MethodInfo startsWithMethod = typeof(string).GetMethod("StartsWith", new Type[] { typeof(string) });
         private static MethodInfo endsWithMethod = typeof(string).GetMethod("EndsWith", new Type[] { typeof(string) });
         private static MethodInfo hasFlagMethod = typeof(Enum).GetMethod("HasFlag", new Type[] { typeof(Enum) });
+        #endregion
 
         public static Expression<Func<T, bool>> GetExpression<T>(IEnumerable<Filter> filter)
         {
@@ -55,10 +59,25 @@ namespace System.Linq.Expressions
 
         private static Expression GetExpression<T>(ParameterExpression param, Filter filter)
         {
-            MemberExpression member = Expression.Property(param, filter.PropertyName);
-            ConstantExpression constant = Expression.Constant(filter.Value);
+            object filterValue = filter.Value;
+            string filterName = filter.PropertyName;
+            Op operation = filter.Operation;
 
-            switch (filter.Operation)
+            MemberExpression member = Expression.Property(param, filter.PropertyName);
+            ConstantExpression constant = null;
+
+            if (filterValue != null && IsNullableType(member.Type))
+            {
+                var targetType = Nullable.GetUnderlyingType(member.Type);
+                var propertyValue = Convert.ChangeType(filterValue, targetType);
+                constant = Expression.Constant(propertyValue, member.Type);
+            }
+            else
+            {
+                constant = Expression.Constant(filterValue);
+            }
+
+            switch (operation)
             {
                 case Op.Equals:
                     return Expression.Equal(member, constant);
@@ -132,16 +151,74 @@ namespace System.Linq.Expressions
                   (Expression.AndAlso(expr1.Body, invokedExpr), expr1.Parameters);
         }
 
-    }
+        private static bool IsNullableType(Type type)
+        {
+            if (type == null)
+                throw new ArgumentNullException(nameof(type));
 
+            return type.IsGenericType && type.GetGenericTypeDefinition().Equals(typeof(Nullable<>));
+        }
+
+    } 
+    #endregion
+
+    #region Filter
+    [DataContract()]
     [Serializable()]
     public class Filter
     {
-        public string PropertyName { get; set; }
-        public Op Operation { get; set; }
-        public object Value { get; set; }
-    }
+        #region PROPERTIES
 
+        /// <summary>
+        /// Filter property name.
+        /// </summary>
+        [DataMember()]
+        public string PropertyName { get; set; }
+
+        /// <summary>
+        /// Operation type.
+        /// </summary>
+        [DataMember()]
+        public Op Operation { get; set; }
+
+        /// <summary>
+        /// Filter value.
+        /// </summary>
+        [DataMember()]
+        public object Value { get; set; }
+
+        #endregion
+
+        #region STATIC FUNCTIONS
+
+        /// <summary>
+        /// Creates a single filter list.
+        /// </summary>
+        /// <param name="propertyName">Property name.</param>
+        /// <param name="propertyValue">Property value.</param>
+        /// <param name="operation">Operation.</param>
+        /// <returns></returns>
+        public static IEnumerable<Filter> CreateSingle(string propertyName, object propertyValue, Op operation)
+        {
+            if (propertyName == null)
+                throw new ArgumentNullException(nameof(propertyName));
+
+            return new List<Filter>() { new Filter() { PropertyName = propertyName, Value = propertyValue, Operation = operation } };
+        }
+
+        /// <summary>
+        /// Gets dafault filter value.
+        /// </summary>
+        public static IEnumerable<Filter> Default
+        {
+            get { return default(IEnumerable<Filter>); }
+        }
+
+        #endregion
+    } 
+    #endregion
+
+    #region Op
     [Serializable()]
     public enum Op
     {
@@ -155,5 +232,6 @@ namespace System.Linq.Expressions
         EndsWith,
         NotEqual,
         HasFlag
-    }
+    } 
+    #endregion
 }

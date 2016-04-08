@@ -81,8 +81,10 @@ namespace CyClone.Core
         /// </summary>
         bool IsFile { get; }
 
+        /// <summary>
+        /// Gets if entry is read only.
+        /// </summary>
         bool IsReadOnly { get; }
-
 
         /// <summary>
         /// Gets total length.
@@ -130,6 +132,9 @@ namespace CyClone.Core
         /// </summary>
         void SetFileTimes();
 
+        /// <summary>
+        /// Gets full file name.
+        /// </summary>
         string FullName
         {
             get;
@@ -143,6 +148,9 @@ namespace CyClone.Core
         /// </remarks>
         int Id { get; set; }
 
+        /// <summary>
+        /// Gets or sets flags.
+        /// </summary>
         FileInfoLevel Flags
         {
             get;
@@ -171,6 +179,9 @@ namespace CyClone.Core
 
     public interface IcyRemoteFileSystemInfo : IcyFileSystemInfo
     {
+        /// <summary>
+        /// Gets message dispatcher.
+        /// </summary>
         IMessageDispatcher Dispatcher
         {
             get;

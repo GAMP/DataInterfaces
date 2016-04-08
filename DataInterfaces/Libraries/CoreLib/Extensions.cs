@@ -1,16 +1,12 @@
-﻿using System.Runtime.ConstrainedExecution;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
 using SharedLib;
 using System.Linq;
 using System.ComponentModel;
-using System.Linq.Expressions;
 using System.Collections;
 using System.Windows.Data;
 using System.Text;
-using System.Runtime.InteropServices;
-using System.Security;
 using Localization;
 using System.Runtime.Serialization;
 
@@ -126,7 +122,7 @@ namespace CoreLib
             return attribs.Length > 0 ? attribs[0].Guid : Guid.Empty;
         }
 
-        public static System.Environment.SpecialFolder GetSpecialFolderValue(this Enum value)
+        public static Environment.SpecialFolder GetSpecialFolderValue(this Enum value)
         {
             // Get the type
             Type type = value.GetType();
@@ -247,14 +243,14 @@ namespace CoreLib
         /// <summary>
         /// Gets all arttibutes.
         /// </summary>
-        public static Object[] GetAttributes<T>(this Enum @enum)
+        public static object[] GetAttributes<T>(this Enum @enum)
         {
             if (@enum != null)
             {
                 FieldInfo fi = @enum.GetType().GetField(@enum.ToString());
                 if (fi != null)
                 {
-                    Object[] attributes = fi.GetCustomAttributes(typeof(T), false);
+                    object[] attributes = fi.GetCustomAttributes(typeof(T), false);
                     if (attributes != null)
                         return (attributes);
                 }
@@ -265,7 +261,7 @@ namespace CoreLib
         /// <summary>
         /// Checks if the value contains the provided type.
         /// </summary>
-        public static bool Has<T>(this System.Enum type, T value)
+        public static bool Has<T>(this Enum type, T value)
         {
             try
             {
@@ -280,7 +276,7 @@ namespace CoreLib
         /// <summary>
         /// Checks if the value is only the provided type.
         /// </summary>
-        public static bool Is<T>(this System.Enum type, T value)
+        public static bool Is<T>(this Enum type, T value)
         {
             try
             {
@@ -295,7 +291,7 @@ namespace CoreLib
         /// <summary>
         /// Appends a value.
         /// </summary>
-        public static T Add<T>(this System.Enum type, T value)
+        public static T Add<T>(this Enum type, T value)
         {
             try
             {
@@ -314,7 +310,7 @@ namespace CoreLib
         /// <summary>
         /// Completely removes the value.
         /// </summary>
-        public static T Remove<T>(this System.Enum type, T value)
+        public static T Remove<T>(this Enum type, T value)
         {
             try
             {
@@ -378,7 +374,9 @@ namespace CoreLib
         /// Calculates the age in years of the current System.DateTime object today.
         /// </summary>
         /// <param name="birthDate">The date of birth</param>
-        /// <returns>Age in years today. 0 is returned for a future date of birth.</returns>
+        /// <returns>
+        /// Age in years today. 0 is returned for a future date of birth.
+        /// </returns>
         public static int Age(this DateTime birthDate)
         {
             var yearsOld = DateTime.Today.Year - birthDate.Year;
@@ -553,18 +551,36 @@ namespace CoreLib
     #region CollectionViewExtension
     public static class CollectionViewExtension
     {
+        /// <summary>
+        /// Gets if current item is last.
+        /// </summary>
+        /// <param name="view">
+        /// Collection view source.
+        /// </param>
+        /// <returns>
+        /// True or false.
+        /// </returns>
         public static bool IsCurrentLast(this ListCollectionView view)
         {
             if (view == null)
-                throw new ArgumentNullException("view");
+                throw new ArgumentNullException(nameof(view));
 
             return view.CurrentPosition == view.Count - 1;
         }
 
+        /// <summary>
+        /// Gets if current item is first.
+        /// </summary>
+        /// <param name="view">
+        /// Collection view source.
+        /// </param>
+        /// <returns>
+        /// True or false.
+        /// </returns>
         public static bool IsCurrentFirst(this ListCollectionView view)
         {
             if (view == null)
-                throw new ArgumentNullException("view");
+                throw new ArgumentNullException(nameof(view));
 
             return view.CurrentPosition == 0;
         }

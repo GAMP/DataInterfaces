@@ -119,7 +119,7 @@ namespace SharedLib
             field = value;
 
             //create new arguments
-            PropertyChangedEventArgsEx args = new PropertyChangedEventArgsEx(propertyName, value, oldValue);
+            var args = new PropertyChangedEventArgsEx(propertyName, value, oldValue);
 
             //raise event
             this.RaisePropertyChanged(args);

@@ -749,6 +749,7 @@ namespace SharedLib.Commands
         UserOperatorUpdate,
         UserOperatorRemove,
         UserOperatorDelete, 
+        UserOperatorSetPassword,
         #endregion
 
         #region PLUGINLIB
@@ -853,11 +854,23 @@ namespace SharedLib.Commands
         StockSet,
         StockGet,
 
+        ProductOrderGet,
         ProductOrderCancel,
         ProductOrderInvoice,
+
         InvoiceGet,
         InvoicePaymentAdd,
         InvoicePaymentGet,
+
+        AttributeGet,
+        AttributeAdd,
+        AttributeUpdate,
+        AttributeRemove,
+
+        UserAttributeGet,
+        UserAttributeGetValue,
+        UserAttributeSetValue,
+        UserAttributeRemove,
     }
     #endregion
 

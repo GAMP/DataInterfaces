@@ -12,34 +12,15 @@ namespace IntegrationLib
     public class UserPrincipal : GenericPrincipal
     {
         #region Constructor
+
         public UserPrincipal(UserIdentity idenity, string[] roles)
             : base(idenity, roles)
         {
         }
 
         public UserPrincipal(UserIdentity idenity)
-            : this(idenity, new string[] { idenity.Role.ToString() })
+            : base(idenity, new string[] { idenity.Role.ToString() })
         {
-        }
-
-        #endregion
-
-        #region Properties
-
-        /// <summary>
-        /// Gets current thread Principal.
-        /// </summary>
-        public static UserPrincipal Current
-        {
-            get { return Thread.CurrentPrincipal as UserPrincipal; }
-        }
-
-        /// <summary>
-        /// Gets user identity.
-        /// </summary>
-        public UserIdentity UserIdentity
-        {
-            get { return this.Identity as UserIdentity; }
         }
 
         #endregion

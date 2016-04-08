@@ -6,6 +6,7 @@ using System.Security.Principal;
 using SharedLib;
 using System.Threading;
 using System.Runtime.Serialization;
+using System.Security.Claims;
 
 namespace IntegrationLib
 {
@@ -16,21 +17,14 @@ namespace IntegrationLib
     {
         #region Constructor
 
-        public UserIdentity(string name, int userId, UserRoles role, string type)
-            : base(name, type)
+        public UserIdentity(string name, int userId, UserRoles role)
+            : base(name)
         {
             this.UserId = userId;
             this.Role = role;
         }
 
-        public UserIdentity(string name, int userId, UserRoles role)
-            : this(name, userId,role,"Basic")
-        {            
-            this.UserId = userId;
-            this.Role = role;
-        }
-
-        #endregion
+        #endregion        
 
         #region Properties
 

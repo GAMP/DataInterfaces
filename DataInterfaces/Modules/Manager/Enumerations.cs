@@ -13,16 +13,15 @@ namespace Manager
         Help,
         Tools,
         View
-    } 
+    }
     #endregion
 
-    #region MenuArea
+    #region KnownMenuArea
     /// <summary>
     /// Menu area enumeration.
     /// </summary>
-    public enum MenuArea
+    public enum KnownMenuArea
     {
-        Unset,
         Main,
         Quick,
         Hosts,

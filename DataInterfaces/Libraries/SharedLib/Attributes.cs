@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace SharedLib
@@ -449,6 +450,83 @@ namespace SharedLib
         {
             this.Category = "Uninstall";
         }
+        #endregion
+    }
+    #endregion
+
+    #region FilterPropertyAttribute
+    /// <summary>
+    /// Maps a class property to filter property name.
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = true, Inherited = true)]
+    public class FilterPropertyAttribute : Attribute
+    {
+        #region CONSTRUCTOR
+
+        /// <summary>
+        /// Creates new filter property attribute.
+        /// </summary>
+        /// <param name="propertyName">Property name.</param>
+        /// <param name="operation">Filter opertation.</param>
+        public FilterPropertyAttribute(string propertyName, Op operation):this(propertyName, operation,null,false)
+        { }
+
+        /// <summary>
+        /// Creates new filter property attribute.
+        /// </summary>
+        /// <param name="propertyName">Property name.</param>
+        /// <param name="operation">Filter opertation.</param>
+        /// <param name="groupName">Filter group name.</param>
+        /// <param name="includedOnNull">Indicates if filter should be included on null values.</param>
+        public FilterPropertyAttribute(string propertyName, Op operation, string groupName, bool includedOnNull)
+        {
+            if (string.IsNullOrWhiteSpace(propertyName))
+                throw new ArgumentNullException(nameof(propertyName));
+
+            this.PropertyName = propertyName;
+            this.Operation = operation;
+            this.GroupName = groupName;
+            this.IncludeOnNull = includedOnNull;
+        }
+
+        #endregion
+
+        #region PROPERTIES
+
+        /// <summary>
+        /// Filter property.
+        /// This is the actual propery name that will be filtered on target object.
+        /// </summary>
+        public string PropertyName
+        {
+            get; protected set;
+        }
+
+        /// <summary>
+        /// Gets if filter should be included if filter value is null.
+        /// </summary>
+        public bool IncludeOnNull
+        {
+            get; protected set;
+        }
+
+        /// <summary>
+        /// Gets filtering operation.
+        /// </summary>
+        public Op Operation
+        {
+            get; protected set;
+        }
+
+        /// <summary>
+        /// Filter group name.
+        /// </summary>
+        public string GroupName
+        {
+            get;
+            protected set;
+        }
+
         #endregion
     }
     #endregion
