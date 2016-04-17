@@ -25,20 +25,8 @@ namespace SharedLib.ViewModels
 
         /// <summary>
         /// Gets item source that can be used for binding.
-        /// This item source should implement observable pattern.
+        /// When implemented this enumerable should implement observable pattern.
         /// </summary>
         IEnumerable<T> EnumerableSource { get; }
-    }
-
-    /// <summary>
-    /// View model locator interface.
-    /// </summary>
-    /// <typeparam name="T">Item type.</typeparam>
-    public interface IViewModelLocatorList<T> : IViewModelLocator<T>
-    {
-        /// <summary>
-        /// Gets item source that can be used for binding and manipulation.
-        /// </summary>
-        IList<T> ListSource { get; }
     }
 }

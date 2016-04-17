@@ -43,11 +43,6 @@ namespace ServerService
         /// </summary>
         event EventHandler<ConnectionChangedArgs> ConnectionChanged;
 
-        /// <summary>
-        /// Occurs on user session change.
-        /// </summary>
-        event EventHandler<UserSessionChangedEventArgs> UserSessionChange;
-
         #endregion
     } 
     #endregion       

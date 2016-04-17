@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace SharedLib.ViewModels
 {
     /// <summary>
-    /// Menu viewmodel interface.
+    /// Menu item viewmodel interface.
     /// Used by viewmodel classes that are exposed for binding with menus.
     /// </summary>
     public interface IMenuItemViewModel

@@ -23,4 +23,22 @@ namespace ServerService
         void ConfigurationSet(ConfigurationRoot configuration);
     }
     #endregion
+
+    #region IConfigurableServiceAsync
+    public interface IConfigurableServiceAsync : IConfigurableService
+    {
+        /// <summary>
+        /// Gets service configuration asynchronously.
+        /// </summary>
+        /// <returns>Configuration instance.</returns>
+        Task<ConfigurationRoot> ConfigurationGetAsync();
+
+        /// <summary>
+        /// Sets service configuration asynchronously.
+        /// </summary>
+        /// <param name="settings">Configuration instance.</param>
+        /// <returns>Associated task.</returns>
+        Task ConfigurationSetAsync(ConfigurationRoot settings);
+    } 
+    #endregion
 }

@@ -15,14 +15,20 @@ namespace IntegrationLib
     {
         #region CONSTRUCTOR
 
-        public AuthResult(LoginResult result, IUserIdentity identity)
+        public AuthResult(LoginResult result) : this(result, null)
+        {
+        }
+
+        public AuthResult(LoginResult result, IUserIdentity identity):this(result,identity, UserInfoTypes.None)
+        {          
+        }
+
+        public AuthResult(LoginResult result,IUserIdentity identity, UserInfoTypes requiredInfo)
         {
             this.Identity = identity;
             this.Result = result;
+            this.RequiredInfo = requiredInfo;
         }
-
-        public AuthResult(LoginResult result) : this(result, null)
-        { }
 
         #endregion
 

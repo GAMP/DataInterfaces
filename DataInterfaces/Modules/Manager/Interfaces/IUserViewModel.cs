@@ -1,6 +1,7 @@
 ﻿using SharedLib;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,83 +9,83 @@ using System.Threading.Tasks;
 namespace Manager.ViewModels
 {
     /// <summary>
-    /// Generic user view model interface.
+    /// Base user view model interface implemented by all user view models.
     /// </summary>
-    public interface IUserViewModel
+    public interface IUserViewModel : INotifyPropertyChanged
     {
         /// <summary>
         /// Gets user id.
         /// </summary>
-        int Id { get; set; }
+        int Id { get; }
 
         /// <summary>
         /// Gets user id.
         /// </summary>
-        int UserId { get; set; }
+        int UserId { get; }
 
         /// <summary>
         /// Gets address.
         /// </summary>
-        string Address { get; set; }
+        string Address { get; }
 
         /// <summary>
         /// Gets birthdate.
         /// </summary>
-        DateTime? BirthDate { get; set; }
+        DateTime? BirthDate { get; }
 
         /// <summary>
         /// Gets city.
         /// </summary>
-        string City { get; set; }
+        string City { get; }
 
         /// <summary>
         /// Gets country.
         /// </summary>
-        string Country { get; set; }
-
-        /// <summary>
-        /// Gets email.
-        /// </summary>
-        string Email { get; set; }
+        string Country { get; }
 
         /// <summary>
         /// Gets first name.
         /// </summary>
-        string FirstName { get; set; }
+        string FirstName { get; }
 
         /// <summary>
         /// Gets last name.
         /// </summary>
-        string LastName { get; set; }
+        string LastName { get; }
 
         /// <summary>
         /// Gets if user is disabled.
         /// </summary>
-        bool IsDisabled { get; set; }
+        bool IsDisabled { get; }
 
         /// <summary>
         /// Gets mobile phone number.
         /// </summary>
-        string Mobile { get; set; }
+        string Mobile { get; }
 
         /// <summary>
         /// Gets phone number.
         /// </summary>
-        string Phone { get; set; }
+        string Phone { get; }
 
         /// <summary>
         /// Gets post code.
         /// </summary>
-        string PostCode { get; set; }
+        string PostCode { get; }
 
         /// <summary>
         /// Gets sex.
         /// </summary>
-        Sex Sex { get; set; }
+        Sex Sex { get; }
 
         /// <summary>
         /// Gets if user is delted.
         /// </summary>
-        bool IsDeleted { get; set; }
+        bool IsDeleted { get; }
+
+        /// <summary>
+        /// Gets user guid.
+        /// </summary>
+        Guid Guid { get; }
     }
 }

@@ -7,18 +7,33 @@ using System.Threading.Tasks;
 namespace Manager.ViewModels
 {
     /// <summary>
-    /// Generic user member view model interface.
+    /// Member user view model interface.
     /// </summary>
     public interface IUserMemberViewModel : IUserViewModel
     {
         /// <summary>
         /// Gets or sets user group id.
         /// </summary>
-        int? GroupId { get; set; }
+        int? GroupId { get; }
+
+        /// <summary>
+        /// Gets email.
+        /// </summary>
+        string Email { get; }
 
         /// <summary>
         /// Gets or sets user name.
         /// </summary>
-        string UserName { get; set; }
+        string UserName { get; }
+
+        /// <summary>
+        /// Gets total amount of points.
+        /// </summary>
+        int Points { get; }
+
+        /// <summary>
+        /// Gets user deposits balance.
+        /// </summary>
+        decimal Deposits { get; }
     }
 }

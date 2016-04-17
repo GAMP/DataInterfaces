@@ -7,8 +7,13 @@ using System.Threading.Tasks;
 
 namespace Manager.Services
 {
+    /// <summary>
+    /// Localization service.
+    /// </summary>
     public interface ILocalizationService
     {
+        #region FUNCTIONS
+
         /// <summary>
         /// Gets localized string value.
         /// </summary>
@@ -45,6 +50,8 @@ namespace Manager.Services
         /// </summary>
         /// <param name="enumValue">Enum value.</param>
         /// <returns>Localized string.</returns>
-        string Loc(Enum enumValue);
+        string Loc(Enum enumValue); 
+
+        #endregion
     }
 }

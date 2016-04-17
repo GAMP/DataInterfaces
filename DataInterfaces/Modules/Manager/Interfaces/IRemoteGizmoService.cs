@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Manager
+namespace Manager.Services
 {
     #region IRemoteGizmoService
     /// <summary>
@@ -18,12 +18,11 @@ namespace Manager
     /// </summary>
     public interface IRemoteGizmoService :
         IRemoteService,
-        IHostService,
-        IConfigurableService,
-        IUserService,
+        IHostServiceAsync,
+        IConfigurableServiceAsync,
+        IUserServiceAsync,
         ILogService        
     {
-
         /// <summary>
         /// Gets if service is authenticated.
         /// </summary>
@@ -66,19 +65,6 @@ namespace Manager
         /// <param name="password">User password.</param>
         /// <returns>Authentication result.</returns>
         AuthResult Authenticate(string username, string password);
-
-        /// <summary>
-        /// Gets service configuration asynchronously.
-        /// </summary>
-        /// <returns>Configuration instance.</returns>
-        Task<ConfigurationRoot> ConfigurationGetAsync();
-
-        /// <summary>
-        /// Sets service configuration asynchronously.
-        /// </summary>
-        /// <param name="settings">Configuration instance.</param>
-        /// <returns>Associated task.</returns>
-        Task ConfigurationSetAsync(ConfigurationRoot settings);
     }
     #endregion
 }

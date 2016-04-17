@@ -4,14 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace Manager.Modules
 {
     /// <summary>
     /// Provides ability to track currently selected users in user module.
     /// </summary>
-    public interface IUserModuleSelectionProvider
+    public interface IUserModuleSelectionProvider 
     {
+        event EventHandler<SelectionChangedEventArgs> SelectionChanged;
+
         /// <summary>
         /// Gets selected items.
         /// </summary>
@@ -42,5 +45,29 @@ namespace Manager.Modules
         /// Gets selected user ids.
         /// </summary>
         IEnumerable<int> GetSelectedUserIds();
+    }
+
+    public interface ISingleGetSelectionProvider<T>
+    {
+        /// <summary>
+        /// Gets selected item.
+        /// </summary>
+        T SelectedItem { get; }
+    }
+
+    public interface ISingleSetSelectedProvider <T> : ISingleGetSelectionProvider<T>
+    {
+        /// <summary>
+        /// Gets or sets selected item.
+        /// </summary>
+        new T SelectedItem { set; }
+    }
+
+    public interface IMultiSelectSelectionProvider <T>
+    {
+        IEnumerable<T> SelectedItems
+        {
+            get;
+        }
     }
 }

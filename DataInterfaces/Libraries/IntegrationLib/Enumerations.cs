@@ -48,7 +48,7 @@ namespace IntegrationLib
     }
     #endregion       
 
-    #region LoginResult
+    #region SmartlaunchLoginResult
     [Flags()]
     public enum SmartlaunchLoginResult : int
     {

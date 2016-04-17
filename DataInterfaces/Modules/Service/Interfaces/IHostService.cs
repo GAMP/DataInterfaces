@@ -28,7 +28,15 @@ namespace ServerService
         #region FUNCTIONS
 
         /// <summary>
-        /// Gets properties for specified host.
+        /// Gets specified property for host.
+        /// </summary>
+        /// <param name="hostId">Host id.</param>
+        /// <param name="type">Property type.</param>
+        /// <returns>Property value.</returns>
+        object HostGetProperty(int hostId, HostPropertyType type);
+
+        /// <summary>
+        /// Gets properties for host.
         /// </summary>
         /// <param name="hostId">Host id.</param>
         /// <param name="types">Property types.</param>
@@ -36,7 +44,7 @@ namespace ServerService
         IDictionary<HostPropertyType, object> HostGetProperties(int hostId, HashSet<HostPropertyType> types);
 
         /// <summary>
-        /// Gets properties for specified host.
+        /// Gets properties for host.
         /// </summary>
         /// <param name="hostId">Host id.</param>
         /// <returns>Properties dictionary.</returns>
@@ -45,4 +53,31 @@ namespace ServerService
         #endregion
     }
     #endregion
+
+    public interface IHostServiceAsync : IHostService
+    {
+        /// <summary>
+        /// Gets specified property for host.
+        /// </summary>
+        /// <param name="hostId">Host id.</param>
+        /// <param name="type">Property type.</param>
+        /// <returns>Associated task.</returns>
+        Task<object> HostGetPropertyAsync(int hostId, HostPropertyType type);
+
+        /// <summary>
+        /// Gets properties for host.
+        /// </summary>
+        /// <param name="hostId">Host id.</param>
+        /// <param name="types">Property types.</param>
+        /// <returns>Associated task.</returns>
+        Task<IDictionary<HostPropertyType, object>> HostGetPropertiesAsync(int hostId, HashSet<HostPropertyType> types);
+
+        /// <summary>
+        /// Gets properties for host.
+        /// </summary>
+        /// <param name="hostId">Host id.</param>
+        /// <returns>Associated task.</returns>
+        Task<IDictionary<HostPropertyType, object>> HostGetPropertiesAsync(int hostId);
+    }
+
 }

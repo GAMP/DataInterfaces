@@ -34,10 +34,10 @@ namespace SharedLib
         /// Gets system ticks set during class creation.
         /// <remarks>This is equals to system ticks set during process creation.</remarks>
         /// </summary>
-        public static int CreationTickCount
+        private static int CreationTickCount
         {
             get;
-            private set;
+            set;
         }
 
         /// <summary>
@@ -45,7 +45,6 @@ namespace SharedLib
         /// </summary>
         public static DateTime Now
         {
-            //get { return InternalDate.CreationTime.Add(TimeSpan.FromMilliseconds(Environment.TickCount - CreationTickCount)); }
             get { return DateTime.Now; }
         }
 
@@ -56,6 +55,15 @@ namespace SharedLib
         {
             get { return InternalDate.Now.ToString(CultureInfo.InvariantCulture); }
         }
+
+        /// <summary>
+        /// Gets UTC date time.
+        /// </summary>
+        public static DateTime UtcNow
+        {
+            get { return InternalDate.Now.ToUniversalTime(); }
+        }
+
         #endregion
     }
 }

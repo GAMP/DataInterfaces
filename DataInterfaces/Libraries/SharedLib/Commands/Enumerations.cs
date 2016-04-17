@@ -738,6 +738,7 @@ namespace SharedLib.Commands
         UserGetPicture,
         UserSetEmail,
         UserSetGroup,
+        UserCredentialsValidate,
         UserLogin,
         UserLogout,
         UserDisable,
@@ -861,6 +862,9 @@ namespace SharedLib.Commands
         InvoiceGet,
         InvoicePaymentAdd,
         InvoicePaymentGet,
+
+        SettingGet,
+        SettingSet,
 
         AttributeGet,
         AttributeAdd,

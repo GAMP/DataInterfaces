@@ -73,10 +73,23 @@ namespace SharedLib
     public class GUIDAttribute : Attribute
     {
         #region Constructor
-        public GUIDAttribute(string guid)
+
+        public GUIDAttribute(string guidString)
         {
-            this.Guid = new Guid(guid);
+            if (string.IsNullOrWhiteSpace(guidString))
+                throw new ArgumentNullException(nameof(guidString));
+
+            this.Guid = new Guid(guidString);
         }
+
+        public GUIDAttribute(Guid guid)
+        {
+            if (guid == null)
+                throw new ArgumentNullException(nameof(guid));
+
+            this.Guid = guid;
+        }
+
         #endregion
 
         #region Fields

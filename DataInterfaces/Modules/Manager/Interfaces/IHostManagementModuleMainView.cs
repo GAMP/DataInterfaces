@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Manager.ViewModels
+namespace Manager.Views
 {
     /// <summary>
-    /// Guest user view model interface.
+    /// Host management module main view.
     /// </summary>
-    public interface IUserGuestViewModel : IUserMemberViewModel
+    public interface IHostManagementModuleMainView : IViewColumns
     {
     }
 }

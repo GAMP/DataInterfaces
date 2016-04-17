@@ -11,7 +11,9 @@ namespace SharedLib
 {
     #region PropertyChangedBase
     [Serializable()]
-    public class PropertyChangedBase : INotifyPropertyChanged
+    public abstract class PropertyChangedBase : CustomTypeDescriptor,
+        INotifyPropertyChanged,
+        IDynamicPropertyObject
     {
         #region FIELDS
         /// <summary>
@@ -129,6 +131,78 @@ namespace SharedLib
 
             //return true since property was changed
             return true;
+        }
+
+        #endregion
+
+        #region ICustomTypeDescriptor
+
+        #region FIELDS
+        private Dictionary<string,PropertyDescriptor> propertyStore = new  Dictionary<string, PropertyDescriptor>(); 
+        #endregion
+
+        public void SetPropertyValue<T>(string propertyName, T propertyValue)
+        {
+            var properties = this.GetProperties()
+                                    .Cast<PropertyDescriptor>()
+                                    .Where(prop => prop.Name.Equals(propertyName));
+
+            if (properties == null || properties.Count() != 1)
+                throw new ArgumentNullException(nameof(propertyName));
+
+            var property = properties.First();
+            property.SetValue(this, propertyValue);
+
+            RaisePropertyChanged(propertyName);
+        }
+        
+        public T GetPropertyValue<T>(string propertyName)
+        {
+            var properties = this.GetProperties()
+                                .Cast<PropertyDescriptor>()
+                                .Where(prop => prop.Name.Equals(propertyName));
+
+            if (properties == null || properties.Count() != 1)
+                throw new ArgumentNullException(nameof(propertyName));        
+
+            var property = properties.First();
+            return (T)property.GetValue(this);
+        }
+        
+        public PropertyDescriptor AddProperty<T, U>(string propertyName) where U : PropertyChangedBase
+        {
+            return this.AddProperty(propertyName, new DynamicPropertyDescriptor<T>(propertyName,typeof(U)));
+        }
+
+        public PropertyDescriptor AddProperty<T>(string propertyName)
+        {
+            return this.AddProperty(propertyName,new DynamicPropertyDescriptor<T>(propertyName, this.GetType()));         
+        }
+
+        private PropertyDescriptor AddProperty(string propertyName, PropertyDescriptor customProperty)
+        {
+            if (string.IsNullOrWhiteSpace(propertyName))
+                throw new ArgumentNullException(nameof(propertyName));
+
+            if (customProperty == null)
+                throw new ArgumentNullException(nameof(customProperty));
+
+            //will throw if other entry with same name already exist
+            propertyStore.Add(propertyName, customProperty);
+
+            //add value change handler
+            customProperty.AddValueChanged(this, (o, e) => { RaisePropertyChanged(propertyName); });
+
+            //return back to caller
+            return customProperty;
+        }
+        
+        public override PropertyDescriptorCollection GetProperties()
+        {
+            return new PropertyDescriptorCollection(base.GetProperties()
+                .Cast<PropertyDescriptor>()
+                .Concat(propertyStore.Values)
+                .ToArray());
         }
 
         #endregion

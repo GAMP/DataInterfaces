@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,9 +8,9 @@ using System.Threading.Tasks;
 namespace Manager.ViewModels
 {
     /// <summary>
-    /// Guest user view model interface.
+    /// Implemented by host view models that represent a host computer.
     /// </summary>
-    public interface IUserGuestViewModel : IUserMemberViewModel
+    public interface IHostComputerViewModel : INotifyPropertyChanged
     {
     }
 }

@@ -11,6 +11,7 @@ namespace System.Linq.Expressions
     public static class ExpressionBuilder
     {
         #region STATIC FIELDS
+        private static MethodInfo compareMethod = typeof(string).GetMethod("Compare", new[] { typeof(string), typeof(string) ,typeof(StringComparison)});
         private static MethodInfo containsMethod = typeof(string).GetMethod("Contains");
         private static MethodInfo startsWithMethod = typeof(string).GetMethod("StartsWith", new Type[] { typeof(string) });
         private static MethodInfo endsWithMethod = typeof(string).GetMethod("EndsWith", new Type[] { typeof(string) });
@@ -62,10 +63,10 @@ namespace System.Linq.Expressions
             object filterValue = filter.Value;
             string filterName = filter.PropertyName;
             Op operation = filter.Operation;
-
             MemberExpression member = Expression.Property(param, filter.PropertyName);
             ConstantExpression constant = null;
-
+            
+            #region NULLABLE HANDLING
             if (filterValue != null && IsNullableType(member.Type))
             {
                 var targetType = Nullable.GetUnderlyingType(member.Type);
@@ -75,13 +76,11 @@ namespace System.Linq.Expressions
             else
             {
                 constant = Expression.Constant(filterValue);
-            }
+            } 
+            #endregion
 
             switch (operation)
             {
-                case Op.Equals:
-                    return Expression.Equal(member, constant);
-
                 case Op.GreaterThan:
                     return Expression.GreaterThan(member, constant);
 
@@ -93,6 +92,17 @@ namespace System.Linq.Expressions
 
                 case Op.LessThanOrEqual:
                     return Expression.LessThanOrEqual(member, constant);
+
+                case Op.Equals:
+
+                    //string equals ignore case comparison
+                    if (member.Type.TypeHandle.Equals(typeof(string).TypeHandle))
+                    {
+                        var compareExpression = Expression.Call(null, compareMethod, member, constant, Expression.Constant(StringComparison.InvariantCultureIgnoreCase));
+                        return Expression.Equal(compareExpression, Expression.Constant(0));
+                    }
+
+                    return Expression.Equal(member, constant);
 
                 case Op.Contains:
                     return Expression.Call(member, containsMethod, constant);
