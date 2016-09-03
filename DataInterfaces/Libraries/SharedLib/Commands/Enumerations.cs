@@ -552,6 +552,8 @@ namespace SharedLib.Commands
         GetMacAddress = 11,
         SetOutOfOrderState = 12,
         GetOutOfOrderState = 13,
+        SetMaintenanceMode=14,
+        GetMaintenanceMode=15,
     }
     #endregion
 
@@ -610,6 +612,7 @@ namespace SharedLib.Commands
         HostLockStateSet,
         HostOrderStateSet,
         HostSecurityStateSet, 
+        HostMaintenanceStateSet,
         #endregion
 
         #region USERGROUP
@@ -739,9 +742,11 @@ namespace SharedLib.Commands
         UserSetEmail,
         UserSetGroup,
         UserCredentialsValidate,
+        UserNegativeBalanceEnable,
         UserLogin,
         UserLogout,
         UserDisable,
+        UserSetSmartCardId,
         #endregion
 
         #region USER OPERATOR
@@ -784,7 +789,6 @@ namespace SharedLib.Commands
         ConfigurationGet,
         ConfigurationSet,
         LanguageGet,
-        IntegrationProvidersGet,
         SkinGet,
         SystemLicenseGet,
         #endregion        
@@ -842,10 +846,19 @@ namespace SharedLib.Commands
         PaymentMethodUpdate,
         PaymentMethodRemove,
 
+        UserBalanceGet,
+        UserGetMoneyForTime,
+        UserGetTimeForMoney,
+        UserProductTimeGet,
+        UserCloseBalance,
+
+        UsageSessionInvoiceActive,
+
         DepositTransactionGet,
         DepositBalanceGet,
         DepositAdd,
         DepositWithdraw,
+        DepositPaymentGet,
 
         PointsGetBalance,
 
@@ -875,6 +888,8 @@ namespace SharedLib.Commands
         UserAttributeGetValue,
         UserAttributeSetValue,
         UserAttributeRemove,
+
+        EntityMarkDeleted,
     }
     #endregion
 
@@ -889,9 +904,9 @@ namespace SharedLib.Commands
         LicenseReservationEvent = 2,
         UserChangeEvent = 3,
         UserStateChangeEvent = 4,
-        UserSessionChangeEvent=5,
         LogChangedEvent = 6,
         EntityEvent=7,
+        UserBalanceEvent=8,
     }
     #endregion
 

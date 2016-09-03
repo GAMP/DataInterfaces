@@ -847,8 +847,6 @@ namespace SharedLib
         Network,
         [Localized("CFG_SECTION_DATABSE")]
         Database,
-        [Localized("CFG_SECTION_INTEGRATION")]
-        Integration,
         [Localized("CFG_SECTION_FILE_SYSTEM")]
         FileSystem,
         [Localized("CFG_SECTION_SHELL")]
@@ -901,7 +899,11 @@ namespace SharedLib
         MSSQL = 1,
         [CanUserAssign(true)]
         MSSQLEXPRESS = 2,
+#if DEBUG
         [CanUserAssign(true)]
+#else
+        [CanUserAssign(false)]
+#endif
         LOCALDB = 3,
         [CanUserAssign(false)]
         SQLITE = 4,
@@ -1016,6 +1018,14 @@ namespace SharedLib
         /// Existing user picture changed.
         /// </summary>
         Picture,
+        /// <summary>
+        /// Allow negative balance changed.
+        /// </summary>
+        NegativBalanceEnabled,
+        /// <summary>
+        /// SmartCard UID Changed.
+        /// </summary>
+        SmartCardUID,
     }
     #endregion
 
@@ -1455,7 +1465,9 @@ namespace SharedLib
     public enum UserGroupOptionType
     {
         None = 0,
-        DisablePersonalStroage = 1,
+        EnablePersonalStorage = 1,
+        HideLogoutButton=2,
+        DisallowManulaLogin=4,
     }
     #endregion
 
@@ -1504,7 +1516,6 @@ namespace SharedLib
     public enum HostGroupOptionType
     {
         None = 0,
-        DisableShell = 1,
     }
     #endregion
 
@@ -1594,13 +1605,13 @@ namespace SharedLib
     #region PRODUCTSORTOPTIONTYPE
     public enum ProductSortOptionType
     {
-        [Localized("DEFAULT")]
+        [Localized("MANUAL")]
         Default = 0,
         [Localized("NAME")]
         Name = 1,
         [Localized("CREATION_TIME")]
         Created = 2
-    } 
+    }
     #endregion
 
     #region BILLRATEOPTIONTYPE
@@ -1611,12 +1622,13 @@ namespace SharedLib
     }
     #endregion
 
-    #region PORDUCTTIMEEXPIRATIONOPTIONTYPE
+    #region PRODUCTTIMEEXPIRATIONOPTIONTYPE
     [Flags()]
-    public enum PorductTimeExpirationOptionType
+    public enum ProductTimeExpirationOptionType
     {
         None = 0,
         ExpiresAtLogout = 1,
+        [Obsolete()]
         ExpiresAtDate = 2,
         ExpireAfterDays = 4
     }
@@ -1758,12 +1770,12 @@ namespace SharedLib
         /// Cash payment.
         /// </summary>
         Cash = -1,
-        
+
         /// <summary>
         /// Credit card payment.
         /// </summary>
         CreditCard = -2,
-        
+
         /// <summary>
         /// Deposit balance payment.
         /// </summary>
@@ -1772,8 +1784,8 @@ namespace SharedLib
         /// <summary>
         /// Deposit points payment.
         /// </summary>
-        Points = -4,           
-    } 
+        Points = -4,
+    }
     #endregion
 
     #region ROUNDOPTIONTYPE
@@ -1845,7 +1857,7 @@ namespace SharedLib
         [Localized("ORDER_STATUS_INVOICED")]
         Invoiced = 1,
         [Localized("ORDER_STATUS_CANCELED")]
-        Canceled =2
+        Canceled = 2
     }
     #endregion
 
@@ -1854,7 +1866,7 @@ namespace SharedLib
     {
         [Localized("INVOICE_STATUS_UNPAID")]
         Unpaid = 0,
-        [Localized("INVOICE_STATUS_PARTIALY_PAID")]
+        [Localized("INVOICE_STATUS_PARTIALLY_PAID")]
         PartialyPaid = 1,
         [Localized("INVOICE_STATUS_PAID")]
         Paid = 2,
@@ -1898,6 +1910,24 @@ namespace SharedLib
     {
         None = 0,
         DeleteDestination = 1,
+    }
+    #endregion
+
+    #region PERSONALFILEACTIVATIONTYPE
+    public enum PersonalFileActivationType
+    {
+        [Localized("LAUNCH")]
+        Launch = 0,
+        [Localized("LOGIN")]
+        Login = 1,
+    }
+    #endregion
+
+    #region PERSONALFILEDEACTIVATIONTYPE
+    public enum PersonalFileDeactivationType
+    {
+        [Localized("LOGOUT")]
+        Logout = 0
     }
     #endregion
 

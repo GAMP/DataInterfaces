@@ -1,4 +1,5 @@
 ﻿using Manager.ViewModels;
+using SharedLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,44 +12,31 @@ namespace Manager.Modules
     /// <summary>
     /// Provides ability to track currently selected users in user module.
     /// </summary>
-    public interface IUserModuleSelectionProvider 
+    public interface IUserModuleSelectionProvider : ISingleGetSelectionProvider<IUserMemberViewModel>
     {
-        event EventHandler<SelectionChangedEventArgs> SelectionChanged;
+        /// <summary>
+        /// Gets selected user id.
+        /// </summary>
+        int? SelectedUserId { get; }
 
         /// <summary>
-        /// Gets selected items.
+        /// Gets if selected user is logged in.
         /// </summary>
-        IEnumerable<IUserMemberViewModel> SelectedItems
-        {
-            get;
-        }
-
-        /// <summary>
-        /// Gets slected item.
-        /// </summary>
-        IUserMemberViewModel SelectedItem
-        {
-            get;
-        }
-
-        /// <summary>
-        /// Gets if selection has logged in.
-        /// </summary>
-        bool SelectionHasLoggedIn { get; }
+        bool? IsSelectedLoggedIn { get; }
 
         /// <summary>
         /// Gets if single is selected and not logged in.
         /// </summary>
-        bool SelectedSingleNotLoggedIn { get; }
-
-        /// <summary>
-        /// Gets selected user ids.
-        /// </summary>
-        IEnumerable<int> GetSelectedUserIds();
+        bool? IsSelectedLoggedOut { get; }
     }
 
     public interface ISingleGetSelectionProvider<T>
     {
+        /// <summary>
+        /// Raised when selected item changes.
+        /// </summary>
+        event EventHandler<SelectedChangeEventArgs<T>> SelectedChanged;
+
         /// <summary>
         /// Gets selected item.
         /// </summary>

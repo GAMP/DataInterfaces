@@ -11,6 +11,6 @@ namespace SharedLib.ViewModels
 
         event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
 
-        void Validate();
+        bool Validate();
     }
 }

@@ -87,5 +87,10 @@ namespace Manager.ViewModels
         /// Gets user guid.
         /// </summary>
         Guid Guid { get; }
+
+        /// <summary>
+        /// Gets user SmartCard UID.
+        /// </summary>
+        string SmartCardUID { get; }
     }
 }

@@ -27,18 +27,27 @@ namespace Manager.Services
         /// Add information message.
         /// </summary>
         /// <param name="message">Message string.</param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown if specified <paramref name="message"/> equals to null or empty string.
+        /// </exception>
         void AddInformation(string message);
 
         /// <summary>
         /// Add warning message.
         /// </summary>
         /// <param name="message">Message string.</param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown if specified <paramref name="message"/> equals to null or empty string.
+        /// </exception>
         void AddWarning(string message);
 
         /// <summary>
         /// Add error message.
         /// </summary>
         /// <param name="message">Message string.</param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown if specified <paramref name="message"/> equals to null or empty string.
+        /// </exception>
         void AddError(string message);
 
         /// <summary>
@@ -46,6 +55,9 @@ namespace Manager.Services
         /// </summary>
         /// <param name="message">Message string.</param>
         /// <param name="ex">Exception instance.</param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown if specified <paramref name="message"/> equals to null or empty string.
+        /// </exception>
         void AddError(string message, Exception ex=null);
 
 
@@ -55,7 +67,10 @@ namespace Manager.Services
         /// <param name="message">Message string.</param>
         /// <param name="endpointName">Endpoint name string.</param>
         /// <param name="type">Message type.</param>
-        /// <param name="error">Exception instance.</param>
+        /// <param name="error">Exception.</param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown if specified <paramref name="message"/> equals to null or empty string.
+        /// </exception>
         void AddMessage(string message, string endpointName, EventTypes type, Exception error=null);
 
         #endregion

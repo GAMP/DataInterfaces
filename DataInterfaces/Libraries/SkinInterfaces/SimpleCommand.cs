@@ -6,6 +6,7 @@ using System.Windows.Input;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Windows;
+using System.Threading.Tasks;
 
 namespace SkinInterfaces
 {
@@ -71,7 +72,8 @@ namespace SkinInterfaces
     #endregion
 
     #region SimpleCommand<T1, T2>
-    public class SimpleCommand<T1, T2> : IExecutionChangedAwareCommand, ICompletionAwareCommand
+    public class SimpleCommand<T1, T2> : IExecutionChangedAwareCommand,
+        ICompletionAwareCommand
     {
         #region CONSTRUCTOR
 
@@ -92,13 +94,13 @@ namespace SkinInterfaces
         #endregion
 
         #region EVENTS
-        public event EventHandler CanExecuteChanged; 
+        public event EventHandler CanExecuteChanged;
         #endregion
 
         #region FIELDS
         protected Func<T1, bool> canExecuteMethod;
-        protected Action<T2> executeMethod;       
-        #endregion        
+        protected Action<T2> executeMethod;
+        #endregion
 
         #region PROPERTIES
         public WeakActionEvent<object> CommandCompleted { get; set; }
@@ -108,28 +110,56 @@ namespace SkinInterfaces
 
         public virtual bool CanExecute(T1 parameter)
         {
-            if (canExecuteMethod == null) return true;
-            return canExecuteMethod(parameter);
+            try
+            {
+                if (canExecuteMethod == null) return true;
+                return canExecuteMethod(parameter);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public void Execute(T2 parameter)
         {
-            if (executeMethod != null)
-                executeMethod(parameter);
+            try
+            {
+                if (executeMethod != null)
+                    executeMethod(parameter);
 
-            WeakActionEvent<object> completedHandler = CommandCompleted;
-            if (completedHandler != null)
-                completedHandler.Invoke(parameter);
+                WeakActionEvent<object> completedHandler = CommandCompleted;
+                if (completedHandler != null)
+                    completedHandler.Invoke(parameter);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public virtual bool CanExecute(object parameter)
         {
-            return CanExecute((T1)parameter);
+            try
+            {
+                return CanExecute((T1)parameter);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public void Execute(object parameter)
         {
-            Execute((T2)parameter);
+            try
+            {
+                Execute((T2)parameter);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public virtual void RaiseCanExecuteChanged()
@@ -138,7 +168,7 @@ namespace SkinInterfaces
             if (handler != null)
                 Application.Current.Dispatcher.BeginInvoke(handler, this, EventArgs.Empty);
         }
-        
+
         #endregion
     }
     #endregion

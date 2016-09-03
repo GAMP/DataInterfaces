@@ -18,6 +18,9 @@ namespace System.ComponentModel
         /// <typeparam name="T">Property type.</typeparam>
         /// <param name="propertyName">Property name.</param>
         /// <returns>Added property descriptor.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown if specified <paramref name="propertyName"/> equals to null or empty string.
+        /// </exception>
         PropertyDescriptor AddProperty<T>(string propertyName);
 
         /// <summary>
@@ -26,7 +29,9 @@ namespace System.ComponentModel
         /// <typeparam name="T">Property value type.</typeparam>
         /// <param name="propertyName">Property name.</param>
         /// <returns>Property value.</returns>
-        /// <exception cref="System.ArgumentNullException">Thrown when no property found with specified property name.</exception>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when no property found with specified <paramref name="propertyName"/>.
+        /// </exception>
         T GetPropertyValue<T>(string propertyName);
 
         /// <summary>
@@ -35,8 +40,15 @@ namespace System.ComponentModel
         /// <typeparam name="T">Property value type.</typeparam>
         /// <param name="propertyName"></param>
         /// <param name="propertyValue">Property value.</param>
-        /// <exception cref="System.ArgumentNullException">Thrown when no property found with specified property name.</exception>
-        /// <exception cref="System.ArgumentException">When property value type and specified value types dont match.</exception>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown if specified <paramref name="propertyName"/> equals to null or empty string.
+        /// </exception>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when no property found with specified <paramref name="propertyName"/>.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// When property value type and specified value types dont match.
+        /// </exception>
         void SetPropertyValue<T>(string propertyName, T propertyValue);
     }
 }

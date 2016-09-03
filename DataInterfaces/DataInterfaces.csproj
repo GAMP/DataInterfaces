@@ -133,14 +133,19 @@
     <Compile Include="Libraries\IntegrationLib\Classes\DbCredentials.cs" />
     <Compile Include="Libraries\IntegrationLib\Classes\DispatcherPrincipal.cs" />
     <Compile Include="Libraries\IntegrationLib\Classes\UserPrincipal.cs" />
+    <Compile Include="Libraries\SharedLib\Classes\DynamicPropertyObject.cs" />
     <Compile Include="Libraries\SharedLib\Dispatcher\CommandParserBase.cs" />
+    <Compile Include="Libraries\SharedLib\ViewModels\Interfaces\IViewAwareModel.cs" />
+    <Compile Include="Libraries\SkinInterfaces\BindingProxy.cs" />
     <Compile Include="Libraries\SkinInterfaces\Converters\BoolToHiddenConverter.cs" />
     <Compile Include="Libraries\SkinInterfaces\Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Converters\CountGreaterConverter.cs" />
     <Compile Include="Libraries\System\ComponentModel\DataAnnotations\EmailNullEmptyAttribute.cs" />
     <Compile Include="Libraries\System\ComponentModel\DataAnnotations\PhoneNullEmptyAttribute.cs" />
     <Compile Include="Libraries\System\ComponentModel\DataAnnotations\UrlNullEmptyAttribute.cs" />
     <Compile Include="Libraries\System\ComponentModel\DynamicPropertyDescriptor.cs" />
     <Compile Include="Libraries\System\ComponentModel\IDynamicPropertyObject.cs" />
+    <Compile Include="Libraries\System\Linq\Expression\IFilterSet.cs" />
     <Compile Include="Modules\Client\Classes\ClientHookPluginBase.cs" />
     <Compile Include="Modules\Manager\Classes\ManagerModulePluginBase.cs" />
     <Compile Include="Modules\Manager\Interfaces\IHostComputerViewModel.cs" />
@@ -158,6 +163,9 @@
     <Compile Include="Modules\Manager\Interfaces\IManagerMenuService.cs" />
     <Compile Include="Modules\Manager\Interfaces\IMediaCapture.cs" />
     <Compile Include="Modules\Manager\Interfaces\IHostModuleMainView.cs" />
+    <Compile Include="Modules\Manager\Interfaces\IHostComputerManagementViewModel.cs" />
+    <Compile Include="Modules\Manager\Interfaces\IProgressDialogController.cs" />
+    <Compile Include="Modules\Manager\Interfaces\IUserDetailSectionModule.cs" />
     <Compile Include="Modules\Manager\Interfaces\IUserModuleMainView.cs" />
     <Compile Include="Modules\Manager\Interfaces\IPluginMetaDataView.cs" />
     <Compile Include="Modules\Manager\Interfaces\IManagerPlugableModule.cs" />
@@ -179,6 +187,7 @@
     <Compile Include="Modules\Service\Classes\GizmoServicePluginBase.cs" />
     <Compile Include="Modules\Manager\Classes\ManagerDispatcherPrincipal.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\IClientSideIntegrationProvider.cs" />
+    <Compile Include="Modules\Service\Classes\UserBalance.cs" />
     <Compile Include="Modules\Service\Enumerations.cs" />
     <Compile Include="Modules\Service\Interfaces\IConfigurableService.cs" />
     <Compile Include="Modules\Service\Interfaces\IGizmoServiceAuthenticationPlugin.cs" />

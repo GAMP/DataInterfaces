@@ -16,25 +16,18 @@ namespace SkinInterfaces.Converters
     /// The converter should never be shared between multiple UI controls.
     /// </remarks>
     /// </summary>
-    public class FlagsEnumValueVisibilityConverter : IValueConverter
+    public class FlagsEnumValueVisibilityConverter : FlagsEnumValueConverter
     {
-        private int targetValue;
-
-        public FlagsEnumValueVisibilityConverter()
+        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            return (bool)base.Convert(value, targetType, parameter, culture) == true ? Visibility.Visible : Visibility.Collapsed;
         }
 
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            int mask = (int)parameter;
-            this.targetValue = (int)value;
-            return  (((mask & this.targetValue) != 0)) ? Visibility.Visible : Visibility.Collapsed;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }
     }
+
     #endregion
 }

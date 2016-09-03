@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 
@@ -168,9 +169,10 @@ namespace SharedLib.Extensions
     }
     #endregion
 
+    #region ObjectExtensions
     public static class ObjectExtensions
     {
-        public static void SyncEntity(object source, object destination ,string[] propertySet)
+        public static void SyncEntity(object source, object destination, string[] propertySet)
         {
             #region VALIDATION
             if (source == null)
@@ -188,7 +190,7 @@ namespace SharedLib.Extensions
 
             #region PROPERTIES
             var properties = propertySet.Select(propertyName => sourceType.GetProperty(propertyName))
-                .Where(property=> property!=null)
+                .Where(property => property != null)
                 .ToList();
 
             foreach (var property in properties)
@@ -225,86 +227,22 @@ namespace SharedLib.Extensions
                     if (destinationList.Count < sourceIndex)
                         throw new ArgumentException(nameof(sourceIndex));
                     var destinationEntry = destinationList.ElementAt(sourceIndex);
-                    SyncEntity(sourceEntry, destinationEntry,propertySet);
+                    SyncEntity(sourceEntry, destinationEntry, propertySet);
                 }
             }
 
             #endregion
-        }        
-    }
-
-    #region EnumerableExtensions
-    public static class EnumerableExtensions
-    {
-        public static IEnumerable<IEnumerable<T>> Chunks<T>(this IEnumerable<T> enumerable,
-                                                    int chunkSize)
-        {
-            if (chunkSize < 1) throw new ArgumentException("chunkSize must be positive");
-
-            using (var e = enumerable.GetEnumerator())
-                while (e.MoveNext())
-                {
-                    var remaining = chunkSize;    // elements remaining in the current chunk
-                    var innerMoveNext = new Func<bool>(() => --remaining > 0 && e.MoveNext());
-
-                    yield return e.GetChunk(innerMoveNext);
-                    while (innerMoveNext()) {/* discard elements skipped by inner iterator */}
-                }
         }
 
-        private static IEnumerable<T> GetChunk<T>(this IEnumerator<T> e,
-                                                  Func<bool> innerMoveNext)
+        public static void SetDefaultValues(this object source)
         {
-            do yield return e.Current;
-            while (innerMoveNext());
+            if (source == null)
+                throw new ArgumentException(nameof(source));
+
+            foreach(PropertyDescriptor property in TypeDescriptor.GetProperties(source))
+                property.ResetValue(source);
+          
         }
-    } 
-    #endregion
-
-    #region DayOfWeekExtensions
-    public static class DayOfWeekExtensions
-    {
-        #region STATIC FIELDS
-        private static readonly IList<DayOfWeek> daysOfWeek = Enum.GetValues(typeof(DayOfWeek))
-              .Cast<DayOfWeek>()
-              .ToList();
-        #endregion
-
-        #region FUNCTIONS
-
-        /// <summary>
-        /// Gets next day of week.
-        /// </summary>
-        /// <param name="day">From day.</param>
-        /// <returns>Next day of week.</returns>
-        public static DayOfWeek Next(this DayOfWeek day)
-        {
-            var currentIndex = daysOfWeek.IndexOf(day);
-
-            int nextIndex = currentIndex + 1;
-            if (currentIndex >= 6)
-                nextIndex = 0;
-
-            return daysOfWeek[nextIndex];
-        }
-
-        /// <summary>
-        /// Gets previous day of week.
-        /// </summary>
-        /// <param name="day">From day.</param>
-        /// <returns>Previous day of week.</returns>
-        public static DayOfWeek Previous(this DayOfWeek day)
-        {
-            var currentIndex = daysOfWeek.IndexOf(day);
-
-            int nextIndex = currentIndex - 1;
-            if (currentIndex <= 0)
-                nextIndex = 6;
-
-            return daysOfWeek[nextIndex];
-        }
-
-        #endregion
     } 
     #endregion
 }

@@ -14,5 +14,6 @@ namespace Manager.Views
     /// </summary>
     public interface IUserModuleMainView : IViewColumns
     {
+        void ScrollToSlected();
     }  
 }

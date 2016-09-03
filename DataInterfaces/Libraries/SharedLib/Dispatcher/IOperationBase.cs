@@ -217,18 +217,14 @@ namespace SharedLib.Dispatcher
 
         public void RaiseOperationUpdateWithParam(object param)
         {
-            var handler = this.OperationUpdate;
-            if (handler != null)
-                handler(this, param);
+            this.OperationUpdate?.Invoke(this, param);
         }
 
         public void RaiseStateUpdateWithParam(OperationState state, object param)
         {
             this.state = state;
 
-            var handler = this.StateChange;
-            if (handler != null)
-                handler(this, state, param);
+            this.StateChange?.Invoke(this, state, param);
         }
         
         public void RaiseOperationUpdate(params object[] parameters)

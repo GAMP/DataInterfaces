@@ -25,6 +25,7 @@ namespace SharedLib.Dispatcher
         #endregion
 
         #region PROPERTIES
+
         /// <summary>
         /// Gets or sets the operations parent command.
         /// </summary>
@@ -49,16 +50,18 @@ namespace SharedLib.Dispatcher
         {
             get;
         }
+
         #endregion
 
         #region FUNCTIONS
+
         /// <summary>
         /// Aborts the operation.
         /// </summary>
         void Abort();
 
         /// <summary>
-        /// Disposes the operation and any used resources.
+        /// Releases the operation.
         /// </summary>
         void Release();
 
@@ -68,6 +71,10 @@ namespace SharedLib.Dispatcher
         /// <param name="parameters">Update parameters.</param>
         void Update(params object[] parameters);
 
+        /// <summary>
+        /// Updates operation with binary data.
+        /// </summary>
+        /// <param name="data"></param>
         void Update(byte[] data);
 
         /// <summary>
@@ -88,9 +95,19 @@ namespace SharedLib.Dispatcher
         /// <param name="param">Parameters.</param>
         void RaiseStateUpdate(OperationState state, params object[] param);
 
+        /// <summary>
+        /// Raises operation update with parameter/
+        /// </summary>
+        /// <param name="param">Parameter instance.</param>
         void RaiseOperationUpdateWithParam(object param);
 
+        /// <summary>
+        /// Raises state change event and sets operation state. 
+        /// </summary>
+        /// <param name="state">New state.</param>
+        /// <param name="param">Parameter instance.</param>
         void RaiseStateUpdateWithParam(OperationState state, object param);
+
         #endregion
     }
     #endregion

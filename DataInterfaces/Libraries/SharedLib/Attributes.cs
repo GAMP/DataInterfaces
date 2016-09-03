@@ -491,7 +491,18 @@ namespace SharedLib
         /// <param name="operation">Filter opertation.</param>
         /// <param name="groupName">Filter group name.</param>
         /// <param name="includedOnNull">Indicates if filter should be included on null values.</param>
-        public FilterPropertyAttribute(string propertyName, Op operation, string groupName, bool includedOnNull)
+        public FilterPropertyAttribute(string propertyName, Op operation, string groupName, bool includedOnNull):this(propertyName,operation,groupName,includedOnNull,false)
+        {
+        }
+
+        /// <summary>
+        /// Creates new filter property attribute.
+        /// </summary>
+        /// <param name="propertyName">Property name.</param>
+        /// <param name="operation">Filter opertation.</param>
+        /// <param name="groupName">Filter group name.</param>
+        /// <param name="includedOnNull">Indicates if filter should be included on null values.</param>
+        public FilterPropertyAttribute(string propertyName, Op operation, string groupName, bool includedOnNull,bool ignore)
         {
             if (string.IsNullOrWhiteSpace(propertyName))
                 throw new ArgumentNullException(nameof(propertyName));
@@ -499,7 +510,8 @@ namespace SharedLib
             this.PropertyName = propertyName;
             this.Operation = operation;
             this.GroupName = groupName;
-            this.IncludeOnNull = includedOnNull;
+            this.IncludeOnNullValue = includedOnNull;
+            this.Ignore = ignore;
         }
 
         #endregion
@@ -518,7 +530,7 @@ namespace SharedLib
         /// <summary>
         /// Gets if filter should be included if filter value is null.
         /// </summary>
-        public bool IncludeOnNull
+        public bool IncludeOnNullValue
         {
             get; protected set;
         }
@@ -535,6 +547,15 @@ namespace SharedLib
         /// Filter group name.
         /// </summary>
         public string GroupName
+        {
+            get;
+            protected set;
+        }
+
+        /// <summary>
+        /// Gets if property should be ignored when calling get filters function.
+        /// </summary>
+        public bool Ignore
         {
             get;
             protected set;

@@ -223,6 +223,14 @@ namespace Manager.ViewModels
         /// </summary>
         /// <param name="user"></param>
         void RemoveUser(IUserMemberViewModel user); 
+
+        /// <summary>
+        /// Gets current user.
+        /// </summary>
+        /// <remarks>
+        /// When multiple users logged on host then this value is equal to null.
+        /// </remarks>
+        IUserMemberViewModel CurrentUser { get; }
         
         #endregion
     }

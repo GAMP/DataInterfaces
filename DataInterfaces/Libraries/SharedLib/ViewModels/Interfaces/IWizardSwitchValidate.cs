@@ -11,7 +11,7 @@ namespace SharedLib.ViewModels
     public interface IWizardSwitchValidate : IWizardItemViewModel, INotifyDataErrorInfo
     {
         Task<bool> SwitchValidateAsync();
-        void Validate();
+        bool Validate();
     }
     #endregion
 }

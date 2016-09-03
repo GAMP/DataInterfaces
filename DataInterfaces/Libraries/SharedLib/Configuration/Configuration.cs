@@ -541,6 +541,19 @@ namespace SharedLib.Configuration
             set;
         }
 
+        /// <summary>
+        /// Gets or sets if client auto discovery should be enabled.
+        /// </summary>
+        [Category("Network")]
+        [DefaultValue(true)]
+        [Description("Enables client auto discovery.")]
+        [DataMember(Order = 11)]
+        public bool AutoDiscoverClients
+        {
+            get;
+            set;
+        }
+
         #endregion
     }
 
@@ -589,25 +602,12 @@ namespace SharedLib.Configuration
         #region PROPERTIES
 
         /// <summary>
-        /// Enables or disables client auto update.
-        /// </summary>
-        [DefaultValue(true)]
-        [Category("General")]
-        [Description("Enable or disable automatic client update.")]
-        [DataMember()]
-        public bool AutoUpdateClient
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
         /// Gets or sets if pending session should terminate.
         /// </summary>
         [DefaultValue(true)]
         [Category("General")]
         [Description("Enable or disable termination of pending user sessions.")]
-        [DataMember()]
+        [DataMember(Order =0)]
         public bool TerminatePendingSessions
         {
             get;
@@ -620,11 +620,37 @@ namespace SharedLib.Configuration
         [DefaultValue(180)]
         [Category("General")]
         [Description("Specifies pending session timeout.")]
-        [DataMember()]
+        [DataMember(Order =1)]
         public int PendingSessionTimeout
         {
             get;
             set;
+        }
+
+
+        /// <summary>
+        /// Enables or disables client auto update.
+        /// </summary>
+        [DefaultValue(true)]
+        [Category("General")]
+        [Description("Enable or disable automatic client update.")]
+        [DataMember(Order =2)]
+        public bool AutoUpdateClient
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets client auto downgrade should be enabled.
+        /// </summary>
+        [DefaultValue(false)]
+        [Category("General")]
+        [Description("Specifies client auto downgrade should be enabled.")]
+        [DataMember(Order =3)]
+        public bool AutoDowngradeClient
+        {
+            get;set;
         }
 
         #endregion
@@ -716,7 +742,6 @@ namespace SharedLib.Configuration
         #region CONSTRUCTOR
         public ClientConfig()
         {
-            this.Integration = new ClientIntegrationConfig();
             this.General = new ClientGeneralConfig();
             this.Shell = new ClientShellConfig();
         } 
@@ -857,18 +882,6 @@ namespace SharedLib.Configuration
             set;
         }
 
-        /// <summary>
-        /// Gets or sets integration settings.
-        /// </summary>
-        [Category("Client")]
-        [Description("Integration configuration.")]
-        [DataMember()]
-        public ClientIntegrationConfig Integration
-        {
-            get;
-            set;
-        }
-
         [Category("Client")]
         [Description("General settings.")]
         [DataMember()]
@@ -893,71 +906,13 @@ namespace SharedLib.Configuration
         public override void SetDefaults()
         {
             base.SetDefaults();
-            this.Integration.SetDefaults();
             this.General.SetDefaults();
             this.Shell.SetDefaults();
         } 
         #endregion
     }
 
-    [Category("Integration")]
-    [Description("Integration configuration.")]
-    [Serializable()]
-    [DataContract()]
-    public class ClientIntegrationConfig : ConfigBase
-    {
-        #region PROPERTIES
-
-        /// <summary>
-        /// Enables or disable integration.
-        /// </summary>
-        [DefaultValue(false)]
-        [DataMember()]
-        public bool IsEnabled
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Gets or sets contract name.
-        /// </summary>
-        [DefaultValue(null)]
-        [DataMember()]
-        public string Provider
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Gets or sets server IPAddress string.
-        /// </summary>
-        [DefaultValue("localhost")]
-        [Required()]
-        [StringLength(255)]
-        [DataMember()]
-        public string ServerIp
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Gets or sets server port.
-        /// </summary>
-        [DefaultValue(7831)]
-        [Range(1, 65536)]
-        [DataMember()]
-        public int ServerPort
-        {
-            get;
-            set;
-        }
-
-        #endregion
-    }
-    
+   
     [Category("General")]
     [Serializable()]
     [DataContract()]
@@ -1023,18 +978,6 @@ namespace SharedLib.Configuration
         #endregion
 
         #region PROPERTIES
-        /// <summary>
-        /// Gets or sets if client GUI should be enabled.
-        /// </summary>
-        [Category("Shell")]
-        [Description("Enables or disables shell.")]
-        [DefaultValue(true)]
-        [DataMember(Order=0)]
-        public bool IsShellEnabled
-        {
-            get;
-            set;
-        }
 
         /// <summary>
         /// Gets or sets name of the current GUI Skin.
@@ -1042,7 +985,7 @@ namespace SharedLib.Configuration
         [Category("Shell")]
         [Description("Specifies shell skin name.")]
         [DefaultValue("Default")]
-        [DataMember(Order=1)]
+        [DataMember(Order=0)]
         public string SkinName
         {
             get;
@@ -1055,7 +998,7 @@ namespace SharedLib.Configuration
         [Category("Shell")]
         [Description("Enables or disables desktop.")]
         [DefaultValue(true)]
-        [DataMember(Order=2)]
+        [DataMember(Order=1)]
         public bool IsDesktopEnabled
         {
             get;
@@ -1065,21 +1008,8 @@ namespace SharedLib.Configuration
         [Category("Shell")]
         [Description("Specifies client language")]
         [DefaultValue("English")]
-        [DataMember(Order=3)]
+        [DataMember(Order=2)]
         public string Language
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Gets or sets if logout button should be shown.
-        /// </summary>
-        [Category("Shell")]
-        [Description("Specifies if logout button should be displaid.")]
-        [DefaultValue(true)]
-        [DataMember(Order=4)]
-        public bool DisplayLogoutButton
         {
             get;
             set;
@@ -1091,7 +1021,7 @@ namespace SharedLib.Configuration
         [Category("Shell")]
         [Description("Specifies user logout action.")]
         [DefaultValue(LogoutAction.Reboot)]
-        [DataMember(Order = 5)]
+        [DataMember(Order = 3)]
         public LogoutAction LogoutAction
         {
             get;
@@ -1104,7 +1034,7 @@ namespace SharedLib.Configuration
         [Category("Shell")]
         [Description("Specifies time notification message.")]
         [DefaultValue(null)]
-        [DataMember(Order=6)]
+        [DataMember(Order=4)]
         public string TimeNotificationMessage
         {
             get;
@@ -1117,7 +1047,7 @@ namespace SharedLib.Configuration
         [Category("Shell")]
         [Description("Specifies virtual desktop items.")]
         [DefaultValue(null)]
-        [DataMember(Order = 7)]
+        [DataMember(Order = 5)]
         public List<int> VirtualDesktopItems
         {
             get;
@@ -1256,6 +1186,14 @@ namespace SharedLib.Configuration
                 this.services = value;
             }
         }
+
+        [Category("Manager")]
+        [DataMember( Order =0, IsRequired =false ,EmitDefaultValue =false)]
+        public string LastOperator
+        {
+            get;set;
+        }
+
         #endregion
     }
     #endregion

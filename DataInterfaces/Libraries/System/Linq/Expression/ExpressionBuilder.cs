@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
@@ -58,11 +59,19 @@ namespace System.Linq.Expressions
             return Expression.Lambda<Func<T, bool>>(exp, param);
         }
 
+        private static BinaryExpression GetExpression<T>(ParameterExpression param, Filter filter1, Filter filter2)
+        {
+            Expression bin1 = GetExpression<T>(param, filter1);
+            Expression bin2 = GetExpression<T>(param, filter2);
+            return Expression.AndAlso(bin1, bin2);
+        }
+
         private static Expression GetExpression<T>(ParameterExpression param, Filter filter)
         {
             object filterValue = filter.Value;
             string filterName = filter.PropertyName;
             Op operation = filter.Operation;
+
             MemberExpression member = Expression.Property(param, filter.PropertyName);
             ConstantExpression constant = null;
             
@@ -123,13 +132,7 @@ namespace System.Linq.Expressions
 
             return null;
         }
-
-        private static BinaryExpression GetExpression<T>(ParameterExpression param, Filter filter1, Filter filter2)
-        {
-            Expression bin1 = GetExpression<T>(param, filter1);
-            Expression bin2 = GetExpression<T>(param, filter2);
-            return Expression.AndAlso(bin1, bin2);
-        }
+  
 
         /// <summary>
         /// Gets the expression that is always true.
@@ -149,19 +152,22 @@ namespace System.Linq.Expressions
                                                             Expression<Func<T, bool>> expr2)
         {
             var invokedExpr = Expression.Invoke(expr2, expr1.Parameters.Cast<Expression>());
-            return Expression.Lambda<Func<T, bool>>
-                  (Expression.OrElse(expr1.Body, invokedExpr), expr1.Parameters);
+            return Expression.Lambda<Func<T, bool>>(Expression.OrElse(expr1.Body, invokedExpr), expr1.Parameters);
         }
 
         public static Expression<Func<T, bool>> And<T>(this Expression<Func<T, bool>> expr1,
                                                              Expression<Func<T, bool>> expr2)
         {
             var invokedExpr = Expression.Invoke(expr2, expr1.Parameters.Cast<Expression>());
-            return Expression.Lambda<Func<T, bool>>
-                  (Expression.AndAlso(expr1.Body, invokedExpr), expr1.Parameters);
+            return Expression.Lambda<Func<T, bool>>(Expression.AndAlso(expr1.Body, invokedExpr), expr1.Parameters);
         }
 
-        private static bool IsNullableType(Type type)
+        /// <summary>
+        /// Gets if specified type is nullable.
+        /// </summary>
+        /// <param name="type">Type.</param>
+        /// <returns>True or false.</returns>
+        public static bool IsNullableType(Type type)
         {
             if (type == null)
                 throw new ArgumentNullException(nameof(type));
@@ -177,6 +183,21 @@ namespace System.Linq.Expressions
     [Serializable()]
     public class Filter
     {
+        #region CONSTRUCTOR
+        public Filter()
+        { }
+
+        public Filter(string propertyName, object value, Op operation)
+        {
+            if (string.IsNullOrWhiteSpace(propertyName))
+                throw new ArgumentNullException(nameof(propertyName));
+
+            this.PropertyName = propertyName;
+            this.Value = value;
+            this.Operation = operation;
+        } 
+        #endregion
+
         #region PROPERTIES
 
         /// <summary>
@@ -242,6 +263,153 @@ namespace System.Linq.Expressions
         EndsWith,
         NotEqual,
         HasFlag
+    }
+    #endregion
+
+    #region FilterSet
+    /// <summary>
+    /// Filter set.
+    /// </summary>
+    [Serializable()]
+    [DataContract()]
+    public class FilterSet : List<Filter>, IFilterSet
+    {
+        #region CONSTRUCTOR
+
+        public FilterSet() : base()
+        { }
+
+        public FilterSet(IEnumerable<Filter> source) : base(source)
+        { }
+
+        #endregion
+
+        #region FIELDS
+        [OptionalField(VersionAdded = 2)]
+        private HashSet<string> includes;
+        #endregion
+
+        #region PROPERTIES
+
+        /// <summary>
+        /// Amount of records to take.
+        /// </summary>
+        [DataMember()]
+        public int? Take
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Amount of records to skip.
+        /// </summary>
+        [DataMember()]
+        public int? Skip
+        {
+            get; set;
+        }
+
+        public HashSet<string> Includes
+        {
+            get
+            {
+                if (this.includes == null)
+                    this.includes = new HashSet<string>();
+                return this.includes;
+            }
+            set { this.includes = value; }
+        }
+
+        IEnumerable<string> IFilterSet.Includes
+        {
+            get { return this.Includes; }
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #region ResultSet
+    [Serializable()]
+    [DataContract()]
+    public class ResultSet<T> : List<T>
+    {
+        #region CONSTRUCTOR
+
+        /// <summary>
+        /// Creates new result set.
+        /// </summary>
+        /// <param name="source">Source collection.</param>
+        public ResultSet(IEnumerable<T> source) : base(source)
+        { }
+
+        /// <summary>
+        /// Creates new result set.
+        /// </summary>
+        /// <param name="source">Source collection.</param>
+        /// <param name="totalCount">Total unfiltered count in source collection.</param>
+        public ResultSet(IEnumerable<T> source, int? totalCount) : this(source)
+        {
+            this.TotalCount = totalCount;
+        }
+
+        #endregion
+
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets total count in source collection.
+        /// </summary>
+        [DataMember()]
+        public int? TotalCount
+        {
+            get;
+            private set;
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #region Extensions
+    public static class Extensions
+    {
+        public static FilterSet ToFilterSet(this IEnumerable<Filter> source)
+        {
+            return source.ToFilterSet(null, null);
+        }
+
+        public static FilterSet ToFilterSet(this IEnumerable<Filter> source, int? take, int? skip)
+        {
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+
+            return new FilterSet(source) { Take = take, Skip = skip };
+        }
+
+        public static ResultSet<T> ToResultSet<T>(this IEnumerable<T> source, IEnumerable<Filter> filters)
+        {
+            return source.ToResultSet(filters, null);
+        }
+
+        public static ResultSet<T> ToResultSet<T>(this IEnumerable<T> source, IEnumerable<Filter> filters, int? count)
+        {
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+
+            var iFilterSet = filters as IFilterSet;
+
+            if (iFilterSet != null)
+            {
+                if (iFilterSet.Skip.HasValue)
+                    source = source.Skip(iFilterSet.Skip.Value);
+
+                if (iFilterSet.Take.HasValue)
+                    source = source.Take(iFilterSet.Take.Value);
+            }
+
+            return new ResultSet<T>(source, count);
+        }
     } 
     #endregion
 }

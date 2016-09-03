@@ -17,6 +17,7 @@ namespace Manager
         public static readonly string ManagerLogModule = "2fa7b7ac-2958-495b-bb83-e85bcab5f26d";
         public static readonly string UsersModule = "98bc7f41-c7f8-4388-a39e-9c15d1af49a5";
         public static readonly string HostManagementModule = "ae67aa8d-60d9-46e0-8a35-ffc1979a5113";
+        public static readonly string UserDetail = "5b9ecf8d-771a-4619-83f7-ddddf7ed96db";
     }
 
     /// <summary>
@@ -31,5 +32,26 @@ namespace Manager
 
         public static readonly string Main_Tools = "ff93e179-1dc8-423f-8c98-02e102af8a20";
         public static readonly string Main_Help = "6a55ebfa-74a7-4d4c-8d71-8ca05265f2e5";
+
+        public static readonly string UserDetail_Account_Enable = "ff93e179-1dc8-423f-8c98-02e102af8a20";
+        public static readonly string UserDetail_Reset_Password = "6a55ebfa-74a7-4d4c-8d71-8ca05265f2e5";
+        public static readonly string UserDetail_Reset_Info = "6a55ebfa-74a7-4d4c-8d71-8ca05265f2e5";
+        public static readonly string UserDetail_Rfid_Assign = "6a55ebfa-74a7-4d4c-8d71-8ca05265f2e5";
+    }
+
+    public enum ManagerMessageDialogResult
+    {
+        Negative = 0,
+        Affirmative = 1,
+        FirstAuxiliary,
+        SecondAuxiliary,
+    }
+
+    public enum ManagerMessageDialogStyle
+    {
+        Affirmative = 0,
+        AffirmativeAndNegative = 1,
+        AffirmativeAndNegativeAndSingleAuxiliary = 2,
+        AffirmativeAndNegativeAndDoubleAuxiliary = 3
     }
 }

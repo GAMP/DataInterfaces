@@ -152,6 +152,11 @@ namespace IntegrationLib
         [Localization.Localized("LOGIN_RESULT_MAX_SESSIONS_REACHED")]
         MaximumSessionsReached =8192,
         /// <summary>
+        /// Insufficient balance.
+        /// </summary>
+        [Localization.Localized("LOGIN_RESULT_INSUFFICIENT_BALANCE")]
+        InsufficientBalance=16384,
+        /// <summary>
         /// Credentials pair is invalid.
         /// </summary>
         [Localization.Localized("LOGIN_RESULT_INVALID_CREDENTIALS")]
@@ -175,6 +180,10 @@ namespace IntegrationLib
         /// Loggout occurred locally.
         /// </summary>
         LoggedOutLocally = 2,
+        /// <summary>
+        /// Invalid user id.
+        /// </summary>
+        InvalidUserId = 2048,
     }
     #endregion    
 
@@ -183,6 +192,11 @@ namespace IntegrationLib
     public enum MoveResult
     {
         Sucess = 0,
+        InvalidUserId,
+        InvalidHostId,
+        AlreadyLoggedIn,
+        AnotherUserLoggedIn,
+        NotLoggedIn,
     } 
     #endregion
 }

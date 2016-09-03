@@ -884,7 +884,7 @@ namespace SkinInterfaces.Converters
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            return value == null ? value : value.ToString().ToUpper();
+            return value?.ToString().ToUpper();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

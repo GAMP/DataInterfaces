@@ -374,7 +374,7 @@ namespace ServerService
     public class UserGroupChangedEventArgs : UserProfileChangeEventArgs
     {
         #region CONSTRUCTOR
-        public UserGroupChangedEventArgs(int userId, int? oldGroupId, int? newGroupId)
+        public UserGroupChangedEventArgs(int userId, int oldGroupId, int newGroupId)
             : base(userId, UserChangeType.UserGroup)
         {
             this.OldGroupId = oldGroupId;
@@ -384,13 +384,19 @@ namespace ServerService
 
         #region PROPERTIES
 
-        public int? OldGroupId
+        /// <summary>
+        /// Gets old user group id.
+        /// </summary>
+        public int OldGroupId
         {
             get;
             protected set;
         }
 
-        public int? NewGroupId
+        /// <summary>
+        /// Gets new user group id.
+        /// </summary>
+        public int NewGroupId
         {
             get;
             protected set;
@@ -450,6 +456,54 @@ namespace ServerService
 
         #endregion
     }
+    #endregion
+
+    #region USERSMARTCARDCHANGEDEVENTARGS
+    [Serializable()]
+    public class UserSmartCardChangedEventArgs : UserProfileChangeEventArgs
+    {
+        #region CONSTRUCTOR
+        public UserSmartCardChangedEventArgs(int userId, string smartCardUID)
+            : base(userId, UserChangeType.SmartCardUID)
+        {
+            this.SmartCardUID = smartCardUID;
+        }
+        #endregion
+
+        #region PROPERTIES
+        public string SmartCardUID
+        {
+            get;
+            protected set;
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #region USERENABLENEGATIVEBALANCEEVENTARGS
+    [Serializable()]
+    [DataContract()]
+    public class UserEnableNegativeBalanceEventArgs : UserProfileChangeEventArgs
+    {
+        #region CONSTRUCTOR
+        public UserEnableNegativeBalanceEventArgs(int userId, bool? enabled) : base(userId, UserChangeType.NegativBalanceEnabled)
+        {
+            this.Enabled = enabled;
+        }
+        #endregion
+
+        #region PROPERTIES
+        /// <summary>
+        /// Gets if negative balance allowed for user.
+        /// </summary>
+        [DataMember()]
+        public bool? Enabled
+        {
+            get; protected set;
+        }
+        #endregion
+    } 
     #endregion
 
     #region USERPICTURECHANGEDEVENTARGS
@@ -677,49 +731,32 @@ namespace ServerService
     public class LogChangeEventArgs : EventArgs
     {
     }
-    #endregion
+    #endregion    
 
-    #region USERSESSIONCHANGEDEVENTARGS
+    #region USERBALANCEEVENTARGS
     [Serializable()]
     [DataContract()]
-    public class UserSessionChangedEventArgs : UserIdEventArgsBase
+    public class UserBalanceEventArgs : UserIdEventArgsBase
     {
         #region CONSTRUCTOR
-        public UserSessionChangedEventArgs(int userId) : base(userId)
-        { }
+        public UserBalanceEventArgs(int userId, UserBalance balance) : base(userId)
+        {
+            if (balance == null)
+                throw new ArgumentNullException(nameof(balance));
+
+            this.Balance = balance;
+        } 
         #endregion
 
         #region PROPERTIES
-
         /// <summary>
-        /// Gets host id.
+        /// Gets balance.
         /// </summary>
-        [DataMember()]
-        public int HostId
-        {
-            get;
-            protected set;
-        }
-
-        /// <summary>
-        /// Gets old state.
-        /// </summary>
-        [DataMember()]
-        public SessionState OldState
-        {
-            get; protected set;
-        }
-
-        /// <summary>
-        /// Gets new state.
-        /// </summary>
-        [DataMember()]
-        public SessionState NewState
+        public UserBalance Balance
         {
             get; protected set;
         } 
-        
         #endregion
-    }
-    #endregion    
+    } 
+    #endregion
 }

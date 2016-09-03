@@ -23,17 +23,17 @@ namespace SkinInterfaces.Converters
         {
         }
 
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public virtual object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             int mask = (int)parameter;
             this.targetValue = (int)value;
             return ((mask & this.targetValue) != 0);
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public virtual object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             this.targetValue ^= (int)parameter;
-            return Enum.Parse(targetType, parameter.ToString());
+            return Enum.Parse(targetType, this.targetValue.ToString());
         }
     }
     #endregion

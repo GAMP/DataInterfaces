@@ -211,4 +211,24 @@ namespace GizmoDALV2
         #endregion
     }
     #endregion
+
+    #region StockException
+    [DataContract()]
+    [Serializable()]
+    public class StockException : ErrorCodeException<StockErrorCodes>
+    {
+        #region CONSTRUCTOR
+
+        public StockException(StockErrorCodes errorCode) : base(errorCode)
+        {
+        }
+
+        protected StockException(System.Runtime.Serialization.SerializationInfo info,
+            System.Runtime.Serialization.StreamingContext context)
+            : base(info, context)
+        { }
+
+        #endregion
+    }
+    #endregion
 }

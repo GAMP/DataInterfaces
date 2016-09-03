@@ -22,7 +22,7 @@ namespace SkinInterfaces.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (bool)value ? Enum.Parse(parameter.GetType(), parameter.ToString()) : Enum.ToObject(EnumType, 0);
+            return (bool)value ? Enum.Parse(parameter.GetType(), parameter.ToString()) : Enum.ToObject(parameter.GetType(), 0);
         }
     }
     #endregion  

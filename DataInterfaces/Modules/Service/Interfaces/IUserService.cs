@@ -32,9 +32,9 @@ namespace ServerService
         event EventHandler<UserProfileChangeEventArgs> UserProfileChange;
 
         /// <summary>
-        /// Occurs on user session change.
+        /// Occurs on user balance change.
         /// </summary>
-        event EventHandler<UserSessionChangedEventArgs> UserSessionChange;
+        event EventHandler<UserBalanceEventArgs> UserBalanceChange;
 
         #endregion
 

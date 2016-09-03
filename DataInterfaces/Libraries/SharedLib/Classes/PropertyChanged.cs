@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 using System.Text;
@@ -11,10 +12,14 @@ namespace SharedLib
 {
     #region PropertyChangedBase
     [Serializable()]
-    public abstract class PropertyChangedBase : CustomTypeDescriptor,
-        INotifyPropertyChanged,
-        IDynamicPropertyObject
+    public abstract class PropertyChangedBase:
+        INotifyPropertyChanged
     {
+        #region CONSTRUCTOR
+        public PropertyChangedBase() : base()
+        { } 
+        #endregion
+
         #region FIELDS
         /// <summary>
         /// Occurs when a property value changes.
@@ -133,76 +138,32 @@ namespace SharedLib
             return true;
         }
 
-        #endregion
-
-        #region ICustomTypeDescriptor
-
-        #region FIELDS
-        private Dictionary<string,PropertyDescriptor> propertyStore = new  Dictionary<string, PropertyDescriptor>(); 
-        #endregion
-
-        public void SetPropertyValue<T>(string propertyName, T propertyValue)
-        {
-            var properties = this.GetProperties()
-                                    .Cast<PropertyDescriptor>()
-                                    .Where(prop => prop.Name.Equals(propertyName));
-
-            if (properties == null || properties.Count() != 1)
-                throw new ArgumentNullException(nameof(propertyName));
-
-            var property = properties.First();
-            property.SetValue(this, propertyValue);
-
-            RaisePropertyChanged(propertyName);
-        }
-        
-        public T GetPropertyValue<T>(string propertyName)
-        {
-            var properties = this.GetProperties()
-                                .Cast<PropertyDescriptor>()
-                                .Where(prop => prop.Name.Equals(propertyName));
-
-            if (properties == null || properties.Count() != 1)
-                throw new ArgumentNullException(nameof(propertyName));        
-
-            var property = properties.First();
-            return (T)property.GetValue(this);
-        }
-        
-        public PropertyDescriptor AddProperty<T, U>(string propertyName) where U : PropertyChangedBase
-        {
-            return this.AddProperty(propertyName, new DynamicPropertyDescriptor<T>(propertyName,typeof(U)));
-        }
-
-        public PropertyDescriptor AddProperty<T>(string propertyName)
-        {
-            return this.AddProperty(propertyName,new DynamicPropertyDescriptor<T>(propertyName, this.GetType()));         
-        }
-
-        private PropertyDescriptor AddProperty(string propertyName, PropertyDescriptor customProperty)
+        /// <summary>
+        /// Gets if specified property is ignored.
+        /// </summary>
+        /// <param name="owner">Propery owner.</param>
+        /// <param name="propertyName">Property name.</param>
+        /// <returns>True or false.</returns>
+        protected bool IsIgnoredProperty(object owner, string propertyName)
         {
             if (string.IsNullOrWhiteSpace(propertyName))
                 throw new ArgumentNullException(nameof(propertyName));
 
-            if (customProperty == null)
-                throw new ArgumentNullException(nameof(customProperty));
+            if (owner == null)
+                throw new ArgumentNullException(nameof(owner));
 
-            //will throw if other entry with same name already exist
-            propertyStore.Add(propertyName, customProperty);
-
-            //add value change handler
-            customProperty.AddValueChanged(this, (o, e) => { RaisePropertyChanged(propertyName); });
-
-            //return back to caller
-            return customProperty;
+            var property = owner.GetType().GetProperty(propertyName);
+            return property.GetCustomAttribute<IgnorePropertyModificationAttribute>() != null;
         }
-        
-        public override PropertyDescriptorCollection GetProperties()
+
+        /// <summary>
+        /// Gets if specified property is ignored.
+        /// </summary>
+        /// <param name="propertyName">Property name.</param>
+        /// <returns>True or false.</returns>
+        protected bool IsIgnoredProperty(string propertyName)
         {
-            return new PropertyDescriptorCollection(base.GetProperties()
-                .Cast<PropertyDescriptor>()
-                .Concat(propertyStore.Values)
-                .ToArray());
+            return this.IsIgnoredProperty(this, propertyName);
         }
 
         #endregion

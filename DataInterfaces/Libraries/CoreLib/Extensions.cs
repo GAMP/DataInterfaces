@@ -383,6 +383,29 @@ namespace CoreLib
             if (DateTime.Today < birthDate.AddYears(yearsOld)) yearsOld--;
             return yearsOld;
         }
+
+        /// <summary>
+        /// Converts provided date daily second to weekly value.
+        /// </summary>
+        /// <param name="time">Date time.</param>
+        /// <returns>Weekly second value.</returns>
+        public static double WeeklySecond(this DateTime time)
+        {
+            return WeeklySecond(time.DayOfWeek, time.TimeOfDay.TotalSeconds);
+        }
+
+        /// <summary>
+        /// Converts provided day of week second to weekly value.
+        /// </summary>
+        /// <param name="time">Date time.</param>
+        /// <returns>Weekly second value.</returns>
+        public static double WeeklySecond(DayOfWeek dayOfWeek, double daySecond)
+        {
+            if (daySecond > 86400)
+                throw new ArgumentException(nameof(daySecond),nameof(daySecond));
+
+            return (((int)(daySecond /60)*60)) + ((int)dayOfWeek * 86400);
+        }
     }
     #endregion
 
@@ -590,8 +613,6 @@ namespace CoreLib
     #region EnumerableExtensions
     public static partial class EnumerableExtensions
     {
-        #region IsNullOrEmpty
-
         /// <summary>
         /// Gets if collection is equal to null or empty.
         /// </summary>
@@ -605,7 +626,85 @@ namespace CoreLib
             return !collection.Any();
         }
 
-        #endregion
-    } 
+        public static IEnumerable<IEnumerable<T>> Chunks<T>(this IEnumerable<T> enumerable,
+                                            int chunkSize)
+        {
+            if (chunkSize < 1) throw new ArgumentException("chunkSize must be positive");
+
+            using (var e = enumerable.GetEnumerator())
+                while (e.MoveNext())
+                {
+                    var remaining = chunkSize;    // elements remaining in the current chunk
+                    var innerMoveNext = new Func<bool>(() => --remaining > 0 && e.MoveNext());
+
+                    yield return e.GetChunk(innerMoveNext);
+                    while (innerMoveNext()) {/* discard elements skipped by inner iterator */}
+                }
+        }
+
+        private static IEnumerable<T> GetChunk<T>(this IEnumerator<T> e,
+                                                  Func<bool> innerMoveNext)
+        {
+            do yield return e.Current;
+            while (innerMoveNext());
+        }
+    }
     #endregion
+
+    #region DayOfWeekExtensions
+    public static class DayOfWeekExtensions
+    {
+        #region STATIC FIELDS
+        private static readonly IList<DayOfWeek> daysOfWeek = Enum.GetValues(typeof(DayOfWeek))
+              .Cast<DayOfWeek>()
+              .ToList();
+        #endregion
+
+        #region FUNCTIONS
+
+        /// <summary>
+        /// Gets next day of week.
+        /// </summary>
+        /// <param name="day">From day.</param>
+        /// <returns>Next day of week.</returns>
+        public static DayOfWeek Next(this DayOfWeek day)
+        {
+            var currentIndex = daysOfWeek.IndexOf(day);
+
+            int nextIndex = currentIndex + 1;
+            if (currentIndex >= 6)
+                nextIndex = 0;
+
+            return daysOfWeek[nextIndex];
+        }
+
+        /// <summary>
+        /// Gets previous day of week.
+        /// </summary>
+        /// <param name="day">From day.</param>
+        /// <returns>Previous day of week.</returns>
+        public static DayOfWeek Previous(this DayOfWeek day)
+        {
+            var currentIndex = daysOfWeek.IndexOf(day);
+
+            int nextIndex = currentIndex - 1;
+            if (currentIndex <= 0)
+                nextIndex = 6;
+
+            return daysOfWeek[nextIndex];
+        }
+
+        /// <summary>
+        /// Gets numeric index of specified day of week.
+        /// </summary>
+        /// <param name="day">Day of week.</param>
+        /// <returns>Integer index.</returns>
+        public static int DayIndex(this DayOfWeek day)
+        {
+            return daysOfWeek.IndexOf(day);
+        }
+
+        #endregion
+    }
+    #endregion    
 }

@@ -14,7 +14,7 @@ namespace Manager.ViewModels
         /// <summary>
         /// Gets or sets user group id.
         /// </summary>
-        int? GroupId { get; }
+        int GroupId { get; }
 
         /// <summary>
         /// Gets email.
@@ -35,5 +35,10 @@ namespace Manager.ViewModels
         /// Gets user deposits balance.
         /// </summary>
         decimal Deposits { get; }
+
+        /// <summary>
+        /// Gets if negative balance allowed.
+        /// </summary>
+        bool IsNegativeBalanceAllowed { get; }
     }
 }
