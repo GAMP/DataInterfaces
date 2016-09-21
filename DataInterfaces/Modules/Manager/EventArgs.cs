@@ -48,17 +48,44 @@ namespace Manager
     }
     #endregion
 
+    #region RFIDEventArgs
+    public abstract class RFIDEventArgs : EventArgs
+    {
+        #region CONSTRUCTOR
+        public RFIDEventArgs(string readerName)
+        {
+            if (string.IsNullOrWhiteSpace(readerName))
+                throw new ArgumentNullException(nameof(readerName));
+
+            this.ReaderName = readerName;
+        }
+        #endregion
+
+        #region PROPERTIES
+        /// <summary>
+        /// Gets associated reader name.
+        /// </summary>
+        public string ReaderName
+        {
+            get;
+            private set;
+        }
+        #endregion
+    } 
+    #endregion
+
     #region RFIDScanEventArgs
     /// <summary>
     /// Rfid scanner service event args.
     /// </summary>
-    public class RFIDScanEventArgs : EventArgs
+    public class RFIDScanEventArgs : RFIDEventArgs
     {
         /// <summary>
         /// Creates new instance.
         /// </summary>
+        /// <param name="readerName">Associated reader name.</param>
         /// <param name="uid">SmartCard UID.</param>
-        public RFIDScanEventArgs(byte[] uid)
+        public RFIDScanEventArgs(string readerName, byte[] uid):base(readerName)
         {
             //uid array must be set
             if (uid == null)

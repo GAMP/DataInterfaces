@@ -899,11 +899,7 @@ namespace SharedLib
         MSSQL = 1,
         [CanUserAssign(true)]
         MSSQLEXPRESS = 2,
-#if DEBUG
-        [CanUserAssign(true)]
-#else
         [CanUserAssign(false)]
-#endif
         LOCALDB = 3,
         [CanUserAssign(false)]
         SQLITE = 4,
@@ -1448,6 +1444,10 @@ namespace SharedLib
         /// </summary>
         [IsGameModeAttibute()]
         CoOpOnline = 4096,
+        /// <summary>
+        /// One time purchase.
+        /// </summary>
+        OneTimePurchase=8192,
     }
     #endregion
 
@@ -1466,8 +1466,10 @@ namespace SharedLib
     {
         None = 0,
         EnablePersonalStorage = 1,
-        HideLogoutButton=2,
-        DisallowManulaLogin=4,
+        HideLogoutButton = 2,
+        DisallowManulaLogin = 4,
+        GuestUse = 8,
+        GuestUseOnly = 16,
     }
     #endregion
 

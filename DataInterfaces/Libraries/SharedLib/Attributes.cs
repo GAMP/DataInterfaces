@@ -528,7 +528,7 @@ namespace SharedLib
         }
 
         /// <summary>
-        /// Gets if filter should be included if filter value is null.
+        /// Gets if filter should be included if filter value equals to null.
         /// </summary>
         public bool IncludeOnNullValue
         {

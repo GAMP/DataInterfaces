@@ -14,7 +14,7 @@ namespace SharedLib.Configuration
     #region CONFIGBASE
     [Serializable()]
     [DataContract()]
-    public abstract class ConfigBase 
+    public abstract class ConfigBase
     {
         /// <summary>
         /// Sets all properties to default values.
@@ -22,7 +22,7 @@ namespace SharedLib.Configuration
         public virtual void SetDefaults()
         {
             foreach (PropertyDescriptor property in TypeDescriptor.GetProperties(this))
-                property.ResetValue(this);      
+                property.ResetValue(this);
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace SharedLib.Configuration
                 throw new ArgumentNullException(nameof(propertyName));
 
             var property = TypeDescriptor.GetProperties(this)[propertyName];
-            if(property.CanResetValue(this))
+            if (property.CanResetValue(this))
                 property.ResetValue(this);
         }
 
@@ -43,7 +43,7 @@ namespace SharedLib.Configuration
         /// Gets validation results.
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<IGrouping<string,ValidationResult>> GetValidationResults()
+        public IEnumerable<IGrouping<string, ValidationResult>> GetValidationResults()
         {
             //create new validation contect
             var validationContext = new ValidationContext(this, null, null);
@@ -85,7 +85,7 @@ namespace SharedLib.Configuration
                 .ToList()
                 .ForEach(x => this.SetDefault(x));
         }
-    } 
+    }
     #endregion
 
     #region CONFIGURATION
@@ -142,7 +142,7 @@ namespace SharedLib.Configuration
 
         #endregion
 
-        #region OVVERIDES
+        #region OVERRIDES
         public override void SetDefaults()
         {
             base.SetDefaults();
@@ -151,7 +151,7 @@ namespace SharedLib.Configuration
             this.Global.SetDefaults();
         }
         #endregion
-    } 
+    }
     #endregion
 
     #region GLOBALCONFIGURATION
@@ -165,11 +165,11 @@ namespace SharedLib.Configuration
         {
             this.Network = new GlobalNetworkCfg();
             this.Subscription = new GlobalSubscriptionConfig();
-        } 
+        }
         #endregion
 
         #region PROPERTIES
-      
+
         /// <summary>
         /// Gets or sets general network section. 
         /// </summary>
@@ -192,7 +192,7 @@ namespace SharedLib.Configuration
         {
             get;
             set;
-        } 
+        }
 
         #endregion
 
@@ -201,7 +201,7 @@ namespace SharedLib.Configuration
         {
             this.Network.SetDefaults();
             this.Subscription.SetDefaults();
-        } 
+        }
         #endregion
     }
 
@@ -289,7 +289,7 @@ namespace SharedLib.Configuration
     #endregion
 
     #region SERVICECONFIGURATION
-    
+
     [Serializable()]
     [DataContract()]
     public class ServiceConfig : ConfigBase
@@ -378,7 +378,7 @@ namespace SharedLib.Configuration
             this.WebApi.SetDefaults();
             this.FileSystem.SetDefaults();
             this.General.SetDefaults();
-        } 
+        }
         #endregion
     }
 
@@ -449,7 +449,7 @@ namespace SharedLib.Configuration
         [Category("Network")]
         [Description("Specifies listener connections backlog.")]
         [DefaultValue(10)]
-        [Range(1,255)]
+        [Range(1, 255)]
         [DataMember(Order = 4)]
         public int BackLog
         {
@@ -607,7 +607,7 @@ namespace SharedLib.Configuration
         [DefaultValue(true)]
         [Category("General")]
         [Description("Enable or disable termination of pending user sessions.")]
-        [DataMember(Order =0)]
+        [DataMember(Order = 0)]
         public bool TerminatePendingSessions
         {
             get;
@@ -620,7 +620,7 @@ namespace SharedLib.Configuration
         [DefaultValue(180)]
         [Category("General")]
         [Description("Specifies pending session timeout.")]
-        [DataMember(Order =1)]
+        [DataMember(Order = 1)]
         public int PendingSessionTimeout
         {
             get;
@@ -634,7 +634,7 @@ namespace SharedLib.Configuration
         [DefaultValue(true)]
         [Category("General")]
         [Description("Enable or disable automatic client update.")]
-        [DataMember(Order =2)]
+        [DataMember(Order = 2)]
         public bool AutoUpdateClient
         {
             get;
@@ -647,10 +647,10 @@ namespace SharedLib.Configuration
         [DefaultValue(false)]
         [Category("General")]
         [Description("Specifies client auto downgrade should be enabled.")]
-        [DataMember(Order =3)]
+        [DataMember(Order = 3)]
         public bool AutoDowngradeClient
         {
-            get;set;
+            get; set;
         }
 
         #endregion
@@ -681,7 +681,7 @@ namespace SharedLib.Configuration
         [Category("Web API")]
         [Description("Specifies WEB API listening port.")]
         [DefaultValue(8080)]
-        [Range(1,65536)]
+        [Range(1, 65536)]
         [DataMember()]
         public int WebAPIPort
         {
@@ -732,7 +732,7 @@ namespace SharedLib.Configuration
     #endregion
 
     #region CLIENTCONFIGURATION
-    
+
     [Category("Client")]
     [Description("Client configuration.")]
     [Serializable()]
@@ -744,7 +744,7 @@ namespace SharedLib.Configuration
         {
             this.General = new ClientGeneralConfig();
             this.Shell = new ClientShellConfig();
-        } 
+        }
         #endregion
 
         #region PROPERTIES
@@ -776,7 +776,7 @@ namespace SharedLib.Configuration
             get;
             set;
         }
-        
+
         /// <summary>
         /// Enables or disables personal personal storage.
         /// </summary>
@@ -789,7 +789,7 @@ namespace SharedLib.Configuration
             get;
             set;
         }
-        
+
         /// <summary>
         /// Gets or sets personal user storage drive letter.
         /// </summary>
@@ -809,7 +809,7 @@ namespace SharedLib.Configuration
         [Category("Client")]
         [Description("Specifies personal storage size.")]
         [DefaultValue(2000)]
-        [Range(1,int.MaxValue)]
+        [Range(1, int.MaxValue)]
         [DataMember()]
         public int PersonalStorageSize
         {
@@ -828,7 +828,19 @@ namespace SharedLib.Configuration
         {
             get;
             set;
-        }     
+        }
+
+        /// <summary>
+        /// Gets or sets if idle computers should be turned off.
+        /// </summary>
+        [Category("Client")]
+        [Description("Specifies if idle computers should be turned off.")]
+        [DefaultValue(false)]
+        [DataMember()]
+        public bool TurnOffIdleComputers
+        {
+            get; set;
+        }
 
         /// <summary>
         /// Gets or sets time before unused system shutdown.
@@ -908,11 +920,11 @@ namespace SharedLib.Configuration
             base.SetDefaults();
             this.General.SetDefaults();
             this.Shell.SetDefaults();
-        } 
+        }
         #endregion
     }
 
-   
+
     [Category("General")]
     [Serializable()]
     [DataContract()]
@@ -930,7 +942,7 @@ namespace SharedLib.Configuration
         [DefaultValue(@"%ALLUSERSPROFILE%\Application Data\NETProjects\Gizmo Client\")]
         [StringLength(255)]
         [Required()]
-        [DataMember(Order=0)]
+        [DataMember(Order = 0)]
         public string DataPath
         {
             get;
@@ -943,7 +955,7 @@ namespace SharedLib.Configuration
         [Category("General")]
         [DefaultValue("password")]
         [Required()]
-        [DataMember(Order=1)]
+        [DataMember(Order = 1)]
         public string ManagerPassword
         {
             get;
@@ -956,12 +968,12 @@ namespace SharedLib.Configuration
         [Category("General")]
         [Description("Enables or disables age rating.")]
         [DefaultValue(true)]
-        [DataMember(Order=2)]
+        [DataMember(Order = 2)]
         public bool IsAgeRatingsEnabled
         {
             get;
             set;
-        } 
+        }
         #endregion
     }
 
@@ -974,7 +986,7 @@ namespace SharedLib.Configuration
         public ClientShellConfig()
         {
             this.VirtualDesktopItems = new List<int>();
-        } 
+        }
         #endregion
 
         #region PROPERTIES
@@ -985,7 +997,7 @@ namespace SharedLib.Configuration
         [Category("Shell")]
         [Description("Specifies shell skin name.")]
         [DefaultValue("Default")]
-        [DataMember(Order=0)]
+        [DataMember(Order = 0)]
         public string SkinName
         {
             get;
@@ -998,7 +1010,7 @@ namespace SharedLib.Configuration
         [Category("Shell")]
         [Description("Enables or disables desktop.")]
         [DefaultValue(true)]
-        [DataMember(Order=1)]
+        [DataMember(Order = 1)]
         public bool IsDesktopEnabled
         {
             get;
@@ -1008,7 +1020,7 @@ namespace SharedLib.Configuration
         [Category("Shell")]
         [Description("Specifies client language")]
         [DefaultValue("English")]
-        [DataMember(Order=2)]
+        [DataMember(Order = 2)]
         public string Language
         {
             get;
@@ -1034,7 +1046,7 @@ namespace SharedLib.Configuration
         [Category("Shell")]
         [Description("Specifies time notification message.")]
         [DefaultValue(null)]
-        [DataMember(Order=4)]
+        [DataMember(Order = 4)]
         public string TimeNotificationMessage
         {
             get;
@@ -1188,10 +1200,10 @@ namespace SharedLib.Configuration
         }
 
         [Category("Manager")]
-        [DataMember( Order =0, IsRequired =false ,EmitDefaultValue =false)]
+        [DataMember(Order = 0, IsRequired = false, EmitDefaultValue = false)]
         public string LastOperator
         {
-            get;set;
+            get; set;
         }
 
         #endregion

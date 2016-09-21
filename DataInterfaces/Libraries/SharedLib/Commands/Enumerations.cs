@@ -850,6 +850,7 @@ namespace SharedLib.Commands
         UserGetMoneyForTime,
         UserGetTimeForMoney,
         UserProductTimeGet,
+        UserSessionGet,
         UserCloseBalance,
 
         UsageSessionInvoiceActive,

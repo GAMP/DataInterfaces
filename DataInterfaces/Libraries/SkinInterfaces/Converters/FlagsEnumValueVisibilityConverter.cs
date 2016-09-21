@@ -19,7 +19,7 @@ namespace SkinInterfaces.Converters
     public class FlagsEnumValueVisibilityConverter : FlagsEnumValueConverter
     {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
+        { 
             return (bool)base.Convert(value, targetType, parameter, culture) == true ? Visibility.Visible : Visibility.Collapsed;
         }
 
@@ -28,6 +28,20 @@ namespace SkinInterfaces.Converters
             throw new NotImplementedException();
         }
     }
+    #endregion
 
+    #region RevertFlagsEnumValueVisibilityConverter
+    public class RevertFlagsEnumValueVisibilityConverter : FlagsEnumValueConverter
+    {
+        public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return (bool)base.Convert(value, targetType, parameter, culture) == true ? Visibility.Collapsed : Visibility.Visible;
+        }
+
+        public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    } 
     #endregion
 }
