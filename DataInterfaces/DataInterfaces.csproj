@@ -172,6 +172,7 @@
     <Compile Include="Modules\Manager\Interfaces\IHostModuleMainView.cs" />
     <Compile Include="Modules\Manager\Interfaces\IHostComputerManagementViewModel.cs" />
     <Compile Include="Modules\Manager\Interfaces\IProgressDialogController.cs" />
+    <Compile Include="Modules\Manager\Interfaces\IShellView.cs" />
     <Compile Include="Modules\Manager\Interfaces\IUserDetailSectionModule.cs" />
     <Compile Include="Modules\Manager\Interfaces\IUserModuleMainView.cs" />
     <Compile Include="Modules\Manager\Interfaces\IPluginMetaDataView.cs" />

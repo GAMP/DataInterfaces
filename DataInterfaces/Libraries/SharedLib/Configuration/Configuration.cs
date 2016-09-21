@@ -1206,7 +1206,31 @@ namespace SharedLib.Configuration
             get; set;
         }
 
+        [DataMember(EmitDefaultValue =true)]
+        public List<ManagerModuleConfig> Modules
+        {
+            get;set;
+        }
+
         #endregion
     }
     #endregion
+
+    [Category("Modules")]
+    [Serializable()]
+    [DataContract()]
+    public class ManagerModuleConfig
+    {
+        [DataMember(Order =0)]
+        public string ModuleType
+        {
+            get;set;
+        }
+
+        [DataMember(Order = 0)]
+        public bool IsHidden
+        {
+            get;set;
+        }
+    }
 }
