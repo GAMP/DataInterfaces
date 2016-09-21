@@ -1176,6 +1176,14 @@ namespace SharedLib.Configuration
     [DataContract()]
     public class ManagerConfig : ConfigBase
     {
+        #region CONSTRUCTOR
+        public ManagerConfig()
+        {
+            this.Modules = new List<ManagerModuleConfig>();
+            this.Services = new List<ServiceConnectionConfig>();
+        } 
+        #endregion
+
         #region FIELDS
         private List<ServiceConnectionConfig> services;
         #endregion
@@ -1216,21 +1224,29 @@ namespace SharedLib.Configuration
     }
     #endregion
 
+    #region MANAGERMODULECONFIG
     [Category("Modules")]
     [Serializable()]
     [DataContract()]
     public class ManagerModuleConfig
     {
-        [DataMember(Order =0)]
+        /// <summary>
+        /// Gets or sets module type.
+        /// </summary>
+        [DataMember(Order = 0)]
         public string ModuleType
         {
-            get;set;
+            get; set;
         }
 
+        /// <summary>
+        /// Gets or sets if module is hidden.
+        /// </summary>
         [DataMember(Order = 0)]
         public bool IsHidden
         {
-            get;set;
+            get; set;
         }
-    }
+    } 
+    #endregion
 }
