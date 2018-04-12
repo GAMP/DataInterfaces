@@ -1,23 +1,19 @@
 ﻿using System;
 using SharedLib.Dispatcher;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace CoreLib.Diagnostics
 {
     #region ICoreProcess
     public interface ICoreProcess : IDisposable
     {
-        /// <summary>
-        /// Gets if the process has exited.
-        /// </summary>
-        bool HasExited { get; }
+        #region PROPERTIES
 
         /// <summary>
         /// Gets the unique process id.
         /// </summary>
         int Id { get; }
-
-        void Kill();
 
         /// <summary>
         /// Gets the process name.
@@ -106,15 +102,7 @@ namespace CoreLib.Diagnostics
         {
             get;
         }
-        
-        /// <summary>
-        /// Updates the cpu usage from specified parameters.
-        /// </summary>
-        /// <param name="userTime">User time.</param>
-        /// <param name="kernelTime">Kernel time.</param>
-        /// <param name="span">Time span.</param>
-        void UpdateCpuUsage(TimeSpan userTime, TimeSpan kernelTime, TimeSpan span);
-        
+
         /// <summary>
         /// Gets total processor time.
         /// </summary>
@@ -122,7 +110,7 @@ namespace CoreLib.Diagnostics
         {
             get;
         }
-        
+
         /// <summary>
         /// Gets user processor time.
         /// </summary>
@@ -148,7 +136,7 @@ namespace CoreLib.Diagnostics
         /// <summary>
         /// Checks if Process handle can be obtained in current thread context.
         /// </summary>
-        bool IsAccessable { get; }
+        bool IsAccessible { get; }
 
         /// <summary>
         /// Gets or sets if process exit event should be hooked.
@@ -156,9 +144,53 @@ namespace CoreLib.Diagnostics
         bool HookExited { get; set; }
 
         /// <summary>
+        /// Gets if the process has exited.
+        /// </summary>
+        bool HasExited { get; }
+
+        /// <summary>
         /// Gets processor count.
         /// </summary>
         int ProcessorCount { get; }
+
+        #endregion
+
+        #region FUNCTIONS
+
+        /// <summary>
+        /// Updates the cpu usage from specified parameters.
+        /// </summary>
+        /// <param name="userTime">User time.</param>
+        /// <param name="kernelTime">Kernel time.</param>
+        /// <param name="span">Time span.</param>
+        [Obsolete()]
+        void UpdateCpuUsage(TimeSpan userTime, TimeSpan kernelTime, TimeSpan span);
+
+        /// <summary>
+        /// Kills current process.
+        /// </summary>
+        void Kill();
+
+        /// <summary>
+        /// Kills current process.
+        /// </summary>
+        /// <returns>Associated task.</returns>
+        Task KillAsync();
+
+        /// <summary>
+        /// Kills current process.
+        /// </summary>
+        /// <param name="force">Force termination.</param>
+        void Kill(bool force);
+
+        /// <summary>
+        /// Kills current process.
+        /// </summary>
+        /// <param name="force">Force termination.</param>
+        /// <returns>Associated task.</returns>
+        Task KillAsync(bool force);
+
+        #endregion
     }
     #endregion    
 }

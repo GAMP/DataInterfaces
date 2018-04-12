@@ -1,10 +1,8 @@
-﻿using System;
+﻿using SharedLib.Dispatcher;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Collections.Specialized;
-using System.Runtime.Serialization;
-using System.Security.Permissions;
+using System.IO;
 
 namespace CyClone.Core
 {
@@ -15,7 +13,7 @@ namespace CyClone.Core
     [Serializable()]
     public class MappingsEventArgs : EventArgs
     {
-        #region Constructor
+        #region CONSTRUCTOR
         public MappingsEventArgs(NotifyCollectionChangedAction action,
            List<IMappingsConfiguration> added,
            List<IMappingsConfiguration> removed)
@@ -26,13 +24,13 @@ namespace CyClone.Core
         }
         #endregion
 
-        #region Fields
-        private List<IMappingsConfiguration> 
-            addedItems, 
+        #region FIELDS
+        private List<IMappingsConfiguration>
+            addedItems,
             removedItems;
         #endregion
 
-        #region Properties
+        #region PROPERTIES
 
         /// <summary>
         /// Gets change action.
@@ -89,12 +87,12 @@ namespace CyClone.Core
     [Serializable()]
     public class SyncProgressEventArgs : EventArgs
     {
-        #region Constructor
+        #region CONSTRUCTOR
         public SyncProgressEventArgs()
         { }
         #endregion
 
-        #region Properties
+        #region PROPERTIES
 
         /// <summary>
         /// Current entry being processed.
@@ -155,7 +153,7 @@ namespace CyClone.Core
             set;
         }
         #endregion
-    } 
+    }
     #endregion
 
     #region FileChangedEventArgs
@@ -190,6 +188,88 @@ namespace CyClone.Core
         /// Gets previous file.
         /// </summary>
         public IcyFileSystemInfo PreviousFile
+        {
+            get;
+            protected set;
+        }
+
+        #endregion
+    }
+    #endregion
+}
+
+namespace CyClone.Security
+{
+    #region VerifyAccessEventArgs
+    public class VerifyAccessEventArgs : EventArgs
+    {
+        #region CONSTRUCTOR
+        public VerifyAccessEventArgs(string path,
+            IMessageDispatcher dispatcher,
+            FileAccess access,
+            FileMode mode,
+            bool sucess = true)
+        {
+            this.TimeStamp = DateTime.Now;
+            this.Access = access;
+            this.Mode = mode;
+            this.Path = path;
+            this.Dispatcher = dispatcher;
+            this.Sucess = sucess;
+        }
+        #endregion
+
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets verification access flags.
+        /// </summary>
+        public FileAccess Access
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets the calling dispatcher.
+        /// </summary>
+        public IMessageDispatcher Dispatcher
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets the path verified.
+        /// </summary>
+        public string Path
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets if verification was sucessfull.
+        /// </summary>
+        public bool Sucess
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets verification file mode flag.
+        /// </summary>
+        public FileMode Mode
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets event time stamp.
+        /// </summary>
+        public DateTime TimeStamp
         {
             get;
             protected set;

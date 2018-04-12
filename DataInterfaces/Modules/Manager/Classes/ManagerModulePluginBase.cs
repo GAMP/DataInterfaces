@@ -20,7 +20,8 @@ namespace Manager.Modules
         #region VIRTUAL METHODS
         
         /// <summary>
-        /// When ovveriden should take care of initializing plugin.
+        /// When overriden should take care of initializing plugin.
+        /// The call will occur on UI Thread.
         /// </summary>
         public virtual void Initialize()
         {
@@ -28,6 +29,7 @@ namespace Manager.Modules
 
         /// <summary>
         /// When overriden should take care of starting plugin.
+        /// The call may occur on any thread.
         /// </summary>
         public virtual void Start()
         {
@@ -35,6 +37,7 @@ namespace Manager.Modules
 
         /// <summary>
         /// When overriden should take care of stopping plugin.
+        /// The call may occur on any thread.
         /// </summary>
         public virtual void Stop()
         {

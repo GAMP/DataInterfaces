@@ -1,22 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Collections.ObjectModel;
-using System.Windows.Controls;
-using SharedLib.Applications;
-using System.Windows;
-using SharedLib;
+﻿using System.Windows;
 using Client;
 
 namespace IntegrationLib
 {
-    #region ILicenseManagerPlugin
     /// <summary>
     /// License Manager interface.
     /// </summary>
     public interface ILicenseManagerPlugin : IPlugin
     {
+        #region FUNCTIONS
+
         /// <summary>
         /// Installs the license.
         /// </summary>
@@ -44,15 +37,20 @@ namespace IntegrationLib
         /// <returns>IApplicationLicenseKey instance.</returns>
         IApplicationLicenseKey EditLicense(IApplicationLicenseKey key, ILicenseProfile profile, ref bool additionHandled, Window owner);
 
+        #endregion
+
+        #region PROPERTIES
+
         /// <summary>
         /// Gets if licenses can be edited by this plugin.
         /// </summary>
-        bool CanEdit { get;}
+        bool CanEdit { get; }
 
         /// <summary>
         /// Gets if licenses can be added to this plugin.
         /// </summary>
         bool CanAdd { get; }
+
+        #endregion
     }
-    #endregion
 }

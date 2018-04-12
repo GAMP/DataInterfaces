@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.Serialization;
-using System.Text;
 
 namespace System.Linq.Expressions
 {
@@ -12,12 +8,14 @@ namespace System.Linq.Expressions
     public static class ExpressionBuilder
     {
         #region STATIC FIELDS
-        private static MethodInfo compareMethod = typeof(string).GetMethod("Compare", new[] { typeof(string), typeof(string) ,typeof(StringComparison)});
+        private static MethodInfo compareMethod = typeof(string).GetMethod("Compare", new[] { typeof(string), typeof(string), typeof(StringComparison) });
         private static MethodInfo containsMethod = typeof(string).GetMethod("Contains");
         private static MethodInfo startsWithMethod = typeof(string).GetMethod("StartsWith", new Type[] { typeof(string) });
         private static MethodInfo endsWithMethod = typeof(string).GetMethod("EndsWith", new Type[] { typeof(string) });
         private static MethodInfo hasFlagMethod = typeof(Enum).GetMethod("HasFlag", new Type[] { typeof(Enum) });
         #endregion
+
+        #region STATIC FUNCTIONS
 
         public static Expression<Func<T, bool>> GetExpression<T>(IEnumerable<Filter> filter)
         {
@@ -74,7 +72,7 @@ namespace System.Linq.Expressions
 
             MemberExpression member = Expression.Property(param, filter.PropertyName);
             ConstantExpression constant = null;
-            
+
             #region NULLABLE HANDLING
             if (filterValue != null && IsNullableType(member.Type))
             {
@@ -85,7 +83,7 @@ namespace System.Linq.Expressions
             else
             {
                 constant = Expression.Constant(filterValue);
-            } 
+            }
             #endregion
 
             switch (operation)
@@ -132,7 +130,6 @@ namespace System.Linq.Expressions
 
             return null;
         }
-  
 
         /// <summary>
         /// Gets the expression that is always true.
@@ -173,9 +170,10 @@ namespace System.Linq.Expressions
                 throw new ArgumentNullException(nameof(type));
 
             return type.IsGenericType && type.GetGenericTypeDefinition().Equals(typeof(Nullable<>));
-        }
+        } 
 
-    } 
+        #endregion
+    }
     #endregion
 
     #region Filter
@@ -195,7 +193,7 @@ namespace System.Linq.Expressions
             this.PropertyName = propertyName;
             this.Value = value;
             this.Operation = operation;
-        } 
+        }
         #endregion
 
         #region PROPERTIES
@@ -234,7 +232,7 @@ namespace System.Linq.Expressions
             if (propertyName == null)
                 throw new ArgumentNullException(nameof(propertyName));
 
-            return new List<Filter>() { new Filter() { PropertyName = propertyName, Value = propertyValue, Operation = operation } };
+            return new FilterSet() { new Filter() { PropertyName = propertyName, Value = propertyValue, Operation = operation } };
         }
 
         /// <summary>
@@ -246,7 +244,7 @@ namespace System.Linq.Expressions
         }
 
         #endregion
-    } 
+    }
     #endregion
 
     #region Op
@@ -320,7 +318,7 @@ namespace System.Linq.Expressions
             set { this.includes = value; }
         }
 
-        IEnumerable<string> IFilterSet.Includes
+        ICollection<string> IFilterSet.Includes
         {
             get { return this.Includes; }
         }
@@ -397,9 +395,7 @@ namespace System.Linq.Expressions
             if (source == null)
                 throw new ArgumentNullException(nameof(source));
 
-            var iFilterSet = filters as IFilterSet;
-
-            if (iFilterSet != null)
+            if (filters is IFilterSet iFilterSet)
             {
                 if (iFilterSet.Skip.HasValue)
                     source = source.Skip(iFilterSet.Skip.Value);
@@ -410,6 +406,6 @@ namespace System.Linq.Expressions
 
             return new ResultSet<T>(source, count);
         }
-    } 
+    }
     #endregion
 }

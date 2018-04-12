@@ -1,16 +1,7 @@
 ﻿using GizmoDALV2;
-using IntegrationLib;
-using Manager;
 using NetLib;
 using SharedLib;
-using SharedLib.Configuration;
-using SharedLib.User;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ServerService
 {
@@ -22,9 +13,22 @@ namespace ServerService
         IHostService,
         ILicenseManagmentService,
         IConfigurableService,
-        IUserService
+        IUserService,
+        IDbContextProvider<IGizmoDBContext>
     {
+        #region FUNCTIONS
+        
+        /// <summary>
+        /// Schedules a user balance event.
+        /// This event is used to notify modules of user balance change.
+        /// </summary>
+        /// <param name="userId">User id.</param>
+        void ScheduleUserBalanceEvent(int? userId); 
+
+        #endregion
+
         #region EVENTS
+
         /// <summary>
         /// Occours on server startup.
         /// <remarks>

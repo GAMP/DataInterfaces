@@ -32,10 +32,12 @@ namespace SharedLib
             if (null == property)
                 throw new ArgumentNullException("property");
             this._propertySource = new WeakReference(propertySource);
-            Binding binding = new Binding();
-            binding.Path = property;
-            binding.Mode = BindingMode.OneWay;
-            binding.Source = propertySource;
+            Binding binding = new Binding()
+            {
+                Path = property,
+                Mode = BindingMode.OneWay,
+                Source = propertySource
+            };
             BindingOperations.SetBinding(this, ValueProperty, binding);
         }
         #endregion

@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Reflection;
-using System.Collections.ObjectModel;
 using System.Windows.Controls;
-using System.Windows.Data;
 using GizmoShell;
 
 namespace SkinLib
@@ -72,6 +68,8 @@ namespace SkinLib
         /// Gets or sets if multiscreen.
         /// </summary>
         bool IsMultiScreen { get; set; } 
+
+        string VideoPath { get; }
         
         #endregion
     }

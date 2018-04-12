@@ -10,7 +10,6 @@ namespace CoreLib
     #region ObjectCopier
     /// <summary>
     /// Reference Article http://www.codeproject.com/KB/tips/SerializedObjectCloner.aspx
-    /// 
     /// Provides a method for performing a deep copy of an object.
     /// Binary Serialization is used to perform the copy.
     /// </summary>
@@ -25,17 +24,18 @@ namespace CoreLib
         public static T Clone<T>(T source)
         {
             // Don't serialize a null object, simply return the default for that object
-            if (Object.ReferenceEquals(source, null))
-            {
+            if (object.ReferenceEquals(source, null))           
                 return default(T);
-            }
+            
             IFormatter formatter = new BinaryFormatter();
-            Stream stream = new MemoryStream();
-            using (stream)
+            using (Stream stream = new MemoryStream())
             {
-                formatter.Serialize(stream, source);
-                stream.Seek(0, SeekOrigin.Begin);
-                return (T)formatter.Deserialize(stream);
+                using (stream)
+                {
+                    formatter.Serialize(stream, source);
+                    stream.Seek(0, SeekOrigin.Begin);
+                    return (T)formatter.Deserialize(stream);
+                }
             }
         }
     } 
@@ -48,6 +48,8 @@ namespace CoreLib
     /// </summary>
     public class Wildcard : Regex
     {
+        #region CONSTRUCTOR
+        
         /// <summary>
         /// Initializes a wildcard with the given search pattern.
         /// </summary>
@@ -78,8 +80,9 @@ namespace CoreLib
             return "^" + Regex.Escape(pattern).
              Replace("\\*", ".*").
              Replace("\\?", ".") + "$";
-        }
+        } 
 
+        #endregion
     }
     #endregion
 
@@ -88,23 +91,20 @@ namespace CoreLib
     {
         #region FEATURES
         private static readonly string FEATURE_BROWSER_EMULATION = @"SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION";
+        private static readonly string FEATURE_GPU_RENDERING = @"SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_GPU_RENDERING";
         #endregion
 
+        #region FUNCTIONS
+
         /// <summary>
-        /// Set FEATURE_BROWSER_EMULATION for specified process name.
+        /// Set FEATURE_BROWSER_EMULATION for current process.
         /// </summary>
         /// <param name="version">
         /// Required emulation version.
         /// </param>
-        public static void SetEmulationVersion(string processName, int version)
+        public static void SetEmulationVersion(IEVersion version)
         {
-            if (string.IsNullOrWhiteSpace(processName))
-                throw new ArgumentNullException(processName);
-
-            using (var key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(FEATURE_BROWSER_EMULATION, true))
-            {
-                key.SetValue(processName, version, RegistryValueKind.DWord);
-            }
+            SetEmulationVersion((int)version);
         }
 
         /// <summary>
@@ -115,7 +115,28 @@ namespace CoreLib
         /// </param>
         public static void SetEmulationVersion(int version)
         {
-            SetEmulationVersion(AppDomain.CurrentDomain.FriendlyName, version);
+            SetFeatureValue(FEATURE_BROWSER_EMULATION, version);
+        }
+
+        public static void SetGPURendering(int value)
+        {
+            SetFeatureValue(FEATURE_GPU_RENDERING, value);
+        }
+
+        private static void SetFeatureValue(string featureKey, int value)
+        {
+            SetFeatureValue(AppDomain.CurrentDomain.FriendlyName, featureKey, value);
+        }
+
+        private static void SetFeatureValue(string processName, string featureKey, int value)
+        {
+            if (string.IsNullOrWhiteSpace(processName))
+                throw new ArgumentNullException(processName);
+
+            using (var key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(featureKey, true))
+            {
+                key.SetValue(processName, value, RegistryValueKind.DWord);
+            }
         }
 
         /// <summary>
@@ -141,6 +162,16 @@ namespace CoreLib
             return GetEmulationVersion(AppDomain.CurrentDomain.FriendlyName);
         }
 
+        public static int? GetGPURenderingFeature()
+        {
+            return GetFeatureValue(FEATURE_GPU_RENDERING);
+        }
+
+        public static int? GetFeatureValue(string feature)
+        {
+            return GetFeatureValue(AppDomain.CurrentDomain.FriendlyName, feature);
+        }
+
         public static int? GetFeatureValue(string processName, string feature)
         {
             if (string.IsNullOrWhiteSpace(processName))
@@ -155,10 +186,26 @@ namespace CoreLib
             }
         }
 
-        public static int? GetFeatureValueCurrent(string feature)
+        #endregion
+
+        #region ENUMS
+
+        public enum IEVersion : int
         {
-            return GetFeatureValue(AppDomain.CurrentDomain.FriendlyName, feature);
-        }
+            IE11001 = 11001,
+            IE11000 = 11000,
+            IE10001 = 10001,
+            IE10000 = 10000,
+            IE9999 = 9999,
+            IE9000 = 9000,
+            IE8888 = 8888,
+            IE8000 = 8000,
+            IE7000 = 7000,
+        } 
+
+        #endregion
     } 
+
+
     #endregion
 }

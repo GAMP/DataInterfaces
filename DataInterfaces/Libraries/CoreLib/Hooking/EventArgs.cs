@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security;
-using System.Text;
 using System.Windows.Forms;
 using System.Windows.Input;
 
@@ -140,6 +137,14 @@ namespace CoreLib.Hooking
             protected set;
         }
 
+        /// <summary>
+        /// Gets if key is injected.
+        /// </summary>
+        public bool IsInjected
+        {
+            get { return (this.Flags & 0x10) != 0; }
+        }
+
         #endregion
 
         #region IMPORTS
@@ -193,7 +198,7 @@ namespace CoreLib.Hooking
 
     #region MouseHookEventArgs
     /// <summary>
-    /// Mouse hooked event arguments.
+    /// Mouse hook event arguments.
     /// </summary>
     public class MouseHookEventArgs : HookEventArgsBase
     {
@@ -264,5 +269,76 @@ namespace CoreLib.Hooking
         }
         #endregion
     }
+    #endregion
+
+    #region MouseLowLevelHookEventArgs
+    /// <summary>
+    /// Mouse low level hook event arguments.
+    /// </summary>
+    public class MouseLowLevelHookEventArgs : HookEventArgsBase
+    {
+        #region CONSTRUCTOR
+        public MouseLowLevelHookEventArgs(MouseButtons button, int x,int y, uint flags,int clickCount)
+        {
+            this.Button = button;
+            this.X = x;
+            this.Y = y;
+            this.Flags = flags;
+            this.ClickCount = clickCount;
+        }
+        #endregion
+
+        #region PROPERTIES
+        
+        /// <summary>
+        /// Gets click count.
+        /// </summary>
+        public int ClickCount
+        {
+            get; protected set;
+        }
+
+        /// <summary>
+        /// Gets mouse button.
+        /// </summary>
+        public MouseButtons Button
+        {
+            get; protected set;
+        }
+
+        /// <summary>
+        /// Gets X position.
+        /// </summary>
+        public int X
+        {
+            get; protected set;
+        }
+
+        /// <summary>
+        /// Gets Y position.
+        /// </summary>
+        public int Y
+        {
+            get; protected set;
+        }
+
+        /// <summary>
+        /// Gets flags.
+        /// </summary>
+        public uint Flags
+        {
+            get; protected set;
+        }
+
+        /// <summary>
+        /// Gets if key is injected.
+        /// </summary>
+        public bool IsInjected
+        {
+            get { return (this.Flags & 0x1) != 0; }
+        } 
+
+        #endregion
+    } 
     #endregion
 }

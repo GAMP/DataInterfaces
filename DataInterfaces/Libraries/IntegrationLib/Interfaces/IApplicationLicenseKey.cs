@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace IntegrationLib
+﻿namespace IntegrationLib
 {
-    #region IApplicationLicenseKey
     /// <summary>
     /// License Key interface.
     /// </summary>
-    public interface IApplicationLicenseKey    
+    public interface IApplicationLicenseKey
     {
+        #region PROPERTIES
+
         /// <summary>
         /// Gets the keys string representation.
         /// </summary>
@@ -20,6 +16,7 @@ namespace IntegrationLib
         /// Returns if the key value is valid.
         /// </summary>
         bool IsValid { get; }
+
+        #endregion
     }
-    #endregion
 }

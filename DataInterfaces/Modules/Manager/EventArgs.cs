@@ -9,16 +9,13 @@ using System.Text;
 
 namespace Manager
 {
-    #region AuthEventArgs
+    #region AUTHEVENTARGS
     public class AuthEventArgs : EventArgs
     {
         #region CONSTRUCTOR
         public AuthEventArgs(IIdentity identity)
         {
-            if (identity == null)
-                throw new ArgumentNullException("IIdentity");
-
-            this.Identity = identity;
+            this.Identity = identity ?? throw new ArgumentNullException(nameof(identity));
         }
         #endregion
 
@@ -35,7 +32,7 @@ namespace Manager
     }
     #endregion
 
-    #region CurrentServiceChangedEventArgs
+    #region CURRENTSERVICECHANGEDEVENTARGS
     public class CurrentServiceChangedEventArgs : SelectedChangeEventArgs<IRemoteGizmoService>
     {
         #region CONSTRUCTOR
@@ -48,7 +45,7 @@ namespace Manager
     }
     #endregion
 
-    #region RFIDEventArgs
+    #region RFIDEVENTARGS
     public abstract class RFIDEventArgs : EventArgs
     {
         #region CONSTRUCTOR
@@ -74,7 +71,7 @@ namespace Manager
     } 
     #endregion
 
-    #region RFIDScanEventArgs
+    #region RFIDSCANEVENTARGS
     /// <summary>
     /// Rfid scanner service event args.
     /// </summary>
@@ -99,7 +96,7 @@ namespace Manager
         }
 
         /// <summary>
-        /// Gets or sets SmartCard UID String.
+        /// Gets SmartCard UID String.
         /// </summary>
         public string UIDString
         {
@@ -113,6 +110,19 @@ namespace Manager
         {
             get; protected set;
         }
-    } 
+
+        /// <summary>
+        /// Gets or sets if event was handled.
+        /// </summary>
+        public bool IsHandled
+        {
+            get;set;
+        }
+    }
+    #endregion
+
+    #region PERMISSIONCHANGEEVENTARGS
+    public class PermissionChangeEventArgs : EventArgs
+    { } 
     #endregion
 }

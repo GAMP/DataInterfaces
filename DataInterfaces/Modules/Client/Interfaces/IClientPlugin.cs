@@ -1,9 +1,4 @@
-﻿using Client;
-using IntegrationLib;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using IntegrationLib;
 
 namespace Client
 {
@@ -12,12 +7,14 @@ namespace Client
     /// </summary>
     public interface IClientPlugin : IPlugin
     {
+        #region PROPERTIES
         /// <summary>
         /// Gets client instance.
         /// </summary>
         IClient Client
         {
             get;
-        }
+        } 
+        #endregion
     }
 }

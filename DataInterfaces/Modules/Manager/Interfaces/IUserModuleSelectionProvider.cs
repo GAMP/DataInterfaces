@@ -2,13 +2,11 @@
 using SharedLib;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 
 namespace Manager.Modules
 {
+    #region IUserModuleSelectionProvider
     /// <summary>
     /// Provides ability to track currently selected users in user module.
     /// </summary>
@@ -28,34 +26,58 @@ namespace Manager.Modules
         /// Gets if single is selected and not logged in.
         /// </summary>
         bool? IsSelectedLoggedOut { get; }
-    }
+    } 
+    #endregion
 
-    public interface ISingleGetSelectionProvider<T>
+    #region ISelectedChangedEvent
+    public interface ISelectedChangedEvent<T>
     {
         /// <summary>
         /// Raised when selected item changes.
         /// </summary>
         event EventHandler<SelectedChangeEventArgs<T>> SelectedChanged;
+    }
+    #endregion
+
+    #region ISelectionChangedEvent
+    public interface ISelectionChangedEvent<T>
+    {
+        /// <summary>
+        /// Raised when selected items changed.
+        /// </summary>
+        event EventHandler<SelectionChangedEventArgs> SelectionChanged;
+    }
+    #endregion
+
+    #region ISingleGetSelectionProvider
+    public interface ISingleGetSelectionProvider<T> : ISelectedChangedEvent<T>
+    {
+        #region PROPERTIES
 
         /// <summary>
         /// Gets selected item.
         /// </summary>
         T SelectedItem { get; }
-    }
 
-    public interface ISingleSetSelectedProvider <T> : ISingleGetSelectionProvider<T>
+        #endregion
+    } 
+    #endregion
+
+    #region IMultiSelectSelectionProvider
+    public interface IMultiSelectSelectionProvider<T> : ISingleGetSelectionProvider<T>,
+    ISelectionChangedEvent<T>
     {
+        #region PROPERTIES
+
         /// <summary>
-        /// Gets or sets selected item.
+        /// Gets selected items.
         /// </summary>
-        new T SelectedItem { set; }
-    }
-
-    public interface IMultiSelectSelectionProvider <T>
-    {
         IEnumerable<T> SelectedItems
         {
             get;
         }
-    }
+
+        #endregion
+    } 
+    #endregion
 }

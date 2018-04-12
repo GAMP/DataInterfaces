@@ -1,10 +1,26 @@
-﻿using System;
+﻿using System.Collections.Generic;
+
 namespace SharedLib.Applications
 {
     public interface IAppProfile
     {
-        string Name { get; set; }
-        System.Collections.Generic.HashSet<int> Profiles { get; set; }
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets profile id.
+        /// </summary>
         int Id { get; }
+
+        /// <summary>
+        /// Gets or sets profile name.
+        /// </summary>
+        string Name { get; }
+
+        /// <summary>
+        /// Gets present apps.
+        /// </summary>
+        HashSet<int> Profiles { get; set; }
+
+        #endregion
     }
 }

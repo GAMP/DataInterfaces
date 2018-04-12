@@ -2,187 +2,6 @@
 
 namespace SharedLib.Commands
 {
-    #region CommandStates
-    /// <summary>
-    /// Represents a states of the commands.
-    /// </summary>
-    [Flags()]
-    public enum CommandStates : uint
-    {
-        /// <summary>
-        /// None state.
-        /// <remarks >
-        /// This should be set in responses if command not requires any callback.
-        /// </remarks>
-        /// </summary>
-        None = 0,
-        
-        /// <summary>
-        /// Command is not supported.
-        /// </summary>
-        NotSupported = 32,
-        
-        /// <summary>
-        /// Invalid command parameters specified.
-        /// <remarks>
-        /// </remarks>
-        /// </summary>
-        InvalidParameters = 64,
-        
-        /// <summary>
-        /// State should be set when request or response sending failed.
-        /// </summary>
-        SendFailed = 128,
-        
-        /// <summary>
-        /// Occours when command carries an operation or a state update and requested command is not present.
-        /// </summary>
-        RequestNotFound = 256,
-        
-        /// <summary>
-        /// This state is set when operation exception is unhandled.
-        /// </summary>
-        UnhandledOperationException = 512,
-        
-        /// <summary>
-        /// Occours when command data is not recognized.
-        /// </summary>
-        Unrecongnized = 1024,
-        
-        /// <summary>
-        /// Command cannot execute due to authorozation.
-        /// </summary>
-        UnAuthorized = 2048,
-        
-        /// <summary>
-        /// All states flag.
-        /// </summary>
-        AllStates = 65535,
-    }
-    #endregion
-
-    #region OperationState
-    [Flags()]
-    public enum OperationState : uint
-    {
-        /// <summary>
-        /// Default operation state.
-        /// </summary>
-        Unknown = 0,
-       
-        /// <summary>
-        /// This flag is set as soon as operation enters executing state.
-        /// </summary>
-        Started = 1,
-        
-        /// <summary>
-        /// This flags the operation completion.
-        /// <remarks>This should be only set when operation has fully completed.
-        /// </summary>
-        Completed = 2,
-        
-        /// <summary>
-        /// Operation aborted.
-        /// </summary>
-        Aborted = 16,
-        
-        /// <summary>
-        /// Operation released.
-        /// </summary>
-        Released = 32,
-        
-        /// <summary>
-        /// Operation update.
-        /// </summary>
-        Update = 128,
-        
-        /// <summary>
-        /// When calling an execute or update with invalid parameters this flag is used.
-        /// </summary>
-        InvalidParameters = 512,
-        
-        /// <summary>
-        /// This is set when operation is failed in case of critical exception for example.
-        /// <remarks>
-        /// This state should only be set when operation is fully aborted and cannot recover.
-        /// This will also lead to operation completeion when SyncOperation class is used.
-        /// In case of recoverable error you can simply send an update to the requesting party or log it.
-        /// </remarks>
-        /// </summary>
-        Failed = 1024,
-        
-        /// <summary>
-        /// This flag is set when the operation was automatically aborted due disconnection.
-        /// </summary>
-        ConnectionLostAbort = 2048,
-        
-        /// <summary>
-        /// Connection changed.
-        /// </summary>
-        ConnectionChange = 4096,
-    }
-    #endregion
-
-    #region RequestsType
-    public enum RequestsType : byte
-    {
-        /// <summary>
-        /// A new request command.
-        /// </summary>
-        Request = 0,
-       
-        /// <summary>
-        /// Response command.
-        /// </summary>
-        Response = 1,
-        
-        /// <summary>
-        /// Encryption negotiation.
-        /// </summary>
-        NEGEncryption = 3,
-        
-        /// <summary>
-        /// Compression negotiation.
-        /// </summary>
-        NEGCompression = 5,
-        
-        /// <summary>
-        /// Protocol negotiation.
-        /// </summary>
-        NEGProtocol = 6,
-        
-        /// <summary>
-        /// Authentication negotiation.
-        /// </summary>
-        NEGAuthenticate = 7,
-        
-        /// <summary>
-        /// Command state update.
-        /// </summary>
-        CommandStateUpdate = 2,
-        
-        /// <summary>
-        /// Operation state update.
-        /// </summary>
-        OperationStateUpdate = 4,
-        
-        /// <summary>
-        /// Operation update.
-        /// </summary>
-        OperationUpdate = 8,
-        
-        /// <summary>
-        /// Operation abort.
-        /// </summary>
-        OperationAbort = 16,
-        
-        /// <summary>
-        /// This state should be set when the operation does not have any completion so the other side would remove it from the operation list.
-        /// </summary>
-        OperationRelease = 32,
-    }
-    #endregion
-
     #region CommandType
     /// <summary>
     /// Represents the type of operation.
@@ -304,6 +123,9 @@ namespace SharedLib.Commands
         /// </summary>
         [OperationType(typeof(ServiceToManagerOpType))]
         ServiceToManager = 20,
+
+        [OperationType(typeof(ServiceToClientOpType))]
+        ServiceToClinet = 21,
     }
     #endregion
 
@@ -311,8 +133,6 @@ namespace SharedLib.Commands
     public enum ApplicationManagement : byte
     {
         SetContainer = 1,
-        AddApplication = 2,
-        RemoveApplication = 3,
         UpdateApplication = 4,
         SetApplicationRating = 5,
         GetApplicationRating = 6,
@@ -320,6 +140,13 @@ namespace SharedLib.Commands
         GetApplicationStat = 8,
         ReserveLicenseBatch = 9,
         ReleaseLicenseBatch = 10,
+        GetAppContainer=11,
+        GetAppInfoContainer=12,
+        GetAppInfoUserContainer=13,
+        AppEvent=14,
+        AppExeExecutionGraphGet=15,
+        AppLinkGet=2,
+        //free id 2,3
     }
     #endregion
 
@@ -370,19 +197,17 @@ namespace SharedLib.Commands
         CloseStream = 21,
         WriteStream = 22,
         ReadStream = 23,
-        SetStreamLength = 24,
-        GetStreamLength = 25,
-        SeekStream = 26,
-        BaseStreamOperation = 27,
+        BaseStreamOperation = 26,
         SetFileTime = 28,
         SetFileAttributes = 29,
         EnumerationContext = 30,
         GetDirectorySize = 31,
         FileExists = 32,
         DirectoryExists = 33,
-        JunctionCreate =34,
-        JunctionDelete=35,
-        JunctionExist=36,
+        JunctionCreate = 34,
+        JunctionDelete = 35,
+        JunctionExist = 36,
+        //free id 24,25,27,17
     }
     #endregion
 
@@ -459,11 +284,16 @@ namespace SharedLib.Commands
         /// <summary>
         /// Integration provider logout operation.
         /// </summary>
+        [Obsolete()]
         IntegratedLogout = 16,
         /// <summary>
         /// UI Notification operation.
         /// </summary>
         UINotify = 17,
+        /// <summary>
+        /// Usage session info get operation.
+        /// </summary>
+        GetUsageSessionInfo=18,
     }
     #endregion
 
@@ -552,8 +382,9 @@ namespace SharedLib.Commands
         GetMacAddress = 11,
         SetOutOfOrderState = 12,
         GetOutOfOrderState = 13,
-        SetMaintenanceMode=14,
-        GetMaintenanceMode=15,
+        SetMaintenanceMode = 14,
+        GetMaintenanceMode = 15,
+        RDPSessionStart=16,
     }
     #endregion
 
@@ -594,303 +425,418 @@ namespace SharedLib.Commands
     public enum ManagerToServiceOpType
     {
         #region LOG
-        LogGet,
-        LogGetById,
-        LogAdd,
-        LogRemove,
+        LogGet = 0,
+        LogGetById = 1,
+        LogAdd = 2,
+        LogRemove = 3,
         #endregion
 
         #region HOST
-        HostGet,
-        HostAdd,
-        HostUpdate,
-        HostRemove,
-        HostPropertiesGet,
-        HostPropertiesSet,
-        HostPowerStateSet,
-        HostModuleStateSet,
-        HostLockStateSet,
-        HostOrderStateSet,
-        HostSecurityStateSet, 
-        HostMaintenanceStateSet,
+        HostGet = 4,
+        HostAdd = 5,
+        HostUpdate = 6,
+        HostRemove = 7,
+        HostPropertiesGet = 8,
+        HostPropertiesSet = 9,
+        HostPowerStateSet = 10,
+        HostModuleStateSet = 11,
+        HostLockStateSet = 12,
+        HostOrderStateSet = 13,
+        HostSecurityStateSet = 14,
+        HostMaintenanceStateSet = 15,
+        HostEndpointTurnOn=253,
+        HostEndpointTurnOff=254,
         #endregion
 
         #region USERGROUP
-        UserGroupGet,
-        UserGroupAdd,
-        UserGroupUpdate,
-        UserGroupRemove, 
+        UserGroupGet = 16,
+        UserGroupAdd = 17,
+        UserGroupUpdate = 18,
+        UserGroupRemove = 19,
         #endregion
 
         #region SECURITY PROFILE
-        SecurityProfileGet,
-        SecurityProfileAdd,
-        SecurityProfileUpdate,
-        SecurityProfileRemove, 
+        SecurityProfileGet = 20,
+        SecurityProfileAdd = 21,
+        SecurityProfileUpdate = 22,
+        SecurityProfileRemove = 23,
         #endregion
 
         #region APPCATEGORY
-        AppCategoryGet,
-        AppCategoryAdd,
-        AppCategoryUpdate,
-        AppCategoryRemove, 
-        AppCategoryMove,
+        AppCategoryGet = 24,
+        AppCategoryAdd = 25,
+        AppCategoryUpdate = 26,
+        AppCategoryRemove = 27,
+        AppCategoryMove = 28,
         #endregion
 
         #region APP ENTERPRISE
-        AppEnterpriseGet,
-        AppEnterpriseAdd,
-        AppEnterpriseUpdate,
-        AppEnterpriseRemove, 
+        AppEnterpriseGet = 29,
+        AppEnterpriseAdd = 30,
+        AppEnterpriseUpdate = 31,
+        AppEnterpriseRemove = 32,
         #endregion
 
         #region APP
-        AppGet,
-        AppGetWithoutExe,
-        AppExeGetWithDeployment,
-        AppGetByUsage,
-        AppGetGraph,
-        AppAdd,
-        AppUpdate,
-        AppRemove,
-        AppGetImage,
-        AppMove,
-        AppRename, 
+        AppGet = 33,
+        AppGetWithoutExe = 34,
+        AppExeGetWithDeployment = 35,
+        AppGetByUsage = 36,
+        AppGetGraph = 37,
+        AppAdd = 38,
+        AppUpdate = 39,
+        AppRemove = 40,
+        AppGetImage = 41,
+        AppMove = 42,
+        AppRename = 43,
         #endregion
 
         #region APPSTAT
-        AppStatGet, 
+        AppStatGet = 44,
         #endregion
 
         #region DEPLOYMENT
-        DeploymentGet,
-        DeploymentAdd,
-        DeploymentUpdate,
-        DeploymentRemove, 
-        DeploymentGetDependentApp,
-        DeploymentGetByAppExe,
+        DeploymentGet = 45,
+        DeploymentAdd = 46,
+        DeploymentUpdate = 47,
+        DeploymentRemove = 48,
+        DeploymentGetDependentApp = 49,
+        DeploymentGetByAppExe = 50,
         #endregion
 
         #region PERSONAL FILE
-        PersonalFileGet,
-        PersonalFileAdd,
-        PersonalFileUpdate,
-        PersonalFileRemove, 
-        PersonalFileGetDependentApp,
+        PersonalFileGet = 51,
+        PersonalFileAdd = 52,
+        PersonalFileUpdate = 53,
+        PersonalFileRemove = 54,
+        PersonalFileGetDependentApp = 55,
         #endregion
 
         #region LICENSE
-        LicenseGet,
-        LicenseAdd,
-        LicenseUpdate,
-        LicenseRemove, 
-        LicenseGetDependentApp,
+        LicenseGet = 56,
+        LicenseAdd = 57,
+        LicenseUpdate = 58,
+        LicenseRemove = 59,
+        LicenseGetDependentApp = 60,
         #endregion
 
         #region APPGROUP
-        AppGroupGet,
-        AppGroupAdd,
-        AppGroupUpdate,
-        AppGroupRemove, 
+        AppGroupGet = 61,
+        AppGroupAdd = 62,
+        AppGroupUpdate = 63,
+        AppGroupRemove = 64,
         #endregion
 
         #region HOSTGROUP
-        HostGroupGet,
-        HostGroupAdd,
-        HostGroupUpdate,
-        HostGroupRemove,
+        HostGroupGet = 65,
+        HostGroupAdd = 66,
+        HostGroupUpdate = 67,
+        HostGroupRemove = 68,
         #endregion
 
         #region HOSTLAYOUTGROUP
-        HostLayoutGroupGet,
-        HostLayoutGroupAdd,
-        HostLayoutGroupUpdate,
-        HostLayoutGroupRemove,
-        HostLayoutGroupImageSet,
-        HostLayoutGroupImageGet,
+        HostLayoutGroupGet = 69,
+        HostLayoutGroupAdd = 70,
+        HostLayoutGroupUpdate = 71,
+        HostLayoutGroupRemove = 72,
+        HostLayoutGroupImageSet = 73,
+        HostLayoutGroupImageGet = 74,
         #endregion
 
         #region NEWS
-        NewsFeedGet,
-        NewsFeedAdd,
-        NewsFeedRemove,
-        NewsFeedUpdate,
+        NewsFeedGet = 75,
+        NewsFeedAdd = 76,
+        NewsFeedRemove = 77,
+        NewsFeedUpdate = 78,
         #endregion
 
         #region FEED
-        FeedGet,
-        FeedAdd,
-        FeedUpdate,
-        FeeedRemove, 
+        FeedGet = 79,
+        FeedAdd = 80,
+        FeedUpdate = 81,
+        FeeedRemove = 82,
         #endregion
 
         #region SESSION
-        SessionGet,
+        UserSessionGet = 83,
+        UserSessionInfoGet = 174,
+        UserSessionOpenInfoGet = 219,
+        UsageSessionActiveInfoGet=259,
         #endregion
 
         #region USER
-        UserGet,
-        UserAdd,
-        UserUpdate,
-        UserRemove,
-        UserDelete,
-        UserUndelete,
-        UserRename,
-        UserSetPassword,
-        UserSetPicture,
-        UserGetPicture,
-        UserSetEmail,
-        UserSetGroup,
-        UserCredentialsValidate,
-        UserNegativeBalanceEnable,
-        UserLogin,
-        UserLogout,
-        UserDisable,
-        UserSetSmartCardId,
+        UserGet = 84,
+        UserAdd = 85,
+        UserUpdate = 86,
+        UserRemove = 87,
+        UserDelete = 88,
+        UserUndelete = 89,
+        UserRename = 90,
+        UserSetPassword = 91,
+        UserSetPicture = 92,
+        UserGetPicture = 93,
+        UserSetEmail = 94,
+        UserSetGroup = 95,
+        UserCredentialsValidate = 96,
+        UserNegativeBalanceEnable = 97,
+        UserLogin = 98,
+        UserGuestLogin =215,
+        UserMove = 218,
+        UserLogout = 99,
+        UserDisable = 100,
+        UserSetSmartCardId = 101,
+        UserPersonalInfoRequest = 247,
+        UserGuestReserve = 220,
+        UserBillingOptionSet=260,
+        #endregion
+
+        #region USER NOTE
+
+        UserNoteGet = 102,
+        UserNoteAdd = 103,
+        UserNoteUpdate = 104,
+        UserNoteRemove = 105,
+
         #endregion
 
         #region USER OPERATOR
-        UserOperatorGet,
-        UserOperatorCreate,
-        UserOperatorUpdate,
-        UserOperatorRemove,
-        UserOperatorDelete, 
-        UserOperatorSetPassword,
+        UserOperatorGet = 106,
+        UserOperatorCreate = 107,
+        UserOperatorUpdate = 108,
+        UserOperatorRemove = 109,
+        UserOperatorDelete = 110,
+        UserOperatorSetPassword = 111,
         #endregion
 
         #region PLUGINLIB
-        PluginLibGet,
-        PluginLibUpdate, 
-        PluginLibGetFiles,
+        PluginLibGet = 112,
+        PluginLibUpdate = 113,
+        PluginLibGetFiles = 114,
         #endregion
 
         #region VARIABLE
-        VariableGet,
-        VariableAdd,
-        VariableUpdate,
-        VariableRemove, 
+        VariableGet = 115,
+        VariableAdd = 116,
+        VariableUpdate = 117,
+        VariableRemove = 118,
         #endregion
 
         #region MAPPING
-        MappingGet,
-        MappingAdd,
-        MappingUpdate,
-        MappingRemove,
+        MappingGet = 119,
+        MappingAdd = 120,
+        MappingUpdate = 121,
+        MappingRemove = 122,
         #endregion
 
         #region ICON
-        IconGet,
-        IconAdd,
-        IconUpdate,
-        IconRemove,
+        IconGet = 123,
+        IconAdd = 124,
+        IconUpdate = 125,
+        IconRemove = 126,
         #endregion
 
         #region CONFIGURATION
-        ConfigurationGet,
-        ConfigurationSet,
-        LanguageGet,
-        SkinGet,
-        SystemLicenseGet,
+        ConfigurationGet = 127,
+        ConfigurationSet = 128,
+        LanguageGet = 129,
+        SkinGet = 130,
+        SystemLicenseGet = 131,
         #endregion        
 
         #region TASK
-        TaskGet,
-        TaskGetById,
-        TaskAdd,
-        TaskRemove,
-        TaskUpdate,
+        TaskGet = 132,
+        TaskGetById = 133,
+        TaskAdd = 134,
+        TaskRemove = 135,
+        TaskUpdate = 136,
         #endregion
 
         #region CLIENT TASK
-        ClientTaskGet,
-        ClientTaskAdd,
-        ClientTaskRemove,
-        ClientTaskUpdate,
+        ClientTaskGet = 137,
+        ClientTaskAdd = 138,
+        ClientTaskRemove = 139,
+        ClientTaskUpdate = 140,
         #endregion
 
         #region APP EXE TASK
-        AppExeTaskGet,
-        AppExeTaskAdd,
-        AppExeTaskRemove,
-        AppExeTaskUpdate, 
+        AppExeTaskGet = 141,
+        AppExeTaskAdd = 142,
+        AppExeTaskRemove = 143,
+        AppExeTaskUpdate = 144,
         #endregion
 
-        MonetaryUnitAdd,
-        MonetaryUnitUpdate,
-        MonetratyUnitRemove,
-        MonetraryUnitGet,
+        #region MONETARY UNIT
+        MonetaryUnitAdd = 145,
+        MonetaryUnitUpdate = 146,
+        MonetratyUnitRemove = 147,
+        MonetraryUnitGet = 148,
+        #endregion
 
-        TaxGet,
-        TaxAdd,
-        TaxUpdate,
-        TaxRemove,
+        #region TAX
+        TaxGet = 149,
+        TaxAdd = 150,
+        TaxUpdate = 151,
+        TaxRemove = 152,
+        #endregion
 
-        ProductGroupGet,
-        ProductGroupAdd,
-        ProductGroupUpdate,
-        ProductGroupRemove,
+        #region PRODUCT GROUP
+        ProductGroupGet = 153,
+        ProductGroupAdd = 154,
+        ProductGroupUpdate = 155,
+        ProductGroupRemove = 156,
+        #endregion
 
-        ProductGet,
-        ProductGetBasic,
-        ProductAdd,
-        ProductUpdate,
-        ProductUpdateBasic, 
+        #region PRODUCT
+        ProductGet = 157,
+        ProductGetBasic = 158,
+        ProductAdd = 159,
+        ProductUpdate = 160,
+        ProductUpdateBasic = 161,
+        ProductPrioritySet = 217,
+        #endregion
 
-        BillProfileGet,
-        BillProfileAdd,
-        BillPorfileUpdate,
-        BillProfileRemove,
+        #region BILL PROFILE
+        BillProfileGet = 162,
+        BillProfileAdd = 163,
+        BillPorfileUpdate = 164,
+        BillProfileRemove = 165,
+        #endregion
 
-        PaymentMethodGet,
-        PaymentMethodAdd,
-        PaymentMethodUpdate,
-        PaymentMethodRemove,
+        #region PAYMENT METHOD
+        PaymentMethodGet = 166,
+        PaymentMethodAdd = 167,
+        PaymentMethodUpdate = 168,
+        PaymentMethodRemove = 169,
+        #endregion
 
-        UserBalanceGet,
-        UserGetMoneyForTime,
-        UserGetTimeForMoney,
-        UserProductTimeGet,
-        UserSessionGet,
-        UserCloseBalance,
+        #region USER BALANCE
+        UserBalanceGet = 170,
+        UserGetMoneyForTime = 171,
+        UserGetTimeForMoney = 172,
+        UserProductTimeGet = 173,       
+        UserCloseBalance = 175,
+        #endregion
 
-        UsageSessionInvoiceActive,
+        #region USAGE SESSION
+        UsageSessionInvoiceActive = 176, 
+        #endregion
 
-        DepositTransactionGet,
-        DepositBalanceGet,
-        DepositAdd,
-        DepositWithdraw,
-        DepositPaymentGet,
+        #region DEPOSIT
+        DepositTransactionGet = 177,
+        DepositBalanceGet = 178,
+        DepositAdd = 179,
+        DepositWithdraw = 180,
+        DepositPaymentGet = 181,
+        #endregion
 
-        PointsGetBalance,
+        #region POINTS
+        PointsGetBalance = 182, 
+        #endregion
 
-        StockTransactionGet,
-        StockAdd,
-        StockRemove,
-        StockSet,
-        StockGet,
+        #region STOCK
+        StockTransactionGet = 183,
+        StockAdd = 184,
+        StockRemove = 185,
+        StockSet = 186,
+        StockGet = 187,
+        StockLogicalGet =216,
+        #endregion
 
-        ProductOrderGet,
-        ProductOrderCancel,
-        ProductOrderInvoice,
+        #region PRODUCT ORDER
+        ProductOrderGet = 188,
+        ProductOrderCancel = 189,
+        ProductOrderInvoice = 190, 
+        #endregion
 
-        InvoiceGet,
-        InvoicePaymentAdd,
-        InvoicePaymentGet,
+        #region INVOICE
+        InvoiceGet = 191,
+        InvoicePaymentAdd = 192,
+        InvoicePaymentGet = 193,
+        InvoiceVoid=258,
+        #endregion
 
-        SettingGet,
-        SettingSet,
+        #region SETTING
+        SettingGet = 194,
+        SettingSet = 195, 
+        #endregion
 
-        AttributeGet,
-        AttributeAdd,
-        AttributeUpdate,
-        AttributeRemove,
+        #region ATTRIBUTE
+        AttributeGet = 196,
+        AttributeAdd = 197,
+        AttributeUpdate = 198,
+        AttributeRemove = 199, 
+        #endregion
 
-        UserAttributeGet,
-        UserAttributeGetValue,
-        UserAttributeSetValue,
-        UserAttributeRemove,
+        #region USER ATTRIBUTE
+        UserAttributeGet = 200,
+        UserAttributeGetValue = 201,
+        UserAttributeSetValue = 202,
+        UserAttributeRemove = 203,
+        #endregion
 
-        EntityMarkDeleted,
+        #region PRESET TIME SALE
+        PresetTimeSaleGet = 205,
+        PresetTimeSaleAdd = 206,
+        PresetTimeSaleUpdate = 207,
+        PresetTimeSaleRemove = 208, 
+        #endregion
+
+        #region PRESET TIME MONEY
+        PresetTimeSaleMoneyGet = 209,
+        PresetTimeSaleMoneyAdd = 210,
+        PresetTimeSaleMoneyUpdate = 211,
+        PresetTimeSaleMoneyRemove = 212, 
+        #endregion
+
+        #region ENTITIES
+        EntityMarkDeleted = 204,
+        EntityCount = 213, 
+        #endregion
+
+        ManagerModuleInfoGet=214,
+
+        ShiftStart=221,
+        ShiftEnd=222,
+        ShiftGetActiveRegister=224,
+        ShiftGetActive=225,
+        ShiftLock = 228,
+        ShiftUnlock = 229,   
+        ShiftInfoGet = 234,
+
+        ShiftSummaryGet=227,
+        ShiftReportGet=235,
+        SaleSummaryReportGet =236,
+        SaleReportGet = 255,
+
+        RegisterGet = 230,
+        RegisterAdd = 231,
+        RegisterUpdate = 232,
+        RegisterGetCurrent = 226,
+
+        WakeOnLan =237,
+
+        AssetTypeAdd=238,
+        AssetTypeUpdate=239,
+        AssetTypeRemove=240,
+        AssetTypeGet =246,
+
+        AssetGet=252,
+        AssetAdd=241,
+        AssetUpdate=242,
+        AssetRemove = 243,
+
+        AssetCheckIn=244,
+        AssetCheckInByUser=250,
+        AssetCheckOut=245,
+        AssetInfoGet = 249,
+
+        AssetTransactionGet=248,
+
+        LicenseReservationGet=256,
+        LicenseKeyReservationInfoGet=257,
+
+
+        //max 261
     }
     #endregion
 
@@ -906,8 +852,19 @@ namespace SharedLib.Commands
         UserChangeEvent = 3,
         UserStateChangeEvent = 4,
         LogChangedEvent = 6,
-        EntityEvent=7,
-        UserBalanceEvent=8,
+        EntityEvent = 7,
+        UserBalanceEvent = 8,
+        UserSessionChangeEvent = 9,
+        EventBatch =10,
+        UsageSessionEvent=11,
+    }
+    #endregion
+
+    #region ServiceToClient
+    public enum ServiceToClientOpType
+    {
+        UserBalanceEvent = 0,
+        EntityEvent =1,
     }
     #endregion
 

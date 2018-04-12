@@ -11,8 +11,7 @@ namespace System.ComponentModel.DataAnnotations
             if (value == null)
                 return false;
 
-            IPAddress ip;
-            return IPAddress.TryParse(value.ToString(), out ip) && ip.ToString().CompareTo(value) == 0 && ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork;
+            return IPAddress.TryParse(value.ToString(), out IPAddress ip) && ip.ToString().CompareTo(value) == 0 && ip.AddressFamily == Net.Sockets.AddressFamily.InterNetwork;
         }
     }
     #endregion

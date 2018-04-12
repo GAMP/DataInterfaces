@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SharedLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,8 @@ namespace Manager.ViewModels
     /// </summary>
     public interface IUserMemberViewModel : IUserViewModel
     {
+        #region PROPERTIES
+        
         /// <summary>
         /// Gets or sets user group id.
         /// </summary>
@@ -39,6 +42,33 @@ namespace Manager.ViewModels
         /// <summary>
         /// Gets if negative balance allowed.
         /// </summary>
-        bool IsNegativeBalanceAllowed { get; }
+        bool? IsNegativeBalanceAllowed { get; }
+
+        /// <summary>
+        /// Gets user session state.
+        /// </summary>
+        SessionState SessionState { get; }
+
+        /// <summary>
+        /// Gets total user session span.
+        /// </summary>
+        double SessionSpan { get; }
+
+        /// <summary>
+        /// Gets total user session active span.
+        /// </summary>
+        double SessionActiveSpan { get; } 
+
+        /// <summary>
+        /// Gets current user session slot.
+        /// </summary>
+        int? Slot { get; }
+
+        /// <summary>
+        /// Gets if user represents an guest.
+        /// </summary>
+        bool IsGuest { get; }
+
+        #endregion
     }
 }

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using SharedLib.Commands;
 
 namespace SharedLib.Dispatcher
@@ -16,12 +13,13 @@ namespace SharedLib.Dispatcher
         /// <summary>
         /// Occurs on operation update.
         /// </summary>
-        event OperationUpdateDelegate OperationUpdate;
+        event EventHandler<OperationUpdateArgs> OperationUpdate;
 
         /// <summary>
         /// Occurs on operation state change.
         /// </summary>
-        event StateChangeDelegate StateChange;
+        event EventHandler<OperationStateEventArgs> StateChange;
+
         #endregion
 
         #region PROPERTIES
@@ -74,7 +72,7 @@ namespace SharedLib.Dispatcher
         /// <summary>
         /// Updates operation with binary data.
         /// </summary>
-        /// <param name="data"></param>
+        /// <param name="data">Byte array parameters.</param>
         void Update(byte[] data);
 
         /// <summary>
@@ -89,11 +87,19 @@ namespace SharedLib.Dispatcher
         void RaiseOperationUpdate(params object[] param);
 
         /// <summary>
+        /// Raises operation update event.
+        /// </summary>
+        /// <param name="paramBuffer">Parameter buffer.</param>
+        /// <param name="offset">Start offset.</param>
+        /// <param name="count">Count.</param>
+        void RaiseOperationUpdate(byte[] paramBuffer, int offset, int count);
+
+        /// <summary>
         /// Raises state change event and sets operation state.
         /// </summary>
         /// <param name="state">New state.</param>
         /// <param name="param">Parameters.</param>
-        void RaiseStateUpdate(OperationState state, params object[] param);
+        void RaiseOperationStateChange(OperationState state, params object[] param);
 
         /// <summary>
         /// Raises operation update with parameter/
@@ -106,7 +112,7 @@ namespace SharedLib.Dispatcher
         /// </summary>
         /// <param name="state">New state.</param>
         /// <param name="param">Parameter instance.</param>
-        void RaiseStateUpdateWithParam(OperationState state, object param);
+        void RaiseOperationStateChangeWithParam(OperationState state, object param);
 
         #endregion
     }

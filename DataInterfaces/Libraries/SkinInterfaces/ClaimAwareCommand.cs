@@ -47,9 +47,7 @@ namespace SkinInterfaces
 
             foreach (var claimRequest in claimAttributes)
             {
-                ClaimsPrincipal currentPrincipal = Thread.CurrentPrincipal as ClaimsPrincipal;
-
-                if (currentPrincipal != null)
+                if (Thread.CurrentPrincipal is ClaimsPrincipal currentPrincipal)
                 {
                     isAuthorized = claimRequest.Action == SecurityAction.Demand ? currentPrincipal.HasClaim(claimRequest.Resource, claimRequest.Operation) : true;
                 }

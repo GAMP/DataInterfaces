@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using IntegrationLib;
 using SharedLib;
 
 namespace IntegrationLib
 {
-    #region IApplicationLicense
     /// <summary>
     /// Application license interface.
     /// </summary>
@@ -70,6 +65,18 @@ namespace IntegrationLib
         }
 
         /// <summary>
+        /// Gets or sets license profile name.
+        /// </summary>
+        string LicenseProfileName
+        {
+            get; set;
+        }
+
+        #endregion
+
+        #region FUNCTIONS
+
+        /// <summary>
         /// Casts the license key to specified class type.
         /// </summary>
         /// <typeparam name="T">Class type.</typeparam>
@@ -78,5 +85,4 @@ namespace IntegrationLib
 
         #endregion
     }
-    #endregion
 }

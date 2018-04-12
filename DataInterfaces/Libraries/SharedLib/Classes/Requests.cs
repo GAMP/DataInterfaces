@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Net;
 using SharedLib.Applications;
 
 namespace SharedLib
 {
-    #region Delegates
+    #region DELEGATES
     public delegate string GetMacAddressDelegate();
     public delegate IPAddress GetIPAddressDelegate(IPVersion version);
     public delegate byte[] CaptureWindowImageDelegate(IntPtr windowHandle, bool includeCursor);
     #endregion
 
+    #region SHAREDFUNCTIONS
     /// <summary>
     /// Shared functions class.
     /// </summary>
@@ -172,5 +170,6 @@ namespace SharedLib
         }
 
         #endregion
-    }
+    } 
+    #endregion
 }

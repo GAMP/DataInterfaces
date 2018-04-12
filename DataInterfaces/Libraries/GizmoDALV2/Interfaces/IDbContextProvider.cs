@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GizmoDALV2
 {
-    public interface IDbContextProvider<TContext>
+    public interface IDbContextProvider<TContext> where TContext : IDisposable
     {
         /// <summary>
         /// Gets database context.

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace SharedLib.Dispatcher
 {
@@ -15,7 +12,7 @@ namespace SharedLib.Dispatcher
         public static void ThrowDispatcherNull(this IMessageDispatcher dispatcher)
         {
             if (dispatcher == null)
-                throw new ArgumentNullException(nameof(dispatcher), "Dispatcher instance may not be null");
+                throw new ArgumentNullException(nameof(dispatcher), "Dispatcher instance may not be null.");
         }
 
         /// <summary>

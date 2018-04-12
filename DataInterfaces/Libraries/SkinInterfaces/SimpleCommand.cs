@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Input;
-using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 using System.Windows;
-using System.Threading.Tasks;
 
 namespace SkinInterfaces
 {
@@ -125,8 +119,7 @@ namespace SkinInterfaces
         {
             try
             {
-                if (executeMethod != null)
-                    executeMethod(parameter);
+                executeMethod?.Invoke(parameter);
 
                 WeakActionEvent<object> completedHandler = CommandCompleted;
                 if (completedHandler != null)
@@ -166,7 +159,7 @@ namespace SkinInterfaces
         {
             var handler = this.CanExecuteChanged;
             if (handler != null)
-                Application.Current.Dispatcher.BeginInvoke(handler, this, EventArgs.Empty);
+                Application.Current?.Dispatcher.BeginInvoke(handler, this, EventArgs.Empty);
         }
 
         #endregion

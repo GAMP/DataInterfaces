@@ -121,22 +121,14 @@ namespace Localization.Engine
         {
             get
             {
-                if (String.IsNullOrWhiteSpace(this.language))
-                {
+                if (string.IsNullOrWhiteSpace(this.language))
                     this.language = DefaultLanguage;
-                }
                 return this.language;
             }
 
             set
             {
-                // the cultureinfo cannot contains a null reference
-                if (value == null)
-                {
-                    throw new ArgumentNullException("value");
-                }
-
-                this.language = value;
+                this.language = value ?? throw new ArgumentNullException(nameof(this.Language));
 
                 //raise language change
                 this.RaiseLanguageChanged();
@@ -181,10 +173,10 @@ namespace Localization.Engine
             set
             {
                 this.embededPath = value;
-                
+
                 //reset default dictionary
                 this.DefaultDictionary = null;
-                
+
                 //raise language change
                 this.RaiseLanguageChanged();
             }
@@ -198,9 +190,7 @@ namespace Localization.Engine
             get
             {
                 if (this.dictionaries == null)
-                {
                     this.dictionaries = new Dictionary<string, Dictionary<string, object>>(StringComparer.InvariantCultureIgnoreCase);
-                }
                 return this.dictionaries;
             }
         }
@@ -218,9 +208,7 @@ namespace Localization.Engine
                     {
                         #region Validate
                         if (string.IsNullOrWhiteSpace(this.DefaultResourcePath))
-                        {
-                            throw new ArgumentNullException("DefaultResourcePath", "DefaultResourcePath not set.");
-                        }
+                            return new Dictionary<string, object>();
                         #endregion
 
                         #region Get default dictionary
@@ -228,10 +216,11 @@ namespace Localization.Engine
                         var exeAssembly = Assembly.GetEntryAssembly();
 
                         //open default resource stream in current assembly
-                        Stream defaultStream = exeAssembly.GetManifestResourceStream(this.DefaultResourcePath);
-
-                        //read embeded resource
-                        this.defaultDictionary = LocalizeDictionary.LoadEmbededDictionary(defaultStream);
+                        using (Stream defaultStream = exeAssembly.GetManifestResourceStream(this.DefaultResourcePath))
+                        {
+                            //read embeded resource
+                            this.defaultDictionary = LocalizeDictionary.TryLoadEmbededDictionary(defaultStream);
+                        }
 
                         //throw exception if default dictionary cannot be loaded
                         if (this.defaultDictionary == null) { throw new ArgumentNullException("Default dictionary may not be null."); }
@@ -445,13 +434,14 @@ namespace Localization.Engine
             }
         }
 
+        /// <summary>
+        /// Raises language change event.
+        /// </summary>
         private void RaiseLanguageChanged()
         {
-            if (this.OnLanguageChanged != null)
-            {
-                this.OnLanguageChanged();
-            }
+            this.OnLanguageChanged?.Invoke();
         }
+
         #endregion
 
         public TType GetLocalizedObject<TType>(string resourceKey) where TType : class
@@ -467,11 +457,11 @@ namespace Localization.Engine
                 {
                     if (resourceKey == null)
                     {
-                        throw new ArgumentNullException("resourceKey");
+                        throw new ArgumentNullException(nameof(resourceKey));
                     }
                     else if (resourceKey == string.Empty)
                     {
-                        throw new ArgumentException("resourceKey is empty", "resourceKey");
+                        throw new ArgumentException($"{nameof(resourceKey)} is empty", nameof(resourceKey));
                     }
                 }
             }
@@ -512,14 +502,14 @@ namespace Localization.Engine
             else
             {
                 return "UNLOCALIZED_RESOURCE" as TType;
-            }           
+            }
         }
 
         private IDictionary<string, object> GetResourceDictionary(string resourceDictionary)
         {
             if (!this.ResourceDictionaries.ContainsKey(resourceDictionary))
             {
-                string fileSearchPath = String.IsNullOrWhiteSpace(this.SearchPath) ? Environment.CurrentDirectory : this.SearchPath;
+                string fileSearchPath = string.IsNullOrWhiteSpace(this.SearchPath) ? Environment.CurrentDirectory : this.SearchPath;
                 string filePath = resourceDictionary + this.FileExtension;
                 string fullPath = Path.Combine(fileSearchPath, resourceDictionary + this.FileExtension);
 
@@ -527,7 +517,7 @@ namespace Localization.Engine
                 if (File.Exists(fullPath))
                 {
                     //load dictionary
-                    var loadedDictionary = LocalizeDictionary.LoadDictionary(fullPath);
+                    var loadedDictionary = LocalizeDictionary.TryLoadDictionary(fullPath);
 
                     //return default
                     if (loadedDictionary != null)
@@ -549,73 +539,67 @@ namespace Localization.Engine
             }
         }
 
-        private static Dictionary<string, object> LoadDictionary(string resourceDictionaryFile)
+        #region STATIC FUNCTIONS
+
+        private static Dictionary<string, object> TryLoadDictionary(string resourceFileName)
         {
-            Stream resourceStream = null;
+            if (string.IsNullOrWhiteSpace(resourceFileName))
+                throw new ArgumentNullException(nameof(resourceFileName));
+
             try
             {
                 var loadedDictionary = new Dictionary<string, object>(StringComparer.InvariantCultureIgnoreCase);
-
-                resourceStream = File.OpenRead(resourceDictionaryFile);
-
-                ResXResourceReader r = new ResXResourceReader(resourceStream);
-
-                var n = r.GetEnumerator();
-
-                while (n.MoveNext())
+                using (var resourceStream = File.OpenRead(resourceFileName))
                 {
-                    if (!loadedDictionary.ContainsKey(n.Key.ToString()))
+                    using (var resourceReader = new ResXResourceReader(resourceStream))
                     {
-                        loadedDictionary.Add(n.Key.ToString(), n.Value);
+                        var enumerator = resourceReader.GetEnumerator();
+
+                        while (enumerator.MoveNext())
+                        {
+                            if (!loadedDictionary.ContainsKey(enumerator.Key.ToString()))
+                                loadedDictionary.Add(enumerator.Key.ToString(), enumerator.Value);
+                        }
                     }
                 }
-
-                r.Close();
 
                 return loadedDictionary;
             }
             catch
             {
                 return null;
-            }
-            finally
-            {
-                if (resourceStream != null)
-                {
-                    resourceStream.Close();
-                }
             }
         }
 
-        private static Dictionary<string, object> LoadEmbededDictionary(Stream stream)
+        private static Dictionary<string, object> TryLoadEmbededDictionary(Stream resourceStream)
         {
+            if (resourceStream == null)
+                throw new ArgumentNullException(nameof(resourceStream));
+
             try
             {
                 var loadedDictionary = new Dictionary<string, object>(StringComparer.InvariantCultureIgnoreCase);
-                ResourceReader r = new ResourceReader(stream);
-                var n = r.GetEnumerator();
-                while (n.MoveNext())
+
+                using (var resourceReader = new ResourceReader(resourceStream))
                 {
-                    if (!loadedDictionary.ContainsKey(n.Key.ToString()))
+                    var enumerator = resourceReader.GetEnumerator();
+
+                    while (enumerator.MoveNext())
                     {
-                        loadedDictionary.Add(n.Key.ToString(), n.Value);
+                        if (!loadedDictionary.ContainsKey(enumerator.Key.ToString()))
+                            loadedDictionary.Add(enumerator.Key.ToString(), enumerator.Value);
                     }
                 }
-                r.Close();
+
                 return loadedDictionary;
             }
             catch
             {
                 return null;
             }
-            finally
-            {
-                if (stream != null)
-                {
-                    stream.Close();
-                }
-            }
-        }        
+        }
+
+        #endregion
 
         #region WeakCultureChangedEventManager
         /// <summary>

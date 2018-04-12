@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace System.ComponentModel
+﻿namespace System.ComponentModel
 {
     /// <summary>
     /// Dynamic object interface.
@@ -12,6 +6,8 @@ namespace System.ComponentModel
     /// </summary>
     public interface IDynamicPropertyObject
     {
+        #region FUNCTIONS
+        
         /// <summary>
         /// Adds a new property to the class.
         /// </summary>
@@ -49,6 +45,8 @@ namespace System.ComponentModel
         /// <exception cref="ArgumentException">
         /// When property value type and specified value types dont match.
         /// </exception>
-        void SetPropertyValue<T>(string propertyName, T propertyValue);
+        void SetPropertyValue<T>(string propertyName, T propertyValue); 
+
+        #endregion
     }
 }

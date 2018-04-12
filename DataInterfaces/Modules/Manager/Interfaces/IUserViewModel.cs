@@ -13,6 +13,8 @@ namespace Manager.ViewModels
     /// </summary>
     public interface IUserViewModel : INotifyPropertyChanged
     {
+        #region PROPERTIES
+
         /// <summary>
         /// Gets user id.
         /// </summary>
@@ -92,5 +94,12 @@ namespace Manager.ViewModels
         /// Gets user SmartCard UID.
         /// </summary>
         string SmartCardUID { get; }
+
+        /// <summary>
+        /// Gets users identification.
+        /// </summary>
+        string Identification { get; }
+
+        #endregion
     }
 }

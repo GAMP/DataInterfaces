@@ -14,7 +14,10 @@ namespace ServerService
     #region ServicePluginBase
     [PartNotDiscoverable()]
     [InheritedExport(typeof(IServicePlugin))]
-    public abstract class ServicePluginBase : IServicePlugin, IPartImportsSatisfiedNotification,IDisposable
+    public abstract class ServicePluginBase :
+        IServicePlugin, 
+        IPartImportsSatisfiedNotification,
+        IDisposable
     {
         #region IServicePlugin
 

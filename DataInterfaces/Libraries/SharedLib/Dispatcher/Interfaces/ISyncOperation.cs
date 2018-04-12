@@ -1,5 +1,4 @@
-﻿using System;
-using SharedLib.Commands;
+﻿using SharedLib.Commands;
 using System.Threading.Tasks;
 using System.Threading;
 
@@ -8,7 +7,7 @@ namespace SharedLib.Dispatcher
     #region ISyncOperation
     public interface ISyncOperation
     {
-        #region Functions
+        #region FUNCTIONS
 
         /// <summary>
         /// Starts the operation.
@@ -80,9 +79,33 @@ namespace SharedLib.Dispatcher
         /// <param name="param">Update parameters.</param>
         Task SendUpdateAsync(params object[] param);
 
+        /// <summary>
+        /// Sends operation update.
+        /// </summary>
+        /// <param name="param">Update parameters.</param>
         void SendUpdate(object param);
 
+        /// <summary>
+        /// Sends operation update asynchronously.
+        /// </summary>
+        /// <param name="param">Update parameters.</param>
         Task SendUpdateAsync(object param);
+
+        /// <summary>
+        /// Sends operation update.
+        /// </summary>
+        /// <param name="buffer">Parameters buffer.</param>
+        /// <param name="offset">Start offset.</param>
+        /// <param name="count">Count.</param>
+        void SendUpdate(byte[] buffer, int offset, int count);
+
+        /// <summary>
+        /// Sends operation update asynchronously.
+        /// </summary>
+        /// <param name="buffer">Parameters buffer.</param>
+        /// <param name="offset">Start offset.</param>
+        /// <param name="count">Count.</param>
+        Task SendUpdateAsync(byte[] buffer, int offset, int count);
 
         /// <summary>
         /// Waits for operation completion.
@@ -135,7 +158,7 @@ namespace SharedLib.Dispatcher
 
         #endregion
 
-        #region Properties
+        #region PROPERTIES
 
         /// <summary>
         /// Gets or sets the operation functions timeout.
@@ -149,10 +172,13 @@ namespace SharedLib.Dispatcher
         IDispatcherCommand Command { get; }
 
         /// <summary>
-        /// Gets the instance of last response data received.
+        /// Gets data array instance of last update received.
         /// </summary>
         object[] Data { get; }
 
+        /// <summary>
+        /// Gets data instance of last update received.
+        /// </summary>
         object DataObject { get; }
 
         /// <summary>
@@ -184,7 +210,6 @@ namespace SharedLib.Dispatcher
         /// Gets if operation was previously started.
         /// </summary>
         bool IsStarted { get; }
-
 
         #endregion
     }

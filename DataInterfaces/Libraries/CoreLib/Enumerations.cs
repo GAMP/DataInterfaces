@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using SharedLib;
 
 namespace CoreLib
@@ -86,17 +83,13 @@ namespace CoreLib
     public enum KeyValueSource
     {
         /// <summary>
-        /// Indicates file source.
-        /// </summary>
-        File,
-        /// <summary>
         /// Indicates registry source.
         /// </summary>
         Registry,
         /// <summary>
         /// Indicates memory source.
         /// </summary>
-        Memory,
+        Stream,
     }
     #endregion
 

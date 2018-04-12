@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Reflection;
-using System.Linq;
 using Localization;
 
 namespace SharedLib
@@ -117,6 +114,23 @@ namespace SharedLib
     }
     #endregion
 
+    #region DialogType
+    /// <summary>
+    /// Dialogue types.
+    /// <remarks>
+    /// This is generaly used in view models to mark the current dialogue type.
+    /// </remarks>
+    /// </summary>
+    [Obsolete()]
+    [Serializable()]
+    public enum DialogType
+    {
+        None = 0,
+        Add = 1,
+        Edit = 2,
+    }
+    #endregion
+
     #endregion
 
     #region VIEWMODELS
@@ -140,23 +154,7 @@ namespace SharedLib
         Working = 1,
         Ready = 2,
     }
-    #endregion
-
-    #region DialogType
-    /// <summary>
-    /// Dialogue types.
-    /// <remarks>
-    /// This is generaly used in view models to mark the current dialogue type.
-    /// </remarks>
-    /// </summary>
-    [Serializable()]
-    public enum DialogType
-    {
-        None = 0,
-        Add = 1,
-        Edit = 2,
-    }
-    #endregion
+    #endregion    
 
     #endregion
 
@@ -199,7 +197,7 @@ namespace SharedLib
     }
     #endregion
 
-    #region KnownFolderTypes
+    #region KNOWNFOLDERTYPES
     /// <summary>
     /// This enumerato is used to combine multiple special folders to unique value.
     /// </summary>
@@ -213,47 +211,47 @@ namespace SharedLib
         /// <summary>
         /// Desktop flag.
         /// </summary>
-        [GUIDAttribute("B4BFCC3A-DB2C-424C-B029-7FE99A87C641")]
+        [GUID("B4BFCC3A-DB2C-424C-B029-7FE99A87C641")]
         [SpecialFolderAttribute(Environment.SpecialFolder.DesktopDirectory)]
         Desktop = 1,
         /// <summary>
         /// Downloads flag.
         /// </summary>
-        [GUIDAttribute("374DE290-123F-4565-9164-39C4925E467B")]
+        [GUID("374DE290-123F-4565-9164-39C4925E467B")]
         Downloads = 2,
         /// <summary>
         /// Favorites flag.
         /// </summary>
-        [GUIDAttribute("1777F761-68AD-4D8A-87BD-30B759FA33DD")]
+        [GUID("1777F761-68AD-4D8A-87BD-30B759FA33DD")]
         [SpecialFolderAttribute(Environment.SpecialFolder.Favorites)]
         Favorites = 4,
         /// <summary>
         /// My Music flag.
         /// </summary>
-        [GUIDAttribute("4BD8D571-6D19-48D3-BE97-422220080E43")]
+        [GUID("4BD8D571-6D19-48D3-BE97-422220080E43")]
         [SpecialFolderAttribute(Environment.SpecialFolder.MyMusic)]
         Music = 8,
         /// <summary>
         /// My pictures flag.
         /// </summary>
-        [GUIDAttribute("33E28130-4E1E-4676-835A-98395C3BC3BB")]
+        [GUID("33E28130-4E1E-4676-835A-98395C3BC3BB")]
         [SpecialFolderAttribute(Environment.SpecialFolder.MyPictures)]
         Pictures = 16,
         /// <summary>
         /// My videos flag.
         /// </summary>
-        [GUIDAttribute("18989B1D-99B5-455B-841C-AB7C74E4DDFC")]
+        [GUID("18989B1D-99B5-455B-841C-AB7C74E4DDFC")]
         [SpecialFolderAttribute(Environment.SpecialFolder.MyVideos)]
         Videos = 32,
         /// <summary>
         /// Saved games flag.
         /// </summary>
-        [GUIDAttribute("4C5C32FF-BB9D-43b0-B5B4-2D72E54EAAA4")]
+        [GUID("4C5C32FF-BB9D-43b0-B5B4-2D72E54EAAA4")]
         SavedGames = 64,
         /// <summary>
         /// Personal flag (Equals MyDocuments).
         /// </summary>
-        [GUIDAttribute("FDD39AD0-238F-46AF-ADB4-6C85480369C7")]
+        [GUID("FDD39AD0-238F-46AF-ADB4-6C85480369C7")]
         [SpecialFolderAttribute(Environment.SpecialFolder.MyDocuments)]
         Personal = 128,
         /// <summary>
@@ -270,7 +268,7 @@ namespace SharedLib
     }
     #endregion
 
-    #region DesktopItemType
+    #region DESKTOPITEMTYPE
     /// <summary>
     /// Desktop item type enumeration.
     /// </summary>
@@ -287,43 +285,7 @@ namespace SharedLib
     }
     #endregion
 
-    #region ModuleEnum
-    [Flags()]
-    public enum ModuleEnum
-    {
-        Unknown = 0,
-        Manager = 1,
-        Client = 2,
-        Service = 4,
-        Any = Manager | Client | Service,
-    }
-    #endregion
-
-    #region ModuleScopes
-    /// <summary>
-    /// Application module type scope enumeration.
-    /// </summary>
-    [Flags()]
-    public enum ModuleScopes
-    {
-        None = 0,
-        Client = 1,
-        Server = 2,
-        Manager = 4,
-        Global = ModuleScopes.Client | ModuleScopes.Server | ModuleScopes.Manager,
-    }
-    #endregion
-
-    #region LicenseReservationType
-    [Flags]
-    public enum LicenseReservationType
-    {
-        FirstAvailable = 0,
-        OneFromEach = 1,
-    }
-    #endregion
-
-    #region LoginState
+    #region LOGINSTATE
     /// <summary>
     /// Login state enumeration.
     /// </summary>
@@ -357,7 +319,7 @@ namespace SharedLib
     }
     #endregion
 
-    #region ClientEventTypes
+    #region CLIENTEVENTTYPES
     /// <summary>
     /// Enumerator for the types of client events.
     /// </summary>
@@ -371,7 +333,7 @@ namespace SharedLib
     }
     #endregion
 
-    #region ContextExecutionState
+    #region CONTEXTEXECUTIONSTATE
     /// <summary>
     /// Execution context state enumeration.
     /// </summary>
@@ -497,7 +459,7 @@ namespace SharedLib
     }
     #endregion
 
-    #region ContainerItemEventType
+    #region CONTAINERITEMEVENTTYPE
     [Serializable()]
     public enum ContainerItemEventType
     {
@@ -523,7 +485,10 @@ namespace SharedLib
     }
     #endregion
 
-    #region LogoutAction
+    #region LOGOUTACTION
+    /// <summary>
+    /// Client logout action types.
+    /// </summary>
     public enum LogoutAction
     {
         NoAction = -1,
@@ -536,20 +501,7 @@ namespace SharedLib
     }
     #endregion
 
-    #region LoginUserActivity
-    /// <summary>
-    /// Represents client activity during user login or logout.
-    /// </summary>
-    public enum LoginUserActivity
-    {
-        None = 0,
-        SettingPersonalUserFile = 1,
-        DeletingUserStorage = 2,
-        TerminatingUserProcesses = 3,
-    }
-    #endregion
-
-    #region NotificationButtons
+    #region NOTIFICATIONBUTTONS
     public enum NotificationButtons
     {
         None = 0,
@@ -560,7 +512,21 @@ namespace SharedLib
     }
     #endregion
 
-    #region AgeRatingType
+    #region TIMELEFTWARNINGTYPE
+    [Flags()]
+    public enum TimeLeftWarningType
+    {
+        [Localized("TIME_LEFT_WARNING_TYPE_NONE")]
+        None = 0,
+        [Localized("TIME_LEFT_WARNING_TYPE_VISUAL")]
+        Visual = 1,
+        [Localized("TIME_LEFT_WARNING_TYPE_AUDIBLE")]
+        Audible = 2,
+        All = Visual | Audible
+    }
+    #endregion
+
+    #region AGERATINGTYPE
     public enum AgeRatingType
     {
         [Description("None")]
@@ -572,7 +538,7 @@ namespace SharedLib
         [Description("PEGI")]
         PEGI = 3,
     }
-    #endregion
+    #endregion    
 
     #region PEGI
     public enum PEGI
@@ -631,7 +597,7 @@ namespace SharedLib
     }
     #endregion
 
-    #region DurationRange
+    #region DURATIONRANGE
     public enum DurationRange
     {
         [Localized("PERIOD_TODAY")]
@@ -647,7 +613,7 @@ namespace SharedLib
     }
     #endregion
 
-    #region FilterResultDirection
+    #region FILTERRESULTDIRECTION
     public enum FilterResultDirection
     {
         [Localized("FILTER_TOP")]
@@ -657,7 +623,7 @@ namespace SharedLib
     }
     #endregion
 
-    #region StartupModuleActivity
+    #region STARTUPMODULEACTIVITY
     /// <summary>
     /// Shared Module activity enumeration.
     /// </summary>
@@ -715,7 +681,19 @@ namespace SharedLib
     }
     #endregion
 
-    #region LicenseStatus
+    #region LICENSERESERVATIONTYPE
+    /// <summary>
+    /// License reservation types.
+    /// </summary>
+    [Flags]
+    public enum LicenseReservationType
+    {
+        FirstAvailable = 0,
+        OneFromEach = 1,
+    }
+    #endregion
+
+    #region LICENSESTATUS
     /// <summary>
     /// License status enumeration.
     /// </summary>
@@ -732,7 +710,7 @@ namespace SharedLib
     }
     #endregion
 
-    #region IPVersion
+    #region IPVERSION
     public enum IPVersion
     {
         IPV4 = 0,
@@ -740,7 +718,7 @@ namespace SharedLib
     }
     #endregion
 
-    #region DriverType
+    #region DRIVERTYPE
     /// <summary>
     /// System driver type enumeration.
     /// </summary>
@@ -778,7 +756,7 @@ namespace SharedLib
     }
     #endregion
 
-    #region HostEventType
+    #region HOSTEVENTTYPE
     public enum HostEventType
     {
         /// <summary>
@@ -841,8 +819,8 @@ namespace SharedLib
         Variables,
         [Localized("CFG_SECTION_PLUGINS")]
         Plugins,
-        [Localized("CFG_SECTION_API")]
-        Api,
+        [Localized("CFG_SECTION_WEB")]
+        Web,
         [Localized("CFG_SECTION_NETWORK")]
         Network,
         [Localized("CFG_SECTION_DATABSE")]
@@ -873,8 +851,6 @@ namespace SharedLib
         Hosts,
         [Localized("CFG_SECTION_FINANCIAL")]
         Financial,
-        [Localized("CFG_SECTION_BILLING")]
-        Billing,
         [Localized("CFG_SECTION_MONETARY_UNITS")]
         MonetaryUnits,
         [Localized("CFG_SECTION_TAX")]
@@ -887,32 +863,34 @@ namespace SharedLib
         Currencies,
         [Localized("CFG_SECTION_BILLING_PROFILES")]
         BillingProfiles,
+        [Localized("CFG_SECTION_ATTRIBUTES")]
+        Attributes,
+        [Localized("CFG_SECTION_PRESETS")]
+        Presets,
+        [Localized("CFG_SECTION_PRIORITY")]
+        Priority,
+        [Localized("CFG_SECTION_REGISTERS")]
+        Registers,
+        [Localized("CFG_SECTION_ASSETS")]
+        Assets,
+        [Localized("CFG_SECTION_BUSINESS")]
+        Business,
     }
     #endregion
 
     #region DATABASETYPE
     public enum DatabaseType
     {
-        [CanUserAssign(true)]
+        [CanUserAssign(false)]
         MYSQL = 0,
         [CanUserAssign(true)]
-        MSSQL = 1,
-        [CanUserAssign(true)]
         MSSQLEXPRESS = 2,
+        [CanUserAssign(true)]
+        MSSQL = 1,
         [CanUserAssign(false)]
         LOCALDB = 3,
         [CanUserAssign(false)]
         SQLITE = 4,
-    }
-    #endregion
-
-    #region KNOWNDBSETTING
-    public enum KnownDbSetting
-    {
-        database_version,
-        end_time,
-        last_up_time,
-        start_time,
     }
     #endregion
 
@@ -951,15 +929,6 @@ namespace SharedLib
         /// </summary>
         [RoleAssignable(false)]
         Operator = 4
-    }
-    #endregion
-
-    #region IMAGETYPE
-    public enum ImageType
-    {
-        Application = 0,
-        Executable = 1,
-        VisualOptions = 2,
     }
     #endregion
 
@@ -1022,11 +991,18 @@ namespace SharedLib
         /// SmartCard UID Changed.
         /// </summary>
         SmartCardUID,
+        /// <summary>
+        /// Billing option.
+        /// </summary>
+        BillingOptions,
     }
     #endregion
 
-    #region ACTIONSOURCE
-    public enum ActionSource
+    #region USERSESSIONACTIONSOURCE
+    /// <summary>
+    /// User session action source types.
+    /// </summary>
+    public enum UserSessionActionSource
     {
         /// <summary>
         /// Function called by user.
@@ -1052,6 +1028,9 @@ namespace SharedLib
     #endregion
 
     #region HOSTPROPERTYTYPE
+    /// <summary>
+    /// Host property types.
+    /// </summary>
     public enum HostPropertyType
     {
         IpAddress = 0,
@@ -1078,7 +1057,56 @@ namespace SharedLib
     }
     #endregion
 
+    #region USERRESERVERESULT
+    public enum UserReserveResult
+    {
+        Sucess = 0,
+        Failed = 1,
+        InvalidUserGroupId = 2,
+        InUse = 3,
+        MaxReservationsReached = 4,
+        InvalidHost = 5,
+        InvalidSlot = 6,
+    }
+    #endregion
+
+    #region USERLOGOUTFLAGS
+    [Flags()]
+    public enum UserLogoutFlags
+    {
+        None = 0,
+        SupressLogoutAction = 1,
+    } 
+    #endregion
+
     #region STORABLE ENUMERATIONS
+
+    #region MODULEENUM
+    [Flags()]
+    public enum ModuleEnum
+    {
+        Unknown = 0,
+        Manager = 1,
+        Client = 2,
+        Service = 4,
+        Any = Manager | Client | Service,
+    }
+    #endregion
+
+    #region MODULESCOPES
+    /// <summary>
+    /// Application module type scope enumeration.
+    /// </summary>
+    [Flags()]
+    public enum ModuleScopes
+    {
+        None = 0,
+        Client = 1,
+        Server = 2,
+        Manager = 4,
+        Global = Client | Server | Manager,
+    }
+    #endregion    
 
     #region LOGCATEGORIES
     [Flags()]
@@ -1261,6 +1289,7 @@ namespace SharedLib
         None = 0,
         Applications = 1,
         Security = 2,
+        AgeRating = 4,
     }
     #endregion
 
@@ -1358,7 +1387,8 @@ namespace SharedLib
         MonitorChildren = 2,
         MultiRun = 4,
         KillChildren = 8,
-        CountAllInstances = 16
+        CountAllInstances = 16,
+        QuickLaunch =32,
     }
     #endregion
 
@@ -1447,7 +1477,7 @@ namespace SharedLib
         /// <summary>
         /// One time purchase.
         /// </summary>
-        OneTimePurchase=8192,
+        OneTimePurchase = 8192,
     }
     #endregion
 
@@ -1467,9 +1497,13 @@ namespace SharedLib
         None = 0,
         EnablePersonalStorage = 1,
         HideLogoutButton = 2,
-        DisallowManulaLogin = 4,
+        DisallowManualLogin = 4,
         GuestUse = 8,
         GuestUseOnly = 16,
+        /// <summary>
+        /// Enables or disables personal files.
+        /// </summary>
+        EnablePersonalFiles = 32,
     }
     #endregion
 
@@ -1483,14 +1517,18 @@ namespace SharedLib
         None = 0,
 
         /// <summary>
-        /// Enable credit limit.
-        /// </summary>
-        EnableCreditLimit = 1,
-
-        /// <summary>
         /// Enable per user credit limit.
         /// </summary>
         EnablePerUserCreditLimit = 2,
+    }
+    #endregion
+
+    #region TIMEPOINTAWARDOPTIONTYPE
+    public enum TimePointAwardOptionType
+    {
+        None = 0,
+        Time = 1,
+        Money = 2
     }
     #endregion
 
@@ -1632,7 +1670,8 @@ namespace SharedLib
         ExpiresAtLogout = 1,
         [Obsolete()]
         ExpiresAtDate = 2,
-        ExpireAfterDays = 4
+        ExpireAfterTime = 4,
+        ExpireAtDayTime =8,
     }
     #endregion
 
@@ -1654,6 +1693,18 @@ namespace SharedLib
         [Localized("EXPIRE_FROM_USE")]
         Use = 1
     }
+    #endregion
+
+    #region EXPIREAFTERTYPE
+    public enum ExpireAfterType
+    {
+        [Localized("DAY_PLURAL")]
+        Day,
+        [Localized("HOUR_PLURAL")]
+        Hour,
+        [Localized("MINUTE_PLURAL")]
+        Minute,
+    } 
     #endregion
 
     #region UNITOFMEASUREOPTIONTYPE
@@ -1768,24 +1819,29 @@ namespace SharedLib
     #region PAYMENTMETHODTYPE
     public enum PaymentMethodType
     {
+        Undefined = 0,
         /// <summary>
         /// Cash payment.
         /// </summary>
+        [Localized("PAYMENT_METHOD_CASH")]
         Cash = -1,
 
         /// <summary>
         /// Credit card payment.
         /// </summary>
+        [Localized("PAYMENT_METHOD_CREDIT_CARD")]
         CreditCard = -2,
 
         /// <summary>
         /// Deposit balance payment.
         /// </summary>
-        Balance = -3,
+        [Localized("PAYMENT_METHOD_DEPOSIT")]
+        Deposit = -3,
 
         /// <summary>
         /// Deposit points payment.
         /// </summary>
+        [Localized("PAYMENT_METHOD_POINTS")]
         Points = -4,
     }
     #endregion
@@ -1834,6 +1890,14 @@ namespace SharedLib
         /// Points redeem.
         /// </summary>
         Redeem = 1,
+        /// <summary>
+        /// Points set.
+        /// </summary>
+        Set = 2,
+        /// <summary>
+        /// Points credited.
+        /// </summary>
+        Credit=3,
     }
     #endregion
 
@@ -1847,7 +1911,9 @@ namespace SharedLib
         [Localized("STOCK_TRANSACTION_SALE")]
         Sale = 2,
         [Localized("STOCK_TRANSACTION_SET")]
-        Set,
+        Set = 3,
+        [Localized("STOCK_TRANSACTION_RETURN")]
+        Return = 4,
     }
     #endregion
 
@@ -1915,6 +1981,15 @@ namespace SharedLib
     }
     #endregion
 
+    #region TASKNOTIFICATIONOPTIONTYPE
+    [Flags()]
+    public enum TaskNotificationOptionType
+    {
+        None = 0,
+        Wait = 1,
+    }
+    #endregion
+
     #region PERSONALFILEACTIVATIONTYPE
     public enum PersonalFileActivationType
     {
@@ -1974,6 +2049,124 @@ namespace SharedLib
         [Localized("OR")]
         Or,
     }
+    #endregion
+
+    #region NOTESEVIRITY
+    public enum NoteSevirity
+    {
+        [Localized("NOTE_SEVIRITY_GREEN")]
+        Green = 0,
+        [Localized("NOTE_SEVIRITY_YELLOW")]
+        Yellow = 1,
+        [Localized("NOTE_SEVIRITY_RED")]
+        Red = 2,
+    }
+    #endregion
+
+    #region NOTEOPTIONS
+    /// <summary>
+    /// Note options.
+    /// </summary>
+    [Flags()]
+    public enum NoteOptions
+    {
+        None = 0,
+    }
+    #endregion
+
+    #region USERNOTEOPTIONS
+    /// <summary>
+    /// User note options.
+    /// </summary>
+    [Flags()]
+    public enum UserNoteOptions
+    {
+        None = 0,
+    }
+    #endregion
+
+    #region SHIFTOPTION
+    public enum ShiftOption
+    {
+        [Localized("SHIFT_OPTION_DISABLED")]
+        Disabled = 0,
+        [Localized("SHIFT_OPTION_OPTIONAL")]
+        Optional = 1,
+        [Localized("SHIFT_OPTION_MANDATORY")]
+        Mandatory = 2,
+    }
+    #endregion
+
+    #region REGISTERTRANSACTIONTYPE
+    /// <summary>
+    /// Register transaction type.
+    /// </summary>
+    public enum RegisterTransactionType
+    {
+        /// <summary>
+        /// Pay in.
+        /// </summary>
+        PayIn,
+        /// <summary>
+        /// Pay out.
+        /// </summary>
+        PayOut,
+        /// <summary>
+        /// Drop.
+        /// </summary>
+        Drop,
+        /// <summary>
+        /// Inventory purchase.
+        /// </summary>
+        InventoryPurchase,
+    }
+    #endregion
+
+    #region REGISTEROPTIONS
+    /// <summary>
+    /// Register options.
+    /// </summary>
+    public enum RegisterOptions
+    {
+        /// <summary>
+        /// None option.
+        /// </summary>
+        None,
+    }
+    #endregion
+
+    #region ORDERLINEPAYTYPE
+    /// <summary>
+    /// Order line payment type.
+    /// </summary>
+    public enum OrderLinePayType
+    {
+        Mixed = 2,
+        Points = 1,
+        Cash = 0,
+    }
+    #endregion
+
+    #region REFUNDSTATUS
+    public enum RefundStatus
+    {
+        [Localized("REFUND_STATUS_NONE")]
+        None,
+        [Localized("REFUND_STATUS_PARTIAL")]
+        Partial,
+        [Localized("REFUND_STATUS_FULL")]
+        Full,
+    }
+    #endregion
+
+    #region BILLINGOPTION
+    public enum BillingOption
+    {
+        None = 0,
+        DisableTimeOffer = 1,
+        DisableFixedTime = 2,
+        DisableDeposit = 4,
+    } 
     #endregion
 
     #endregion

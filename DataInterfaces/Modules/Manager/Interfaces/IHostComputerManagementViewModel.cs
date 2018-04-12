@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Manager.ViewModels
+﻿namespace Manager.ViewModels
 {
+    /// <summary>
+    /// Computer management view model interface.
+    /// </summary>
     public interface IHostComputerManagementViewModel : IHostComputerViewModel
     { }
 }

@@ -1142,6 +1142,7 @@ namespace SkinLib
         private List<Exception> exceptions;
         private List<Assembly> assemblies;
         private string skinPath;
+        private string videoPath;
         private Window mainWindow;
         private IntPtr mainWindowHandle;
         private HwndSource hwndSource;
@@ -1165,7 +1166,7 @@ namespace SkinLib
         {
             get { return this.CurrentLayout; }
         }
-       
+
         IUIConfiguration IUIHandler.UIConfiguration
         {
             get { return this.UIConfiguration; }
@@ -1301,6 +1302,19 @@ namespace SkinLib
         }
 
         /// <summary>
+        /// Gets or sets video path.
+        /// </summary>
+        public string VideoPath
+        {
+            get { return this.videoPath; }
+            set
+            {
+                this.videoPath = value;
+                this.RaisePropertyChanged(nameof(this.VideoPath));
+            }
+        }
+
+        /// <summary>
         /// Gets if skin was previously loaded.
         /// </summary>
         public bool IsLoaded
@@ -1327,7 +1341,7 @@ namespace SkinLib
             {
                 this.isBackground = value;
                 this.RaisePropertyChanged("IsBackground");
-                this.MakeTopMostSafe(this.MainWindow, value);
+                MakeTopMostSafe(this.MainWindow, value);
             }
         }
 
@@ -1535,10 +1549,10 @@ namespace SkinLib
             {
                 if (String.IsNullOrWhiteSpace(imageFileName) & !String.IsNullOrWhiteSpace(this.CurrentLayout.ImagePath))
                 {
-                    if (System.IO.File.Exists(this.CurrentLayout.ImagePath) == false)
+                    if (File.Exists(this.CurrentLayout.ImagePath) == false)
                     {
                         string Filename = Path.GetFileName(this.CurrentLayout.ImagePath);
-                        if (System.IO.File.Exists(Path.Combine(this.SkinPath, Filename)) == true)
+                        if (File.Exists(Path.Combine(this.SkinPath, Filename)) == true)
                         {
                             imageFileName = Path.Combine(this.SkinPath, Filename);
                         }
@@ -1550,8 +1564,7 @@ namespace SkinLib
                 }
                 if (File.Exists(imageFileName))
                 {
-                    ImageSource source;
-                    if (this.TryLoadImageSource(imageFileName, out source))
+                    if (this.TryLoadImageSource(imageFileName, out ImageSource source))
                     {
                         this.CurrentLayout.Background = new ImageBrush(source);
                         return true;
@@ -1569,8 +1582,7 @@ namespace SkinLib
         {
             try
             {
-                ImageSource imageSource;
-                if (this.TryLoadImageSource(imageFileName, out imageSource))
+                if (this.TryLoadImageSource(imageFileName, out ImageSource imageSource))
                     return this.SwapImage(imageSource);
                 return false;
             }
@@ -1603,8 +1615,8 @@ namespace SkinLib
                     SecondGroup.Children.Add(ExtraPicture2);
                 }
 
-                System.Windows.Media.Animation.DoubleAnimation ImageAnimation =
-                    new System.Windows.Media.Animation.DoubleAnimation(1, 0, new Duration(TimeSpan.FromMilliseconds(1000)), FillBehavior.HoldEnd);
+                DoubleAnimation ImageAnimation =
+                    new DoubleAnimation(1, 0, new Duration(TimeSpan.FromMilliseconds(1000)), FillBehavior.HoldEnd);
 
                 SecondGroup.BeginAnimation(DrawingGroup.OpacityProperty, ImageAnimation, HandoffBehavior.Compose);
 
@@ -1682,28 +1694,8 @@ namespace SkinLib
         public void FitIn()
         {
             if (this.MainWindowHandle != IntPtr.Zero)
-            {
-                int width = default(int);
-                int height = default(int);
-
-                var primaryScreen = System.Windows.Forms.Screen.PrimaryScreen;
-
-                if (this.IsMultiScreen)
-                {
-                    foreach (var Screen in System.Windows.Forms.Screen.AllScreens)
-                        width += Screen.Bounds.Width;
-                }
-                else
-                {
-                    width = primaryScreen.Bounds.Width;
-                }
-
-                height = primaryScreen.Bounds.Height;
-
-                UIHandler.MoveWindow(this.MainWindowHandle, 0, 0, width, height, true);
-            }
+                UIHandler.FitWindow(this.MainWindowHandle, this.IsMultiScreen);
         }
-
         public void FitInIfRequired()
         {
             //get main window
@@ -1773,37 +1765,11 @@ namespace SkinLib
 
             window.RemoveHandler(UIElement.MouseDownEvent, new MouseButtonEventHandler(MouseDownHandler));
             window.RemoveHandler(UIElement.MouseMoveEvent, new MouseEventHandler(MouseOverHandler));
-        }
-
-        private void MakeTopMostSafe(Window window, bool make)
-        {
-            if (window == null)
-                return;
-
-            #region Create Delegate
-            Action<Window, bool> del = (win, makeTop) =>
-            {
-                if (makeTop == true)
-                {
-                    win.Topmost = false;
-                    win.Topmost = true;
-                    win.Activate();
-                }
-                else
-                {
-                    win.Topmost = false;
-                }
-            };
-            #endregion
-
-            #region Invoke
-            window.Dispatcher.Invoke(del, window, make);
-            #endregion
-        }
+        }       
 
         public void MakeTopMost(bool make)
         {
-            this.MakeTopMostSafe(this.MainWindow, make);
+            MakeTopMostSafe(this.MainWindow, make);
         }
 
         #endregion
@@ -1894,7 +1860,7 @@ namespace SkinLib
         private void OnMainWindowDeactivated(object sender, EventArgs e)
         {
             if (!this.IsBackground)
-                this.MakeTopMostSafe(sender as Window, true);
+                MakeTopMostSafe(sender as Window, true);
         }
 
         private void OnMainWindowActivated(object sender, EventArgs e)
@@ -1918,7 +1884,7 @@ namespace SkinLib
                 this.FitInIfRequired();
         }
 
-        private IntPtr WindowProc(IntPtr hwnd, int msg, System.IntPtr wParam, System.IntPtr lParam, ref bool handled)
+        private IntPtr WindowProc(IntPtr hwnd, int msg, IntPtr wParam, System.IntPtr lParam, ref bool handled)
         {
             try
             {
@@ -2054,7 +2020,7 @@ namespace SkinLib
 
                 if (args.Handled)
                     return;
-            } 
+            }
 
             #endregion
 
@@ -2128,6 +2094,74 @@ namespace SkinLib
 
             }
             #endregion
+        }
+
+        #endregion
+
+        #region STATIC FUNCTIONS
+
+        public static void MakeTopMostSafe(Window window, bool make)
+        {
+            if (window == null)
+                return;
+
+            window.Dispatcher.Invoke(()=> 
+            {
+                if (make == true)
+                {
+                    window.Topmost = false;
+                    window.Topmost = true;
+                    window.Activate();
+                }
+                else
+                {
+                    window.Topmost = make;
+                }
+            });    
+        }
+
+        public static bool FitWindow(IntPtr hwnd, bool multiScreen)
+        {
+            int width = default(int);
+            int height = default(int);
+
+            var primaryScreen = System.Windows.Forms.Screen.PrimaryScreen;
+
+            if (multiScreen)
+            {
+                foreach (var Screen in System.Windows.Forms.Screen.AllScreens)
+                    width += Screen.Bounds.Width;
+            }
+            else
+            {
+                width = primaryScreen.Bounds.Width;
+            }
+
+            height = primaryScreen.Bounds.Height;
+
+            return MoveWindow(hwnd, 0, 0, width, height, true);
+        }
+
+        public static bool FitWindowToWorkingArea(IntPtr hwnd, bool multiScreen)
+        {
+            int width = default(int);
+            int height = default(int);
+
+            var primaryScreen = System.Windows.Forms.Screen.PrimaryScreen;
+
+            if (multiScreen)
+            {
+                foreach (var Screen in System.Windows.Forms.Screen.AllScreens)
+                    width += Screen.Bounds.Width;
+            }
+            else
+            {
+                width = primaryScreen.Bounds.Width;
+            }
+
+            height = primaryScreen.WorkingArea.Height;
+
+            return MoveWindow(hwnd, 0, 0, width, height, true);
         }
 
         #endregion

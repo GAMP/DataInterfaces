@@ -145,6 +145,14 @@ namespace SharedLib.Dispatcher.Exceptions
             this.Timeout = timeout;
         }
 
+        public OperationTimeoutException(string message,double timeout,IDispatcherCommand command):this(message,timeout)
+        {
+            if (command == null)
+                throw new ArgumentNullException(nameof(command));
+
+            this.Command = command;
+        }
+
         public OperationTimeoutException(string message)
             : base(message)
         { }
@@ -168,7 +176,15 @@ namespace SharedLib.Dispatcher.Exceptions
         public double Timeout
         {
             get;
-            set;
+            protected set;
+        }
+
+        /// <summary>
+        /// Gets or sets command.
+        /// </summary>
+        public IDispatcherCommand Command
+        {
+            get;protected set;
         }
 
         #endregion

@@ -1,23 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Microsoft.VisualBasic;
-using System.Collections;
 using System.Data;
-using System.Diagnostics;
-using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using System.Xml;
 using System.Windows.Media;
 using System.Windows;
-using System.Windows.Data;
 using System.ComponentModel;
 using SkinInterfaces;
-using System.IO;
 using System.Reflection;
-using SkinLib;
-using SharedLib;
 
 namespace SkinLib
 {
@@ -51,7 +41,8 @@ namespace SkinLib
             top;
         private string
             configurationName,
-            imagePath;
+            imagePath,
+            videoPath;
         private bool
             isDefault,
             mIsInitialized;
@@ -189,6 +180,16 @@ namespace SkinLib
             {
                 this.imagePath = value;
                 this.RaisePropertyChanged("ImagePath");
+            }
+        }
+
+        public string VideoPath
+        {
+            get { return this.videoPath; }
+            set
+            {
+                this.videoPath = value;
+                this.RaisePropertyChanged(nameof(this.VideoPath));
             }
         }
 

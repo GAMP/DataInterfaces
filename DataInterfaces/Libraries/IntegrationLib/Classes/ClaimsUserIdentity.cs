@@ -1,15 +1,14 @@
 ﻿using SharedLib;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Runtime.Serialization;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IntegrationLib
 {
     #region ClaimsUserIdentity
     [Serializable()]
+    [DataContract()]
     public class ClaimsUserIdentity : ClaimsIdentity, IUserIdentity
     {
         #region CONSTRUCTOR
@@ -32,12 +31,17 @@ namespace IntegrationLib
         /// <summary>
         /// Gets user id.
         /// </summary>
+        [DataMember(Order = 0)]
         public int UserId
         {
             get;
             private set;
         }
 
+        /// <summary>
+        /// Gets user role.
+        /// </summary>
+        [DataMember(Order = 1)]
         public UserRoles Role
         {
             get

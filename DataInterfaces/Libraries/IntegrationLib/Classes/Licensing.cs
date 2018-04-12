@@ -5,6 +5,7 @@ using System.Windows;
 using SharedLib;
 using SharedLib.Dispatcher;
 using Client;
+using System.Runtime.Serialization;
 
 namespace IntegrationLib
 {
@@ -13,9 +14,10 @@ namespace IntegrationLib
     /// Application license base class.
     /// </summary>
     [Serializable()]
+    [DataContract()]
     public abstract class ApplicationLicenseBase : ItemBase, IApplicationLicense
     {
-        #region Fileds
+        #region FILEDS
         [NonSerialized()]
         private bool mboolIsLocal;
         [NonSerialized()]
@@ -24,14 +26,17 @@ namespace IntegrationLib
         private string comment;
         private IApplicationLicenseKey key;
         private Guid guid;
+        [OptionalField(VersionAdded = 2)]
+        private string licenseProfileName;
         #endregion
 
-        #region Properties
+        #region PROPERTIES
 
         /// <summary>
         /// Gets or Sets keys local value.
         /// </summary>
         /// <returns>This will be used with multisite license management.</returns>
+        [IgnoreDataMember()]
         public virtual bool IsLocal
         {
             get
@@ -48,6 +53,7 @@ namespace IntegrationLib
         /// <summary>
         /// Gets or sets license key.
         /// </summary>
+        [DataMember()]
         public virtual IApplicationLicenseKey Key
         {
             get { return this.key; }
@@ -77,6 +83,7 @@ namespace IntegrationLib
         /// This can be an actual serial number if the license object is binary file.
         /// This can help you track individual licenses.
         /// </remarks>
+        [DataMember()]
         public string Comment
         {
             get { return this.comment; }
@@ -90,6 +97,7 @@ namespace IntegrationLib
         /// <summary>
         /// Gets or sets a unique global license identifier.
         /// </summary>
+        [IgnoreDataMember()]
         public Guid Guid
         {
             get
@@ -108,6 +116,20 @@ namespace IntegrationLib
         }
 
         /// <summary>
+        /// Gets or sets license profile name.
+        /// </summary>
+        [DataMember()]
+        public string LicenseProfileName
+        {
+            get { return this.licenseProfileName; }
+            set { this.licenseProfileName = value; }
+        }
+
+        #endregion
+
+        #region FUNCTIONS
+
+        /// <summary>
         /// Returns key instance as specified T type.
         /// </summary>
         public T KeyAs<T>()
@@ -121,9 +143,10 @@ namespace IntegrationLib
 
     #region ApplicationLicense
     [Serializable()]
+    [DataContract()]
     public sealed class ApplicationLicense : ApplicationLicenseBase
     {
-        #region Constructor
+        #region CONSTRUCTOR
 
         /// <summary>
         /// Creates new ApplicationLicense instance.
@@ -156,17 +179,20 @@ namespace IntegrationLib
     /// License Key Base Class.
     /// </summary>
     [Serializable()]
-    public abstract class ApplicationLicenseKeyBase : PropertyChangedNotificator, IApplicationLicenseKey
+    [DataContract()]
+    public abstract class ApplicationLicenseKeyBase : PropertyChangedNotificator,
+        IApplicationLicenseKey
     {
-        #region Fields
+        #region FIELDS
         private string value;
         #endregion
 
-        #region Properties
+        #region PROPERTIES
 
         /// <summary>
         /// Gets or sets keys string value.
         /// </summary>
+        [IgnoreDataMember()]
         public string Value
         {
             get { return this.value; }
@@ -179,8 +205,9 @@ namespace IntegrationLib
         }
 
         /// <summary>
-        /// When ovveriden return key string representation.
+        /// When overriden should return key string representation.
         /// </summary>
+        [DataMember()]
         public virtual string KeyString
         {
             get { return this.Value; }
@@ -189,6 +216,7 @@ namespace IntegrationLib
         /// <summary>
         /// When ovveriden returns if current key is valid.
         /// </summary>
+        [IgnoreDataMember()]
         public virtual bool IsValid
         {
             get { return !String.IsNullOrWhiteSpace(this.Value); }
@@ -203,35 +231,38 @@ namespace IntegrationLib
     /// License reservation class.
     /// </summary>
     [Serializable()]
+    [DataContract()]
     public class LicenseReservation : ItemObject, ILicenseReservation
     {
-        #region Constructor
+        #region CONSTRUCTOR
 
         public LicenseReservation()
         { }
 
-        public LicenseReservation(int id,
-            Dictionary<int, IApplicationLicense> licenses,
-            IMessageDispatcher dispatcher)
+        public LicenseReservation(int id, Dictionary<int, IApplicationLicense> licenses, IMessageDispatcher dispatcher)
         {
             this.Id = id;
             this.Licenses = licenses;
             this.Dispatcher = dispatcher;
+            this.HostId = hostId;
         }
 
         #endregion
 
-        #region Fields
+        #region FIELDS
         private Dictionary<int, IApplicationLicense> licenses;
         [NonSerialized()]
         private IMessageDispatcher dispatcher;
+        [OptionalField(VersionAdded = 2)]
+        private int hostId;
         #endregion
 
-        #region Properties
+        #region PROPERTIES
 
         /// <summary>
         /// Gets the list of reserved licenses.
         /// </summary>
+        [IgnoreDataMember()]
         public Dictionary<int, IApplicationLicense> Licenses
         {
             get
@@ -246,6 +277,7 @@ namespace IntegrationLib
         /// <summary>
         /// Gets the message dispatcher.
         /// </summary>
+        [IgnoreDataMember()]
         public IMessageDispatcher Dispatcher
         {
             get { return this.dispatcher; }
@@ -255,6 +287,7 @@ namespace IntegrationLib
         /// <summary>
         /// Gets application name.
         /// </summary>
+        [DataMember(Order = 0)]
         public string Application
         {
             get;
@@ -264,10 +297,30 @@ namespace IntegrationLib
         /// <summary>
         /// Gets executable name.
         /// </summary>
+        [DataMember(Order = 1)]
         public string Executable
         {
             get;
             set;
+        }
+
+        /// <summary>
+        /// Gets host id.
+        /// </summary>
+        [DataMember(Order = 3)]
+        public int HostId
+        {
+            get { return this.hostId; }
+            set { this.hostId = value; }
+        }
+
+        /// <summary>
+        /// Gets license keys.
+        /// </summary>
+        [DataMember(Order = 3)]
+        public IEnumerable<IApplicationLicense> LicenseKeys
+        {
+            get { return this.Licenses.Values; }
         }
 
         #endregion

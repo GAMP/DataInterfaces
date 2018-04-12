@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Localization;
 
 namespace GizmoDALV2
 {
@@ -21,11 +17,37 @@ namespace GizmoDALV2
     /// </summary>
     public enum InvoiceErrorCode
     {
+        /// <summary>
+        /// Set when invoice status is already set to paid and we try to execute a payment on it.
+        /// </summary>
         AlreadyPaid,
-        PointsLess,
-        PointsZero,
-        CashZero,
-        CashLess,
+        /// <summary>
+        /// Set when we try to fully repay an invoice with amount less than outstanding amount.
+        /// </summary>
+        AmountLessThanOutstanding,
+    }
+    #endregion
+
+    #region InvoicePaymentErrorCode
+    public enum InvoicePaymentErrorCode
+    {
+        /// <summary>
+        /// Set on unspecified error.
+        /// </summary>
+        [Localized("UNSPECIFIED")]
+        Unspecified = 0,
+        /// <summary>
+        /// Set when invoice payment amount equals zero.
+        /// </summary>
+        AmountZeroOrLess,
+        /// <summary>
+        /// Set when outstanding amount is zero.
+        /// </summary>
+        OutstandingAmountZero,
+        /// <summary>
+        /// Set when outstanding amount is less than the payment amount.
+        /// </summary>
+        OutstandingAmountLess,
     } 
     #endregion
 
@@ -35,11 +57,31 @@ namespace GizmoDALV2
     /// </summary>
     public enum PaymentErrorCode
     {
-        Unspecified = 0,
-        InsufficientFunds = 1,
-        AmountZero = 2,
+        /// <summary>
+        /// Set on unspecified error.
+        /// </summary>
+        [Localized("UNSPECIFIED")]
+        Unspecified = 0,       
+        /// <summary>
+        /// Set when there are no funds avaliable to execute this payment.
+        /// </summary>
+        [Localized("PAYMENTERRORCODE_INSUFFICIENT_FUNDS")]
+        InsufficientFunds = 1,        
+        /// <summary>
+        /// Set when payment amount equals zero or less. Zero payments not allowed.
+        /// </summary>
+        [Localized("PAYMENTERRORCODE_AMOUNT_ZERO_OR_LESS")]
+        AmountZeroOrLess = 2,        
+        /// <summary>
+        /// Set when amount recieved is less than actual payment amount.
+        /// </summary>
+        [Localized("PAYMENTERRORCODE_AMOUNT_RECEIVED_LESS")]
         AmountReceivedLess = 3,
-        InvalidPaymentMethod=4,
+        /// <summary>
+        /// Set when we try to execute a payment with an method that is invalid for payment transaction.
+        /// </summary>
+        [Localized("PAYMENTERRORCODE_INALID_PAYMENT_METHOD")]
+        InvalidPaymentMethod =4,
     }
     #endregion
 
@@ -49,8 +91,10 @@ namespace GizmoDALV2
     /// </summary>
     public enum OrderStatusErrorCode
     {
-        Invoiced,
-        Canceled,
+        Unspecified = 0,
+        AlreadyInvoiced,
+        AlreadyCanceled,
+        NegativeCost,
     }
     #endregion
 
@@ -60,8 +104,18 @@ namespace GizmoDALV2
     /// </summary>
     public enum DepositErrorCode
     {
+        Unspecified = 0,
+        /// <summary>
+        /// Set when we try to execute deposit transaction with zero amount.
+        /// </summary>
+        AmountZeroOrLess,
+        /// <summary>
+        /// Set when user has no funds to execute the transaction.
+        /// </summary>
         InsufficientFunds,
-        InvalidPaymentMethod,
+        /// <summary>
+        /// Set when deposit transaction would cause user into negative balance.
+        /// </summary>
         NegativeBalanceNotAllowed,
     }
     #endregion
@@ -69,18 +123,59 @@ namespace GizmoDALV2
     #region StockErrorCodes
     public enum StockErrorCodes
     {
+        Unspecified = 0,
         /// <summary>
         /// Set when we try to modify stock level of a product that have stock disabled.
         /// </summary>
-        StockDisabled,
+        StockDisabled=1,
         /// <summary>
         /// Set when we try to create a stock transaction with zero amount.
         /// </summary>
-        ZeroAmount,
+        ZeroAmount=2,
         /// <summary>
         /// Set when we have a TargetDifferentProduct flag on product stock option while not actually targeting specific product.
         /// </summary>
-        TargetProductNotSet,
+        TargetProductNotSet=3,
+    }
+    #endregion
+
+    #region ShiftErrorCode
+    public enum ShiftErrorCode
+    {
+        [Localized("SHIFT_ERROR_NO_ACTIVE_SHIFT")]
+        NoActiveShift =0,
+        [Localized("SHIFT_ERROR_ANOTHER_ACTIVE")]
+        AnotherShift =1,
+        [Localized("SHIFT_ERROR_ALREADY_ACTIVE")]
+        AlreadyActive =2,
+        [Localized("SHIFT_ERROR_NO_REGISTER")]
+        NoRgister = 3,
+        [Localized("SHIFT_ERROR_INVALID_ID")]
+        InvalidShiftId = 4,
+        [Localized("SHIFT_ERROR_ALREADY_ENDED")]
+        AlreadyEnded = 5,
+        [Localized("SHIFT_ERROR_DISABLED")]
+        ShiftDisabled =6,
+        [Localized("SHIFT_ERROR_NO_OPERATOR")]
+        NoOperator = 7,
+        [Localized("SHIFT_ERROR_ENDING")]
+        ShiftEnding= 8,
+        [Localized("SHIFT_ERROR_NOT_ENDING")]
+        ShiftNotEnding =9,
+        [Localized("SHIFT_ERROR_DELETED_REGISTER")]
+        DeletedRegister =10,
+    }
+    #endregion
+
+    #region AssetErrorCode
+    public enum AssetErrorCode
+    {
+        [Localized("ASSET_ERROR_NOT_CHECKED_IN")]
+        NotCheckedIn = 0,
+        [Localized("ASSET_ERROR_ALREADY_CHECKED_IN")]
+        AlreadyCheckedIn = 1,
+        [Localized("ASSET_ERROR_DISABLED")]
+        AssetDisabled = 2,
     } 
     #endregion
 }

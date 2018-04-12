@@ -12,6 +12,9 @@ using System.Windows.Shell;
 
 namespace SharedLib.Views
 {
+    /// <summary>
+    /// Reperesents a closable view.
+    /// </summary>
     public interface IClosableView : IView
     {
         double Height { get; set; }
@@ -369,5 +372,7 @@ namespace SharedLib.Views
         double ActualHeight { get; }
 
         event RoutedEventHandler Loaded;
+
+        System.Windows.Threading.Dispatcher Dispatcher { get; }
     }
 }

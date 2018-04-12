@@ -24,10 +24,9 @@ namespace SkinInterfaces.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            int intValue = 0;
-            if (value != null && int.TryParse(value.ToString(), out intValue))
+            if (value != null && int.TryParse(value.ToString(), out int intValue))
                 return intValue == 0 ? null : value;
-           
+
             return value;
         }
     }

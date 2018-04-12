@@ -1,33 +1,24 @@
 ﻿using System;
-using System.Collections.ObjectModel;
 using SharedLib.Applications;
 using System.Diagnostics;
 using SharedLib;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace Client
 {
     public interface IExecutionContext
     {
-        /// <summary>
-        /// Initiates execution abort.
-        /// </summary>
-        void BeginAbort(bool async);
+        #region EVENTS
 
         /// <summary>
-        /// Asynchronosly executes context.
+        /// Occours when execution state changes.
         /// </summary>
-        /// <param name="reinstall">Indicates if reprocessing should occour.</param>
-        void BeginExecute(bool reinstall);
+        event EventHandler<ExecutionContextStateArgs> ExecutionStateChaged;
 
-        /// <summary>
-        /// Destroys context.
-        /// </summary>
-        void Destroy();
+        #endregion        
 
-        /// <summary>
-        /// Releases context without destroying it.
-        /// </summary>
-        void Release();
+        #region PROPERTIES
 
         /// <summary>
         /// Gets executable instance of this context.
@@ -35,9 +26,9 @@ namespace Client
         IExecutable Executable { get; }
 
         /// <summary>
-        /// Occours when execution state changes.
+        /// Gets application instance of this context.
         /// </summary>
-        event EventHandler<ExecutionContextStateArgs> ExecutionStateChaged;
+        IApplicationProfile Profile { get; }
 
         /// <summary>
         /// Gets if aborting is initiated.
@@ -55,9 +46,9 @@ namespace Client
         bool IsExecuting { get; }
 
         /// <summary>
-        /// Gets Application Profile of this context.
+        /// Gets if context is ready for execution.
         /// </summary>
-        IApplicationProfile Profile { get; }
+        bool IsReady { get; }
 
         /// <summary>
         /// Gets the last execution state.
@@ -68,6 +59,40 @@ namespace Client
         /// Gets total execution time.
         /// </summary>
         TimeSpan TotalExecutionSpan { get; }
+
+        /// <summary>
+        /// Gets if context currently waiting for finalization.
+        /// </summary>
+        bool IsWaitingFinalization { get; }
+
+        /// <summary>
+        /// Gets the execution context client.
+        /// </summary>
+        IClient Client { get; }
+
+        /// <summary>
+        /// Indicates that execution was previously completed with success.
+        /// </summary>
+        bool HasCompleted { get; }
+
+        /// <summary>
+        /// Gets if the executable should be autolaunched.
+        /// </summary>
+        bool AutoLaunch { get; }
+
+        #endregion
+
+        #region FUNCTIONS
+
+        /// <summary>
+        /// Destroys context.
+        /// </summary>
+        void Destroy();
+
+        /// <summary>
+        /// Releases context without destroying it.
+        /// </summary>
+        void Release();
 
         /// <summary>
         /// Tries to activate main windows of context processes.
@@ -92,11 +117,6 @@ namespace Client
         bool AddProcessIfStarted(Process process, bool isMain);
 
         /// <summary>
-        /// Kills context.
-        /// </summary>
-        void Kill();
-
-        /// <summary>
         /// Tries to obtain full executable file name.
         /// </summary>
         /// <param name="processId">Process id.</param>
@@ -111,23 +131,16 @@ namespace Client
         void WriteMessage(string message);
 
         /// <summary>
-        /// Gets if context currently waiting for finalization.
+        /// Kills context.
         /// </summary>
-        bool IsWaitingFinalization { get; }
+        void Kill();
 
-        /// <summary>
-        /// Gets the execution context client.
-        /// </summary>
-        IClient Client { get; }
+        #endregion
+    }
 
-        /// <summary>
-        /// Indicates that execution was previously completed with success.
-        /// </summary>
-        bool HasCompleted { get; }
-
-        /// <summary>
-        /// Gets if the executable should be autolaunched.
-        /// </summary>
-        bool AutoLaunch { get; }
+    public interface IExecutionContextAync : IExecutionContext
+    {
+        Task ExecuteAsync(CancellationToken ct);
+        Task ExecuteAsync(bool reProcess, CancellationToken ct);
     }
 }

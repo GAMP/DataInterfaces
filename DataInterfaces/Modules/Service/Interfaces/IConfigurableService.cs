@@ -10,6 +10,8 @@ namespace ServerService
     #region IConfigurableService
     public interface IConfigurableService
     {
+        #region FUNCTIONS
+        
         /// <summary>
         /// Gets service configuration.
         /// </summary>
@@ -20,13 +22,17 @@ namespace ServerService
         /// Sets service configuration.
         /// </summary>
         /// <param name="configuration">Service configuration root.</param>
-        void ConfigurationSet(ConfigurationRoot configuration);
+        void ConfigurationSet(ConfigurationRoot configuration); 
+
+        #endregion
     }
     #endregion
 
     #region IConfigurableServiceAsync
     public interface IConfigurableServiceAsync : IConfigurableService
     {
+        #region FUNCTIONS
+        
         /// <summary>
         /// Gets service configuration asynchronously.
         /// </summary>
@@ -38,7 +44,9 @@ namespace ServerService
         /// </summary>
         /// <param name="settings">Configuration instance.</param>
         /// <returns>Associated task.</returns>
-        Task ConfigurationSetAsync(ConfigurationRoot settings);
+        Task ConfigurationSetAsync(ConfigurationRoot settings); 
+
+        #endregion
     } 
     #endregion
 }

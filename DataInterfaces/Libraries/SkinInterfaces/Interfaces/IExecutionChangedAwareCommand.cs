@@ -8,7 +8,14 @@ namespace SkinInterfaces
     /// </summary>
     public interface IExecutionChangedAwareCommand : ICommand
     {
-        void RaiseCanExecuteChanged();
+        #region FUNCTIONS
+        
+        /// <summary>
+        /// Raises can execute changed event.
+        /// </summary>
+        void RaiseCanExecuteChanged(); 
+
+        #endregion
     }
     #endregion
 }

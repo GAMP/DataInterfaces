@@ -1,10 +1,11 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 
 namespace CyClone.Core
 {
     public interface IcyHandleInfo
     {
+        #region PROPERTIES
+
         /// <summary>
         /// Gets remote dispatcher.
         /// </summary>
@@ -42,8 +43,30 @@ namespace CyClone.Core
         }
 
         /// <summary>
+        /// Gets file options.
+        /// </summary>
+        FileOptions Options
+        {
+            get;
+        }
+
+        /// <summary>
+        /// Gets if handle was opened for async operation.
+        /// </summary>
+        bool IsAsync
+        {
+            get;
+        }
+
+        #endregion
+
+        #region FUNCTIONS
+        
+        /// <summary>
         /// Closes file handle.
         /// </summary>
-        void Close();
+        void Close(); 
+
+        #endregion
     }
 }

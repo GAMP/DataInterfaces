@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace CoreLib.Hooking
+﻿namespace CoreLib.Hooking
 {
     #region IShellHook
     public interface IShellHook

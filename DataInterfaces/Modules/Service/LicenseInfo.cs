@@ -1,10 +1,7 @@
-﻿using ServerService;
-using SharedLib;
+﻿using SharedLib;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
 
 namespace ServerService
 {
@@ -15,8 +12,8 @@ namespace ServerService
         #region CONSTRUCTOR
         public LicenseInfo(Dictionary<string, object> parameters)
         {
-            this.Parameters = parameters;
-        } 
+            this.Parameters = parameters ?? throw new ArgumentNullException(nameof(parameters));
+        }
         #endregion
 
         #region FIELDS

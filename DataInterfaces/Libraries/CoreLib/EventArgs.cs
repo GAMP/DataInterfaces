@@ -1,34 +1,39 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Runtime.Serialization;
 
 namespace CoreLib
 {
     #region ExceptionEventArgs
+    /// <summary>
+    /// Exception event args.
+    /// </summary>
+    [Serializable()]
+    [DataContract()]
     public class ExceptionEventArgs : EventArgs
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="exception">Exception instance.</param>
         public ExceptionEventArgs(Exception exception)
         {
-            if (exception == null)
-                throw new ArgumentNullException("exception");
-
-            this.Exception = exception;
+            this.Exception = exception ?? throw new ArgumentNullException(nameof(exception));
         }
         #endregion
 
         #region PROPERTIES
 
         /// <summary>
-        /// Gets exception object.
+        /// Gets exception object instance.
         /// </summary>
+        [DataMember()]
         public Exception Exception
         {
             get;
             protected set;
         }
-        
+
         #endregion
     }
     #endregion

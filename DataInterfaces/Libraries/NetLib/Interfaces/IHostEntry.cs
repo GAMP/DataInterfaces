@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using CoreLib;
 using Client;
 using SharedLib;
 using SharedLib.Dispatcher;
-using SharedLib.Management;
 
 namespace NetLib
 {

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Windows.Data;
 using System.Windows;
@@ -13,7 +11,6 @@ using System.Globalization;
 using System.Windows.Controls.Primitives;
 using System.Collections.ObjectModel;
 using CoreLib;
-using System.Collections;
 using SharedLib.ViewModels;
 using SharedLib;
 using CyClone.Core;
@@ -95,15 +92,14 @@ namespace SkinInterfaces.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            TimeSpan ts = TimeSpan.FromSeconds((double)value);
-            return String.Format("{0:D2}:{1:D2}:{2:D2}", ts.Hours, ts.Minutes, ts.Seconds);
+            TimeSpan span = TimeSpan.FromSeconds((double)value);
+            return string.Format("{0:D2}:{1:D2}:{2:D2}", (int)span.TotalHours, span.Minutes, span.Seconds);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }
-
     }
     #endregion
 
@@ -112,14 +108,12 @@ namespace SkinInterfaces.Converters
     {
         #region IValueConverter Members
 
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             try
             {
-
-                if (value is TimeSpan)
+                if (value is TimeSpan span)
                 {
-                    TimeSpan span = (TimeSpan)value;
                     string spanString = span.ToString();
                     if (spanString.LastIndexOf(".") != -1)
                     {
@@ -145,7 +139,6 @@ namespace SkinInterfaces.Converters
 
         #endregion
     }
-
     #endregion
 
     #endregion
@@ -519,8 +512,10 @@ namespace SkinInterfaces.Converters
                                 if ((nextindex != -1) & (nextindex != index + 1))
                                 {
                                     string substring = initialstring.Substring(index + 2, (nextindex) - (index + 2));
-                                    Run subrun = new Run(substring);
-                                    subrun.Foreground = (System.Windows.Media.Brush)new System.Windows.Media.BrushConverter().ConvertFromString(color.ToString());
+                                    Run subrun = new Run(substring)
+                                    {
+                                        Foreground = (Brush)new System.Windows.Media.BrushConverter().ConvertFromString(color.ToString())
+                                    };
                                     textholder.Inlines.Add(subrun);
                                     index = nextindex;
                                 }
@@ -529,7 +524,7 @@ namespace SkinInterfaces.Converters
                                     string substring = initialstring.Substring(index + 2, initialstring.Length - (index + 2));
                                     Run subrun = new Run(substring);
 
-                                    subrun.Foreground = (System.Windows.Media.Brush)new System.Windows.Media.BrushConverter().ConvertFromString(color);
+                                    subrun.Foreground = (Brush)new System.Windows.Media.BrushConverter().ConvertFromString(color);
                                     textholder.Inlines.Add(subrun);
                                     return textholder;
                                 }
@@ -615,7 +610,7 @@ namespace SkinInterfaces.Converters
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            return value != null ? value : parameter;
+            return value ?? parameter;
         }
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
@@ -902,10 +897,13 @@ namespace SkinInterfaces.Converters
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (value is Double & value != null)
+            if (value == null)
+                return value;
+
+            if (double.TryParse(value.ToString(), out double currencyValue))
             {
                 CultureInfo info = System.Threading.Thread.CurrentThread.CurrentCulture;
-                return String.Format("{0:C}", value);
+                return String.Format("{0:C}", currencyValue);
             }
             else
             {
@@ -1249,14 +1247,14 @@ namespace SkinInterfaces.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null || value is string && ((string)value).Length == 0)
-                return (ImageSource)null;
+            if (value == null || value is string stringValue && stringValue.Length == 0)
+                return DependencyProperty.UnsetValue;
             return value;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            return Binding.DoNothing;
         }
     }
     #endregion

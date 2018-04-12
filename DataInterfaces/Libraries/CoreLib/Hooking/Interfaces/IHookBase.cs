@@ -5,11 +5,8 @@ namespace CoreLib.Hooking
     #region IHookBase
     public interface IHookBase
     {
-        /// <summary>
-        /// Installs hook.
-        /// </summary>
-        void Hook();
-
+        #region PROPERTIES
+        
         /// <summary>
         /// Gets intsalled hooke handle.
         /// </summary>
@@ -25,10 +22,21 @@ namespace CoreLib.Hooking
         /// </summary>
         IntPtr ModuleHandle { get; }
 
+        #endregion
+
+        #region FUNCTIONS
+        
+        /// <summary>
+        /// Installs hook.
+        /// </summary>
+        void Hook();
+
         /// <summary>
         /// Uninstalls hook.
         /// </summary>
-        void Unhook();
+        void Unhook(); 
+
+        #endregion
     } 
     #endregion
 }

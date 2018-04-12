@@ -2,12 +2,8 @@
 using IntegrationLib;
 using ServerService;
 using SharedLib;
-using SharedLib.Configuration;
 using SharedLib.Dispatcher;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Manager.Services
@@ -23,6 +19,17 @@ namespace Manager.Services
         IUserServiceAsync,
         ILogService        
     {
+
+        /// <summary>
+        /// Occurs on user balance change completes.
+        /// </summary>
+        event EventHandler<UserBalanceEventArgs> UserBalanceChangeCompleted;
+
+        /// <summary>
+        /// Occurs when host properties changed completed.
+        /// </summary>
+        event EventHandler<HostPropertiesChangedEventArgs> HostPropertiesChangeCompleted;
+
         /// <summary>
         /// Gets if service is authenticated.
         /// </summary>

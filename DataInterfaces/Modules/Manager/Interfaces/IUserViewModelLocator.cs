@@ -27,6 +27,5 @@ namespace Manager.ViewModels
         /// <param name="excludedUser">User id to excluse from search.</param>
         /// <returns>True or false.</returns>
         bool UserEmailExists(string email, int excludedUser);
-
     }
 }

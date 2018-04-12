@@ -1,19 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using CoreLib;
 using SharedLib;
 using SharedLib.Applications;
 using SkinLib;
 using SharedLib.Logging;
 using IntegrationLib;
-using SharedLib.Commands;
 using System.Windows;
 using SharedLib.ViewModels;
 using CoreLib.Hooking;
-using SharedLib.Management;
-using SharedLib.Dispatcher;
 using SharedLib.User;
 using System.ComponentModel;
 using System.Threading.Tasks;
@@ -56,11 +50,6 @@ namespace Client
         /// Occurs on input lock state change.
         /// </summary>
         event EventHandler<LockStateEventArgs> LockStateChange;
-
-        /// <summary>
-        /// Occurs on integration provider avaliability change.
-        /// </summary>
-        event EventHandler<AvailabilityEventArgs> IntegrationAvailabilityChange;
 
         /// <summary>
         /// Occurs on client id change.
@@ -176,14 +165,6 @@ namespace Client
         }
 
         /// <summary>
-        /// Gets or sets the integration provider.
-        /// </summary>
-        IClientSideIntegrationProvider IntegrationProvider
-        {
-            get;
-        }
-
-        /// <summary>
         /// Gets or sets if client is currently in out of order state.
         /// </summary>
         bool IsOutOfOrder
@@ -195,7 +176,7 @@ namespace Client
         /// <summary>
         /// Gets the handle of current main window.
         /// </summary>
-        IntPtr MainWindowHandle { get; }
+        IntPtr ShellWindowHandle { get; }
 
         /// <summary>
         /// Gets client module keyboard hook instance.
@@ -207,7 +188,7 @@ namespace Client
         /// Gets client module mouse hook instance.
         /// </summary>
         [Obsolete("Will be replaced or updated in new releases. Do not use.")]
-        IMouseHook MouseHook { get; }
+        IMouseLowLevelHook MouseHook { get; }
 
         /// <summary>
         /// Gets client module shell hook instance.

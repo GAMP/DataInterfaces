@@ -1,18 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace SharedLib.Management
 {
-    #region ISecurityProfile
     public interface ISecurityProfile
     {
+        #region PROPERTIES
+        
+        /// <summary>
+        /// Gets profile id.
+        /// </summary>
         int Id { get; set; }
-        int DisabledDrives { get; set; }
-        string Name { get; set; }
-        List<ISecurityPolicy> Policies { get; set; }
-        List<IRestriction> Restrictions { get; set; }
+
+        /// <summary>
+        /// Gets disabled drives flag.
+        /// </summary>
+        int DisabledDrives { get; }
+
+        /// <summary>
+        /// Gets profile name.
+        /// </summary>
+        string Name { get; }
+
+        /// <summary>
+        /// Gets policies.
+        /// </summary>
+        List<ISecurityPolicy> Policies { get; }
+
+        /// <summary>
+        /// Gets restrictions.
+        /// </summary>
+        List<IRestriction> Restrictions { get; } 
+
+        #endregion
     }
-    #endregion
 }

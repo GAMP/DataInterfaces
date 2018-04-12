@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,38 +11,63 @@ namespace IntegrationLib
     /// Claim info base class.
     /// Used to describe existing claims.
     /// </summary>
-    public class ClaimInfoBase : IClaimInfo
+    [Serializable()]
+    [DataContract()]
+    public class ClaimTypeInfoBase : ClaimTypeBase, IClaimTypeInfo
     {
-        public ClaimInfoBase(string type,string resource, string friendlyName,string description)
+        #region CONSTRUCTOR
+        public ClaimTypeInfoBase(string resource, string operation):base(resource,operation)
         {
-            if (string.IsNullOrWhiteSpace(type))
-                throw new ArgumentNullException(nameof(type));
+        }
+        #endregion
 
-            this.Operation = type;
-            this.Resource = resource;
-            this.FriendlyName = friendlyName;
-            this.Description = description;
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets or sets group.
+        /// </summary>
+        [DataMember()]
+        public string Group
+        {
+            get; set;
         }
 
-        public virtual string FriendlyName
+        /// <summary>
+        /// Gets or sets name.
+        /// </summary>
+        [DataMember()]
+        public string Name
         {
-            get; protected set;
+            get; set;
         }
 
+        /// <summary>
+        /// Gets or sets description.
+        /// </summary>
+        [DataMember()]
         public virtual string Description
         {
-            get; protected set;
-        }
-        
-        public virtual string Resource
-        {
-            get; protected set;
+            get; set;
         }
 
-        public virtual string Operation
+        /// <summary>
+        /// Gets or sets type.
+        /// </summary>
+        [DataMember()]
+        public virtual Enum Type
         {
-            get; protected set;
+            get;set;
         }
 
+        /// <summary>
+        /// Gets or sets dependent claim.
+        /// </summary>
+        [DataMember()]
+        public virtual Enum[] DependsOn
+        {
+            get;set;
+        }
+
+        #endregion        
     }
 }

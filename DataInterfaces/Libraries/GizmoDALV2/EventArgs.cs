@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GizmoDALV2
 {
@@ -18,7 +16,7 @@ namespace GizmoDALV2
             : this(type)
         {
             if (addedItem != null)
-                this.Addedtems = new List<T>() { addedItem };
+                this.AddedItems = new List<T>() { addedItem };
 
             if (removedItem != null)
                 this.RemovedItems = new List<T>() { removedItem };            
@@ -30,7 +28,7 @@ namespace GizmoDALV2
             this.Type = type;
 
             if (addedItems != null)
-                this.Addedtems = new List<T>(addedItems);
+                this.AddedItems = new List<T>(addedItems);
 
             if (removedItems != null)
                 this.RemovedItems = new List<T>(removedItems);
@@ -60,6 +58,20 @@ namespace GizmoDALV2
 
         #region PROPERTIES
 
+        #region INTERFACE
+
+        IEnumerable<object> IEntityEventArgs.RemovedItems
+        {
+            get { return this.RemovedItems.Cast<object>(); }
+        }
+
+        IEnumerable<object> IEntityEventArgs.AddedItems
+        {
+            get { return this.AddedItems.Cast<object>(); }
+        }
+
+        #endregion
+
         /// <summary>
         /// Gets removed items.
         /// </summary>
@@ -75,21 +87,11 @@ namespace GizmoDALV2
             protected set { this.removedItems = value; }
         }
 
-        IEnumerable<object> IEntityEventArgs.RemovedItems
-        {
-            get { return this.RemovedItems.Cast<object>(); }
-        }
-
-        IEnumerable<object> IEntityEventArgs.AddedItems
-        {
-            get { return this.Addedtems.Cast<object>(); }
-        }
-
         /// <summary>
         /// Gets added items.
         /// </summary>
         [DataMember()]
-        public IEnumerable<T> Addedtems
+        public IEnumerable<T> AddedItems
         {
             get
             {

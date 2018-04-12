@@ -14,7 +14,13 @@ namespace SkinInterfaces
     /// </summary>
     public class DeferredAction : IDisposable
     {
+        #region FIELDS
         private Timer timer;
+        #endregion
+
+        #region FUNCTIONS
+
+        #region STATIC
 
         /// <summary>
         /// Creates a new DeferredAction.
@@ -25,20 +31,26 @@ namespace SkinInterfaces
         public static DeferredAction Create(Action action)
         {
             if (action == null)
-            {
-                throw new ArgumentNullException("action");
-            }
+                throw new ArgumentNullException(nameof(action));
 
             return new DeferredAction(action);
         }
+
+        #endregion
+
+        #region PRIVATE
 
         private DeferredAction(Action action)
         {
             this.timer = new Timer(new TimerCallback(delegate
             {
-                Application.Current.Dispatcher.Invoke(action);
+                Application.Current?.Dispatcher.Invoke(action);
             }));
         }
+
+        #endregion
+
+        #region PUBLIC
 
         /// <summary>
         /// Defers performing the action until after time elapses.  Repeated calls will reschedule the action
@@ -49,19 +61,23 @@ namespace SkinInterfaces
         /// </param>
         public void Defer(TimeSpan delay)
         {
+            if (delay == null)
+                throw new ArgumentNullException(nameof(delay));
+
             // Fire action when time elapses (with no subsequent calls).
             this.timer.Change(delay, TimeSpan.FromMilliseconds(-1));
-        }
+        }  
+        
+        #endregion
 
-        #region IDisposable Members
+        #endregion
+
+        #region IDisposable
 
         public void Dispose()
         {
-            if (this.timer != null)
-            {
-                this.timer.Dispose();
-                this.timer = null;
-            }
+            this.timer?.Dispose();
+            this.timer = null;
         }
 
         #endregion

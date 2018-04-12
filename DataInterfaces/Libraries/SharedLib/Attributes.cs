@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace SharedLib
 {
@@ -47,23 +44,13 @@ namespace SharedLib
             get;
             protected set;
         }
-    } 
-    #endregion
-
-    #region IgnorePropertyModificationAttribute
-    /// <summary>
-    /// This attribute should be used on properties that not to be considered as modified during property change.
-    /// </summary>
-    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
-    public class IgnorePropertyModificationAttribute : Attribute
-    {
     }
     #endregion
-
+    
     #region IsGameModeAttibute
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
     public sealed class IsGameModeAttibute : Attribute
-    { } 
+    { }
     #endregion
 
     #region GUIDAttribue
@@ -467,12 +454,60 @@ namespace SharedLib
     }
     #endregion
 
+    #region PropertyMapAttribute
+    [AttributeUsage(AttributeTargets.All, AllowMultiple = true, Inherited = true)]
+    public class PropertyMapAttribute : Attribute
+    {
+        #region CONSTRUCTOR
+
+        public PropertyMapAttribute(string propertyName)
+        {
+            if (string.IsNullOrWhiteSpace(propertyName))
+                throw new ArgumentNullException(nameof(propertyName));
+
+            this.typeId = Guid.NewGuid();
+
+            this.PropertyName = propertyName;
+        }
+
+        #endregion
+
+        #region FILEDS
+        private Guid typeId;
+        #endregion
+
+        #region PROPERTIES
+
+        /// <summary>
+        /// Property name.
+        /// </summary>
+        public string PropertyName
+        {
+            get; protected set;
+        }
+
+        #endregion
+
+        #region OVERRIDES
+
+        public override object TypeId
+        {
+            get
+            {
+                return this.typeId;
+            }
+        }
+
+        #endregion
+    }
+    #endregion
+
     #region FilterPropertyAttribute
     /// <summary>
     /// Maps a class property to filter property name.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = true, Inherited = true)]
-    public class FilterPropertyAttribute : Attribute
+    public class FilterPropertyAttribute : PropertyMapAttribute
     {
         #region CONSTRUCTOR
 
@@ -481,7 +516,7 @@ namespace SharedLib
         /// </summary>
         /// <param name="propertyName">Property name.</param>
         /// <param name="operation">Filter opertation.</param>
-        public FilterPropertyAttribute(string propertyName, Op operation):this(propertyName, operation,null,false)
+        public FilterPropertyAttribute(string propertyName, Op operation) : this(propertyName, operation, null, false)
         { }
 
         /// <summary>
@@ -491,7 +526,7 @@ namespace SharedLib
         /// <param name="operation">Filter opertation.</param>
         /// <param name="groupName">Filter group name.</param>
         /// <param name="includedOnNull">Indicates if filter should be included on null values.</param>
-        public FilterPropertyAttribute(string propertyName, Op operation, string groupName, bool includedOnNull):this(propertyName,operation,groupName,includedOnNull,false)
+        public FilterPropertyAttribute(string propertyName, Op operation, string groupName, bool includedOnNull) : this(propertyName, operation, groupName, includedOnNull, false)
         {
         }
 
@@ -502,12 +537,8 @@ namespace SharedLib
         /// <param name="operation">Filter opertation.</param>
         /// <param name="groupName">Filter group name.</param>
         /// <param name="includedOnNull">Indicates if filter should be included on null values.</param>
-        public FilterPropertyAttribute(string propertyName, Op operation, string groupName, bool includedOnNull,bool ignore)
+        public FilterPropertyAttribute(string propertyName, Op operation, string groupName, bool includedOnNull, bool ignore) : base(propertyName)
         {
-            if (string.IsNullOrWhiteSpace(propertyName))
-                throw new ArgumentNullException(nameof(propertyName));
-
-            this.PropertyName = propertyName;
             this.Operation = operation;
             this.GroupName = groupName;
             this.IncludeOnNullValue = includedOnNull;
@@ -517,15 +548,6 @@ namespace SharedLib
         #endregion
 
         #region PROPERTIES
-
-        /// <summary>
-        /// Filter property.
-        /// This is the actual propery name that will be filtered on target object.
-        /// </summary>
-        public string PropertyName
-        {
-            get; protected set;
-        }
 
         /// <summary>
         /// Gets if filter should be included if filter value equals to null.

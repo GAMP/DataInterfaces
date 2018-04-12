@@ -1,35 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using SharedLib.Commands;
-using System.Collections.ObjectModel;
-using System.Runtime.Serialization;
-using System.Windows;
-using System.Net.Sockets;
-using System.Diagnostics;
-using System.Threading;
-using SharedLib.Logging;
 using NetLib;
 using SharedLib.Dispatcher.Exceptions;
 
 namespace SharedLib.Dispatcher
 {
-    #region Delegates
-    public delegate void ExecuteCommandDelegate(IDispatcherCommand cmd, params object[] parameters);
+    #region DELEGATES
     public delegate void ConnectionDelegate(IConnection connection);
     public delegate void ConnectionStateDelegate(IMessageDispatcher sender, bool connected);
     public delegate void DispatcherExceptionDelegate(DispatcherException ex, IDispatcherCommand command);
     #endregion
 
-    #region Interfaces
+    #region INTERFACES
     /// <summary>
     /// Message dispatcher interface.
     /// </summary>
     public interface IMessageDispatcher
     {
         #region PROPERTIES
-        
+
         /// <summary>
         /// Gets the list of active outgoing commands.
         /// </summary>
@@ -127,7 +116,7 @@ namespace SharedLib.Dispatcher
         /// </summary>
         /// <param name="level">Version.</param>
         /// <returns>True for scuccess otherwise false.</returns>
-        bool SetProtocolVersion(int version); 
+        bool SetProtocolVersion(int version);
 
         /// <summary>
         /// Tires to send command.
@@ -141,6 +130,14 @@ namespace SharedLib.Dispatcher
         /// </summary>
         /// <param name="cmd">Command instance.</param>
         void Send(IDispatcherCommand cmd);
+
+        /// <summary>
+        /// Sends the command.
+        /// </summary>
+        /// <param name="cmd">Command instance.</param>
+        /// <param name="parameterOffset">Prameter start offset.</param>
+        /// <param name="parameterCount">Parameter buffer count.</param>
+        void Send(IDispatcherCommand cmd, byte[] parameterBuffer, int parameterOffset, int parameterCount);
 
         /// <summary>
         /// Resetd the dispatcher and aborts the active operations.
@@ -163,12 +160,6 @@ namespace SharedLib.Dispatcher
         /// Detaches current connection if one set.
         /// </summary>
         void DetachCurrent();
-
-        [Obsolete()]
-        IDispatcherCommand SendRequest(CommandType cmdtype, CommandStates resstates, params object[] paramarray);
-
-        [Obsolete()]
-        IDispatcherCommand SendRequest(CommandType cmdtype, params object[] paramarray);
 
         /// <summary>
         /// Gets a new instance of request command.
@@ -205,7 +196,7 @@ namespace SharedLib.Dispatcher
         /// <param name="cmdType">Operation type.</param>
         /// <param name="timeout">Operation timeout.</param>
         /// <param name="parameters">Operation parameters.</param>
-        ISyncOperation CreateSyncOperationWithParam(CommandType cmdType, int timeout, object parameters=null);
+        ISyncOperation CreateSyncOperationWithParam(CommandType cmdType, int timeout, object parameters = null);
 
         /// <summary>
         /// Creates sync operation with single parameters.
@@ -213,7 +204,7 @@ namespace SharedLib.Dispatcher
         /// <param name="cmdType">Operation type.</param>
         /// <param name="timeout">Operation timeout.</param>
         /// <param name="parameters">Operation parameters.</param>
-        ISyncOperation CreateSyncOperationWithParam(CommandType cmdType, object parameters=null);
+        ISyncOperation CreateSyncOperationWithParam(CommandType cmdType, object parameters = null);
 
         /// <summary>
         /// Creates sync operation with multiple parameters.
@@ -228,14 +219,14 @@ namespace SharedLib.Dispatcher
         /// </summary>
         /// <param name="cmdType">Operation type.</param>
         /// <param name="parameters">Operation parameters.</param>
-        ISyncOperation CreateSyncOperation(CommandType cmdType, params object[] parameters);       
-        
+        ISyncOperation CreateSyncOperation(CommandType cmdType, params object[] parameters);
+
         #endregion
 
         #endregion
 
         #region EVENTS
-        
+
         /// <summary>
         /// Occurs when connection attached to this command dispatcher.
         /// </summary>
@@ -254,7 +245,7 @@ namespace SharedLib.Dispatcher
         /// <summary>
         /// Occurs on dispatcher exception.
         /// </summary>
-        event DispatcherExceptionDelegate DispatcherException; 
+        event DispatcherExceptionDelegate DispatcherException;
 
         #endregion
     }

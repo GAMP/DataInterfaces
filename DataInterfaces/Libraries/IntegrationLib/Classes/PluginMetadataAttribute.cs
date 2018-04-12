@@ -34,20 +34,18 @@ namespace IntegrationLib
             Description = description;
         }
 
-        public PluginMetadataAttribute(string name, string version, string description, string icon)
+        public PluginMetadataAttribute(string name, string version, string description, string iconResource)
             : this(name, version, description)
         {
-            #region Validation
-            if (String.IsNullOrWhiteSpace(icon))
-                throw new ArgumentNullException("Icon");
-            #endregion
+            if (string.IsNullOrWhiteSpace(iconResource))
+                throw new ArgumentNullException(nameof(iconResource));
 
-            IconResource = icon;
+            IconResource = iconResource;
         }
 
         #endregion
 
-        #region Properties
+        #region PROPERTIES
 
         /// <summary>
         /// Gets plugin name.

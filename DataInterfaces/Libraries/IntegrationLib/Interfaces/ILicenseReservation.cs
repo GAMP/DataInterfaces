@@ -1,15 +1,45 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace IntegrationLib
 {
-    #region ILicenseReservation
     public interface ILicenseReservation
     {
-        global::System.Collections.Generic.Dictionary<int, global::IntegrationLib.IApplicationLicense> Licenses { get; }
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets reserved licenses.
+        /// </summary>
+        Dictionary<int, IApplicationLicense> Licenses { get; }
+
+        /// <summary>
+        /// Gets or sets license reservation id.
+        /// </summary>
         int Id { get; set; }
+
+        /// <summary>
+        /// Gets executable.
+        /// </summary>
+        string Executable
+        {
+            get;
+        }
+
+        /// <summary>
+        /// Gets appliaction.
+        /// </summary>
+        string Application
+        {
+            get;
+        }
+
+        /// <summary>
+        /// Gets host id.
+        /// </summary>
+        int HostId
+        {
+            get;
+        }
+
+        #endregion
     }
-    #endregion
 }

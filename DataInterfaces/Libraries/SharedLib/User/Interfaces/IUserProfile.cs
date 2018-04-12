@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace SharedLib.User
 {
-    #region IUserProfile
     public interface IUserProfile
     {
+        #region PROPERTIES
+
         /// <summary>
-        /// Gets the username.
+        /// Gets or sets username.
         /// </summary>
         string UserName { get; set; }
 
@@ -108,20 +106,15 @@ namespace SharedLib.User
         /// </summary>
         bool IsEnabled { get; set; }
 
+        #endregion
+
+        #region FUNCTIONS
+        
         /// <summary>
         /// Reset profile to default values.
         /// </summary>
         void Reset();
-    } 
-    #endregion
 
-    #region IIntegratedUserProfile
-    public interface IIntegratedUserProfile : IUserProfile
-    {
-        /// <summary>
-        /// Gets the time status of the profile.
-        /// </summary>
-        IUserTimeStatus TimeStatus { get; }
-    } 
-    #endregion
+        #endregion
+    }
 }

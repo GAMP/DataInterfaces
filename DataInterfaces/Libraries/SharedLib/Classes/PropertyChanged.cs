@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SharedLib
 {
@@ -74,12 +70,7 @@ namespace SharedLib
             //process event in derived classes
             if (this.OnPropertyChanging(sender, args))
             {
-                //get handler
-                var handler = this.PropertyChanged;
-
-                //raise event if listeners present
-                if (handler != null)
-                    handler(sender, args);
+                this.PropertyChanged?.Invoke(sender, args);
             }
         }
 

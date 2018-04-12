@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using SharedLib.Commands;
 using SharedLib.Dispatcher.Exceptions;
+using CoreLib;
 
 namespace SharedLib.Dispatcher
 {
@@ -16,10 +14,7 @@ namespace SharedLib.Dispatcher
         #region CONSTRUCTORS
         public IOperationBase(IDispatcherCommand cmd)
         {
-            if (cmd == null)
-                throw new ArgumentNullException(nameof(cmd));
-
-            this.Command = cmd;
+            this.Command = cmd ?? throw new ArgumentNullException(nameof(cmd));
             this.Dispatcher = cmd.Dispatcher;
         }
         #endregion
@@ -29,19 +24,17 @@ namespace SharedLib.Dispatcher
         /// <summary>
         /// Occours when state of the operation has changed.
         /// </summary>
-        public event StateChangeDelegate StateChange;
+        public event EventHandler<OperationStateEventArgs> StateChange;
 
         /// <summary>
         /// Occours when operation has been updated.
         /// </summary>
-        public event OperationUpdateDelegate OperationUpdate;
+        public event EventHandler<OperationUpdateArgs> OperationUpdate;
 
         #endregion
 
         #region FIELDS
         private OperationState state;
-        private IDispatcherCommand command;
-        private IMessageDispatcher dispatcher;
         #endregion
 
         #region PROPERTIES
@@ -51,8 +44,7 @@ namespace SharedLib.Dispatcher
         /// </summary>
         public IDispatcherCommand Command
         {
-            get { return this.command; }
-            protected set { this.command = value; }
+            get; protected set;
         }
 
         /// <summary>
@@ -60,8 +52,7 @@ namespace SharedLib.Dispatcher
         /// </summary>
         public IMessageDispatcher Dispatcher
         {
-            get { return this.dispatcher; }
-            protected set { this.dispatcher = value; }
+            get; protected set;
         }
 
         /// <summary>
@@ -73,7 +64,7 @@ namespace SharedLib.Dispatcher
             set
             {
                 this.state = value;
-                this.RaiseStateUpdate(value);
+                this.RaiseOperationStateChange(value);
             }
         }
 
@@ -84,18 +75,7 @@ namespace SharedLib.Dispatcher
         {
             get
             {
-                return this.Command != null ? this.Command.ParamsArray.Length : 0;
-            }
-        }
-
-        /// <summary>
-        /// Gets parameters count of the current operation.
-        /// </summary>
-        public int OpParametersCount
-        {
-            get
-            {          
-                return this.ParametersCount > 1 ? this.ParametersCount -1 : 0;
+                return this.Command.ParamsArray.Length;
             }
         }
 
@@ -103,49 +83,129 @@ namespace SharedLib.Dispatcher
 
         #region VIRTUAL FUNCTIONS
 
-        public virtual void Abort() { this.RaiseStateUpdate(OperationState.Aborted); }
+        /// <summary>
+        /// Aborts operation.
+        /// </summary>
+        public virtual void Abort() { RaiseOperationStateChange(OperationState.Aborted); }
 
-        public virtual void Release() { this.RaiseStateUpdate(OperationState.Released); }
+        /// <summary>
+        /// Releases operation.
+        /// </summary>
+        public virtual void Release() { RaiseOperationStateChange(OperationState.Released); }
 
-        public virtual void Execute() { this.RaiseStateUpdate(OperationState.Completed); }
+        /// <summary>
+        /// Executes operation.
+        /// </summary>
+        public virtual void Execute() { RaiseOperationStateChange(OperationState.Completed); }
 
-        public virtual void Update(params object[] parameters) { this.RaiseOperationUpdate(parameters); }
+        /// <summary>
+        /// Updates operation.
+        /// </summary>
+        /// <param name="parameters">Operation parameters.</param>
+        public virtual void Update(params object[] parameters) { RaiseOperationUpdateWithParam(parameters); }
 
-        public virtual void Update(byte[] data) { this.RaiseOperationUpdate(data); }
+        /// <summary>
+        /// Updates operation.
+        /// </summary>
+        /// <param name="data">Operation data parameters.</param>
+        public virtual void Update(byte[] data) { RaiseOperationUpdateWithParam(data); }
+
+        /// <summary>
+        /// Raises operation update event.
+        /// </summary>
+        /// <param name="parameters">Optional parameters.</param>
+        public void RaiseOperationUpdate(params object[] parameters)
+        {
+            RaiseOperationUpdateWithParam(parameters);
+        }     
+
+        /// <summary>
+        /// Raises operation update.
+        /// </summary>
+        /// <param name="paramBuffer">Param buffer.</param>
+        /// <param name="offset">Offset.</param>
+        /// <param name="count">Count.</param>
+        public void RaiseOperationUpdate(byte[] paramBuffer, int offset, int count)
+        {
+            paramBuffer.ThrowIfInvalid(offset, count);
+            RaiseOperationUpdateWithArgs(new OperationUpdateArgs(paramBuffer, offset, count));
+        }
+
+        /// <summary>
+        /// Raises operation update event.
+        /// </summary>
+        /// <param name="param">Optional parameter.</param>
+        public virtual void RaiseOperationUpdateWithParam(object param)
+        {
+            RaiseOperationUpdateWithArgs(new OperationUpdateArgs(param));
+        }
+
+        /// <summary>
+        /// Raises operation state change.
+        /// </summary>
+        /// <param name="state">New state.</param>
+        public virtual void RaiseOperationStateChange(OperationState state)
+        {
+            RaiseOperationStateChangeWithParam(state);
+        }
+
+        /// <summary>
+        /// Raises operation state change event.
+        /// </summary>
+        /// <param name="state">New state.</param>
+        /// <param name="param">Optional parameters.</param>
+        public virtual void RaiseOperationStateChange(OperationState state, params object[] param)
+        {
+            RaiseOperationStateChangeWithParam(state, param);
+        }
+
+        /// <summary>
+        /// Raises operation state event.
+        /// </summary>
+        /// <param name="state">New state.</param>
+        /// <param name="param">Optional parameter.</param>
+        public virtual void RaiseOperationStateChangeWithParam(OperationState state, object param = null)
+        {
+            var previousState = this.state;
+            this.state = state;
+
+           RaiseOperationStateChangeWithArgs(new OperationStateEventArgs(previousState, state, param));
+        }
 
         #endregion
 
         #region FUNCTIONS
 
         /// <summary>
-        /// Checks if the current operation command has a valid paramters count.
+        /// Checks if the current operation command has exact paramters count.
         /// </summary>
         /// <param name="count">Paramters count.</param>
         /// <returns>True or false.</returns>
         public bool HasParamsCount(int count)
         {
-            return this.Command != null && (this.Command.ParamsArray.Length >= count);
+            return Command.ParamsArray.Length >= count;
         }
 
         /// <summary>
-        /// Checks if the current operation command has a valid paramters count without counting the operation type command.
+        /// Checks if the current operation command has a exact operation paramters count.
         /// </summary>
         /// <param name="count">Paramters count.</param>
         /// <returns>True or false.</returns>
         public bool HasOpParametersCount(int count)
         {
-            return this.Command != null && ((this.Command.ParamsArray.Length - 1) >= count);
+            return Command.ParamsArray.Length - 1 >= count;
         }
 
         /// <summary>
         /// Gets if operation parameter count is in range.
         /// </summary>
-        /// <param name="low">Low range.</param>
-        /// <param name="high">High range.</param>
+        /// <param name="lowIndex">Low range.</param>
+        /// <param name="highIndex">High range.</param>
         /// <returns>True or false.</returns>
-        public bool HasOpParametersBetween(int low, int high)
+        public bool HasOpParametersBetween(int lowIndex, int highIndex)
         {
-            return this.Command != null && ((this.Command.ParamsArray.Length - 1) >= low & (this.Command.ParamsArray.Length - 1) >= high | high == 0);
+            var parametersLength = this.Command.ParamsArray.Length - 1;
+            return parametersLength >= lowIndex && parametersLength >= highIndex;
         }
 
         /// <summary>
@@ -159,9 +219,9 @@ namespace SharedLib.Dispatcher
         /// <returns>Parameter of type T.</returns>
         public T GetParameterAt<T>(int index)
         {
-            if (this.HasOpParametersBetween(0, index))
+            if (HasOpParametersBetween(0, index))
             {
-                return (T)this.Command.ParamsArray[index];
+                return (T)Command.ParamsArray[index];
             }
             else
             {
@@ -176,16 +236,49 @@ namespace SharedLib.Dispatcher
         /// <param name="index">Parameter index.</param>
         /// <param name="parameter">Parameter value.</param>
         /// <returns>True or false.</returns>
-        public bool TryGetParameterAt<T>(int index,out T parameter)
+        public bool TryGetParameterAt<T>(int index, out T parameter)
         {
             parameter = default(T);
 
-            if (!this.HasOpParametersBetween(0, index))
+            if (!HasOpParametersBetween(0, index))
                 return false;
 
-            parameter = (T)this.Command.ParamsArray[index];
+            if (Command.ParamsArray[index] is T value)
+            {
+                parameter = value;
+                return true;
+            }
 
-            return true;
+            return false;
+        }
+
+        /// <summary>
+        /// Tries to obtain parameter at specified index.
+        /// </summary>
+        /// <typeparam name="T">Parameter type.</typeparam>
+        /// <param name="parameters">Parameters array.</param>
+        /// <param name="index">Parameter index.</param>
+        /// <param name="parameter">Parameter value.</param>
+        /// <returns>True or false.</returns>
+        public bool TryGetParameterAt<T>(object[] parameters, int index, out T parameter)
+        {
+            parameter = default(T);
+
+            if (parameters == null)
+                return false;
+
+            var parametersLength = parameters.Length - 1;
+
+            if (parametersLength < 0 || parametersLength < index)
+                return false;
+
+            if (parameters[index] is T value)
+            {
+                parameter = value;
+                return true;
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -208,73 +301,94 @@ namespace SharedLib.Dispatcher
         /// <returns>True or false.</returns>
         public bool IsParameterAtEquals<T>(int index)
         {
-            return this.HasOpParametersBetween(0, index) ? this.Command.ParamsArray[index] is T : false;
+            return HasOpParametersBetween(0, index) ? Command.ParamsArray[index] is T : false;
+        }
+
+        /// <summary>
+        /// Checks if parameter at specified index equal to null.
+        /// </summary>
+        /// <param name="index">Parameter index.</param>
+        /// <remarks>
+        /// This function will return false if there is no parameter at specified index.
+        /// </remarks>
+        /// <returns>True or false.</returns>
+        public bool IsParameterAtEqualsNull(int index)
+        {
+            return HasOpParametersBetween(0, index) ? Command.ParamsArray[index] == null : false;
         }
 
         #endregion
 
         #region PROTECTED FUNCTIONS
 
-        public void RaiseOperationUpdateWithParam(object param)
+        protected void RaiseOperationStateChangeWithArgs(OperationStateEventArgs args)
         {
-            this.OperationUpdate?.Invoke(this, param);
+            StateChange?.Invoke(this, args);
         }
 
-        public void RaiseStateUpdateWithParam(OperationState state, object param)
+        protected void RaiseOperationUpdateWithArgs(OperationUpdateArgs args)
         {
-            this.state = state;
+            OperationUpdate?.Invoke(this, args);
+        }
 
-            this.StateChange?.Invoke(this, state, param);
-        }
-        
-        public void RaiseOperationUpdate(params object[] parameters)
+        protected void RaiseInvalidParams()
         {
-            this.RaiseOperationUpdateWithParam(parameters);
+            RaiseInvalidParamsWithParam();
         }
-        
-        public void RaiseStateUpdate(OperationState state, params object[] param)
+
+        protected void RaiseInvalidParamsWithParam(object param = null)
         {
-            this.RaiseStateUpdateWithParam(state, param);
-        }       
-        
+            RaiseOperationStateChangeWithParam(OperationState.InvalidParameters, param);
+        }
+
         protected void RaiseInvalidParams(params object[] parameters)
         {
-            this.RaiseStateUpdateWithParam(OperationState.InvalidParameters, parameters);
+            RaiseInvalidParamsWithParam(parameters);
         }
-        
-        protected void RaiseInvalidParamsWithParam(object param)
+
+        protected void RaiseStarted()
         {
-            this.RaiseStateUpdateWithParam(OperationState.InvalidParameters, param);
+            RaiseStartedWithParam();
+        }
+
+        protected void RaiseStartedWithParam(object param = null)
+        {
+            RaiseOperationStateChangeWithParam(OperationState.Started, param);
         }
 
         protected void RaiseStarted(params object[] parameters)
         {
-            this.RaiseStateUpdateWithParam(OperationState.Started, parameters);
+            RaiseStartedWithParam(parameters);
         }
 
-        protected void RaiseStartedWithParam(object param)
+        protected void RaiseFailed()
         {
-            this.RaiseStateUpdateWithParam(OperationState.Started, param);
+            RaiseFailedWithParam();
         }
-        
+
+        protected void RaiseFailedWithParam(object param = null)
+        {
+            RaiseOperationStateChangeWithParam(OperationState.Failed, param);
+        }
+
         protected void RaiseFailed(params object[] parameters)
         {
-            this.RaiseStateUpdateWithParam(OperationState.Failed, parameters);
+            RaiseFailedWithParam(parameters);
         }
 
-        protected void RaiseFailedWithParam(object param)
+        protected void RaiseCompleted()
         {
-            this.RaiseStateUpdateWithParam(OperationState.Failed, param);
+            RaiseCompletedWithParam();
         }
-        
+
+        protected void RaiseCompletedWithParam(object param = null)
+        {
+            RaiseOperationStateChangeWithParam(OperationState.Completed, param);
+        }
+
         protected void RaiseCompleted(params object[] parameters)
         {
-            this.RaiseStateUpdateWithParam(OperationState.Completed, parameters);
-        }
-
-        protected void RaiseCompletedWithParam(object param)
-        {
-            this.RaiseStateUpdateWithParam(OperationState.Completed, param);
+            RaiseCompletedWithParam(parameters);
         }
 
         /// <summary>

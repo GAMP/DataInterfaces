@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using IntegrationLib;
 using NetLib;
 using SharedLib;
 using SharedLib.Dispatcher;
-using SharedLib.Logging;
 using System.Runtime.Serialization;
 
 namespace ServerService
@@ -188,11 +185,8 @@ namespace ServerService
         #region CONSTRUCTOR
         public ReservationEventArgs(ILicenseReservation reservation, bool released)
         {
-            if (reservation == null)
-                throw new ArgumentNullException("reservation");
-
             this.Released = released;
-            this.Reservation = reservation;
+            this.Reservation = reservation ?? throw new ArgumentNullException("reservation");
         }
         #endregion
 
@@ -503,7 +497,7 @@ namespace ServerService
             get; protected set;
         }
         #endregion
-    } 
+    }
     #endregion
 
     #region USERPICTURECHANGEDEVENTARGS
@@ -745,7 +739,7 @@ namespace ServerService
                 throw new ArgumentNullException(nameof(balance));
 
             this.Balance = balance;
-        } 
+        }
         #endregion
 
         #region PROPERTIES
@@ -755,7 +749,369 @@ namespace ServerService
         public UserBalance Balance
         {
             get; protected set;
-        } 
+        }
+        #endregion
+    }
+    #endregion
+
+    #region USERSESSIONCHANGEDEVENTARGS
+    [Serializable()]
+    [DataContract()]
+    public class UserSessionChangedEventArgs : UserIdEventArgsBase
+    {
+        #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance user session state change.
+        /// </summary>
+        /// <param name="userId">User id.</param>
+        /// <param name="state">New state.</param>
+        /// <param name="span">Span.</param>
+        public UserSessionChangedEventArgs(int userId, int hostId, int slot, SessionState state, double span) : base(userId)
+        {
+            this.State = state;
+            this.Span = span;
+            this.Slot = slot;
+            this.HostId = hostId;
+        }
+        #endregion
+
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets new state.
+        /// </summary>
+        [DataMember()]
+        public SessionState State
+        {
+            get; protected set;
+        }
+
+        /// <summary>
+        /// Gets span.
+        /// </summary>
+        [DataMember()]
+        public double Span
+        {
+            get; protected set;
+        }
+
+        /// <summary>
+        /// Gets slot.
+        /// </summary>
+        [DataMember()]
+        public int Slot
+        {
+            get; protected set;
+        }
+
+        /// <summary>
+        /// Gets host id.
+        /// </summary>
+        public int HostId
+        {
+            get; protected set;
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #region USAGESESSIONCHANGEDEVENTARGS
+    [Serializable()]
+    [DataContract()]
+    public class UsageSessionChangedEventArgs : UserIdEventArgsBase
+    {
+        #region CONSTRUCTOR
+        public UsageSessionChangedEventArgs(int userId, UsageType usageType, string timeProduct) : base(userId)
+        {
+            this.CurrentTimeProduct = timeProduct;
+            this.CurrentUsageType = usageType;
+        }
+        #endregion
+
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets current time poroduct name.
+        /// </summary>
+        public string CurrentTimeProduct
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets current usage type.
+        /// </summary>
+        public UsageType CurrentUsageType
+        {
+            get;
+            private set;
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #region USERPROFILEEVENTARGS
+    /// <summary>
+    /// User profile event arguments.
+    /// </summary>
+    [Serializable()]
+    [DataContract()]
+    public class UserProfileEventArgs : UserProfileChangeEventArgs
+    {
+        #region CONSTRUCTOR
+        public UserProfileEventArgs(int userId, object userProfile, UserChangeType type) : base(userId, type)
+        {
+            if (userProfile == null)
+                throw new ArgumentNullException(nameof(userProfile));
+
+            this.UserProfile = userProfile;
+        }
+        #endregion
+
+        #region FIELDS
+        private object userProfile;
+        #endregion
+
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets user profile.
+        /// </summary>
+        [DataMember()]
+        public object UserProfile
+        {
+            get { return this.userProfile; }
+            protected set { this.userProfile = value; }
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #region USERBALANCECLOSEEVENTARGS
+    [Serializable()]
+    [DataContract()]
+    public class UserBalanceCloseEventArgs : UserIdEventArgsBase
+    {
+        #region CONSTRUCTOR
+        public UserBalanceCloseEventArgs(int userId) : base(userId)
+        { }
+        #endregion
+    }
+    #endregion
+
+    #region BILLINGOPTIONSCHANGEDEVENTARGS
+    [Serializable()]
+    [DataContract()]
+    public class BillingOptionsChangedEventArgs : UserProfileChangeEventArgs
+    {
+        #region CONSTRUCTOR
+        public BillingOptionsChangedEventArgs(int userId, BillingOption? options) : base(userId, UserChangeType.BillingOptions)
+        {
+            this.Options = options;
+        }
+        #endregion
+
+        #region PROPERTIES
+        /// <summary>
+        /// Gets billing options.
+        /// </summary>
+        public BillingOption? Options
+        {
+            get; protected set;
+        }
+        #endregion
+    }
+    #endregion
+
+    #region APPRATEDEVENTARGS
+    [DataContract()]
+    [Serializable()]
+    public class AppRatedEventArgs : UserIdEventArgsBase
+    {
+        #region CONSTRUCTOR
+        public AppRatedEventArgs(int userId, int appId, int userRating, int appRating, int count) : base(userId)
+        {
+            this.AppId = appId;
+            this.UserRating = userRating;
+            this.AppRating = appRating;
+            this.RatesCount = count;
+        }
+        #endregion
+
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets rated app id.
+        /// </summary>
+        [DataMember()]
+        public int AppId
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets global average rating value.
+        /// </summary>
+        [DataMember()]
+        public int AppRating
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets user rating value.
+        /// </summary>
+        [DataMember()]
+        public int UserRating
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets total ratings count.
+        /// </summary>
+        [DataMember()]
+        public int RatesCount
+        {
+            get;
+            private set;
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #region APPSTATEVENTARGS
+    [DataContract()]
+    [Serializable()]
+    public class AppStatEventArgs : UserIdEventArgsBase
+    {
+        #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="userId">User id.</param>
+        /// <param name="appId">App id.</param>
+        /// <param name="appExeId">App exe id.</param>
+        /// <param name="totalAppTime">Total app time.</param>
+        /// <param name="totalAppExecutions">Total app executions.</param>
+        /// <param name="totalAppExeTime">Total app exe time.</param>
+        /// <param name="totalAppExeExecutions">Total app exe executions.</param>
+        /// <param name="totalAppExeUserTime">Total app exe user time.</param>
+        /// <param name="totalAppExeUserExectutions">Total app exe user executions.</param>
+        public AppStatEventArgs(int userId,
+            int appId,
+            int appExeId,
+            double totalAppTime,
+            int totalAppExecutions,
+            double totalAppExeTime,
+            int totalAppExeExecutions,
+            double totalAppExeUserTime,
+            int totalAppExeUserExectutions) : base(userId)
+        {
+            this.AppId = appId;
+            this.AppExeId = appExeId;
+
+            this.TotalAppTime = totalAppTime;
+            this.TotalAppExecutions = totalAppExecutions;
+
+            this.TotalAppExeTime = totalAppExeTime;
+            this.TotalAppExeExecutions = totalAppExeExecutions;
+
+            this.TotalAppExeUserTime = totalAppExeUserTime;
+            this.TotalAppExeUserExecutions = totalAppExeUserExectutions;
+        }
+        #endregion
+
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets app id.
+        /// </summary>
+        [DataMember()]
+        public int AppId
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets app exe id.
+        /// </summary>
+        [DataMember()]
+        public int AppExeId
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets total app time.
+        /// </summary>
+        [DataMember()]
+        public double TotalAppTime
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets total app executions.
+        /// </summary>
+        [DataMember()]
+        public int TotalAppExecutions
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets total executable time.
+        /// </summary>
+        [DataMember()]
+        public double TotalAppExeTime
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Get total executions.
+        /// </summary>
+        [DataMember()]
+        public int TotalAppExeExecutions
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets total executable user time.
+        /// </summary>
+        [DataMember()]
+        public double TotalAppExeUserTime
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Gets total user executions.
+        /// </summary>
+        [DataMember()]
+        public int TotalAppExeUserExecutions
+        {
+            get;
+            private set;
+        }
+
         #endregion
     } 
     #endregion

@@ -16,6 +16,7 @@ namespace ServerService
     public interface IUserService
     {
         #region EVENTS
+
         /// <summary>
         /// Occurs on user state change.
         /// </summary>
@@ -35,6 +36,16 @@ namespace ServerService
         /// Occurs on user balance change.
         /// </summary>
         event EventHandler<UserBalanceEventArgs> UserBalanceChange;
+
+        /// <summary>
+        /// Occurs on user session change.
+        /// </summary>
+        event EventHandler<UserSessionChangedEventArgs> UserSessionChange;
+
+        /// <summary>
+        /// Occurs on user balance close.
+        /// </summary>
+        event EventHandler<UserBalanceCloseEventArgs> UserBalanceClose;
 
         #endregion
 

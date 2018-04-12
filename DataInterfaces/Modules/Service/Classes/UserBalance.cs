@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using ProtoBuf;
+using System;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ServerService
 {
@@ -12,10 +9,24 @@ namespace ServerService
     /// </summary>
     [Serializable()]
     [DataContract()]
+    [ProtoContract()]
     public class UserBalance
     {
         #region CONSTRUCTOR
-        public UserBalance(int userId, decimal deposits, int points,decimal onInvoices,decimal onInvoicedUsage,decimal onActiveUsage,double? timeOnUsageBalance,double timeProduct,double timeFixed)
+
+        public UserBalance()
+        { }
+
+        public UserBalance(int userId,
+            decimal deposits,
+            int points,
+            decimal onInvoices,
+            decimal onInvoicedUsage,
+            decimal onActiveUsage,
+            double? totalUserTime,
+            double? totalCreditedTime,
+            double timeProduct,
+            double timeFixed)
         {
             this.UserId = userId;
 
@@ -26,109 +37,132 @@ namespace ServerService
             this.OnInvoicedUsage = onInvoicedUsage;
             this.OnUninvoicedUsage = onActiveUsage;
 
-            this.AvailableTime = timeOnUsageBalance;
+            this.AvailableTime = totalUserTime;
+            this.AvailableCreditedTime = totalCreditedTime;
             this.TimeProduct = timeProduct;
             this.TimeFixed = timeFixed;
         }
+
         #endregion
 
         #region PROPERTIES
 
         /// <summary>
-        /// Gets user id.
+        /// Gets or sets user id.
         /// </summary>
         [DataMember(Order = 0)]
+        [ProtoMember(1)]
         public int UserId
         {
-            get; protected set;
+            get; set;
         }
 
         /// <summary>
-        /// Gets deposits balance.
+        /// Gets or sets total user deposits.
         /// </summary>
         [DataMember(Order = 1)]
+        [ProtoMember(2)]
         public decimal Deposits
         {
             get;
-            protected set;
+            set;
         }
 
         /// <summary>
-        /// Gets points balance.
+        /// Gets or sets total user points.
         /// </summary>
         [DataMember(Order = 2)]
+        [ProtoMember(3)]
         public int Points
         {
             get;
-            protected set;
+            set;
         }
 
         /// <summary>
-        /// Gets total outstanding amount on invoices.
+        /// Gets or sets total outstanding amount on invoices.
         /// </summary>
         [DataMember(Order = 3)]
+        [ProtoMember(4)]
         public decimal OnInvoices
         {
             get;
-            protected set;
+            set;
         }
 
         /// <summary>
-        /// Gets total outstanding amount on invoiced usage sessions.
+        /// Gets or sets total outstanding amount on invoiced usage sessions.
         /// </summary>
         [DataMember(Order = 4)]
+        [ProtoMember(5)]
         public decimal OnInvoicedUsage
         {
             get;
-            protected set;
+            set;
         }
 
         /// <summary>
-        /// Gets total outstanding amount on current active usage session.
+        /// Gets or sets total outstanding amount on current active usage session.
         /// </summary>
         [DataMember(Order = 5)]
+        [ProtoMember(6)]
         public decimal OnUninvoicedUsage
         {
             get;
-            protected set;
+            set;
         }
 
         /// <summary>
         /// Gets total amount of time on time product purchases.
         /// </summary>
-        [DataMember(Order =6)]
+        [DataMember(Order = 6)]
+        [ProtoMember(7)]
         public double TimeProduct
         {
             get;
-            protected set;
+            set;
         }
 
         /// <summary>
-        /// Gets total amount of time on fixed time purchases.
+        /// Gets or sets total amount of time on fixed time purchases.
         /// </summary>
-        [DataMember(Order =7)]
+        [DataMember(Order = 7)]
+        [ProtoMember(8)]
         public double TimeFixed
         {
             get;
-            protected set;
+            set;
         }
 
         /// <summary>
-        /// Gets total time based on user deposits.
+        /// Gets or sets total time based on user deposits and time products.
         /// </summary>
-        [DataMember(Order =8)]
+        [DataMember(Order = 8)]
+        [ProtoMember(9)]
         public double? AvailableTime
         {
             get;
-            protected set;
+            set;
         }
 
-        #region BALANCES
+        /// <summary>
+        /// Gets or sets total time based on user deposits and time products.
+        /// This value also includes time based on credit limit.
+        /// </summary>
+        [DataMember(Order = 9)]
+        [ProtoMember(10)]
+        public double? AvailableCreditedTime
+        {
+            get; set;
+        }
+
+        #region COMPUTED
 
         /// <summary>
         /// Gets current balance.
         /// </summary>
-        [DataMember()]
+        [DataMember(Order = 10)]
+        [ProtoIgnore()]
         public decimal Balance
         {
             get { return this.Deposits - this.OnInvoices - this.OnUninvoicedUsage; }
@@ -137,7 +171,8 @@ namespace ServerService
         /// <summary>
         /// Gets time balance on product time.
         /// </summary>
-        [DataMember()]
+        [DataMember(Order = 11)]
+        [ProtoIgnore()]
         public double TimeProductBalance
         {
             get { return this.TimeProduct + this.TimeFixed; }
@@ -149,15 +184,24 @@ namespace ServerService
         /// <remarks>
         /// This balance is represented by sum of invoiced and active usage. 
         /// </remarks>
-        [DataMember()]
+        [DataMember(Order = 12)]
+        [ProtoIgnore()]
         public decimal UsageBalance
         {
             get { return this.OnInvoicedUsage + this.OnUninvoicedUsage; }
-        } 
+        }
 
-        #endregion  
+        /// <summary>
+        /// Gets total outstanding.
+        /// </summary>
+        [DataMember(Order = 13)]
+        [ProtoIgnore()]
+        public decimal TotalOutstanding
+        {
+            get { return this.OnInvoices + this.OnUninvoicedUsage; }
+        }
 
-
+        #endregion
 
         #endregion
     }

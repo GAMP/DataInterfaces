@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Runtime.Serialization;
 using SharedLib;
 using SharedLib.User;
@@ -315,7 +312,7 @@ namespace IntegrationLib
             this.MobilePhone = string.Empty;
             this.Phone = string.Empty;
             this.PostCode = string.Empty;
-            this.Sex = SharedLib.Sex.Unspecified;
+            this.Sex = Sex.Unspecified;
             this.Role = UserRoles.None;
             this.UserName = string.Empty;
             this.IsEnabled = false;

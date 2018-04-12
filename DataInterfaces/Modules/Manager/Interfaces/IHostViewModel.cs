@@ -1,12 +1,6 @@
-﻿using NetLib;
-using SharedLib;
-using SharedLib.Configuration;
-using System;
+﻿using SharedLib;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Manager.ViewModels
 {
@@ -86,7 +80,7 @@ namespace Manager.ViewModels
         {
             get;
             set;
-        } 
+        }
         #endregion
 
         #region HOST COMPUTER
@@ -168,6 +162,10 @@ namespace Manager.ViewModels
             set;
         }
 
+        /// <summary>
+        /// Gets if computer operating system is 64 bit.
+        /// </summary>
+        bool? Is64BitOperatingSystem { get; }
 
         #endregion
 
@@ -201,7 +199,12 @@ namespace Manager.ViewModels
         {
             get;
             set;
-        } 
+        }
+
+        /// <summary>
+        /// Gets if host has at least one reserved guest account.
+        /// </summary>
+        bool HasReservedGuest { get; set; }
 
         #endregion
 
@@ -222,7 +225,7 @@ namespace Manager.ViewModels
         /// Removes user from host view model.
         /// </summary>
         /// <param name="user"></param>
-        void RemoveUser(IUserMemberViewModel user); 
+        void RemoveUser(IUserMemberViewModel user);
 
         /// <summary>
         /// Gets current user.
@@ -231,7 +234,7 @@ namespace Manager.ViewModels
         /// When multiple users logged on host then this value is equal to null.
         /// </remarks>
         IUserMemberViewModel CurrentUser { get; }
-        
+
         #endregion
     }
 }

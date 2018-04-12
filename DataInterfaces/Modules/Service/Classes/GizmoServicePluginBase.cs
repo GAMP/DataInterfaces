@@ -10,6 +10,10 @@ namespace ServerService
         IPartImportsSatisfiedNotification,
         IDisposable
     {
+        #region FIELDS
+        protected bool isDisposed;
+        #endregion
+
         #region PROPERTIES
 
         /// <summary>

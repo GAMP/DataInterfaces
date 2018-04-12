@@ -11,6 +11,8 @@ namespace ServerService
     /// </summary>
     public interface IGizmoServiceModulePlugin : IGizmoServicePlugin
     {
+        #region FUNCTIONS
+        
         /// <summary>
         /// Initializes plugin.
         /// </summary>
@@ -24,6 +26,8 @@ namespace ServerService
         /// <summary>
         /// Stopping plugin.
         /// </summary>
-        void Stop();
+        void Stop(); 
+
+        #endregion
     }
 }

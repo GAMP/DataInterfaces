@@ -18,13 +18,18 @@ namespace SkinInterfaces.Converters
 
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
+            bool revert = false;
+
+            if(parameter!=null)
+                bool.TryParse(parameter.ToString(), out revert);
+
             if (value == null)
             {
-                return Visibility.Collapsed;
+                return revert ? Visibility.Visible : Visibility.Collapsed;
             }
             else
             {
-                return Visibility.Visible;
+                return revert ? Visibility.Collapsed : Visibility.Visible;
             }
         }
 

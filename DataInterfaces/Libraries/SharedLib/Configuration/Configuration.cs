@@ -3,11 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SharedLib.Configuration
 {
@@ -194,9 +190,20 @@ namespace SharedLib.Configuration
             set;
         }
 
+        /// <summary>
+        /// Gets or sets financial configuration.
+        /// </summary>
+        [Category("Financial")]
+        [Description("Financial configuration.")]
+        [DataMember(Order = 2)]
+        public FinancialConfig Financial
+        {
+            get;set;
+        }
+
         #endregion
 
-        #region OVVERIDES
+        #region OVERRIDES
         public override void SetDefaults()
         {
             this.Network.SetDefaults();
@@ -299,9 +306,11 @@ namespace SharedLib.Configuration
         {
             this.Network = new ServiceNetworkConfig();
             this.Database = new ServiceDatabaseConfig();
-            this.WebApi = new ServiceWebApiConfig();
+            this.Web = new ServiceWebConfig();
             this.FileSystem = new ServiceFileSystemConfig();
             this.General = new ServiceGeneralConfig();
+            this.Web = new ServiceWebConfig();
+            this.Backup = new ServiceBackupConfig();
         }
         #endregion
 
@@ -331,16 +340,12 @@ namespace SharedLib.Configuration
             set;
         }
 
-        /// <summary>
-        /// Gets or sets web api configuration.
-        /// </summary>
-        [Category("Web API")]
-        [Description("Web API configuration.")]
+        [Category("Web")]
+        [Description("Web configuration.")]
         [DataMember(Order = 2)]
-        public ServiceWebApiConfig WebApi
+        public ServiceWebConfig Web
         {
-            get;
-            set;
+            get; set;
         }
 
         /// <summary>
@@ -367,6 +372,17 @@ namespace SharedLib.Configuration
             set;
         }
 
+        /// <summary>
+        /// Gets or sets backup configuration.
+        /// </summary>
+        [Category("Backup")]
+        [Description("Backup configuration.")]
+        [DataMember(Order = 5)]
+        public ServiceBackupConfig Backup
+        {
+            get;set;
+        }
+
         #endregion
 
         #region OVERRIDE
@@ -375,9 +391,10 @@ namespace SharedLib.Configuration
             base.SetDefaults();
             this.Network.SetDefaults();
             this.Database.SetDefaults();
-            this.WebApi.SetDefaults();
+            this.Web.SetDefaults();
             this.FileSystem.SetDefaults();
             this.General.SetDefaults();
+            this.Backup.SetDefaults();
         }
         #endregion
     }
@@ -513,28 +530,12 @@ namespace SharedLib.Configuration
         }
 
         /// <summary>
-        /// Gets or sets if the service should resolve the incoming client hostnames.
-        /// </summary>
-        /// <remarks>
-        /// In some cases resolving hostnames may lead to slowdowns in incomming client connection processing.
-        /// </remarks>
-        [Category("Network")]
-        [Description("Enables hostname resolving.")]
-        [DefaultValue(false)]
-        [DataMember(Order = 9)]
-        public bool ResolveHostnames
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
         /// Gets or sets if the hostnames should be restored on client machines.
         /// </summary>
         [Category("Network")]
         [DefaultValue(false)]
         [Description("Enables hostname restoring.")]
-        [DataMember(Order = 10)]
+        [DataMember(Order = 9)]
         public bool RestoreHostnames
         {
             get;
@@ -547,7 +548,7 @@ namespace SharedLib.Configuration
         [Category("Network")]
         [DefaultValue(true)]
         [Description("Enables client auto discovery.")]
-        [DataMember(Order = 11)]
+        [DataMember(Order = 10)]
         public bool AutoDiscoverClients
         {
             get;
@@ -592,6 +593,15 @@ namespace SharedLib.Configuration
             set;
         }
 
+        [Category("Database")]
+        [DefaultValue(null)]
+        [Description("Specifies database command timeout.")]
+        [DataMember()]
+        public int? CommandTimeout
+        {
+            get;set;
+        }
+
         #endregion
     }
 
@@ -627,7 +637,6 @@ namespace SharedLib.Configuration
             set;
         }
 
-
         /// <summary>
         /// Enables or disables client auto update.
         /// </summary>
@@ -653,45 +662,154 @@ namespace SharedLib.Configuration
             get; set;
         }
 
+        [Category("General")]
+        [Description("Members auto invoice settings.")]
+        [DataMember(Order = 4)]
+        public AutoInvoiceConfig MemberAutoInvoice
+        {
+            get;set;
+        }
+
+        [Category("General")]
+        [Description("Guets auto invoice settings.")]
+        [DataMember(Order = 5)]
+        public AutoInvoiceConfig GuestAutoInvoice
+        {
+            get; set;
+        }
+
         #endregion
     }
 
     [DataContract()]
     [Serializable()]
-    public class ServiceWebApiConfig : ConfigBase
+    public class ServiceBackupConfig : ConfigBase
     {
         #region PROPERTIES
-
+        
         /// <summary>
-        /// Gets or sets if Server WEB API Enabled.
+        /// Gets or sets if backup is enabled.
         /// </summary>
-        [Category("Web API")]
-        [DefaultValue(false)]
-        [Description("Enables or disables WEB API.")]
         [DataMember()]
-        public bool EnableWebAPI
+        [DefaultValue(true)]
+        public bool IsEnabled
         {
-            get;
-            set;
+            get; set;
         }
 
         /// <summary>
-        /// Gets or sets WEB API port.
+        /// Gets or sets backup folder.
         /// </summary>
-        [Category("Web API")]
-        [Description("Specifies WEB API listening port.")]
-        [DefaultValue(8080)]
-        [Range(1, 65536)]
         [DataMember()]
-        public int WebAPIPort
+        public string BackupFolder
         {
-            get;
-            set;
+            get; set;
         }
+
+        /// <summary>
+        /// Gets or sets maximum amount of backup files to keep.
+        /// </summary>
+        [DefaultValue(30)]
+        [DataMember()]
+        public int MaxFiles
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets backup time.
+        /// </summary>
+        [DataMember()]
+        public TimeSpan? Time
+        {
+            get; set;
+        }
+
+        #endregion
+
+        #region OVERRIDES
+
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+
+            this.Time = new TimeSpan(6, 0, 0);
+        } 
 
         #endregion
     }
 
+    [Serializable()]
+    [DataContract()]
+    public class AutoInvoiceConfig : ConfigBase
+    {
+        #region PROPERTIES
+
+        [DataMember(Order =0)]
+        [DefaultValue(false)]
+        public bool AutoInvoice
+        {
+            get; set;
+        }
+
+        [DataMember(Order = 1)]
+        [Range(1,int.MaxValue)]
+        [DefaultValue(30)]
+        public int AfterMinutes
+        {
+            get; set;
+        }
+
+        [DataMember(Order = 2)]
+        [Range(1, int.MaxValue)]
+        [DefaultValue(false)]
+        public bool AutoPay
+        {
+            get; set;
+        } 
+
+        #endregion
+    }
+
+    #region SERVICEWEBCONFIG
+    [DataContract()]
+    [Serializable()]
+    public class ServiceWebConfig : ConfigBase
+    {
+        /// <summary>
+        /// Gets or sets if web portal enabled.
+        /// </summary>
+        [DefaultValue(true)]
+        [DataMember(Order = 0)]
+        public bool EnableWebProtal
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets web portal port.
+        /// </summary>
+        [DefaultValue(80)]
+        [Range(1, 65536)]
+        [DataMember(Order = 1)]
+        public int WebPortalPort
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets if HTTPs connections should be enabled.
+        /// </summary>
+        [DefaultValue(false)]
+        [DataMember(Order = 2)]
+        public bool EnableSSL
+        {
+            get; set;
+        }
+    }
+    #endregion
+
+    #region SERVICEFILESYSTEMCONFIG
     [Serializable()]
     [DataContract()]
     public class ServiceFileSystemConfig : ConfigBase
@@ -728,7 +846,30 @@ namespace SharedLib.Configuration
 
         #endregion
     }
+    #endregion
 
+    #endregion
+
+    #region FINANCIALCONFIG
+    /// <summary>
+    /// Global financial configuration.
+    /// </summary>
+    [Serializable()]
+    [DataContract()]
+    public class FinancialConfig : ConfigBase
+    {
+        #region PROPERTIES
+        /// <summary>
+        /// Gets or sets time sale vat.
+        /// </summary>
+        [DataMember()]
+        [Range(0,100)]
+        public decimal TimeSaleVAT
+        {
+            get; set;
+        }
+        #endregion
+    } 
     #endregion
 
     #region CLIENTCONFIGURATION
@@ -847,7 +988,7 @@ namespace SharedLib.Configuration
         /// </summary>
         [Category("Client")]
         [Description("Specifies computer turn off timeout.")]
-        [DefaultValue(180)]
+        [DefaultValue(10)]
         [DataMember()]
         public int TurnOffTimeOut
         {
@@ -1053,13 +1194,29 @@ namespace SharedLib.Configuration
             set;
         }
 
+        [Category("Shell")]
+        [DefaultValue(0)]
+        [DataMember(Order =5)]
+        public int TimeLeftWarning
+        {
+            get;set;
+        }
+
+        [Category("Shell")]
+        [DefaultValue(TimeLeftWarningType.All)]
+        [DataMember(Order = 6)]
+        public TimeLeftWarningType TimeLeftWarningType
+        {
+            get;set;
+        }
+
         /// <summary>
         /// Gets or sets virtual desktop items.
         /// </summary>
         [Category("Shell")]
         [Description("Specifies virtual desktop items.")]
         [DefaultValue(null)]
-        [DataMember(Order = 5)]
+        [DataMember(Order = 7)]
         public List<int> VirtualDesktopItems
         {
             get;
@@ -1078,7 +1235,7 @@ namespace SharedLib.Configuration
     [Category("Services")]
     [Serializable()]
     [DataContract()]
-    public class ServiceConnectionConfig : IComparable<ServiceConnectionConfig>
+    public class ServiceConnectionConfig : ConfigBase, IComparable<ServiceConnectionConfig>
     {
         #region PROPERTIES
 
@@ -1097,6 +1254,7 @@ namespace SharedLib.Configuration
         /// Gets or sets servers port.
         /// </summary>
         [DataMember()]
+        [DefaultValue(44967)]
         [Range(1, 65536)]
         public int Port
         {
@@ -1117,7 +1275,7 @@ namespace SharedLib.Configuration
         /// <summary>
         /// Gets or sets connection compression level.
         /// </summary>
-        [DefaultValue(1)]
+        [DefaultValue(0)]
         [DataMember()]
         [Range(1, 9)]
         public int CompressionLevel
@@ -1135,6 +1293,36 @@ namespace SharedLib.Configuration
         {
             get;
             set;
+        }
+
+        /// <summary>
+        /// Gets or sets if keep alive should be enabled.
+        /// </summary>
+        [DefaultValue(true)]
+        [DataMember()]
+        public bool KeepAlive
+        {
+            get;set;
+        }
+
+        /// <summary>
+        /// Gets or sets keep alive timeout.
+        /// </summary>
+        [DataMember()]
+        [DefaultValue(250)]
+        public int KeepAliveTimeout
+        {
+            get;set;
+        }
+
+        /// <summary>
+        /// Gets or sets keep alive interval.
+        /// </summary>
+        [DataMember()]
+        [DefaultValue(150)]
+        public int KeepAliveInterval
+        {
+            get;set;
         }
 
         #endregion
@@ -1214,10 +1402,54 @@ namespace SharedLib.Configuration
             get; set;
         }
 
+        [Category("Manager")]
+        [DataMember(Order = 0, IsRequired = false, EmitDefaultValue = false)]
+        public string Language
+        {
+            get;set;
+        }
+
+        [Category("Modules")]
         [DataMember(EmitDefaultValue =true)]
         public List<ManagerModuleConfig> Modules
         {
             get;set;
+        }
+
+        [Category("Devices")]
+        [DataMember()]
+        public POSDeviceConfig CashDrawer
+        {
+            get; set;
+        }
+
+        [Category("Devices")]
+        [DataMember()]
+        public POSDeviceConfig BarcodeScanner
+        {
+            get;set;
+        }
+
+        [Category("Devices")]
+        [DataMember()]
+        public POSDeviceConfig POSPrinter
+        {
+            get;set;
+        }
+
+        [Category("Devices")]
+        [DataMember()]
+        public POSDeviceConfig Printer
+        {
+            get;set;
+        }
+
+        [Category("User Interface")]
+        [DataMember()]
+        public bool OverlayDetailEnabled
+        {
+            get;
+            set;
         }
 
         #endregion
@@ -1246,6 +1478,72 @@ namespace SharedLib.Configuration
         public bool IsHidden
         {
             get; set;
+        }
+    }
+    #endregion
+
+    #region POSDEVICECONFIG
+    [Category("Devices")]
+    [Serializable()]
+    [DataContract()]
+    public class POSDeviceConfig
+    {
+        [DataMember(Order =0)]
+        public string Name
+        {
+            get; set;
+        }
+
+        [DataMember(Order =1)]
+        public string Provider
+        {
+            get; set;
+        }
+    }
+    #endregion
+
+    #region SKINCONFIG
+    /// <summary>
+    /// Client skin configuration.
+    /// </summary>
+    [Category("Skin")]
+    [Serializable()]
+    [DataContract()]
+    public class SkinConfig : ConfigBase
+    {
+        private string[] noload, supressModule;
+
+        /// <summary>
+        /// Gets or sets disabled modules.
+        /// </summary>
+        [DataMember()]
+        public string[] SupressModule
+        {
+            get
+            {
+                if (this.supressModule == null)
+                    this.supressModule = new string[0];
+                return this.supressModule;
+            }
+            set
+            {
+                this.supressModule = value;
+            }
+        }
+
+        [DataMember()]
+        public string[] NoLoadDll
+        {
+            get
+            {
+                if (this.noload == null)
+                    this.noload = new string[0];
+                return this.noload;
+            }
+            set
+            {
+                this.noload = value;
+            }
         }
     } 
     #endregion

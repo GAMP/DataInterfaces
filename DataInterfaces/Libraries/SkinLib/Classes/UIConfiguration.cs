@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using SharedLib;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Xml;
-using System.IO;
 using System.ComponentModel;
-using SkinInterfaces;
-using System.Diagnostics;
 
 namespace SkinLib
 {
@@ -127,7 +123,7 @@ namespace SkinLib
                     this.userControls = new ObservableCollection<FrameworkElement>();
                 return this.userControls;
             }
-        }     
+        }
 
         /// <summary>
         /// Gets the list of the assemblies assigned to this configuration.
@@ -261,7 +257,7 @@ namespace SkinLib
         {
             get { return this.Layouts; }
         }
- 
+
         IEnumerable<IUIComponent> IUIConfiguration.Components
         {
             get
@@ -494,10 +490,11 @@ namespace SkinLib
                     #region PROCESS EACH LAYOUT
 
                     //Create new configuration class                
-                    UILayout layout = new UILayout(this);
-
-                    //set xml
-                    layout.Xml = childNode.Clone();
+                    UILayout layout = new UILayout(this)
+                    {
+                        //set xml
+                        Xml = childNode.Clone()
+                    };
 
                     #region LAYOUT PROPERTIES
 
@@ -542,9 +539,14 @@ namespace SkinLib
                         layout.ResolutionHeight = int.Parse(childNode.Attributes["ResolutionHeight"].Value);
                     }
 
-                    if (childNode.Attributes["ImagePath"] != null)
+                    if (childNode.Attributes[nameof(UILayout.ImagePath)] != null)
                     {
-                        layout.ImagePath = childNode.Attributes["ImagePath"].Value;
+                        layout.ImagePath = childNode.Attributes[nameof(UILayout.ImagePath)].Value;
+                    }
+
+                    if (childNode.Attributes[nameof(UILayout.VideoPath)] != null)
+                    {
+                        layout.VideoPath = childNode.Attributes[nameof(UILayout.VideoPath)].Value;
                     }
 
                     #endregion
@@ -793,8 +795,7 @@ namespace SkinLib
             {
                 try
                 {
-                    var instance = UIHandler.Current.CreateInstance(component) as FrameworkElement;
-                    if (instance != null && component.GUID != this.MainWindowComponent.GUID)
+                    if (UIHandler.Current.CreateInstance(component) is FrameworkElement instance && component.GUID != this.MainWindowComponent.GUID)
                     {
                         this.UserControlDictionary.Add(component.GUID, instance);
                         this.UserControls.Add(instance);

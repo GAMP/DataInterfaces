@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using SharedLib.User;
 using SharedLib.Applications;
@@ -317,24 +315,33 @@ namespace Client
     {
         #region CONSTRUCTOR
 
-        public ExecutionContextStateArgs(ContextExecutionState newState,
+        public ExecutionContextStateArgs(int exeId,ContextExecutionState newState,
             ContextExecutionState oldState,
             object stateObject)
         {
+            this.ExecutableId = exeId;
             this.NewState = newState;
             this.OldState = oldState;
             this.StateObject = stateObject;
         }
 
-        public ExecutionContextStateArgs(ContextExecutionState newState,
+        public ExecutionContextStateArgs(int exeId, ContextExecutionState newState,
           ContextExecutionState oldState)
-            : this(newState, oldState, null)
+            : this(exeId, newState, oldState, null)
         {
         }
 
         #endregion
 
         #region PROPERTIES
+
+        /// <summary>
+        /// Gets or sets executable id.
+        /// </summary>
+        public int ExecutableId
+        {
+            get;protected set;
+        }
 
         /// <summary>
         /// Gets the instance of the state object.

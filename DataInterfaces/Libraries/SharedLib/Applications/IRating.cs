@@ -6,6 +6,8 @@ namespace SharedLib.Applications
     /// </summary>
     public interface IRating
     {
+        #region PROPERTIES
+        
         /// <summary>
         /// Gets application id.
         /// </summary>
@@ -24,6 +26,8 @@ namespace SharedLib.Applications
         /// <summary>
         /// Gets total rates value.
         /// </summary>
-        double Value { get; }
+        double Value { get; } 
+
+        #endregion
     }
 }
