@@ -47,12 +47,10 @@ namespace SkinInterfaces
             // Get the IProvideValue interface which gives us access to the target property 
             // and object.  Note that MSDN calls this interface "internal" but it's necessary
             // here because we need to know what property we are assigning to.
-            var pvt = serviceProvider.GetService(typeof(IProvideValueTarget)) as IProvideValueTarget;
-            if (pvt != null)
+            if (serviceProvider.GetService(typeof(IProvideValueTarget)) is IProvideValueTarget pvt)
             {
-                var fe = pvt.TargetObject as FrameworkElement;
                 object targetProperty = pvt.TargetProperty;
-                if (fe != null)
+                if (pvt.TargetObject is FrameworkElement fe)
                 {
                     // If the element isn't loaded yet, then wait for it.
                     if (!fe.IsLoaded)
@@ -85,9 +83,8 @@ namespace SkinInterfaces
                                 }
                             }
                             // Simple property assignment through reflection.
-                            else if (targetProperty is PropertyInfo)
+                            else if (targetProperty is PropertyInfo pi)
                             {
-                                var pi = (PropertyInfo)targetProperty;
                                 pi.SetValue(fe, ie, null);
                             }
 
@@ -134,12 +131,11 @@ namespace SkinInterfaces
         /// <returns></returns>
         static IInputElement GetFirstFocusableChild(IInputElement fe)
         {
-            var dpo = fe as DependencyObject;
-            return dpo == null ? null : (from vc in EnumerateVisualTree(dpo, c => !FocusManager.GetIsFocusScope(c))
-                                         let iic = vc as IInputElement
-                                         where iic != null && iic.Focusable && iic.IsEnabled &&
-                                         (!(iic is FrameworkElement) || (((FrameworkElement)iic).IsVisible))
-                                         select iic).FirstOrDefault();
+            return !(fe is DependencyObject dpo) ? null : (from vc in EnumerateVisualTree(dpo, c => !FocusManager.GetIsFocusScope(c))
+                                                           let iic = vc as IInputElement
+                                                           where iic != null && iic.Focusable && iic.IsEnabled &&
+                                                           (!(iic is FrameworkElement) || (((FrameworkElement)iic).IsVisible))
+                                                           select iic).FirstOrDefault();
         }
 
         /// <summary>
@@ -152,8 +148,7 @@ namespace SkinInterfaces
         {
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(start); i++)
             {
-                var child = VisualTreeHelper.GetChild(start, i) as T;
-                if (child != null && (eval != null && eval(child)))
+                if (VisualTreeHelper.GetChild(start, i) is T child && (eval != null && eval(child)))
                 {
                     yield return child;
                     foreach (var childOfChild in EnumerateVisualTree(child, eval))

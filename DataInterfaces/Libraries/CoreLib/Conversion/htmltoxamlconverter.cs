@@ -737,7 +737,7 @@ namespace HTMLConverter
                 if (hrefParts.Length > 0 && hrefParts[0].Trim().Length > 0)
                 {
                     xamlElement.SetAttribute("Source", hrefParts[0].Trim());
-                    xamlElement.SetAttribute("Stretch", "None");
+                    //xamlElement.SetAttribute("Stretch", "None");
                 }
 
                 // Recurse into element subtree
@@ -2090,6 +2090,7 @@ namespace HTMLConverter
                         break;
 
                     case "width":
+                        break;
                     case "height":
                         //  Decide what to do with width and height propeties
                         break;
@@ -2651,6 +2652,8 @@ namespace HTMLConverter
         public const string Xaml_TableCell_RowSpan = "RowSpan";
 
         public const string Xaml_Width = "Width";
+
+        public const string Xaml_Height = "Height";
         public const string Xaml_Brushes_Black = "Black";
         public const string Xaml_FontFamily = "FontFamily";
 

@@ -126,6 +126,9 @@ namespace SharedLib.Commands
 
         [OperationType(typeof(ServiceToClientOpType))]
         ServiceToClinet = 21,
+
+        [OperationType(typeof(EnvironmentOprations))]
+        Environment =22,
     }
     #endregion
 
@@ -140,13 +143,19 @@ namespace SharedLib.Commands
         GetApplicationStat = 8,
         ReserveLicenseBatch = 9,
         ReleaseLicenseBatch = 10,
-        GetAppContainer=11,
-        GetAppInfoContainer=12,
-        GetAppInfoUserContainer=13,
-        AppEvent=14,
-        AppExeExecutionGraphGet=15,
-        AppLinkGet=2,
-        //free id 2,3
+        GetAppContainer = 11,
+        GetAppInfoContainer = 12,
+        GetAppInfoUserContainer = 13,
+        GetNewsContainer = 3,
+        AppEvent = 14,
+        AppExeExecutionGraphGet = 15,
+        AppExePersonalFileGet =16,
+        AppExePersonalFilePathsGet=17,
+        AppExePersonalFileByActivationGet=21,
+        AppExeDeploymentPathsGet=18,
+        AppLinkGet = 2,
+        DeploymentGet=19,
+        PersonalFileGet=20,
     }
     #endregion
 
@@ -293,7 +302,7 @@ namespace SharedLib.Commands
         /// <summary>
         /// Usage session info get operation.
         /// </summary>
-        GetUsageSessionInfo=18,
+        GetUsageSessionInfo = 18,
     }
     #endregion
 
@@ -384,7 +393,7 @@ namespace SharedLib.Commands
         GetOutOfOrderState = 13,
         SetMaintenanceMode = 14,
         GetMaintenanceMode = 15,
-        RDPSessionStart=16,
+        RDPSessionStart = 16,
     }
     #endregion
 
@@ -444,8 +453,8 @@ namespace SharedLib.Commands
         HostOrderStateSet = 13,
         HostSecurityStateSet = 14,
         HostMaintenanceStateSet = 15,
-        HostEndpointTurnOn=253,
-        HostEndpointTurnOff=254,
+        HostEndpointTurnOn = 253,
+        HostEndpointTurnOff = 254,
         #endregion
 
         #region USERGROUP
@@ -453,6 +462,7 @@ namespace SharedLib.Commands
         UserGroupAdd = 17,
         UserGroupUpdate = 18,
         UserGroupRemove = 19,
+        UserGroupHostDisallowedGet = 268,
         #endregion
 
         #region SECURITY PROFILE
@@ -561,7 +571,7 @@ namespace SharedLib.Commands
         UserSessionGet = 83,
         UserSessionInfoGet = 174,
         UserSessionOpenInfoGet = 219,
-        UsageSessionActiveInfoGet=259,
+        UsageSessionActiveInfoGet = 259,
         #endregion
 
         #region USER
@@ -580,14 +590,14 @@ namespace SharedLib.Commands
         UserCredentialsValidate = 96,
         UserNegativeBalanceEnable = 97,
         UserLogin = 98,
-        UserGuestLogin =215,
+        UserGuestLogin = 215,
         UserMove = 218,
         UserLogout = 99,
         UserDisable = 100,
         UserSetSmartCardId = 101,
         UserPersonalInfoRequest = 247,
         UserGuestReserve = 220,
-        UserBillingOptionSet=260,
+        UserBillingOptionSet = 260,
         #endregion
 
         #region USER NOTE
@@ -713,12 +723,12 @@ namespace SharedLib.Commands
         UserBalanceGet = 170,
         UserGetMoneyForTime = 171,
         UserGetTimeForMoney = 172,
-        UserProductTimeGet = 173,       
+        UserProductTimeGet = 173,
         UserCloseBalance = 175,
         #endregion
 
         #region USAGE SESSION
-        UsageSessionInvoiceActive = 176, 
+        UsageSessionInvoiceActive = 176,
         #endregion
 
         #region DEPOSIT
@@ -730,7 +740,7 @@ namespace SharedLib.Commands
         #endregion
 
         #region POINTS
-        PointsGetBalance = 182, 
+        PointsGetBalance = 182,
         #endregion
 
         #region STOCK
@@ -739,32 +749,32 @@ namespace SharedLib.Commands
         StockRemove = 185,
         StockSet = 186,
         StockGet = 187,
-        StockLogicalGet =216,
+        StockLogicalGet = 216,
         #endregion
 
         #region PRODUCT ORDER
         ProductOrderGet = 188,
         ProductOrderCancel = 189,
-        ProductOrderInvoice = 190, 
+        ProductOrderInvoice = 190,
         #endregion
 
         #region INVOICE
         InvoiceGet = 191,
         InvoicePaymentAdd = 192,
         InvoicePaymentGet = 193,
-        InvoiceVoid=258,
+        InvoiceVoid = 258,
         #endregion
 
         #region SETTING
         SettingGet = 194,
-        SettingSet = 195, 
+        SettingSet = 195,
         #endregion
 
         #region ATTRIBUTE
         AttributeGet = 196,
         AttributeAdd = 197,
         AttributeUpdate = 198,
-        AttributeRemove = 199, 
+        AttributeRemove = 199,
         #endregion
 
         #region USER ATTRIBUTE
@@ -778,34 +788,34 @@ namespace SharedLib.Commands
         PresetTimeSaleGet = 205,
         PresetTimeSaleAdd = 206,
         PresetTimeSaleUpdate = 207,
-        PresetTimeSaleRemove = 208, 
+        PresetTimeSaleRemove = 208,
         #endregion
 
         #region PRESET TIME MONEY
         PresetTimeSaleMoneyGet = 209,
         PresetTimeSaleMoneyAdd = 210,
         PresetTimeSaleMoneyUpdate = 211,
-        PresetTimeSaleMoneyRemove = 212, 
+        PresetTimeSaleMoneyRemove = 212,
         #endregion
 
         #region ENTITIES
         EntityMarkDeleted = 204,
-        EntityCount = 213, 
+        EntityCount = 213,
         #endregion
 
-        ManagerModuleInfoGet=214,
+        ManagerModuleInfoGet = 214,
 
-        ShiftStart=221,
-        ShiftEnd=222,
-        ShiftGetActiveRegister=224,
-        ShiftGetActive=225,
+        ShiftStart = 221,
+        ShiftEnd = 222,
+        ShiftGetActiveRegister = 224,
+        ShiftGetActive = 225,
         ShiftLock = 228,
-        ShiftUnlock = 229,   
+        ShiftUnlock = 229,
         ShiftInfoGet = 234,
 
-        ShiftSummaryGet=227,
-        ShiftReportGet=235,
-        SaleSummaryReportGet =236,
+        ShiftSummaryGet = 227,
+        ShiftReportGet = 235,
+        SaleSummaryReportGet = 236,
         SaleReportGet = 255,
 
         RegisterGet = 230,
@@ -813,30 +823,37 @@ namespace SharedLib.Commands
         RegisterUpdate = 232,
         RegisterGetCurrent = 226,
 
-        WakeOnLan =237,
+        WakeOnLan = 237,
 
-        AssetTypeAdd=238,
-        AssetTypeUpdate=239,
-        AssetTypeRemove=240,
-        AssetTypeGet =246,
+        AssetTypeAdd = 238,
+        AssetTypeUpdate = 239,
+        AssetTypeRemove = 240,
+        AssetTypeGet = 246,
 
-        AssetGet=252,
-        AssetAdd=241,
-        AssetUpdate=242,
+        AssetGet = 252,
+        AssetAdd = 241,
+        AssetUpdate = 242,
         AssetRemove = 243,
 
-        AssetCheckIn=244,
-        AssetCheckInByUser=250,
-        AssetCheckOut=245,
+        AssetCheckIn = 244,
+        AssetCheckInByUser = 250,
+        AssetCheckOut = 245,
         AssetInfoGet = 249,
 
-        AssetTransactionGet=248,
+        AssetTransactionGet = 248,
 
-        LicenseReservationGet=256,
-        LicenseKeyReservationInfoGet=257,
+        LicenseReservationGet = 256,
+        LicenseKeyReservationInfoGet = 257,
 
+        WaitingLineMoveTo=261,
+        WaitingLineAdd=262,
+        WaitingLineRemove=263,
+        WaitingLineInfoGet=264,
+        WaitngLineGet =265,
+        WaitingLineAddOrUpdate =266,
+        WaitingLinePrioritiesSet=267,
 
-        //max 261
+        //max 269
     }
     #endregion
 
@@ -855,8 +872,8 @@ namespace SharedLib.Commands
         EntityEvent = 7,
         UserBalanceEvent = 8,
         UserSessionChangeEvent = 9,
-        EventBatch =10,
-        UsageSessionEvent=11,
+        EventBatch = 10,
+        UsageSessionEvent = 11,
     }
     #endregion
 
@@ -864,8 +881,15 @@ namespace SharedLib.Commands
     public enum ServiceToClientOpType
     {
         UserBalanceEvent = 0,
-        EntityEvent =1,
+        EntityEvent = 1,
     }
+    #endregion
+
+    #region EnvironmentOprations
+    public enum EnvironmentOprations
+    {
+        Expand = 0,
+    } 
     #endregion
 
     #region OperationTypeAttribute

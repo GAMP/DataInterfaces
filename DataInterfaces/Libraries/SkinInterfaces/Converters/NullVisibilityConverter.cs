@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Data;
 
@@ -20,7 +17,7 @@ namespace SkinInterfaces.Converters
         {
             bool revert = false;
 
-            if(parameter!=null)
+            if (parameter != null)
                 bool.TryParse(parameter.ToString(), out revert);
 
             if (value == null)

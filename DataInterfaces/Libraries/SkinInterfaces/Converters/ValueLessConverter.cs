@@ -18,11 +18,21 @@ namespace SkinInterfaces.Converters
             if (parameter == null)
                 return false;
 
-            var typeConverter = TypeDescriptor.GetConverter(value.GetType());
-            if (!typeConverter.CanConvertFrom(parameter.GetType()))
-                return false;
+            var valueType = value.GetType();
+            var parameterType = parameter.GetType();
 
-            var convertedValue = typeConverter.ConvertFrom(parameter);
+            object convertedValue;
+            if (parameterType != valueType)
+            {
+                var typeConverter = TypeDescriptor.GetConverter(valueType);
+                if (!typeConverter.CanConvertFrom(parameterType))
+                    return false;
+
+                convertedValue = typeConverter.ConvertFrom(parameter);
+            }else
+            {
+                convertedValue = parameter;
+            }
 
             if (value is IComparable iComparable)
                 return iComparable.CompareTo(convertedValue) < 0;         

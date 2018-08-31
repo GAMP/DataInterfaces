@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Markup;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Reflection;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
 using System.Windows.Controls;
@@ -162,12 +158,12 @@ namespace SkinInterfaces
             }
             else
             {
-                RoutedEventHandler handler = null;
-                handler = (sender, e) =>
+                void handler(object sender, RoutedEventArgs e)
                 {
                     element.Loaded -= handler;
                     action();
-                };
+                }
+
                 element.Loaded += handler;
             }
         }
@@ -181,12 +177,12 @@ namespace SkinInterfaces
             }
             else
             {
-                RoutedEventHandler handler = null;
-                handler = (sender, e) =>
+                void handler(object sender, RoutedEventArgs e)
                 {
                     element.Loaded -= handler;
                     action(element);
-                };
+                }
+
                 element.Loaded += handler;
             }
         }

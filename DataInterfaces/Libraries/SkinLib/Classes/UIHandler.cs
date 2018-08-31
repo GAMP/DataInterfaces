@@ -2148,6 +2148,7 @@ namespace SkinLib
             int height = default(int);
 
             var primaryScreen = System.Windows.Forms.Screen.PrimaryScreen;
+            var workingArea = primaryScreen.WorkingArea;
 
             if (multiScreen)
             {
@@ -2156,12 +2157,12 @@ namespace SkinLib
             }
             else
             {
-                width = primaryScreen.Bounds.Width;
+                width = workingArea.Width;
             }
 
-            height = primaryScreen.WorkingArea.Height;
+            height = workingArea.Height;
 
-            return MoveWindow(hwnd, 0, 0, width, height, true);
+            return MoveWindow(hwnd,workingArea.Location.X, workingArea.Location.Y, width, height, true);
         }
 
         #endregion

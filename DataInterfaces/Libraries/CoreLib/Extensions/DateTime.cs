@@ -75,6 +75,20 @@ namespace CoreLib
         }
 
         /// <summary>
+        /// Gets start of the day.
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public static DateTime StartOfTheDay(this DateTime dt)
+        {
+            if (dt == null)
+                throw new ArgumentNullException(nameof(dt));
+
+            return new DateTime(dt.Year, dt.Month, dt.Day);
+
+        }
+
+        /// <summary>
         /// Gets start of the week date time.
         /// </summary>
         /// <param name="dt">DateTime.</param>

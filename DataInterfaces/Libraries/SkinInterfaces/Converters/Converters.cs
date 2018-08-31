@@ -17,7 +17,6 @@ using CyClone.Core;
 using System.Windows.Markup;
 using IntegrationLib;
 using System.Reflection;
-using System.Windows.Media;
 
 namespace SkinInterfaces.Converters
 {
@@ -468,140 +467,6 @@ namespace SkinInterfaces.Converters
         }
 
         #endregion
-    }
-    #endregion
-
-    #region GameServerNameConverter
-    /// <summary>
-    /// This class converts the game server name to the standart color strings.
-    /// </summary>
-    public class GameServerNameConverter : IValueConverter
-    {
-        #region IValueConverter Members
-
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            try
-            {
-                if (value != null)
-                {
-                    //Get the initial string value.
-                    string initialstring = value.ToString();
-                    //Create a textblock to hold the value of string.
-                    TextBlock textholder = new TextBlock();
-                    textholder.TextWrapping = TextWrapping.NoWrap;
-                    textholder.TextTrimming = TextTrimming.CharacterEllipsis;
-                    //Get the first index of color key.
-                    int index = initialstring.IndexOf("^");
-                    //Ignore or proceed depending on color keys found.
-                    if (index == -1)
-                    {
-                        //No color keys found.
-                        //Return full string to the caller.
-                        textholder.Inlines.Add(new Run(initialstring));
-                    }
-                    else
-                    {
-                        while (true)
-                        {
-                            if (index != -1)
-                            {
-                                string color = findcolor(initialstring.ToCharArray()[index + 1].ToString());
-                                int nextindex = initialstring.IndexOf("^", index + 1);
-
-                                if ((nextindex != -1) & (nextindex != index + 1))
-                                {
-                                    string substring = initialstring.Substring(index + 2, (nextindex) - (index + 2));
-                                    Run subrun = new Run(substring)
-                                    {
-                                        Foreground = (Brush)new System.Windows.Media.BrushConverter().ConvertFromString(color.ToString())
-                                    };
-                                    textholder.Inlines.Add(subrun);
-                                    index = nextindex;
-                                }
-                                else
-                                {
-                                    string substring = initialstring.Substring(index + 2, initialstring.Length - (index + 2));
-                                    Run subrun = new Run(substring);
-
-                                    subrun.Foreground = (Brush)new System.Windows.Media.BrushConverter().ConvertFromString(color);
-                                    textholder.Inlines.Add(subrun);
-                                    return textholder;
-                                }
-
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
-
-                    }
-
-                }
-                return value;
-            }
-            catch
-            {
-                return "Unable To Parse";
-            };
-
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
-        string findcolor(string character)
-        {
-            switch (character)
-            {
-                case "0": return "Black";
-                case "1": return "Red";
-                case "2": return "Green";
-                case "3": return "Yellow";
-                case "4": return "Blue";
-                case "5": return "Cyan";
-                case "6": return "Pink";
-                case "7": return "White";
-                case "8": return "Orange";
-                case "9": return "Gray";
-                case "a": return "Orange";
-                case "b": return "Turquoise";
-                case "c": return "Purple";
-                case "d": return "LightBlue";
-                case "e": return "Purple";
-                case "f": return "LightBlue";
-                case "g": return "LightGreen";
-                case "h": return "DarkGreen";
-                case "i": return "DarkRed";
-                case "j": return "Claret";
-                case "k": return "Brown";
-                case "l": return "LightBrown";
-                case "m": return "Olive";
-                case "n": return "Beige";
-                case "o": return "Beige";
-                case "p": return "Black";
-                case "r": return "Green";
-                case "s": return "Yellow";
-                case "t": return "Blue";
-                case "u": return "Cyan";
-                case "v": return "Pink";
-                case "w": return "White";
-                case "x": return "Orange";
-                case "y": return "Gray";
-                case "z": return "Orange";
-                case "/": return "Beige";
-                case "*": return "Gray";
-                case "-": return "Olive";
-                case "+": return "FoxyRed";
-                case "?": return "DarkBrown";
-                case "@": return "Brown";
-            }
-            return null;
-        }
     }
     #endregion
 
@@ -1179,7 +1044,7 @@ namespace SkinInterfaces.Converters
         {
             try
             {
-                if (!String.IsNullOrWhiteSpace(value as string))
+                if (!string.IsNullOrWhiteSpace(value as string))
                 {
                     var doc = HTMLConverter.HtmlToXamlConverter.ConvertHtmlToXaml(value as string, true);
                     FlowDocument document = (FlowDocument)XamlReader.Parse(doc);
@@ -1187,7 +1052,8 @@ namespace SkinInterfaces.Converters
                 }
             }
             catch
-            { }
+            {
+            }
             return null;
         }
 

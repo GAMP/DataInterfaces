@@ -1,10 +1,4 @@
-﻿using Manager.ViewModels;
-using SharedLib.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SharedLib.ViewModels;
 
 namespace Manager.ViewModels
 {

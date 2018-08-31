@@ -12,7 +12,7 @@ namespace ServerService
         #region CONSTRUCTOR
         public LicenseInfo(Dictionary<string, object> parameters)
         {
-            this.Parameters = parameters ?? throw new ArgumentNullException(nameof(parameters));
+            Parameters = parameters ?? throw new ArgumentNullException(nameof(parameters));
         }
         #endregion
 
@@ -30,7 +30,7 @@ namespace ServerService
         {
             get
             {
-                return (this.HasValidTrialLicenses ? this.TrialCount : 0) + (this.HasValidLicenses ? this.Count : 0);
+                return (HasValidTrialLicenses ? TrialCount : 0) + (HasValidLicenses ? Count : 0);
             }
         }
 
@@ -40,7 +40,7 @@ namespace ServerService
         [DataMember()]
         public int Count
         {
-            get { return (int)this.Parameters["count"]; }
+            get { return (int)Parameters["count"]; }
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace ServerService
         [DataMember()]
         public int TrialCount
         {
-            get { return (int)this.Parameters["trialcount"]; }
+            get { return (int)Parameters["trialcount"]; }
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace ServerService
         [DataMember()]
         public string HardwareId
         {
-            get { return (string)this.Parameters["hardwareid"]; }
+            get { return (string)Parameters["hardwareid"]; }
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace ServerService
         {
             get
             {
-                return (bool)this.Parameters["local"];
+                return (bool)Parameters["local"];
             }
         }
 
@@ -81,7 +81,7 @@ namespace ServerService
         {
             get
             {
-                return (DateTime)this.Parameters["issued"];
+                return (DateTime)Parameters["issued"];
             }
         }
 
@@ -91,7 +91,7 @@ namespace ServerService
         [DataMember()]
         public DateTime Expires
         {
-            get { return (DateTime)this.Parameters["expiredate"]; }
+            get { return (DateTime)Parameters["expiredate"]; }
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace ServerService
         [DataMember()]
         public DateTime TrialExpires
         {
-            get { return (DateTime)this.Parameters["trialexpiredate"]; }
+            get { return (DateTime)Parameters["trialexpiredate"]; }
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace ServerService
         [DataMember()]
         public bool IsServerTrialExpired
         {
-            get { return (bool)this.Parameters["servertrialexpired"]; }
+            get { return (bool)Parameters["servertrialexpired"]; }
         }
 
         /// <summary>
@@ -118,7 +118,7 @@ namespace ServerService
         [DataMember()]
         public bool IsLocalExpired
         {
-            get { return this.Expires <= InternalDate.Now; }
+            get { return Expires <= InternalDate.Now; }
         }
 
         /// <summary>
@@ -127,7 +127,7 @@ namespace ServerService
         [DataMember()]
         public bool IsLocalTrialExpired
         {
-            get { return this.TrialExpires <= InternalDate.Now; }
+            get { return TrialExpires <= InternalDate.Now; }
         }
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace ServerService
         [DataMember()]
         public bool IsServerExpired
         {
-            get { return (bool)this.Parameters["serverexpired"]; }
+            get { return (bool)Parameters["serverexpired"]; }
         }
 
         /// <summary>
@@ -147,7 +147,7 @@ namespace ServerService
         {
             get
             {
-                return this.TrialCount >= 0 & !this.IsServerTrialExpired & !this.IsLocalTrialExpired;
+                return TrialCount >= 0 & !IsServerTrialExpired & !IsLocalTrialExpired;
             }
         }
 
@@ -159,7 +159,7 @@ namespace ServerService
         {
             get
             {
-                return this.Count >= 0 & !this.IsServerExpired & !this.IsLocalExpired;
+                return Count >= 0 & !IsServerExpired & !IsLocalExpired;
             }
         }
 
@@ -167,8 +167,8 @@ namespace ServerService
 
         protected Dictionary<string, object> Parameters
         {
-            get { return this.parameters; }
-            set { this.parameters = value; }
+            get { return parameters; }
+            set { parameters = value; }
         }
 
         #endregion

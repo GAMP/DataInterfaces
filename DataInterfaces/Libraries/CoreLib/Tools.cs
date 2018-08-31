@@ -24,9 +24,9 @@ namespace CoreLib
         public static T Clone<T>(T source)
         {
             // Don't serialize a null object, simply return the default for that object
-            if (object.ReferenceEquals(source, null))           
+            if (object.ReferenceEquals(source, null))
                 return default(T);
-            
+
             IFormatter formatter = new BinaryFormatter();
             using (Stream stream = new MemoryStream())
             {
@@ -38,8 +38,8 @@ namespace CoreLib
                 }
             }
         }
-    } 
-    #endregion    
+    }
+    #endregion
 
     #region Wildcard
     /// <summary>
@@ -49,7 +49,7 @@ namespace CoreLib
     public class Wildcard : Regex
     {
         #region CONSTRUCTOR
-        
+
         /// <summary>
         /// Initializes a wildcard with the given search pattern.
         /// </summary>
@@ -80,7 +80,7 @@ namespace CoreLib
             return "^" + Regex.Escape(pattern).
              Replace("\\*", ".*").
              Replace("\\?", ".") + "$";
-        } 
+        }
 
         #endregion
     }
@@ -135,7 +135,16 @@ namespace CoreLib
 
             using (var key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(featureKey, true))
             {
-                key.SetValue(processName, value, RegistryValueKind.DWord);
+                if (key == null)
+                {
+                    using (var newKey = Microsoft.Win32.Registry.LocalMachine.CreateSubKey(featureKey))
+                        newKey.SetValue(processName, value, RegistryValueKind.DWord);                    
+                }
+                else
+                {
+
+                    key.SetValue(processName, value, RegistryValueKind.DWord);
+                }
             }
         }
 
@@ -201,10 +210,10 @@ namespace CoreLib
             IE8888 = 8888,
             IE8000 = 8000,
             IE7000 = 7000,
-        } 
+        }
 
         #endregion
-    } 
+    }
 
 
     #endregion

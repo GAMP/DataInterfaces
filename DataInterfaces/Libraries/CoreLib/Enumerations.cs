@@ -73,6 +73,14 @@ namespace CoreLib
         /// Update exit code.
         /// </summary>
         Update=-515,
+        /// <summary>
+        /// Another instance is running.
+        /// </summary>
+        AnotherInstanceRunning=-516,
+        /// <summary>
+        /// Terminated on session end.
+        /// </summary>
+        SessionEnded = -517,
     }
     #endregion    
 

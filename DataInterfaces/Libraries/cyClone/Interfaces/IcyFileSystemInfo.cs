@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Microsoft.Win32.SafeHandles;
 using SharedLib.Dispatcher;
 
 namespace CyClone.Core
 {
     public interface IcyFileSystemInfo
     {
+        #region PROPERTIES
+
         /// <summary>
         /// Gets or sets attributes.
         /// </summary>
@@ -28,20 +29,38 @@ namespace CyClone.Core
         DateTime LastWriteTime { get; set; }
 
         /// <summary>
-        /// Deletes file system entry.
-        /// </summary>
-        void Delete();
-
-        /// <summary>
-        /// Deletes file system entry.
-        /// </summary>
-        Task DeleteAsync();
-
-        /// <summary>
         /// Gets if entry exists.
         /// </summary>
         bool Exists { get; }
 
+        /// <summary>
+        /// Gets full file name.
+        /// </summary>
+        string FullName
+        {
+            get;
+        }
+
+        /// <summary>
+        /// Gets enumeration id.
+        /// </summary>
+        /// <remarks>
+        /// This value is only used to identify file during enumeration.
+        /// </remarks>
+        int Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets flags.
+        /// </summary>
+        FileInfoLevel Flags
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets if entry is virtual.
+        /// </summary>
         bool IsVirtual
         {
             get;
@@ -116,46 +135,35 @@ namespace CyClone.Core
         /// </summary>
         string RelativeDirectory { get; }
 
+        #endregion
+
+        #region FUNCTIONS
+
         /// <summary>
-        /// Sets the current file info to the file.
+        /// Deletes file system entry.
+        /// </summary>
+        void Delete();
+
+        /// <summary>
+        /// Deletes file system entry.
+        /// </summary>
+        Task DeleteAsync();
+
+        /// <summary>
+        /// Sets the current file info to the entry.
         /// <remarks>File info includes File Times and File Atributes.</remarks>
         /// </summary>
         void SetFileInfo();
 
         /// <summary>
-        /// Sets the current attributes to the file.
+        /// Sets the current attributes to the entry.
         /// </summary>
         void SetAtributes();
 
         /// <summary>
-        /// Sets the current file times to the file.
+        /// Sets the current file times to the entry.
         /// </summary>
         void SetFileTimes();
-
-        /// <summary>
-        /// Gets full file name.
-        /// </summary>
-        string FullName
-        {
-            get;
-        }
-
-        /// <summary>
-        /// Gets enumeration id.
-        /// </summary>
-        /// <remarks>
-        /// This value is only used to identify file during enumeration.
-        /// </remarks>
-        int Id { get; set; }
-
-        /// <summary>
-        /// Gets or sets flags.
-        /// </summary>
-        FileInfoLevel Flags
-        {
-            get;
-            set;
-        }
 
         /// <summary>
         /// Moves entry to new destination.
@@ -175,10 +183,15 @@ namespace CyClone.Core
         /// <param name="item">File system entry.</param>
         /// <returns>True or false.</returns>
         bool IsEqual(IcyFileSystemInfo item);
+
+        #endregion
     }
 
+    #region IcyRemoteFileSystemInfo
     public interface IcyRemoteFileSystemInfo : IcyFileSystemInfo
     {
+        #region PROPERTIES
+
         /// <summary>
         /// Gets message dispatcher.
         /// </summary>
@@ -186,5 +199,8 @@ namespace CyClone.Core
         {
             get;
         }
-    }
+
+        #endregion
+    } 
+    #endregion
 }

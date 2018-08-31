@@ -104,6 +104,11 @@ namespace IntegrationLib
         [Localization.Localized("LOGIN_RESULT_SLOT_INVALID")]
         SlotInvalid = 131072,
         /// <summary>
+        /// Not in waiting line.
+        /// </summary>
+        [Localization.Localized("LOGIN_RESULT_NOT_IN_WAITING_LINE")]
+        NotInWaitingLine = 262144,
+        /// <summary>
         /// Credentials pair is invalid.
         /// </summary>
         [Localization.Localized("LOGIN_RESULT_INVALID_CREDENTIALS")]

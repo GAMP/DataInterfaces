@@ -38,7 +38,34 @@ namespace GizmoDALV2
         /// created for many-to-many relationships and relationships where there is no foreign
         /// key property included in the entity class (often referred to as independent associations).
         /// </returns>
-        int SaveChanges(); 
+        int SaveChanges();
+
+        /// <summary>
+        /// Demand find entity.
+        /// </summary>
+        /// <typeparam name="TEntity">Entity type.</typeparam>
+        /// <param name="entityKey">Entity key.</param>
+        /// <returns>Found entity.</returns>
+        /// <exception cref="EntityNotFoundExcpetion">In case no entity found with given key.</exception>
+        TEntity DemandFind<TEntity>(int entityKey);
+
+        /// <summary>
+        /// Demand find entity.
+        /// </summary>
+        /// <typeparam name="TEntity">Entity type.</typeparam>
+        /// <param name="entityKeys">Entity keys.</param>
+        /// <returns>Found entity.</returns>
+        /// <exception cref="EntityNotFoundExcpetion">In case no entity found with given key.</exception>
+        TEntity DemandFind<TEntity>(object[] entityKeys);
+
+        /// <summary>
+        /// Checks if credentials are valid.
+        /// </summary>
+        /// <param name="password">Password.</param>
+        /// <param name="salt">Salt.</param>
+        /// <param name="pwdHash">Password hash.</param>
+        /// <returns></returns>
+        bool CredentialsIsPasswordValid(string password, byte[] salt, byte[] pwdHash);
 
         #endregion
     }

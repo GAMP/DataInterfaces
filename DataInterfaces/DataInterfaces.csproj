@@ -63,6 +63,7 @@
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Prefer32Bit>false</Prefer32Bit>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -91,7 +92,7 @@
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="protobuf-net, Version=2.3.7.0, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
-      <HintPath>..\..\Client_Module\packages\protobuf-net.2.3.7\lib\net40\protobuf-net.dll</HintPath>
+      <HintPath>..\..\V2Importer\packages\protobuf-net.2.3.7\lib\net40\protobuf-net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -108,7 +109,7 @@
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\Manager\packages\Expression.Blend.Sdk.1.0.2\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <HintPath>..\..\V2Importer\packages\Expression.Blend.Sdk.1.0.2\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq">
@@ -127,6 +128,7 @@
     <Compile Include="Libraries\CoreLib\Diagnostics\TraceWriter.cs" />
     <Compile Include="Libraries\CoreLib\Extensions\Byte.cs" />
     <Compile Include="Libraries\CoreLib\Extensions\CollectionView.cs" />
+    <Compile Include="Libraries\CoreLib\Extensions\DataGrid.cs" />
     <Compile Include="Libraries\CoreLib\Extensions\DateTime.cs" />
     <Compile Include="Libraries\CoreLib\Extensions\DayOfWeek.cs" />
     <Compile Include="Libraries\CoreLib\Extensions\Enum.cs" />
@@ -140,6 +142,7 @@
     <Compile Include="Libraries\CoreLib\Queue\QueueEventArgs.cs" />
     <Compile Include="Libraries\cyClone\Exceptions.cs" />
     <Compile Include="Libraries\GizmoDALV2\DataSize.cs" />
+    <Compile Include="Libraries\GizmoDALV2\DTO\WaitingLineInfo.cs" />
     <Compile Include="Libraries\GizmoDALV2\Enumerations.cs" />
     <Compile Include="Libraries\GizmoDALV2\EventArgs.cs" />
     <Compile Include="Libraries\GizmoDALV2\Exceptions.cs" />
@@ -176,6 +179,8 @@
     <Compile Include="Libraries\SharedLib\ViewModels\Interfaces\ISearchField.cs" />
     <Compile Include="Libraries\SharedLib\ViewModels\Interfaces\IViewAwareModel.cs" />
     <Compile Include="Libraries\SkinInterfaces\Behaviours\CurrencyTextBehaviour.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Behaviours\MediaElementBehaviour.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Behaviours\MouseBehaviour.cs" />
     <Compile Include="Libraries\SkinInterfaces\BindingProxy.cs" />
     <Compile Include="Libraries\SkinInterfaces\Converters\BoolAnyConverter.cs" />
     <Compile Include="Libraries\SkinInterfaces\Converters\BoolToHiddenConverter.cs" />
@@ -190,6 +195,8 @@
     <Compile Include="Libraries\SkinInterfaces\Converters\ValueLessConverter.cs" />
     <Compile Include="Libraries\SkinInterfaces\Converters\ValueNullToBoolConverter.cs" />
     <Compile Include="Libraries\SkinInterfaces\Converters\ValueGreaterConverter.cs" />
+    <Compile Include="Libraries\SkinInterfaces\EventToCommand.cs" />
+    <Compile Include="Libraries\SkinInterfaces\SetPropertyAction.cs" />
     <Compile Include="Libraries\System\ComponentModel\DataAnnotations\EmailNullEmptyAttribute.cs" />
     <Compile Include="Libraries\System\ComponentModel\DataAnnotations\PathInvalidCharactersValidationAttribute.cs" />
     <Compile Include="Libraries\System\ComponentModel\DataAnnotations\PhoneNullEmptyAttribute.cs" />
@@ -200,11 +207,17 @@
     <Compile Include="Libraries\System\Linq\Expression\IFilterSet.cs" />
     <Compile Include="Libraries\System\Threading\Tasks\NotifyTaskCompletion.cs" />
     <Compile Include="Libraries\System\Threading\Tasks\Parallel.cs" />
+    <Compile Include="Libraries\System\Windows\Data\ClutureAwareBinding.cs" />
+    <Compile Include="Libraries\Windows\UI.cs" />
     <Compile Include="Modules\Client\Classes\ClientHookPluginBase.cs" />
     <Compile Include="Modules\Client\Classes\ClientModule.cs" />
     <Compile Include="Modules\Client\Enumerations.cs" />
     <Compile Include="Modules\Client\Interfaces\IClientSwitchInModule.cs" />
     <Compile Include="Modules\Client\Interfaces\IClinetCompositionService.cs" />
+    <Compile Include="Modules\Client\Interfaces\IShellViewModel.cs" />
+    <Compile Include="Modules\Client\Interfaces\ViewModels\IFeedSourceViewModel.cs" />
+    <Compile Include="Modules\Client\Interfaces\ViewModels\IMediaViewModel.cs" />
+    <Compile Include="Modules\Client\Interfaces\ViewModels\INewsViewModel.cs" />
     <Compile Include="Modules\Client\Interfaces\Views\IAppDetailView.cs" />
     <Compile Include="Modules\Client\Interfaces\IClientSectionModule.cs" />
     <Compile Include="Modules\Client\Interfaces\ISkinBootStrapper.cs" />
@@ -294,6 +307,7 @@
     <Compile Include="Modules\Service\Interfaces\IConfigurableService.cs" />
     <Compile Include="Modules\Service\Interfaces\IGizmoServiceAuthenticationPlugin.cs" />
     <Compile Include="Modules\Service\Interfaces\IGizmoServiceHookPlugin.cs" />
+    <Compile Include="Modules\Service\Interfaces\IGizmoServiceLog.cs" />
     <Compile Include="Modules\Service\Interfaces\IGizmoServiceModulePlugin.cs" />
     <Compile Include="Modules\Service\Interfaces\IGizmoServicePlugin.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\IPluginModule.cs" />
@@ -542,6 +556,7 @@
     <Compile Include="Libraries\SkinLib\Classes\UIComponent.cs" />
     <Compile Include="Libraries\SkinLib\Interfaces\IUIConfiguration.cs" />
     <Compile Include="Libraries\SkinLib\Interfaces\IUIHandler.cs" />
+    <Compile Include="Modules\Service\Interfaces\IUserBalanceHandler.cs" />
     <Compile Include="Modules\Service\Interfaces\IUserTimeBillingHandler.cs" />
     <Compile Include="Modules\Service\Interfaces\IUserService.cs" />
     <Compile Include="Modules\Service\LicenseInfo.cs" />
@@ -577,7 +592,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

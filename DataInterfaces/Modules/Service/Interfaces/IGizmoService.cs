@@ -11,6 +11,7 @@ namespace ServerService
     /// </summary>
     public interface IGizmoService :
         IHostService,
+        IGizmoServiceLog,
         ILicenseManagmentService,
         IConfigurableService,
         IUserService,

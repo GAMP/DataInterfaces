@@ -12,16 +12,16 @@ namespace GizmoDALV2
 
         public EntityNotFoundExcpetion() : base() { }
 
-        public EntityNotFoundExcpetion(int entityKey, Type entityType):this()
+        public EntityNotFoundExcpetion(int entityKey, Type entityType) : this()
         {
             if (entityType == null)
                 throw new ArgumentNullException(nameof(entityType));
 
-            this.EntityKey = entityKey;
-            this.EntityType = entityType;
+            EntityKey = entityKey;
+            EntityType = entityType;
         }
 
-        public EntityNotFoundExcpetion(object[] keys, Type entityType):this()
+        public EntityNotFoundExcpetion(object[] keys, Type entityType) : this()
         {
             if (keys == null)
                 throw new ArgumentNullException(nameof(keys));
@@ -29,8 +29,8 @@ namespace GizmoDALV2
             if (entityType == null)
                 throw new ArgumentNullException(nameof(entityType));
 
-            this.Keys = keys;
-            this.EntityType = entityType;
+            Keys = keys;
+            EntityType = entityType;
         }
 
         public EntityNotFoundExcpetion(string message)
@@ -41,10 +41,33 @@ namespace GizmoDALV2
             : base(message, inner)
         { }
 
-        protected EntityNotFoundExcpetion(System.Runtime.Serialization.SerializationInfo info,
-            System.Runtime.Serialization.StreamingContext context)
+        protected EntityNotFoundExcpetion(SerializationInfo info,
+            StreamingContext context)
             : base(info, context)
-        { }
+        {
+            if (info != null)
+            {
+                EntityType = (Type)info.GetValue(nameof(EntityType), typeof(Type));
+                EntityKey = (int?)info.GetValue(nameof(EntityKey), typeof(int?));
+                Keys = (object[])info.GetValue(nameof(Keys), typeof(object[]));
+            }
+        }
+
+        #endregion
+
+        #region OVERRIDES
+
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+
+            if (info != null)
+            {
+                info.AddValue(nameof(EntityType), EntityType);
+                info.AddValue(nameof(EntityKey), EntityKey);
+                info.AddValue(nameof(Keys), Keys);
+            }
+        }
 
         #endregion
 
@@ -95,9 +118,14 @@ namespace GizmoDALV2
         #region CONSTRUCTOR
 
         public ErrorCodeException(TErrorCode errorCode)
-       : base()
+            : base()
         {
-            this.ErrorCode = errorCode;
+            ErrorCode = errorCode;
+        }
+
+        public ErrorCodeException(string message,TErrorCode errorCode):this(message)
+        {
+            ErrorCode = errorCode;
         }
 
         public ErrorCodeException() : base() { }
@@ -110,13 +138,13 @@ namespace GizmoDALV2
             : base(message, inner)
         { }
 
-        protected ErrorCodeException(System.Runtime.Serialization.SerializationInfo info,
-            System.Runtime.Serialization.StreamingContext context)
+        protected ErrorCodeException(SerializationInfo info,
+            StreamingContext context)
             : base(info, context)
         {
             if (info != null)
             {
-                this.ErrorCode = (TErrorCode)info.GetValue(nameof(this.ErrorCode),typeof(TErrorCode));
+                ErrorCode = (TErrorCode)info.GetValue(nameof(ErrorCode), typeof(TErrorCode));
             }
         }
 
@@ -126,7 +154,7 @@ namespace GizmoDALV2
 
             if (info != null)
             {
-                info.AddValue(nameof(this.ErrorCode), this.ErrorCode);
+                info.AddValue(nameof(ErrorCode), ErrorCode);
             }
         }
 
@@ -140,7 +168,7 @@ namespace GizmoDALV2
         [DataMember()]
         public TErrorCode ErrorCode
         {
-            get;protected set;
+            get; protected set;
         }
 
         #endregion
@@ -149,7 +177,7 @@ namespace GizmoDALV2
 
         public override string ToString()
         {
-            return string.Format("{0} failed with error {1}", this.GetType().FullName, this.ErrorCode);
+            return string.Format("{0} failed with error {1}", GetType().FullName, ErrorCode);
         }
 
         #endregion
@@ -167,8 +195,8 @@ namespace GizmoDALV2
         public OrderStatusException(OrderStatusErrorCode errorCode) : base(errorCode)
         { }
 
-        protected OrderStatusException(System.Runtime.Serialization.SerializationInfo info,
-            System.Runtime.Serialization.StreamingContext context)
+        protected OrderStatusException(SerializationInfo info,
+            StreamingContext context)
             : base(info, context)
         { }
 
@@ -185,20 +213,20 @@ namespace GizmoDALV2
 
         public PaymentExcpetionBase(TErrorCode errorCode, int paymentMethodId) : base(errorCode)
         {
-            this.PaymentMethodId = paymentMethodId;
+            PaymentMethodId = paymentMethodId;
         }
 
-        public PaymentExcpetionBase(TErrorCode errorCode):base(errorCode)
+        public PaymentExcpetionBase(TErrorCode errorCode) : base(errorCode)
         {
         }
 
-        protected PaymentExcpetionBase(System.Runtime.Serialization.SerializationInfo info,
-          System.Runtime.Serialization.StreamingContext context)
+        protected PaymentExcpetionBase(SerializationInfo info,
+          StreamingContext context)
             : base(info, context)
         {
             if (info != null)
             {
-                this.PaymentMethodId = (int?)info.GetValue(nameof(this.PaymentMethodId),typeof(int?));
+                PaymentMethodId = (int?)info.GetValue(nameof(PaymentMethodId), typeof(int?));
             }
         }
 
@@ -225,14 +253,14 @@ namespace GizmoDALV2
 
             if (info != null)
             {
-                info.AddValue(nameof(this.PaymentMethodId), this.PaymentMethodId);
+                info.AddValue(nameof(PaymentMethodId), PaymentMethodId);
             }
         }
 
         #endregion
-    } 
+    }
 
-    #endregion    
+    #endregion
 
     #region PAYMENTEXCEPTION
     [DataContract()]
@@ -241,14 +269,14 @@ namespace GizmoDALV2
     {
         #region CONSTRUCTOR
 
-        public PaymentException(PaymentErrorCode errorCode, int paymentMethodId) : base(errorCode,paymentMethodId)
+        public PaymentException(PaymentErrorCode errorCode, int paymentMethodId) : base(errorCode, paymentMethodId)
         { }
 
-        protected PaymentException(System.Runtime.Serialization.SerializationInfo info,
-            System.Runtime.Serialization.StreamingContext context)
+        protected PaymentException(SerializationInfo info,
+            StreamingContext context)
             : base(info, context)
         { }
-        
+
         #endregion
     }
     #endregion
@@ -264,8 +292,8 @@ namespace GizmoDALV2
         {
         }
 
-        protected InvoiceException(System.Runtime.Serialization.SerializationInfo info,
-            System.Runtime.Serialization.StreamingContext context)
+        protected InvoiceException(SerializationInfo info,
+            StreamingContext context)
             : base(info, context)
         { }
 
@@ -287,13 +315,13 @@ namespace GizmoDALV2
         public InvoicePaymentExcpetion(InvoicePaymentErrorCode errorCode) : base(errorCode)
         { }
 
-        protected InvoicePaymentExcpetion(System.Runtime.Serialization.SerializationInfo info,
-           System.Runtime.Serialization.StreamingContext context)
+        protected InvoicePaymentExcpetion(SerializationInfo info,
+           StreamingContext context)
             : base(info, context)
         { }
 
         #endregion
-    } 
+    }
     #endregion
 
     #region DEPOSITEXCEPTION
@@ -358,6 +386,7 @@ namespace GizmoDALV2
 
     #region ASSETEXCEPTION
     [Serializable()]
+    [DataContract()]
     public class AssetException : ErrorCodeException<AssetErrorCode>
     {
         #region CONSTRUCTOR
@@ -371,6 +400,37 @@ namespace GizmoDALV2
         { }
 
         #endregion
-    } 
+    }
+    #endregion
+
+    #region WAITINGLINEEXCEPTION
+
+    [Serializable()]
+    [DataContract()]
+    public class WaitingLineException : ErrorCodeException<WaitingLineErrorCode>
+    {
+        #region CONSTRUCTOR
+
+        public WaitingLineException(WaitingLineErrorCode code) : base(code)
+        { }
+
+        public WaitingLineException() : base() { }
+
+        public WaitingLineException(string message)
+          : base(message)
+        { }
+
+        public WaitingLineException(string message, Exception inner)
+            : base(message, inner)
+        { }
+
+        protected WaitingLineException(SerializationInfo info,
+            StreamingContext context)
+            : base(info, context)
+        { }
+
+        #endregion
+    }
+
     #endregion
 }

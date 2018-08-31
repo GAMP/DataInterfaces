@@ -6,10 +6,10 @@ namespace CyClone.Core
     /// <summary>
     /// Directory implementation interface.
     /// </summary>
-    public interface IcyDirectoryInfo :IcyFileSystemInfo
+    public interface IcyDirectoryInfo : IcyFileSystemInfo
     {
         #region PROPERTIES
-        
+
         /// <summary>
         /// Gets the total size of the directory including subdirectories.
         /// <remarks>This propery is called in synchronous manner and can take large amount of time to return.</remarks>
@@ -57,8 +57,17 @@ namespace CyClone.Core
         /// <returns>string[] of subdirectories names.</returns>
         string[] GetDirectories(string searchPattern, System.IO.SearchOption searchOption);
 
+        /// <summary>
+        /// Gets sub directories.
+        /// </summary>
+        /// <returns>Array of sub directories.</returns>
         string[] GetDirectories();
 
+        /// <summary>
+        /// Gets sub directories.
+        /// </summary>
+        /// <param name="searchPattern">Search pattern.</param>
+        /// <returns>Array of sub directories.</returns>
         string[] GetDirectories(string searchPattern);
 
         IcyDirectoryInfo[] GetDirectoryInfos();
@@ -96,33 +105,33 @@ namespace CyClone.Core
         /// <param name="relativePath">Child relative path.</param>
         /// <param name="getIfno">Enables or disables obtaining of child info data.</param>
         /// <returns>IcyFileInfo file info.</returns>
-
         IcyFileInfo GetChildFileInfo(string relativePath, bool getIfno);
 
         /// <summary>
         /// Gets list of string of each file entry present in directory.
         /// </summary>
-        /// <param name="searchPattern"></param>
+        /// <param name="searchPattern">Search pattern.</param>
         /// <returns></returns>
-
         string[] GteFileSystemEntries(string searchPattern);
 
         /// <summary>
         /// Gets list of FileSystemInfos.
+        /// <paramref name="searchPattern"/>Search pattern.<paramref name="searchPattern"/>
+        /// <paramref name="searchOption"/>Search option.<paramref name="searchOption"/>
         /// </summary>
         List<IcyFileSystemInfo> GetFileSystemInfos(string searchPattern, SearchOption searchOption);
 
         /// <summary>
         /// Gets the enumeration context for this directory info.
         /// </summary>
-        /// <returns>IEnumerationContext object.</returns>
+        /// <returns>IEnumerationContext instance.</returns>
         IEnumerationContext GetEnumerationContext();
 
         /// <summary>
         /// Gets the enumeration context for this directory info.
         /// </summary>
         /// <param name="pattern">Search pattern.</param>
-        /// <returns>IEnumerationContext object.</returns>
+        /// <returns>IEnumerationContext instance.</returns>
         IEnumerationContext GetEnumerationContext(string pattern);
 
         /// <summary>
@@ -143,7 +152,7 @@ namespace CyClone.Core
         /// Gets the root drive info.
         /// </summary>
         /// <returns></returns>
-        IcyDriveInfo GetRootInfo();    
+        IcyDriveInfo GetRootInfo();
 
         #endregion
     }
@@ -153,6 +162,6 @@ namespace CyClone.Core
     /// </summary>
     public interface IcyRemoteDirectoryInfo : IcyRemoteFileSystemInfo
     {
-    
+
     }
 }

@@ -198,7 +198,15 @@ namespace SharedLib.Configuration
         [DataMember(Order = 2)]
         public FinancialConfig Financial
         {
-            get;set;
+            get; set;
+        }
+
+        [Category("Waiting Line")]
+        [Description("Waiting line configuration.")]
+        [DataMember(Order = 2)]
+        public WaitingLineConfig WaitingLine
+        {
+            get; set;
         }
 
         #endregion
@@ -210,6 +218,65 @@ namespace SharedLib.Configuration
             this.Subscription.SetDefaults();
         }
         #endregion
+    }
+
+    [Serializable()]
+    [DataContract()]
+    public class WaitingLineConfig : ConfigBase
+    {
+        /// <summary>
+        /// Gets or sets if logout grace period should be enabled.
+        /// </summary>
+        [DefaultValue(false)]
+        [DataMember()]
+        public bool EnableLogoutGreacePeriod
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets logout grace period in minutes.
+        /// </summary>
+        [DefaultValue(30)]
+        [Range(1, int.MaxValue)]
+        [DataMember()]
+        public int LogoutGracePeriod
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets if user should be removed from all waiting lines on login.
+        /// </summary>
+        [DefaultValue(true)]
+        [DataMember()]
+        public bool RemoveFromAllOnLogin
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets waiting line next in line time.
+        /// </summary>
+        [DefaultValue(30)]
+        [Range(1, int.MaxValue)]
+        [DataMember()]
+        public int NextInLineTime
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets global waiting line remove time.
+        /// </summary>
+        [DefaultValue(30)]
+        [Range(1, int.MaxValue)]
+        [DataMember()]
+        public int RemoveTime
+        {
+            get; set;
+        }
     }
 
     [DataContract()]
@@ -380,7 +447,7 @@ namespace SharedLib.Configuration
         [DataMember(Order = 5)]
         public ServiceBackupConfig Backup
         {
-            get;set;
+            get; set;
         }
 
         #endregion
@@ -599,7 +666,7 @@ namespace SharedLib.Configuration
         [DataMember()]
         public int? CommandTimeout
         {
-            get;set;
+            get; set;
         }
 
         #endregion
@@ -667,7 +734,7 @@ namespace SharedLib.Configuration
         [DataMember(Order = 4)]
         public AutoInvoiceConfig MemberAutoInvoice
         {
-            get;set;
+            get; set;
         }
 
         [Category("General")]
@@ -686,7 +753,7 @@ namespace SharedLib.Configuration
     public class ServiceBackupConfig : ConfigBase
     {
         #region PROPERTIES
-        
+
         /// <summary>
         /// Gets or sets if backup is enabled.
         /// </summary>
@@ -734,7 +801,7 @@ namespace SharedLib.Configuration
             base.SetDefaults();
 
             this.Time = new TimeSpan(6, 0, 0);
-        } 
+        }
 
         #endregion
     }
@@ -745,7 +812,7 @@ namespace SharedLib.Configuration
     {
         #region PROPERTIES
 
-        [DataMember(Order =0)]
+        [DataMember(Order = 0)]
         [DefaultValue(false)]
         public bool AutoInvoice
         {
@@ -753,7 +820,7 @@ namespace SharedLib.Configuration
         }
 
         [DataMember(Order = 1)]
-        [Range(1,int.MaxValue)]
+        [Range(1, int.MaxValue)]
         [DefaultValue(30)]
         public int AfterMinutes
         {
@@ -766,7 +833,7 @@ namespace SharedLib.Configuration
         public bool AutoPay
         {
             get; set;
-        } 
+        }
 
         #endregion
     }
@@ -805,6 +872,37 @@ namespace SharedLib.Configuration
         public bool EnableSSL
         {
             get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets if HTTPs port.
+        /// </summary>
+        [DefaultValue(443)]
+        [Range(1, 65536)]
+        [DataMember(Order = 3)]
+        public int SSLPort
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets PFX file path.
+        /// </summary>
+        [DefaultValue(null)]
+        [DataMember(Order = 4)]
+        public string PFXPath
+        {
+            get;set;
+        }
+
+        /// <summary>
+        /// Gets or sets PFX file password.
+        /// </summary>
+        [DefaultValue(null)]
+        [DataMember(Order = 5)]
+        public string PFXPassword
+        {
+            get;set;
         }
     }
     #endregion
@@ -863,13 +961,13 @@ namespace SharedLib.Configuration
         /// Gets or sets time sale vat.
         /// </summary>
         [DataMember()]
-        [Range(0,100)]
+        [Range(0, 100)]
         public decimal TimeSaleVAT
         {
             get; set;
         }
         #endregion
-    } 
+    }
     #endregion
 
     #region CLIENTCONFIGURATION
@@ -1065,7 +1163,6 @@ namespace SharedLib.Configuration
         #endregion
     }
 
-
     [Category("General")]
     [Serializable()]
     [DataContract()]
@@ -1137,7 +1234,7 @@ namespace SharedLib.Configuration
         /// </summary>
         [Category("Shell")]
         [Description("Specifies shell skin name.")]
-        [DefaultValue("Default")]
+        [DefaultValue("Material")]
         [DataMember(Order = 0)]
         public string SkinName
         {
@@ -1196,10 +1293,10 @@ namespace SharedLib.Configuration
 
         [Category("Shell")]
         [DefaultValue(0)]
-        [DataMember(Order =5)]
+        [DataMember(Order = 5)]
         public int TimeLeftWarning
         {
-            get;set;
+            get; set;
         }
 
         [Category("Shell")]
@@ -1207,7 +1304,7 @@ namespace SharedLib.Configuration
         [DataMember(Order = 6)]
         public TimeLeftWarningType TimeLeftWarningType
         {
-            get;set;
+            get; set;
         }
 
         /// <summary>
@@ -1221,6 +1318,24 @@ namespace SharedLib.Configuration
         {
             get;
             set;
+        }
+
+        [Category("Shell")]
+        [Description("Enables or disables shell start menu.")]
+        [DefaultValue(false)]
+        [DataMember(Order = 8)]
+        public bool DisableStarMenu
+        {
+            get;set;
+        }
+
+        [Category("Shell")]
+        [Description("Enables or disables sticky shell.")]
+        [DefaultValue(false)]
+        [DataMember(Order = 9)]
+        public bool StickyShell
+        {
+            get;set;
         }
 
         #endregion       
@@ -1302,7 +1417,7 @@ namespace SharedLib.Configuration
         [DataMember()]
         public bool KeepAlive
         {
-            get;set;
+            get; set;
         }
 
         /// <summary>
@@ -1312,7 +1427,7 @@ namespace SharedLib.Configuration
         [DefaultValue(250)]
         public int KeepAliveTimeout
         {
-            get;set;
+            get; set;
         }
 
         /// <summary>
@@ -1322,7 +1437,7 @@ namespace SharedLib.Configuration
         [DefaultValue(150)]
         public int KeepAliveInterval
         {
-            get;set;
+            get; set;
         }
 
         #endregion
@@ -1369,7 +1484,7 @@ namespace SharedLib.Configuration
         {
             this.Modules = new List<ManagerModuleConfig>();
             this.Services = new List<ServiceConnectionConfig>();
-        } 
+        }
         #endregion
 
         #region FIELDS
@@ -1406,42 +1521,14 @@ namespace SharedLib.Configuration
         [DataMember(Order = 0, IsRequired = false, EmitDefaultValue = false)]
         public string Language
         {
-            get;set;
-        }
-
-        [Category("Modules")]
-        [DataMember(EmitDefaultValue =true)]
-        public List<ManagerModuleConfig> Modules
-        {
-            get;set;
-        }
-
-        [Category("Devices")]
-        [DataMember()]
-        public POSDeviceConfig CashDrawer
-        {
             get; set;
         }
 
-        [Category("Devices")]
-        [DataMember()]
-        public POSDeviceConfig BarcodeScanner
+        [Category("Modules")]
+        [DataMember(EmitDefaultValue = true)]
+        public List<ManagerModuleConfig> Modules
         {
-            get;set;
-        }
-
-        [Category("Devices")]
-        [DataMember()]
-        public POSDeviceConfig POSPrinter
-        {
-            get;set;
-        }
-
-        [Category("Devices")]
-        [DataMember()]
-        public POSDeviceConfig Printer
-        {
-            get;set;
+            get; set;
         }
 
         [Category("User Interface")]
@@ -1452,9 +1539,16 @@ namespace SharedLib.Configuration
             set;
         }
 
+        [Category("Devices")]
+        [DataMember()]
+        public DevicesConfig Devices
+        {
+            get; set;
+        }
+
         #endregion
     }
-    #endregion
+    #endregion    
 
     #region MANAGERMODULECONFIG
     [Category("Modules")]
@@ -1482,23 +1576,92 @@ namespace SharedLib.Configuration
     }
     #endregion
 
+    #region DEVICESCONFIG
+    [Category("Devices")]
+    [Serializable()]
+    [DataContract()]
+    public class DevicesConfig : ConfigBase
+    {
+        #region PROPERTIES
+
+        [Category("Cash Drawer")]
+        [DataMember()]
+        public POSDeviceConfig CashDrawer
+        {
+            get; set;
+        }
+
+        [Category("Barcode Scanner")]
+        [DataMember()]
+        public POSDeviceConfig BarcodeScanner
+        {
+            get; set;
+        }
+
+        [Category("POS Printer")]
+        [DataMember()]
+        public POSDevicePrinterConfig Printer
+        {
+            get; set;
+        }
+
+        #endregion
+    }
+    #endregion
+
     #region POSDEVICECONFIG
     [Category("Devices")]
     [Serializable()]
     [DataContract()]
     public class POSDeviceConfig
     {
-        [DataMember(Order =0)]
+        #region PROPERTIES
+
+        [DataMember(Order = 0)]
         public string Name
         {
             get; set;
         }
 
-        [DataMember(Order =1)]
+        [DataMember(Order = 1)]
         public string Provider
         {
             get; set;
         }
+
+        #endregion
+    }
+    #endregion
+
+    #region POSDEVICEPRINTERCONFIG
+    [Category("Devices")]
+    [Serializable()]
+    [DataContract()]
+    public class POSDevicePrinterConfig : POSDeviceConfig
+    {
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets or sets if receipt printing is enabled.
+        /// </summary>
+        [DefaultValue(true)]
+        [DataMember()]
+        public bool ReceiptPrintEnabled
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets raw commands to send to printer after printing.
+        /// </summary>
+        [DefaultValue("27;112;0;25;25")]
+        [DataMember()]
+        public string OpenCashDrawerCommand
+        {
+            get; set;
+        }
+
+        #endregion
     }
     #endregion
 
@@ -1511,7 +1674,12 @@ namespace SharedLib.Configuration
     [DataContract()]
     public class SkinConfig : ConfigBase
     {
-        private string[] noload, supressModule;
+        #region FIELDS 
+        private string[] noload,
+            supressModule;
+        #endregion
+
+        #region PROPERTIES
 
         /// <summary>
         /// Gets or sets disabled modules.
@@ -1531,6 +1699,9 @@ namespace SharedLib.Configuration
             }
         }
 
+        /// <summary>
+        /// Gets or sets list of dlls that should not be loaded.
+        /// </summary>
         [DataMember()]
         public string[] NoLoadDll
         {
@@ -1545,6 +1716,68 @@ namespace SharedLib.Configuration
                 this.noload = value;
             }
         }
-    } 
+
+        /// <summary>
+        /// Gets or sets default wallpaper.
+        /// </summary>
+        [DataMember()]
+        public string Wallpaper
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets if software redndering should be preferred.
+        /// </summary>
+        [DefaultValue(false)]
+        [DataMember()]
+        public bool SoftwareRendering
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Rotator configuration.
+        /// </summary>
+        [DataMember()]
+        public RotatorConfig Rotator
+        {
+            get; set;
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #region ROTATORCONFIG
+    [Category("Rotator")]
+    [Serializable()]
+    [DataContract()]
+    public class RotatorConfig : ConfigBase
+    {
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets or sets source path for the rotator.
+        /// </summary>
+        [DefaultValue("rotator")]
+        [DataMember()]
+        public string RotatorSource
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets rotate seconds.
+        /// </summary>
+        [DefaultValue(5000)]
+        [DataMember()]
+        public int RotateEverySeconds
+        {
+            get; set;
+        }
+
+        #endregion
+    }
     #endregion
 }

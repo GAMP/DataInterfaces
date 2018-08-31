@@ -1,4 +1,6 @@
-﻿using SharedLib.Views;
+﻿using Client.ViewModels;
+using SharedLib.Views;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -60,6 +62,13 @@ namespace Client
         void HideCurrentOverlay(bool cancel);
 
         void HideCurrentOverlay();
+
+        event EventHandler<OverlayEventArgs> OverlayEvent;
+
+        Task ShowOverlayAsync(IMediaViewModel mediaModel);
+        Task ShowOverlayAsync(IMediaViewModel mediaModel, bool allowClosing);
+        Task ShowOverlayAsync(IMediaViewModel mediaModel, CancellationToken ct);
+        Task ShowOverlayAsync(IMediaViewModel mediaModel, bool allowClosing, CancellationToken ct);
 
         #endregion
     }

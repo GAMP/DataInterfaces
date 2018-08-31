@@ -491,11 +491,17 @@ namespace SharedLib
     /// </summary>
     public enum LogoutAction
     {
+        [Localized("LOGOUT_ACTION_NONE")]
         NoAction = -1,
+        [Localized("LOGOUT_ACTION_REBOOT")]
         Reboot = 0,
+        [Localized("LOGOUT_ACTION_CLOSE_PROGRAMS")]
         ClosePrograms = 1,
+        [Localized("LOGOUT_ACTION_TURN_OFF")]
         TurnOff = 2,
+        [Localized("LOGOUT_ACTION_LOG_OFF")]
         LogOff = 3,
+        [Localized("LOGOUT_ACTION_STAND_BY")]
         StandBy = 4,
         AdminMode = 5,
     }
@@ -875,6 +881,8 @@ namespace SharedLib
         Assets,
         [Localized("CFG_SECTION_BUSINESS")]
         Business,
+        [Localized("CFG_SECTION_WAITING_LINES")]
+        WaitingLines,
     }
     #endregion
 
@@ -1389,6 +1397,7 @@ namespace SharedLib
         KillChildren = 8,
         CountAllInstances = 16,
         QuickLaunch =32,
+        ShellExecute=64,
     }
     #endregion
 
@@ -1398,10 +1407,15 @@ namespace SharedLib
     /// </summary>
     public enum RunMode
     {
+        [Localized("RUN_MODE_FULL_SCREEN")]
         FullScreen = 0,
+        [Localized("RUN_MODE_MINIMIZED")]
         Minimized = 1,
+        [Localized("RUN_MODE_MAXIMIZED")]
         Maximized = 2,
+        [Localized("RUN_MODE_HIDDEN")]
         Hidden = 3,
+        [Localized("RUN_MODE_NORMAL")]
         Normal = 4
     }
     #endregion
@@ -1699,11 +1713,11 @@ namespace SharedLib
     public enum ExpireAfterType
     {
         [Localized("DAY_PLURAL")]
-        Day,
+        Day=0,
         [Localized("HOUR_PLURAL")]
-        Hour,
+        Hour=1,
         [Localized("MINUTE_PLURAL")]
-        Minute,
+        Minute=2,
     } 
     #endregion
 
@@ -1993,9 +2007,9 @@ namespace SharedLib
     #region PERSONALFILEACTIVATIONTYPE
     public enum PersonalFileActivationType
     {
-        [Localized("LAUNCH")]
+        [Localized("PERSONAL_FILE_ACTIVATION_TYPE_LAUNCH")]
         Launch = 0,
-        [Localized("LOGIN")]
+        [Localized("PERSONAL_FILE_ACTIVATION_TYPE_LOGIN")]
         Login = 1,
     }
     #endregion
@@ -2166,6 +2180,37 @@ namespace SharedLib
         DisableTimeOffer = 1,
         DisableFixedTime = 2,
         DisableDeposit = 4,
+    }
+    #endregion
+
+    #region WAITINGLINETIMEOUTOPTION
+    /// <summary>
+    /// Waiting line timeout options.
+    /// </summary>
+    [Flags()]
+    public enum WaitingLineTimeoutOption
+    {
+        [Localized("WAITING_LINE_TIMEOUT_OPTION_NONE")]
+        None = 0,
+        [Localized("WAITING_LINE_TIMEOUT_OPTION_REMOVE")]
+        Remove = 1,
+        [Localized("WAITING_LINE_TIMEOUT_OPTION_NEXT_IN_LINE")]
+        NextInLine = 2,
+    }
+    #endregion
+
+    #region WAITINGLINESTATE
+    /// <summary>
+    /// Waiting line states.
+    /// </summary>
+    public enum WaitingLineState
+    {
+        [Localized("WAITING_LINE_SATE_ACTIVE")]
+        Active = 0,
+        [Localized("WAITING_LINE_SATE_PROCESSED")]
+        Processed = 2,
+        [Localized("WAITING_LINE_SATE_CANCEL")]
+        Cancel = 1,
     } 
     #endregion
 

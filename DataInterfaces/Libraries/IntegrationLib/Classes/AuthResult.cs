@@ -16,15 +16,15 @@ namespace IntegrationLib
         {
         }
 
-        public AuthResult(LoginResult result, IUserIdentity identity):this(result,identity, UserInfoTypes.None)
-        {          
+        public AuthResult(LoginResult result, IUserIdentity identity) : this(result, identity, UserInfoTypes.None)
+        {
         }
 
-        public AuthResult(LoginResult result,IUserIdentity identity, UserInfoTypes requiredInfo)
+        public AuthResult(LoginResult result, IUserIdentity identity, UserInfoTypes requiredInfo)
         {
-            this.Identity = identity;
-            this.Result = result;
-            this.RequiredInfo = requiredInfo;
+            Identity = identity;
+            Result = result;
+            RequiredInfo = requiredInfo;
         }
 
         #endregion
@@ -74,9 +74,9 @@ namespace IntegrationLib
         {
             get
             {
-                if (this.custom == null)
-                    this.custom = new Dictionary<string, object>();
-                return this.custom;
+                if (custom == null)
+                    custom = new Dictionary<string, object>();
+                return custom;
             }
         }
 

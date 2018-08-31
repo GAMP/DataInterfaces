@@ -500,4 +500,20 @@ namespace Client
         #endregion
     } 
     #endregion
+
+    public class OverlayEventArgs : EventArgs
+    {
+        public OverlayEventArgs(bool isOpen)
+        {
+            this.IsOpen = isOpen;
+        }
+
+        /// <summary>
+        /// Gets if overlay is currently open.
+        /// </summary>
+        public bool IsOpen
+        {
+            get;protected set;
+        }
+    }
 }

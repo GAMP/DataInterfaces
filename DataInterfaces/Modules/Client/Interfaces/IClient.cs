@@ -389,6 +389,14 @@ namespace Client
         /// <returns>IExecutionContext instance, null in case executable not found.</returns>
         IExecutionContext GetExecutionContext(int executableId);
 
+        /// <summary>
+        /// Deserialize skin json configuration file to specified type.
+        /// </summary>
+        /// <typeparam name="T">Type.</typeparam>
+        /// <param name="fileName">File name.</param>
+        /// <returns>Type instance.</returns>
+        T JsonDeserializeConfig<T>(string fileName) where T : SharedLib.Configuration.SkinConfig;
+
         #endregion
     }
 }

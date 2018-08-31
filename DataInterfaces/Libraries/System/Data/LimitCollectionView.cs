@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Specialized;
 
 namespace System.Windows.Data
 {
@@ -14,7 +15,7 @@ namespace System.Windows.Data
         #endregion
 
         #region FIELDS
-        private int itemLimit = 0;
+        private int MAX_ITEMS = 0;
         #endregion
 
         #region PROPERTIES
@@ -24,12 +25,12 @@ namespace System.Windows.Data
         /// </summary>
         public int MaxItems
         {
-            get { return this.itemLimit; }
+            get { return this.MAX_ITEMS; }
             set
             {
-                this.itemLimit = value;
-                this.OnPropertyChanged(new ComponentModel.PropertyChangedEventArgs(nameof(this.MaxItems)));
-                this.RefreshOrDefer();
+                MAX_ITEMS = value;
+                OnPropertyChanged(new ComponentModel.PropertyChangedEventArgs(nameof(this.MaxItems)));
+                RefreshOrDefer();
             }
         }
 
@@ -44,15 +45,31 @@ namespace System.Windows.Data
         {
             get
             {
-                if (this.MaxItems <= 0)
+                if (MaxItems <= 0)
                     return base.Count;
 
                 var baseCount = base.Count;
 
-                if (this.MaxItems > baseCount)
+                if (MaxItems > baseCount)
                     return baseCount;
 
-                return this.MaxItems;
+                return MaxItems;
+            }
+        }
+
+        protected override void ProcessCollectionChanged(NotifyCollectionChangedEventArgs args)
+        {
+            base.ProcessCollectionChanged(args);
+            try
+            {
+                if (args.Action == NotifyCollectionChangedAction.Add || args.Action == NotifyCollectionChangedAction.Remove)
+                {
+                    RefreshOverride();
+                }
+            }
+            catch
+            {
+
             }
         }
 

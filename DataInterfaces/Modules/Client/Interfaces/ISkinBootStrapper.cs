@@ -4,6 +4,6 @@ namespace Client
 {
     public interface ISkinBootStrapper
     {
-        Task InitializeAsync();
+        Task InitializeAsync(string configFileName);
     }
 }

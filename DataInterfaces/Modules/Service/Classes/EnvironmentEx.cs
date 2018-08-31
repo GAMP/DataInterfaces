@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ServerService
 {
@@ -30,7 +26,7 @@ namespace ServerService
         /// </summary>
         public static bool IsUserInteractiveOrDocker
         {
-            get { return Environment.UserInteractive || EnvironmentEx.IsDocker; }
+            get { return Environment.UserInteractive || IsDocker; }
         }
 
         #endregion

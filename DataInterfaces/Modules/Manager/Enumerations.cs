@@ -1,10 +1,4 @@
-﻿using SharedLib;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Manager
+﻿namespace Manager
 {
     /// <summary>
     /// Definitions of known menu areas.
@@ -18,7 +12,7 @@ namespace Manager
         public static readonly string UsersModule = "98bc7f41-c7f8-4388-a39e-9c15d1af49a5";
         public static readonly string HostManagementModule = "ae67aa8d-60d9-46e0-8a35-ffc1979a5113";
         public static readonly string UserDetail = "5b9ecf8d-771a-4619-83f7-ddddf7ed96db";
-       
+        public static readonly string WaitingLine = "94d352ef-a046-49a7-bacf-f9d92c1dc1ec";
     }
 
     /// <summary>
@@ -46,6 +40,14 @@ namespace Manager
         public static readonly string Shift_Manage = "66376d8f-e407-4a40-8714-acc86cb1add3";
 
         public static readonly string Hosts_Allow_Negative = "a7864b22-c393-4d0e-9689-2c5cc9d10c9c";
+
+        public static readonly string WAITING_LINE_ADD_USER = "b893e19e-44ca-4be3-a680-222af174d838";
+        public static readonly string WAITING_LINE_LOGIN = "a64b4eda-5883-495b-a620-268c1504210a";
+        public static readonly string WAITING_LINE_MOVE_TOP = "f5d0d286-8b6d-4359-9287-1ef34c19f2bd";
+        public static readonly string WAITING_LINE_MOVE_UP = "e3fe4626-4677-403c-bad9-5ad2abf09cc1";
+        public static readonly string WAITING_LINE_MOVE_DOWN = "55b686ec-56d8-40fd-bef8-7df267a8850b";
+        public static readonly string WAITING_LINE_MOVE_BOTTOM = "10a61425-89a6-4ba1-83b4-16a17402d5f1";
+        public static readonly string WAITING_LINE_REMOVE = "b37b5579-2726-4233-afc0-8906e822a479";
     }
 
     public enum ManagerMessageDialogResult
