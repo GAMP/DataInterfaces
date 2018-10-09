@@ -1,10 +1,5 @@
 ﻿using ProtoBuf;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ServerService
 {
@@ -12,46 +7,50 @@ namespace ServerService
     [DataContract()]
     public class AssetInfo
     {
+        #region PROPERTIES
+
         [ProtoMember(1)]
         [DataMember()]
         public int AssetTypeId
         {
-            get;set;
+            get; set;
         }
 
         [ProtoMember(2)]
         [DataMember()]
         public int AssetId
         {
-            get;set;
+            get; set;
         }
 
         [ProtoMember(3)]
         [DataMember()]
         public int? UsedById
         {
-            get;set;
+            get; set;
         }
 
         [ProtoMember(4)]
         [DataMember()]
         public int Number
         {
-            get;set;
+            get; set;
         }
 
         [ProtoMember(5)]
         [DataMember()]
         public string Tag
         {
-            get;set;
+            get; set;
         }
 
         [ProtoMember(6)]
         [DataMember()]
         public bool IsEnabled
         {
-            get;set;
-        }
+            get; set;
+        } 
+
+        #endregion
     }
 }

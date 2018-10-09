@@ -1,26 +1,7 @@
-﻿using System;
-using SharedLib;
+﻿using SharedLib;
 
 namespace CoreLib
 {
-    #region KnownArgumentType
-    /// <summary>
-    /// Enumeration of shared command line agument types.
-    /// </summary>
-    [Obsolete()]
-    public enum KnownArgumentType : int
-    {
-        Load = 0,
-        Connect = 1,
-        Exit = 2,
-        Login = 3,
-        Logout = 4,
-        Install = 5,
-        Uninstall = 6,
-        FirstRun = 7,
-    }
-    #endregion
-
     #region OperatingSystems
     /// <summary>
     /// Operating system type enumeration.

@@ -482,9 +482,9 @@ namespace Client
     public class ClientActivityEventArgs : EventArgs
     {
         #region CONSTRUCTOR
-        public ClientActivityEventArgs(StartupModuleActivity activity)
+        public ClientActivityEventArgs(ClientStartupActivity activity)
         {
-            this.Activity = activity;
+            Activity = activity;
         } 
         #endregion
 
@@ -492,28 +492,36 @@ namespace Client
         /// <summary>
         /// Gets current client activity.
         /// </summary>
-        public StartupModuleActivity Activity
+        public ClientStartupActivity Activity
         {
             get;
             protected set;
         } 
         #endregion
-    } 
+    }
     #endregion
 
+    #region OverlayEventArgs
     public class OverlayEventArgs : EventArgs
     {
+        #region CONSTRUCTOR
         public OverlayEventArgs(bool isOpen)
         {
             this.IsOpen = isOpen;
         }
+        #endregion
+
+        #region PROPERTIES
 
         /// <summary>
         /// Gets if overlay is currently open.
         /// </summary>
         public bool IsOpen
         {
-            get;protected set;
+            get; protected set;
         }
-    }
+
+        #endregion
+    } 
+    #endregion
 }

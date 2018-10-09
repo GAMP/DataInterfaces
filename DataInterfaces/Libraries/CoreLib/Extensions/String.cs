@@ -30,5 +30,23 @@ namespace CoreLib
             }
             return source;
         }
+
+        /// <summary>
+        /// Compares two strings.
+        /// </summary>
+        /// <param name="source">Source string.</param>
+        /// <param name="strB">Compare string.</param>
+        /// <param name="ignoreCase">Ignore case.</param>
+        /// <returns>True if string equals , otherwise false.</returns>
+        public static bool Compare(this string source, string strB , bool ignoreCase)
+        {
+            if (string.IsNullOrWhiteSpace(source))
+                throw new ArgumentException("String may not be null or empty", nameof(source));
+
+            if (string.IsNullOrWhiteSpace(strB))
+                throw new ArgumentException("String may not be null or empty", nameof(strB));
+
+            return string.Compare(source, strB, ignoreCase) == 0;
+        }
     }
 }

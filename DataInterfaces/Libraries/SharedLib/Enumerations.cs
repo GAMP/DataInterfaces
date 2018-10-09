@@ -627,65 +627,7 @@ namespace SharedLib
         [Localized("FILTER_BOTTOM")]
         Bottom,
     }
-    #endregion
-
-    #region STARTUPMODULEACTIVITY
-    /// <summary>
-    /// Shared Module activity enumeration.
-    /// </summary>
-    public enum StartupModuleActivity
-    {
-        [Localized("EN_SMA_AUTHORIZNG_LICENSE")]
-        AuthorizingLicense,
-        [Localized("EN_SMA_INITIALIZING_DATA")]
-        InitializingData,
-        [Localized("EN_SMA_STARTING_TRAY_SERVICES")]
-        StartingTrayServices,
-        [Localized("EN_SMA_STARTING_NETWORK_SERVICES")]
-        StartingNetworkServices,
-        [Localized("EN_SMA_STARTING_UI")]
-        StartingUi,
-        [Localized("EN_SMA_STARTING_INTEGRATION")]
-        StartingIntegration,
-        [Localized("EN_SMA_STARTING_SHELL")]
-        StartingShell,
-        [Localized("EN_SMA_INITIATING_CONNECTION")]
-        InitiatingConnection,
-        [Localized("EN_SMA_INSTALLING_DRIVER")]
-        InstallingSystemDriver,
-        [Localized("EN_SMA_UNINSTALLING_DRIVER")]
-        UninstallingSystemDriver,
-        [Localized("EN_SMA_CHECKING_DRIVER")]
-        CheckingSystemDriver,
-        [Localized("EN_SMA_SETTING_USER_PROFILE")]
-        SettingPersonalUserFiles,
-        [Localized("EN_SMA_CREATING_STORAGE")]
-        CreatingUserStorage,
-        [Localized("EN_SMA_DESTROYING_STORAGE")]
-        DestroyingUserStorage,
-        [Localized("EN_SMA_PROCESSING_TASKS")]
-        ProcessingTasks,
-        [Localized("EN_SMA_DESTROYING_CONTEXTS")]
-        DestroyingUserContexts,
-        [Localized("EN_SMA_EXECUTING_LOGOUT_ACTION")]
-        ExecutingLogoutAction,
-        [Localized("EN_SMA_TERMINATING_USER_PROCESSES")]
-        TerminatingUserProcesses,
-        [Localized("EN_SMA_INITIALIZING_PLUGINS")]
-        InitializingPlugins,
-        [Localized("EN_SMA_LOADING_PLUGINS")]
-        LoadingPlugins,
-        [Localized("EN_SMA_CONFIGURING_FIREWALL")]
-        ConfiguringFirewall,
-        [Localized("EN_SMA_PARSING_ARGUMENTS")]
-        ParsingArguments,
-        [Localized("EN_SMA_EXPANDING_VARIABLES")]
-        ExpandingVariables,
-        RefreshingFileShares,
-        [Localized("EN_SMA_STARTING_API_SERVER")]
-        StartingAPIServer,
-    }
-    #endregion
+    #endregion    
 
     #region LICENSERESERVATIONTYPE
     /// <summary>
@@ -1826,7 +1768,9 @@ namespace SharedLib
     [Flags()]
     public enum PaymentMethodOptionType
     {
-        None = 0
+        None = 0,
+        [Localized("PAYMENT_METHOD_OPTION_TYPE_COUTABLE")]
+        Countable =1,
     }
     #endregion
 
@@ -2211,6 +2155,21 @@ namespace SharedLib
         Processed = 2,
         [Localized("WAITING_LINE_SATE_CANCEL")]
         Cancel = 1,
+    }
+    #endregion
+
+    #region POWERSAVEMODE
+    /// <summary>
+    /// Power save modes.
+    /// </summary>
+    public enum PowerSaveMode
+    {
+        [Localized("NONE")]
+        None = 0,
+        [Localized("POWER_SAVE_MODE_SHUT_DOWN")]
+        Shutdown = 1,
+        [Localized("POWER_SAVE_MODE_SLEEP")]
+        Sleep = 2
     } 
     #endregion
 

@@ -303,6 +303,11 @@ namespace SharedLib.Commands
         /// Usage session info get operation.
         /// </summary>
         GetUsageSessionInfo = 18,
+
+        /// <summary>
+        /// Get image hash operation.
+        /// </summary>
+        GetImageHash = 19,
     }
     #endregion
 
@@ -568,6 +573,7 @@ namespace SharedLib.Commands
         #endregion
 
         #region SESSION
+        UserLoginSessionInfoGet = 269,
         UserSessionGet = 83,
         UserSessionInfoGet = 174,
         UserSessionOpenInfoGet = 219,
@@ -575,6 +581,7 @@ namespace SharedLib.Commands
         #endregion
 
         #region USER
+
         UserGet = 84,
         UserAdd = 85,
         UserUpdate = 86,
@@ -598,6 +605,7 @@ namespace SharedLib.Commands
         UserPersonalInfoRequest = 247,
         UserGuestReserve = 220,
         UserBillingOptionSet = 260,
+
         #endregion
 
         #region USER NOTE
@@ -803,7 +811,7 @@ namespace SharedLib.Commands
         EntityCount = 213,
         #endregion
 
-        ManagerModuleInfoGet = 214,
+        #region SHIFT
 
         ShiftStart = 221,
         ShiftEnd = 222,
@@ -812,18 +820,29 @@ namespace SharedLib.Commands
         ShiftLock = 228,
         ShiftUnlock = 229,
         ShiftInfoGet = 234,
+        
+        #endregion
+
+        #region REGISTER
+        RegisterGet = 230,
+        RegisterAdd = 231,
+        RegisterUpdate = 232,
+        RegisterGetCurrent = 226,
+        #endregion
+
+        #region REPORTS
 
         ShiftSummaryGet = 227,
         ShiftReportGet = 235,
         SaleSummaryReportGet = 236,
         SaleReportGet = 255,
 
-        RegisterGet = 230,
-        RegisterAdd = 231,
-        RegisterUpdate = 232,
-        RegisterGetCurrent = 226,
+        #endregion
 
         WakeOnLan = 237,
+        ManagerModuleInfoGet = 214,
+
+        #region ASSETS 
 
         AssetTypeAdd = 238,
         AssetTypeUpdate = 239,
@@ -840,20 +859,26 @@ namespace SharedLib.Commands
         AssetCheckOut = 245,
         AssetInfoGet = 249,
 
-        AssetTransactionGet = 248,
+        AssetTransactionGet = 248, 
+
+        #endregion
 
         LicenseReservationGet = 256,
         LicenseKeyReservationInfoGet = 257,
 
-        WaitingLineMoveTo=261,
-        WaitingLineAdd=262,
-        WaitingLineRemove=263,
-        WaitingLineInfoGet=264,
-        WaitngLineGet =265,
-        WaitingLineAddOrUpdate =266,
-        WaitingLinePrioritiesSet=267,
+        #region WAITING LINE
 
-        //max 269
+        WaitingLineMoveTo = 261,
+        WaitingLineAdd = 262,
+        WaitingLineRemove = 263,
+        WaitingLineInfoGet = 264,
+        WaitngLineGet = 265,
+        WaitingLineAddOrUpdate = 266,
+        WaitingLinePrioritiesSet = 267, 
+
+        #endregion
+
+        //max 270
     }
     #endregion
 

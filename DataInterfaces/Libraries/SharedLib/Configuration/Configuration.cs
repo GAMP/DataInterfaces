@@ -65,7 +65,7 @@ namespace SharedLib.Configuration
         /// <returns></returns>
         public IEnumerable<string> GetInvalidPropertyNames()
         {
-            return this.GetValidationResults()
+            return GetValidationResults()
                 .Select(x => x.Key);
         }
 
@@ -77,9 +77,9 @@ namespace SharedLib.Configuration
         /// </summary>
         public void ResetInvalidProperties()
         {
-            this.GetInvalidPropertyNames()
+            GetInvalidPropertyNames()
                 .ToList()
-                .ForEach(x => this.SetDefault(x));
+                .ForEach(x => SetDefault(x));
         }
     }
     #endregion
@@ -92,9 +92,9 @@ namespace SharedLib.Configuration
         #region CONSTRUCTOR
         public ConfigurationRoot()
         {
-            this.Service = new ServiceConfig();
-            this.Client = new ClientConfig();
-            this.Global = new GlobalConfiguration();
+            Service = new ServiceConfig();
+            Client = new ClientConfig();
+            Global = new GlobalConfiguration();
         }
         #endregion
 
@@ -142,9 +142,9 @@ namespace SharedLib.Configuration
         public override void SetDefaults()
         {
             base.SetDefaults();
-            this.Service.SetDefaults();
-            this.Client.SetDefaults();
-            this.Global.SetDefaults();
+            Service.SetDefaults();
+            Client.SetDefaults();
+            Global.SetDefaults();
         }
         #endregion
     }
@@ -159,8 +159,8 @@ namespace SharedLib.Configuration
         #region CONSTRUCTOR
         public GlobalConfiguration()
         {
-            this.Network = new GlobalNetworkCfg();
-            this.Subscription = new GlobalSubscriptionConfig();
+            Network = new GlobalNetworkCfg();
+            Subscription = new GlobalSubscriptionConfig();
         }
         #endregion
 
@@ -214,8 +214,8 @@ namespace SharedLib.Configuration
         #region OVERRIDES
         public override void SetDefaults()
         {
-            this.Network.SetDefaults();
-            this.Subscription.SetDefaults();
+            Network.SetDefaults();
+            Subscription.SetDefaults();
         }
         #endregion
     }
@@ -371,13 +371,13 @@ namespace SharedLib.Configuration
         #region CONSTRUCTOR
         public ServiceConfig()
         {
-            this.Network = new ServiceNetworkConfig();
-            this.Database = new ServiceDatabaseConfig();
-            this.Web = new ServiceWebConfig();
-            this.FileSystem = new ServiceFileSystemConfig();
-            this.General = new ServiceGeneralConfig();
-            this.Web = new ServiceWebConfig();
-            this.Backup = new ServiceBackupConfig();
+            Network = new ServiceNetworkConfig();
+            Database = new ServiceDatabaseConfig();
+            Web = new ServiceWebConfig();
+            FileSystem = new ServiceFileSystemConfig();
+            General = new ServiceGeneralConfig();
+            Web = new ServiceWebConfig();
+            Backup = new ServiceBackupConfig();
         }
         #endregion
 
@@ -456,12 +456,12 @@ namespace SharedLib.Configuration
         public override void SetDefaults()
         {
             base.SetDefaults();
-            this.Network.SetDefaults();
-            this.Database.SetDefaults();
-            this.Web.SetDefaults();
-            this.FileSystem.SetDefaults();
-            this.General.SetDefaults();
-            this.Backup.SetDefaults();
+            Network.SetDefaults();
+            Database.SetDefaults();
+            Web.SetDefaults();
+            FileSystem.SetDefaults();
+            General.SetDefaults();
+            Backup.SetDefaults();
         }
         #endregion
     }
@@ -705,12 +705,23 @@ namespace SharedLib.Configuration
         }
 
         /// <summary>
+        /// Gets or sets if user balance reprocessing should be forced.
+        /// </summary>
+        [Category("General")]
+        [Description("Forces user balance reprocess.")]
+        [DataMember(Order = 2)]
+        public bool ForceUserBalanceReprocess
+        {
+            get; set;
+        }
+
+        /// <summary>
         /// Enables or disables client auto update.
         /// </summary>
         [DefaultValue(true)]
         [Category("General")]
         [Description("Enable or disable automatic client update.")]
-        [DataMember(Order = 2)]
+        [DataMember(Order = 3)]
         public bool AutoUpdateClient
         {
             get;
@@ -723,7 +734,7 @@ namespace SharedLib.Configuration
         [DefaultValue(false)]
         [Category("General")]
         [Description("Specifies client auto downgrade should be enabled.")]
-        [DataMember(Order = 3)]
+        [DataMember(Order = 4)]
         public bool AutoDowngradeClient
         {
             get; set;
@@ -731,7 +742,7 @@ namespace SharedLib.Configuration
 
         [Category("General")]
         [Description("Members auto invoice settings.")]
-        [DataMember(Order = 4)]
+        [DataMember(Order = 5)]
         public AutoInvoiceConfig MemberAutoInvoice
         {
             get; set;
@@ -739,11 +750,11 @@ namespace SharedLib.Configuration
 
         [Category("General")]
         [Description("Guets auto invoice settings.")]
-        [DataMember(Order = 5)]
+        [DataMember(Order = 6)]
         public AutoInvoiceConfig GuestAutoInvoice
         {
             get; set;
-        }
+        } 
 
         #endregion
     }
@@ -800,7 +811,7 @@ namespace SharedLib.Configuration
         {
             base.SetDefaults();
 
-            this.Time = new TimeSpan(6, 0, 0);
+            Time = new TimeSpan(6, 0, 0);
         }
 
         #endregion
@@ -892,7 +903,7 @@ namespace SharedLib.Configuration
         [DataMember(Order = 4)]
         public string PFXPath
         {
-            get;set;
+            get; set;
         }
 
         /// <summary>
@@ -902,7 +913,7 @@ namespace SharedLib.Configuration
         [DataMember(Order = 5)]
         public string PFXPassword
         {
-            get;set;
+            get; set;
         }
     }
     #endregion
@@ -981,8 +992,8 @@ namespace SharedLib.Configuration
         #region CONSTRUCTOR
         public ClientConfig()
         {
-            this.General = new ClientGeneralConfig();
-            this.Shell = new ClientShellConfig();
+            General = new ClientGeneralConfig();
+            Shell = new ClientShellConfig();
         }
         #endregion
 
@@ -1095,6 +1106,18 @@ namespace SharedLib.Configuration
         }
 
         /// <summary>
+        /// Gets or sets if computers should sleep on idle turn off.
+        /// </summary>
+        [Category("Client")]
+        [Description("Specifies if computers should sleep on idle turn off.")]
+        [DefaultValue(false)]
+        [DataMember()]
+        public bool TurnOffIdleSleepEnable
+        {
+            get; set;
+        }
+
+        /// <summary>
         /// Gets or sets if free disk space should be allocated.
         /// </summary>
         [Category("Client")]
@@ -1157,8 +1180,8 @@ namespace SharedLib.Configuration
         public override void SetDefaults()
         {
             base.SetDefaults();
-            this.General.SetDefaults();
-            this.Shell.SetDefaults();
+            General.SetDefaults();
+            Shell.SetDefaults();
         }
         #endregion
     }
@@ -1223,7 +1246,7 @@ namespace SharedLib.Configuration
         #region CONSTRUCTOR
         public ClientShellConfig()
         {
-            this.VirtualDesktopItems = new List<int>();
+            VirtualDesktopItems = new List<int>();
         }
         #endregion
 
@@ -1326,7 +1349,7 @@ namespace SharedLib.Configuration
         [DataMember(Order = 8)]
         public bool DisableStarMenu
         {
-            get;set;
+            get; set;
         }
 
         [Category("Shell")]
@@ -1335,7 +1358,7 @@ namespace SharedLib.Configuration
         [DataMember(Order = 9)]
         public bool StickyShell
         {
-            get;set;
+            get; set;
         }
 
         #endregion       
@@ -1447,23 +1470,23 @@ namespace SharedLib.Configuration
         {
             int result;
 
-            result = string.Compare(this.HostName, other.HostName, true);
+            result = string.Compare(HostName, other.HostName, true);
             if (result != 0)
                 return result;
 
-            result = string.Compare(this.FriendlyName, other.FriendlyName, true);
+            result = string.Compare(FriendlyName, other.FriendlyName, true);
             if (result != 0)
                 return result;
 
-            result = this.Port != other.Port ? this.Port < other.Port ? -1 : 1 : 0;
+            result = Port != other.Port ? Port < other.Port ? -1 : 1 : 0;
             if (result != 0)
                 return result;
 
-            result = this.CompressionLevel != other.CompressionLevel ? this.CompressionLevel < other.CompressionLevel ? -1 : 1 : 0;
+            result = CompressionLevel != other.CompressionLevel ? CompressionLevel < other.CompressionLevel ? -1 : 1 : 0;
             if (result != 0)
                 return result;
 
-            result = this.SecureConnection != other.SecureConnection ? this.SecureConnection != true ? -1 : 1 : 0;
+            result = SecureConnection != other.SecureConnection ? SecureConnection != true ? -1 : 1 : 0;
             if (result != 0)
                 return result;
 
@@ -1482,8 +1505,8 @@ namespace SharedLib.Configuration
         #region CONSTRUCTOR
         public ManagerConfig()
         {
-            this.Modules = new List<ManagerModuleConfig>();
-            this.Services = new List<ServiceConnectionConfig>();
+            Modules = new List<ManagerModuleConfig>();
+            Services = new List<ServiceConnectionConfig>();
         }
         #endregion
 
@@ -1500,13 +1523,13 @@ namespace SharedLib.Configuration
         {
             get
             {
-                if (this.services == null)
-                    this.services = new List<ServiceConnectionConfig>();
+                if (services == null)
+                    services = new List<ServiceConnectionConfig>();
                 return services;
             }
             set
             {
-                this.services = value;
+                services = value;
             }
         }
 
@@ -1689,13 +1712,13 @@ namespace SharedLib.Configuration
         {
             get
             {
-                if (this.supressModule == null)
-                    this.supressModule = new string[0];
-                return this.supressModule;
+                if (supressModule == null)
+                    supressModule = new string[0];
+                return supressModule;
             }
             set
             {
-                this.supressModule = value;
+                supressModule = value;
             }
         }
 
@@ -1707,13 +1730,13 @@ namespace SharedLib.Configuration
         {
             get
             {
-                if (this.noload == null)
-                    this.noload = new string[0];
-                return this.noload;
+                if (noload == null)
+                    noload = new string[0];
+                return noload;
             }
             set
             {
-                this.noload = value;
+                noload = value;
             }
         }
 

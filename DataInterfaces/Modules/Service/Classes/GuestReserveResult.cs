@@ -1,11 +1,7 @@
 ﻿using ProtoBuf;
 using SharedLib;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ServerService
 {
@@ -18,8 +14,8 @@ namespace ServerService
 
         public GuestReserveResult(UserReserveResult result)
         {
-            this.UserId = null;
-            this.Result = result;
+            UserId = null;
+            Result = result;
         }
 
         public GuestReserveResult(int userId) : this(userId, UserReserveResult.Sucess)
@@ -28,8 +24,8 @@ namespace ServerService
 
         public GuestReserveResult(int userId, UserReserveResult result)
         {
-            this.Result = result;
-            this.UserId = userId;
+            Result = result;
+            UserId = userId;
         } 
 
         #endregion

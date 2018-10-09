@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Data;
 
 namespace SkinInterfaces.Converters
@@ -20,7 +17,9 @@ namespace SkinInterfaces.Converters
 
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            return !(value == null);
+            bool revert = bool.Parse(parameter?.ToString() ?? "false");
+
+            return revert ? value == null : value != null;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

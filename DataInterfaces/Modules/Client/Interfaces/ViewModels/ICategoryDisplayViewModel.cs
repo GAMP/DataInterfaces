@@ -35,6 +35,11 @@
         bool HasApps { get; }
 
         /// <summary>
+        /// Gets if category has sub categories with apps.
+        /// </summary>
+        bool HasSubcategoryWithApps { get; }
+
+        /// <summary>
         /// Gets parent id.
         /// </summary>
         int? ParentId { get; }

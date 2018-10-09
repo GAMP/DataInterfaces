@@ -150,6 +150,7 @@
     <Compile Include="Libraries\GizmoDALV2\Interfaces\IDbContextProvider.cs" />
     <Compile Include="Libraries\GizmoDALV2\Interfaces\IEntityEventArgs.cs" />
     <Compile Include="Libraries\GizmoDALV2\Interfaces\IGizmoDBContext.cs" />
+    <Compile Include="Libraries\GizmoDALV2\Interfaces\IGizmoDbContextProvider.cs" />
     <Compile Include="Libraries\IntegrationLib\Classes\AuthResult.cs" />
     <Compile Include="Libraries\IntegrationLib\Classes\ClaimInfoBase.cs" />
     <Compile Include="Libraries\IntegrationLib\Classes\ClaimTypeInfoDiscoveryProviderBase.cs" />
@@ -301,8 +302,10 @@
     <Compile Include="Modules\Service\Classes\ShiftReport.cs" />
     <Compile Include="Modules\Service\Classes\ShiftSummaryReport.cs" />
     <Compile Include="Modules\Service\Classes\SaleSummaryReport.cs" />
+    <Compile Include="Modules\Service\Classes\SpanResult.cs" />
     <Compile Include="Modules\Service\Classes\UsageSessionInfo.cs" />
     <Compile Include="Modules\Service\Classes\UserBalance.cs" />
+    <Compile Include="Modules\Service\Classes\UserLoginSessionInfo.cs" />
     <Compile Include="Modules\Service\Enumerations.cs" />
     <Compile Include="Modules\Service\Interfaces\IConfigurableService.cs" />
     <Compile Include="Modules\Service\Interfaces\IGizmoServiceAuthenticationPlugin.cs" />
@@ -559,6 +562,7 @@
     <Compile Include="Modules\Service\Interfaces\IUserBalanceHandler.cs" />
     <Compile Include="Modules\Service\Interfaces\IUserTimeBillingHandler.cs" />
     <Compile Include="Modules\Service\Interfaces\IUserService.cs" />
+    <Compile Include="Modules\Service\Interfaces\IViewRenderService.cs" />
     <Compile Include="Modules\Service\LicenseInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Modules\Client\ClientInstance.cs" />

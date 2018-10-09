@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using SharedLib.Applications;
+﻿using SharedLib.Applications;
 using SharedLib.Dispatcher;
 using NetLib;
 using System.Windows;
@@ -13,7 +9,6 @@ namespace SharedLib
     public delegate MessageBoxResult NotifyUserDelegate(string message, WindowShowParams parameters, out INotifyWindowViewModel model);
     public delegate void ShutDownDelegate(object sender, ShutDownEventArgs e);
     public delegate void StartUpDelegate(object sender, StartUpEventArgs e);
-    public delegate void CurrentActivityDelegate(StartupModuleActivity current);   
     public delegate void ContainerChangedDelegate(object sender, ContainerChangedEventArgs e);    
     public delegate bool ContainerExternalFilterDelegate(object sender, IApplicationProfile profile);
     public delegate void ContainerItemsEventDelegate(object sender, ContainerItemEventArgs e);
