@@ -147,6 +147,7 @@
     <Compile Include="Libraries\GizmoDALV2\EventArgs.cs" />
     <Compile Include="Libraries\GizmoDALV2\Exceptions.cs" />
     <Compile Include="Libraries\GizmoDALV2\Extenstions.cs" />
+    <Compile Include="Libraries\GizmoDALV2\Interfaces\IDatabaseTransaction.cs" />
     <Compile Include="Libraries\GizmoDALV2\Interfaces\IDbContextProvider.cs" />
     <Compile Include="Libraries\GizmoDALV2\Interfaces\IEntityEventArgs.cs" />
     <Compile Include="Libraries\GizmoDALV2\Interfaces\IGizmoDBContext.cs" />

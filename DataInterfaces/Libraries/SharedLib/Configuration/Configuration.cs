@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Manager;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -915,6 +916,16 @@ namespace SharedLib.Configuration
         {
             get; set;
         }
+
+        /// <summary>
+        /// Gets or sets Token secret.
+        /// </summary>
+        [DefaultValue(null)]
+        [DataMember(Order = 6,IsRequired =false)]
+        public string TokenSecret
+        {
+            get;set;
+        }
     }
     #endregion
 
@@ -1515,6 +1526,7 @@ namespace SharedLib.Configuration
         #endregion
 
         #region PROPERTIES
+
         /// <summary>
         /// Gets a list of configured servers.
         /// </summary>
@@ -1560,6 +1572,16 @@ namespace SharedLib.Configuration
         {
             get;
             set;
+        }
+
+        /// <summary>
+        /// Gets or sets extended user search fields.
+        /// </summary>
+        [Category("Functionality")]
+        [DataMember()]
+        public UserSearchFields ExtendedUserSearchFields
+        {
+            get;set;
         }
 
         [Category("Devices")]

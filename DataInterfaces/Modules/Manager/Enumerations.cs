@@ -50,6 +50,9 @@
         public static readonly string WAITING_LINE_REMOVE = "b37b5579-2726-4233-afc0-8906e822a479";
     }
 
+    /// <summary>
+    /// Message dialog result.
+    /// </summary>
     public enum ManagerMessageDialogResult
     {
         Negative = 0,
@@ -58,11 +61,30 @@
         SecondAuxiliary,
     }
 
+    /// <summary>
+    /// Message dialog style.
+    /// </summary>
     public enum ManagerMessageDialogStyle
     {
         Affirmative = 0,
         AffirmativeAndNegative = 1,
         AffirmativeAndNegativeAndSingleAuxiliary = 2,
         AffirmativeAndNegativeAndDoubleAuxiliary = 3
+    }
+
+    /// <summary>
+    /// Extended user search fields.
+    /// </summary>
+    public enum UserSearchFields
+    {
+        None = 0,
+        [Localization.Localized("PHONE_NUMBER")]
+        Phone = 1,
+        [Localization.Localized("MOBILE_PHONE_NUMBER")]
+        MobilePhone = 2,
+        [Localization.Localized("FIRST_NAME")]
+        FirstName = 4,
+        [Localization.Localized("LAST_NAME")]
+        LastName = 8,
     }
 }

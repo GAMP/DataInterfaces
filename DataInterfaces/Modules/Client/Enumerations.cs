@@ -60,6 +60,8 @@ namespace Client
         ExpandingVariables,
         [Localized("EN_SMA_RESOLVING_SERVER_IP")]
         ResolvingServerIp,
+        [Localized("EN_SMA_PROCESSING_DRIVE_MAPPINGS")]
+        ProcessingDriveMappings,
     }
     #endregion
 }

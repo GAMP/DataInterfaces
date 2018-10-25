@@ -33,7 +33,7 @@
         #endregion
 
         [ClaimDescription(@"Shift", "ViewExpected", "PERMISSION_GROUP_SHIFT", "PERMISSION_ACTION_SHIFT_VIEW_EXPECTED")]
-        ShiftCount,
+        ShiftCountViewExpected,
 
         [ClaimDescription(@"Stock", "*", "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_STOCK")]
         Stock,

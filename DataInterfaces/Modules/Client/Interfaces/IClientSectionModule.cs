@@ -2,6 +2,9 @@
 
 namespace Client
 {
+    /// <summary>
+    /// Client skin module inteface.
+    /// </summary>
     public interface IClientSkinModule : IClientPlugin
     {
     }
@@ -19,10 +22,16 @@ namespace Client
         #endregion
     }
 
+    /// <summary>
+    /// Client section module interface.
+    /// </summary>
     public interface IClientSectionModule : IClientViewModule , IClientSwitchInModule
     {       
     }
 
+    /// <summary>
+    /// Client user settings module interface.
+    /// </summary>
     public interface IClientUserSettingsModule : IClientViewModule , IClientSwitchInModule
     {
     }

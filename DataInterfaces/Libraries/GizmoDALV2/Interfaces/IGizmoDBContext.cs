@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Linq;
 
 namespace GizmoDALV2
@@ -66,6 +67,19 @@ namespace GizmoDALV2
         /// <param name="pwdHash">Password hash.</param>
         /// <returns></returns>
         bool CredentialsIsPasswordValid(string password, byte[] salt, byte[] pwdHash);
+
+        /// <summary>
+        /// Begins transaction.
+        /// </summary>
+        /// <returns>Database transaction.</returns>
+        IDatabaseTransaction BeginTransaction();
+
+        /// <summary>
+        /// Begins transaction.
+        /// </summary>
+        /// <param name="isolationLevel">Transaction isolation level.</param>
+        /// <returns>Database transaction.</returns>
+        IDatabaseTransaction BeginTransaction(IsolationLevel isolationLevel);
 
         #endregion
     }
