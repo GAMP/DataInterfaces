@@ -1,5 +1,4 @@
-﻿using System;
-using SharedLib.Dispatcher;
+﻿using SharedLib.Dispatcher;
 using System.IO;
 
 namespace CyClone.Core
@@ -7,6 +6,8 @@ namespace CyClone.Core
     #region IcyDriveInfo
     public interface IcyDriveInfo
     {
+        #region PROPERTIES
+
         /// <summary>
         /// Gets drive name.
         /// </summary>
@@ -65,20 +66,26 @@ namespace CyClone.Core
         IcyDirectoryInfo RootDirectory
         {
             get;
-        }
+        } 
+
+        #endregion
     } 
     #endregion
 
     #region IcyRemoteDriveInfo
     public interface IcyRemoteDriveInfo : IcyDriveInfo
     {
+        #region PROPERTIES
+        
         /// <summary>
         /// Gets remote dispatcher.
         /// </summary>
         IMessageDispatcher Dispatcher
         {
             get;
-        }
+        } 
+
+        #endregion
     } 
     #endregion
 }

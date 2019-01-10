@@ -1,16 +1,10 @@
 ﻿using System.Collections.Generic;
 using SharedLib.Commands;
 using NetLib;
-using SharedLib.Dispatcher.Exceptions;
+using System;
 
 namespace SharedLib.Dispatcher
 {
-    #region DELEGATES
-    public delegate void ConnectionDelegate(IConnection connection);
-    public delegate void ConnectionStateDelegate(IMessageDispatcher sender, bool connected);
-    public delegate void DispatcherExceptionDelegate(DispatcherException ex, IDispatcherCommand command);
-    #endregion
-
     #region INTERFACES
     /// <summary>
     /// Message dispatcher interface.
@@ -230,22 +224,22 @@ namespace SharedLib.Dispatcher
         /// <summary>
         /// Occurs when connection attached to this command dispatcher.
         /// </summary>
-        event ConnectionDelegate ConnectionAttached;
+        event EventHandler<DispatcherConnectionEventArgs> ConnectionAttached;
 
         /// <summary>
         /// Occurs when connection detached from this dispatcher.
         /// </summary>
-        event ConnectionDelegate ConnectionDetached;
+        event EventHandler<DispatcherConnectionEventArgs> ConnectionDetached;
 
         /// <summary>
         /// Occurs when state of the connection attached to this dispatcher changes.
         /// </summary>
-        event ConnectionStateDelegate ConnectionStateChanged;
+        event EventHandler<DispatcherStateEventArgs> ConnectionStateChanged;
 
         /// <summary>
         /// Occurs on dispatcher exception.
         /// </summary>
-        event DispatcherExceptionDelegate DispatcherException;
+        event EventHandler<DispatcherExceptionEventArgs> DispatcherException;
 
         #endregion
     }

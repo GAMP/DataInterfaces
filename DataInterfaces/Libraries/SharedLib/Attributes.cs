@@ -10,7 +10,7 @@ namespace SharedLib
         #region Constructor
         public RoleAssignableAttribute(bool assignable)
         {
-            this.Assignable = assignable;
+            Assignable = assignable;
         }
         #endregion
 
@@ -33,7 +33,7 @@ namespace SharedLib
     {
         public CanUserAssignAttribute(bool assignable)
         {
-            this.Assignable = assignable;
+            Assignable = assignable;
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace SharedLib
         }
     }
     #endregion
-    
+
     #region IsGameModeAttibute
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
     public sealed class IsGameModeAttibute : Attribute
@@ -66,7 +66,7 @@ namespace SharedLib
             if (string.IsNullOrWhiteSpace(guidString))
                 throw new ArgumentNullException(nameof(guidString));
 
-            this.Guid = new Guid(guidString);
+            Guid = new Guid(guidString);
         }
 
         public GUIDAttribute(Guid guid)
@@ -74,7 +74,7 @@ namespace SharedLib
             if (guid == null)
                 throw new ArgumentNullException(nameof(guid));
 
-            this.Guid = guid;
+            Guid = guid;
         }
 
         #endregion
@@ -89,8 +89,8 @@ namespace SharedLib
         /// </summary>
         public Guid Guid
         {
-            get { return this.guid; }
-            protected set { this.guid = value; }
+            get { return guid; }
+            protected set { guid = value; }
         }
         #endregion
     }
@@ -114,7 +114,7 @@ namespace SharedLib
 
         public SpecialFolderAttribute(System.Environment.SpecialFolder knownFolderType)
         {
-            this.SpecialFolder = knownFolderType;
+            SpecialFolder = knownFolderType;
         }
 
         #endregion
@@ -126,8 +126,8 @@ namespace SharedLib
         /// </summary>
         public System.Environment.SpecialFolder SpecialFolder
         {
-            get { return this.folderType; }
-            protected set { this.folderType = value; }
+            get { return folderType; }
+            protected set { folderType = value; }
         }
 
         #endregion
@@ -148,7 +148,7 @@ namespace SharedLib
         /// <param name="value">Age value.</param>
         public AgeRatingAttribute(uint value)
         {
-            this.Age = value;
+            Age = value;
         }
         #endregion
 
@@ -182,20 +182,23 @@ namespace SharedLib
             string valueName)
         {
             #region Validation
-            if (String.IsNullOrWhiteSpace(registryPath))
+
+            if (string.IsNullOrWhiteSpace(registryPath))
                 throw new ArgumentException("Registry path may not be null or empty.", "RegistryPath");
-            if (String.IsNullOrWhiteSpace(description))
+
+            if (string.IsNullOrWhiteSpace(description))
                 throw new ArgumentException("Description may not be null or empty.", "Description");
+
             #endregion
 
             //registry path of restriction
-            this.RegistryPath = registryPath;
+            RegistryPath = registryPath;
 
             //if value name is emty enum value should be used
-            this.ValueName = valueName;
+            ValueName = valueName;
 
             //set description
-            this.Description = description;
+            Description = description;
         }
         #endregion
 
@@ -246,8 +249,8 @@ namespace SharedLib
         /// </summary>
         public Microsoft.Win32.RegistryHive Hive
         {
-            get { return this.hive; }
-            protected set { this.hive = value; }
+            get { return hive; }
+            protected set { hive = value; }
         }
 
         #endregion
@@ -273,7 +276,7 @@ namespace SharedLib
         public MessengerPolicyAttribute(string description, string valueName = "")
             : base("Software\\Policies\\Microsoft\\Messenger\\Client", description, valueName)
         {
-            this.Category = "MSN Messenger";
+            Category = "MSN Messenger";
         }
         #endregion
     }
@@ -286,7 +289,7 @@ namespace SharedLib
         public InternetExplorerPolicyAttribute(string description, string valueName = "")
             : base("Software\\Policies\\Microsoft\\Internet Explorer\\Restrictions", description, valueName)
         {
-            this.Category = "Internet Explorer";
+            Category = "Internet Explorer";
         }
         #endregion
     }
@@ -299,7 +302,7 @@ namespace SharedLib
         public InternetExplorerToolbarsPolicyAttribute(string description, string valueName = "")
             : base("Software\\Policies\\Microsoft\\Internet Explorer\\Toolbars\\Restrictions", description, valueName)
         {
-            this.Category = "Internet Explorer Toolbars";
+            Category = "Internet Explorer Toolbars";
         }
         #endregion
     }
@@ -312,7 +315,7 @@ namespace SharedLib
         public ExplorerPolicyAttribute(string description, string valueName = "")
             : base("Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer", description, valueName)
         {
-            this.Category = "Windows Explorer";
+            Category = "Windows Explorer";
         }
         #endregion
 
@@ -320,9 +323,9 @@ namespace SharedLib
         public override object GetValueForAttribute(bool enable)
         {
             var returnValue = base.GetValueForAttribute(enable);
-            if (!String.IsNullOrWhiteSpace(this.ValueName))
+            if (!string.IsNullOrWhiteSpace(ValueName))
             {
-                switch (this.ValueName)
+                switch (ValueName)
                 {
                     case "NoDriveAutoRun":
                         returnValue = (int)returnValue * (int)(Math.Pow(2, 26));
@@ -348,14 +351,14 @@ namespace SharedLib
         public SystemPolicyAttribute(string description, string valueName = "")
             : base("Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System", description, valueName)
         {
-            this.Category = "System";
+            Category = "System";
         }
 
         public SystemPolicyAttribute(string description, Microsoft.Win32.RegistryHive hive, string valueName = "")
             : base("Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System", description, valueName)
         {
-            this.Category = "System";
-            this.Hive = hive;
+            Category = "System";
+            Hive = hive;
         }
 
         #endregion
@@ -364,9 +367,9 @@ namespace SharedLib
         public override object GetValueForAttribute(bool enable)
         {
             var returnValue = base.GetValueForAttribute(enable);
-            if (!String.IsNullOrWhiteSpace(this.ValueName))
+            if (!string.IsNullOrWhiteSpace(ValueName))
             {
-                switch (this.ValueName)
+                switch (ValueName)
                 {
                     case "DisableCMD":
                         returnValue = (int)returnValue * 2;
@@ -388,7 +391,7 @@ namespace SharedLib
         public NetworkPolicyAttribute(string description, string valueName = "")
             : base("Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Network", description, valueName)
         {
-            this.Category = "Network";
+            Category = "Network";
         }
         #endregion
     }
@@ -401,7 +404,7 @@ namespace SharedLib
         public CommonDialogPolicyAttribute(string description, string valueName = "")
             : base("Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Comdlg32", description, valueName)
         {
-            this.Category = "Common Dialog";
+            Category = "Common Dialog";
         }
         #endregion
     }
@@ -414,7 +417,7 @@ namespace SharedLib
         public NoEnumPolicyAttribute(string description, string valueName = "")
             : base("Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\NonEnum", description, valueName)
         {
-            this.Category = "Explorer";
+            Category = "No Enum (Pre Windows 10)";
         }
         #endregion
     }
@@ -427,8 +430,8 @@ namespace SharedLib
         public UsbStorPolicyAttribute(string description, string valueName = "")
             : base("System\\CurrentControlSet\\Services\\UsbStor", description, valueName)
         {
-            this.Hive = Microsoft.Win32.RegistryHive.LocalMachine;
-            this.Category = "Hardware";
+            Hive = Microsoft.Win32.RegistryHive.LocalMachine;
+            Category = "Hardware";
         }
         #endregion
 
@@ -448,7 +451,7 @@ namespace SharedLib
         public UninstallAttribute(string description, string valueName = "")
             : base(@"Software\Microsoft\Windows\CurrentVersion\Policies\Uninstall", description, valueName)
         {
-            this.Category = "Uninstall";
+            Category = "Uninstall";
         }
         #endregion
     }
@@ -465,9 +468,9 @@ namespace SharedLib
             if (string.IsNullOrWhiteSpace(propertyName))
                 throw new ArgumentNullException(nameof(propertyName));
 
-            this.typeId = Guid.NewGuid();
+            typeId = Guid.NewGuid();
 
-            this.PropertyName = propertyName;
+            PropertyName = propertyName;
         }
 
         #endregion
@@ -494,7 +497,7 @@ namespace SharedLib
         {
             get
             {
-                return this.typeId;
+                return typeId;
             }
         }
 
@@ -539,10 +542,10 @@ namespace SharedLib
         /// <param name="includedOnNull">Indicates if filter should be included on null values.</param>
         public FilterPropertyAttribute(string propertyName, Op operation, string groupName, bool includedOnNull, bool ignore) : base(propertyName)
         {
-            this.Operation = operation;
-            this.GroupName = groupName;
-            this.IncludeOnNullValue = includedOnNull;
-            this.Ignore = ignore;
+            Operation = operation;
+            GroupName = groupName;
+            IncludeOnNullValue = includedOnNull;
+            Ignore = ignore;
         }
 
         #endregion

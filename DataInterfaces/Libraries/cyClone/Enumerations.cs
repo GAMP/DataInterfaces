@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace CyClone
 {
@@ -61,15 +58,6 @@ namespace CyClone
         /// If the flag is set, ejection commands are handled and the storage is destroyed. Works only for PnP storages.
         /// </summary>
         AllowEjection = 0x00008000
-    }
-    #endregion
-
-    #region NotifyFileAction
-    public enum NotifyFileAction
-    {
-        Added = 1,
-        Removed = 2,
-        Modified = 3,
     }
     #endregion
 
@@ -283,7 +271,7 @@ namespace CyClone
     }
     #endregion
 
-    #region FileSyncError
+    #region FileSyncOperation
     [Flags()]
     public enum FileSyncOperation
     {

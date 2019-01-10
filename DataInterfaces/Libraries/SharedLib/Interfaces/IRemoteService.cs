@@ -1,9 +1,5 @@
 ﻿using SharedLib.Dispatcher;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SharedLib
@@ -15,7 +11,7 @@ namespace SharedLib
         /// <summary>
         /// Occurs when service connection state changed.
         /// </summary>
-        event ConnectionStateDelegate ConnectionStateChange; 
+        event EventHandler<DispatcherStateEventArgs> ConnectionStateChange; 
 
         #endregion
 

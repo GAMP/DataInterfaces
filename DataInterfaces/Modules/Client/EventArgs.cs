@@ -14,7 +14,7 @@ namespace Client
         #region CONSTRUCTOR
         public UserPasswordChangeEventArgs(string newPassword)
         {
-            this.NewPassword = newPassword;
+            NewPassword = newPassword;
         }
         #endregion
 
@@ -44,8 +44,8 @@ namespace Client
             if (oldProfile == null)
                 throw new ArgumentNullException("oldProfile");
 
-            this.NewProfile = newProfile;
-            this.OldProfile = oldProfile;
+            NewProfile = newProfile;
+            OldProfile = oldProfile;
         } 
         #endregion
 
@@ -87,11 +87,11 @@ namespace Client
             LoginResult failReason = LoginResult.Sucess,
             UserInfoTypes requiredInfo = UserInfoTypes.None)
         {
-            this.UserProfile = profile;
-            this.State = state;
-            this.OldState = oldState;
-            this.FailReason = failReason;
-            this.RequiredUserInformation = requiredInfo;
+            UserProfile = profile;
+            State = state;
+            OldState = oldState;
+            FailReason = failReason;
+            RequiredUserInformation = requiredInfo;
         }
         #endregion    
 
@@ -158,7 +158,7 @@ namespace Client
         {
             get
             {
-                return !(this.RequiredUserInformation == UserInfoTypes.None) & !(this.RequiredUserInformation == UserInfoTypes.Password);
+                return !(RequiredUserInformation == UserInfoTypes.None) & !(RequiredUserInformation == UserInfoTypes.Password);
             }
         }
 
@@ -169,7 +169,7 @@ namespace Client
         {
             get
             {
-                return (this.RequiredUserInformation & UserInfoTypes.Password) == UserInfoTypes.Password;
+                return (RequiredUserInformation & UserInfoTypes.Password) == UserInfoTypes.Password;
             }
         }
 
@@ -180,11 +180,11 @@ namespace Client
         {
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("----------------START-------------------");
-            if(this.UserProfile!=null)
-                builder.AppendLine(String.Format("User Id:{0}", this.UserProfile.Id));
-            builder.AppendLine(String.Format("Old State:{0}", this.OldState));
-            builder.AppendLine(String.Format("New State:{0}", this.State));
-            builder.AppendLine(String.Format("Fail Reason:{0}", this.FailReason));
+            if(UserProfile!=null)
+                builder.AppendLine(String.Format("User Id:{0}", UserProfile.Id));
+            builder.AppendLine(String.Format("Old State:{0}", OldState));
+            builder.AppendLine(String.Format("New State:{0}", State));
+            builder.AppendLine(String.Format("Fail Reason:{0}", FailReason));
             builder.AppendLine("----------------END---------------------");
             return builder.ToString();
         }
@@ -199,7 +199,7 @@ namespace Client
         #region CONSTRUCTOR
         public LockStateEventArgs(bool isLocked)
         {
-            this.IsLocked = isLocked;
+            IsLocked = isLocked;
         }
         #endregion
 
@@ -225,8 +225,8 @@ namespace Client
         #region CONSTRUCTOR
         public IdChangeEventArgs(int newId, int oldId)
         {
-            this.NewId = newId;
-            this.OldId = oldId;
+            NewId = newId;
+            OldId = oldId;
         }
         #endregion
 
@@ -262,13 +262,13 @@ namespace Client
 
         public SecurityStateArgs(bool isEnabled,bool wasEnabled)
         {
-            this.IsEnabled = isEnabled;
-            this.WasEnabled = wasEnabled;
+            IsEnabled = isEnabled;
+            WasEnabled = wasEnabled;
         }
 
         public SecurityStateArgs(bool isEnabled,bool wasEnabled,bool activePolicy = false):this(isEnabled,wasEnabled)
         {     
-            this.ActiveProfileChanged = activePolicy;
+            ActiveProfileChanged = activePolicy;
         }
 
         #endregion
@@ -319,10 +319,10 @@ namespace Client
             ContextExecutionState oldState,
             object stateObject)
         {
-            this.ExecutableId = exeId;
-            this.NewState = newState;
-            this.OldState = oldState;
-            this.StateObject = stateObject;
+            ExecutableId = exeId;
+            NewState = newState;
+            OldState = oldState;
+            StateObject = stateObject;
         }
 
         public ExecutionContextStateArgs(int exeId, ContextExecutionState newState,
@@ -381,7 +381,7 @@ namespace Client
         #region CONSTRUCTOR
         public OutOfOrderStateEventArgs(bool newState)
         {
-            this.IsOutOfOrder = newState;
+            IsOutOfOrder = newState;
         }
         #endregion
 
@@ -413,9 +413,9 @@ namespace Client
             if (userRating == null)
                 throw new ArgumentNullException("userRating");
 
-            this.ApplicationId = appId;
-            this.OverallRating = overallRating;
-            this.UserRating = userRating;
+            ApplicationId = appId;
+            OverallRating = overallRating;
+            UserRating = userRating;
         } 
         #endregion
 
@@ -458,7 +458,7 @@ namespace Client
         #region CONSTRUCTOR
         public ProfilesChangeEventArgs(bool isInitial)
         {
-            this.IsInitial = isInitial;
+            IsInitial = isInitial;
         } 
         #endregion
 
@@ -507,7 +507,7 @@ namespace Client
         #region CONSTRUCTOR
         public OverlayEventArgs(bool isOpen)
         {
-            this.IsOpen = isOpen;
+            IsOpen = isOpen;
         }
         #endregion
 

@@ -2,6 +2,9 @@
 
 namespace ServerService.Web
 {
+    /// <summary>
+    /// Razro view renderer service interface.
+    /// </summary>
     public interface IViewRenderService
     {
         #region FUNCTIONS

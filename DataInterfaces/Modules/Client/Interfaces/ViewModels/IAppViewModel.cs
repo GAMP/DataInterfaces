@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using SharedLib;
-using SkinInterfaces;
 
 namespace Client.ViewModels
 {
     public interface IAppViewModel
     {
+        #region PROPERTIES
+
         /// <summary>
         /// Gets add date.
         /// </summary>
-        DateTime AddDate { get;}
+        DateTime AddDate { get; }
 
         /// <summary>
         /// Gets app id.
         /// </summary>
         int AppId { get; }
-
 
         /// <summary>
         /// Gets category id.
@@ -33,15 +33,16 @@ namespace Client.ViewModels
         /// <summary>
         /// Gets publisher id.
         /// </summary>
-        int? PublisherId { get;  }
+        int? PublisherId { get; }
 
         /// <summary>
         /// Gets description.
         /// </summary>
         string Description { get; }
 
-  
-
+        /// <summary>
+        /// Gets executables collection view.
+        /// </summary>
         ListCollectionView Executables { get; }
 
         /// <summary>
@@ -54,6 +55,9 @@ namespace Client.ViewModels
         /// </summary>
         IEnumerable<ApplicationModes> ExeModes { get; }
 
+        /// <summary>
+        /// Gets app image task.
+        /// </summary>
         NotifyTaskCompletion<byte[]> ImageData { get; }
 
         /// <summary>
@@ -69,10 +73,28 @@ namespace Client.ViewModels
         /// <summary>
         /// Gets title.
         /// </summary>
-        string Title { get;  }
+        string Title { get; }
+
+        /// <summary>
+        /// Gets total executions.
+        /// </summary>
         int TotalExecutions { get; }
+
+        /// <summary>
+        /// Gets total execution time.
+        /// </summary>
         double TotalExecutionTime { get; }
-        int TotalRates { get;  }
-        int UserRating { get;  }
+
+        /// <summary>
+        /// Gets total rates.
+        /// </summary>
+        int TotalRates { get; }
+
+        /// <summary>
+        /// Gets current user rating.
+        /// </summary>
+        int UserRating { get; } 
+
+        #endregion
     }
 }

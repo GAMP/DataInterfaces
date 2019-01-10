@@ -399,10 +399,7 @@ namespace IntegrationLib
         /// <param name="settings">IPluginSettings instance.</param>
         public void Initialize(IPluginSettings settings)
         {
-            if (settings == null)
-                throw new ArgumentNullException("Plugin settings may not be null");
-
-            this.Settings = settings;
+            this.Settings = settings ?? throw new ArgumentNullException("Plugin settings may not be null");
             this.OnInitialized(settings);
         }
 

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Interactivity;
 using System.Windows.Input;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using Microsoft.Xaml.Behaviors;
 
 namespace SkinInterfaces
 {

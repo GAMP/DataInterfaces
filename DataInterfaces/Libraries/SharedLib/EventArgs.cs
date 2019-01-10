@@ -3,125 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using SharedLib.Applications;
-using SharedLib.Logging;
 
 namespace SharedLib
 {
-    #region StartUpEventArgs
-    [Serializable()]
-    public class StartUpEventArgs : EventArgs
-    {
-    }
-    #endregion
-
-    #region ShutDownEventArgs
-    public class ShutDownEventArgs : EventArgs
-    {
-        #region Constructor
-
-        public ShutDownEventArgs(bool restarting = false, bool isCrashed = false)
-        {
-            this.IsRestarting = restarting;
-            this.IsCrashed = isCrashed;
-        }
-
-        #endregion
-
-        #region Properties
-
-        /// <summary>
-        /// Gets if application is restarting.
-        /// </summary>
-        public bool IsRestarting
-        {
-            get;
-            protected set;
-        }
-
-        /// <summary>
-        /// Gets if application is sutting down due to a crash.
-        /// </summary>
-        public bool IsCrashed
-        {
-            get;
-            protected set;
-        }
-
-        #endregion
-    }
-    #endregion
-
-    #region LogEventArgs
-    public class LogEventArgs : EventArgs
-    {
-        #region Constructor
-        /// <summary>
-        /// Creates new LogEventArgs instance.
-        /// </summary>
-        /// <param name="message">Log Message.</param>
-        /// <param name="sucess">Storage add sucess.</param>
-        public LogEventArgs(ILogMessage message, bool sucess = true)
-        {
-            #region Validation
-            if (message == null)
-                throw new ArgumentNullException("Message", "Log message may not be null");
-            #endregion
-
-            this.Message = message;
-            this.Sucess = sucess;
-        }
-        #endregion
-
-        #region Properties
-
-        /// <summary>
-        /// Gets the log message.
-        /// </summary>
-        public ILogMessage Message
-        {
-            get;
-            protected set;
-        }
-
-        /// <summary>
-        /// Gets if message was added sucessfully to log storage.
-        /// </summary>
-        public bool Sucess
-        {
-            get;
-            protected set;
-        }
-
-        #endregion
-    }
-    #endregion
-
-    #region MaintenanceEventArgs
-    [Serializable()]
-    public class MaintenanceEventArgs : EventArgs
-    {
-        #region Constructor
-        
-        public MaintenanceEventArgs(bool enabled)
-        {
-            this.IsEnabled = enabled;
-        }       
-
-        #endregion
-
-        #region Properties
-        /// <summary>
-        /// Gets if maintenance mod is enabled.
-        /// </summary>
-        public bool IsEnabled
-        {
-            get;
-            protected set;
-        }
-
-        #endregion
-    }
-    #endregion
+    #region OBSOLETE
 
     #region ContainerChangedEventArgs
     /// <summary>
@@ -133,8 +18,8 @@ namespace SharedLib
         #region CONSTRUCTOR
         public ContainerChangedEventArgs(IApplicationContainer oldContainer, IApplicationContainer newContainer)
         {
-            this.OldContainer = oldContainer;
-            this.NewContainer = newContainer;
+            OldContainer = oldContainer;
+            NewContainer = newContainer;
         }
         #endregion
 
@@ -172,25 +57,25 @@ namespace SharedLib
 
         public ContainerItemEventArgs(ContainerItemEventType action)
         {
-            this.Action = action;
+            Action = action;
         }
 
-        public ContainerItemEventArgs(int containerId, IEnumerable<object> itemsList, ContainerItemEventType action):this(action)
+        public ContainerItemEventArgs(int containerId, IEnumerable<object> itemsList, ContainerItemEventType action) : this(action)
         {
-            this.NewItems = itemsList;
-            this.ContainerID = containerId;
+            NewItems = itemsList;
+            ContainerID = containerId;
         }
 
-        public ContainerItemEventArgs(int containerId, IEnumerable<object> newItems, IEnumerable<object> oldItems, ContainerItemEventType action):this(containerId,newItems,action)
+        public ContainerItemEventArgs(int containerId, IEnumerable<object> newItems, IEnumerable<object> oldItems, ContainerItemEventType action) : this(containerId, newItems, action)
         {
-            this.OldItems = oldItems;
+            OldItems = oldItems;
         }
 
         #endregion
 
         #region FIELDS
         private ContainerItemEventType action;
-        private IEnumerable<object> newItems,oldItems;
+        private IEnumerable<object> newItems, oldItems;
         private int containerId;
         #endregion
 
@@ -201,8 +86,8 @@ namespace SharedLib
         /// </summary>
         public int ContainerID
         {
-            get { return this.containerId; }
-            protected set { this.containerId = value; }
+            get { return containerId; }
+            protected set { containerId = value; }
         }
 
         /// <summary>
@@ -210,8 +95,8 @@ namespace SharedLib
         /// </summary>
         public ContainerItemEventType Action
         {
-            get { return this.action; }
-            protected set { this.action = value; }
+            get { return action; }
+            protected set { action = value; }
         }
 
         /// <summary>
@@ -221,13 +106,13 @@ namespace SharedLib
         {
             get
             {
-                if (this.newItems == null)
+                if (newItems == null)
                 {
-                    this.newItems = new List<object>();
+                    newItems = new List<object>();
                 }
-                return this.newItems;
+                return newItems;
             }
-            protected set { this.newItems = value; }
+            protected set { newItems = value; }
         }
 
         /// <summary>
@@ -237,13 +122,13 @@ namespace SharedLib
         {
             get
             {
-                if (this.oldItems == null)
+                if (oldItems == null)
                 {
-                    this.oldItems = new List<object>();
+                    oldItems = new List<object>();
                 }
-                return this.oldItems;
+                return oldItems;
             }
-            protected set { this.oldItems = value; }
+            protected set { oldItems = value; }
         }
 
         #endregion
@@ -255,14 +140,14 @@ namespace SharedLib
             try
             {
                 StringBuilder builder = new StringBuilder();
-                builder.AppendLine(String.Format("Event Type:{0}", this.Action));
-                builder.AppendLine(String.Format("New Items Count:{0}", this.NewItems.Count()));
-                foreach (var item in this.NewItems)
+                builder.AppendLine(String.Format("Event Type:{0}", Action));
+                builder.AppendLine(String.Format("New Items Count:{0}", NewItems.Count()));
+                foreach (var item in NewItems)
                 {
                     builder.AppendLine(item.ToString());
                 }
-                builder.AppendLine(String.Format("Old Items Count:{0}", this.OldItems.Count()));
-                foreach (var item in this.OldItems)
+                builder.AppendLine(String.Format("Old Items Count:{0}", OldItems.Count()));
+                foreach (var item in OldItems)
                 {
                     builder.AppendLine(item.ToString());
                 }
@@ -272,6 +157,80 @@ namespace SharedLib
             {
                 return base.ToString();
             }
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #endregion
+
+    #region StartUpEventArgs
+    [Serializable()]
+    public class StartUpEventArgs : EventArgs
+    {
+    }
+    #endregion
+
+    #region ShutDownEventArgs
+    public class ShutDownEventArgs : EventArgs
+    {
+        #region CONSTRUCTOR
+
+        public ShutDownEventArgs(bool restarting = false, bool isCrashed = false)
+        {
+            IsRestarting = restarting;
+            IsCrashed = isCrashed;
+        }
+
+        #endregion
+
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets if application is restarting.
+        /// </summary>
+        public bool IsRestarting
+        {
+            get;
+            protected set;
+        }
+
+        /// <summary>
+        /// Gets if application is sutting down due to a crash.
+        /// </summary>
+        public bool IsCrashed
+        {
+            get;
+            protected set;
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #region MaintenanceEventArgs
+    [Serializable()]
+    public class MaintenanceEventArgs : EventArgs
+    {
+        #region CONSTRUCTOR
+
+        public MaintenanceEventArgs(bool enabled)
+        {
+            IsEnabled = enabled;
+        }
+
+        #endregion
+
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets if maintenance mod is enabled.
+        /// </summary>
+        public bool IsEnabled
+        {
+            get;
+            protected set;
         }
 
         #endregion
@@ -292,8 +251,8 @@ namespace SharedLib
 
         public SelectedChangeEventArgs(T current, T previous)
         {
-            this.Current = current;
-            this.Previous = previous;
+            Current = current;
+            Previous = previous;
         }
 
         #endregion
@@ -322,27 +281,6 @@ namespace SharedLib
     }
     #endregion
 
-    #region CurrentChangedEventArgs
-    /// <summary>
-    /// Generic current changed event args.
-    /// </summary>
-    /// <typeparam name="T">Item type.</typeparam>
-    public class CurrentChangedEventArgs<T> : SelectedChangeEventArgs<T>
-    {
-        #region CONSTRUCTOR
-
-        protected CurrentChangedEventArgs() : base()
-        {
-        }
-
-        public CurrentChangedEventArgs(T current, T previous) : base(current, previous)
-        {
-        }
-
-        #endregion
-    }
-    #endregion
-
     #region MessageLogEventArgs
     [Serializable()]
     public class MessageLogEventArgs : EventArgs
@@ -358,7 +296,7 @@ namespace SharedLib
             if (string.IsNullOrWhiteSpace(message))
                 throw new ArgumentNullException(nameof(message));
 
-            this.Message = message;
+            Message = message;
         }
 
         /// <summary>
@@ -368,15 +306,15 @@ namespace SharedLib
         /// <param name="endpoint">Endpoint.</param>
         /// <param name="type">Event type.</param>
         /// <param name="exception">Exception.</param>
-        public MessageLogEventArgs(string message, string endpoint, EventTypes type, Exception exception):
+        public MessageLogEventArgs(string message, string endpoint, EventTypes type, Exception exception) :
             this(message)
         {
-            this.Endpoint = endpoint;
-            this.EventType = type;
-            this.Exception = exception;
-            this.Time = InternalDate.Now;
+            Endpoint = endpoint;
+            EventType = type;
+            Exception = exception;
+            Time = InternalDate.Now;
         }
-        
+
         #endregion
 
         #region PROPERTIES
@@ -425,7 +363,7 @@ namespace SharedLib
             get;
             protected set;
         }
-        
+
         #endregion
     }
     #endregion

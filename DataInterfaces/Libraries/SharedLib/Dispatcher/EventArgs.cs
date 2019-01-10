@@ -1,24 +1,27 @@
-﻿using SharedLib.Commands;
+﻿using NetLib;
+using SharedLib.Commands;
+using SharedLib.Dispatcher.Exceptions;
 using System;
 
 namespace SharedLib.Dispatcher
 {
-    public abstract class OperationEventArgsBase :EventArgs
+    #region OperationEventArgsBase
+    public abstract class OperationEventArgsBase : EventArgs
     {
         #region CONSTRUCTOR
 
         protected OperationEventArgsBase(object param)
         {
-            this.Param = param;
+            Param = param;
         }
 
         protected OperationEventArgsBase(byte[] paramBuffer, int offset, int count)
         {
-            this.Param = paramBuffer;
-            this.ParamBuffer = paramBuffer;
-            this.BufferOffset = offset;
-            this.BufferCount = count;
-        } 
+            Param = paramBuffer;
+            ParamBuffer = paramBuffer;
+            BufferOffset = offset;
+            BufferCount = count;
+        }
 
         #endregion
 
@@ -54,27 +57,29 @@ namespace SharedLib.Dispatcher
         public int BufferCount
         {
             get; protected set;
-        } 
+        }
 
         #endregion
-    }
+    } 
+    #endregion
 
+    #region OperationStateEventArgs
     public class OperationStateEventArgs : OperationEventArgsBase
     {
         #region CONSTRUCTOR
 
-        public OperationStateEventArgs(OperationState previous, OperationState current,object param) : 
+        public OperationStateEventArgs(OperationState previous, OperationState current, object param) :
             base(param)
         {
-            this.CurrentState = current;
-            this.PreviousState = previous;
+            CurrentState = current;
+            PreviousState = previous;
         }
 
-        public OperationStateEventArgs(OperationState previous, OperationState current,byte[] buffer, int offset, int count) :
+        public OperationStateEventArgs(OperationState previous, OperationState current, byte[] buffer, int offset, int count) :
             base(buffer, offset, count)
         {
-            this.CurrentState = current;
-            this.PreviousState = previous;
+            CurrentState = current;
+            PreviousState = previous;
         }
 
         #endregion
@@ -95,11 +100,13 @@ namespace SharedLib.Dispatcher
         public OperationState PreviousState
         {
             get; protected set;
-        } 
+        }
 
         #endregion
-    }
+    } 
+    #endregion
 
+    #region OperationUpdateArgs
     public class OperationUpdateArgs : OperationEventArgsBase
     {
         #region CONSTRUCTOR
@@ -108,8 +115,90 @@ namespace SharedLib.Dispatcher
         { }
 
         public OperationUpdateArgs(byte[] buffer, int offset, int count) : base(buffer, offset, count)
-        { } 
+        { }
+
+        #endregion
+    } 
+    #endregion
+
+    #region DispatcherExceptionEventArgs
+    public class DispatcherExceptionEventArgs : EventArgs
+    {
+        #region CONSTRUCTOR
+        public DispatcherExceptionEventArgs(DispatcherException exception, IDispatcherCommand command = default)
+        {
+            Exception = exception ?? throw new ArgumentNullException(nameof(exception));
+            Command = command;
+        }
+        #endregion
+
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets dispatcher exception.
+        /// </summary>
+        public DispatcherException Exception
+        {
+            get; protected set;
+        }
+
+        /// <summary>
+        /// Gets optional command associated with exception event.
+        /// </summary>
+        public IDispatcherCommand Command
+        {
+            get; protected set;
+        }
 
         #endregion
     }
+    #endregion
+
+    #region DispatcherStateEventArgs
+    public class DispatcherStateEventArgs : EventArgs
+    {
+        #region CONSTRUCTOR
+        public DispatcherStateEventArgs(bool state)
+        {
+            IsConnected = state;
+        }
+        #endregion
+
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets if dispatcher is connected.
+        /// </summary>
+        public bool IsConnected
+        {
+            get; protected set;
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #region DispatcherConnectionEventArgs
+    public class DispatcherConnectionEventArgs : EventArgs
+    {
+        #region CONSTRUCTOR
+        public DispatcherConnectionEventArgs(IConnection connection)
+        {
+            Connection = connection ?? throw new ArgumentException(nameof(connection));
+        } 
+        #endregion
+
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets associated connection.
+        /// </summary>
+        public IConnection Connection
+        {
+            get; protected set;
+        }
+
+        #endregion
+    } 
+    #endregion
 }

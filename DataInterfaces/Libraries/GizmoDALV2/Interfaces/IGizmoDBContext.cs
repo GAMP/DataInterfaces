@@ -7,6 +7,9 @@ namespace GizmoDALV2
     /// <summary>
     /// Gizmo Database context inteface.    
     /// </summary>
+    /// <remarks>
+    /// It is always safe to cast this interface to Entity Framework DbContext.
+    /// </remarks>
     public interface IGizmoDBContext :IDisposable
     {
         #region PROPERTIES
@@ -18,7 +21,7 @@ namespace GizmoDALV2
         {
             get;set;
         }
-        
+
         #endregion
 
         #region FUNCTIONS
@@ -27,7 +30,7 @@ namespace GizmoDALV2
         /// Gets queryable db set for specified type.
         /// </summary>
         /// <typeparam name="TEntity">Entiity type.</typeparam>
-        /// <returns>Entity set.</returns>
+        /// <returns>IQueryable Entity set.</returns>
         IQueryable<TEntity> QueryableSet<TEntity>() where TEntity : class;
         
         /// <summary>
@@ -65,7 +68,7 @@ namespace GizmoDALV2
         /// <param name="password">Password.</param>
         /// <param name="salt">Salt.</param>
         /// <param name="pwdHash">Password hash.</param>
-        /// <returns></returns>
+        /// <returns>True if valid otherwise false.</returns>
         bool CredentialsIsPasswordValid(string password, byte[] salt, byte[] pwdHash);
 
         /// <summary>

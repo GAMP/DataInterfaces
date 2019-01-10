@@ -48,5 +48,16 @@ namespace CoreLib
 
             return string.Compare(source, strB, ignoreCase) == 0;
         }
+
+        /// <summary>
+        /// Truncates the string to max length.
+        /// </summary>
+        /// <param name="value">String value.</param>
+        /// <param name="maxLength">Max length.</param>
+        /// <returns>Truncated string.</returns>
+        public static string WithMaxLength(this string value, int maxLength)
+        {
+            return value?.Substring(0, Math.Min(value.Length, maxLength));
+        }
     }
 }

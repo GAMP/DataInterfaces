@@ -28,19 +28,19 @@ namespace ServerService
             double timeProduct,
             double timeFixed)
         {
-            this.UserId = userId;
+            UserId = userId;
 
-            this.Deposits = deposits;
-            this.Points = points;
+            Deposits = deposits;
+            Points = points;
 
-            this.OnInvoices = onInvoices;
-            this.OnInvoicedUsage = onInvoicedUsage;
-            this.OnUninvoicedUsage = onActiveUsage;
+            OnInvoices = onInvoices;
+            OnInvoicedUsage = onInvoicedUsage;
+            OnUninvoicedUsage = onActiveUsage;
 
-            this.AvailableTime = totalUserTime;
-            this.AvailableCreditedTime = totalCreditedTime;
-            this.TimeProduct = timeProduct;
-            this.TimeFixed = timeFixed;
+            AvailableTime = totalUserTime;
+            AvailableCreditedTime = totalCreditedTime;
+            TimeProduct = timeProduct;
+            TimeFixed = timeFixed;
         }
 
         #endregion
@@ -165,7 +165,7 @@ namespace ServerService
         [ProtoIgnore()]
         public decimal Balance
         {
-            get { return this.Deposits - this.OnInvoices - this.OnUninvoicedUsage; }
+            get { return Deposits - OnInvoices - OnUninvoicedUsage; }
         }
 
         /// <summary>
@@ -175,7 +175,7 @@ namespace ServerService
         [ProtoIgnore()]
         public double TimeProductBalance
         {
-            get { return this.TimeProduct + this.TimeFixed; }
+            get { return TimeProduct + TimeFixed; }
         }
 
         /// <summary>
@@ -188,7 +188,7 @@ namespace ServerService
         [ProtoIgnore()]
         public decimal UsageBalance
         {
-            get { return this.OnInvoicedUsage + this.OnUninvoicedUsage; }
+            get { return OnInvoicedUsage + OnUninvoicedUsage; }
         }
 
         /// <summary>
@@ -198,7 +198,7 @@ namespace ServerService
         [ProtoIgnore()]
         public decimal TotalOutstanding
         {
-            get { return this.OnInvoices + this.OnUninvoicedUsage; }
+            get { return OnInvoices + OnUninvoicedUsage; }
         }
 
         #endregion

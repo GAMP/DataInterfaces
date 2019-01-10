@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace IntegrationLib
+﻿namespace IntegrationLib
 {
     #region HttpCredentials
     public class HttpCredentials
@@ -25,7 +20,7 @@ namespace IntegrationLib
         /// </summary>
         public bool IsEmpty
         {
-            get { return string.IsNullOrWhiteSpace(this.Username) & string.IsNullOrWhiteSpace(this.Password); }
+            get { return string.IsNullOrWhiteSpace(Username) & string.IsNullOrWhiteSpace(Password); }
         }
 
         #endregion

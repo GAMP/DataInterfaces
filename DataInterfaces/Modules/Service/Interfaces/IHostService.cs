@@ -47,6 +47,14 @@ namespace ServerService
         /// <returns>Properties dictionary.</returns>
         IDictionary<HostPropertyType, object> HostGetProperties(int hostId);
 
+        /// <summary>
+        /// Gets host ids where property equals to specified value.
+        /// </summary>
+        /// <param name="type">Property type.</param>
+        /// <param name="value">Property value.</param>
+        /// <returns>Host id set.</returns>
+        ISet<int> HostGetWherePropertyEquals(HostPropertyType type, object value);
+
         #endregion
     }
     #endregion

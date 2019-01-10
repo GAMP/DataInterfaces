@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using CoreLib;
 
 namespace SharedLib
@@ -9,9 +6,24 @@ namespace SharedLib
     #region ISecurityPolicy
     public interface ISecurityPolicy
     {
+        #region PROPERTIES
+        
+        /// <summary>
+        /// Gets or sets security policy id.
+        /// </summary>
         int Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets security profile id.
+        /// </summary>
         int ProfileId { get; set; }
-        global::CoreLib.SecurityPolicyType Type { get; set; }
+
+        /// <summary>
+        /// Gets or sets security policy type.
+        /// </summary>
+        SecurityPolicyType Type { get; set; } 
+
+        #endregion
     }
     #endregion
 
@@ -19,7 +31,7 @@ namespace SharedLib
     [Serializable()]
     public class SecurityPolicy : ItemObject, ISecurityPolicy
     {
-        #region Properties
+        #region PROPERTIES
 
         /// <summary>
         /// Gets or sets security profile id.

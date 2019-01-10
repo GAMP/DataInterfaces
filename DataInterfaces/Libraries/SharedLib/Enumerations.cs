@@ -4,8 +4,6 @@ using Localization;
 
 namespace SharedLib
 {
-    #region OBSOLETE
-
     #region ActivationType
     /// <summary>
     /// Common activation deactivation types.
@@ -67,95 +65,6 @@ namespace SharedLib
         [Description("All Types")]
         AllTypes = 65535,
     }
-    #endregion
-
-    #region ActionState
-    /// <summary>
-    /// Basic enumeration for actions or operations.
-    /// </summary>
-    [Obsolete()]
-    public enum ActionState
-    {
-        Inactive,
-        Comparing,
-        Deploying,
-        Aborted,
-        Failed,
-        Compared,
-        Aborting,
-    }
-    #endregion
-
-    #region ManagementTypesEnum
-    [Obsolete()]
-    public enum ManagementTypesEnum
-    {
-        Tasking = 0,
-        Registry = 1,
-        FileSystem = 2,
-        Processes = 3,
-        Information = 4,
-    }
-    #endregion
-
-    #region ManagerViewTypes
-    [Obsolete()]
-    public enum ManagerViewTypes
-    {
-        Management = 0,
-        Screens = 1,
-        Log = 2,
-        Deployment = 3,
-        Settings = 4,
-        Applications = 5,
-        Users = 6,
-        NewsCenter = 7,
-        Statistics = 8,
-    }
-    #endregion
-
-    #region DialogType
-    /// <summary>
-    /// Dialogue types.
-    /// <remarks>
-    /// This is generaly used in view models to mark the current dialogue type.
-    /// </remarks>
-    /// </summary>
-    [Obsolete()]
-    [Serializable()]
-    public enum DialogType
-    {
-        None = 0,
-        Add = 1,
-        Edit = 2,
-    }
-    #endregion
-
-    #endregion
-
-    #region VIEWMODELS
-
-    #region StartPageViewTypes
-    public enum StartPageViewTypes
-    {
-        Home = 0,
-        Applications = 1,
-        Favorites = 2,
-        ControlPanel = 3,
-        Media = 4,
-        GameServers = 5,
-    }
-    #endregion
-
-    #region ContextExecutionViewState
-    public enum ContextExecutionViewState
-    {
-        Initial = 0,
-        Working = 1,
-        Ready = 2,
-    }
-    #endregion    
-
     #endregion
 
     #region QUEUESTATUS
@@ -528,7 +437,9 @@ namespace SharedLib
         Visual = 1,
         [Localized("TIME_LEFT_WARNING_TYPE_AUDIBLE")]
         Audible = 2,
-        All = Visual | Audible
+        [Localized("TIME_LEFT_WARNING_TYPE_MINIMIZE_WINDOWS")]
+        MinimizeWindows =4,
+        All = Visual | Audible | TimeLeftWarningType.MinimizeWindows
     }
     #endregion
 
@@ -731,6 +642,9 @@ namespace SharedLib
         /// Host was updated.
         /// </summary>
         Updated = 5,
+
+        Deleted = 6,
+        Undeleted = 7,
     }
     #endregion
 
@@ -1856,6 +1770,10 @@ namespace SharedLib
         /// Points credited.
         /// </summary>
         Credit=3,
+        /// <summary>
+        /// Points return transaction.
+        /// </summary>
+        Remove=4,
     }
     #endregion
 

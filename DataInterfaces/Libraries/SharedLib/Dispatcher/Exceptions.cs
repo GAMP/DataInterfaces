@@ -25,20 +25,20 @@ namespace SharedLib.Dispatcher.Exceptions
         #endregion
 
         #region Properties
-        
+
         /// <summary>
         /// Gets if InnerException is SocketException.
         /// </summary>
         public bool IsSocketException
         {
-            get 
-            { 
-                return (this.InnerException != null && 
-                this.InnerException is SocketException) || 
-                this.InnerException !=null && this.InnerException.InnerException !=null && 
-                this.InnerException.InnerException is SocketException ||
-                this.InnerException != null && this.InnerException.InnerException !=null && this.InnerException.InnerException.InnerException != null &&
-                this.InnerException.InnerException.InnerException is SocketException;
+            get
+            {
+                return (InnerException != null &&
+                InnerException is SocketException) ||
+                InnerException != null && InnerException.InnerException != null &&
+                InnerException.InnerException is SocketException ||
+                InnerException != null && InnerException.InnerException != null && InnerException.InnerException.InnerException != null &&
+                InnerException.InnerException.InnerException is SocketException;
             }
         }
 
@@ -60,19 +60,19 @@ namespace SharedLib.Dispatcher.Exceptions
 
         #region Constructor
 
-        public DispatcherException(IMessageDispatcher dispatcher, string message,Exception inner)
-            : base(message,inner)
+        public DispatcherException(IMessageDispatcher dispatcher, string message, Exception inner)
+            : base(message, inner)
         {
             #region Validation
             if (dispatcher == null)
                 throw new ArgumentNullException("Dispatcher", "Dispatcher may not be null.");
             #endregion
 
-            this.Dispatcher = dispatcher;
+            Dispatcher = dispatcher;
         }
 
-        public DispatcherException(IMessageDispatcher dispatcher,string message)
-            : this(dispatcher, message,null)
+        public DispatcherException(IMessageDispatcher dispatcher, string message)
+            : this(dispatcher, message, null)
         { }
 
         public DispatcherException() : base() { }
@@ -91,10 +91,10 @@ namespace SharedLib.Dispatcher.Exceptions
         /// </summary>
         public IMessageDispatcher Dispatcher
         {
-            get { return this.dispatcher; }
-            protected set { this.dispatcher = value; }
+            get { return dispatcher; }
+            protected set { dispatcher = value; }
         }
-        
+
         #endregion
     }
     #endregion
@@ -142,15 +142,12 @@ namespace SharedLib.Dispatcher.Exceptions
         public OperationTimeoutException(string message, double timeout)
             : base(message)
         {
-            this.Timeout = timeout;
+            Timeout = timeout;
         }
 
-        public OperationTimeoutException(string message,double timeout,IDispatcherCommand command):this(message,timeout)
+        public OperationTimeoutException(string message, double timeout, IDispatcherCommand command) : this(message, timeout)
         {
-            if (command == null)
-                throw new ArgumentNullException(nameof(command));
-
-            this.Command = command;
+            Command = command ?? throw new ArgumentNullException(nameof(command));
         }
 
         public OperationTimeoutException(string message)
@@ -184,7 +181,7 @@ namespace SharedLib.Dispatcher.Exceptions
         /// </summary>
         public IDispatcherCommand Command
         {
-            get;protected set;
+            get; protected set;
         }
 
         #endregion
@@ -203,7 +200,7 @@ namespace SharedLib.Dispatcher.Exceptions
         public InvalidParametersException(string parametername, string message = "Operation parameters are invalid.")
             : base(message)
         {
-            this.ParameterName = parametername;
+            ParameterName = parametername;
         }
 
         public InvalidParametersException(string message)
@@ -300,7 +297,7 @@ namespace SharedLib.Dispatcher.Exceptions
         public CommandUnrecognizedException(string message, IDispatcherCommand cmd)
             : base(message)
         {
-            this.Command = cmd;
+            Command = cmd;
         }
 
         public CommandUnrecognizedException() : base() { }
@@ -416,7 +413,7 @@ namespace SharedLib.Dispatcher.Exceptions
         { }
 
         #endregion
-    } 
+    }
     #endregion
 
     #region PoolProcesFailedException
@@ -476,6 +473,6 @@ namespace SharedLib.Dispatcher.Exceptions
         { }
 
         #endregion
-    } 
+    }
     #endregion
 }

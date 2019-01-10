@@ -1,9 +1,6 @@
 ﻿using System;
 using CoreLib;
 using SharedLib;
-using SharedLib.Applications;
-using SkinLib;
-using SharedLib.Logging;
 using IntegrationLib;
 using System.Windows;
 using SharedLib.ViewModels;
@@ -138,31 +135,6 @@ namespace Client
         /// Gets client version ifnormation.
         /// </summary>
         string VersionInfo { get; }
-
-        /// <summary>
-        /// Gets the application container instance.
-        /// </summary>
-        IApplicationContainer ApplicationContainer
-        {
-            get;
-        }
-
-        /// <summary>
-        /// Gets the skin handler instance.
-        /// </summary>
-        IUIHandler SkinHandler
-        {
-            get;
-        }
-
-        /// <summary>
-        /// Gest the client log provider.
-        /// </summary>
-        [Obsolete("Will be replaced or updated in new releases. Do not use.")]
-        ILog Log
-        {
-            get;
-        }
 
         /// <summary>
         /// Gets or sets if client is currently in out of order state.
@@ -383,19 +355,18 @@ namespace Client
         void Logout();
 
         /// <summary>
-        /// Gets execution context.
-        /// </summary>
-        /// <param name="executableId">Executable id.</param>
-        /// <returns>IExecutionContext instance, null in case executable not found.</returns>
-        IExecutionContext GetExecutionContext(int executableId);
-
-        /// <summary>
         /// Deserialize skin json configuration file to specified type.
         /// </summary>
         /// <typeparam name="T">Type.</typeparam>
         /// <param name="fileName">File name.</param>
         /// <returns>Type instance.</returns>
         T JsonDeserializeConfig<T>(string fileName) where T : SharedLib.Configuration.SkinConfig;
+
+        void LogAdd(string message);
+
+        void LogAdd(string message, LogCategories category);
+
+        void LogAddError(string messgae, Exception ex, LogCategories category);
 
         #endregion
     }

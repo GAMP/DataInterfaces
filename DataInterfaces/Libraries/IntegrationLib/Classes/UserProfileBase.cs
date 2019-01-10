@@ -15,17 +15,17 @@ namespace IntegrationLib
     {
         #region FIELDS
         protected string
-            userName = String.Empty,
-            firstName = String.Empty,
-            lastName = String.Empty,
-            country = String.Empty,
-            email = String.Empty,
-            phone = String.Empty,
-            mobilePhone = String.Empty,
-            address = String.Empty,
-            city = String.Empty,
-            postCode = String.Empty,
-            groupName = String.Empty;
+            userName = string.Empty,
+            firstName = string.Empty,
+            lastName = string.Empty,
+            country = string.Empty,
+            email = string.Empty,
+            phone = string.Empty,
+            mobilePhone = string.Empty,
+            address = string.Empty,
+            city = string.Empty,
+            postCode = string.Empty,
+            groupName = string.Empty;
         protected int
             groupId;
         protected DateTime
@@ -44,11 +44,11 @@ namespace IntegrationLib
         [DataMember()]
         public virtual string UserName
         {
-            get { return this.userName; }
+            get { return userName; }
             set
             {
-                this.userName = value;
-                this.RaisePropertyChanged("UserName");
+                userName = value;
+                RaisePropertyChanged("UserName");
             }
         }
 
@@ -58,11 +58,11 @@ namespace IntegrationLib
         [DataMember()]
         public virtual string FirstName
         {
-            get { return this.firstName; }
+            get { return firstName; }
             set
             {
-                this.firstName = value;
-                this.RaisePropertyChanged("FirstName");
+                firstName = value;
+                RaisePropertyChanged("FirstName");
             }
         }
 
@@ -72,11 +72,11 @@ namespace IntegrationLib
         [DataMember()]
         public virtual string LastName
         {
-            get { return this.lastName; }
+            get { return lastName; }
             set
             {
-                this.lastName = value;
-                this.RaisePropertyChanged("LastName");
+                lastName = value;
+                RaisePropertyChanged("LastName");
             }
         }
 
@@ -86,11 +86,11 @@ namespace IntegrationLib
         [DataMember()]
         public virtual DateTime BirthDate
         {
-            get { return this.birthDate; }
+            get { return birthDate; }
             set
             {
-                this.birthDate = value;
-                this.RaisePropertyChanged("BirthDate");
+                birthDate = value;
+                RaisePropertyChanged("BirthDate");
             }
         }
 
@@ -100,11 +100,11 @@ namespace IntegrationLib
         [DataMember()]
         public virtual DateTime Registered
         {
-            get { return this.registered; }
+            get { return registered; }
             set
             {
-                this.registered = value;
-                this.RaisePropertyChanged("Registered");
+                registered = value;
+                RaisePropertyChanged("Registered");
             }
         }
 
@@ -114,11 +114,11 @@ namespace IntegrationLib
         [DataMember()]
         public virtual string City
         {
-            get { return this.city; }
+            get { return city; }
             set
             {
-                this.city = value;
-                this.RaisePropertyChanged("City");
+                city = value;
+                RaisePropertyChanged("City");
             }
         }
 
@@ -128,11 +128,11 @@ namespace IntegrationLib
         [DataMember()]
         public virtual string Address
         {
-            get { return this.address; }
+            get { return address; }
             set
             {
-                this.address = value;
-                this.RaisePropertyChanged("Address");
+                address = value;
+                RaisePropertyChanged("Address");
             }
         }
 
@@ -142,11 +142,11 @@ namespace IntegrationLib
         [DataMember()]
         public virtual int GroupId
         {
-            get { return this.groupId; }
+            get { return groupId; }
             set
             {
-                this.groupId = value;
-                this.RaisePropertyChanged("GroupId");
+                groupId = value;
+                RaisePropertyChanged("GroupId");
             }
         }
 
@@ -155,11 +155,11 @@ namespace IntegrationLib
         /// </summary>
         public virtual string GroupName
         {
-            get { return this.groupName; }
+            get { return groupName; }
             set
             {
-                this.groupName = value;
-                this.RaisePropertyChanged("GroupName");
+                groupName = value;
+                RaisePropertyChanged("GroupName");
             }
         }
 
@@ -169,11 +169,11 @@ namespace IntegrationLib
         [DataMember()]
         public virtual string Country
         {
-            get { return this.country; }
+            get { return country; }
             set
             {
-                this.country = value;
-                this.RaisePropertyChanged("Country");
+                country = value;
+                RaisePropertyChanged("Country");
             }
         }
 
@@ -183,11 +183,11 @@ namespace IntegrationLib
         [DataMember()]
         public virtual string Email
         {
-            get { return this.email; }
+            get { return email; }
             set
             {
-                this.email = value;
-                this.RaisePropertyChanged("Email");
+                email = value;
+                RaisePropertyChanged("Email");
             }
         }
 
@@ -197,11 +197,11 @@ namespace IntegrationLib
         [DataMember()]
         public virtual string Phone
         {
-            get { return this.phone; }
+            get { return phone; }
             set
             {
-                this.phone = value;
-                this.RaisePropertyChanged("Phone");
+                phone = value;
+                RaisePropertyChanged("Phone");
             }
         }
 
@@ -211,11 +211,11 @@ namespace IntegrationLib
         [DataMember()]
         public virtual string MobilePhone
         {
-            get { return this.mobilePhone; }
+            get { return mobilePhone; }
             set
             {
-                this.mobilePhone = value;
-                this.RaisePropertyChanged("MobilePhone");
+                mobilePhone = value;
+                RaisePropertyChanged("MobilePhone");
             }
         }
 
@@ -225,11 +225,11 @@ namespace IntegrationLib
         [DataMember()]
         public virtual string PostCode
         {
-            get { return this.postCode; }
+            get { return postCode; }
             set
             {
-                this.postCode = value;
-                this.RaisePropertyChanged("PostCode");
+                postCode = value;
+                RaisePropertyChanged("PostCode");
             }
         }
 
@@ -239,11 +239,11 @@ namespace IntegrationLib
         [DataMember()]
         public virtual Sex Sex
         {
-            get { return this.sex; }
+            get { return sex; }
             set
             {
-                this.sex = value;
-                this.RaisePropertyChanged("Sex");
+                sex = value;
+                RaisePropertyChanged("Sex");
             }
         }
 
@@ -253,11 +253,11 @@ namespace IntegrationLib
         [DataMember()]
         public virtual UserRoles Role
         {
-            get { return this.role; }
+            get { return role; }
             set
             {
-                this.role = value;
-                this.RaisePropertyChanged("Role");
+                role = value;
+                RaisePropertyChanged("Role");
             }
         }
 
@@ -266,7 +266,7 @@ namespace IntegrationLib
         /// </summary>
         public virtual bool IsAdmin
         {
-            get { return this.Role == UserRoles.Operator; }
+            get { return Role == UserRoles.Operator; }
             set { }
         }
 
@@ -275,7 +275,7 @@ namespace IntegrationLib
         /// </summary>
         public virtual bool IsGuest
         {
-            get { return this.Role == UserRoles.Guest; }
+            get { return Role == UserRoles.Guest; }
             set { }
         }
 
@@ -285,11 +285,11 @@ namespace IntegrationLib
         [DataMember()]
         public virtual bool IsEnabled
         {
-            get { return this.isEnabled; }
+            get { return isEnabled; }
             set
             {
-                this.isEnabled = value;
-                this.RaisePropertyChanged("IsEnabled");
+                isEnabled = value;
+                RaisePropertyChanged("IsEnabled");
             }
         }
 
@@ -301,79 +301,23 @@ namespace IntegrationLib
         /// </summary>
         public virtual void Reset()
         {
-            this.Id = 0;
-            this.Address = string.Empty;
-            this.BirthDate = DateTime.MinValue;
-            this.City = string.Empty;
-            this.Country = string.Empty;
-            this.Email = string.Empty;
-            this.FirstName = string.Empty;
-            this.LastName = string.Empty;
-            this.MobilePhone = string.Empty;
-            this.Phone = string.Empty;
-            this.PostCode = string.Empty;
-            this.Sex = Sex.Unspecified;
-            this.Role = UserRoles.None;
-            this.UserName = string.Empty;
-            this.IsEnabled = false;
+            Id = 0;
+            Address = string.Empty;
+            BirthDate = DateTime.MinValue;
+            City = string.Empty;
+            Country = string.Empty;
+            Email = string.Empty;
+            FirstName = string.Empty;
+            LastName = string.Empty;
+            MobilePhone = string.Empty;
+            Phone = string.Empty;
+            PostCode = string.Empty;
+            Sex = Sex.Unspecified;
+            Role = UserRoles.None;
+            UserName = string.Empty;
+            IsEnabled = false;
         }
         #endregion
     }
-    #endregion
-
-    #region IntegrationUserProfile
-
-    /// <summary>
-    /// User profile class used for integration plugins.
-    /// </summary>
-    [Serializable()]
-    [DataContract()]
-    public class IntegrationUserProfile : UserProfileBase
-    {
-        #region Fileds
-        protected IUserTimeStatus timeStatus;
-        protected bool isGuest, isAdmin;
-        #endregion
-
-        #region Properties
-
-        /// <summary>
-        /// Gets the time status information for the user profile.
-        /// </summary>
-        [DataMember()]
-        IUserTimeStatus TimeStatus
-        {
-            get { return this.timeStatus; }
-        }
-
-        public override bool IsAdmin
-        {
-            get
-            {
-                return this.isAdmin;
-            }
-            set
-            {
-                this.isAdmin = value;
-                this.RaisePropertyChanged("IsAdmin");
-            }
-        }
-
-        public override bool IsGuest
-        {
-            get
-            {
-                return this.isGuest;
-            }
-            set
-            {
-                this.isGuest = value;
-                this.RaisePropertyChanged("IsGuest");
-            }
-        }
-
-        #endregion
-    }
-
     #endregion
 }

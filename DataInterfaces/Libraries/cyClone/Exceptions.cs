@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
 using System.Text;
@@ -11,7 +9,7 @@ namespace CyClone.Core
     [Serializable()]
     public class FileSyncException : Exception, ISerializable
     {
-        #region Constructor
+        #region CONSTRUCTOR
 
         public FileSyncException(string message,
             FileSyncOperation error,
@@ -20,9 +18,9 @@ namespace CyClone.Core
             Exception inner)
             : base(message, inner)
         {
-            this.Operation = error;
-            this.SourceFile = sourceFile;
-            this.DestinationFile = destinationFile;
+            Operation = error;
+            SourceFile = sourceFile;
+            DestinationFile = destinationFile;
         }
 
         public FileSyncException(string message)
@@ -39,15 +37,15 @@ namespace CyClone.Core
         {
             if (info != null)
             {
-                this.Operation = (FileSyncOperation)info.GetValue("Operation", typeof(FileSyncOperation));
-                this.SourceFile = (IcyFileSystemInfo)info.GetValue("SourceFile", typeof(IcyFileSystemInfo));
-                this.DestinationFile = (IcyFileSystemInfo)info.GetValue("DestinationFile", typeof(IcyFileSystemInfo));
+                Operation = (FileSyncOperation)info.GetValue("Operation", typeof(FileSyncOperation));
+                SourceFile = (IcyFileSystemInfo)info.GetValue("SourceFile", typeof(IcyFileSystemInfo));
+                DestinationFile = (IcyFileSystemInfo)info.GetValue("DestinationFile", typeof(IcyFileSystemInfo));
             }
         }
 
         #endregion
 
-        #region Properties
+        #region PROPERTIES
 
         /// <summary>
         /// Gets the operation error.
@@ -76,39 +74,39 @@ namespace CyClone.Core
             protected set;
         }
 
-        #endregion
-
-        #region ISerializable
-
-        [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
-        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            base.GetObjectData(info, context);
-
-            if (info != null)
-            {
-                info.AddValue("Operation", this.Operation);
-                info.AddValue("SourceFile", this.SourceFile);
-                info.AddValue("DestinationFile", this.DestinationFile);
-            }
-        }
-        
-        #endregion
+        #endregion        
 
         #region OVERRIDES
 
         public override string ToString()
         {
             StringBuilder builder = new StringBuilder();
-            builder.AppendLine(String.Format("Operation:{0}", this.Operation));
-            builder.AppendLine(String.Format("Source FileName:{0}", this.SourceFile));
-            builder.AppendLine(String.Format("Destination FileName:{0}", this.DestinationFile));
-            builder.AppendLine(String.Format("Message:{0}", this.Message));
+            builder.AppendLine(string.Format("Operation:{0}", Operation));
+            builder.AppendLine(string.Format("Source FileName:{0}", SourceFile));
+            builder.AppendLine(string.Format("Destination FileName:{0}", DestinationFile));
+            builder.AppendLine(string.Format("Message:{0}", Message));
             builder.AppendLine();
             builder.AppendLine(base.ToString());
             return builder.ToString();
         }
-        
+
+        #endregion
+
+        #region ISerializable
+
+        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+
+            if (info != null)
+            {
+                info.AddValue("Operation", Operation);
+                info.AddValue("SourceFile", SourceFile);
+                info.AddValue("DestinationFile", DestinationFile);
+            }
+        }
+
         #endregion
     }
     #endregion

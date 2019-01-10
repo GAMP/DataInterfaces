@@ -1,0 +1,3 @@
+﻿namespace DataInterfaces.Modules.Shared
+{
+}

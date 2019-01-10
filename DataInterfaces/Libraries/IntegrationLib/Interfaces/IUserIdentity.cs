@@ -1,5 +1,4 @@
-﻿using System;
-using System.Security.Principal;
+﻿using System.Security.Principal;
 using SharedLib;
 
 namespace IntegrationLib
@@ -9,6 +8,8 @@ namespace IntegrationLib
     /// </summary>
     public interface IUserIdentity : IIdentity
     {
+        #region PROPERTIES
+        
         /// <summary>
         /// Gets identity user id.
         /// </summary>
@@ -17,7 +18,8 @@ namespace IntegrationLib
         /// <summary>
         /// Gets identity user role.
         /// </summary>
-        [Obsolete("Roles will be removed in upcoming version.")]
-        UserRoles Role { get; }
+        UserRoles Role { get; } 
+
+        #endregion
     }
 }

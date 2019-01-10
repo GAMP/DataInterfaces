@@ -5,16 +5,12 @@ namespace CyClone.Core
 {
     public interface IEnumerationContext : IDisposable
     {
+        #region PROPERTIES
+        
         /// <summary>
-        /// Closes enumeration context.
+        /// Gets if context is currently open.
         /// </summary>
-        void Close();
-
-        /// <summary>
-        /// Asynchronously closes enumeration context.
-        /// </summary>
-        /// <returns>Associated task.</returns>
-        Task CloseAsync();
+        bool IsOpen { get; }
 
         /// <summary>
         /// Gets directory name.
@@ -25,6 +21,21 @@ namespace CyClone.Core
         /// Gets file name.
         /// </summary>
         string FileName { get; }
+
+        #endregion
+
+        #region FUNCTIONS
+
+        /// <summary>
+        /// Closes enumeration context.
+        /// </summary>
+        void Close();
+
+        /// <summary>
+        /// Asynchronously closes enumeration context.
+        /// </summary>
+        /// <returns>Associated task.</returns>
+        Task CloseAsync();
 
         /// <summary>
         /// Finds next entry.
@@ -60,11 +71,8 @@ namespace CyClone.Core
         /// Asynchronously finds first info entry.
         /// </summary>
         /// <returns>Next entry, null in case no more files to enumerate.</returns>
-        Task<IcyFileSystemInfo> FindFirstInfoAsync();
+        Task<IcyFileSystemInfo> FindFirstInfoAsync(); 
 
-        /// <summary>
-        /// Gets if context is currently open.
-        /// </summary>
-        bool IsOpen { get; }
+        #endregion
     }
 }

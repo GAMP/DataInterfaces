@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Security.Principal;
 using SharedLib;
-using System.Threading;
 using System.Runtime.Serialization;
-using System.Security.Claims;
 
 namespace IntegrationLib
 {
@@ -20,8 +15,8 @@ namespace IntegrationLib
         public UserIdentity(string name, int userId, UserRoles role)
             : base(name)
         {
-            this.UserId = userId;
-            this.Role = role;
+            UserId = userId;
+            Role = role;
         }
 
         #endregion        

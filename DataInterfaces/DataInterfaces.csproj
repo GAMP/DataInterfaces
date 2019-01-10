@@ -53,6 +53,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <UseVSHostingProcess>true</UseVSHostingProcess>
     <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -64,6 +65,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Prefer32Bit>false</Prefer32Bit>
     <UseVSHostingProcess>true</UseVSHostingProcess>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -87,12 +89,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\Client_Module\packages\Microsoft.Xaml.Behaviors.Wpf.1.0.1\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="protobuf-net, Version=2.3.7.0, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
-      <HintPath>..\..\V2Importer\packages\protobuf-net.2.3.7\lib\net40\protobuf-net.dll</HintPath>
+    <Reference Include="protobuf-net, Version=2.4.0.0, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
+      <HintPath>..\..\Manager\packages\protobuf-net.2.4.0\lib\net40\protobuf-net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -108,9 +113,6 @@
     <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\V2Importer\packages\Expression.Blend.Sdk.1.0.2\lib\net45\System.Windows.Interactivity.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -141,6 +143,7 @@
     <Compile Include="Libraries\CoreLib\Queue\QueueEntryBase.cs" />
     <Compile Include="Libraries\CoreLib\Queue\QueueEventArgs.cs" />
     <Compile Include="Libraries\cyClone\Exceptions.cs" />
+    <Compile Include="Libraries\cyClone\Interfaces\IcyMapping.cs" />
     <Compile Include="Libraries\GizmoDALV2\DataSize.cs" />
     <Compile Include="Libraries\GizmoDALV2\DTO\WaitingLineInfo.cs" />
     <Compile Include="Libraries\GizmoDALV2\Enumerations.cs" />
@@ -157,11 +160,11 @@
     <Compile Include="Libraries\IntegrationLib\Classes\ClaimTypeInfoDiscoveryProviderBase.cs" />
     <Compile Include="Libraries\IntegrationLib\Classes\ClaimsUserIdentity.cs" />
     <Compile Include="Libraries\IntegrationLib\Classes\ClaimTypeBase.cs" />
-    <Compile Include="Libraries\IntegrationLib\Classes\DbCredentials.cs" />
     <Compile Include="Libraries\IntegrationLib\Classes\DispatcherPrincipal.cs" />
     <Compile Include="Libraries\IntegrationLib\Classes\Documentation.cs" />
     <Compile Include="Libraries\IntegrationLib\Classes\HttpContextIdentityProvider.cs" />
     <Compile Include="Libraries\IntegrationLib\Classes\UserPrincipal.cs" />
+    <Compile Include="Libraries\IntegrationLib\Delegates.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\IClaimsProviderService.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\IClaimType.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\IClaimTypeInfo.cs" />
@@ -170,6 +173,8 @@
     <Compile Include="Libraries\IntegrationLib\Interfaces\IPluginMetadata.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\IPluginSettings.cs" />
     <Compile Include="Libraries\NetLib\Enumerations.cs" />
+    <Compile Include="Libraries\NetLib\Interfaces\ISocketConnection.cs" />
+    <Compile Include="Libraries\NetLib\Interfaces\IWebScoketConnection.cs" />
     <Compile Include="Libraries\SharedLib\Applications\IHasVisualOptions.cs" />
     <Compile Include="Libraries\SharedLib\Attributes\IgnorePropertyModificationAttribute.cs" />
     <Compile Include="Libraries\SharedLib\Classes\DynamicPropertyObjectBase.cs" />
@@ -177,7 +182,10 @@
     <Compile Include="Libraries\SharedLib\Commands\OperationState.cs" />
     <Compile Include="Libraries\SharedLib\Commands\RequestsType.cs" />
     <Compile Include="Libraries\SharedLib\Dispatcher\CommandParserBase.cs" />
-    <Compile Include="Libraries\SharedLib\User\Interfaces\IIntegratedUserProfile.cs" />
+    <Compile Include="Libraries\SharedLib\Logging\Interfaces\ILogMessage.cs" />
+    <Compile Include="Libraries\SharedLib\Logging\Interfaces\ILogProvider.cs" />
+    <Compile Include="Libraries\SharedLib\Logging\Interfaces\ILogService.cs" />
+    <Compile Include="Libraries\SharedLib\ServerQueryLib\ISQServer.cs" />
     <Compile Include="Libraries\SharedLib\ViewModels\Interfaces\ISearchField.cs" />
     <Compile Include="Libraries\SharedLib\ViewModels\Interfaces\IViewAwareModel.cs" />
     <Compile Include="Libraries\SkinInterfaces\Behaviours\CurrencyTextBehaviour.cs" />
@@ -207,13 +215,23 @@
     <Compile Include="Libraries\System\ComponentModel\IDynamicPropertyObject.cs" />
     <Compile Include="Libraries\System\Data\LimitCollectionView.cs" />
     <Compile Include="Libraries\System\Linq\Expression\IFilterSet.cs" />
+    <Compile Include="Libraries\System\Windows\Data\PropertyChangeFilterAttribute.cs" />
+    <Compile Include="Libraries\System\Windows\Data\PropertyChangeFilterIgnoreAttribute.cs" />
     <Compile Include="Libraries\System\Threading\Tasks\NotifyTaskCompletion.cs" />
     <Compile Include="Libraries\System\Threading\Tasks\Parallel.cs" />
     <Compile Include="Libraries\System\Windows\Data\ClutureAwareBinding.cs" />
     <Compile Include="Libraries\Windows\UI.cs" />
+    <Compile Include="Modules\Client\Attributes\ModuleDescriptionAttribute.cs" />
+    <Compile Include="Modules\Client\Attributes\ModuleGuidAttribute.cs" />
+    <Compile Include="Modules\Client\Attributes\ModuleIconAttribute.cs" />
     <Compile Include="Modules\Client\Classes\ClientHookPluginBase.cs" />
-    <Compile Include="Modules\Client\Classes\ClientModule.cs" />
+    <Compile Include="Modules\Client\Attributes\ModuleDisplayOrderAttribute.cs" />
+    <Compile Include="Modules\Client\Classes\ClientModuleBase.cs" />
+    <Compile Include="Modules\Client\Classes\ClientSectionModuleBase.cs" />
+    <Compile Include="Modules\Client\Classes\ClientSwitchInModule.cs" />
+    <Compile Include="Modules\Client\Classes\ClientUserSettingsModuleBase.cs" />
     <Compile Include="Modules\Client\Enumerations.cs" />
+    <Compile Include="Modules\Client\Interfaces\IClientSkinModuleMetadata.cs" />
     <Compile Include="Modules\Client\Interfaces\IClientSwitchInModule.cs" />
     <Compile Include="Modules\Client\Interfaces\IClinetCompositionService.cs" />
     <Compile Include="Modules\Client\Interfaces\IShellViewModel.cs" />
@@ -232,7 +250,7 @@
     <Compile Include="Modules\Client\Interfaces\ViewModels\IAppExeViewModelLocator.cs" />
     <Compile Include="Modules\Client\Interfaces\ViewModels\ICategoryDisplayViewModel.cs" />
     <Compile Include="Modules\Client\Interfaces\IDialogService.cs" />
-    <Compile Include="Modules\Client\Interfaces\ImageHandler.cs" />
+    <Compile Include="Modules\Client\Interfaces\IAppImageHandler.cs" />
     <Compile Include="Modules\Client\Interfaces\Views\IShellView.cs" />
     <Compile Include="Modules\Client\Interfaces\ViewModels\IAppViewModel.cs" />
     <Compile Include="Modules\Client\Interfaces\ViewModels\IMessageDialogViewModel.cs" />
@@ -376,7 +394,6 @@
     <Compile Include="Libraries\IntegrationLib\Interfaces\IAuthResult.cs" />
     <Compile Include="Libraries\IntegrationLib\Classes\PluginMetadataAttribute.cs" />
     <Compile Include="Libraries\IntegrationLib\Classes\UserIdentity.cs" />
-    <Compile Include="Modules\Service\Classes\ServicePluginBase.cs" />
     <Compile Include="Modules\Client\Interfaces\IClientHook.cs" />
     <Compile Include="Modules\Client\Interfaces\IClientPlugin.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\IDispatcherPrincipal.cs" />
@@ -385,21 +402,14 @@
     <Compile Include="Modules\Service\Interfaces\IHostService.cs" />
     <Compile Include="Modules\Service\Interfaces\ILicenseManagmentService.cs" />
     <Compile Include="Modules\Service\Interfaces\ILogService.cs" />
-    <Compile Include="Modules\Service\Interfaces\IServiceAuthenticationPlugin.cs" />
-    <Compile Include="Modules\Service\Interfaces\IServiceHookPlugin.cs" />
-    <Compile Include="Modules\Service\Interfaces\IServicePlugin.cs" />
     <Compile Include="Libraries\NetLib\Delegates.cs" />
     <Compile Include="Libraries\NetLib\EventArgs.cs" />
     <Compile Include="Libraries\SharedLib\Dispatcher\EventArgs.cs" />
     <Compile Include="Libraries\SharedLib\Interfaces\INewsFeed.cs" />
     <Compile Include="Libraries\SharedLib\Applications\IRating.cs" />
     <Compile Include="Libraries\SharedLib\Classes\InternalDate.cs" />
-    <Compile Include="Libraries\SharedLib\Management\Interfaces\IHostGroup.cs" />
     <Compile Include="Libraries\SharedLib\Management\Interfaces\ISecurityProfile.cs" />
-    <Compile Include="Libraries\SharedLib\Management\Interfaces\IUserGroup.cs" />
     <Compile Include="Libraries\SharedLib\Management\Interfaces\IVariable.cs" />
-    <Compile Include="Libraries\SharedLib\ObjectFactories\IBusinessObjectsFactory.cs" />
-    <Compile Include="Libraries\SharedLib\User\Interfaces\IUserSession.cs" />
     <Compile Include="Libraries\SharedLib\ViewModels\Interfaces\IMenuItemViewModel.cs" />
     <Compile Include="Libraries\SkinInterfaces\Behaviours\GridViewBehavior.cs" />
     <Compile Include="Libraries\SkinInterfaces\Converters\FlagsEnumValueConverter.cs" />
@@ -408,15 +418,11 @@
     <Compile Include="Libraries\SkinLib\Classes\UIConfigurationChild.cs" />
     <Compile Include="Modules\Client\EventArgs.cs" />
     <Compile Include="Modules\Client\Exceptions.cs" />
-    <Compile Include="Modules\Client\Interfaces\IApplicationView.cs" />
-    <Compile Include="Modules\Client\Interfaces\IExecutableViewModel.cs" />
-    <Compile Include="Modules\Client\Interfaces\IStartPageViewModel.cs" />
     <Compile Include="Modules\Manager\Enumerations.cs" />
     <Compile Include="Modules\Manager\EventArgs.cs" />
     <Compile Include="Modules\Manager\Interfaces\ICompositionService.cs" />
     <Compile Include="Modules\Manager\Interfaces\IRemoteGizmoService.cs" />
     <Compile Include="Libraries\SharedLib\Interfaces\IRemoteService.cs" />
-    <Compile Include="Modules\Service\Delegates.cs" />
     <Compile Include="Modules\Service\Exceptions.cs" />
     <Compile Include="Libraries\SharedLib\Delegates.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\IProvidePrincipal.cs" />
@@ -436,9 +442,7 @@
     <Compile Include="Libraries\GizmoShell\Interfaces\IShellItemBase.cs" />
     <Compile Include="Libraries\GizmoShell\Interfaces\IShellNotifyIcon.cs" />
     <Compile Include="Libraries\GizmoShell\Interfaces\IWindowInfo.cs" />
-    <Compile Include="Libraries\IntegrationLib\Delegates.cs" />
     <Compile Include="Libraries\IntegrationLib\Enumerations.cs" />
-    <Compile Include="Libraries\IntegrationLib\EventArgs.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\IApplicationLicenseKey.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\IConfigurableLicenseManager.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\ILicenseReservation.cs" />
@@ -456,20 +460,16 @@
     <Compile Include="Libraries\cyClone\Delegates.cs" />
     <Compile Include="Libraries\cyClone\Enumerations.cs" />
     <Compile Include="Libraries\cyClone\Interfaces\IMappingsConfiguration.cs" />
-    <Compile Include="Libraries\cyClone\Interfaces\IcyAction.cs" />
     <Compile Include="Libraries\cyClone\Interfaces\IcyDiffList.cs" />
     <Compile Include="Libraries\cyClone\Interfaces\IcyDirectoryInfo.cs" />
     <Compile Include="Libraries\cyClone\Interfaces\IcyDriveInfo.cs" />
     <Compile Include="Libraries\cyClone\Interfaces\IcyFileInfo.cs" />
     <Compile Include="Libraries\cyClone\Interfaces\IcyFileSystemInfo.cs" />
     <Compile Include="Libraries\cyClone\Interfaces\IcyHandleInfo.cs" />
-    <Compile Include="Libraries\cyClone\Interfaces\IcyMapping.cs" />
     <Compile Include="Libraries\cyClone\Interfaces\IcyRemoteFileStream.cs" />
-    <Compile Include="Libraries\cyClone\Interfaces\IcyStreamsWriter.cs" />
     <Compile Include="Libraries\cyClone\Interfaces\IcyStructure.cs" />
     <Compile Include="Libraries\cyClone\Interfaces\IcySync.cs" />
     <Compile Include="Libraries\cyClone\Interfaces\IEnumerationContext.cs" />
-    <Compile Include="Libraries\cyClone\Interfaces\IPatchBlock.cs" />
     <Compile Include="Libraries\CoreLib\Hooking\KeyHook.cs" />
     <Compile Include="Libraries\IntegrationLib\Classes\UserProfileBase.cs" />
     <Compile Include="Libraries\Localization\Attributes\LocalizedAttribute.cs" />
@@ -506,9 +506,8 @@
     <Compile Include="Libraries\SharedLib\Enumerations.cs" />
     <Compile Include="Libraries\SharedLib\Commands\Interfaces\ICommand.cs" />
     <Compile Include="Libraries\SharedLib\Plugins\Interfaces\IPluginConfiguration.cs" />
-    <Compile Include="Libraries\SharedLib\Interfaces\IRestriction.cs" />
-    <Compile Include="Libraries\SharedLib\Interfaces\ISecurityPolicy.cs" />
-    <Compile Include="Libraries\SharedLib\Logging\Interfaces\ILogProvider.cs" />
+    <Compile Include="Libraries\SharedLib\Management\Interfaces\IRestriction.cs" />
+    <Compile Include="Libraries\SharedLib\Management\Interfaces\ISecurityPolicy.cs" />
     <Compile Include="Modules\Service\EventArgs.cs" />
     <Compile Include="Libraries\SharedLib\EventArgs.cs" />
     <Compile Include="Libraries\SharedLib\Container\Interfaces\IContainer.cs" />
@@ -518,18 +517,14 @@
     <Compile Include="Libraries\SharedLib\Applications\IApplicationProfile.cs" />
     <Compile Include="Libraries\SharedLib\Applications\IApplicationContainer.cs" />
     <Compile Include="Libraries\SharedLib\Applications\ICDImage.cs" />
-    <Compile Include="Libraries\SharedLib\ViewModels\Interfaces\IHostManagerView.cs" />
     <Compile Include="Libraries\SharedLib\Applications\IExecutable.cs" />
-    <Compile Include="Libraries\NetLib\Interfaces\IHostEntry.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\ILicenseManagerPlugin.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\ILicenseProfile.cs" />
-    <Compile Include="Modules\Service\Interfaces\IService.cs" />
     <Compile Include="Libraries\SharedLib\Dispatcher\Interfaces\IOperation.cs" />
     <Compile Include="Libraries\SharedLib\Tasks\ITask.cs" />
     <Compile Include="Libraries\SharedLib\User\Interfaces\IUserProfile.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\IApplicationLicense.cs" />
     <Compile Include="Libraries\SharedLib\Classes\Shared.cs" />
-    <Compile Include="Libraries\ServerQueryLib\ISQServer.cs" />
     <Compile Include="Libraries\SharedLib\User\Interfaces\IUserTimeStatus.cs" />
     <Compile Include="Libraries\SharedLib\ViewModels\Interfaces\IMessageBoxModel.cs" />
     <Compile Include="Libraries\SharedLib\ViewModels\Interfaces\INotifyWindowViewModel.cs" />
@@ -561,6 +556,7 @@
     <Compile Include="Libraries\SkinLib\Interfaces\IUIConfiguration.cs" />
     <Compile Include="Libraries\SkinLib\Interfaces\IUIHandler.cs" />
     <Compile Include="Modules\Service\Interfaces\IUserBalanceHandler.cs" />
+    <Compile Include="Modules\Service\Interfaces\IUserProfileHook.cs" />
     <Compile Include="Modules\Service\Interfaces\IUserTimeBillingHandler.cs" />
     <Compile Include="Modules\Service\Interfaces\IUserService.cs" />
     <Compile Include="Modules\Service\Interfaces\IViewRenderService.cs" />
@@ -568,9 +564,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Modules\Client\ClientInstance.cs" />
     <Compile Include="Libraries\SharedLib\ViewModels\Interfaces\ICategoriesView.cs" />
-    <Compile Include="Modules\Client\Interfaces\IClientViewModel.cs" />
-    <Compile Include="Modules\Service\Interfaces\IServiceViewModel.cs" />
-    <Compile Include="Modules\Service\ServerInstance.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
@@ -597,6 +590,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

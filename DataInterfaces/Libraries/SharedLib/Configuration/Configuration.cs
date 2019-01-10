@@ -379,6 +379,7 @@ namespace SharedLib.Configuration
             General = new ServiceGeneralConfig();
             Web = new ServiceWebConfig();
             Backup = new ServiceBackupConfig();
+            MailServer = new MailServerConfig();
         }
         #endregion
 
@@ -451,6 +452,14 @@ namespace SharedLib.Configuration
             get; set;
         }
 
+        [Category("Mail Server")]
+        [Description("Mail Server configuration.")]
+        [DataMember(Order = 6)]
+        public MailServerConfig MailServer
+        {
+            get;set;
+        }
+
         #endregion
 
         #region OVERRIDE
@@ -463,6 +472,7 @@ namespace SharedLib.Configuration
             FileSystem.SetDefaults();
             General.SetDefaults();
             Backup.SetDefaults();
+            MailServer.SetDefaults();
         }
         #endregion
     }
@@ -968,6 +978,67 @@ namespace SharedLib.Configuration
     }
     #endregion
 
+    [Serializable()]
+    [DataContract()]
+    public class MailServerConfig : ConfigBase
+    {
+        /// <summary>
+        /// Gets or sets SMTP server host.
+        /// </summary>
+        [DefaultValue("smtp.yourservername.com")]
+        [Required()]
+        public string Host
+        {
+            get;set;
+        }
+
+        /// <summary>
+        /// Gets or sets mail server port.
+        /// </summary>
+        [DefaultValue(465)]
+        [Range(1, 65536)]
+        public int Port
+        {
+            get;set;
+        }
+
+        /// <summary>
+        /// Gets or sets username.
+        /// </summary>
+        [StringLength(255)]
+        public string Username
+        {
+            get;set;
+        }
+
+        /// <summary>
+        /// Gets or sets password.
+        /// </summary>
+        [StringLength(255)]
+        public string Password
+        {
+            get;set;
+        }
+
+        /// <summary>
+        /// Gets or sets if authentication should be used.
+        /// </summary>
+        [DefaultValue(false)]
+        public bool EnableAuthentication
+        {
+            get;set;
+        }
+
+        /// <summary>
+        /// Gets or sets if SSL should be used.
+        /// </summary>
+        [DefaultValue(true)]
+        public bool UseSSL
+        {
+            get;set;
+        }        
+    }
+
     #endregion
 
     #region FINANCIALCONFIG
@@ -1257,7 +1328,6 @@ namespace SharedLib.Configuration
         #region CONSTRUCTOR
         public ClientShellConfig()
         {
-            VirtualDesktopItems = new List<int>();
         }
         #endregion
 
@@ -1370,6 +1440,15 @@ namespace SharedLib.Configuration
         public bool StickyShell
         {
             get; set;
+        }
+
+        [Category("Shell")]
+        [Description("Enables or disables desktop switching.")]
+        [DefaultValue(true)]
+        [DataMember(Order = 10)]
+        public bool DisableDesktopSwitching
+        {
+            get;set;
         }
 
         #endregion       
@@ -1584,6 +1663,13 @@ namespace SharedLib.Configuration
             get;set;
         }
 
+        [Category("Functionality")]
+        [DataMember()]
+        public bool PreferUserSearch
+        {
+            get;set;
+        }
+
         [Category("Devices")]
         [DataMember()]
         public DevicesConfig Devices
@@ -1791,6 +1877,17 @@ namespace SharedLib.Configuration
         }
 
         #endregion
+
+        #region OVERRIDES
+
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+
+            Rotator?.SetDefaults();
+        } 
+
+        #endregion
     }
     #endregion
 
@@ -1815,7 +1912,7 @@ namespace SharedLib.Configuration
         /// <summary>
         /// Gets or sets rotate seconds.
         /// </summary>
-        [DefaultValue(5000)]
+        [DefaultValue(5)]
         [DataMember()]
         public int RotateEverySeconds
         {

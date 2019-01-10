@@ -18,7 +18,7 @@ namespace CoreLib
         /// <param name="exception">Exception instance.</param>
         public ExceptionEventArgs(Exception exception)
         {
-            this.Exception = exception ?? throw new ArgumentNullException(nameof(exception));
+            Exception = exception ?? throw new ArgumentNullException(nameof(exception));
         }
         #endregion
 

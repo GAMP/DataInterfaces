@@ -1,6 +1,5 @@
-﻿using System;
-using System.Net;
-using System.Net.Sockets;
+﻿using CoreLib;
+using System;
 
 namespace NetLib
 {
@@ -10,21 +9,13 @@ namespace NetLib
     /// </summary>
     public interface IConnection
     {
-        #region EVENTS
+        #region EVENTS   
 
-        event EndpointEventDelegate EndpointBound;
+        event EventHandler<ExceptionEventArgs> Exception;
 
-        event EndpointEventDelegate EndpointConnected;
+        event EventHandler<ConnectDisconnectEventArgs> EndpointDisconnected;
 
-        event EndpointEventDelegate EndpointConnecting;
-
-        event EndpointEventDelegate EndpointConnectionFailed;
-
-        event ConnectionEventDelegate EndpointDisconnected;
-
-        event ConnectionExceptionDelegate Exception;
-
-        event NewConnectionDelegate NewConnection;
+        event EventHandler<ConnectDisconnectEventArgs> EndpointConnected;
 
         event EventHandler<SentReceivedEventArgs> Received;
 
@@ -61,47 +52,12 @@ namespace NetLib
         /// <summary>
         /// Gets if receiving.
         /// </summary>
-        bool IsReceiving { get; }
-
-        /// <summary>
-        /// Enables or disables keep alive.
-        /// </summary>
-        bool KeepAlive { get; set; }
-
-        /// <summary>
-        /// Gets or sets keep-alive interval.
-        /// </summary>
-        uint KeepAliveInterval { get; set; }
-
-        /// <summary>
-        /// Gets or sets keep-alive timeout.
-        /// </summary>
-        uint KeepAliveTimeOut { get; set; }
-
-        /// <summary>
-        /// Enables or disables socket no-delay.
-        /// </summary>
-        bool NoDelay { get; set; }
-
-        /// <summary>
-        /// Gets or sets socket receive buffer size.
-        /// </summary>
-        int ReceiveBufferSize { get; set; }
+        bool IsReceiving { get; } 
 
         /// <summary>
         /// Gets or sets receive chunk size.
         /// </summary>
         uint ReceiveChunkSize { get; set; }
-
-        /// <summary>
-        /// Gets internal socket instance.
-        /// </summary>
-        Socket Socket { get; }
-
-        /// <summary>
-        /// Gets or sets socket send buffer size.
-        /// </summary>
-        int SendBufferSize { get; set; }
 
         /// <summary>
         /// Gets send chunk size.
@@ -122,49 +78,13 @@ namespace NetLib
 
         #region FUNCTIONS
 
-        /// <summary>
-        /// Starts to listen for connections..
-        /// </summary>
-        /// <param name="backlog">Backlog.</param>
-        void Listen(int backlog);
-
-        void Bind(EndPoint localEP);
-
-        void Bind(IPAddress address, int port);
-
-        void Bind(string address, int port);
-
         void Close();
 
-        void Close(int timeOut);
+        void Receive();   
 
-        void Connect(EndPoint remoteEP);
+        void ShutDown();
 
-        void Connect(IPAddress address, int port);
-
-        void Connect(string host, int port);
-
-        void Disconnect(bool reuseSocket);
-
-        void Receive();
-
-        int Receive(byte[] buffer);
-
-        int Receive(byte[] buffer, int offset, int size, System.Net.Sockets.SocketFlags socketFlags);
-
-        int Receive(byte[] buffer, int size, System.Net.Sockets.SocketFlags socketFlags);
-
-        int Send(byte[] buffer);
-
-        int Send(byte[] buffer, int offset, int size, System.Net.Sockets.SocketFlags socketFlags);
-
-        int Send(byte[] buffer, int size, System.Net.Sockets.SocketFlags socketFlags);
-
-        int Send(byte[] buffer, System.Net.Sockets.SocketFlags socketFlags);
-
-        int SendTo(byte[] buffer, ref EndPoint remoteEP);
-
-        void ShutDown(System.Net.Sockets.SocketShutdown how);
+        int Send(byte[] buffer, int offset, int size);
 
         #endregion
     }

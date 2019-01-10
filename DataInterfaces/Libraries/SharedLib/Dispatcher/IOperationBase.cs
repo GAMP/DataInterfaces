@@ -238,7 +238,7 @@ namespace SharedLib.Dispatcher
         /// <returns>True or false.</returns>
         public bool TryGetParameterAt<T>(int index, out T parameter)
         {
-            parameter = default(T);
+            parameter = default;
 
             if (!HasOpParametersBetween(0, index))
                 return false;

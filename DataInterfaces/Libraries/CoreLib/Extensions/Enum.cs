@@ -124,7 +124,7 @@ namespace CoreLib
             var type = enumVal.GetType();
             var memInfo = type.GetMember(enumVal.ToString());
             if (memInfo.Count() == 0)
-                return default(T);
+                return default;
 
             var attributes = memInfo[0].GetCustomAttributes(typeof(T), false);
             if (attributes.Length > 0)
@@ -133,7 +133,7 @@ namespace CoreLib
             }
             else
             {
-                return default(T);
+                return default;
             }
         }
 

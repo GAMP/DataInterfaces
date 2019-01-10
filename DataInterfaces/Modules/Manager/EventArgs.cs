@@ -1,11 +1,7 @@
 ﻿using Manager.Services;
-using ServerService;
 using SharedLib;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Principal;
-using System.Text;
 
 namespace Manager
 {
@@ -15,7 +11,7 @@ namespace Manager
         #region CONSTRUCTOR
         public AuthEventArgs(IIdentity identity)
         {
-            this.Identity = identity ?? throw new ArgumentNullException(nameof(identity));
+            Identity = identity ?? throw new ArgumentNullException(nameof(identity));
         }
         #endregion
 
@@ -38,8 +34,8 @@ namespace Manager
         #region CONSTRUCTOR
         public CurrentServiceChangedEventArgs(IRemoteGizmoService current, IRemoteGizmoService previous)
         {
-            this.Current = current;
-            this.Previous = previous;
+            Current = current;
+            Previous = previous;
         }
         #endregion
     }
@@ -54,7 +50,7 @@ namespace Manager
             if (string.IsNullOrWhiteSpace(readerName))
                 throw new ArgumentNullException(nameof(readerName));
 
-            this.ReaderName = readerName;
+            ReaderName = readerName;
         }
         #endregion
 
@@ -68,7 +64,7 @@ namespace Manager
             private set;
         }
         #endregion
-    } 
+    }
     #endregion
 
     #region RFIDSCANEVENTARGS
@@ -82,7 +78,7 @@ namespace Manager
         /// </summary>
         /// <param name="readerName">Associated reader name.</param>
         /// <param name="uid">SmartCard UID.</param>
-        public RFIDScanEventArgs(string readerName, byte[] uid):base(readerName)
+        public RFIDScanEventArgs(string readerName, byte[] uid) : base(readerName)
         {
             //uid array must be set
             if (uid == null)
@@ -92,7 +88,7 @@ namespace Manager
             if (uid.Length < 4 || uid.Length > 7)
                 throw new ArgumentNullException(nameof(uid));
 
-            this.UID = uid;
+            UID = uid;
         }
 
         /// <summary>
@@ -100,7 +96,7 @@ namespace Manager
         /// </summary>
         public string UIDString
         {
-            get { return BitConverter.ToString(this.UID); }
+            get { return BitConverter.ToString(UID); }
         }
 
         /// <summary>
@@ -116,13 +112,13 @@ namespace Manager
         /// </summary>
         public bool IsHandled
         {
-            get;set;
+            get; set;
         }
     }
     #endregion
 
     #region PERMISSIONCHANGEEVENTARGS
     public class PermissionChangeEventArgs : EventArgs
-    { } 
+    { }
     #endregion
 }

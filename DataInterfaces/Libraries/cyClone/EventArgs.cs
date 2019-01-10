@@ -18,9 +18,9 @@ namespace CyClone.Core
            List<IMappingsConfiguration> added,
            List<IMappingsConfiguration> removed)
         {
-            this.Action = action;
-            this.AddedItems = added;
-            this.RemovedItems = removed;
+            Action = action;
+            AddedItems = added;
+            RemovedItems = removed;
         }
         #endregion
 
@@ -48,13 +48,13 @@ namespace CyClone.Core
         {
             get
             {
-                if (this.addedItems == null)
-                    this.addedItems = new List<IMappingsConfiguration>();
-                return this.addedItems;
+                if (addedItems == null)
+                    addedItems = new List<IMappingsConfiguration>();
+                return addedItems;
             }
             protected set
             {
-                this.addedItems = value;
+                addedItems = value;
             }
         }
 
@@ -65,11 +65,11 @@ namespace CyClone.Core
         {
             get
             {
-                if (this.removedItems == null)
-                    this.removedItems = new List<IMappingsConfiguration>();
-                return this.removedItems;
+                if (removedItems == null)
+                    removedItems = new List<IMappingsConfiguration>();
+                return removedItems;
             }
-            protected set { this.removedItems = value; }
+            protected set { removedItems = value; }
         }
 
         #endregion
@@ -77,7 +77,7 @@ namespace CyClone.Core
         #region OVERRIDES
         public override string ToString()
         {
-            return String.Format("Change Action {0} Added Items {1} Removed Items {2}", this.Action, this.AddedItems.Count, this.RemovedItems.Count);
+            return String.Format("Change Action {0} Added Items {1} Removed Items {2}", Action, AddedItems.Count, RemovedItems.Count);
         }
         #endregion
     }
@@ -168,8 +168,8 @@ namespace CyClone.Core
         /// <param name="previousFile">Previous file.</param>
         public FileChangedEventArgs(IcyFileSystemInfo currentFile, IcyFileSystemInfo previousFile)
         {
-            this.CurrentFile = currentFile;
-            this.PreviousFile = previousFile;
+            CurrentFile = currentFile;
+            PreviousFile = previousFile;
         }
         #endregion
 
@@ -210,12 +210,12 @@ namespace CyClone.Security
             FileMode mode,
             bool sucess = true)
         {
-            this.TimeStamp = DateTime.Now;
-            this.Access = access;
-            this.Mode = mode;
-            this.Path = path;
-            this.Dispatcher = dispatcher;
-            this.Sucess = sucess;
+            TimeStamp = DateTime.Now;
+            Access = access;
+            Mode = mode;
+            Path = path;
+            Dispatcher = dispatcher;
+            Sucess = sucess;
         }
         #endregion
 

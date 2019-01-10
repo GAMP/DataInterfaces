@@ -10,7 +10,7 @@ namespace SharedLib
     /// Base classs for objects supporting dynamic properties.
     /// </summary>
     public abstract class DynamicPropertyObjectBase : PropertyChangedBase,
-        IDynamicPropertyObject, 
+        IDynamicPropertyObject,
         ICustomTypeDescriptor
     {
         #region CONSTRUCTOR
@@ -19,7 +19,7 @@ namespace SharedLib
         #endregion
 
         #region FIELDS
-        private Dictionary<string, PropertyDescriptor> propertyStore = new Dictionary<string, PropertyDescriptor>();
+        private readonly Dictionary<string, PropertyDescriptor> propertyStore = new Dictionary<string, PropertyDescriptor>();
         #endregion
 
         #region FUNCTIONS
@@ -29,7 +29,7 @@ namespace SharedLib
             if (string.IsNullOrWhiteSpace(propertyName))
                 throw new ArgumentNullException(nameof(propertyName));
 
-            var properties = this.GetProperties()
+            var properties = GetProperties()
                                     .Cast<PropertyDescriptor>()
                                     .Where(prop => prop.Name.Equals(propertyName));
 
@@ -37,6 +37,7 @@ namespace SharedLib
                 throw new ArgumentNullException(nameof(propertyName));
 
             var property = properties.First();
+
             property.SetValue(this, propertyValue);
 
             RaisePropertyChanged(propertyName);
@@ -47,7 +48,7 @@ namespace SharedLib
             if (string.IsNullOrWhiteSpace(propertyName))
                 throw new ArgumentNullException(nameof(propertyName));
 
-            var properties = this.GetProperties()
+            var properties = GetProperties()
                                 .Cast<PropertyDescriptor>()
                                 .Where(prop => prop.Name.Equals(propertyName));
 
@@ -60,12 +61,12 @@ namespace SharedLib
 
         public PropertyDescriptor AddProperty<T, U>(string propertyName) where U : PropertyChangedBase
         {
-            return this.AddProperty(propertyName, new DynamicPropertyDescriptor<T>(propertyName, typeof(U)));
+            return AddProperty(propertyName, new DynamicPropertyDescriptor<T>(propertyName, typeof(U)));
         }
 
         public PropertyDescriptor AddProperty<T>(string propertyName)
         {
-            return this.AddProperty(propertyName, new DynamicPropertyDescriptor<T>(propertyName, this.GetType()));
+            return AddProperty(propertyName, new DynamicPropertyDescriptor<T>(propertyName, GetType()));
         }
 
         private PropertyDescriptor AddProperty(string propertyName, PropertyDescriptor customProperty)
@@ -108,7 +109,7 @@ namespace SharedLib
                .ToArray());
 
             return properties;
-        }        
+        }
 
         public virtual AttributeCollection GetAttributes()
         {
@@ -161,6 +162,6 @@ namespace SharedLib
         }
 
         #endregion
-    } 
+    }
     #endregion
 }

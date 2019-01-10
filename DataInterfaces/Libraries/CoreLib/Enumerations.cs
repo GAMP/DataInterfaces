@@ -127,28 +127,28 @@ namespace CoreLib
     {
         #region Messenger
 
-        [MessengerPolicyAttribute("Disable Collaboration Applications")]
+        [MessengerPolicy("Disable Collaboration Applications")]
         DisableCollaborationApps = 1,
 
-        [MessengerPolicyAttribute("Disable File Transfer")]
+        [MessengerPolicy("Disable File Transfer")]
         DisableFileTransfer = 2,
 
-        [MessengerPolicyAttribute("Disable PC2PCAudio")]
+        [MessengerPolicy("Disable PC2PCAudio")]
         DisablePC2PCAudio = 3,
 
         [MessengerPolicyAttribute("Disable PC2Phone")]
         DisablePC2Phone = 4,
 
-        [MessengerPolicyAttribute("Disable Video")]
+        [MessengerPolicy("Disable Video")]
         DisableVideo = 5,
 
-        [MessengerPolicyAttribute("Prevent Auto Update")]
+        [MessengerPolicy("Prevent Auto Update")]
         PreventAutoUpdate = 6,
 
-        [MessengerPolicyAttribute("Prevent Background Download")]
+        [MessengerPolicy("Prevent Background Download")]
         PreventBackgroundDownload = 7,
 
-        [MessengerPolicyAttribute("Prevent Consumer Version")]
+        [MessengerPolicy("Prevent Consumer Version")]
         PreventConsumerVersion = 8,
 
         #endregion
@@ -250,7 +250,7 @@ namespace CoreLib
         [ExplorerPolicy("Disable File to Url")]
         NoFileUrl = 37,
 
-        [ExplorerPolicyAttribute("Disable search features")]
+        [ExplorerPolicy("Disable search features")]
         NoFind = 38,
 
         [ExplorerPolicy("Disable Folder Options Menu")]
@@ -276,6 +276,15 @@ namespace CoreLib
 
         [ExplorerPolicy("Disable Log Off", "NoLogOff")]
         DisableLogOff = 60,
+
+        [ExplorerPolicy("Disable tray contextual menu", "NoTrayContextMenu")]
+        NoTrayContextMenu = 62,
+
+        [ExplorerPolicy("Disable control panel (disables both old and new control panels)", "NoControlPanel")]
+        NoExplorerControlPanel = 63,
+
+        [ExplorerPolicy("Remove logoff/sign out option from start menu")]
+        StartMenuLogOff = 64,
 
         #endregion
 

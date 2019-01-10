@@ -8,12 +8,12 @@ namespace SharedLib
 {
     #region PropertyChangedBase
     [Serializable()]
-    public abstract class PropertyChangedBase:
+    public abstract class PropertyChangedBase :
         INotifyPropertyChanged
     {
         #region CONSTRUCTOR
         public PropertyChangedBase() : base()
-        { } 
+        { }
         #endregion
 
         #region FIELDS
@@ -31,7 +31,7 @@ namespace SharedLib
         /// </summary>
         protected void RaisePropertyChanged()
         {
-            this.RaisePropertyChanged(new PropertyChangedEventArgsEx());
+            RaisePropertyChanged(new PropertyChangedEventArgsEx());
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace SharedLib
         protected void RaisePropertyChanged(string propertyName)
         {
             //Null or empty string propertyName should be allowed http://msdn.microsoft.com/en-us/library/system.componentmodel.inotifypropertychanged.propertychanged.aspx
-            this.RaisePropertyChanged(this, new PropertyChangedEventArgsEx(propertyName));
+            RaisePropertyChanged(this, new PropertyChangedEventArgsEx(propertyName));
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace SharedLib
         protected void RaisePropertyChanged(PropertyChangedEventArgsEx args)
         {
             //Null or empty string propertyName should be allowed http://msdn.microsoft.com/en-us/library/system.componentmodel.inotifypropertychanged.propertychanged.aspx
-            this.RaisePropertyChanged(this, args);
+            RaisePropertyChanged(this, args);
         }
 
         /// <summary>
@@ -68,10 +68,8 @@ namespace SharedLib
                 throw new ArgumentNullException(nameof(args));
 
             //process event in derived classes
-            if (this.OnPropertyChanging(sender, args))
-            {
-                this.PropertyChanged?.Invoke(sender, args);
-            }
+            if (OnPropertyChanging(sender, args))
+                PropertyChanged?.Invoke(sender, args);
         }
 
         /// <summary>
@@ -120,10 +118,10 @@ namespace SharedLib
             var args = new PropertyChangedEventArgsEx(propertyName, value, oldValue);
 
             //raise event
-            this.RaisePropertyChanged(args);
+            RaisePropertyChanged(args);
 
             //inform subclasses
-            this.OnPropertyChanged(this, args);
+            OnPropertyChanged(this, args);
 
             //return true since property was changed
             return true;
@@ -154,7 +152,7 @@ namespace SharedLib
         /// <returns>True or false.</returns>
         protected bool IsIgnoredProperty(string propertyName)
         {
-            return this.IsIgnoredProperty(this, propertyName);
+            return IsIgnoredProperty(this, propertyName);
         }
 
         #endregion
@@ -182,14 +180,14 @@ namespace SharedLib
         public PropertyChangedEventArgsEx(string propertyName, object newValue)
             : base(propertyName)
         {
-            this.NewValue = newValue;
+            NewValue = newValue;
         }
 
-        public PropertyChangedEventArgsEx(string propertyName, object NewValue, object OldValue)
+        public PropertyChangedEventArgsEx(string propertyName, object newValue, object oldValue)
             : base(propertyName)
         {
-            this.NewValue = NewValue;
-            this.OldValue = OldValue;
+            NewValue = newValue;
+            OldValue = oldValue;
         }
 
         #endregion

@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
+﻿using System.ComponentModel.Composition;
 using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace SharedLib.Services
@@ -104,9 +97,8 @@ namespace SharedLib.Services
         /// <returns><c>true</c> for yes, <c>false</c> for no and <c>null</c> for cancel.</returns>
         public virtual bool? ShowQuestion(object owner, string message)
         {
-            Window ownerWindow = owner as Window;
             MessageBoxResult result;
-            if (ownerWindow != null)
+            if (owner is Window ownerWindow)
             {
                 result = MessageBox.Show(ownerWindow, message, ApplicationInfo.ProductName, MessageBoxButton.YesNoCancel,
                     MessageBoxImage.Question, MessageBoxResult.Cancel, MessageBoxOptions);
@@ -131,9 +123,8 @@ namespace SharedLib.Services
         /// <returns><c>true</c> for yes and <c>false</c> for no.</returns>
         public virtual bool ShowYesNoQuestion(object owner, string message)
         {
-            Window ownerWindow = owner as Window;
             MessageBoxResult result;
-            if (ownerWindow != null)
+            if (owner is Window ownerWindow)
             {
                 result = MessageBox.Show(ownerWindow, message, ApplicationInfo.ProductName, MessageBoxButton.YesNo,
                     MessageBoxImage.Question, MessageBoxResult.No, MessageBoxOptions);

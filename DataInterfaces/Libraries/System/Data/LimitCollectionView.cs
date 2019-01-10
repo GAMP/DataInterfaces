@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Specialized;
 
 namespace System.Windows.Data
 {
@@ -10,7 +9,7 @@ namespace System.Windows.Data
     {
         #region CONSTRUCTOR
         public LimitCollectionView(IList source) : base(source)
-        {
+        {          
         }
         #endregion
 
@@ -25,11 +24,11 @@ namespace System.Windows.Data
         /// </summary>
         public int MaxItems
         {
-            get { return this.MAX_ITEMS; }
+            get { return MAX_ITEMS; }
             set
             {
                 MAX_ITEMS = value;
-                OnPropertyChanged(new ComponentModel.PropertyChangedEventArgs(nameof(this.MaxItems)));
+                OnPropertyChanged(new ComponentModel.PropertyChangedEventArgs(nameof(MaxItems)));
                 RefreshOrDefer();
             }
         }
@@ -45,32 +44,32 @@ namespace System.Windows.Data
         {
             get
             {
+                if (IsRefreshDeferred)
+                    return 0;
+
                 if (MaxItems <= 0)
-                    return base.Count;
+                    return base.Count;        
 
                 var baseCount = base.Count;
 
                 if (MaxItems > baseCount)
                     return baseCount;
 
-                return MaxItems;
+                return Math.Min(MaxItems,baseCount);
             }
         }
 
-        protected override void ProcessCollectionChanged(NotifyCollectionChangedEventArgs args)
+        public override bool PassesFilter(object item)
         {
-            base.ProcessCollectionChanged(args);
-            try
-            {
-                if (args.Action == NotifyCollectionChangedAction.Add || args.Action == NotifyCollectionChangedAction.Remove)
-                {
-                    RefreshOverride();
-                }
-            }
-            catch
-            {
+            if (!base.PassesFilter(item))
+                return false;
 
+            if(item!=null)
+            {
+                return IndexOf(item) < MaxItems;
             }
+
+            return true;
         }
 
         #endregion

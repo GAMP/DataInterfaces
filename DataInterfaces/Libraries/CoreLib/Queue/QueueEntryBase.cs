@@ -33,7 +33,7 @@ namespace CoreLib.Queue
         {
             get
             {
-                return this.cancelSource;
+                return cancelSource;
             }
         }
 
@@ -44,7 +44,7 @@ namespace CoreLib.Queue
         {
             get
             {
-                return this.cancelSource.Token;
+                return cancelSource.Token;
             }
         }
 
@@ -53,8 +53,8 @@ namespace CoreLib.Queue
         /// </summary>
         public QueuePriority Priority
         {
-            get { return this.priority; }
-            set { this.SetProperty(ref this.priority, value); }
+            get { return priority; }
+            set { SetProperty(ref priority, value); }
         }
 
         /// <summary>
@@ -62,8 +62,8 @@ namespace CoreLib.Queue
         /// </summary>
         public T Action
         {
-            get { return this.action; }
-            set { this.SetProperty(ref this.action, value); }
+            get { return action; }
+            set { SetProperty(ref action, value); }
         }
 
         /// <summary>
@@ -71,8 +71,8 @@ namespace CoreLib.Queue
         /// </summary>
         public QueueStatus Status
         {
-            get { return this.status; }
-            set { this.SetProperty(ref this.status, value); }
+            get { return status; }
+            set { SetProperty(ref status, value); }
         }
 
         /// <summary>
@@ -80,8 +80,8 @@ namespace CoreLib.Queue
         /// </summary>
         public Exception Exception
         {
-            get { return this.exception; }
-            set { this.SetProperty(ref this.exception, value); }
+            get { return exception; }
+            set { SetProperty(ref exception, value); }
         }
 
         /// <summary>
@@ -89,8 +89,8 @@ namespace CoreLib.Queue
         /// </summary>
         public double Progress
         {
-            get { return this.progress; }
-            set { this.SetProperty(ref this.progress, value); }
+            get { return progress; }
+            set { SetProperty(ref progress, value); }
         }
 
         /// <summary>
@@ -98,8 +98,8 @@ namespace CoreLib.Queue
         /// </summary>
         public DateTime Time
         {
-            get { return this.time; }
-            set { this.SetProperty(ref this.time, value); }
+            get { return time; }
+            set { SetProperty(ref time, value); }
         }
 
         /// <summary>
@@ -109,9 +109,9 @@ namespace CoreLib.Queue
         {
             get
             {
-                if (this.cancelCommand == null)
-                    this.cancelCommand = new SimpleCommand<object, object>(OnCanCancelCommand, OnCancelCommand);
-                return this.cancelCommand;
+                if (cancelCommand == null)
+                    cancelCommand = new SimpleCommand<object, object>(OnCanCancelCommand, OnCancelCommand);
+                return cancelCommand;
             }
         }
 
@@ -122,9 +122,9 @@ namespace CoreLib.Queue
         {
             get
             {
-                if (this.pauseCommand == null)
-                    this.pauseCommand = new SimpleCommand<object, object>(OnCanPauseCommand, OnPauseCommand);
-                return this.pauseCommand;
+                if (pauseCommand == null)
+                    pauseCommand = new SimpleCommand<object, object>(OnCanPauseCommand, OnPauseCommand);
+                return pauseCommand;
             }
         }
 
@@ -136,16 +136,18 @@ namespace CoreLib.Queue
         {
             return false;
         }
+
         protected virtual void OnPauseCommand(object param)
         { }
 
         protected virtual bool OnCanCancelCommand(object param)
         {
-            return !this.CancelToken.IsCancellationRequested;
+            return !CancelToken.IsCancellationRequested;
         }
+
         protected virtual void OnCancelCommand(object param)
         {
-            this.CancelTokenSource.Cancel();
+            CancelTokenSource.Cancel();
         }
 
         #endregion

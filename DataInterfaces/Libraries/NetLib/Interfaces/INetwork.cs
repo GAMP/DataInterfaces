@@ -6,21 +6,28 @@ namespace NetLib
     public interface INetwork
     {
         #region EVENTS
+        /// <summary>
+        /// Occours when one of network connections is changed.
+        /// </summary>
         event EventHandler<ConnectionChangedArgs> ConnectionChanged;
         #endregion
 
         #region PROPERTIES
 
+        /// <summary>
+        /// Gets stream connection.
+        /// </summary>
         IConnection StreamConnection
         {
             get;
-            set;
         }
 
+        /// <summary>
+        /// Gets datagram connection.
+        /// </summary>
         IConnection DataGramConnection
         {
             get;
-            set;
         }
         
         #endregion

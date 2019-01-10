@@ -1,7 +1,7 @@
 ﻿namespace IntegrationLib
 {
     /// <summary>
-    /// Plugin metadat interface.
+    /// Plugin metadata interface.
     /// </summary>
     public interface IPluginMetadata
     {

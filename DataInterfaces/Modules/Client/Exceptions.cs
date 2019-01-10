@@ -9,7 +9,7 @@ namespace Client
     [Serializable()]
     public class ContextExecutionFailedException : Exception
     {
-        #region Constructor
+        #region CONSTRUCTOR
 
         public ContextExecutionFailedException(string message)
             : base(message)
@@ -17,7 +17,7 @@ namespace Client
         
         public ContextExecutionFailedException() : base() { }
         
-        public ContextExecutionFailedException(string message, System.Exception inner) : base(message, inner) { }
+        public ContextExecutionFailedException(string message, Exception inner) : base(message, inner) { }
         
         protected ContextExecutionFailedException(System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context)

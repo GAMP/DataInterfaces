@@ -32,17 +32,28 @@
         SaleNoDeleteTimePurchases,
         #endregion
 
+        #region SHIFT
         [ClaimDescription(@"Shift", "ViewExpected", "PERMISSION_GROUP_SHIFT", "PERMISSION_ACTION_SHIFT_VIEW_EXPECTED")]
         ShiftCountViewExpected,
+        #endregion
 
+        #region STOCK
         [ClaimDescription(@"Stock", "*", "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_STOCK")]
         Stock,
+        #endregion
+
+        #region MANAGEMENT
 
         [ClaimDescription(@"Management", "*", "PERMISSION_GROUP_MANAGEMENT", "PERMISSION_ACTION_MANAGEMENT")]
         Management,
 
-        [ClaimDescription(@"Management", "Tasks", new GizmoClaimTypes[] { Management }, "PERMISSION_GROUP_MANAGEMENT", "PERMISSION_ACTION_MANAGEMENT_TASKS",IsAssignable =false)]
+        [ClaimDescription(@"Management", "Tasks", new GizmoClaimTypes[] { Management }, "PERMISSION_GROUP_MANAGEMENT", "PERMISSION_ACTION_MANAGEMENT_TASKS", IsAssignable = false)]
         ManagementTasks,
+
+        [ClaimDescription(@"Management", "Maintenance", "PERMISSION_GROUP_MANAGEMENT", "PERMISSION_ACTION_MANAGEMENT_MAINTENANCE")]
+        ManageMaintenance,
+
+        #endregion
 
         [ClaimDescription(@"Deployment", "*", "PERMISSION_GROUP_DEPLOYMENT", "PERMISSION_ACTION_DEPLOYMENT")]
         Deployment,
@@ -63,6 +74,7 @@
         News,
 
         #region USER
+
         [ClaimDescription(@"User", "UserPasswordReset", "PERMISSION_GROUP_USER", "PERMISSION_ACTION_USER_PASSWORD_RESET")]
         UserResetPassword,
 
@@ -75,8 +87,27 @@
         [ClaimDescription(@"User", "UserManualLogin", "PERMISSION_GROUP_USER", "PERMISSION_ACTION_MANUAL_LOGIN")]
         UserManualLogin,
 
+        [ClaimDescription(@"User", "Delete", "PERMISSION_GROUP_USER", "PERMISSION_ACTION_USER_DELETE")]
+        UserDelete,
+
+        [ClaimDescription(@"User", "ChangeUserName", "PERMISSION_GROUP_USER", "PERMISSION_ACTION_USER_CHANGE_USERNAME")]
+        UserChangeUserName,
+
+        [ClaimDescription(@"User", "ChangeUserGroup", "PERMISSION_GROUP_USER", "PERMISSION_ACTION_USER_CHANGE_USERGROUP")]
+        UserChangeUserGroup,
+
+        [ClaimDescription(@"User", "Edit", "PERMISSION_GROUP_USER", "PERMISSION_ACTION_USER_EDIT")]
+        UserEdit,
+
         #endregion
-    } 
+
+        #region LOG
+
+        [ClaimDescription(@"Log", "Clear", "PERMISSION_GROUP_LOG", "PERMISSION_ACTION_LOG_CLEAR")]
+        LogClear,
+
+        #endregion
+    }
     #endregion
 
     #region BackupResultCode

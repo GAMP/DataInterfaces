@@ -55,7 +55,7 @@ namespace ServerService
         /// </summary>
         public void Dispose()
         {
-            this.OnDisposing(true);
+            OnDisposing(true);
         }
         #endregion
     }

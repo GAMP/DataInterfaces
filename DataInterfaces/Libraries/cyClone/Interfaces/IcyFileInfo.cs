@@ -1,20 +1,30 @@
-﻿using System;
-using CyClone.Core;
-using SharedLib.Dispatcher;
+﻿using System.IO;
 
 namespace CyClone.Core
 {
+    #region IcyFileInfo
     public interface IcyFileInfo : IcyFileSystemInfo
     {
-        string Hash { get; set; }
-        System.IO.Stream Open(System.IO.FileMode Mode, System.IO.FileAccess Access, System.IO.FileShare Share, int BufferSize, System.IO.FileOptions Options);
-        System.IO.Stream Open(System.IO.FileMode Mode, System.IO.FileAccess Access);
-        System.IO.Stream Open(System.IO.FileMode Mode);
-        System.IO.Stream OpenRead();      
-    }
+        #region PROPERTIES
 
+        string Hash { get; set; }
+
+        #endregion
+
+        #region FUNCTIONS
+
+        Stream Open(FileMode Mode, FileAccess Access, FileShare Share, int BufferSize, FileOptions Options);
+        Stream Open(FileMode Mode, FileAccess Access);
+        Stream Open(FileMode Mode);
+        Stream OpenRead(); 
+
+        #endregion
+    } 
+    #endregion
+
+    #region IcyRemoteFileInfo
     public interface IcyRemoteFileInfo : IcyRemoteFileSystemInfo
     {
- 
-    }
+    } 
+    #endregion
 }

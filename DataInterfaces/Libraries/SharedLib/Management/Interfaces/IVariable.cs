@@ -1,5 +1,4 @@
-﻿using System;
-namespace SharedLib.Management
+﻿namespace SharedLib.Management
 {
     public interface IVariable
     {

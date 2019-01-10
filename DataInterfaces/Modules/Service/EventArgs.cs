@@ -1,125 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using IntegrationLib;
-using NetLib;
 using SharedLib;
-using SharedLib.Dispatcher;
 using System.Runtime.Serialization;
 using GizmoDALV2.DTO;
 
 namespace ServerService
 {
-    #region OBSOLETE
-
-    #region HOSTEVENTARGS
-    [Obsolete()]
-    public class HostEventArgs : EventArgs
-    {
-        #region Constructor
-        public HostEventArgs(IHostEntry host, HostEventType type)
-        {
-            this.Host = host;
-            this.Type = type;
-        }
-        #endregion
-
-        #region Properties
-        /// <summary>
-        /// Gets the host of event.
-        /// </summary>
-        public IHostEntry Host
-        {
-            get;
-            protected set;
-        }
-
-        /// <summary>
-        /// Gets the type of event.
-        /// </summary>
-        public HostEventType Type
-        {
-            get;
-            protected set;
-        }
-        #endregion
-
-        #region OVERRIDES
-        public override string ToString()
-        {
-            return String.Format("Host {0} event {1}", this.Host.HostName, this.Type);
-        }
-        #endregion
-    }
-    #endregion
-
-    #region USERSTATEEVENTARGS
-    [Obsolete()]
-    public class UserStateEventArgs : UserIdEventArgsBase
-    {
-        #region CONSTRUCTOR
-        public UserStateEventArgs(int userId, LoginState newState, LoginState oldState, IHostEntry host, IMessageDispatcher dispatcher)
-            : base(userId)
-        {
-            #region VALIDATION
-            if (host == null)
-                throw new ArgumentNullException("Host", "Host may not be null");
-            #endregion
-
-            this.NewState = newState;
-            this.OldState = oldState;
-            this.HostEntry = host;
-            this.Dispatcher = dispatcher;
-        }
-        #endregion
-
-        #region PROPERTIES
-
-        /// <summary>
-        /// Gets new user state.
-        /// </summary>
-        public LoginState NewState
-        {
-            get;
-            protected set;
-        }
-
-        /// <summary>
-        /// Gets old user state.
-        /// </summary>
-        public LoginState OldState
-        {
-            get;
-            protected set;
-        }
-
-        public IHostEntry HostEntry
-        {
-            get;
-            protected set;
-        }
-
-        /// <summary>
-        /// Gets message dispatcher.
-        /// </summary>
-        public IMessageDispatcher Dispatcher
-        {
-            get;
-            protected set;
-        }
-
-        #endregion
-
-        #region OVERRIDES
-        public override string ToString()
-        {
-            return String.Format("User Id:{0} New State {1} Old State: {2}", this.UserId, this.NewState, this.OldState);
-        }
-        #endregion
-    }
-    #endregion
-
-    #endregion
-
     #region BASE ABSTRACT
 
     #region UserIdEventArgsBase
@@ -337,7 +224,7 @@ namespace ServerService
         public UserPasswordChangedEventArgs(int userId, string newPassword)
             : base(userId, UserChangeType.Password)
         {
-            this.NewPassword = newPassword;
+            NewPassword = newPassword;
         }
         #endregion
 
@@ -357,7 +244,7 @@ namespace ServerService
         /// </summary>
         public bool IsReset
         {
-            get { return String.IsNullOrWhiteSpace(this.NewPassword); }
+            get { return string.IsNullOrWhiteSpace(NewPassword); }
         }
 
         #endregion
