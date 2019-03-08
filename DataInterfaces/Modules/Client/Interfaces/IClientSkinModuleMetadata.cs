@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 
 namespace Client
 {
@@ -37,6 +38,11 @@ namespace Client
         /// Gets module icon resource.
         /// </summary>
         string IconResource { get; }
+
+        /// <summary>
+        /// Gets exported type.
+        /// </summary>
+        Type Type { get; }
 
         #endregion
     }

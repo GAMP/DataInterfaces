@@ -361,7 +361,7 @@ namespace SharedLib.Configuration
         #endregion
     }
 
-    #endregion
+    #endregion    
 
     #region SERVICECONFIGURATION
 
@@ -379,7 +379,7 @@ namespace SharedLib.Configuration
             General = new ServiceGeneralConfig();
             Web = new ServiceWebConfig();
             Backup = new ServiceBackupConfig();
-            MailServer = new MailServerConfig();
+            SMTP = new SMTPConfig();
         }
         #endregion
 
@@ -452,10 +452,10 @@ namespace SharedLib.Configuration
             get; set;
         }
 
-        [Category("Mail Server")]
-        [Description("Mail Server configuration.")]
+        [Category("SMTP Server")]
+        [Description("SMTP Server configuration.")]
         [DataMember(Order = 6)]
-        public MailServerConfig MailServer
+        public SMTPConfig SMTP
         {
             get;set;
         }
@@ -472,7 +472,7 @@ namespace SharedLib.Configuration
             FileSystem.SetDefaults();
             General.SetDefaults();
             Backup.SetDefaults();
-            MailServer.SetDefaults();
+            SMTP.SetDefaults();
         }
         #endregion
     }
@@ -936,6 +936,27 @@ namespace SharedLib.Configuration
         {
             get;set;
         }
+
+        /// <summary>
+        /// Gets or sets external host name.
+        /// </summary>
+        [DefaultValue("localhost")]
+        [DataMember(Order = 7, IsRequired = false)]
+        public string ExternalHostName
+        {
+            get;set;
+        }
+
+        /// <summary>
+        /// Gets or sets external port.
+        /// </summary>
+        [DefaultValue(80)]
+        [Range(1, 65536)]
+        [DataMember(Order = 7, IsRequired = false)]
+        public int? ExternalPort
+        {
+            get;set;
+        }
     }
     #endregion
 
@@ -978,66 +999,87 @@ namespace SharedLib.Configuration
     }
     #endregion
 
+    #region SMTPCONFIG
     [Serializable()]
     [DataContract()]
-    public class MailServerConfig : ConfigBase
+    public class SMTPConfig : ConfigBase
     {
+        #region PROPERTIES
+
         /// <summary>
         /// Gets or sets SMTP server host.
         /// </summary>
-        [DefaultValue("smtp.yourservername.com")]
+        [DataMember()]
         [Required()]
         public string Host
         {
-            get;set;
+            get; set;
         }
 
         /// <summary>
         /// Gets or sets mail server port.
         /// </summary>
+        [DataMember()]
         [DefaultValue(465)]
         [Range(1, 65536)]
         public int Port
         {
-            get;set;
+            get; set;
         }
 
         /// <summary>
         /// Gets or sets username.
         /// </summary>
+        [DataMember()]
         [StringLength(255)]
         public string Username
         {
-            get;set;
+            get; set;
         }
 
         /// <summary>
         /// Gets or sets password.
         /// </summary>
+        [DataMember()]
         [StringLength(255)]
         public string Password
         {
-            get;set;
+            get; set;
         }
 
         /// <summary>
         /// Gets or sets if authentication should be used.
         /// </summary>
+        [DataMember()]
         [DefaultValue(false)]
         public bool EnableAuthentication
         {
-            get;set;
+            get; set;
         }
 
         /// <summary>
         /// Gets or sets if SSL should be used.
         /// </summary>
+        [DataMember()]
         [DefaultValue(true)]
         public bool UseSSL
         {
-            get;set;
-        }        
-    }
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets if SMTP is enabled.
+        /// </summary>
+        [DataMember()]
+        [DefaultValue(false)]
+        public bool Enable
+        {
+            get; set;
+        } 
+
+        #endregion
+    } 
+    #endregion
 
     #endregion
 
@@ -1317,6 +1359,16 @@ namespace SharedLib.Configuration
             get;
             set;
         }
+
+        [Category("General")]
+        [Description("Enables or disables client ordering.")]
+        [DefaultValue(true)]
+        [DataMember(Order = 3)]
+        public bool IsOrderingEnabled
+        {
+            get;set;
+        }
+
         #endregion
     }
 
@@ -1790,6 +1842,28 @@ namespace SharedLib.Configuration
         public string OpenCashDrawerCommand
         {
             get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets if deposit receipts should be printed.
+        /// </summary>
+        [DefaultValue(false)]
+        [DataMember()]
+        public bool DepositReceiptEnabled
+        {
+            get;set;
+        }
+
+        [DataMember()]
+        public int? ReceiptCount
+        {
+            get;set;
+        }
+
+        [DataMember()]
+        public int? DepositReceiptCount
+        {
+            get;set;
         }
 
         #endregion

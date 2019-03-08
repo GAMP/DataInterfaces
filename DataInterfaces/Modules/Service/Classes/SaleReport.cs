@@ -70,7 +70,7 @@ namespace ServerService
         [ProtoIgnore()]
         public int SessionTimeMinutes
         {
-            get { return (int)Math.Round(this.SessionTime / 60,0); }
+            get { return (int)Math.Round(this.SessionTime); }
         }
 
         /// <summary>

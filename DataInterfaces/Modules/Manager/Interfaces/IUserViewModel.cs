@@ -100,6 +100,11 @@ namespace Manager.ViewModels
         /// </summary>
         string Identification { get; }
 
+        /// <summary>
+        /// Gets user age.
+        /// </summary>
+        int? Age { get; }
+
         #endregion
     }
 }

@@ -85,7 +85,6 @@ namespace CoreLib
                 throw new ArgumentNullException(nameof(dt));
 
             return new DateTime(dt.Year, dt.Month, dt.Day);
-
         }
 
         /// <summary>

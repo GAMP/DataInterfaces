@@ -308,6 +308,21 @@ namespace SharedLib.Commands
         /// Get image hash operation.
         /// </summary>
         GetImageHash = 19,
+
+        /// <summary>
+        /// Get ordering data.
+        /// </summary>
+        GetOrderingData = 20,
+
+        /// <summary>
+        /// Create orderd.
+        /// </summary>
+        ProductOrderCreate =21,
+
+        /// <summary>
+        /// Get user balance.
+        /// </summary>
+        UserBalanceGet =22 ,
     }
     #endregion
 
@@ -745,6 +760,7 @@ namespace SharedLib.Commands
         DepositAdd = 179,
         DepositWithdraw = 180,
         DepositPaymentGet = 181,
+        DepositTransactionInfoGet=271,
         #endregion
 
         #region POINTS
@@ -762,8 +778,12 @@ namespace SharedLib.Commands
 
         #region PRODUCT ORDER
         ProductOrderGet = 188,
+        ProductOrderOpenInfoGet=273,
         ProductOrderCancel = 189,
         ProductOrderInvoice = 190,
+        ProductOrderAccept = 270,
+        ProductOrderComplete= 272,
+        ProductOrderLineUpdateState = 274,
         #endregion
 
         #region INVOICE
@@ -878,7 +898,7 @@ namespace SharedLib.Commands
 
         #endregion
 
-        //max 270
+        //max 275
     }
     #endregion
 
@@ -907,6 +927,7 @@ namespace SharedLib.Commands
     {
         UserBalanceEvent = 0,
         EntityEvent = 1,
+        EventBatch =2,
     }
     #endregion
 

@@ -229,7 +229,13 @@ namespace SharedLib.Extensions
             foreach (var enumerableProperty in enumerableProperties)
             {
                 var sourceEnumerable = (IEnumerable)enumerableProperty.GetValue(source);
+
+                if (sourceEnumerable == null)
+                    continue;
+
                 var destinationEnumerable = (IEnumerable)enumerableProperty.GetValue(destination);
+                if (destinationEnumerable == null)
+                    continue;
 
                 var sourceList = sourceEnumerable.OfType<object>().ToList();
                 var destinationList = destinationEnumerable.OfType<object>().ToList();

@@ -9,7 +9,7 @@ namespace ServerService
 {
     #region BASE ABSTRACT
 
-    #region UserIdEventArgsBase
+    #region USERIDEVENTARGSBASE
     [Serializable()]
     [DataContract()]
     public abstract class UserIdEventArgsBase : EventArgs
@@ -37,7 +37,7 @@ namespace ServerService
     }
     #endregion
 
-    #region HostIdArgs
+    #region HOSTIDARGS
     [Serializable()]
     [DataContract()]
     public abstract class HostIdArgs : EventArgs
@@ -60,6 +60,30 @@ namespace ServerService
             get;
             protected set;
         }
+        #endregion
+    }
+    #endregion
+
+    #region ORDEREVENTARGSBASE
+    [Serializable()]
+    [DataContract()]
+    public abstract class OrderEventArgsBase : UserIdEventArgsBase
+    {
+        #region CONSTRUCTOR
+        public OrderEventArgsBase(int userId, int orderId) : base(userId)
+        {
+            OrderId = orderId;
+        }
+        #endregion
+
+        #region PROPERTIES
+
+        [DataMember()]
+        public int OrderId
+        {
+            get; protected set;
+        }
+
         #endregion
     }
     #endregion
@@ -1074,6 +1098,158 @@ namespace ServerService
         /// </summary>
         [DataMember()]
         public IEnumerable<WaitingEntryInfo> ActiveEntries
+        {
+            get; set;
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #region ORDERSTATUSCHANGEEVENTARGS
+    [Serializable()]
+    [DataContract()]
+    public class OrderStatusChangeEventArgs : OrderEventArgsBase
+    {
+        #region CONSTRUCTOR    
+        public OrderStatusChangeEventArgs(int userId,
+            int orderId,
+            OrderStatus newStatus,
+            OrderStatus? oldStatus) : base(userId, orderId)
+        {
+            OrderId = orderId;
+            NewStatus = newStatus;
+            OldStatus = oldStatus;
+        }
+        #endregion
+
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets new status.
+        /// </summary>
+        [DataMember()]
+        public OrderStatus NewStatus
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets old status.
+        /// </summary>
+        [DataMember()]
+        public OrderStatus? OldStatus
+        {
+            get; set;
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #region ORDERINVOICEDEVENTARGS
+    [Serializable()]
+    [DataContract()]
+    public class OrderInvoicedEventArgs : OrderEventArgsBase
+    {
+        #region CONSTRUCTOR
+        public OrderInvoicedEventArgs(int orderId, int userId, int invoiceId) : base(userId, orderId)
+        {
+            InvoiceId = invoiceId;
+        }
+        #endregion
+
+        #region PROPERTIES
+
+        [DataMember()]
+        public int InvoiceId
+        {
+            get; set;
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #region ORDERINVOICEPAYMENTEVENTARGS
+    [Serializable()]
+    [DataContract()]
+    public class OrderInvoicePaymentEventArgs : OrderInvoicedEventArgs
+    {
+        #region CONSTRUCTOR
+        public OrderInvoicePaymentEventArgs(int orderId,
+            int userId,
+            int invoiceId,
+            int paymentMethodId,
+            decimal amount,
+            decimal outstanding) : base(orderId, userId, invoiceId)
+        {
+            Amount = amount;
+            PaymentMethodId = paymentMethodId;
+            Outstanding = outstanding;
+        }
+        #endregion
+
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets payment method id.
+        /// </summary>
+        [DataMember()]
+        public int? PaymentMethodId
+        {
+            get; protected set;
+        }
+
+        /// <summary>
+        /// Gets payment amount.
+        /// </summary>
+        [DataMember()]
+        public decimal Amount
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Get outstanding amount on invoice.
+        /// </summary>
+        [DataMember()]
+        public decimal Outstanding
+        {
+            get; protected set;
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #region ORDERDELIVEREDARGS
+    [Serializable()]
+    [DataContract()]
+    public class OrderDeliveredArgs : OrderEventArgsBase
+    {
+        #region CONSTRUCTOR
+        public OrderDeliveredArgs(int userId, int orderId) : base(userId, orderId)
+        {
+        }
+        #endregion
+
+        #region PROPERTIES
+
+        [DataMember()]
+        public bool IsDelivered
+        {
+            get; set;
+        }
+
+        [DataMember()]
+        public DateTime? DeliverTime
+        {
+            get; set;
+        }
+
+        [DataMember()]
+        public IEnumerable<OrderLineState> States
         {
             get; set;
         }

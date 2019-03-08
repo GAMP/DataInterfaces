@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
 
 namespace ServerService
 {
-    #region MaximumConnectionsException
+    #region MAXIMUMCONNECTIONSEXCEPTION
     /// <summary>
     /// This exception is thrown when maximum client connections reached.
     /// </summary>
@@ -14,7 +11,7 @@ namespace ServerService
     [DataContract()]
     public class MaximumConnectionsException : Exception
     {
-        #region Constructor
+        #region CONSTRUCTOR
 
         public MaximumConnectionsException(string message)
             : base(message)
@@ -32,12 +29,12 @@ namespace ServerService
     }
     #endregion
 
-    #region LicenseResevationException
+    #region LICENSERESEVATIONEXCEPTION
     [DataContract()]
     [Serializable()]
     public class LicenseResevationException : Exception
     {
-        #region Constructor
+        #region CONSTRUCTOR
 
         public LicenseResevationException(string message)
             : base(message)
@@ -52,6 +49,26 @@ namespace ServerService
             : base(info, context) { }
 
         #endregion
+    }
+    #endregion
+
+    #region HOSTRESERVATIONEXCEPTION
+    public class HostReservationException : GizmoDALV2.ErrorCodeException<ReservationErrorCode>
+    {
+        public HostReservationException(ReservationErrorCode errorCode) : base(errorCode)
+        { }
     } 
     #endregion
+
+    public enum ReservationErrorCode
+    {
+        InvalidUserId,
+        InvalidReservationId,
+        UserAlreadyAdded,
+        UserNotPresent,
+        ReservationInactive,
+        InvalidDate,
+        InvalidDuration,
+        Failed,
+    }
 }

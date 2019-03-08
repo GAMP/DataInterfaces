@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Threading;
 using System.Threading.Tasks;
 
 namespace Manager.Modules
@@ -14,24 +11,38 @@ namespace Manager.Modules
     /// </remarks>
     public interface IInitEnumerator
     {
+        #region FUNCTIONS
+        
         /// <summary>
         /// Initiates enumeration.
         /// </summary>
-        void Enumerate();
-
-        /// <summary>
-        /// Initiates enumeration.
-        /// </summary>
+        /// <returns>
+        /// Associated task.
+        /// </returns>
         Task EnumerateAsync();
 
         /// <summary>
-        /// Clears any enumeration.
+        /// Initiates enumeration.
         /// </summary>
-        void Clear();
+        /// <param name="ct">Cancellation token.</param>
+        /// <returns>Associated task.</returns>
+        Task EnumerateAsync(CancellationToken ct);
+
+        /// <summary>
+        /// Clears enumeration.
+        /// </summary>
+        /// <param name="ct">Cancellation token.</param>
+        /// <returns>Associated task.</returns>
+        Task ClearAsync(CancellationToken ct);
 
         /// <summary>
         /// Clears any enumeration.
         /// </summary>
-        Task ClearAsync();
+        /// <returns>
+        /// Associated task.
+        /// </returns>
+        Task ClearAsync(); 
+
+        #endregion
     }
 }

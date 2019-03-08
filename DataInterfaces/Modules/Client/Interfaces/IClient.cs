@@ -8,6 +8,7 @@ using CoreLib.Hooking;
 using SharedLib.User;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using ServerService;
 
 namespace Client
 {
@@ -110,6 +111,11 @@ namespace Client
         /// Occurs on maintenace mode change.
         /// </summary>
         event EventHandler<MaintenanceEventArgs> MaintenanceModeChange;
+
+        /// <summary>
+        /// Occurs on order status change.
+        /// </summary>
+        event EventHandler<OrderStatusChangeEventArgs> OrderStatusChange;
 
         #endregion
 

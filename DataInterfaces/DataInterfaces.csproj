@@ -90,7 +90,7 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\Client_Module\packages\Microsoft.Xaml.Behaviors.Wpf.1.0.1\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+      <HintPath>..\..\Manager\packages\Microsoft.Xaml.Behaviors.Wpf.1.0.1\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework">
@@ -200,6 +200,7 @@
     <Compile Include="Libraries\SkinInterfaces\Converters\DecimalToIntConverter.cs" />
     <Compile Include="Libraries\SkinInterfaces\Converters\EmumValueGreaterOrEqualConverter.cs" />
     <Compile Include="Libraries\SkinInterfaces\Converters\EnumMatchToBooleanConverter.cs" />
+    <Compile Include="Libraries\SkinInterfaces\Converters\NullToHiddenConverter.cs" />
     <Compile Include="Libraries\SkinInterfaces\Converters\StringCompareMultiValueConverter.cs" />
     <Compile Include="Libraries\SkinInterfaces\Converters\StringEqualNonCaseConverter.cs" />
     <Compile Include="Libraries\SkinInterfaces\Converters\ValueLessConverter.cs" />
@@ -224,6 +225,7 @@
     <Compile Include="Modules\Client\Attributes\ModuleDescriptionAttribute.cs" />
     <Compile Include="Modules\Client\Attributes\ModuleGuidAttribute.cs" />
     <Compile Include="Modules\Client\Attributes\ModuleIconAttribute.cs" />
+    <Compile Include="Modules\Client\Attributes\ModuleTypeAttribute.cs" />
     <Compile Include="Modules\Client\Classes\ClientHookPluginBase.cs" />
     <Compile Include="Modules\Client\Attributes\ModuleDisplayOrderAttribute.cs" />
     <Compile Include="Modules\Client\Classes\ClientModuleBase.cs" />
@@ -231,9 +233,11 @@
     <Compile Include="Modules\Client\Classes\ClientSwitchInModule.cs" />
     <Compile Include="Modules\Client\Classes\ClientUserSettingsModuleBase.cs" />
     <Compile Include="Modules\Client\Enumerations.cs" />
+    <Compile Include="Modules\Client\Interfaces\IClientShopViewModel.cs" />
     <Compile Include="Modules\Client\Interfaces\IClientSkinModuleMetadata.cs" />
     <Compile Include="Modules\Client\Interfaces\IClientSwitchInModule.cs" />
     <Compile Include="Modules\Client\Interfaces\IClinetCompositionService.cs" />
+    <Compile Include="Modules\Client\Interfaces\IProductViewModel.cs" />
     <Compile Include="Modules\Client\Interfaces\IShellViewModel.cs" />
     <Compile Include="Modules\Client\Interfaces\ViewModels\IFeedSourceViewModel.cs" />
     <Compile Include="Modules\Client\Interfaces\ViewModels\IMediaViewModel.cs" />
@@ -304,6 +308,9 @@
     <Compile Include="Modules\Service\Classes\BackupResult.cs" />
     <Compile Include="Modules\Service\Classes\LicenseKeyReservationInfo.cs" />
     <Compile Include="Modules\Service\Classes\OperatorBasicSummary.cs" />
+    <Compile Include="Modules\Service\Classes\OrderLineState.cs" />
+    <Compile Include="Modules\Service\Classes\OrderResult.cs" />
+    <Compile Include="Modules\Service\Classes\ProductOrderInfo.cs" />
     <Compile Include="Modules\Service\Classes\SalePaymentSummary.cs" />
     <Compile Include="Modules\Service\Classes\EnvironmentEx.cs" />
     <Compile Include="Modules\Service\Classes\GizmoServiceAuthPluginBase.cs" />
@@ -324,7 +331,12 @@
     <Compile Include="Modules\Service\Classes\SpanResult.cs" />
     <Compile Include="Modules\Service\Classes\UsageSessionInfo.cs" />
     <Compile Include="Modules\Service\Classes\UserBalance.cs" />
+    <Compile Include="Modules\Service\Classes\UserDepositInfo.cs" />
     <Compile Include="Modules\Service\Classes\UserLoginSessionInfo.cs" />
+    <Compile Include="Modules\Service\Dto\ClientOrderingData.cs" />
+    <Compile Include="Modules\Service\Dto\UserPaymentMethodDTO.cs" />
+    <Compile Include="Modules\Service\Dto\UserProductGroupDTO.cs" />
+    <Compile Include="Modules\Service\Dto\UserProductDTO.cs" />
     <Compile Include="Modules\Service\Enumerations.cs" />
     <Compile Include="Modules\Service\Interfaces\IConfigurableService.cs" />
     <Compile Include="Modules\Service\Interfaces\IGizmoServiceAuthenticationPlugin.cs" />
@@ -590,7 +602,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

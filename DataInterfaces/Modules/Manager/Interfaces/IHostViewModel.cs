@@ -10,6 +10,7 @@ namespace Manager.ViewModels
     public interface IHostViewModel : INotifyPropertyChanged
     {
         #region BASE
+
         /// <summary>
         /// Gets database id.
         /// </summary>
@@ -81,6 +82,12 @@ namespace Manager.ViewModels
             get;
             set;
         }
+
+        /// <summary>
+        /// Gets if host is deleted.
+        /// </summary>
+        bool IsDeleted { get; }
+
         #endregion
 
         #region HOST COMPUTER

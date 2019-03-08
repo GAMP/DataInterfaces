@@ -92,9 +92,10 @@ namespace GizmoDALV2
     public enum OrderStatusErrorCode
     {
         Unspecified = 0,
-        AlreadyInvoiced,
-        AlreadyCanceled,
-        NegativeCost,
+        AlreadyCompleted=1,
+        AlreadyCanceled=2,
+        AlreadyAccepted=3,
+        AlreadyInvoiced=4,
     }
     #endregion
 
@@ -192,6 +193,6 @@ namespace GizmoDALV2
         NotActive = 3,
         [Localized("WAITING_LINE_ERROR_ALREADY_LOGGED_IN")]
         AlreadyLoggedIn = 4,
-    } 
-    #endregion
+    }
+    #endregion   
 }

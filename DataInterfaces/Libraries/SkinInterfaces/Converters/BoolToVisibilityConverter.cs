@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 
@@ -29,8 +25,7 @@ namespace SkinInterfaces.Converters
                     bool revert = false;
                     if (parameter != null)
                     {
-                        bool temp;
-                        if (bool.TryParse(parameter.ToString(), out temp))
+                        if (bool.TryParse(parameter.ToString(), out bool temp))
                         {
                             revert = temp;
                         }

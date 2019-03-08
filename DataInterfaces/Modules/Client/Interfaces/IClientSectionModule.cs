@@ -35,4 +35,9 @@ namespace Client
     public interface IClientUserSettingsModule : IClientViewModule , IClientSwitchInModule
     {
     }
+
+    public interface IShopModule : IClientSkinModule
+    {
+
+    }
 }

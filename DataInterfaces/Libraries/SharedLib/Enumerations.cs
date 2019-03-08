@@ -438,7 +438,7 @@ namespace SharedLib
         [Localized("TIME_LEFT_WARNING_TYPE_AUDIBLE")]
         Audible = 2,
         [Localized("TIME_LEFT_WARNING_TYPE_MINIMIZE_WINDOWS")]
-        MinimizeWindows =4,
+        MinimizeWindows = 4,
         All = Visual | Audible | TimeLeftWarningType.MinimizeWindows
     }
     #endregion
@@ -739,6 +739,8 @@ namespace SharedLib
         Business,
         [Localized("CFG_SECTION_WAITING_LINES")]
         WaitingLines,
+        [Localized("CFG_SECTION_PAYMENT_METHODS")]
+        PaymentMethods,
     }
     #endregion
 
@@ -940,7 +942,7 @@ namespace SharedLib
     {
         None = 0,
         SupressLogoutAction = 1,
-    } 
+    }
     #endregion
 
     #region STORABLE ENUMERATIONS
@@ -1252,8 +1254,8 @@ namespace SharedLib
         MultiRun = 4,
         KillChildren = 8,
         CountAllInstances = 16,
-        QuickLaunch =32,
-        ShellExecute=64,
+        QuickLaunch = 32,
+        ShellExecute = 64,
     }
     #endregion
 
@@ -1485,9 +1487,9 @@ namespace SharedLib
         /// </summary>
         None = 0,
         /// <summary>
-        /// Client order allowed.
+        /// Client order disallowed.
         /// </summary>
-        AllowOrder = 1,
+        DisallowAllowOrder = 1,
         /// <summary>
         /// Disallow ability of order for non users.
         /// </summary>
@@ -1541,7 +1543,7 @@ namespace SharedLib
         [Obsolete()]
         ExpiresAtDate = 2,
         ExpireAfterTime = 4,
-        ExpireAtDayTime =8,
+        ExpireAtDayTime = 8,
     }
     #endregion
 
@@ -1569,12 +1571,12 @@ namespace SharedLib
     public enum ExpireAfterType
     {
         [Localized("DAY_PLURAL")]
-        Day=0,
+        Day = 0,
         [Localized("HOUR_PLURAL")]
-        Hour=1,
+        Hour = 1,
         [Localized("MINUTE_PLURAL")]
-        Minute=2,
-    } 
+        Minute = 2,
+    }
     #endregion
 
     #region UNITOFMEASUREOPTIONTYPE
@@ -1684,7 +1686,7 @@ namespace SharedLib
     {
         None = 0,
         [Localized("PAYMENT_METHOD_OPTION_TYPE_COUTABLE")]
-        Countable =1,
+        Countable = 1,
     }
     #endregion
 
@@ -1769,11 +1771,11 @@ namespace SharedLib
         /// <summary>
         /// Points credited.
         /// </summary>
-        Credit=3,
+        Credit = 3,
         /// <summary>
         /// Points return transaction.
         /// </summary>
-        Remove=4,
+        Remove = 4,
     }
     #endregion
 
@@ -1798,10 +1800,12 @@ namespace SharedLib
     {
         [Localized("ORDER_STATUS_ON_HOLD")]
         OnHold = 0,
-        [Localized("ORDER_STATUS_INVOICED")]
-        Invoiced = 1,
+        [Localized("ORDER_STATUS_COMPLETED")]
+        Completed = 1,
         [Localized("ORDER_STATUS_CANCELED")]
-        Canceled = 2
+        Canceled = 2,
+        [Localized("ORDER_STATUS_ACCEPTED")]
+        Accepted = 3,
     }
     #endregion
 
@@ -2088,7 +2092,157 @@ namespace SharedLib
         Shutdown = 1,
         [Localized("POWER_SAVE_MODE_SLEEP")]
         Sleep = 2
-    } 
+    }
+    #endregion
+
+    #region TOKENTYPE
+    /// <summary>
+    /// Security token types.
+    /// </summary>
+    public enum TokenType
+    {
+        /// <summary>
+        /// JWT Refresh token.
+        /// </summary>
+        JWTRefresh = 0,
+        /// <summary>
+        /// Email verification token.
+        /// </summary>
+        VerifyEmail = 1,
+        /// <summary>
+        /// Mobile phone verification token.
+        /// </summary>
+        VerifyMobilePhone = 2,
+        /// <summary>
+        /// Create account token.
+        /// </summary>
+        CreateAccount=3,
+    }
+    #endregion
+
+    #region TOKENSTATUS
+    /// <summary>
+    /// Token status enumeration.
+    /// </summary>
+    public enum TokenStatus
+    {
+        /// <summary>
+        /// Token unused.
+        /// </summary>
+        [Localized("TOKEN_STATUS_UNUSED")]
+        Unused = 0,
+        /// <summary>
+        /// Token used.
+        /// </summary>
+        [Localized("TOKEN_STATUS_USED")]
+        Used = 1,
+        /// <summary>
+        /// Token revoked.
+        /// </summary>
+        [Localized("TOKEN_STATUS_REVOKED")]
+        Revoked = 2,
+    }
+    #endregion
+
+    #region RESERVATIONSTATUS
+    public enum ReservationStatus
+    {
+        /// <summary>
+        /// Reservation is active.
+        /// </summary>
+        Active = 0,
+        /// <summary>
+        /// Reservation is canceled by operator.
+        /// </summary>
+        Canceled = 1,
+        /// <summary>
+        /// Reservation is canceld by user.
+        /// </summary>
+        CancledByUser = 2,
+        /// <summary>
+        /// Reservation canceld do to no user entry.
+        /// </summary>
+        CanceledNoEntry = 3,
+        /// <summary>
+        /// Reservation is expired due to expiration rule.
+        /// </summary>
+        Expired = 4,
+    }
+    #endregion
+
+    #region VERIFICATIONSTATUS
+    public enum VerificationStatus
+    {
+        Unverified = 0,
+        Verified = 1,
+    }
+    #endregion
+
+    #region VERIFICATIONRESULT
+    public enum VerificationResult
+    {
+        Sucess = 0,
+        InvalidToken = 1,
+        ExpiredToken = 2,
+        UsedToken=3,
+        InvalidVerification = 4,
+        AlreadyVerified = 5,
+        PartialSucess=7,
+        IncompleteTokenData=9,
+        Failure=8,
+    }
+    #endregion
+
+    #region VERIFICATIONSTARTRESULT
+    public enum VerificationStartResult
+    {
+        Sucess = 0,
+        NoRouteForDelivery = 1,
+        DeliveryFailed = 2,
+        Failed = 3,
+    }
+    #endregion
+
+    #region ORDERSOURCE
+    public enum OrderSource
+    {
+        Default = 0,
+        Client = 1,
+        Web = 2,
+    }
+    #endregion
+
+    #region ORDERRESULT
+    public enum OrderResult
+    {
+        OnHold=0,
+        Accepted=1,
+        Completed=2,
+        Failed=3,
+    }
+    #endregion
+
+    #region ORDERFAILREASON
+    public enum OrderFailReason
+    {
+        None = 0,
+        InsufficientBalance = 1,
+        InvalidPaymentMethod = 2,
+        InvalidOrder = 3,
+        OrderingDisabled=4,
+    }
+    #endregion
+
+    #region PRODUCTTYPE
+    public enum ProductType
+    {
+        [Localized("PRODUCT_TYPE_PRODUCT")]
+        Product,
+        [Localized("PRODUCT_TYPE_TIME")]
+        ProductTime,
+        [Localized("PRODUCT_TYPE_BUNDLE")]
+        ProductBundle,
+    }
     #endregion
 
     #endregion
