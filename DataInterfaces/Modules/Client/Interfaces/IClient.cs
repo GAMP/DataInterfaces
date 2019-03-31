@@ -75,14 +75,6 @@ namespace Client
         event EventHandler<ClientActivityEventArgs> ActivityChange;
 
         /// <summary>
-        /// Occurs on current application container change.
-        /// <remarks>
-        /// This event occurs when whole application container is changed.
-        /// </remarks>
-        /// </summary>
-        event EventHandler<ContainerChangedEventArgs> ContainerChange;
-
-        /// <summary>
         /// Occurs on out of order state change.
         /// </summary>
         event EventHandler<OutOfOrderStateEventArgs> OutOfOrderStateChange;

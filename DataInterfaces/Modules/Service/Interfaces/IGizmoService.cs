@@ -1,4 +1,5 @@
-﻿using GizmoDALV2;
+﻿using DataInterfaces.Modules.Service.Interfaces;
+using GizmoDALV2;
 using NetLib;
 using SharedLib;
 using System;
@@ -15,7 +16,8 @@ namespace ServerService
         ILicenseManagmentService,
         IConfigurableService,
         IUserService,
-        IDbContextProvider<IGizmoDBContext>
+        IDbContextProvider<IGizmoDBContext>,
+        IReportsService
     {
         #region FUNCTIONS
         

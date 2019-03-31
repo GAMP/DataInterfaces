@@ -9,7 +9,7 @@ namespace SharedLib.Dispatcher
     /// <summary>
     /// Message dispatcher interface.
     /// </summary>
-    public interface IMessageDispatcher
+    public interface IMessageDispatcher : CyClone.Core.IBufferManager
     {
         #region PROPERTIES
 
@@ -243,5 +243,5 @@ namespace SharedLib.Dispatcher
 
         #endregion
     }
-    #endregion    
+    #endregion  
 }

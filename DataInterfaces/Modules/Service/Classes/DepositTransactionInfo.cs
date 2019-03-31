@@ -52,20 +52,40 @@ namespace ServerService
         }
 
         /// <summary>
-        /// Gets or sets last transaction date.
+        /// Gets or sets current transaction id.
         /// </summary>
         [DataMember()]
         [ProtoMember(5)]
+        public int CurrentTransactionId
+        {
+            get;set;
+        }
+
+        /// <summary>
+        /// Gets or sets last transaction date.
+        /// </summary>
+        [DataMember()]
+        [ProtoMember(6)]
         public DateTime CurrentTransactionDate
         {
             get; set;
         }
 
         /// <summary>
+        /// Gets or sets previous transaction id.
+        /// </summary>
+        [DataMember()]
+        [ProtoMember(7)]
+        public int? PreviousTransactionId
+        {
+            get;set;
+        }
+
+        /// <summary>
         /// Gets or sets previous transaction date.
         /// </summary>
         [DataMember()]
-        [ProtoMember(6)]
+        [ProtoMember(8)]
         public DateTime? PreviousTransactionDate
         {
             get; set;
@@ -75,8 +95,8 @@ namespace ServerService
         /// Gets current transaction type.
         /// </summary>
         [DataMember()]
-        [ProtoMember(7)]
-        public DepositTransactionType? CurrentTransactionType
+        [ProtoMember(9)]
+        public DepositTransactionType CurrentTransactionType
         {
             get;set;
         }
@@ -85,7 +105,7 @@ namespace ServerService
         /// Gets previous transaction type.
         /// </summary>
         [DataMember()]
-        [ProtoMember(8)]
+        [ProtoMember(10)]
         public DepositTransactionType? PreviousTransactionType
         {
             get; set;
@@ -95,7 +115,7 @@ namespace ServerService
         /// Gets or sets amount.
         /// </summary>
         [DataMember()]
-        [ProtoMember(9)]
+        [ProtoMember(11)]
         public decimal Amount
         {
             get;set;
@@ -105,7 +125,7 @@ namespace ServerService
         /// Gets or sets payment method id.
         /// </summary>
         [DataMember()]
-        [ProtoMember(10)]
+        [ProtoMember(12)]
         public int? PaymentMethodId
         {
             get;set;
@@ -115,7 +135,7 @@ namespace ServerService
         /// Gets or sets payment method name.
         /// </summary>
         [DataMember()]
-        [ProtoMember(11)]
+        [ProtoMember(13)]
         public string PaymentMethodName
         {
             get; set;
@@ -125,7 +145,7 @@ namespace ServerService
         /// Gets or sets created by id.
         /// </summary>
         [DataMember()]
-        [ProtoMember(12)]
+        [ProtoMember(14)]
         public int? CreatedById
         {
             get;set;
@@ -135,7 +155,7 @@ namespace ServerService
         /// Gets or sets creaded by username.
         /// </summary>
         [DataMember()]
-        [ProtoMember(13)]
+        [ProtoMember(15)]
         public string CreatedByUsername
         {
             get; set;
@@ -145,7 +165,7 @@ namespace ServerService
         /// Gets or sets register id.
         /// </summary>
         [DataMember()]
-        [ProtoMember(14)]
+        [ProtoMember(16)]
         public int? RegisterId
         {
             get;set;
@@ -155,7 +175,7 @@ namespace ServerService
         /// Gets or sets register name.
         /// </summary>
         [DataMember()]
-        [ProtoMember(15)]
+        [ProtoMember(17)]
         public string RegisterName
         {
             get; set;

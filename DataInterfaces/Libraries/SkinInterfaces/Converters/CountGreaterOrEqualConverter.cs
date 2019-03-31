@@ -8,6 +8,9 @@ namespace SkinInterfaces.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (value == null)
+                return false;
+
             int count = int.Parse(value.ToString());
             int maxValue = int.Parse(parameter.ToString());
             return count >= maxValue;

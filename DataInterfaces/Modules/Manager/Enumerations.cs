@@ -86,5 +86,7 @@
         FirstName = 4,
         [Localization.Localized("LAST_NAME")]
         LastName = 8,
+        [Localization.Localized("EMAIL_ADDRESS")]
+        Email = 16,
     }
 }

@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Text;
 
 namespace CoreLib
 {
@@ -58,6 +61,25 @@ namespace CoreLib
         public static string WithMaxLength(this string value, int maxLength)
         {
             return value?.Substring(0, Math.Min(value.Length, maxLength));
+        }
+
+        /// <summary>
+        /// Formats string with named parameters.
+        /// </summary>
+        /// <param name="str">String.</param>
+        /// <param name="args">Arguments.</param>
+        /// <returns>Formatted string.</returns>
+        public static string Format(this string str, params Expression<Func<string, object>>[] args)
+        {
+            var parameters = args.ToDictionary(e => string.Format("{{{0}}}", e.Parameters[0].Name), e => e.Compile()(e.Parameters[0].Name));
+
+            var sb = new StringBuilder(str);
+            foreach (var kv in parameters)
+            {
+                sb.Replace(kv.Key, kv.Value != null ? kv.Value.ToString() : "");
+            }
+
+            return sb.ToString();
         }
     }
 }

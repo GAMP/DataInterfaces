@@ -2144,8 +2144,8 @@ namespace SkinLib
 
         public static bool FitWindowToWorkingArea(IntPtr hwnd, bool multiScreen)
         {
-            int width = default(int);
-            int height = default(int);
+            int width = default;
+            int height = default;
 
             var primaryScreen = System.Windows.Forms.Screen.PrimaryScreen;
             var workingArea = primaryScreen.WorkingArea;
@@ -2163,7 +2163,7 @@ namespace SkinLib
             height = workingArea.Height;
 
             return MoveWindow(hwnd,workingArea.Location.X, workingArea.Location.Y, width, height, true);
-        }
+        }       
 
         #endregion
     }

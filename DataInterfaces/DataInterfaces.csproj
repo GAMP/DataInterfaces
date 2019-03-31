@@ -143,6 +143,7 @@
     <Compile Include="Libraries\CoreLib\Queue\QueueEntryBase.cs" />
     <Compile Include="Libraries\CoreLib\Queue\QueueEventArgs.cs" />
     <Compile Include="Libraries\cyClone\Exceptions.cs" />
+    <Compile Include="Libraries\cyClone\Interfaces\IBufferManager.cs" />
     <Compile Include="Libraries\cyClone\Interfaces\IcyMapping.cs" />
     <Compile Include="Libraries\GizmoDALV2\DataSize.cs" />
     <Compile Include="Libraries\GizmoDALV2\DTO\WaitingLineInfo.cs" />
@@ -306,10 +307,14 @@
     <Compile Include="Modules\Service\Classes\BackupFileInfo.cs" />
     <Compile Include="Modules\Service\Classes\BackupInfo.cs" />
     <Compile Include="Modules\Service\Classes\BackupResult.cs" />
+    <Compile Include="Modules\Service\Classes\Filters\DepositTransactionInfoFilter.cs" />
+    <Compile Include="Modules\Service\Classes\Filters\FinancialTransactionFilterBase.cs" />
+    <Compile Include="Modules\Service\Classes\Filters\TakeSkipFilterBase.cs" />
     <Compile Include="Modules\Service\Classes\LicenseKeyReservationInfo.cs" />
     <Compile Include="Modules\Service\Classes\OperatorBasicSummary.cs" />
     <Compile Include="Modules\Service\Classes\OrderLineState.cs" />
     <Compile Include="Modules\Service\Classes\OrderResult.cs" />
+    <Compile Include="Modules\Service\Classes\ProductOrderAcceptInfo.cs" />
     <Compile Include="Modules\Service\Classes\ProductOrderInfo.cs" />
     <Compile Include="Modules\Service\Classes\SalePaymentSummary.cs" />
     <Compile Include="Modules\Service\Classes\EnvironmentEx.cs" />
@@ -323,6 +328,7 @@
     <Compile Include="Modules\Service\Classes\OpenSessionInfo.cs" />
     <Compile Include="Modules\Service\Classes\PaymentSummary.cs" />
     <Compile Include="Modules\Service\Classes\SaleReport.cs" />
+    <Compile Include="Modules\Service\Classes\Security\VerificationResults.cs" />
     <Compile Include="Modules\Service\Classes\ShiftCountSummary.cs" />
     <Compile Include="Modules\Service\Classes\ShiftInfo.cs" />
     <Compile Include="Modules\Service\Classes\ShiftReport.cs" />
@@ -331,14 +337,61 @@
     <Compile Include="Modules\Service\Classes\SpanResult.cs" />
     <Compile Include="Modules\Service\Classes\UsageSessionInfo.cs" />
     <Compile Include="Modules\Service\Classes\UserBalance.cs" />
-    <Compile Include="Modules\Service\Classes\UserDepositInfo.cs" />
+    <Compile Include="Modules\Service\Classes\DepositTransactionInfo.cs" />
     <Compile Include="Modules\Service\Classes\UserLoginSessionInfo.cs" />
     <Compile Include="Modules\Service\Dto\ClientOrderingData.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\AccountTransactionDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\ChartRecordDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\DateUtilizationChartDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\Financial\FinancialReportDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\Financial\FinancialReportFilterDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\Financial\FinancialReportUserGroupInvoicesDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\Hosts\HostGroupDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\Hosts\HostsGroupDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\Hosts\HostUsageReportDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\Hosts\HostUsageReportFilterDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\Hosts\SessionCostGroupedDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\InvoiceDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\InvoicePaymentDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\InvoicesInfoDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\ListItemContainerDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\MemberCountersDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\NamedDecimalContainerDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\NamedInstanceDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\NamedIntegerContainerDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\Operators\OperatorTransactionDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\Operators\OperatorsLogReportDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\Operators\OperatorsLogReportFilterDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\Overview\OverviewReportDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\Overview\OverviewReportFilterDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\Overview\OverviewReportOperatorGroupDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\OperatorDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\ProductDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\Products\ProductReportFilterDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\Products\StockTransactionDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\Products\UserGroupProductsSoldDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\Products\ProductStockDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\Products\ProductReportDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\Products\StockReportDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\Products\StockReportFilterDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\ReportBaseDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\ReportFilterBaseDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\ReportUserSessionDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\SessionCostBaseDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\SessionCostDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\Users\TopUserDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\Users\UsersReportDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\Users\UsersReportFilterDTO.cs" />
+    <Compile Include="Modules\Service\Dto\Reports\Users\UsersReportUserGroupDTO.cs" />
     <Compile Include="Modules\Service\Dto\UserPaymentMethodDTO.cs" />
     <Compile Include="Modules\Service\Dto\UserProductGroupDTO.cs" />
     <Compile Include="Modules\Service\Dto\UserProductDTO.cs" />
     <Compile Include="Modules\Service\Enumerations.cs" />
+    <Compile Include="Modules\Service\Enums\FinancialReportType.cs" />
+    <Compile Include="Modules\Service\Enums\HostUsageReportType.cs" />
+    <Compile Include="Modules\Service\Enums\OverviewReportChartType.cs" />
     <Compile Include="Modules\Service\Interfaces\IConfigurableService.cs" />
+    <Compile Include="Modules\Service\Interfaces\IEmailDeliveryService.cs" />
     <Compile Include="Modules\Service\Interfaces\IGizmoServiceAuthenticationPlugin.cs" />
     <Compile Include="Modules\Service\Interfaces\IGizmoServiceHookPlugin.cs" />
     <Compile Include="Modules\Service\Interfaces\IGizmoServiceLog.cs" />
@@ -567,6 +620,9 @@
     <Compile Include="Libraries\SkinLib\Classes\UIComponent.cs" />
     <Compile Include="Libraries\SkinLib\Interfaces\IUIConfiguration.cs" />
     <Compile Include="Libraries\SkinLib\Interfaces\IUIHandler.cs" />
+    <Compile Include="Modules\Service\Interfaces\IMessageDeliveryService.cs" />
+    <Compile Include="Modules\Service\Interfaces\IReportsService.cs" />
+    <Compile Include="Modules\Service\Interfaces\ISMSDeliveryService.cs" />
     <Compile Include="Modules\Service\Interfaces\IUserBalanceHandler.cs" />
     <Compile Include="Modules\Service\Interfaces\IUserProfileHook.cs" />
     <Compile Include="Modules\Service\Interfaces\IUserTimeBillingHandler.cs" />
@@ -602,6 +658,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

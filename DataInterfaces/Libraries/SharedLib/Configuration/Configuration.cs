@@ -380,6 +380,7 @@ namespace SharedLib.Configuration
             Web = new ServiceWebConfig();
             Backup = new ServiceBackupConfig();
             SMTP = new SMTPConfig();
+            SMSGateway = new SMSGatewayConfig();
         }
         #endregion
 
@@ -460,6 +461,14 @@ namespace SharedLib.Configuration
             get;set;
         }
 
+        [Category("SMS Gateway")]
+        [Description("SMS Gateway configuration.")]
+        [DataMember(Order = 7)]
+        public SMSGatewayConfig SMSGateway
+        {
+            get;set;
+        }
+
         #endregion
 
         #region OVERRIDE
@@ -473,6 +482,7 @@ namespace SharedLib.Configuration
             General.SetDefaults();
             Backup.SetDefaults();
             SMTP.SetDefaults();
+            SMSGateway.SetDefaults();
         }
         #endregion
     }
@@ -1072,10 +1082,163 @@ namespace SharedLib.Configuration
         /// </summary>
         [DataMember()]
         [DefaultValue(false)]
-        public bool Enable
+        public bool IsEnabled
         {
             get; set;
         } 
+
+        #endregion
+    }
+    #endregion
+
+    #region SMSGATEWAYCONFIG
+    [DataContract()]
+    [Serializable()]
+    public class SMSGatewayConfig : ConfigBase
+    {
+        #region CONSTRUCTOR
+        public SMSGatewayConfig()
+        {
+        }
+        #endregion
+
+        #region FIELDS
+        private IList<SMSGatewayParameter> parameters;
+        #endregion
+
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets or sets if gateway is enabled.
+        /// </summary>
+        [DefaultValue(true)]
+        [DataMember()]
+        public bool IsEnabled
+        {
+            get;set;
+        }
+
+        /// <summary>
+        /// Gets or sets gateway url.
+        /// </summary>
+        [DataMember()]
+        public string GatewayUrl
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets api key.
+        /// </summary>
+        [DataMember()]
+        public string ApiKey
+        {
+            get;set;
+        }
+
+        /// <summary>
+        /// Gets or sets api secret.
+        /// </summary>
+        [DataMember()]
+        public string ApiSecret
+        {
+            get;set;
+        }
+
+        /// <summary>
+        /// Gets or sets api username.
+        /// </summary>
+        [DataMember()]
+        public string Username
+        {
+            get;set;
+        }
+
+        /// <summary>
+        /// Gets or sets api password.
+        /// </summary>
+        [DataMember()]
+        public string Password
+        {
+            get;set;
+        }
+
+        /// <summary>
+        /// Gets gateway parameters.
+        /// </summary>
+        [DataMember()]
+        public IList<SMSGatewayParameter> Parameters
+        {
+            get
+            {
+                if (parameters == null)
+                    parameters = new List<SMSGatewayParameter>();
+                return parameters;
+            }
+            set
+            {
+                parameters = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets selected provider.
+        /// </summary>
+        [DefaultValue(SMSGatewayProvider.Custom)]
+        [DataMember()]
+        public SMSGatewayProvider Provider
+        {
+            get;set;
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #region SMSGATEWAYPARAMETER
+    [DataContract()]
+    [Serializable()]
+    public class SMSGatewayParameter
+    {
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets or sets parameter name.
+        /// </summary>
+        [DataMember()]
+        public string Name
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets parameter value.
+        /// </summary>
+        [DataMember()]
+        public string Value
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets parameter options.
+        /// </summary>
+        [DefaultValue(SMSGatewayParameterOption.None)]
+        [DataMember(EmitDefaultValue = false)]
+        public SMSGatewayParameterOption Options
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets parameter type.
+        /// </summary>
+        [DefaultValue(SMSGatewayParameterType.Custom)]
+        [DataMember(EmitDefaultValue = false)]
+        public SMSGatewayParameterType Type
+        {
+            get; set;
+        }
 
         #endregion
     } 

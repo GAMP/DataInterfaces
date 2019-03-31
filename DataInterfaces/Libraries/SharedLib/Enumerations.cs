@@ -2117,6 +2117,10 @@ namespace SharedLib
         /// Create account token.
         /// </summary>
         CreateAccount=3,
+        /// <summary>
+        /// Reset password token.
+        /// </summary>
+        ResetPassword=4,
     }
     #endregion
 
@@ -2178,18 +2182,19 @@ namespace SharedLib
     }
     #endregion
 
-    #region VERIFICATIONRESULT
-    public enum VerificationResult
+    #region VERIFICATIONCOMPLETERESULT
+    public enum VerificationCompleteResult
     {
         Sucess = 0,
-        InvalidToken = 1,
-        ExpiredToken = 2,
-        UsedToken=3,
-        InvalidVerification = 4,
-        AlreadyVerified = 5,
+        Failure = 1,
+        InvalidToken = 2,
+        ExpiredToken = 3,
+        UsedToken=4,
+        InvalidVerification = 5,
+        AlreadyVerified = 6,
         PartialSucess=7,
-        IncompleteTokenData=9,
-        Failure=8,
+        IncompleteTokenData=8,    
+        InvalidConfirmationCode=9,
     }
     #endregion
 
@@ -2200,6 +2205,8 @@ namespace SharedLib
         NoRouteForDelivery = 1,
         DeliveryFailed = 2,
         Failed = 3,
+        InvalidInput=4,
+        InvalidUserId=5,
     }
     #endregion
 
@@ -2243,6 +2250,51 @@ namespace SharedLib
         [Localized("PRODUCT_TYPE_BUNDLE")]
         ProductBundle,
     }
+    #endregion
+
+    #region HTTPREQUESTBODYTYPE
+    public enum HttpRequestBodyType
+    {
+        None = 0,
+        FormData = 1,
+        FormDataUrlEncoded = 2,
+    }
+    #endregion
+
+    #region SMSSENDRESULT
+    public enum SMSSendResult
+    {
+        Sent = 0,
+        Failed = 1,
+    }
+    #endregion
+
+    #region SMSGATEWAYPROVIDER
+    public enum SMSGatewayProvider
+    {
+        Custom = 0,
+        Nexmo = 1,
+        Twilio = 2,
+    }
+    #endregion
+
+    #region SMSGATEWAYPARAMETEROPTION
+    [Flags()]
+    public enum SMSGatewayParameterOption
+    {
+        None = 0,
+        IncludeInBody=1,
+    }
+    #endregion
+
+    #region SMSGATEWAYPARAMETERTYPE
+    public enum SMSGatewayParameterType
+    {
+        Custom = 0,
+        From = 1,
+        To = 2,
+        Text = 3,
+    } 
     #endregion
 
     #endregion
