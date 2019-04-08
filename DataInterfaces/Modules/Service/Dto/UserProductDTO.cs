@@ -1,6 +1,7 @@
 ﻿using ProtoBuf;
 using SharedLib;
 using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace ServerService
@@ -97,6 +98,21 @@ namespace ServerService
             get;set;
         }
 
+
+        [DataMember()]
+        [ProtoMember(13)]
+        public bool HasImage
+        {
+            get;set;
+        }
+
+        [DataMember()]
+        [ProtoMember(14)]
+        public bool IsMemberOnly
+        {
+            get;set;
+        }
+
         #endregion
     }
 
@@ -122,6 +138,26 @@ namespace ServerService
         [DataMember()]
         [ProtoMember(3)]
         public OrderLinePayType PayType
+        {
+            get;set;
+        }
+    }
+
+    [DataContract()]
+    [Serializable()]
+    [ProtoContract()]
+    public class ClientProductOrder
+    {
+        [ProtoMember(1)]
+        [DataMember()]
+        public string UserNote
+        {
+            get;set;
+        }
+
+        [ProtoMember(2)]
+        [DataMember()]
+        public IEnumerable<ProductOrderEntry> Entries
         {
             get;set;
         }

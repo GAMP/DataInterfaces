@@ -17,7 +17,8 @@ namespace Localization.Engine
 {
     public sealed class LocalizeDictionary : DependencyObject
     {
-        #region Constructor
+        #region CONSTRUCTOR
+
         /// <summary>
         /// Prevents a default instance of the <see cref="LocalizeDictionary"/> class from being created.
         /// Static Constructor
@@ -29,11 +30,12 @@ namespace Localization.Engine
         public LocalizeDictionary(string searchPath)
             : this()
         {
-            this.SearchPath = searchPath;
+            SearchPath = searchPath;
         }
+
         #endregion
 
-        #region Fields
+        #region FIELDS
 
         [DesignOnly(true)]
         public static readonly DependencyProperty DesignLanguageProperty =
@@ -74,7 +76,7 @@ namespace Localization.Engine
 
         #endregion
 
-        #region Properties
+        #region PROPERTIES
 
         /// <summary>
         /// Gets the <see cref="LocalizeDictionary"/> singleton.
@@ -121,17 +123,17 @@ namespace Localization.Engine
         {
             get
             {
-                if (string.IsNullOrWhiteSpace(this.language))
-                    this.language = DefaultLanguage;
-                return this.language;
+                if (string.IsNullOrWhiteSpace(language))
+                    language = DefaultLanguage;
+                return language;
             }
 
             set
             {
-                this.language = value ?? throw new ArgumentNullException(nameof(this.Language));
+                language = value ?? throw new ArgumentNullException(nameof(Language));
 
                 //raise language change
-                this.RaiseLanguageChanged();
+                RaiseLanguageChanged();
             }
         }
 
@@ -150,17 +152,17 @@ namespace Localization.Engine
         {
             get
             {
-                return this.searchPath;
+                return searchPath;
             }
             set
             {
-                this.searchPath = value;
+                searchPath = value;
 
                 //reset dictionaries
-                this.ResourceDictionaries.Clear();
+                ResourceDictionaries.Clear();
 
                 //raise language change
-                this.RaiseLanguageChanged();
+                RaiseLanguageChanged();
             }
         }
 
@@ -169,16 +171,16 @@ namespace Localization.Engine
         /// </summary>
         public string DefaultResourcePath
         {
-            get { return this.embededPath; }
+            get { return embededPath; }
             set
             {
-                this.embededPath = value;
+                embededPath = value;
 
                 //reset default dictionary
-                this.DefaultDictionary = null;
+                DefaultDictionary = null;
 
                 //raise language change
-                this.RaiseLanguageChanged();
+                RaiseLanguageChanged();
             }
         }
 
@@ -189,9 +191,9 @@ namespace Localization.Engine
         {
             get
             {
-                if (this.dictionaries == null)
-                    this.dictionaries = new Dictionary<string, Dictionary<string, object>>(StringComparer.InvariantCultureIgnoreCase);
-                return this.dictionaries;
+                if (dictionaries == null)
+                    dictionaries = new Dictionary<string, Dictionary<string, object>>(StringComparer.InvariantCultureIgnoreCase);
+                return dictionaries;
             }
         }
 
@@ -202,12 +204,12 @@ namespace Localization.Engine
         {
             get
             {
-                if (this.defaultDictionary == null)
+                if (defaultDictionary == null)
                 {
-                    if (!this.GetIsInDesignMode())
+                    if (!GetIsInDesignMode())
                     {
                         #region Validate
-                        if (string.IsNullOrWhiteSpace(this.DefaultResourcePath))
+                        if (string.IsNullOrWhiteSpace(DefaultResourcePath))
                             return new Dictionary<string, object>();
                         #endregion
 
@@ -216,34 +218,35 @@ namespace Localization.Engine
                         var exeAssembly = Assembly.GetEntryAssembly();
 
                         //open default resource stream in current assembly
-                        using (Stream defaultStream = exeAssembly.GetManifestResourceStream(this.DefaultResourcePath))
+                        using (Stream defaultStream = exeAssembly.GetManifestResourceStream(DefaultResourcePath))
                         {
                             //read embeded resource
-                            this.defaultDictionary = LocalizeDictionary.TryLoadEmbededDictionary(defaultStream);
+                            defaultDictionary = LocalizeDictionary.TryLoadEmbededDictionary(defaultStream);
                         }
 
                         //throw exception if default dictionary cannot be loaded
-                        if (this.defaultDictionary == null) { throw new ArgumentNullException("Default dictionary may not be null."); }
+                        if (defaultDictionary == null) { throw new ArgumentNullException("Default dictionary may not be null."); }
                         #endregion
                     }
                     else
                     {
-                        this.defaultDictionary = new Dictionary<string, object>();
+                        defaultDictionary = new Dictionary<string, object>();
                     }
                 }
-                return this.defaultDictionary;
+                return defaultDictionary;
             }
             private set
             {
-                this.defaultDictionary = value;
+                defaultDictionary = value;
             }
         }
 
         #endregion
 
-        #region Functions
+        #region FUNCTIONS
 
         #region Dependency Object
+
         [DesignOnly(true)]
         public static string GetDesignLanguage(DependencyObject obj)
         {
@@ -343,11 +346,11 @@ namespace Localization.Engine
         {
             try
             {
-                return this.GetResourceDictionary(resourceDictionary).ContainsKey(resourceKey);
+                return GetResourceDictionary(resourceDictionary).ContainsKey(resourceKey);
             }
             catch
             {
-                if (this.GetIsInDesignMode())
+                if (GetIsInDesignMode())
                 {
                     return false;
                 }
@@ -439,7 +442,7 @@ namespace Localization.Engine
         /// </summary>
         private void RaiseLanguageChanged()
         {
-            this.OnLanguageChanged?.Invoke();
+            OnLanguageChanged?.Invoke();
         }
 
         #endregion
@@ -449,7 +452,7 @@ namespace Localization.Engine
             #region Validation
             if (string.IsNullOrEmpty(resourceKey))
             {
-                if (this.GetIsInDesignMode())
+                if (GetIsInDesignMode())
                 {
                     return null;
                 }
@@ -468,7 +471,7 @@ namespace Localization.Engine
             #endregion
 
             //get resource dictionary
-            IDictionary<string, object> resourceDictionary = this.GetResourceDictionary(this.Language);
+            IDictionary<string, object> resourceDictionary = GetResourceDictionary(Language);
 
             object retVal = null;
 
@@ -479,9 +482,9 @@ namespace Localization.Engine
             }
             else
             {
-                if (this.DefaultDictionary.ContainsKey(resourceKey))
+                if (DefaultDictionary.ContainsKey(resourceKey))
                 {
-                    retVal = this.DefaultDictionary[resourceKey];
+                    retVal = DefaultDictionary[resourceKey];
                 }
                 else
                 {
@@ -497,7 +500,7 @@ namespace Localization.Engine
             if (resourceKey.HasCustomAttribute<LocalizedAttribute>())
             {
                 var attribute = resourceKey.GetAttributeOfType<LocalizedAttribute>();
-                return this.GetLocalizedObject<TType>(attribute.ResourceKey);
+                return GetLocalizedObject<TType>(attribute.ResourceKey);
             }
             else
             {
@@ -507,11 +510,11 @@ namespace Localization.Engine
 
         private IDictionary<string, object> GetResourceDictionary(string resourceDictionary)
         {
-            if (!this.ResourceDictionaries.ContainsKey(resourceDictionary))
+            if (!ResourceDictionaries.ContainsKey(resourceDictionary))
             {
-                string fileSearchPath = string.IsNullOrWhiteSpace(this.SearchPath) ? Environment.CurrentDirectory : this.SearchPath;
-                string filePath = resourceDictionary + this.FileExtension;
-                string fullPath = Path.Combine(fileSearchPath, resourceDictionary + this.FileExtension);
+                string fileSearchPath = string.IsNullOrWhiteSpace(SearchPath) ? Environment.CurrentDirectory : SearchPath;
+                string filePath = resourceDictionary + FileExtension;
+                string fullPath = Path.Combine(fileSearchPath, resourceDictionary + FileExtension);
 
                 //load dictionary if exists 
                 if (File.Exists(fullPath))
@@ -523,15 +526,15 @@ namespace Localization.Engine
                     if (loadedDictionary != null)
                     {
                         //add loaded dictionary to cache
-                        this.ResourceDictionaries.Add(resourceDictionary, loadedDictionary);
+                        ResourceDictionaries.Add(resourceDictionary, loadedDictionary);
                     }
                 }
             }
 
-            if (this.ResourceDictionaries.ContainsKey(resourceDictionary))
+            if (ResourceDictionaries.ContainsKey(resourceDictionary))
             {
                 //return requested loaded dictionary
-                return this.ResourceDictionaries[resourceDictionary];
+                return ResourceDictionaries[resourceDictionary];
             }
             else
             {
@@ -624,7 +627,7 @@ namespace Localization.Engine
             private WeakCultureChangedEventManager()
             {
                 // creates a new list and assign it to listeners
-                this.listeners = new ListenerList();
+                listeners = new ListenerList();
             }
 
             /// <summary>
@@ -688,10 +691,10 @@ namespace Localization.Engine
             [MethodImpl(MethodImplOptions.Synchronized)]
             protected override void StartListening(object source)
             {
-                if (!this.isListening)
+                if (!isListening)
                 {
-                    Instance.OnLanguageChanged += this.Instance_OnLanguageChanged;
-                    this.isListening = true;
+                    Instance.OnLanguageChanged += Instance_OnLanguageChanged;
+                    isListening = true;
                 }
             }
 
@@ -702,17 +705,17 @@ namespace Localization.Engine
             [MethodImpl(MethodImplOptions.Synchronized)]
             protected override void StopListening(object source)
             {
-                if (this.isListening)
+                if (isListening)
                 {
-                    Instance.OnLanguageChanged -= this.Instance_OnLanguageChanged;
-                    this.isListening = false;
+                    Instance.OnLanguageChanged -= Instance_OnLanguageChanged;
+                    isListening = false;
                 }
             }
 
             private void Instance_OnLanguageChanged()
             {
                 // tells every listener in the list that the event is occurred
-                this.DeliverEventToList(Instance, EventArgs.Empty, this.listeners);
+                DeliverEventToList(Instance, EventArgs.Empty, listeners);
             }
 
             /// <summary>
@@ -723,18 +726,18 @@ namespace Localization.Engine
             {
                 // check if listeners are available and the listening process is stopped, start it.
                 // otherwise if no listeners are available and the listening process is started, stop it
-                if (this.listeners.Count != 0)
+                if (listeners.Count != 0)
                 {
-                    if (!this.isListening)
+                    if (!isListening)
                     {
-                        this.StartListening(null);
+                        StartListening(null);
                     }
                 }
                 else
                 {
-                    if (this.isListening)
+                    if (isListening)
                     {
-                        this.StopListening(null);
+                        StopListening(null);
                     }
                 }
             }

@@ -192,6 +192,14 @@ namespace Client
         IUserProfile CurrentUser { get; }
 
         /// <summary>
+        /// Gets current user identity.
+        /// </summary>
+        /// <remarks>
+        /// The identity will be set once user is logged in.
+        /// </remarks>
+        IUserIdentity CurrentUserIdentity { get; }
+
+        /// <summary>
         /// Gets if there is a user logged in.
         /// </summary>
         bool IsUserLoggedIn { get; }

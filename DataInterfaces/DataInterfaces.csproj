@@ -234,7 +234,8 @@
     <Compile Include="Modules\Client\Classes\ClientSwitchInModule.cs" />
     <Compile Include="Modules\Client\Classes\ClientUserSettingsModuleBase.cs" />
     <Compile Include="Modules\Client\Enumerations.cs" />
-    <Compile Include="Modules\Client\Interfaces\IClientShopViewModel.cs" />
+    <Compile Include="Modules\Client\Interfaces\ViewModels\IPaymentMethodViewModel.cs" />
+    <Compile Include="Modules\Client\Interfaces\ViewModels\IClientShopViewModel.cs" />
     <Compile Include="Modules\Client\Interfaces\IClientSkinModuleMetadata.cs" />
     <Compile Include="Modules\Client\Interfaces\IClientSwitchInModule.cs" />
     <Compile Include="Modules\Client\Interfaces\IClinetCompositionService.cs" />
@@ -243,6 +244,7 @@
     <Compile Include="Modules\Client\Interfaces\ViewModels\IFeedSourceViewModel.cs" />
     <Compile Include="Modules\Client\Interfaces\ViewModels\IMediaViewModel.cs" />
     <Compile Include="Modules\Client\Interfaces\ViewModels\INewsViewModel.cs" />
+    <Compile Include="Modules\Client\Interfaces\ViewModels\IProductOrderViewModel.cs" />
     <Compile Include="Modules\Client\Interfaces\Views\IAppDetailView.cs" />
     <Compile Include="Modules\Client\Interfaces\IClientSectionModule.cs" />
     <Compile Include="Modules\Client\Interfaces\ISkinBootStrapper.cs" />

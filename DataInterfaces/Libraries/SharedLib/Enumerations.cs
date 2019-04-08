@@ -2237,6 +2237,7 @@ namespace SharedLib
         InvalidPaymentMethod = 2,
         InvalidOrder = 3,
         OrderingDisabled=4,
+        InvalidUserId=5,
     }
     #endregion
 
@@ -2294,6 +2295,54 @@ namespace SharedLib
         From = 1,
         To = 2,
         Text = 3,
+    }
+    #endregion
+
+    #region PRODUCTORDERPASSRESULT
+    public enum ProductOrderPassResult
+    {
+        [Localized("PRODUCT_ORDER_PASS_RESULT_SUCESS")]
+        Sucess = 0,
+        /// <summary>
+        /// Invalid user id passed.
+        /// </summary>
+        [Localized("PRODUCT_ORDER_PASS_RESULT_INVALID_USER_ID")]
+        InvalidUserId =1,
+        /// <summary>
+        /// Invalid product id passed.
+        /// </summary>
+        [Localized("PRODUCT_ORDER_PASS_RESULT_INVALID_PRODUCT_ID")]
+        InvalidProdcutId =2,
+        /// <summary>
+        /// User group disallowed.
+        /// </summary>
+        [Localized("PRODUCT_ORDER_PASS_RESULT_DISALLOWED_USER_GROUP")]
+        UserGroupDisallowed = 3,
+        /// <summary>
+        /// Sale disallowed.
+        /// </summary>
+        [Localized("PRODUCT_ORDER_PASS_RESULT_SALE_DISALLOWED")]
+        SaleDisallowed = 4,
+        /// <summary>
+        /// Client ordering disallowed.
+        /// </summary>
+        [Localized("PRODUCT_ORDER_PASS_RESULT_CLIENT_ORDER_DISALLOWED")]
+        ClientOrderDisallowed = 5,
+        /// <summary>
+        /// Geuest order disallowed.
+        /// </summary>
+        [Localized("PRODUCT_ORDER_PASS_RESULT_GUEST_SALE_DISALLOWED")]
+        GuestSaleDisallowed = 6,
+        /// <summary>
+        /// Product id out of stock.
+        /// </summary>
+        [Localized("PRODUCT_ORDER_PASS_RESULT_OUT_OF_STOCK")]
+        OutOfStock = 7,
+        /// <summary>
+        /// Purchase period disallowed.
+        /// </summary>
+        [Localized("PRODUCT_ORDER_PASS_RESULT_PURCHASE_PERIOD_DISALLOWED")]
+        PeriodDisallowed =8,
     } 
     #endregion
 

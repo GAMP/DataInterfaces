@@ -323,6 +323,11 @@ namespace SharedLib.Commands
         /// Get user balance.
         /// </summary>
         UserBalanceGet =22 ,
+
+        /// <summary>
+        /// Passes product oder.
+        /// </summary>
+        ProductOrderPass =23 ,
     }
     #endregion
 

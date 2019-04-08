@@ -344,6 +344,26 @@ namespace GizmoDALV2
     }
     #endregion
 
+    #region POINTTRANSACTIONEXCEPTION
+    [DataContract()]
+    [Serializable()]
+    public class PointTransactionException : ErrorCodeException<PointTransactionErrorCode>
+    {
+        #region CONSTRUCTOR
+
+        public PointTransactionException(PointTransactionErrorCode errorCode) : base(errorCode)
+        {
+        }
+
+        protected PointTransactionException(SerializationInfo info,
+            StreamingContext context)
+            : base(info, context)
+        { }
+
+        #endregion
+    }
+    #endregion
+
     #region STOCKEXCEPTION
     [DataContract()]
     [Serializable()]

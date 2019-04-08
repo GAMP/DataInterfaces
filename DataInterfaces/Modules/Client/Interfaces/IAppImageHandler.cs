@@ -46,7 +46,8 @@ namespace Client
 
     public enum ImageType
     {
-        Application,
-        Executable,
+        Application=0,
+        Executable=1,
+        ProductDefault=2,
     }
 }

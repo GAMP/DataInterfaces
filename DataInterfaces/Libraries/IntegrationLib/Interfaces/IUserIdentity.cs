@@ -1,4 +1,6 @@
-﻿using System.Security.Principal;
+﻿using System.Collections.Generic;
+using System.Security.Claims;
+using System.Security.Principal;
 using SharedLib;
 
 namespace IntegrationLib
@@ -19,6 +21,11 @@ namespace IntegrationLib
         /// Gets identity user role.
         /// </summary>
         UserRoles Role { get; } 
+
+        /// <summary>
+        /// Gets user claims.
+        /// </summary>
+        IEnumerable<Claim> Claims { get; }
 
         #endregion
     }
