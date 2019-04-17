@@ -242,6 +242,11 @@ namespace Manager.ViewModels
         /// </remarks>
         IUserMemberViewModel CurrentUser { get; }
 
+        /// <summary>
+        /// Gets logged in users count.
+        /// </summary>
+        int UsersCount { get; }
+
         #endregion
     }
 }

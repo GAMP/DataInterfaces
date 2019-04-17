@@ -2,6 +2,7 @@
 using SharedLib.Commands;
 using NetLib;
 using System;
+using System.Security.Principal;
 
 namespace SharedLib.Dispatcher
 {
@@ -97,6 +98,12 @@ namespace SharedLib.Dispatcher
         #endregion
 
         #region FUNCTIONS
+
+        /// <summary>
+        /// Sets current thread principal.
+        /// </summary>
+        /// <param name="principal">Thread principal to use for spawned tasks threads.</param>
+        void SetPrincipal(IPrincipal principal);
 
         /// <summary>
         /// Sets compression level.

@@ -19,7 +19,10 @@ namespace ServerService.Dto.Reports
 
         [DataMember]
         public decimal Removed { get; set; }
-        
+
+        [DataMember]
+        public decimal Set { get; set; }
+
         [DataMember]
         public decimal Final { get; set; }
 

@@ -1,10 +1,5 @@
 ﻿using SharedLib.Dispatcher;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IntegrationLib
 {
@@ -17,7 +12,7 @@ namespace IntegrationLib
             : base(identity)
         {
             dispatcher.ThrowDispatcherNull();
-            this.Dispacther = dispatcher;
+            Dispacther = dispatcher;
         }
 
         #endregion
@@ -38,7 +33,7 @@ namespace IntegrationLib
         /// </summary>
         public IUserIdentity UserIdentity
         {
-            get { return this.Identity as IUserIdentity; }
+            get { return Identity as IUserIdentity; }
         }
 
         #endregion

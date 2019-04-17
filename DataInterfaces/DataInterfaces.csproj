@@ -234,6 +234,7 @@
     <Compile Include="Modules\Client\Classes\ClientSwitchInModule.cs" />
     <Compile Include="Modules\Client\Classes\ClientUserSettingsModuleBase.cs" />
     <Compile Include="Modules\Client\Enumerations.cs" />
+    <Compile Include="Modules\Client\Interfaces\IProductGroupViewModel.cs" />
     <Compile Include="Modules\Client\Interfaces\ViewModels\IPaymentMethodViewModel.cs" />
     <Compile Include="Modules\Client\Interfaces\ViewModels\IClientShopViewModel.cs" />
     <Compile Include="Modules\Client\Interfaces\IClientSkinModuleMetadata.cs" />

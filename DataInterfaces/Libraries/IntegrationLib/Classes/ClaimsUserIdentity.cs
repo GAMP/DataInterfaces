@@ -7,6 +7,9 @@ using System.Security.Claims;
 namespace IntegrationLib
 {
     #region ClaimsUserIdentity
+    /// <summary>
+    /// Extends generic claims identity.
+    /// </summary>
     [Serializable()]
     [DataContract()]
     public class ClaimsUserIdentity : ClaimsIdentity, IUserIdentity
@@ -15,13 +18,18 @@ namespace IntegrationLib
 
         public ClaimsUserIdentity(int userId)
         {
-            this.UserId = userId;
+            UserId = userId;
         }
 
         public ClaimsUserIdentity(int userId, IEnumerable<Claim> claims)
             : base(claims)
         {
-            this.UserId = userId;
+            UserId = userId;
+        }
+
+        public ClaimsUserIdentity(int userId,IEnumerable<Claim> claims,UserRoles role):this(userId,claims)
+        {
+            Role = role;
         }
 
         #endregion
@@ -35,7 +43,7 @@ namespace IntegrationLib
         public int UserId
         {
             get;
-            private set;
+            protected set;
         }
 
         /// <summary>
@@ -44,10 +52,8 @@ namespace IntegrationLib
         [DataMember(Order = 1)]
         public UserRoles Role
         {
-            get
-            {
-                return UserRoles.None;
-            }
+            get;
+            protected set;
         }
 
         #endregion
