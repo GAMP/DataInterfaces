@@ -49,8 +49,21 @@ namespace Client
         /// </remarks>
         Task ShowOverlayAsync(object content, CancellationToken ct);
 
+        /// <summary>
+        /// Shows overlay.
+        /// </summary>
+        /// <param name="content">Overlay content.</param>
+        /// <param name="allowClosing">Specifies if automatic closing should occur.</param>
+        /// <returns>>Associated task.</returns>
         Task ShowOverlayAsync(object content, bool allowClosing);
 
+        /// <summary>
+        /// Shows overlay.
+        /// </summary>
+        /// <param name="content">Overlay content.</param>
+        /// <param name="allowClosing">Specifies if automatic closing should occur.</param>
+        /// <param name="ct">Cancelation token.</param>
+        /// <returns>>Associated task.</returns>
         Task ShowOverlayAsync(object content, bool allowClosing, CancellationToken ct);
 
         /// <summary>
@@ -61,8 +74,14 @@ namespace Client
         /// </param>
         void HideCurrentOverlay(bool cancel);
 
+        /// <summary>
+        /// Hides current overlay.
+        /// </summary>
         void HideCurrentOverlay();
 
+        /// <summary>
+        /// Occurs on overlay change.
+        /// </summary>
         event EventHandler<OverlayEventArgs> OverlayEvent;
 
         Task ShowOverlayAsync(IMediaViewModel mediaModel);

@@ -39,5 +39,7 @@ namespace ServerService.Dto.Reports
         [DataMember]
         public int UserGroupId { get; set; }
 
+        [DataMember]
+        public bool IsGuest { get; set; }
     }
 }

@@ -37,5 +37,8 @@ namespace DataInterfaces.Modules.Service.Dto.Reports.Operators
 
         [DataMember]
         public string PaymentMethod { get; set; }
+
+        [DataMember]
+        public string Register { get; set; }
     }
 }

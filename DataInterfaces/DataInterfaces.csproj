@@ -164,6 +164,7 @@
     <Compile Include="Libraries\IntegrationLib\Classes\DispatcherPrincipal.cs" />
     <Compile Include="Libraries\IntegrationLib\Classes\Documentation.cs" />
     <Compile Include="Libraries\IntegrationLib\Classes\HttpContextIdentityProvider.cs" />
+    <Compile Include="Libraries\IntegrationLib\Classes\TokenResult.cs" />
     <Compile Include="Libraries\IntegrationLib\Classes\UserPrincipal.cs" />
     <Compile Include="Libraries\IntegrationLib\Delegates.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\IClaimsProviderService.cs" />
@@ -235,6 +236,7 @@
     <Compile Include="Modules\Client\Classes\ClientUserSettingsModuleBase.cs" />
     <Compile Include="Modules\Client\Enumerations.cs" />
     <Compile Include="Modules\Client\Interfaces\IProductGroupViewModel.cs" />
+    <Compile Include="Modules\Client\Interfaces\Views\IRegisterView.cs" />
     <Compile Include="Modules\Client\Interfaces\ViewModels\IPaymentMethodViewModel.cs" />
     <Compile Include="Modules\Client\Interfaces\ViewModels\IClientShopViewModel.cs" />
     <Compile Include="Modules\Client\Interfaces\IClientSkinModuleMetadata.cs" />
@@ -341,7 +343,9 @@
     <Compile Include="Modules\Service\Classes\UsageSessionInfo.cs" />
     <Compile Include="Modules\Service\Classes\UserBalance.cs" />
     <Compile Include="Modules\Service\Classes\DepositTransactionInfo.cs" />
+    <Compile Include="Modules\Service\Classes\UserInfoVerificationInfo.cs" />
     <Compile Include="Modules\Service\Classes\UserLoginSessionInfo.cs" />
+    <Compile Include="Modules\Service\Classes\UserGeneralStatsReport.cs" />
     <Compile Include="Modules\Service\Dto\ClientOrderingData.cs" />
     <Compile Include="Modules\Service\Dto\Reports\AccountTransactionDTO.cs" />
     <Compile Include="Modules\Service\Dto\Reports\ChartRecordDTO.cs" />

@@ -3,6 +3,9 @@ using System.Threading.Tasks;
 
 namespace CyClone.Core
 {
+    /// <summary>
+    /// File system enumeration context.
+    /// </summary>
     public interface IEnumerationContext : IDisposable
     {
         #region PROPERTIES

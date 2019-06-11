@@ -5,13 +5,9 @@ using ServerService.Dto.Reports.Operators;
 using ServerService.Dto.Reports.Overview;
 using ServerService.Dto.Reports.Products;
 using ServerService.Dto.Reports.Users;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace DataInterfaces.Modules.Service.Interfaces
+namespace ServerService
 {
     public interface IReportsService
     {

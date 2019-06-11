@@ -945,6 +945,254 @@ namespace SharedLib
     }
     #endregion
 
+    #region POWERSAVEMODE
+    /// <summary>
+    /// Power save modes.
+    /// </summary>
+    public enum PowerSaveMode
+    {
+        [Localized("NONE")]
+        None = 0,
+        [Localized("POWER_SAVE_MODE_SHUT_DOWN")]
+        Shutdown = 1,
+        [Localized("POWER_SAVE_MODE_SLEEP")]
+        Sleep = 2
+    }
+    #endregion
+
+    #region ORDERRESULT
+    public enum OrderResult
+    {
+        OnHold = 0,
+        Accepted = 1,
+        Completed = 2,
+        Failed = 3,
+    }
+    #endregion
+
+    #region ORDERFAILREASON
+    public enum OrderFailReason
+    {
+        None = 0,
+        InsufficientBalance = 1,
+        InvalidPaymentMethod = 2,
+        InvalidOrder = 3,
+        OrderingDisabled = 4,
+        InvalidUserId = 5,
+    }
+    #endregion
+
+    #region PRODUCTTYPE
+    public enum ProductType
+    {
+        [Localized("PRODUCT_TYPE_PRODUCT")]
+        Product,
+        [Localized("PRODUCT_TYPE_TIME")]
+        ProductTime,
+        [Localized("PRODUCT_TYPE_BUNDLE")]
+        ProductBundle,
+    }
+    #endregion
+
+    #region CONST ERROR CODES
+
+    public class BASE_CODES
+    {
+        public const int SUCESS = 0;
+        public const int FAILURE = 1;
+    }
+
+    public class TOKEN_ERROR_CODES
+    {
+        public const int INVALID_TOKEN = 101;
+        public const int EXPIRED_TOKEN = 102;
+        public const int REVOKED_TOKEN = 103;
+        public const int USED_TOKEN = 104;
+        public const int INVALID_TOKEN_INPUT = 105;
+    }
+
+    public class VERIFICATION_ERROR_CODES
+    {
+        public const int INVALID_VERIFICATION = 201;
+        public const int USED_VERIFICATION = 202;
+    }
+
+    public class CONFIRMATION_ERROR_CODES
+    {
+        public const int INVALID_CONFIRMATION_CODE = 301;
+    }
+
+    public class EXTENDED_ERROR_CODES
+    {
+        public const int PARTIAL_SUCESS = 401;
+        public const int INVALID_INPUT = 402;
+        public const int INVALID_USER_ID = 403;
+        public const int INVALID_USER_GROUP = 404;
+        public const int NON_UNIQUE_INPUT = 405;
+    }
+
+    public class DELIVERY_ERROR_CODES
+    {
+        public const int DELIVERY_FAILED = 501;
+        public const int NO_ROUTE = 502;
+    }
+
+    #endregion
+
+    #region VERIFICATIONSTARTRESULTCODE
+    public enum VerificationStartResultCode
+    {
+        Sucess = BASE_CODES.SUCESS,
+        Failed = BASE_CODES.FAILURE,
+        NoRouteForDelivery = DELIVERY_ERROR_CODES.NO_ROUTE,
+        DeliveryFailed = DELIVERY_ERROR_CODES.DELIVERY_FAILED,
+        InvalidUserId = EXTENDED_ERROR_CODES.INVALID_USER_ID,
+        InvalidInput = EXTENDED_ERROR_CODES.INVALID_INPUT,
+        NonUniqueInput = EXTENDED_ERROR_CODES.NON_UNIQUE_INPUT,
+    }
+    #endregion
+
+    #region VERIFICATIONCOMPLETERESULTCODE
+    public enum VerificationCompleteResultCode
+    {
+        Sucess = BASE_CODES.SUCESS,
+        Failure = BASE_CODES.FAILURE,
+        InvalidToken = TOKEN_ERROR_CODES.INVALID_TOKEN,
+        InvalidTokenInput = TOKEN_ERROR_CODES.INVALID_TOKEN_INPUT,
+        ExpiredToken = TOKEN_ERROR_CODES.EXPIRED_TOKEN,
+        UsedToken = TOKEN_ERROR_CODES.USED_TOKEN,
+        RevokedToken = TOKEN_ERROR_CODES.REVOKED_TOKEN,
+        InvalidVerification = VERIFICATION_ERROR_CODES.INVALID_VERIFICATION,
+        AlreadyVerified = VERIFICATION_ERROR_CODES.USED_VERIFICATION,
+        PartialSucess = EXTENDED_ERROR_CODES.PARTIAL_SUCESS,
+        InvalidConfirmationCode = CONFIRMATION_ERROR_CODES.INVALID_CONFIRMATION_CODE,
+    }
+    #endregion
+
+    #region ACCOUNTCREATIONBYTOKENCOMPLETERESULTCODE
+    public enum AccountCreationByTokenCompleteResultCode
+    {
+        Sucess = BASE_CODES.SUCESS,
+        Failure = BASE_CODES.FAILURE,
+        InvalidToken = TOKEN_ERROR_CODES.INVALID_TOKEN,
+        InvalidTokenInput = TOKEN_ERROR_CODES.INVALID_TOKEN_INPUT,
+        ExpiredToken = TOKEN_ERROR_CODES.EXPIRED_TOKEN,
+        UsedToken = TOKEN_ERROR_CODES.USED_TOKEN,
+        RevokedToken = TOKEN_ERROR_CODES.REVOKED_TOKEN,
+        InvalidVerification = VERIFICATION_ERROR_CODES.INVALID_VERIFICATION,
+        AlreadyVerified = VERIFICATION_ERROR_CODES.USED_VERIFICATION,
+        InvalidInput = EXTENDED_ERROR_CODES.INVALID_INPUT,
+        NoUserGroup = EXTENDED_ERROR_CODES.INVALID_USER_GROUP,
+    }
+    #endregion
+
+    #region ACCOUNTCREATIONCOMPLETERESULTCODE
+    public enum AccountCreationCompleteResultCode
+    {
+        Sucess = BASE_CODES.SUCESS,
+        Failure = BASE_CODES.FAILURE,
+        InvalidInput = EXTENDED_ERROR_CODES.INVALID_INPUT,
+        NoUserGroup = EXTENDED_ERROR_CODES.INVALID_USER_GROUP,
+        NonUniqueInput = EXTENDED_ERROR_CODES.NON_UNIQUE_INPUT,
+    }
+    #endregion
+
+    #region SMSSENDRESULTCODE
+    public enum SMSSendResultCode
+    {
+        Sent = 0,
+        Failed = 1,
+    }
+    #endregion
+
+    #region SMSGATEWAYPROVIDER
+    public enum SMSGatewayProvider
+    {
+        Custom = 0,
+        Nexmo = 1,
+        Twilio = 2,
+        SMSC=3,
+    }
+    #endregion
+
+    #region SMSGATEWAYPARAMETEROPTION
+    [Flags()]
+    public enum SMSGatewayParameterOption
+    {
+        None = 0,
+    }
+    #endregion
+
+    #region PRODUCTORDERPASSRESULT
+    public enum ProductOrderPassResult
+    {
+        [Localized("PRODUCT_ORDER_PASS_RESULT_SUCESS")]
+        Sucess = 0,
+        /// <summary>
+        /// Invalid user id passed.
+        /// </summary>
+        [Localized("PRODUCT_ORDER_PASS_RESULT_INVALID_USER_ID")]
+        InvalidUserId = 1,
+        /// <summary>
+        /// Invalid product id passed.
+        /// </summary>
+        [Localized("PRODUCT_ORDER_PASS_RESULT_INVALID_PRODUCT_ID")]
+        InvalidProdcutId = 2,
+        /// <summary>
+        /// User group disallowed.
+        /// </summary>
+        [Localized("PRODUCT_ORDER_PASS_RESULT_DISALLOWED_USER_GROUP")]
+        UserGroupDisallowed = 3,
+        /// <summary>
+        /// Sale disallowed.
+        /// </summary>
+        [Localized("PRODUCT_ORDER_PASS_RESULT_SALE_DISALLOWED")]
+        SaleDisallowed = 4,
+        /// <summary>
+        /// Client ordering disallowed.
+        /// </summary>
+        [Localized("PRODUCT_ORDER_PASS_RESULT_CLIENT_ORDER_DISALLOWED")]
+        ClientOrderDisallowed = 5,
+        /// <summary>
+        /// Geuest order disallowed.
+        /// </summary>
+        [Localized("PRODUCT_ORDER_PASS_RESULT_GUEST_SALE_DISALLOWED")]
+        GuestSaleDisallowed = 6,
+        /// <summary>
+        /// Product id out of stock.
+        /// </summary>
+        [Localized("PRODUCT_ORDER_PASS_RESULT_OUT_OF_STOCK")]
+        OutOfStock = 7,
+        /// <summary>
+        /// Purchase period disallowed.
+        /// </summary>
+        [Localized("PRODUCT_ORDER_PASS_RESULT_PURCHASE_PERIOD_DISALLOWED")]
+        PeriodDisallowed = 8,
+    }
+    #endregion
+
+    #region REGISTRATIONVERIFICATIONMETHOD
+    [Flags()]
+    public enum RegistrationVerificationMethod
+    {
+        /// <summary>
+        /// No verification.
+        /// </summary>
+        [Localized("REGISTER_VERIFICATION_METHOD_NONE")]
+        None = 0,
+        /// <summary>
+        /// Email verification.
+        /// </summary>
+        [Localized("REGISTER_VERIFICATION_METHOD_EMAIL_ADDRESS")]
+        Email = 1,
+        /// <summary>
+        /// Mobile phone verification.
+        /// </summary>
+        [Localized("REGISTER_VERIFICATION_METHOD_MOBILE_PHONE")]
+        MobilePhone = 2,
+    } 
+    #endregion
+
     #region STORABLE ENUMERATIONS
 
     #region MODULEENUM
@@ -1376,6 +1624,7 @@ namespace SharedLib
         /// Enables or disables personal files.
         /// </summary>
         EnablePersonalFiles = 32,
+        DisallowLoginFromManager = 64,
     }
     #endregion
 
@@ -2078,22 +2327,7 @@ namespace SharedLib
         [Localized("WAITING_LINE_SATE_CANCEL")]
         Cancel = 1,
     }
-    #endregion
-
-    #region POWERSAVEMODE
-    /// <summary>
-    /// Power save modes.
-    /// </summary>
-    public enum PowerSaveMode
-    {
-        [Localized("NONE")]
-        None = 0,
-        [Localized("POWER_SAVE_MODE_SHUT_DOWN")]
-        Shutdown = 1,
-        [Localized("POWER_SAVE_MODE_SLEEP")]
-        Sleep = 2
-    }
-    #endregion
+    #endregion    
 
     #region TOKENTYPE
     /// <summary>
@@ -2181,35 +2415,7 @@ namespace SharedLib
         Verified = 1,
     }
     #endregion
-
-    #region VERIFICATIONCOMPLETERESULT
-    public enum VerificationCompleteResult
-    {
-        Sucess = 0,
-        Failure = 1,
-        InvalidToken = 2,
-        ExpiredToken = 3,
-        UsedToken=4,
-        InvalidVerification = 5,
-        AlreadyVerified = 6,
-        PartialSucess=7,
-        IncompleteTokenData=8,    
-        InvalidConfirmationCode=9,
-    }
-    #endregion
-
-    #region VERIFICATIONSTARTRESULT
-    public enum VerificationStartResult
-    {
-        Sucess = 0,
-        NoRouteForDelivery = 1,
-        DeliveryFailed = 2,
-        Failed = 3,
-        InvalidInput=4,
-        InvalidUserId=5,
-    }
-    #endregion
-
+    
     #region ORDERSOURCE
     public enum OrderSource
     {
@@ -2217,133 +2423,6 @@ namespace SharedLib
         Client = 1,
         Web = 2,
     }
-    #endregion
-
-    #region ORDERRESULT
-    public enum OrderResult
-    {
-        OnHold=0,
-        Accepted=1,
-        Completed=2,
-        Failed=3,
-    }
-    #endregion
-
-    #region ORDERFAILREASON
-    public enum OrderFailReason
-    {
-        None = 0,
-        InsufficientBalance = 1,
-        InvalidPaymentMethod = 2,
-        InvalidOrder = 3,
-        OrderingDisabled=4,
-        InvalidUserId=5,
-    }
-    #endregion
-
-    #region PRODUCTTYPE
-    public enum ProductType
-    {
-        [Localized("PRODUCT_TYPE_PRODUCT")]
-        Product,
-        [Localized("PRODUCT_TYPE_TIME")]
-        ProductTime,
-        [Localized("PRODUCT_TYPE_BUNDLE")]
-        ProductBundle,
-    }
-    #endregion
-
-    #region HTTPREQUESTBODYTYPE
-    public enum HttpRequestBodyType
-    {
-        None = 0,
-        FormData = 1,
-        FormDataUrlEncoded = 2,
-    }
-    #endregion
-
-    #region SMSSENDRESULT
-    public enum SMSSendResult
-    {
-        Sent = 0,
-        Failed = 1,
-    }
-    #endregion
-
-    #region SMSGATEWAYPROVIDER
-    public enum SMSGatewayProvider
-    {
-        Custom = 0,
-        Nexmo = 1,
-        Twilio = 2,
-    }
-    #endregion
-
-    #region SMSGATEWAYPARAMETEROPTION
-    [Flags()]
-    public enum SMSGatewayParameterOption
-    {
-        None = 0,
-        IncludeInBody=1,
-    }
-    #endregion
-
-    #region SMSGATEWAYPARAMETERTYPE
-    public enum SMSGatewayParameterType
-    {
-        Custom = 0,
-        From = 1,
-        To = 2,
-        Text = 3,
-    }
-    #endregion
-
-    #region PRODUCTORDERPASSRESULT
-    public enum ProductOrderPassResult
-    {
-        [Localized("PRODUCT_ORDER_PASS_RESULT_SUCESS")]
-        Sucess = 0,
-        /// <summary>
-        /// Invalid user id passed.
-        /// </summary>
-        [Localized("PRODUCT_ORDER_PASS_RESULT_INVALID_USER_ID")]
-        InvalidUserId =1,
-        /// <summary>
-        /// Invalid product id passed.
-        /// </summary>
-        [Localized("PRODUCT_ORDER_PASS_RESULT_INVALID_PRODUCT_ID")]
-        InvalidProdcutId =2,
-        /// <summary>
-        /// User group disallowed.
-        /// </summary>
-        [Localized("PRODUCT_ORDER_PASS_RESULT_DISALLOWED_USER_GROUP")]
-        UserGroupDisallowed = 3,
-        /// <summary>
-        /// Sale disallowed.
-        /// </summary>
-        [Localized("PRODUCT_ORDER_PASS_RESULT_SALE_DISALLOWED")]
-        SaleDisallowed = 4,
-        /// <summary>
-        /// Client ordering disallowed.
-        /// </summary>
-        [Localized("PRODUCT_ORDER_PASS_RESULT_CLIENT_ORDER_DISALLOWED")]
-        ClientOrderDisallowed = 5,
-        /// <summary>
-        /// Geuest order disallowed.
-        /// </summary>
-        [Localized("PRODUCT_ORDER_PASS_RESULT_GUEST_SALE_DISALLOWED")]
-        GuestSaleDisallowed = 6,
-        /// <summary>
-        /// Product id out of stock.
-        /// </summary>
-        [Localized("PRODUCT_ORDER_PASS_RESULT_OUT_OF_STOCK")]
-        OutOfStock = 7,
-        /// <summary>
-        /// Purchase period disallowed.
-        /// </summary>
-        [Localized("PRODUCT_ORDER_PASS_RESULT_PURCHASE_PERIOD_DISALLOWED")]
-        PeriodDisallowed =8,
-    } 
     #endregion
 
     #endregion

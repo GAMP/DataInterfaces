@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ServerService.Dto.Reports.Users
 {
@@ -15,7 +12,7 @@ namespace ServerService.Dto.Reports.Users
         public int TopUsersNumber { get; set; }
 
         [DataMember]
-        public MemberCountersDTO MemberCounters { get; set; }
+        public MemberCountersDTO MemberCounters { get; set; } = new MemberCountersDTO();
 
         [DataMember]
         public List<UsersReportUserGroupDTO> TopSpenders { get; set; } = new List<UsersReportUserGroupDTO>();

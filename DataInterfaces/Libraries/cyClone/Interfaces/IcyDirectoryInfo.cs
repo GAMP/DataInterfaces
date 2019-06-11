@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System;
 
 namespace CyClone.Core
 {
@@ -39,7 +38,7 @@ namespace CyClone.Core
         #region FUNCTIONS
 
         /// <summary>
-        /// Creates the directory.
+        /// Creates directory.
         /// </summary>
         void Create();
 
@@ -50,76 +49,42 @@ namespace CyClone.Core
         void Delete(bool recursive);
 
         /// <summary>
-        /// Gets a list of subdirectories.
+        /// Gets child path relative to directory.
         /// </summary>
-        /// <param name="searchPattern">Search pattern.</param>
-        /// <param name="searchOption">Search option.</param>
-        /// <returns>string[] of subdirectories names.</returns>
-        string[] GetDirectories(string searchPattern, System.IO.SearchOption searchOption);
+        /// <param name="relativePath">Child relative path.</param>
+        /// <returns>Full child path.</returns>
+        /// <exception cref="ArgumentNullException">Thrown in case <paramref name="relativePath"/>equals null or empty string.</exception>
+        string GetChildPath(string relativePath);
 
         /// <summary>
-        /// Gets sub directories.
+        /// Gets child directory info.
         /// </summary>
-        /// <returns>Array of sub directories.</returns>
-        string[] GetDirectories();
-
-        /// <summary>
-        /// Gets sub directories.
-        /// </summary>
-        /// <param name="searchPattern">Search pattern.</param>
-        /// <returns>Array of sub directories.</returns>
-        string[] GetDirectories(string searchPattern);
-
-        IcyDirectoryInfo[] GetDirectoryInfos();
-
-        IcyDirectoryInfo[] GetDirectoryInfos(string searchPattern);
-
-        IcyDirectoryInfo[] GetDirectoryInfos(string searchPattern, System.IO.SearchOption searchOption);
-
-        IcyFileInfo[] GetFileInfos(string searchPattern);
-
-        IcyFileInfo[] GetFileInfos();
-
-        IcyFileInfo[] GetFileInfos(string searchPattern, System.IO.SearchOption searchOption);
-
-        string[] GetFiles();
-
-        string[] GetFiles(string searchPattern);
-
-        string[] GetFiles(string searchPattern, SearchOption searchOption);
-
+        /// <param name="relativePath">Child relative path.</param>
+        /// <returns>Child directory info.</returns>
         IcyDirectoryInfo GetChildDirectoryInfo(string relativePath);
 
+        /// <summary>
+        /// Gets child directory info.
+        /// </summary>
+        /// <param name="relativePath">Child relative path.</param>
+        /// <param name="getIfno">Indicates if the file info should be obtained.</param>
+        /// <returns>Child directory info.</returns>
         IcyDirectoryInfo GetChildDirectoryInfo(string relativePath, bool getIfno);
 
         /// <summary>
         /// Gets the child file info.
         /// </summary>
         /// <param name="relativePath">Child relative path.</param>
-        /// <returns>IcyFileInfo file info.</returns>
+        /// <returns>Child file info.</returns>
         IcyFileInfo GetChildFileInfo(string relativePath);
 
         /// <summary>
         /// Gets the child file info.
         /// </summary>
         /// <param name="relativePath">Child relative path.</param>
-        /// <param name="getIfno">Enables or disables obtaining of child info data.</param>
-        /// <returns>IcyFileInfo file info.</returns>
+        /// <param name="getIfno">Indicates if the file info should be obtained.</param>
+        /// <returns>Child file info.</returns>
         IcyFileInfo GetChildFileInfo(string relativePath, bool getIfno);
-
-        /// <summary>
-        /// Gets list of string of each file entry present in directory.
-        /// </summary>
-        /// <param name="searchPattern">Search pattern.</param>
-        /// <returns></returns>
-        string[] GteFileSystemEntries(string searchPattern);
-
-        /// <summary>
-        /// Gets list of FileSystemInfos.
-        /// <paramref name="searchPattern"/>Search pattern.<paramref name="searchPattern"/>
-        /// <paramref name="searchOption"/>Search option.<paramref name="searchOption"/>
-        /// </summary>
-        List<IcyFileSystemInfo> GetFileSystemInfos(string searchPattern, SearchOption searchOption);
 
         /// <summary>
         /// Gets the enumeration context for this directory info.
@@ -132,6 +97,7 @@ namespace CyClone.Core
         /// </summary>
         /// <param name="pattern">Search pattern.</param>
         /// <returns>IEnumerationContext instance.</returns>
+        /// <exception cref="ArgumentNullException">Thrown in case <paramref name="pattern"/>equals null or empty string.</exception>
         IEnumerationContext GetEnumerationContext(string pattern);
 
         /// <summary>
@@ -139,6 +105,7 @@ namespace CyClone.Core
         /// </summary>
         /// <param name="relativePath">Directory relative path.</param>
         /// <returns>True or false.</returns>
+        /// <exception cref="ArgumentNullException">Thrown in case <paramref name="relativePath"/>equals null or empty string.</exception>
         bool ChildDirectoryExists(string relativePath);
 
         /// <summary>
@@ -146,6 +113,7 @@ namespace CyClone.Core
         /// </summary>
         /// <param name="relativePath">File relative path.</param>
         /// <returns>True or false.</returns>
+        /// <exception cref="ArgumentNullException">Thrown in case <paramref name="relativePath"/>equals null or empty string.</exception>
         bool ChildFileExists(string relativePath);
 
         /// <summary>
@@ -153,6 +121,7 @@ namespace CyClone.Core
         /// </summary>
         /// <returns></returns>
         IcyDriveInfo GetRootInfo();
+
 
         #endregion
     }
@@ -162,6 +131,5 @@ namespace CyClone.Core
     /// </summary>
     public interface IcyRemoteDirectoryInfo : IcyRemoteFileSystemInfo
     {
-
     }
 }

@@ -18,7 +18,7 @@ namespace ServerService.Services
         /// <param name="message">Text message.</param>
         /// <returns>Result of operation.</returns>
         /// <exception cref="System.ArgumentNullException">Thrown if one of parameters equals to null or empty string.</exception>
-        Task<SMSSendResult> SendAsync(string from, string to, string message); 
+        Task<SMSSendResultCode> SendAsync(string from, string to, string message); 
 
         #endregion
     }

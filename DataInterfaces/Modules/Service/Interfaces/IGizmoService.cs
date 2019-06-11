@@ -1,5 +1,4 @@
-﻿using DataInterfaces.Modules.Service.Interfaces;
-using GizmoDALV2;
+﻿using GizmoDALV2;
 using NetLib;
 using SharedLib;
 using System;

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
+﻿using System.ComponentModel;
 using System.Threading.Tasks;
 
 namespace SharedLib.ViewModels
@@ -10,8 +6,13 @@ namespace SharedLib.ViewModels
     #region IWizardSwitchValidate
     public interface IWizardSwitchValidate : IWizardItemViewModel, INotifyDataErrorInfo
     {
+        #region FUNCTIONS
+
         Task<bool> SwitchValidateAsync();
-        bool Validate();
+
+        bool Validate(); 
+
+        #endregion
     }
     #endregion
 }

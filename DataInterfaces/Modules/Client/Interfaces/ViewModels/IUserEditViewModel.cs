@@ -38,7 +38,7 @@ namespace Client.ViewModels
 
     public interface IUserPasswordEditViewModel
     {
-        string Password { get; }
+        #region PROPERTIES
 
         /// <summary>
         /// Gets or sets accept command.
@@ -50,8 +50,27 @@ namespace Client.ViewModels
         /// </summary>
         IExecutionChangedAwareCommand CancelCommand { get; set; }
 
+        /// <summary>
+        /// Gets current password.
+        /// </summary>
+        string Password { get; }
+
+        /// <summary>
+        /// Gets if model is valid.
+        /// </summary>
         bool IsValid { get; }
 
-        bool Validate();
+
+        #endregion
+
+        #region FUNCTIONS
+        
+        /// <summary>
+        /// Validates the model.
+        /// </summary>
+        /// <returns>True if model is valid , otherwise false.</returns>
+        bool Validate(); 
+
+        #endregion
     }
 }

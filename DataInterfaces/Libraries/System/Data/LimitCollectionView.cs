@@ -35,7 +35,7 @@ namespace System.Windows.Data
 
         #endregion
 
-        #region OVERRIDES
+        #region OVERRIDES       
 
         /// <summary>
         /// Gets the estimated number of records.

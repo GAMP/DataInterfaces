@@ -5,12 +5,14 @@ using System.Runtime.Serialization;
 
 namespace ServerService
 {
-    #region TokeVerificationResultBase
+    #region VerificationResultBase
     [DataContract()]
     [Serializable()]
     [ProtoContract()]
-    [ProtoInclude(500,typeof(EmailVerificationStartResult))]
-    [ProtoInclude(501, typeof(MobilePhoneVerificationResult))]
+    [ProtoInclude(500, typeof(EmailVerificationStartResult))]
+    [ProtoInclude(501, typeof(MobilePhoneVerificationStartResult))]
+    [ProtoInclude(502, typeof(AccountCreationByMobilePhoneResult))]
+    [ProtoInclude(503, typeof(AccountCreationByEmailResult))]
     public abstract class VerificationResultBase<T>
     {
         #region PROPERTIES
@@ -59,6 +61,7 @@ namespace ServerService
         /// Gets result string.
         /// </summary>
         [DataMember(EmitDefaultValue = false)]
+        [ProtoIgnore()]
         public string ResultString
         {
             get { return Result.ToString(); }
@@ -72,7 +75,7 @@ namespace ServerService
     [DataContract()]
     [Serializable()]
     [ProtoContract()]
-    public class EmailVerificationStartResult : VerificationResultBase<VerificationStartResult>
+    public class EmailVerificationStartResult : VerificationResultBase<VerificationStartResultCode>
     {
         #region PROPERTIES
 
@@ -87,17 +90,105 @@ namespace ServerService
     }
     #endregion
 
-    #region MobilePhoneVerificationResult
+    #region MobilePhoneVerificationStartResult
     [DataContract()]
     [Serializable()]
     [ProtoContract()]
-    public class MobilePhoneVerificationResult : VerificationResultBase<VerificationStartResult>
+    public class MobilePhoneVerificationStartResult : VerificationResultBase<VerificationStartResultCode>
     {
         #region PROPERTIES
 
         [ProtoMember(1)]
         [DataMember(EmitDefaultValue = false)]
         public string MobilePhone
+        {
+            get; set;
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #region AccountCreationByMobilePhoneResult
+    [DataContract()]
+    [Serializable()]
+    [ProtoContract()]
+    public class AccountCreationByMobilePhoneResult : VerificationResultBase<VerificationStartResultCode>
+    {
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets or sets mobile phone.
+        /// </summary>
+        [DataMember()]
+        [ProtoMember(1)]
+        public string MobilePhone
+        {
+            get; set;
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #region AccountCreationByEmailResult
+    [DataContract()]
+    [Serializable()]
+    [ProtoContract()]
+    public class AccountCreationByEmailResult : VerificationResultBase<VerificationStartResultCode>
+    {
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets or sets email address.
+        /// </summary>
+        [DataMember()]
+        [ProtoMember(1)]
+        public string EmailAddress
+        {
+            get; set;
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #region AccountCreationByTokenCompleteResult
+    [DataContract()]
+    [Serializable()]
+    [ProtoContract()]
+    public class AccountCreationByTokenCompleteResult : VerificationResultBase<SharedLib.AccountCreationByTokenCompleteResultCode>
+    {
+        #region PROPERTIES
+
+        [DataMember(EmitDefaultValue = false)]
+        [ProtoMember(1)]
+        public int? CreatedUserId
+        {
+            get; set;
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #region AccountCreationCompleteResult
+    [DataContract()]
+    [Serializable()]
+    [ProtoContract()]
+    public class AccountCreationCompleteResult
+    {
+        #region PROPERTIES
+
+        [ProtoMember(1)]
+        public SharedLib.AccountCreationCompleteResultCode Result
+        {
+            get; set;
+        }
+
+        [DataMember(EmitDefaultValue = false)]
+        [ProtoMember(2)]
+        public int? UserId
         {
             get; set;
         }

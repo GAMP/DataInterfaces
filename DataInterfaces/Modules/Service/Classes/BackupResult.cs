@@ -20,9 +20,9 @@ namespace ServerService
 
         public BackupResult(string fileName, BackupResultCode code, Exception ex)
         {
-            this.BackupFile = fileName;
-            this.Code = code;
-            this.Error = ex;
+            BackupFile = fileName;
+            Code = code;
+            Error = ex;
         }
 
         #endregion

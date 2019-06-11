@@ -11,20 +11,20 @@ namespace Manager.Modules
         /// Starts the module.
         /// </summary>
         /// <returns>Associated task.</returns>
-        Task Start();
+        Task StartAsync();
 
         /// <summary>
         /// Stops the module.
         /// </summary>
         /// <returns>Associated task.</returns>
-        Task Stop();
+        Task StopAsync();
 
         /// <summary>
         /// Initializes the module.
         /// </summary>
         /// <param name="user">User view model instance.</param>
         /// <returns>Associated task.</returns>
-        Task Initialize(IUserMemberViewModel user);
+        Task InitializeAync(IUserMemberViewModel user);
 
         #endregion
 

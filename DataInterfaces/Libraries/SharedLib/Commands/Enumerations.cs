@@ -128,7 +128,7 @@ namespace SharedLib.Commands
         ServiceToClinet = 21,
 
         [OperationType(typeof(EnvironmentOprations))]
-        Environment =22,
+        Environment = 22,
     }
     #endregion
 
@@ -149,13 +149,13 @@ namespace SharedLib.Commands
         GetNewsContainer = 3,
         AppEvent = 14,
         AppExeExecutionGraphGet = 15,
-        AppExePersonalFileGet =16,
-        AppExePersonalFilePathsGet=17,
-        AppExePersonalFileByActivationGet=21,
-        AppExeDeploymentPathsGet=18,
+        AppExePersonalFileGet = 16,
+        AppExePersonalFilePathsGet = 17,
+        AppExePersonalFileByActivationGet = 21,
+        AppExeDeploymentPathsGet = 18,
         AppLinkGet = 2,
-        DeploymentGet=19,
-        PersonalFileGet=20,
+        DeploymentGet = 19,
+        PersonalFileGet = 20,
     }
     #endregion
 
@@ -303,31 +303,35 @@ namespace SharedLib.Commands
         /// Usage session info get operation.
         /// </summary>
         GetUsageSessionInfo = 18,
-
         /// <summary>
         /// Get image hash operation.
         /// </summary>
         GetImageHash = 19,
-
         /// <summary>
         /// Get ordering data.
         /// </summary>
         GetOrderingData = 20,
-
         /// <summary>
         /// Create orderd.
         /// </summary>
-        ProductOrderCreate =21,
-
+        ProductOrderCreate = 21,
         /// <summary>
         /// Get user balance.
         /// </summary>
-        UserBalanceGet =22 ,
-
+        UserBalanceGet = 22,
         /// <summary>
         /// Passes product oder.
         /// </summary>
-        ProductOrderPass =23 ,
+        ProductOrderPass = 23,
+        TokenVerify = 24,
+        AccountCreateByMobilePhoneStart = 25,
+        AccountCreateByEmailStart = 26,
+        AccountCreateByTokenComplete = 27,
+        AccountCreateComplete = 32,
+        UsernameExist = 28,
+        UserEmailExist = 29,
+        EmailVerificationStateInfoGet = 30,
+        MobilePhoneVerificationStateInfoGet = 31,
     }
     #endregion
 
@@ -765,7 +769,7 @@ namespace SharedLib.Commands
         DepositAdd = 179,
         DepositWithdraw = 180,
         DepositPaymentGet = 181,
-        DepositTransactionInfoGet=271,
+        DepositTransactionInfoGet = 271,
         #endregion
 
         #region POINTS
@@ -783,11 +787,11 @@ namespace SharedLib.Commands
 
         #region PRODUCT ORDER
         ProductOrderGet = 188,
-        ProductOrderOpenInfoGet=273,
+        ProductOrderOpenInfoGet = 273,
         ProductOrderCancel = 189,
         ProductOrderInvoice = 190,
         ProductOrderAccept = 270,
-        ProductOrderComplete= 272,
+        ProductOrderComplete = 272,
         ProductOrderLineUpdateState = 274,
         #endregion
 
@@ -845,7 +849,7 @@ namespace SharedLib.Commands
         ShiftLock = 228,
         ShiftUnlock = 229,
         ShiftInfoGet = 234,
-        
+
         #endregion
 
         #region REGISTER
@@ -861,6 +865,7 @@ namespace SharedLib.Commands
         ShiftReportGet = 235,
         SaleSummaryReportGet = 236,
         SaleReportGet = 255,
+        UserGeneralReportGet = 275,
 
         #endregion
 
@@ -884,7 +889,7 @@ namespace SharedLib.Commands
         AssetCheckOut = 245,
         AssetInfoGet = 249,
 
-        AssetTransactionGet = 248, 
+        AssetTransactionGet = 248,
 
         #endregion
 
@@ -899,11 +904,11 @@ namespace SharedLib.Commands
         WaitingLineInfoGet = 264,
         WaitngLineGet = 265,
         WaitingLineAddOrUpdate = 266,
-        WaitingLinePrioritiesSet = 267, 
+        WaitingLinePrioritiesSet = 267,
 
         #endregion
 
-        //max 275
+        //max 276
     }
     #endregion
 
@@ -932,7 +937,7 @@ namespace SharedLib.Commands
     {
         UserBalanceEvent = 0,
         EntityEvent = 1,
-        EventBatch =2,
+        EventBatch = 2,
     }
     #endregion
 
@@ -940,7 +945,7 @@ namespace SharedLib.Commands
     public enum EnvironmentOprations
     {
         Expand = 0,
-    } 
+    }
     #endregion
 
     #region OperationTypeAttribute

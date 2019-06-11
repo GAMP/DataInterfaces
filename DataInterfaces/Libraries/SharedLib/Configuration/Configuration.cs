@@ -1085,7 +1085,17 @@ namespace SharedLib.Configuration
         public bool IsEnabled
         {
             get; set;
-        } 
+        }
+
+        /// <summary>
+        /// Gets or sets reply to address.
+        /// </summary>
+        [DataMember()]
+        [EmailNullEmpty()]
+        public string ReplyToAddress
+        {
+            get;set;
+        }
 
         #endregion
     }
@@ -1111,7 +1121,7 @@ namespace SharedLib.Configuration
         /// <summary>
         /// Gets or sets if gateway is enabled.
         /// </summary>
-        [DefaultValue(true)]
+        [DefaultValue(false)]
         [DataMember()]
         public bool IsEnabled
         {
@@ -1125,42 +1135,6 @@ namespace SharedLib.Configuration
         public string GatewayUrl
         {
             get; set;
-        }
-
-        /// <summary>
-        /// Gets or sets api key.
-        /// </summary>
-        [DataMember()]
-        public string ApiKey
-        {
-            get;set;
-        }
-
-        /// <summary>
-        /// Gets or sets api secret.
-        /// </summary>
-        [DataMember()]
-        public string ApiSecret
-        {
-            get;set;
-        }
-
-        /// <summary>
-        /// Gets or sets api username.
-        /// </summary>
-        [DataMember()]
-        public string Username
-        {
-            get;set;
-        }
-
-        /// <summary>
-        /// Gets or sets api password.
-        /// </summary>
-        [DataMember()]
-        public string Password
-        {
-            get;set;
         }
 
         /// <summary>
@@ -1206,6 +1180,7 @@ namespace SharedLib.Configuration
         /// Gets or sets parameter name.
         /// </summary>
         [DataMember()]
+        [Required()]
         public string Name
         {
             get; set;
@@ -1215,6 +1190,7 @@ namespace SharedLib.Configuration
         /// Gets or sets parameter value.
         /// </summary>
         [DataMember()]
+        [Required()]
         public string Value
         {
             get; set;
@@ -1226,16 +1202,6 @@ namespace SharedLib.Configuration
         [DefaultValue(SMSGatewayParameterOption.None)]
         [DataMember(EmitDefaultValue = false)]
         public SMSGatewayParameterOption Options
-        {
-            get; set;
-        }
-
-        /// <summary>
-        /// Gets or sets parameter type.
-        /// </summary>
-        [DefaultValue(SMSGatewayParameterType.Custom)]
-        [DataMember(EmitDefaultValue = false)]
-        public SMSGatewayParameterType Type
         {
             get; set;
         }
@@ -1528,6 +1494,24 @@ namespace SharedLib.Configuration
         [DefaultValue(true)]
         [DataMember(Order = 3)]
         public bool IsOrderingEnabled
+        {
+            get;set;
+        }
+
+        [Category("General")]
+        [Description("Enables or disables client user registration.")]
+        [DefaultValue(false)]
+        [DataMember(Order =4)]
+        public bool IsClientRegistrationEnabled
+        {
+            get;set;
+        }
+
+        [Category("General")]
+        [Description("Gets or sets client registration verification method.")]
+        [DefaultValue(RegistrationVerificationMethod.None)]
+        [DataMember(Order = 5)]
+        public RegistrationVerificationMethod VerificationMethod
         {
             get;set;
         }

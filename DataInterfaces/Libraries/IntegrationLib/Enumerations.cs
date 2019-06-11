@@ -113,6 +113,11 @@ namespace IntegrationLib
         /// </summary>
         [Localization.Localized("LOGIN_RESULT_INVALID_CREDENTIALS")]
         InvalidCredentials = InvalidPassword | InvalidUserName,
+        /// <summary>
+        /// User group use not allowed for the operator.
+        /// </summary>
+        [Localization.Localized("LOGIN_RESULT_OPERATOR_USER_GROUP_DENIED")]
+        OperatorUserGroupDenied = 524288,
     }
     #endregion
 
