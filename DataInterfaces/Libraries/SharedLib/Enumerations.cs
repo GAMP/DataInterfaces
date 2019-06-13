@@ -1934,8 +1934,6 @@ namespace SharedLib
     public enum PaymentMethodOptionType
     {
         None = 0,
-        [Localized("PAYMENT_METHOD_OPTION_TYPE_COUTABLE")]
-        Countable = 1,
     }
     #endregion
 

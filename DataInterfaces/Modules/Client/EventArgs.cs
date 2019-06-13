@@ -4,6 +4,7 @@ using SharedLib.User;
 using SharedLib.Applications;
 using IntegrationLib;
 using SharedLib;
+using System.Runtime.Serialization;
 
 namespace Client
 {
@@ -497,6 +498,43 @@ namespace Client
             get;
             protected set;
         } 
+        #endregion
+    }
+    #endregion
+
+    #region LanguageChangeEventArgs
+    [Serializable()]
+    [DataContract()]
+    public class LanguageChangeEventArgs : EventArgs
+    {
+        #region CONSTRUCTOR
+        public LanguageChangeEventArgs(string settingsLanguage, string preferedUILanguage)
+        {
+            SettingsLanguage = settingsLanguage;
+            PreferedUILanguage = preferedUILanguage;
+        }
+        #endregion
+
+        #region PROPERTIES
+
+        /// <summary>
+        /// Current settings language.
+        /// </summary>
+        [DataMember()]
+        public string SettingsLanguage
+        {
+            get; protected set;
+        }
+
+        /// <summary>
+        /// Current user prefered language.
+        /// </summary>
+        [DataMember()]
+        public string PreferedUILanguage
+        {
+            get; protected set;
+        }
+
         #endregion
     }
     #endregion

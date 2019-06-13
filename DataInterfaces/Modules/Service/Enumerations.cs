@@ -30,6 +30,9 @@
 
         [ClaimDescription(@"Sale", "DeleteTimePurchases", "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_DELETE_TIME_PURCHASES")]
         SaleNoDeleteTimePurchases,
+
+        [ClaimDescription(@"Sale", "ManualOpenCashDrawer", "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_MANUAL_OPEN_CASH_DRAWER")]
+        SaleManualOpenCashDrawer,
         #endregion
 
         #region SHIFT

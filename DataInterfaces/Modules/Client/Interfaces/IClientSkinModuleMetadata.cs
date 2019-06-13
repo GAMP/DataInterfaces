@@ -32,7 +32,7 @@ namespace Client
         /// Gets module display order.
         /// </summary>
         [DefaultValue(0)]
-        int DiaplayOrder { get; }
+        int DisplayOrder { get; }
 
         /// <summary>
         /// Gets module icon resource.

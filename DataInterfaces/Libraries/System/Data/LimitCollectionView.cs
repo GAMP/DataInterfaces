@@ -35,7 +35,7 @@ namespace System.Windows.Data
 
         #endregion
 
-        #region OVERRIDES       
+        #region OVERRIDES
 
         /// <summary>
         /// Gets the estimated number of records.
@@ -45,7 +45,7 @@ namespace System.Windows.Data
             get
             {
                 if (IsRefreshDeferred)
-                    return 0;
+                    return base.Count;
 
                 if (MaxItems <= 0)
                     return base.Count;        
@@ -64,12 +64,77 @@ namespace System.Windows.Data
             if (!base.PassesFilter(item))
                 return false;
 
-            if(item!=null)
+            if (MaxItems > 0)
             {
-                return IndexOf(item) < MaxItems;
+                if (item != null)
+                {
+                    return IndexOf(item) + 1 < MaxItems;
+                }
             }
 
             return true;
+        }
+
+        #endregion
+    }
+
+    public class LimitedListCollectionView : ListCollectionView, IEnumerable
+    {
+        #region CONSTRUCTOR
+        public LimitedListCollectionView(IList list)
+            : base(list)
+        {
+            MaxItems = int.MaxValue;
+        }
+        #endregion
+
+        #region PROPERTIES
+        public int MaxItems { get; set; }
+        #endregion
+
+        #region OVERRIDES
+
+        public override int Count { get { return Math.Min(base.Count, MaxItems); } }
+
+        public override bool MoveCurrentToLast()
+        {
+            return base.MoveCurrentToPosition(Count - 1);
+        }
+
+        public override bool MoveCurrentToNext()
+        {
+            if (base.CurrentPosition == Count - 1)
+                return base.MoveCurrentToPosition(base.Count);
+            else
+                return base.MoveCurrentToNext();
+        }
+
+        public override bool MoveCurrentToPrevious()
+        {
+            if (base.IsCurrentAfterLast)
+                return base.MoveCurrentToPosition(Count - 1);
+            else
+                return base.MoveCurrentToPrevious();
+        }
+
+        public override bool MoveCurrentToPosition(int position)
+        {
+            if (position < Count)
+                return base.MoveCurrentToPosition(position);
+            else
+                return base.MoveCurrentToPosition(base.Count);
+        } 
+
+        #endregion
+
+        #region IEnumerable Members
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            do
+            {
+                yield return CurrentItem;
+            } while (MoveCurrentToNext());
         }
 
         #endregion

@@ -13,7 +13,7 @@ namespace Client
         #region CONSTRUCTOR
         public ModuleDisplayOrderAttribute(int order)
         {
-            DiaplayOrder = order;
+            DisplayOrder = order;
         }
         #endregion
 
@@ -22,7 +22,7 @@ namespace Client
         /// <summary>
         /// Gets display order.
         /// </summary>
-        public int DiaplayOrder
+        public int DisplayOrder
         {
             get;
             private set;
