@@ -78,6 +78,9 @@ namespace System.Windows.Data
         #endregion
     }
 
+    /// <summary>
+    /// Collection view that limits it view items.
+    /// </summary>
     public class LimitedListCollectionView : ListCollectionView, IEnumerable
     {
         #region CONSTRUCTOR
