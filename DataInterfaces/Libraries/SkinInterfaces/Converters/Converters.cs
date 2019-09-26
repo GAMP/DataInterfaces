@@ -423,52 +423,7 @@ namespace SkinInterfaces.Converters
 
         #endregion
     }
-    #endregion
-
-    #region ControlBoxStatesConverter
-    public class ControlBoxStatesConverter : IValueConverter
-    {
-        #region IValueConverter Members
-
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            try
-            {
-                int type = (int)parameter;
-                SkinInterfaces.ElementVisualState supported = (SkinInterfaces.ElementVisualState)value;
-                if (type == 1)
-                {
-                    if ((supported & ElementVisualState.Minimized) == ElementVisualState.Minimized)
-                    {
-                        return Visibility.Visible;
-                    }
-                    return Visibility.Collapsed;
-                }
-                if (type == 2)
-                {
-                    if ((supported & ElementVisualState.Maximized) == ElementVisualState.Maximized)
-                    {
-                        return Visibility.Visible;
-                    }
-                    return Visibility.Collapsed;
-                }
-                return Visibility.Collapsed;
-            }
-            catch
-            {
-                return Visibility.Collapsed;
-            }
-
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
-    }
-    #endregion
+    #endregion    
 
     #region FallBackConverter
     public class FallBackConverter : IValueConverter

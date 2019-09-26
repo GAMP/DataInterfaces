@@ -2,6 +2,12 @@
 
 namespace ServerService
 {
+    /// <summary>
+    /// Extended Environment class.
+    /// </summary>
+    /// <remarks>
+    /// Provides extended environment functionality.
+    /// </remarks>
     public static class EnvironmentEx
     {
         #region STATIC FIELDS
@@ -27,6 +33,14 @@ namespace ServerService
         public static bool IsUserInteractiveOrDocker
         {
             get { return Environment.UserInteractive || IsDocker; }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether the current process is running in user interactive mode.
+        /// </summary>
+        public static bool IsUserInteractive
+        {
+            get { return Environment.UserInteractive; }
         }
 
         #endregion

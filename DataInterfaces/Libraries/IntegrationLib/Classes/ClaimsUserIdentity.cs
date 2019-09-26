@@ -1,34 +1,31 @@
 ﻿using SharedLib;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Security.Claims;
+using System.Security.Principal;
 
 namespace IntegrationLib
 {
-    #region ClaimsUserIdentity
     /// <summary>
     /// Extends generic claims identity.
     /// </summary>
     [Serializable()]
     [DataContract()]
-    public class ClaimsUserIdentity : ClaimsIdentity, IUserIdentity
+    public class ClaimsUserIdentity : GenericIdentity, IUserIdentity
     {
         #region CONSTRUCTOR
 
-        public ClaimsUserIdentity(int userId)
+        public ClaimsUserIdentity(string name, int userId, UserRoles role)
+         : this(name,userId,role, Enumerable.Empty<Claim>())
         {
-            UserId = userId;
         }
 
-        public ClaimsUserIdentity(int userId, IEnumerable<Claim> claims)
-            : base(claims)
+        public ClaimsUserIdentity(string name, int userId, UserRoles role, IEnumerable<Claim> claims):base(name)
         {
+            AddClaims(claims);
             UserId = userId;
-        }
-
-        public ClaimsUserIdentity(int userId,IEnumerable<Claim> claims,UserRoles role):this(userId,claims)
-        {
             Role = role;
         }
 
@@ -58,5 +55,4 @@ namespace IntegrationLib
 
         #endregion
     }
-    #endregion
 }

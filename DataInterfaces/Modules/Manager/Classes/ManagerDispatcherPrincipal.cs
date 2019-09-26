@@ -1,17 +1,11 @@
 ﻿using IntegrationLib;
-using SharedLib;
 using SharedLib.Dispatcher;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Manager
 {
-    #region ManagerDispatcherPrincipal
     public class ManagerDispatcherPrincipal : ClaimsPrincipal
     {
         #region CONSTRUCTOR
@@ -84,5 +78,4 @@ namespace Manager
 
         #endregion
     } 
-    #endregion
 }

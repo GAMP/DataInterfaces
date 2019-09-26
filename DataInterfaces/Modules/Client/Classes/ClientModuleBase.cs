@@ -25,6 +25,9 @@ namespace Client
             private set { SetProperty(ref client, value); }
         }
 
+        /// <summary>
+        /// Gets dialog service instance.
+        /// </summary>
         [Import(AllowDefault = true)]
         public virtual IDialogService DialogService
         {

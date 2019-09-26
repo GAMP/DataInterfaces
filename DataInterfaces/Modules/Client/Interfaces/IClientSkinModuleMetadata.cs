@@ -3,7 +3,12 @@ using System.ComponentModel;
 
 namespace Client
 {
-    #region IClientSkinModuleMetadata
+    /// <summary>
+    /// Client module meta data interface.
+    /// </summary>
+    /// <remarks>
+    /// Used to map exported module meta data attributes.
+    /// </remarks>
     public interface IClientSkinModuleMetadata
     {
         #region PROPERTIES
@@ -46,5 +51,4 @@ namespace Client
 
         #endregion
     }
-    #endregion
 }

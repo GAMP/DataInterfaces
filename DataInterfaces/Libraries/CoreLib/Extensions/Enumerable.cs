@@ -10,6 +10,8 @@ namespace CoreLib
     /// </summary>
     public static partial class EnumerableExtensions
     {
+        #region FUNCTIONS
+        
         /// <summary>
         /// Gets if collection is equal to null or empty.
         /// </summary>
@@ -97,6 +99,8 @@ namespace CoreLib
                 foreach (var child in SelectRecursive(children, selector))
                     yield return child;
             }
-        }
+        } 
+
+        #endregion
     }
 }

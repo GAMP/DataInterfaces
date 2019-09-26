@@ -3,7 +3,6 @@ using System.ComponentModel.Composition;
 
 namespace Client
 {
-    #region ModuleIconAttribute
     /// <summary>
     /// Used tot add material design icon to module.
     /// </summary>
@@ -34,6 +33,5 @@ namespace Client
         }
 
         #endregion
-    } 
-    #endregion
+    }
 }

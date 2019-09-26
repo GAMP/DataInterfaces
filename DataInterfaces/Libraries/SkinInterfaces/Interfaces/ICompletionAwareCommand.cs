@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace SkinInterfaces
+﻿namespace SkinInterfaces
 {
-    #region ICompletionAwareCommand
     /// <summary>
     /// Interface that is used for ICommands that notify when they are completed.
     /// </summary>
     public interface ICompletionAwareCommand
     {
+        #region PROPERTIES
+        
         /// <summary>
         /// Notifies that the command has completed
         /// </summary>
-        WeakActionEvent<object> CommandCompleted { get; set; }
+        WeakActionEvent<object> CommandCompleted { get; set; } 
+
+        #endregion
     }
-    #endregion
 }

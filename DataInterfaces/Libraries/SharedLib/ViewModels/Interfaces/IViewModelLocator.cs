@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace SharedLib.ViewModels
 {
@@ -11,6 +7,8 @@ namespace SharedLib.ViewModels
     /// </summary>
     public interface IViewModelLocator<T>
     {
+        #region PROPERTIES
+        
         /// <summary>
         /// Tries to obtain view model.
         /// </summary>
@@ -27,6 +25,8 @@ namespace SharedLib.ViewModels
         /// Gets item source that can be used for binding.
         /// When implemented this enumerable should implement observable pattern.
         /// </summary>
-        IEnumerable<T> EnumerableSource { get; }
+        IEnumerable<T> EnumerableSource { get; } 
+
+        #endregion
     }
 }

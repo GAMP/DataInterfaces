@@ -1,11 +1,5 @@
-﻿using IntegrationLib;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Data.SqlTypes;
-using System.Linq;
-using System.Security.Claims;
-using System.Security.Principal;
-using System.Text;
 
 namespace GizmoDALV2
 {

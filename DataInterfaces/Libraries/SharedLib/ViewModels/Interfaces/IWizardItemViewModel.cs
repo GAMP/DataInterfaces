@@ -1,12 +1,8 @@
 ﻿namespace SharedLib.ViewModels
 {
     #region IWizardItemViewModel
-    public interface IWizardItemViewModel
+    public interface IWizardItemViewModel : IViewAwareModel
     {
-        object View
-        {
-            get;
-        }
     }
     #endregion
 }

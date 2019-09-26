@@ -8,6 +8,8 @@ namespace CoreLib
     /// </summary>
     public static class DateTimeExtensions
     {
+        #region FUNCTIONS
+
         /// <summary>
         /// Gets the age in years of the current DateTime based on current Date.
         /// </summary>
@@ -196,6 +198,8 @@ namespace CoreLib
             var previousYearDate = dt.AddYears(-1);
 
             return new DateTime(previousYearDate.Year, 1, 1);
-        }
+        } 
+
+        #endregion
     }
 }

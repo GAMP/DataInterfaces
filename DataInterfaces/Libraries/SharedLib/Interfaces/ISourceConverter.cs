@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SharedLib
+﻿namespace SharedLib
 {
     public interface ISourceConverter<T>
     {
+        #region FUNCTIONS
+        
         /// <summary>
         /// Converts to source class.
         /// </summary>
@@ -18,6 +14,8 @@ namespace SharedLib
         /// Converts from source class.
         /// </summary>
         /// <param name="source">Source class instance.</param>
-        void FromSource(T source);
+        void FromSource(T source); 
+
+        #endregion
     }
 }

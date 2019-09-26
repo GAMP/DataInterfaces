@@ -3,7 +3,12 @@ using System.Security.Claims;
 
 namespace IntegrationLib
 {
-    #region DispatcherPrincipal
+    /// <summary>
+    /// Dispatcher principal.
+    /// </summary>
+    /// <remarks>
+    /// Provides means for accessing current identity based on calling dispatcher.
+    /// </remarks>
     public class DispatcherPrincipal : ClaimsPrincipal, IDispatcherPrincipal
     {
         #region CONSTRUCTOR
@@ -38,5 +43,4 @@ namespace IntegrationLib
 
         #endregion
     }
-    #endregion
 }

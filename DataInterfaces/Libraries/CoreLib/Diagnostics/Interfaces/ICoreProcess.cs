@@ -1,11 +1,11 @@
 ﻿using System;
-using SharedLib.Dispatcher;
-using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace CoreLib.Diagnostics
 {
-    #region ICoreProcess
+    /// <summary>
+    /// Core process interface.
+    /// </summary>
     public interface ICoreProcess : IDisposable
     {
         #region PROPERTIES
@@ -192,5 +192,4 @@ namespace CoreLib.Diagnostics
 
         #endregion
     }
-    #endregion    
 }

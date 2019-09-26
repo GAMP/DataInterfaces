@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace SharedLib.ViewModels
+﻿namespace SharedLib.ViewModels
 {
     #region ISelectViewModelBase
     public interface ISelectViewModelBase : IValidateViewModelBase

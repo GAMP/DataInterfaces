@@ -2,13 +2,13 @@
 
 namespace CoreLib.Hooking
 {
-    #region IMouseHook
     public interface IMouseHook : IHookBase
     {
+        #region EVENTS
         /// <summary>
         /// Raised on mouse event.
         /// </summary>
         event EventHandler<MouseHookEventArgs> Event;
+        #endregion
     }
-    #endregion
 }

@@ -2,11 +2,15 @@
 using SharedLib.Applications;
 using System.Diagnostics;
 using SharedLib;
-using System.Threading.Tasks;
-using System.Threading;
 
 namespace Client
 {
+    /// <summary>
+    /// Execution context interface.
+    /// </summary>
+    /// <remarks>
+    /// Provides access and interactivity with client application executables.
+    /// </remarks>
     public interface IExecutionContext
     {
         #region EVENTS
@@ -136,11 +140,5 @@ namespace Client
         void Kill();
 
         #endregion
-    }
-
-    public interface IExecutionContextAync : IExecutionContext
-    {
-        Task ExecuteAsync(CancellationToken ct);
-        Task ExecuteAsync(bool reProcess, CancellationToken ct);
     }
 }

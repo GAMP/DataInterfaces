@@ -4,7 +4,6 @@ using System.Runtime.CompilerServices;
 
 namespace CoreLib.Diagnostics
 {
-    #region TraceWriter
     public static class TraceWriter
     {
         #region FIELDS
@@ -71,5 +70,4 @@ namespace CoreLib.Diagnostics
 
         #endregion        
     }
-    #endregion
 }

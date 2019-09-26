@@ -416,7 +416,7 @@ namespace SharedLib.Dispatcher.Exceptions
     }
     #endregion
 
-    #region PoolProcesFailedException
+    #region PoolProcessFailedException
     [Serializable()]
     public class PoolProcessFailedException : DispatcherOperationExceptionBase
     {

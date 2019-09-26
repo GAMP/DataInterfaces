@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace CoreLib.Diagnostics
 {
-    #region KillProcessInvokeInfo
     public class KillProcessInvokeInfo : MarshalByRefObject
     {
-        #region Constructor
+        #region CONSTRUCTOR
         /// <summary>
         /// Create new instance of KillProcessInvokeInfo.
         /// </summary>
@@ -35,7 +31,7 @@ namespace CoreLib.Diagnostics
         }
         #endregion
 
-        #region Properties
+        #region PROPERTIES
 
         /// <summary>
         /// Gets the delegate of this invocation info.
@@ -57,5 +53,4 @@ namespace CoreLib.Diagnostics
 
         #endregion
     }
-    #endregion
 }

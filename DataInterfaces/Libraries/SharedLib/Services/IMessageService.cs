@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SharedLib.Services
+﻿namespace SharedLib.Services
 {
     /// <summary>
     /// This service shows messages to the user. It returns the answer when the message was a question.

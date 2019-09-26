@@ -1,7 +1,7 @@
 ﻿namespace SharedLib.Views
 {
     /// <summary>
-    /// Represents a view
+    /// Represents a view.
     /// </summary>
     public interface IView
     {

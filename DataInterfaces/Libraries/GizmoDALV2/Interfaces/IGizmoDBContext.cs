@@ -50,7 +50,7 @@ namespace GizmoDALV2
         /// <typeparam name="TEntity">Entity type.</typeparam>
         /// <param name="entityKey">Entity key.</param>
         /// <returns>Found entity.</returns>
-        /// <exception cref="EntityNotFoundExcpetion">In case no entity found with given key.</exception>
+        /// <exception cref="EntityNotFoundException">In case no entity found with given key.</exception>
         TEntity DemandFind<TEntity>(int entityKey);
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace GizmoDALV2
         /// <typeparam name="TEntity">Entity type.</typeparam>
         /// <param name="entityKeys">Entity keys.</param>
         /// <returns>Found entity.</returns>
-        /// <exception cref="EntityNotFoundExcpetion">In case no entity found with given key.</exception>
+        /// <exception cref="EntityNotFoundException">In case no entity found with given key.</exception>
         TEntity DemandFind<TEntity>(object[] entityKeys);
 
         /// <summary>

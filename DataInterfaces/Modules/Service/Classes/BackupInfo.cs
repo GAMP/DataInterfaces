@@ -1,19 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ServerService
 {
+    /// <summary>
+    /// Backup information model.
+    /// </summary>
+    /// <remarks>
+    /// Used to describe an backup.
+    /// </remarks>
     [DataContract()]
     public class BackupInfo
     {
         #region PROPERTIES
         
         /// <summary>
-        /// Gets or sets backup time.
+        /// Backup time.
         /// </summary>
         [DataMember()]
         public DateTime Time
@@ -22,7 +24,7 @@ namespace ServerService
         }
 
         /// <summary>
-        /// Gets or sets
+        /// Database name.
         /// </summary>
         [DataMember()]
         public string DatabaseName

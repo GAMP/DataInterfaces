@@ -384,6 +384,28 @@ namespace SharedLib
     }
     #endregion
 
+    #region WindowsSystemPolicyAttribute
+    public class WindowsSystemPolicyAttribute : PolicyAttribute
+    {
+        #region Constructor
+
+        public WindowsSystemPolicyAttribute(string description, string valueName = "")
+            : base(@"Software\Policies\Microsoft\Windows\System", description, valueName)
+        {
+            Category = "System";
+        }
+
+        public WindowsSystemPolicyAttribute(string description, Microsoft.Win32.RegistryHive hive, string valueName = "")
+            : base(@"Software\Policies\Microsoft\Windows\System", description, valueName)
+        {
+            Category = "System";
+            Hive = hive;
+        }
+
+        #endregion
+    } 
+    #endregion
+
     #region NetworkPolicyAttribute
     public class NetworkPolicyAttribute : PolicyAttribute
     {

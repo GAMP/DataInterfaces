@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace SkinInterfaces
@@ -42,7 +38,7 @@ namespace SkinInterfaces
 
         private DeferredAction(Action action)
         {
-            this.timer = new Timer(new TimerCallback(delegate
+            timer = new Timer(new TimerCallback(delegate
             {
                 Application.Current?.Dispatcher.Invoke(action);
             }));
@@ -65,9 +61,9 @@ namespace SkinInterfaces
                 throw new ArgumentNullException(nameof(delay));
 
             // Fire action when time elapses (with no subsequent calls).
-            this.timer.Change(delay, TimeSpan.FromMilliseconds(-1));
-        }  
-        
+            timer.Change(delay, TimeSpan.FromMilliseconds(-1));
+        }
+
         #endregion
 
         #endregion
@@ -76,8 +72,8 @@ namespace SkinInterfaces
 
         public void Dispose()
         {
-            this.timer?.Dispose();
-            this.timer = null;
+            timer?.Dispose();
+            timer = null;
         }
 
         #endregion

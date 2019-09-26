@@ -1,10 +1,13 @@
-﻿using ServerService.Dto.Reports;
-using ServerService.Dto.Reports.Financial;
-using ServerService.Dto.Reports.Hosts;
-using ServerService.Dto.Reports.Operators;
-using ServerService.Dto.Reports.Overview;
-using ServerService.Dto.Reports.Products;
-using ServerService.Dto.Reports.Users;
+﻿using ServerService.Reporting;
+using ServerService.Reporting.Reports.Assets;
+using ServerService.Reporting.Reports.Financial;
+using ServerService.Reporting.Reports.Hosts;
+using ServerService.Reporting.Reports.Overview;
+using ServerService.Reporting.Reports.Products;
+using ServerService.Reporting.Reports.Shifts;
+using ServerService.Reporting.Reports.Transactions;
+using ServerService.Reporting.Reports.Users;
+using System;
 using System.Collections.Generic;
 
 namespace ServerService
@@ -13,22 +16,44 @@ namespace ServerService
     {
         FinancialReportDTO GetFinancialReport(FinancialReportFilterDTO Filters);
 
-        List<HostGroupDTO> GetHostGroups();
+        List<ListItemDTO> GetHostGroups();
 
         HostUsageReportDTO GetHostUsageReport(HostUsageReportFilterDTO Filters);
 
         OverviewReportDTO GetOverviewReport(OverviewReportFilterDTO Filters);
 
-        UsersReportDTO GetUsersReport(UsersReportFilterDTO Filters);
+        TopUsersReportDTO GetUsersReport(TopUsersReportFilterDTO Filters);
 
-        List<ProductDTO> GetProducts();
+        List<SoldProductDTO> GetProducts();
 
-        List<OperatorDTO> GetOperators();
+        List<ListItemDTO> GetOperators();
 
         StockReportDTO GetStockReport(StockReportFilterDTO Filters);
 
         ProductReportDTO GetProductReport(ProductReportFilterDTO Filters);
 
-        OperatorsLogReportDTO GetOperatorsLogReport(OperatorsLogReportFilterDTO Filters);
+        TransactionsLogReportDTO GetTransactionsLogReport(TransactionsLogReportFilterDTO Filters);
+
+        DayOfWeek GetBusinessStartWeekDay();
+
+        string GetBusinessDayStart();
+
+        DateTime GetFirstBusinessDayOfWeek(DateTime Date, DayOfWeek StartDay);
+
+        List<ListItemDTO> GetRegisters();
+
+        ShiftsLogReportDTO GetShiftsLogReport(ShiftsLogReportFilterDTO Filters);
+
+        List<ListItemDTO> GetAssetTypes();
+
+        List<ListItemDTO> GetAssets();
+
+        AssetsLogReportDTO GetAssetsLogReport(AssetsLogReportFilterDTO Filters);
+
+        InvoicesLogReportDTO GetInvoicesLogReport(InvoicesLogReportFilterDTO Filters);
+
+        InvoiceReportDTO GetInvoiceReport(InvoiceReportFilterDTO Filters);
+
+        ZLogReportDTO GetZLogReport(ZLogReportFilterDTO Filters);
     }
 }

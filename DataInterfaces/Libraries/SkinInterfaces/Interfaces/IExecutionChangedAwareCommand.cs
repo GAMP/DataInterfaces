@@ -2,7 +2,6 @@
 
 namespace SkinInterfaces
 {
-    #region IExecutionChangedAwareCommand
     /// <summary>
     /// Interface that is used for ICommands that notify when can execute status changes.
     /// </summary>
@@ -17,5 +16,4 @@ namespace SkinInterfaces
 
         #endregion
     }
-    #endregion
 }

@@ -2,11 +2,10 @@
 
 namespace CoreLib.Hooking
 {
-    #region IHookBase
     public interface IHookBase
     {
         #region PROPERTIES
-        
+
         /// <summary>
         /// Gets intsalled hooke handle.
         /// </summary>
@@ -25,7 +24,7 @@ namespace CoreLib.Hooking
         #endregion
 
         #region FUNCTIONS
-        
+
         /// <summary>
         /// Installs hook.
         /// </summary>
@@ -34,9 +33,8 @@ namespace CoreLib.Hooking
         /// <summary>
         /// Uninstalls hook.
         /// </summary>
-        void Unhook(); 
+        void Unhook();
 
         #endregion
-    } 
-    #endregion
+    }
 }

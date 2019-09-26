@@ -3,7 +3,6 @@ using System.ComponentModel.Composition;
 
 namespace Client
 {
-    #region ModuleDisplayOrderAttribute
     /// <summary>
     /// Display order attribute.
     /// </summary>
@@ -30,5 +29,4 @@ namespace Client
 
         #endregion
     }
-    #endregion
 }

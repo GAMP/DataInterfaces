@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 
 namespace Client
 {
-    #region ClientSwitchInModule
     /// <summary>
     /// Module supporting switching in and out.
     /// </summary>
@@ -35,5 +34,4 @@ namespace Client
 
         #endregion
     } 
-    #endregion
 }

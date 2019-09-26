@@ -43,11 +43,4 @@ namespace Client
 
         #endregion
     }
-
-    public enum ImageType
-    {
-        Application=0,
-        Executable=1,
-        ProductDefault=2,
-    }
 }

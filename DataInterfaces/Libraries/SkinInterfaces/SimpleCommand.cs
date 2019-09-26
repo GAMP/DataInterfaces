@@ -157,7 +157,7 @@ namespace SkinInterfaces
 
         public virtual void RaiseCanExecuteChanged()
         {
-            var handler = this.CanExecuteChanged;
+            var handler = CanExecuteChanged;
             if (handler != null)
                 Application.Current?.Dispatcher.BeginInvoke(handler, this, EventArgs.Empty);
         }

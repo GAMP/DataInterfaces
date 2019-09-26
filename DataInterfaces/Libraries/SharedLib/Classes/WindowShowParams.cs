@@ -49,7 +49,7 @@ namespace SharedLib
         #region PROPERTIES
 
         /// <summary>
-        /// Gets the windows title.
+        /// Window title.
         /// </summary>
         [DataMember()]
         public string Title
@@ -59,7 +59,7 @@ namespace SharedLib
         }
 
         /// <summary>
-        /// Gets or sets left position.
+        /// Left window position.
         /// </summary>
         [DataMember()]
         public int Left
@@ -69,7 +69,7 @@ namespace SharedLib
         }
 
         /// <summary>
-        /// Gets or sets top position.
+        /// Top window position.
         /// </summary>
         [DataMember()]
         public int Top
@@ -79,7 +79,7 @@ namespace SharedLib
         }
 
         /// <summary>
-        /// Gets or sets if window should be shown as dialog.
+        /// Indicates if window should be shown as dialog.
         /// </summary>
         [DataMember()]
         public bool ShowDialog
@@ -89,7 +89,7 @@ namespace SharedLib
         }
 
         /// <summary>
-        /// Gets or sets if window should be topmost.
+        /// Indicates if window should be topmost.
         /// </summary>
         [DataMember()]
         public bool TopMost
@@ -99,7 +99,7 @@ namespace SharedLib
         }
 
         /// <summary>
-        /// Gets or sets window width.
+        /// Window width.
         /// </summary>
         [DataMember()]
         public double Width
@@ -109,7 +109,7 @@ namespace SharedLib
         }
 
         /// <summary>
-        /// Gets or sets window height.
+        /// Window height.
         /// </summary>
         [DataMember()]
         public double Height
@@ -121,6 +121,7 @@ namespace SharedLib
         /// <summary>
         /// Gets or sets window owner.
         /// </summary>
+        [IgnoreDataMember()]
         public IntPtr Owner
         {
             get;
@@ -128,7 +129,7 @@ namespace SharedLib
         }
 
         /// <summary>
-        /// Gets or sets if window will be draggable.
+        ///Indicates if window will be draggable.
         /// </summary>
         [DataMember()]
         public bool AllowDrag
@@ -138,7 +139,7 @@ namespace SharedLib
         }
 
         /// <summary>
-        /// Gets or sets if window buttons should be added.
+        /// Indicates if window buttons should be added.
         /// </summary>
         [DataMember()]
         public bool NoButtons
@@ -148,7 +149,7 @@ namespace SharedLib
         }
 
         /// <summary>
-        /// Gets or sets if window closing is allowed.
+        /// Indicates if window closing is allowed.
         /// </summary>
         [DataMember()]
         public bool AllowClosing
@@ -158,7 +159,7 @@ namespace SharedLib
         }
 
         /// <summary>
-        /// Gets or sets startup location.
+        /// Window startup location.
         /// </summary>
         [DataMember()]
         public WindowStartupLocation StarupLocation
@@ -168,7 +169,7 @@ namespace SharedLib
         }
 
         /// <summary>
-        /// Gets or sets size to content type.
+        /// Indicates size to content type.
         /// </summary>
         [DataMember()]
         public SizeToContent SizeToContent
@@ -178,7 +179,7 @@ namespace SharedLib
         }
 
         /// <summary>
-        /// Gets or sets Messagebox buttons type.
+        /// Indicates buttons type.
         /// </summary>
         [DataMember()]
         public MessageBoxButton Buttons
@@ -188,7 +189,7 @@ namespace SharedLib
         }
 
         /// <summary>
-        /// Gets or sets Messagebox icon image type.
+        /// Indicates icon image type.
         /// </summary>
         [DataMember()]
         public MessageBoxImage Icon
@@ -198,13 +199,13 @@ namespace SharedLib
         }
 
         /// <summary>
-        /// Gets or sets keyboard default button.
+        /// Indicates keyboard default button.
         /// </summary>
         [DataMember()]
         public NotificationButtons DefaultButton { get; set; } = NotificationButtons.Ok;
 
         /// <summary>
-        /// Gets or sets if window should be show activated.
+        /// Indicates if window should be shown activated.
         /// </summary>
         [DataMember()]
         public bool ShowActivated
@@ -214,16 +215,16 @@ namespace SharedLib
         }
 
         /// <summary>
-        /// Gets or sets window maximum width.
+        /// Window maximum width.
         /// </summary>
         [DataMember()]
         public double MaxWidth { get; set; } = double.PositiveInfinity;
 
         /// <summary>
-        /// Gets or sets window maximum height.
+        /// Window maximum height.
         /// </summary>
         [DataMember()]
-        public double MaxHeight { get; set;} = double.PositiveInfinity;
+        public double MaxHeight { get; set; } = double.PositiveInfinity;
 
         #endregion
     }

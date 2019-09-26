@@ -1,16 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SharedLib
+﻿namespace SharedLib
 {
+    /// <summary>
+    /// Inteface implemented by object supporting use order.
+    /// </summary>
     public interface IUseOrder
     {
+        #region PROPERTIES
+        /// <summary>
+        /// Gets or sets use order.
+        /// </summary>
         int UseOrder
         {
             get; set;
-        }
+        } 
+        #endregion
     }
 }

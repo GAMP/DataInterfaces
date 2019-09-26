@@ -2,52 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SharedLib.Applications;
 
 namespace SharedLib
 {
     #region OBSOLETE
-
-    #region ContainerChangedEventArgs
-    /// <summary>
-    /// Container change event arguments.
-    /// </summary>
-    [Serializable()]
-    public class ContainerChangedEventArgs : EventArgs
-    {
-        #region CONSTRUCTOR
-        public ContainerChangedEventArgs(IApplicationContainer oldContainer, IApplicationContainer newContainer)
-        {
-            OldContainer = oldContainer;
-            NewContainer = newContainer;
-        }
-        #endregion
-
-        #region PROPERTIES
-
-        /// <summary>
-        /// Gets the instance of the new Application Container.
-        /// <remarks>Can be equal to null.</remarks>
-        /// </summary>
-        public IApplicationContainer NewContainer
-        {
-            get;
-            protected set;
-        }
-
-        /// <summary>
-        /// Gets the instance of the old Application Container.
-        /// <remarks>Will be null if container set for the fisrt time.</remarks>
-        /// </summary>
-        public IApplicationContainer OldContainer
-        {
-            get;
-            protected set;
-        }
-
-        #endregion
-    }
-    #endregion
 
     #region ContainerItemEventArgs
     [Serializable()]

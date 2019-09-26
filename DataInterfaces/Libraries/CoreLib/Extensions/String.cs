@@ -10,6 +10,8 @@ namespace CoreLib
     /// </summary>
     public static class StringExtensions
     {
+        #region FUNCTIONS
+        
         /// <summary>
         /// Replaces a string value.
         /// </summary>
@@ -41,7 +43,7 @@ namespace CoreLib
         /// <param name="strB">Compare string.</param>
         /// <param name="ignoreCase">Ignore case.</param>
         /// <returns>True if string equals , otherwise false.</returns>
-        public static bool Compare(this string source, string strB , bool ignoreCase)
+        public static bool Compare(this string source, string strB, bool ignoreCase)
         {
             if (string.IsNullOrWhiteSpace(source))
                 throw new ArgumentException("String may not be null or empty", nameof(source));
@@ -80,6 +82,8 @@ namespace CoreLib
             }
 
             return sb.ToString();
-        }
+        } 
+
+        #endregion
     }
 }

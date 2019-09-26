@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
+﻿using System.IO;
 
 namespace CoreLib.Registry
 {
@@ -11,6 +7,8 @@ namespace CoreLib.Registry
     /// </summary>
     public interface IRegistryFile
     {
+        #region FUNCTIONS
+        
         /// <summary>
         /// Imports from file.
         /// </summary>
@@ -22,16 +20,18 @@ namespace CoreLib.Registry
         /// </summary>
         /// <param name="filename">File name.</param>
         void Export(string filename);
-        
+
         /// <summary>
         /// Imports from memory.
         /// </summary>
         void Import();
-        
+
         /// <summary>
         /// Exoprts to stream.
         /// </summary>
         /// <param name="stream">Export stream.</param>
-        void Export(Stream stream);
+        void Export(Stream stream); 
+
+        #endregion
     }
 }

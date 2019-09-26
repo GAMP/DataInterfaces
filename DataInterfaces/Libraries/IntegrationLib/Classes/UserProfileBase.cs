@@ -5,7 +5,6 @@ using SharedLib.User;
 
 namespace IntegrationLib
 {
-    #region UserProfileBase
     /// <summary>
     /// Base user profile class.
     /// </summary>
@@ -319,5 +318,4 @@ namespace IntegrationLib
         }
         #endregion
     }
-    #endregion
 }

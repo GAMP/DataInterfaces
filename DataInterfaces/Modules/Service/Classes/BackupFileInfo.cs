@@ -1,12 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ServerService
 {
+    /// <summary>
+    /// Backup file info model.
+    /// </summary>
+    /// <remarks>
+    /// Used to describe file entry in backup file.
+    /// </remarks>
     [Serializable()]
     [DataContract()]
     public class BackupFileInfo
@@ -14,7 +16,7 @@ namespace ServerService
         #region PROPERTIES
 
         /// <summary>
-        /// Gets or sets file date.
+        /// File date.
         /// </summary>
         [DataMember()]
         public DateTime Date
@@ -23,7 +25,7 @@ namespace ServerService
         }
 
         /// <summary>
-        /// Gets or sets file name.
+        /// File name.
         /// </summary>
         [DataMember()]
         public string FileName

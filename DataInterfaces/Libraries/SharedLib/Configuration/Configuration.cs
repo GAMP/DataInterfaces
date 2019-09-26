@@ -1,4 +1,5 @@
-﻿using Manager;
+﻿using Client;
+using Manager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -162,6 +163,7 @@ namespace SharedLib.Configuration
         {
             Network = new GlobalNetworkCfg();
             Subscription = new GlobalSubscriptionConfig();
+            Reservation = new ReservationConfig();
         }
         #endregion
 
@@ -206,6 +208,15 @@ namespace SharedLib.Configuration
         [Description("Waiting line configuration.")]
         [DataMember(Order = 2)]
         public WaitingLineConfig WaitingLine
+        {
+            get; set;
+        }
+
+
+        [Category("Reservations")]
+        [Description("Reservations configuration.")]
+        [DataMember(Order = 3)]
+        public ReservationConfig Reservation
         {
             get; set;
         }
@@ -361,7 +372,61 @@ namespace SharedLib.Configuration
         #endregion
     }
 
-    #endregion    
+    #region RESERVATIONCONFIG
+    [Category("Reservations")]
+    [Serializable()]
+    [DataContract()]
+    public class ReservationConfig : ConfigBase
+    {
+        #region PROPERTIES
+
+        /// <summary>
+        /// Enables blocking login on hosts with upcoming reservations.
+        /// </summary>
+        [DataMember(Order = 0)]
+        [DefaultValue(true)]
+        public bool EnableLoginBlock
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Time in minutes before upcoming reservation to block login.
+        /// </summary>
+        [DataMember(Order = 1)]
+        [DefaultValue(30)]
+        [Range(0,int.MaxValue)]
+        public int LoginBlockTime
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Enables unblocking login for active reservation.
+        /// </summary>
+        [DataMember(Order = 2)]
+        [DefaultValue(false)]
+        public bool EnableLoginUnblock
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Time in minutes before unblocking login for active reservation.
+        /// </summary>
+        [DataMember(Order = 3)]
+        [DefaultValue(30)]
+        [Range(0, int.MaxValue)]
+        public int LoginUnblockTime
+        {
+            get; set;
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #endregion
 
     #region SERVICECONFIGURATION
 
@@ -1207,8 +1272,8 @@ namespace SharedLib.Configuration
         }
 
         #endregion
-    } 
-    #endregion
+    }
+    #endregion    
 
     #endregion
 
@@ -2138,6 +2203,16 @@ namespace SharedLib.Configuration
         public int RotateEverySeconds
         {
             get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets rotator file order.
+        /// </summary>
+        [DefaultValue(RotatorFileOrder.Random)]
+        [DataMember()]
+        public RotatorFileOrder RotatorFileOrder
+        {
+            get;set;
         }
 
         #endregion

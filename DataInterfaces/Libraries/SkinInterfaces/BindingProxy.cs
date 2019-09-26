@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
 namespace SkinInterfaces
 {
@@ -21,7 +16,7 @@ namespace SkinInterfaces
         /// </summary>
         public object Data
         {
-            get { return (object)GetValue(DataProperty); }
+            get { return GetValue(DataProperty); }
             set { SetValue(DataProperty, value); }
         }
         #endregion

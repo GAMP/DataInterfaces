@@ -1,7 +1,7 @@
 ﻿namespace System.ComponentModel
 {
     /// <summary>
-    /// Dynamic property discriptor.
+    /// Dynamic property descriptor.
     /// </summary>
     /// <typeparam name="T">Property type.</typeparam>
     public class DynamicPropertyDescriptor<T> : PropertyDescriptor

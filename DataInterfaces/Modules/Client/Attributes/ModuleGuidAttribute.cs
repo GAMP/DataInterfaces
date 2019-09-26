@@ -3,7 +3,6 @@ using System.ComponentModel.Composition;
 
 namespace Client
 {
-    #region ModuleGuidAttribute
     [MetadataAttribute(), AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
     public class ModuleGuidAttribute : Attribute
     {
@@ -36,6 +35,5 @@ namespace Client
         }
 
         #endregion
-    } 
-    #endregion
+    }
 }

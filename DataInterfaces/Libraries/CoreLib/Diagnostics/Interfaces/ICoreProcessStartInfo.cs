@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
+﻿using System.Diagnostics;
 
 namespace CoreLib.Diagnostics
 {
-    #region ICoreProcessStartInfo
     public interface ICoreProcessStartInfo
     {
         #region PROPERTIES
@@ -63,5 +58,4 @@ namespace CoreLib.Diagnostics
 
         #endregion
     }
-    #endregion
 }

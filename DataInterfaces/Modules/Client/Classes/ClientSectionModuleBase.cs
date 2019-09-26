@@ -3,7 +3,6 @@ using System.ComponentModel.Composition;
 
 namespace Client
 {
-    #region ClientSectionModuleBase
     /// <summary>
     /// Section module.
     /// </summary>
@@ -27,5 +26,4 @@ namespace Client
 
         #endregion
     } 
-    #endregion
 }

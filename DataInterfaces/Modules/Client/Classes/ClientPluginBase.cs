@@ -1,13 +1,7 @@
-﻿using Client;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Linq;
-using System.Text;
+﻿using System.ComponentModel.Composition;
 
 namespace Client
 {
-    #region ClientPluginBase
     [PartNotDiscoverable()]
     [InheritedExport(typeof(IClientPlugin))]
     public abstract class ClientPluginBase : 
@@ -36,6 +30,5 @@ namespace Client
         {
         } 
         #endregion
-    } 
-    #endregion    
+    }  
 }

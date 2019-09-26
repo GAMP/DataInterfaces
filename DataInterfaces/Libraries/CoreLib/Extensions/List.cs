@@ -9,6 +9,8 @@ namespace CoreLib
     /// </summary>
     public static class ListExtensions
     {
+        #region FUNCTIONS
+        
         /// <summary>
         /// Moves item up in specified list.
         /// </summary>
@@ -133,6 +135,8 @@ namespace CoreLib
 
             foreach (T item in items)
                 list.Remove(item);
-        }
+        } 
+
+        #endregion
     }
 }

@@ -2,7 +2,6 @@
 
 namespace ServerService
 {
-    #region ILogService
     public interface ILogService
     {
         #region EVENTS
@@ -12,5 +11,4 @@ namespace ServerService
         event EventHandler<LogChangeEventArgs> LogChange; 
         #endregion
     }
-    #endregion
 }

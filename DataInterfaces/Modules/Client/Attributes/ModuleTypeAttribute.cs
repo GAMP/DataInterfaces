@@ -24,14 +24,14 @@ namespace Client
         #endregion
 
         #region PROPERTIES
-        
+
         /// <summary>
         /// Gets module type.
         /// </summary>
         public Type Type
         {
             get; protected set;
-        } 
+        }
 
         #endregion
     }

@@ -1,8 +1,12 @@
-﻿using System;
-namespace CoreLib.Diagnostics
+﻿namespace CoreLib.Diagnostics
 {
+    /// <summary>
+    /// Core process module interface.
+    /// </summary>
     public interface ICoreProcessModule
     {
+        #region PROPERTIES
+        
         /// <summary>
         /// Gets company name.
         /// </summary>
@@ -31,6 +35,8 @@ namespace CoreLib.Diagnostics
         /// <summary>
         /// Gets icon data.
         /// </summary>
-        byte[] IconData { get; }
+        byte[] IconData { get; } 
+
+        #endregion
     }
 }

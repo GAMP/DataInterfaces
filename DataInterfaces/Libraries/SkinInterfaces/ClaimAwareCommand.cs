@@ -65,15 +65,15 @@ namespace SkinInterfaces
 
         public override bool CanExecute(object parameter)
         {
-            this.IsAuthorized = !this.IsAuthorizedChecked ? (this.executeMethod == null || this.executeMethod != null && this.IsMethodAuthorized(this.executeMethod.Method)) : this.IsAuthorized;
+            IsAuthorized = !this.IsAuthorizedChecked ? (this.executeMethod == null || this.executeMethod != null && this.IsMethodAuthorized(this.executeMethod.Method)) : this.IsAuthorized;
 
-            return this.IsAuthorized && CanExecute((T1)parameter);
+            return IsAuthorized && CanExecute((T1)parameter);
         }
 
         public override void RaiseCanExecuteChanged()
         {
             base.RaiseCanExecuteChanged();
-            this.IsAuthorizedChecked = false;
+            IsAuthorizedChecked = false;
         }
 
         #endregion

@@ -5,7 +5,6 @@ using System;
 
 namespace ServerService
 {
-    #region IGizmoService
     /// <summary>
     /// Gizmo Service Interface.
     /// </summary>
@@ -50,6 +49,5 @@ namespace ServerService
         event EventHandler<ConnectionChangedArgs> ConnectionChanged;
 
         #endregion
-    } 
-    #endregion       
+    }      
 }
