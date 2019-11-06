@@ -4,55 +4,76 @@ using System.Runtime.Serialization;
 
 namespace ServerService.Reporting
 {
+    /// <summary>
+    /// Account Transaction.
+    /// </summary>
     [Serializable]
     [DataContract]
     public class AccountTransactionDTO
     {
+        /// <summary>
+        /// The creation time of the account transaction.
+        /// </summary>
         [DataMember]
         public DateTime CreatedTime { get; set; }
 
+        /// <summary>
+        /// The type of the transaction.
+        /// </summary>
         [DataMember]
-        public DepositTransactionType Type { get; set; }
+        public DepositTransactionType TransactionType { get; set; }
 
         /// <summary>
-        /// Gets or sets the payment type id of the transaction.
+        /// The payment type Id of the transaction.
         /// </summary>
         [DataMember]
         public int PaymentMethodId { get; set; }
 
         /// <summary>
-        /// Gets or sets the payment type name of the transaction.
+        /// The payment type name of the transaction.
         /// </summary>
         [DataMember]
-        public string Name { get; set; }
+        public string PaymentMethodName { get; set; }
 
         /// <summary>
-        /// Gets or sets the amount of the transaction.
+        /// The amount of the transaction.
         /// </summary>
         [DataMember]
         public decimal Amount { get; set; }
 
         /// <summary>
-        /// Gets or sets the quantity of the transactions with the specific amount.
+        /// The quantity of the transactions with the specific amount, in case of grouped transactions.
         /// </summary>
         [DataMember]
         public int Quantity { get; set; }
 
         /// <summary>
-        /// Gets or sets the total amount of the transactions with the specific amount.
+        /// The total amount of the transactions with the specific amount, in case of grouped transactions.
         /// </summary>
         [DataMember]
         public decimal Total { get; set; }
 
+        /// <summary>
+        /// The Id of the operator performed the account transaction.
+        /// </summary>
         [DataMember]
-        public int? Operator { get; set; }
+        public int? OperatorId { get; set; }
 
+        /// <summary>
+        /// The Id of the shift in which the account transaction was created.
+        /// </summary>
         [DataMember]
         public int? ShiftId { get; set; }
 
+        /// <summary>
+        /// The Id of the group to which the user belongs.
+        /// </summary>
         [DataMember]
         public int UserGroupId { get; set; }
 
+        /// <summary>
+        /// The user is guest.
+        /// </summary>
         [DataMember]
         public bool IsGuest { get; set; }
     }

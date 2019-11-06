@@ -1,19 +1,19 @@
-﻿using ProtoBuf;
-using SharedLib;
+﻿using SharedLib;
 using System.Runtime.Serialization;
 
 namespace ServerService
 {
+    /// <summary>
+    /// Reservation filter.
+    /// </summary>
     [DataContract()]
-    [ProtoContract()]
-    public class ReservationFilter : RecordFilterBase
+    public class ReservationFilter : DateRangeFilterBase
     {
         #region PROPERTIES
 
         /// <summary>
         /// Gets or sets deisred reservation id.
         /// </summary>
-        [ProtoMember(1)]
         [DataMember(EmitDefaultValue = false)]
         public int? Id
         {
@@ -23,7 +23,6 @@ namespace ServerService
         /// <summary>
         /// Gets or sets desired reservation status.
         /// </summary>
-        [ProtoMember(2)]
         [DataMember(EmitDefaultValue = false)]
         public ReservationStatus? Status
         {
@@ -33,7 +32,6 @@ namespace ServerService
         /// <summary>
         /// Gets or sets desired user id.
         /// </summary>
-        [ProtoMember(3)]
         [DataMember(EmitDefaultValue = false)]
         public int? UserId
         {

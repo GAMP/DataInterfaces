@@ -4,12 +4,20 @@ using System.Runtime.Serialization;
 
 namespace ServerService
 {
-    #region USERGROUPCHANGEDEVENTARGS
+    /// <summary>
+    /// User password changed event args.
+    /// </summary>
     [Serializable()]
     [DataContract()]
     public class UserGroupChangedEventArgs : UserProfileChangeEventArgs
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="userId">User id.</param>
+        /// <param name="oldGroupId">Old group id.</param>
+        /// <param name="newGroupId">New group id.</param>
         public UserGroupChangedEventArgs(int userId, int oldGroupId, int newGroupId)
             : base(userId, UserChangeType.UserGroup)
         {
@@ -23,6 +31,7 @@ namespace ServerService
         /// <summary>
         /// Gets old user group id.
         /// </summary>
+        [DataMember()]
         public int OldGroupId
         {
             get;
@@ -32,6 +41,7 @@ namespace ServerService
         /// <summary>
         /// Gets new user group id.
         /// </summary>
+        [DataMember()]
         public int NewGroupId
         {
             get;
@@ -40,5 +50,4 @@ namespace ServerService
 
         #endregion
     }
-    #endregion
 }

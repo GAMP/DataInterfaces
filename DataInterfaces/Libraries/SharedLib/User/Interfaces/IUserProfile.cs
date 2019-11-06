@@ -2,6 +2,9 @@
 
 namespace SharedLib.User
 {
+    /// <summary>
+    /// User profile implementation interface.
+    /// </summary>
     public interface IUserProfile
     {
         #region PROPERTIES

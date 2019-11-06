@@ -1,6 +1,8 @@
 ﻿namespace Client.ViewModels
 {
-    #region IProductViewModel
+    /// <summary>
+    /// Client product view model interface.
+    /// </summary>
     public interface IProductViewModel
     {
         #region PROPERTIES
@@ -12,5 +14,4 @@
 
         #endregion
     } 
-    #endregion
 }

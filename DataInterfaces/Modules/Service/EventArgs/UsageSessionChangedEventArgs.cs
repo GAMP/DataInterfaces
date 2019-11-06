@@ -3,16 +3,24 @@ using System.Runtime.Serialization;
 
 namespace ServerService
 {
-    #region USAGESESSIONCHANGEDEVENTARGS
+    /// <summary>
+    /// User usage session changed event args.
+    /// </summary>
     [Serializable()]
     [DataContract()]
     public class UsageSessionChangedEventArgs : UserIdEventArgsBase
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="userId">User id.</param>
+        /// <param name="usageType">Current usage type.</param>
+        /// <param name="timeProduct">Current time product name.</param>
         public UsageSessionChangedEventArgs(int userId, UsageType usageType, string timeProduct) : base(userId)
         {
-            this.CurrentTimeProduct = timeProduct;
-            this.CurrentUsageType = usageType;
+            CurrentTimeProduct = timeProduct;
+            CurrentUsageType = usageType;
         }
         #endregion
 
@@ -21,6 +29,7 @@ namespace ServerService
         /// <summary>
         /// Gets current time poroduct name.
         /// </summary>
+        [DataMember()]
         public string CurrentTimeProduct
         {
             get;
@@ -30,6 +39,7 @@ namespace ServerService
         /// <summary>
         /// Gets current usage type.
         /// </summary>
+        [DataMember()]
         public UsageType CurrentUsageType
         {
             get;
@@ -38,5 +48,4 @@ namespace ServerService
 
         #endregion
     }
-    #endregion
 }

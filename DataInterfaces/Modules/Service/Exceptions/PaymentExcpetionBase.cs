@@ -4,22 +4,39 @@ using System.Runtime.Serialization;
 
 namespace ServerService.Exceptions
 {
-    #region PAYMENTEXCPETIONBASE
+    /// <summary>
+    /// Payment exception base class.
+    /// </summary>
+    /// <typeparam name="TErrorCode">Payment error code tyepe.</typeparam>
     [Serializable()]
     [DataContract()]
     public abstract class PaymentExcpetionBase<TErrorCode> : ErrorCodeExceptionBase<TErrorCode>
     {
         #region CONSTRUCTOR
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="errorCode">Error code.</param>
+        /// <param name="paymentMethodId">Payment method id.</param>
         public PaymentExcpetionBase(TErrorCode errorCode, int paymentMethodId) : base(errorCode)
         {
             PaymentMethodId = paymentMethodId;
         }
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="errorCode">Error code.</param>
         public PaymentExcpetionBase(TErrorCode errorCode) : base(errorCode)
         {
         }
 
+        /// <summary>
+        /// Serialization constructor.
+        /// </summary>
+        /// <param name="info">Serialization info.</param>
+        /// <param name="context">Serialization context.</param>
         protected PaymentExcpetionBase(SerializationInfo info,
           StreamingContext context)
             : base(info, context)
@@ -47,6 +64,11 @@ namespace ServerService.Exceptions
 
         #region OVERRIDES
 
+        /// <summary>
+        /// Gets object data.
+        /// </summary>
+        /// <param name="info">Serialization info.</param>
+        /// <param name="context">Serialization context.</param>
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
@@ -59,6 +81,4 @@ namespace ServerService.Exceptions
 
         #endregion
     }
-
-    #endregion
 }

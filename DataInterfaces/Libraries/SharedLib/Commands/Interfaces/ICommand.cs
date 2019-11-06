@@ -1,5 +1,4 @@
-﻿using System;
-using SharedLib.Dispatcher;
+﻿using SharedLib.Dispatcher;
 namespace SharedLib.Commands
 {
     #region Delegates
@@ -8,7 +7,6 @@ namespace SharedLib.Commands
     /// </summary>
     /// <param name="sender">Command object that raised the event.</param>
     /// <param name="state">New Command state.</param>
-    /// <param name="resstates">Response states of this command.</param>
     /// <param name="parameters">New parameters.</param>
     public delegate void StateChangeDelegate(IDispatcherCommand sender, CommandStates state, params object[] parameters);
     #endregion       

@@ -1,32 +1,43 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace ServerService.Reporting.Reports.Assets
 {
+    /// <summary>
+    /// Assets Log Report Filter.
+    /// </summary>
     [Serializable]
     [DataContract]
-    public class AssetsLogReportFilterDTO : ReportFilterBaseDTO
+    public class AssetsLogReportFilterDTO : DateRangeReportFilterBaseDTO
     {
-        [DataMember]
-        public List<ListItemDTO> AssetTypes { get; set; }
-
+        /// <summary>
+        /// Filter Asset Type Id.
+        /// </summary>
         [DataMember]
         public int? AssetTypeId { get; set; }
 
-        [DataMember]
-        public List<ListItemDTO> Assets { get; set; }
-
+        /// <summary>
+        /// Filter Asset Id.
+        /// </summary>
         [DataMember]
         public int? AssetId { get; set; }
 
-        [DataMember]
-        public List<ListItemDTO> Operators { get; set; }
-
+        /// <summary>
+        /// Filter Check Out Operator Id.
+        /// </summary>
         [DataMember]
         public int? CheckOutOperatorId { get; set; }
 
+        /// <summary>
+        /// Filter Check In Operator Id.
+        /// </summary>
         [DataMember]
         public int? CheckInOperatorId { get; set; }
+
+        /// <summary>
+        /// Filter User Id.
+        /// </summary>
+        [DataMember]
+        public int? UserId { get; set; }
     }
 }

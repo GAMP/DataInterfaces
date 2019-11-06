@@ -4,12 +4,20 @@ using System.Runtime.Serialization;
 
 namespace ServerService
 {
-    #region USERPICTURECHANGEDEVENTARGS
+    /// <summary>
+    /// User pricture changed event args.
+    /// </summary>
     [Serializable()]
     [DataContract()]
     public class UserPictureChangedEventArgs : UserProfileChangeEventArgs
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="userId">User id.</param>
+        /// <param name="oldPicture">Old picture data.</param>
+        /// <param name="newPicture">New picture data.</param>
         public UserPictureChangedEventArgs(int userId, byte[] oldPicture, byte[] newPicture)
             : base(userId, UserChangeType.Picture)
         {
@@ -23,6 +31,7 @@ namespace ServerService
         /// <summary>
         /// Gets old picture.
         /// </summary>
+        [DataMember()]
         public byte[] OldPicture
         {
             get;
@@ -32,6 +41,7 @@ namespace ServerService
         /// <summary>
         /// Gets new picture.
         /// </summary>
+        [DataMember()]
         public byte[] NewPicture
         {
             get;
@@ -40,5 +50,4 @@ namespace ServerService
 
         #endregion
     }
-    #endregion
 }

@@ -3,15 +3,21 @@ using System.Runtime.Serialization;
 
 namespace ServerService
 {
-    #region USERIDEVENTARGSBASE
+    /// <summary>
+    /// Base class for event args with user id.
+    /// </summary>
     [Serializable()]
     [DataContract()]
     public abstract class UserIdEventArgsBase : EventArgs
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="userId"></param>
         public UserIdEventArgsBase(int userId)
         {
-            this.UserId = userId;
+            UserId = userId;
         }
         #endregion
 
@@ -29,5 +35,4 @@ namespace ServerService
 
         #endregion
     }
-    #endregion
 }

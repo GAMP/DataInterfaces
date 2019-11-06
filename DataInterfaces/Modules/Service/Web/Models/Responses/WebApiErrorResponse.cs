@@ -75,21 +75,23 @@ namespace ServerService.Web.Api
 
         #region STATIC FUNCTIONS
 
-        public static WebApiErrorResponse Create(int statusCode)
-        {
-            return new WebApiErrorResponse(statusCode);
-        }
-
-        public static WebApiErrorResponse Create(int statusCode, IEnumerable<WebApiError> errors)
-        {
-            return new WebApiErrorResponse(statusCode, errors);
-        }
-
+        /// <summary>
+        /// Creates response.
+        /// </summary>
+        /// <param name="statusCode">Status code.</param>
+        /// <param name="errorMessage">Error message.</param>
+        /// <returns>Web api error response.</returns>
         public static WebApiErrorResponse Create(int statusCode, string errorMessage)
         {
             return new WebApiErrorResponse(statusCode, new List<WebApiError>() { new WebApiError(errorMessage) });
         }
 
+        /// <summary>
+        /// Creates bad request response.
+        /// </summary>
+        /// <param name="errorMessage">Error message.</param>
+        /// <param name="errorCode">Error code.</param>
+        /// <returns>Web api error response.</returns>
         public static WebApiErrorResponse CreateBadRequestResponse(string errorMessage, Enum errorCode)
         {
             var response = Create((int)System.Net.HttpStatusCode.BadRequest, errorMessage);

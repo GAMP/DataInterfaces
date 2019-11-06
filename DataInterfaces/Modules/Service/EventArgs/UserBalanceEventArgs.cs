@@ -3,18 +3,22 @@ using System.Runtime.Serialization;
 
 namespace ServerService
 {
-    #region USERBALANCEEVENTARGS
+    /// <summary>
+    /// User balance change event args.
+    /// </summary>
     [Serializable()]
     [DataContract()]
     public class UserBalanceEventArgs : UserIdEventArgsBase
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="userId">User id.</param>
+        /// <param name="balance">User balance.</param>
         public UserBalanceEventArgs(int userId, UserBalance balance) : base(userId)
         {
-            if (balance == null)
-                throw new ArgumentNullException(nameof(balance));
-
-            this.Balance = balance;
+            Balance = balance ?? throw new ArgumentNullException(nameof(balance));
         }
         #endregion
 
@@ -22,11 +26,11 @@ namespace ServerService
         /// <summary>
         /// Gets balance.
         /// </summary>
+        [DataMember()]
         public UserBalance Balance
         {
             get; protected set;
         }
         #endregion
     }
-    #endregion
 }

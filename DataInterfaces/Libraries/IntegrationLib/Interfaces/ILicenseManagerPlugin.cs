@@ -34,6 +34,9 @@ namespace IntegrationLib
         /// Edit existing license key.
         /// </summary>
         /// <param name="key">License Key.</param>
+        /// <param name="profile">License profile.</param>
+        /// <param name="additionHandled">Indicates if addition of license was handled.</param>
+        /// <param name="owner">Dialog owner window.</param>
         /// <returns>IApplicationLicenseKey instance.</returns>
         IApplicationLicenseKey EditLicense(IApplicationLicenseKey key, ILicenseProfile profile, ref bool additionHandled, Window owner);
 

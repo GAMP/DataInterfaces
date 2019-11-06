@@ -157,10 +157,10 @@ namespace SharedLib
             }
         }
 
-        [XmlIgnore()]
         /// <summary>
-        /// Gets or Sets items container.
+        /// Gets or sets item container.
         /// </summary>
+        [XmlIgnore()]
         public virtual IItemBase Container
         {
             get { return this.container; }

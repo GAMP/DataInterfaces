@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Security.Claims;
 using System.Security.Permissions;
 using System.Threading;
+using System.Windows.Input;
 
 namespace SkinInterfaces
 {
@@ -14,6 +15,11 @@ namespace SkinInterfaces
     public class ClaimAwareCommand<T1, T2> : SimpleCommand<T1, T2>
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="canExecuteMethod">Can execute method.</param>
+        /// <param name="executeMethod">Execute method.</param>
         public ClaimAwareCommand(Func<T1, bool> canExecuteMethod, Action<T2> executeMethod)
            : base(canExecuteMethod, executeMethod)
         {
@@ -63,13 +69,21 @@ namespace SkinInterfaces
 
         #region OVERRIDES
 
+        /// <summary>
+        /// Called on can execute.
+        /// </summary>
+        /// <param name="parameter">Command parameter.</param>
+        /// <returns>True or false.</returns>
         public override bool CanExecute(object parameter)
         {
-            IsAuthorized = !this.IsAuthorizedChecked ? (this.executeMethod == null || this.executeMethod != null && this.IsMethodAuthorized(this.executeMethod.Method)) : this.IsAuthorized;
+            IsAuthorized = !IsAuthorizedChecked ? (this.executeMethod == null || this.executeMethod != null && this.IsMethodAuthorized(this.executeMethod.Method)) : this.IsAuthorized;
 
             return IsAuthorized && CanExecute((T1)parameter);
         }
 
+        /// <summary>
+        /// Raises <see cref="ICommand.CanExecuteChanged"/>.
+        /// </summary>
         public override void RaiseCanExecuteChanged()
         {
             base.RaiseCanExecuteChanged();

@@ -4,19 +4,33 @@ using System.Runtime.Serialization;
 
 namespace ServerService
 {
-    #region USERENABLEDCHANGEDEVENTARGS
+    /// <summary>
+    /// User enabled event args.
+    /// </summary>
     [Serializable()]
     [DataContract()]
     public class UserEnabledChangedEventArgs : UserProfileChangeEventArgs
     {
         #region CONSTRUCTOR
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="userId">User id.</param>
+        /// <param name="disabled">Indicates if user is disabled.</param>
         public UserEnabledChangedEventArgs(int userId, bool disabled)
             : base(userId, UserChangeType.Enabled)
         {
             Disabled = disabled;
         }
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="userId">User id.</param>
+        /// <param name="disabled">Indicates if user is disabled.</param>
+        /// <param name="enableDate">Enable date.</param>
+        /// <param name="disabledDate">Disable date.</param>
         public UserEnabledChangedEventArgs(int userId, bool disabled, DateTime? enableDate, DateTime? disabledDate)
          : base(userId, UserChangeType.Enabled)
         {
@@ -39,6 +53,7 @@ namespace ServerService
         /// <summary>
         /// Gets if user is disabled.
         /// </summary>
+        [DataMember()]
         public bool Disabled
         {
             get;
@@ -48,6 +63,7 @@ namespace ServerService
         /// <summary>
         /// Gets enable date.
         /// </summary>
+        [DataMember()]
         public DateTime? EnableDate
         {
             get { return enableDate; }
@@ -57,6 +73,7 @@ namespace ServerService
         /// <summary>
         /// Gets disabled date.
         /// </summary>
+        [DataMember()]
         public DateTime? DisabledDate
         {
             get { return disabledDate; }
@@ -65,5 +82,4 @@ namespace ServerService
 
         #endregion
     }
-    #endregion
 }

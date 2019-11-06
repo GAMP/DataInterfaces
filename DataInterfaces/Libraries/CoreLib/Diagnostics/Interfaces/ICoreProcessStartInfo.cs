@@ -2,6 +2,9 @@
 
 namespace CoreLib.Diagnostics
 {
+    /// <summary>
+    /// Core process start info interface.
+    /// </summary>
     public interface ICoreProcessStartInfo
     {
         #region PROPERTIES

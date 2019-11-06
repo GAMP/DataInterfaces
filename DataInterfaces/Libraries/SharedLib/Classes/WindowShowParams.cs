@@ -14,34 +14,49 @@ namespace SharedLib
     {
         #region CONSTRUCTOR
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
         public WindowShowParams()
         {
-            this.StarupLocation = WindowStartupLocation.CenterOwner;
-            this.SizeToContent = SizeToContent.WidthAndHeight;
-            this.AllowClosing = true;
-            this.AllowDrag = true;
-            this.ShowDialog = true;
-            this.Icon = MessageBoxImage.Question;
-            this.Buttons = MessageBoxButton.OK;
-            this.TopMost = true;
+            StarupLocation = WindowStartupLocation.CenterOwner;
+            SizeToContent = SizeToContent.WidthAndHeight;
+            AllowClosing = true;
+            AllowDrag = true;
+            ShowDialog = true;
+            Icon = MessageBoxImage.Question;
+            Buttons = MessageBoxButton.OK;
+            TopMost = true;
         }
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="title">Title.</param>
         public WindowShowParams(string title)
             : this()
         {
-            this.Title = title;
+            Title = title;
         }
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="title">Title.</param>
+        /// <param name="width">Width.</param>
+        /// <param name="height">Height.</param>
+        /// <param name="top">Top.</param>
+        /// <param name="left">Left.</param>
         public WindowShowParams(string title,
             double width = double.PositiveInfinity,
             double height = double.PositiveInfinity,
             int top = 0, int left = 0)
             : this(title)
         {
-            this.Width = width;
-            this.Height = height;
-            this.Top = top;
-            this.Left = left;
+            Width = width;
+            Height = height;
+            Top = top;
+            Left = left;
         }
 
         #endregion

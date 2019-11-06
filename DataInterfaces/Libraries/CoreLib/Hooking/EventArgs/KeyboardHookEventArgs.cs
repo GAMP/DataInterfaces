@@ -12,6 +12,16 @@ namespace CoreLib.Hooking
     public class KeyboardHookEventArgs : HookEventArgsBase
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="keyCode">Key code.</param>
+        /// <param name="scanCode">Scan code.</param>
+        /// <param name="flags">Flags.</param>
+        /// <param name="time">Time.</param>
+        /// <param name="extraInfo">Extra info.</param>
+        /// <param name="state">State.</param>
+        /// <param name="getModifiers">Indicates if modfires should be obtained.</param>
         public KeyboardHookEventArgs(uint keyCode,
             uint scanCode,
             uint flags,
@@ -140,26 +150,34 @@ namespace CoreLib.Hooking
 
         #region FUNCTIONS
 
+        /// <summary>
+        /// Gets modifiers.
+        /// </summary>
         private void GetModifers()
         {
-            if (KeyboardHookEventArgs.IsKeyPushedDown(Keys.LShiftKey))
+            if (IsKeyPushedDown(Keys.LShiftKey))
             {
                 Modifiers |= ModifierKeys.Shift;
             }
-            if (KeyboardHookEventArgs.IsKeyPushedDown(Keys.LControlKey))
+            if (IsKeyPushedDown(Keys.LControlKey))
             {
                 Modifiers |= ModifierKeys.Control;
             }
-            if (KeyboardHookEventArgs.IsKeyPushedDown(Keys.LMenu))
+            if (IsKeyPushedDown(Keys.LMenu))
             {
                 Modifiers |= ModifierKeys.Alt;
             }
-            if (KeyboardHookEventArgs.IsKeyPushedDown(Keys.LWin))
+            if (IsKeyPushedDown(Keys.LWin))
             {
                 Modifiers |= ModifierKeys.Windows;
             }
         }
 
+        /// <summary>
+        /// Gets if key is pushed down.
+        /// </summary>
+        /// <param name="vKey">Key.</param>
+        /// <returns>True or false.</returns>
         public static bool IsKeyPushedDown(Keys vKey)
         {
             return 0 != (GetKeyState((int)vKey) & 0x8000);
@@ -168,9 +186,12 @@ namespace CoreLib.Hooking
         #endregion
 
         #region OVERRIDES
+        /// <summary>
+        /// Converts to string.
+        /// </summary>
         public override string ToString()
         {
-            return String.Format("Key {0} Modifiers {1} State {2}", Key, Modifiers, State);
+            return string.Format("Key {0} Modifiers {1} State {2}", Key, Modifiers, State);
         }
         #endregion
     }

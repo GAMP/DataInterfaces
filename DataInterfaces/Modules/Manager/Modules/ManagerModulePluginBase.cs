@@ -35,11 +35,14 @@ namespace Manager.Modules
         /// </summary>
         public virtual void Stop()
         {
-        } 
+        }
 
         #endregion
 
         #region IPartImportsSatisfiedNotification
+        /// <summary>
+        /// Called once all imports are satisfied.
+        /// </summary>
         public virtual void OnImportsSatisfied()
         {
         }

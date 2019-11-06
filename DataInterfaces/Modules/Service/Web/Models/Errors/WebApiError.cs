@@ -9,6 +9,10 @@ namespace ServerService.Web.Api
     public class WebApiError
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="message"></param>
         public WebApiError(string message)
         {
             Message = message;

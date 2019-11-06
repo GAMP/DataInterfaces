@@ -15,21 +15,34 @@ namespace ServerService
     {
         #region CONSTRUCTOR
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="result">Reserve result.</param>
         public GuestReserveResult(UserReserveResult result)
         {
             UserId = null;
             Result = result;
         }
 
-        public GuestReserveResult(int userId) : this(userId, UserReserveResult.Sucess)
+        /// <summary>
+        /// Creates new instance with successful result.
+        /// </summary>
+        /// <param name="userId">User id.</param>
+        public GuestReserveResult(int userId) : this(userId, UserReserveResult.Success)
         {
         }
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="userId">User id.</param>
+        /// <param name="result">Reserve result.</param>
         public GuestReserveResult(int userId, UserReserveResult result)
         {
             Result = result;
             UserId = userId;
-        } 
+        }
 
         #endregion
 
@@ -62,7 +75,7 @@ namespace ServerService
         [ProtoMember(2)]
         public bool IsNewGuest
         {
-            get;set;
+            get; set;
         }
 
         /// <summary>
@@ -72,7 +85,7 @@ namespace ServerService
         [ProtoMember(3)]
         public object Entity
         {
-            get;set;
+            get; set;
         }
 
         #endregion

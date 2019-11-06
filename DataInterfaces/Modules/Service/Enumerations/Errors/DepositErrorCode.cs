@@ -1,11 +1,13 @@
 ﻿namespace ServerService
 {
-    #region DepositErrorCode
     /// <summary>
     /// Deposit transactions error codes.
     /// </summary>
     public enum DepositErrorCode
     {
+        /// <summary>
+        /// Unspecified.
+        /// </summary>
         Unspecified = 0,
         /// <summary>
         /// Set when we try to execute deposit transaction with zero amount.
@@ -20,5 +22,4 @@
         /// </summary>
         NegativeBalanceNotAllowed,
     }
-    #endregion
 }

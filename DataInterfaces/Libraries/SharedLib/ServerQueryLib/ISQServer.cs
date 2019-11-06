@@ -2,9 +2,14 @@
 
 namespace ServerQueryLib
 {
+    /// <summary>
+    /// Server query interface.
+    /// </summary>
     [Obsolete()]
     public interface ISQServer
     {
+        #region PROPERTIES
+        
         /// <summary>
         /// Gets server name.
         /// </summary>
@@ -24,6 +29,8 @@ namespace ServerQueryLib
         /// <summary>
         /// Gets or sets server id.
         /// </summary>
-        int ID { get; set; }
+        int ID { get; set; } 
+
+        #endregion
     }
 }

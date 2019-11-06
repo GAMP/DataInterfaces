@@ -18,7 +18,7 @@
         /// <summary>
         /// Called when applicaton switches out of this module.
         /// </summary>
-        /// <param name="previous">Current module instance.</param>
+        /// <param name="current">Current module instance.</param>
         void OnSwitchingOut(T current); 
 
         #endregion

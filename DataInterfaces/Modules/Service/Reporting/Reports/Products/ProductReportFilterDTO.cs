@@ -1,20 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ServerService.Reporting.Reports.Products
 {
+    /// <summary>
+    /// Product Report Filter.
+    /// </summary>
     [Serializable]
     [DataContract]
-    public class ProductReportFilterDTO : ReportFilterBaseDTO
+    public class ProductReportFilterDTO : DateRangeReportFilterBaseDTO
     {
-        [DataMember]
-        public List<SoldProductDTO> Products { get; set; }
-
+        /// <summary>
+        /// Filter Product Id.
+        /// </summary>
         [DataMember]
         public int ProductId { get; set; }
+
+        /// <summary>
+        /// Filter User Id.
+        /// </summary>
+        [DataMember]
+        public int? UserId { get; set; }
     }
 }

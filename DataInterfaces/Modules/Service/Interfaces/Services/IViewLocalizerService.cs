@@ -6,12 +6,12 @@
     public interface IViewLocalizerService
     {
         #region FUNCTIONS
-        
+
         /// <summary>
-        /// Get localized string value.
+        /// Gets localized string value.
         /// </summary>
-        /// <param name="key">Key.</param>
-        /// <returns></returns>
+        /// <param name="key">Localization key.</param>
+        /// <returns>Localized string value.</returns>
         string GetLocalizedStringValue(string key); 
 
         #endregion

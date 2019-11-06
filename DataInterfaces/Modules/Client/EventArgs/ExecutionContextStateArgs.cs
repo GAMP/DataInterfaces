@@ -11,6 +11,25 @@ namespace Client
     {
         #region CONSTRUCTOR
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="exeId">Executable id.</param>
+        /// <param name="newState">New state.</param>
+        /// <param name="oldState">Old state.</param>
+        public ExecutionContextStateArgs(int exeId, ContextExecutionState newState,
+          ContextExecutionState oldState)
+            : this(exeId, newState, oldState, null)
+        {
+        }
+
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="exeId">Executable id.</param>
+        /// <param name="newState">New state.</param>
+        /// <param name="oldState">Old state.</param>
+        /// <param name="stateObject">Custom state object.</param>
         public ExecutionContextStateArgs(int exeId, ContextExecutionState newState,
             ContextExecutionState oldState,
             object stateObject)
@@ -19,12 +38,6 @@ namespace Client
             NewState = newState;
             OldState = oldState;
             StateObject = stateObject;
-        }
-
-        public ExecutionContextStateArgs(int exeId, ContextExecutionState newState,
-          ContextExecutionState oldState)
-            : this(exeId, newState, oldState, null)
-        {
         }
 
         #endregion

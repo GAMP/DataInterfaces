@@ -115,7 +115,7 @@ namespace SharedLib.Dispatcher
         /// <summary>
         /// Sets protocol version.
         /// </summary>
-        /// <param name="level">Version.</param>
+        /// <param name="version">Version.</param>
         /// <returns>True for scuccess otherwise false.</returns>
         bool SetProtocolVersion(int version);
 
@@ -136,6 +136,7 @@ namespace SharedLib.Dispatcher
         /// Sends the command.
         /// </summary>
         /// <param name="cmd">Command instance.</param>
+        /// <param name="parameterBuffer">Parameter buffer.</param>
         /// <param name="parameterOffset">Prameter start offset.</param>
         /// <param name="parameterCount">Parameter buffer count.</param>
         void Send(IDispatcherCommand cmd, byte[] parameterBuffer, int parameterOffset, int parameterCount);
@@ -184,7 +185,7 @@ namespace SharedLib.Dispatcher
         /// Gets new instance of response command with single parameters.
         /// </summary>
         /// <param name="cmd">Source command.</param>
-        /// <param name="resstates">Response states.</param>
+        /// <param name="responseStates">Response states.</param>
         /// <param name="parameters">Parameters.</param>
         /// <returns>Command instance.</returns>
         IDispatcherCommand GetResponseCommandWithParam(IDispatcherCommand cmd, CommandStates responseStates, object parameters);
@@ -203,7 +204,6 @@ namespace SharedLib.Dispatcher
         /// Creates sync operation with single parameters.
         /// </summary>
         /// <param name="cmdType">Operation type.</param>
-        /// <param name="timeout">Operation timeout.</param>
         /// <param name="parameters">Operation parameters.</param>
         ISyncOperation CreateSyncOperationWithParam(CommandType cmdType, object parameters = null);
 

@@ -3,6 +3,9 @@ using System.Collections.ObjectModel;
 
 namespace CyClone.Core
 {
+    /// <summary>
+    /// File structure interface.
+    /// </summary>
     public interface IcyStructure
     {
         #region PROPERTIES

@@ -2,7 +2,9 @@
 
 namespace ServerService
 {
-    #region InvoicePaymentErrorCode
+    /// <summary>
+    /// Invoice payment error code.
+    /// </summary>
     public enum InvoicePaymentErrorCode
     {
         /// <summary>
@@ -23,5 +25,4 @@ namespace ServerService
         /// </summary>
         OutstandingAmountLess,
     }
-    #endregion
 }

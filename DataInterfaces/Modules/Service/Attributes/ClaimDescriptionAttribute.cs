@@ -10,19 +10,36 @@ namespace ServerService
     {
         #region CONSTRUCTOR
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="resource">Resource.</param>
+        /// <param name="operation">Operation.</param>
+        /// <param name="groupKey">Group key.</param>
+        /// <param name="nameKey">Name key.</param>
+        /// <param name="descriptionKey">Description key.</param>
         public ClaimDescriptionAttribute(string resource,
             string operation,
             string groupKey = null,
             string nameKey = null,
             string descriptionKey = null)
         {
-            this.Resource = resource;
-            this.Operation = operation;
-            this.GroupKey = groupKey;
-            this.NameKey = nameKey;
-            this.DescriptionKey = descriptionKey;
+            Resource = resource;
+            Operation = operation;
+            GroupKey = groupKey;
+            NameKey = nameKey;
+            DescriptionKey = descriptionKey;
         }
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="resource">Resource.</param>
+        /// <param name="operation">Operation.</param>
+        /// <param name="dependsOn">Depends on.</param>
+        /// <param name="groupKey">Group key.</param>
+        /// <param name="nameKey">Name key.</param>
+        /// <param name="descriptionKey">Description key.</param>
         public ClaimDescriptionAttribute(string resource,
             string operation,
             GizmoClaimTypes[] dependsOn,
@@ -30,12 +47,12 @@ namespace ServerService
             string nameKey = null,
             string descriptionKey = null)
         {
-            this.Resource = resource;
-            this.Operation = operation;
-            this.GroupKey = groupKey;
-            this.NameKey = nameKey;
-            this.DescriptionKey = descriptionKey;
-            this.DependsOn = dependsOn;
+            Resource = resource;
+            Operation = operation;
+            GroupKey = groupKey;
+            NameKey = nameKey;
+            DescriptionKey = descriptionKey;
+            DependsOn = dependsOn;
         }
 
         #endregion

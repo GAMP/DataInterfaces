@@ -5,21 +5,38 @@ using System.Runtime.Serialization;
 
 namespace IntegrationLib
 {
-    #region AuthResult
+    /// <summary>
+    /// Authentication result.
+    /// </summary>
     [DataContract()]
     [Serializable()]
     public class AuthResult : IAuthResult
     {
         #region CONSTRUCTOR
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="result">Result.</param>
         public AuthResult(LoginResult result) : this(result, null)
         {
         }
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="result">Result.</param>
+        /// <param name="identity">Identity.</param>
         public AuthResult(LoginResult result, IUserIdentity identity) : this(result, identity, UserInfoTypes.None)
         {
         }
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="result">Result.</param>
+        /// <param name="identity">Identity.</param>
+        /// <param name="requiredInfo">Required user info flags.</param>
         public AuthResult(LoginResult result, IUserIdentity identity, UserInfoTypes requiredInfo)
         {
             Identity = identity;
@@ -82,5 +99,4 @@ namespace IntegrationLib
 
         #endregion
     }
-    #endregion
 }

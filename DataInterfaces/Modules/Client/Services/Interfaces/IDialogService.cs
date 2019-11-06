@@ -3,6 +3,9 @@ using System.Threading.Tasks;
 
 namespace Client
 {
+    /// <summary>
+    /// Client dialog service.
+    /// </summary>
     public interface IDialogService
     {
         #region FUNCTIONS

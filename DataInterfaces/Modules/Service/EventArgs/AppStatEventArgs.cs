@@ -3,7 +3,9 @@ using System.Runtime.Serialization;
 
 namespace ServerService
 {
-    #region APPSTATEVENTARGS
+    /// <summary>
+    /// App stats event args.
+    /// </summary>
     [DataContract()]
     [Serializable()]
     public class AppStatEventArgs : UserIdEventArgsBase
@@ -31,17 +33,17 @@ namespace ServerService
             double totalAppExeUserTime,
             int totalAppExeUserExectutions) : base(userId)
         {
-            this.AppId = appId;
-            this.AppExeId = appExeId;
+            AppId = appId;
+            AppExeId = appExeId;
 
-            this.TotalAppTime = totalAppTime;
-            this.TotalAppExecutions = totalAppExecutions;
+            TotalAppTime = totalAppTime;
+            TotalAppExecutions = totalAppExecutions;
 
-            this.TotalAppExeTime = totalAppExeTime;
-            this.TotalAppExeExecutions = totalAppExeExecutions;
+            TotalAppExeTime = totalAppExeTime;
+            TotalAppExeExecutions = totalAppExeExecutions;
 
-            this.TotalAppExeUserTime = totalAppExeUserTime;
-            this.TotalAppExeUserExecutions = totalAppExeUserExectutions;
+            TotalAppExeUserTime = totalAppExeUserTime;
+            TotalAppExeUserExecutions = totalAppExeUserExectutions;
         }
         #endregion
 
@@ -129,5 +131,4 @@ namespace ServerService
 
         #endregion
     }
-    #endregion
 }

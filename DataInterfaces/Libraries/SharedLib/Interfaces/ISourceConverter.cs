@@ -1,5 +1,9 @@
 ﻿namespace SharedLib
 {
+    /// <summary>
+    /// Generic mapping inteface.
+    /// </summary>
+    /// <typeparam name="T">Destination type.</typeparam>
     public interface ISourceConverter<T>
     {
         #region FUNCTIONS

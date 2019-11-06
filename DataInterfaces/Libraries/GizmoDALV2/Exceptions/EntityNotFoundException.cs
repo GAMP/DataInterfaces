@@ -3,44 +3,67 @@ using System.Runtime.Serialization;
 
 namespace GizmoDALV2
 {
-    #region ENTITYNOTFOUNDEXCPETION
+    /// <summary>
+    /// Entity not found exception.
+    /// </summary>
+    /// <remarks>
+    /// Thrown when trying to query database entity by id for non existing record.
+    /// </remarks>
     [DataContract()]
     [Serializable()]
     public class EntityNotFoundException : Exception
     {
         #region CONSTRUCTOR
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
         public EntityNotFoundException() : base() { }
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="entityKey">Entity key.</param>
+        /// <param name="entityType">Entity type.</param>
         public EntityNotFoundException(int entityKey, Type entityType) : this()
         {
-            if (entityType == null)
-                throw new ArgumentNullException(nameof(entityType));
-
             EntityKey = entityKey;
-            EntityType = entityType;
+            EntityType = entityType ?? throw new ArgumentNullException(nameof(entityType));
         }
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="keys">Entity keys.</param>
+        /// <param name="entityType">Entity type.</param>
         public EntityNotFoundException(object[] keys, Type entityType) : this()
         {
-            if (keys == null)
-                throw new ArgumentNullException(nameof(keys));
-
-            if (entityType == null)
-                throw new ArgumentNullException(nameof(entityType));
-
-            Keys = keys;
-            EntityType = entityType;
+            Keys = keys ?? throw new ArgumentNullException(nameof(keys));
+            EntityType = entityType ?? throw new ArgumentNullException(nameof(entityType));
         }
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="message">Exception message.</param>
         public EntityNotFoundException(string message)
             : base(message)
         { }
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="message">Exception message.</param>
+        /// <param name="inner">Inner exception.</param>
         public EntityNotFoundException(string message, Exception inner)
             : base(message, inner)
         { }
 
+        /// <summary>
+        /// Serialization constructor.
+        /// </summary>
+        /// <param name="info">Serialization info.</param>
+        /// <param name="context">Serialization context.</param>
         protected EntityNotFoundException(SerializationInfo info,
             StreamingContext context)
             : base(info, context)
@@ -57,6 +80,11 @@ namespace GizmoDALV2
 
         #region OVERRIDES
 
+        /// <summary>
+        /// Gets object data.
+        /// </summary>
+        /// <param name="info">Serialization info.</param>
+        /// <param name="context">Serialization context.</param>
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
@@ -103,5 +131,4 @@ namespace GizmoDALV2
 
         #endregion
     }
-    #endregion
 }

@@ -155,7 +155,7 @@ namespace SharedLib.Extensions
         /// <param name="source">A sequence containing elements.</param>
         /// <param name="item">The item to locate.</param>
         /// <param name="itemComparer">The item equality comparer to use.  Pass null to use the default comparer.</param>
-        /// <returns>The index of the entry if it was found in the sequence; otherwise, -1.</returns></returns>
+        /// <returns>The index of the entry if it was found in the sequence; otherwise, -1.</returns>
         public static int IndexOf<TSource>(this IEnumerable<TSource> source, TSource item, IEqualityComparer<TSource> itemComparer)
         {
             if (source == null)

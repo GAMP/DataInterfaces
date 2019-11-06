@@ -1,26 +1,43 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace ServerService.Reporting.Reports.Transactions
 {
+    /// <summary>
+    /// Transactions Log Report Filter.
+    /// </summary>
     [Serializable]
     [DataContract]
-    public class TransactionsLogReportFilterDTO : ReportFilterBaseDTO
+    public class TransactionsLogReportFilterDTO : DateRangeReportFilterBaseDTO
     {
-        [DataMember]
-        public List<ListItemDTO> Operators { get; set; }
-
+        /// <summary>
+        /// Filter Operator Id.
+        /// </summary>
         [DataMember]
         public int? OperatorId { get; set; }
 
-        [DataMember]
-        public List<ListItemDTO> Registers { get; set; }
-
+        /// <summary>
+        /// Filter Register Id.
+        /// </summary>
         [DataMember]
         public int? RegisterId { get; set; }
 
+        /// <summary>
+        /// Filter User Id.
+        /// </summary>
         [DataMember]
-        public TransactionsLogActionTypes? ActionType { get; set; }
+        public int? UserId { get; set; }
+
+        /// <summary>
+        /// Filter User Name.
+        /// </summary>
+        [DataMember]
+        public string UserName { get; set; }
+
+        /// <summary>
+        /// Filter Transactions Log Action Type.
+        /// </summary>
+        [DataMember]
+        public TransactionsLogActionTypes? TransactionsLogActionType { get; set; }
     }
 }

@@ -2,6 +2,9 @@
 
 namespace SharedLib.Applications
 {
+    /// <summary>
+    /// App profile interface.
+    /// </summary>
     public interface IAppProfile
     {
         #region PROPERTIES

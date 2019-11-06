@@ -3,6 +3,9 @@ using System.Reflection;
 
 namespace Client
 {
+    /// <summary>
+    /// Client compisition service.
+    /// </summary>
     public interface IClinetCompositionService
     {
         #region FUNCTIONS

@@ -4,25 +4,34 @@ using System.Runtime.Serialization;
 
 namespace ServerService.Reporting.Reports.Financial
 {
+    /// <summary>
+    /// Invoices Log Report Filter.
+    /// </summary>
     [Serializable]
     [DataContract]
-    public class InvoicesLogReportFilterDTO : ReportFilterBaseDTO
+    public class InvoicesLogReportFilterDTO : DateRangeReportFilterBaseDTO
     {
-        [DataMember]
-        public List<ListItemDTO> Operators { get; set; }
-
+        /// <summary>
+        /// Filter Operator Id.
+        /// </summary>
         [DataMember]
         public int? OperatorId { get; set; }
 
-        [DataMember]
-        public List<ListItemDTO> Registers { get; set; }
-
+        /// <summary>
+        /// Filter Register Id.
+        /// </summary>
         [DataMember]
         public int? RegisterId { get; set; }
 
+        /// <summary>
+        /// Filter Payment Status Type.
+        /// </summary>
         [DataMember]
         public InvoicesLogPaymentStatusTypes? PaymentStatusType { get; set; }
 
+        /// <summary>
+        /// Filter Voided Status Type.
+        /// </summary>
         [DataMember]
         public InvoicesLogVoidedStatusTypes? VoidedStatusType { get; set; }
     }

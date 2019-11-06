@@ -1,5 +1,8 @@
 ﻿namespace Manager
 {
+    /// <summary>
+    /// Media capture interface.
+    /// </summary>
     public interface IMediaCapture
     {
         #region FUNCTIONS

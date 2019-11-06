@@ -1,8 +1,13 @@
 ﻿namespace ServerService
 {
-    #region StockErrorCodes
+    /// <summary>
+    /// Stock error codes.
+    /// </summary>
     public enum StockErrorCodes
     {
+        /// <summary>
+        /// Unspecified.
+        /// </summary>
         Unspecified = 0,
         /// <summary>
         /// Set when we try to modify stock level of a product that have stock disabled.
@@ -17,5 +22,4 @@
         /// </summary>
         TargetProductNotSet = 3,
     }
-    #endregion
 }

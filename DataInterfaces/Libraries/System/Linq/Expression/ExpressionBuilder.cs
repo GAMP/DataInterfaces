@@ -5,6 +5,9 @@ using System.Runtime.Serialization;
 namespace System.Linq.Expressions
 {
     #region ExpressionBuilder
+    /// <summary>
+    /// Expression builder.
+    /// </summary>
     public static class ExpressionBuilder
     {
         #region STATIC FIELDS
@@ -17,6 +20,12 @@ namespace System.Linq.Expressions
 
         #region STATIC FUNCTIONS
 
+        /// <summary>
+        /// Gets compiled expression.
+        /// </summary>
+        /// <typeparam name="T">Result type.</typeparam>
+        /// <param name="filter">Filter.</param>
+        /// <returns></returns>
         public static Expression<Func<T, bool>> GetExpression<T>(IEnumerable<Filter> filter)
         {
             if (filter == null || filter.Count() == 0)
@@ -145,6 +154,13 @@ namespace System.Linq.Expressions
         /// <returns>False expression.</returns>
         public static Expression<Func<T, bool>> False<T>() { return x => false; }
 
+        /// <summary>
+        /// Or expression.
+        /// </summary>
+        /// <typeparam name="T">Result type.</typeparam>
+        /// <param name="expr1">First expression.</param>
+        /// <param name="expr2">Second expression.</param>
+        /// <returns></returns>
         public static Expression<Func<T, bool>> Or<T>(this Expression<Func<T, bool>> expr1,
                                                             Expression<Func<T, bool>> expr2)
         {
@@ -152,6 +168,13 @@ namespace System.Linq.Expressions
             return Expression.Lambda<Func<T, bool>>(Expression.OrElse(expr1.Body, invokedExpr), expr1.Parameters);
         }
 
+        /// <summary>
+        /// And expression.
+        /// </summary>
+        /// <typeparam name="T">Result type.</typeparam>
+        /// <param name="expr1">First expression.</param>
+        /// <param name="expr2">Second expression.</param>
+        /// <returns></returns>
         public static Expression<Func<T, bool>> And<T>(this Expression<Func<T, bool>> expr1,
                                                              Expression<Func<T, bool>> expr2)
         {
@@ -177,23 +200,37 @@ namespace System.Linq.Expressions
     #endregion
 
     #region Filter
+    /// <summary>
+    /// Expression filter.
+    /// </summary>
     [DataContract()]
     [Serializable()]
     public class Filter
     {
         #region CONSTRUCTOR
+
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
         public Filter()
         { }
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="propertyName">Property name.</param>
+        /// <param name="value">Property value.</param>
+        /// <param name="operation">Operation.</param>
         public Filter(string propertyName, object value, Op operation)
         {
             if (string.IsNullOrWhiteSpace(propertyName))
                 throw new ArgumentNullException(nameof(propertyName));
 
-            this.PropertyName = propertyName;
-            this.Value = value;
-            this.Operation = operation;
+            PropertyName = propertyName;
+            Value = value;
+            Operation = operation;
         }
+
         #endregion
 
         #region PROPERTIES
@@ -248,18 +285,51 @@ namespace System.Linq.Expressions
     #endregion
 
     #region Op
+    /// <summary>
+    /// Expression operations.
+    /// </summary>
     [Serializable()]
     public enum Op
     {
+        /// <summary>
+        /// Equals.
+        /// </summary>
         Equals,
+        /// <summary>
+        /// Greater than.
+        /// </summary>
         GreaterThan,
+        /// <summary>
+        /// Less than.
+        /// </summary>
         LessThan,
+        /// <summary>
+        /// Greater than or equal.
+        /// </summary>
         GreaterThanOrEqual,
+        /// <summary>
+        /// Less than or equal.
+        /// </summary>
         LessThanOrEqual,
+        /// <summary>
+        /// Contains.
+        /// </summary>
         Contains,
+        /// <summary>
+        /// Starts with.
+        /// </summary>
         StartsWith,
+        /// <summary>
+        /// Ends with.
+        /// </summary>
         EndsWith,
+        /// <summary>
+        /// Not equal.
+        /// </summary>
         NotEqual,
+        /// <summary>
+        /// Has flag.
+        /// </summary>
         HasFlag
     }
     #endregion
@@ -274,9 +344,16 @@ namespace System.Linq.Expressions
     {
         #region CONSTRUCTOR
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
         public FilterSet() : base()
         { }
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="source">Filter source.</param>
         public FilterSet(IEnumerable<Filter> source) : base(source)
         { }
 
@@ -307,20 +384,26 @@ namespace System.Linq.Expressions
             get; set;
         }
 
+        /// <summary>
+        /// Optional query includes.
+        /// </summary>
         public HashSet<string> Includes
         {
             get
             {
-                if (this.includes == null)
-                    this.includes = new HashSet<string>();
-                return this.includes;
+                if (includes == null)
+                    includes = new HashSet<string>();
+                return includes;
             }
-            set { this.includes = value; }
+            set { includes = value; }
         }
 
+        /// <summary>
+        /// Optional query includes.
+        /// </summary>
         ICollection<string> IFilterSet.Includes
         {
-            get { return this.Includes; }
+            get { return Includes; }
         }
 
         #endregion
@@ -328,6 +411,10 @@ namespace System.Linq.Expressions
     #endregion
 
     #region ResultSet
+    /// <summary>
+    /// Result set.
+    /// </summary>
+    /// <typeparam name="T">Item type.</typeparam>
     [Serializable()]
     [DataContract()]
     public class ResultSet<T> : List<T>
@@ -370,13 +457,28 @@ namespace System.Linq.Expressions
     #endregion
 
     #region Extensions
+    /// <summary>
+    /// Extensions.
+    /// </summary>
     public static class Extensions
     {
+        /// <summary>
+        /// Converts to filter set.
+        /// </summary>
+        /// <param name="source">Source filters.</param>
+        /// <returns>Filter set.</returns>
         public static FilterSet ToFilterSet(this IEnumerable<Filter> source)
         {
             return source.ToFilterSet(null, null);
         }
 
+        /// <summary>
+        /// Converts to filter set.
+        /// </summary>
+        /// <param name="source">Source filters.</param>
+        /// <param name="take">Optional take amount.</param>
+        /// <param name="skip">Optional skip amount.</param>
+        /// <returns>Filter set.</returns>
         public static FilterSet ToFilterSet(this IEnumerable<Filter> source, int? take, int? skip)
         {
             if (source == null)
@@ -385,11 +487,26 @@ namespace System.Linq.Expressions
             return new FilterSet(source) { Take = take, Skip = skip };
         }
 
+        /// <summary>
+        /// Converts to result set.
+        /// </summary>
+        /// <typeparam name="T">Item type.</typeparam>
+        /// <param name="source">Source collection.</param>
+        /// <param name="filters">Filters.</param>
+        /// <returns>Result set.</returns>
         public static ResultSet<T> ToResultSet<T>(this IEnumerable<T> source, IEnumerable<Filter> filters)
         {
             return source.ToResultSet(filters, null);
         }
 
+        /// <summary>
+        /// Converts to result set.
+        /// </summary>
+        /// <typeparam name="T">Item type.</typeparam>
+        /// <param name="source">Source collection.</param>
+        /// <param name="filters">Filters.</param>
+        /// <param name="count">Optional count.</param>
+        /// <returns>Result set.</returns>
         public static ResultSet<T> ToResultSet<T>(this IEnumerable<T> source, IEnumerable<Filter> filters, int? count)
         {
             if (source == null)

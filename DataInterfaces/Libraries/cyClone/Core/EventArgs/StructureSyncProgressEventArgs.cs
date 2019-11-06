@@ -2,10 +2,16 @@
 
 namespace CyClone.Core
 {
+    /// <summary>
+    /// Structure sync progress event args.
+    /// </summary>
     [Serializable()]
     public class StructureSyncProgressEventArgs : SyncProgressEventArgs
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
         public StructureSyncProgressEventArgs()
         { }
         #endregion

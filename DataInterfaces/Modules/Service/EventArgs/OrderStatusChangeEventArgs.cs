@@ -4,12 +4,21 @@ using System.Runtime.Serialization;
 
 namespace ServerService
 {
-    #region ORDERSTATUSCHANGEEVENTARGS
+    /// <summary>
+    /// Order status change event args.
+    /// </summary>
     [Serializable()]
     [DataContract()]
     public class OrderStatusChangeEventArgs : OrderEventArgsBase
     {
-        #region CONSTRUCTOR    
+        #region CONSTRUCTOR  
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="userId">User id.</param>
+        /// <param name="orderId">Order id.</param>
+        /// <param name="newStatus">New status.</param>
+        /// <param name="oldStatus">Old status.</param>
         public OrderStatusChangeEventArgs(int userId,
             int orderId,
             OrderStatus newStatus,
@@ -42,6 +51,18 @@ namespace ServerService
         }
 
         #endregion
+
+        #region OVERRDIES
+
+        /// <summary>
+        /// Converts to string.
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return $"Order id {OrderId} , Old status = {OldStatus?.ToString() ?? ""} New status = {NewStatus}";
+        }
+
+        #endregion
     }
-    #endregion
 }

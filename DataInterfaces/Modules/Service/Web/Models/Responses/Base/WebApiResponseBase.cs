@@ -7,9 +7,14 @@ namespace ServerService.Web.Api
     /// Base class for web api responses.
     /// </summary>
     [DataContract()]    
-    public abstract class WebApiResponseBase
+    public class WebApiResponseBase
     {
         #region CONSTRUCTOR
+
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        public WebApiResponseBase() { }
 
         /// <summary>
         /// Creates new instance.
@@ -32,7 +37,7 @@ namespace ServerService.Web.Api
         [DataMember()]
         public int HttpStatusCode
         {
-            get; protected set;
+            get; set;
         }
 
         /// <summary>

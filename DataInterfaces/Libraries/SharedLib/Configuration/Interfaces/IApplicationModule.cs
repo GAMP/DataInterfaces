@@ -1,5 +1,8 @@
 ﻿namespace SharedLib.Configuration
 {
+    /// <summary>
+    /// Application module implementation interface.
+    /// </summary>
     public interface IApplicationModule
     {
         #region PROPERTIES

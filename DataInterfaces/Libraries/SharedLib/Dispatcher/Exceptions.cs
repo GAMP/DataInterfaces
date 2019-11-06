@@ -5,6 +5,9 @@ using System.Net.Sockets;
 namespace SharedLib.Dispatcher.Exceptions
 {
     #region DispatcherOperationExceptionBase
+    /// <summary>
+    /// Dispatcher exception base.
+    /// </summary>
     public abstract class DispatcherOperationExceptionBase : Exception
     {
         #region Constructor

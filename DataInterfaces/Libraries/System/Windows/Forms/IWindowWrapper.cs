@@ -9,6 +9,10 @@
     public class IWindowWrapper : IWin32Window
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="handle">Window handle.</param>
         public IWindowWrapper(IntPtr handle)
         {
             Handle = handle;

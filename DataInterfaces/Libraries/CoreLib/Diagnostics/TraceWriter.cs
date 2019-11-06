@@ -4,12 +4,11 @@ using System.Runtime.CompilerServices;
 
 namespace CoreLib.Diagnostics
 {
+    /// <summary>
+    /// Generic trace writer.
+    /// </summary>
     public static class TraceWriter
     {
-        #region FIELDS
-        private static bool enabled = true;
-        #endregion
-
         #region PROPERTIES
 
         /// <summary>
@@ -17,35 +16,51 @@ namespace CoreLib.Diagnostics
         /// </summary>
         public static bool TraceEnabled
         {
-            get { return TraceWriter.enabled; }
-            set { TraceWriter.enabled = value; }
+            get;set;
         }
 
         #endregion
 
         #region FUNCTIONS
 
+        /// <summary>
+        /// Writes trace line.
+        /// </summary>
+        /// <param name="message">Message.</param>
+        /// <param name="ex">Exception.</param>
         public static void WriteLine(string message, Exception ex)
         {
-            if (TraceWriter.TraceEnabled && message != null)
-                TraceWriter.WriteLine(String.Format("{0}\n{1}", message, ex));           
+            if (TraceEnabled && message != null)
+                WriteLine(string.Format("{0}\n{1}", message, ex));           
         }
 
+        /// <summary>
+        /// Writes trace line.
+        /// </summary>
+        /// <param name="message">Message.</param>
+        /// <param name="category">Category.</param>
         public static void WriteLine(object message, string category = null)
         {
-            if (TraceWriter.TraceEnabled && message != null)
+            if (TraceEnabled && message != null)
             {
-                string formatedMessage = String.Format("{1}\n{0}\n{2}", message, DateTime.Now, category);
+                string formatedMessage = string.Format("{1}\n{0}\n{2}", message, DateTime.Now, category);
                 Trace.WriteLine(formatedMessage);
             }
         }
         
+        /// <summary>
+        /// Traces a message.
+        /// </summary>
+        /// <param name="message">Message.</param>
+        /// <param name="memberName">Memeber name.</param>
+        /// <param name="sourceFilePath">Source file path.</param>
+        /// <param name="sourceLineNumber">Source line number.</param>
         public static void TraceMessage(string message,
             [CallerMemberName] string memberName = "",
             [CallerFilePath] string sourceFilePath = "",
             [CallerLineNumber] int sourceLineNumber = 0)
         {
-            if (TraceWriter.TraceEnabled)
+            if (TraceEnabled)
             {
                 Trace.WriteLine("MESSAGE: " + message);
                 Trace.WriteLine("MEMBER NAME: " + memberName);
@@ -54,12 +69,19 @@ namespace CoreLib.Diagnostics
             }
         }
 
+        /// <summary>
+        /// Traces an exception.
+        /// </summary>
+        /// <param name="ex">Exception.</param>
+        /// <param name="memberName">Memeber name.</param>
+        /// <param name="sourceFilePath">Source file path.</param>
+        /// <param name="sourceLineNumber">Source line number.</param>
         public static void TraceException(Exception ex,
             [CallerMemberName] string memberName = "",
             [CallerFilePath] string sourceFilePath = "",
             [CallerLineNumber] int sourceLineNumber = 0)
         {
-            if (TraceWriter.TraceEnabled)
+            if (TraceEnabled)
             {
                 Trace.WriteLine("EXCEPTION: " + ex.ToString());
                 Trace.WriteLine("MEMBER NAME: " + memberName);

@@ -4,6 +4,9 @@ using System.Windows.Input;
 
 namespace CoreLib.Hooking
 {
+    /// <summary>
+    /// Keyboard hook implementation base interface.
+    /// </summary>
     public interface IKeyboardHook : IHookBase
     {
         #region EVENTS

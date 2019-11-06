@@ -9,15 +9,22 @@ namespace System.Windows.Data
     {
         #region CONSTRUCTOR
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
         public CultureAwareBinding()
         {
             ConverterCulture = CultureInfo.CurrentCulture;
         }
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="path">Property path.</param>
         public CultureAwareBinding(string path) : base(path)
         {
             ConverterCulture = CultureInfo.CurrentCulture;
-        } 
+        }
 
         #endregion
     }

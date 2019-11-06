@@ -3,12 +3,19 @@ using System.Runtime.Serialization;
 
 namespace ServerService
 {
-    #region ORDEREVENTARGSBASE
+    /// <summary>
+    /// Order event args base class.
+    /// </summary>
     [Serializable()]
     [DataContract()]
     public abstract class OrderEventArgsBase : UserIdEventArgsBase
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="userId">User id.</param>
+        /// <param name="orderId">Order id.</param>
         public OrderEventArgsBase(int userId, int orderId) : base(userId)
         {
             OrderId = orderId;
@@ -17,6 +24,9 @@ namespace ServerService
 
         #region PROPERTIES
 
+        /// <summary>
+        /// Gets order id.
+        /// </summary>
         [DataMember()]
         public int OrderId
         {
@@ -25,5 +35,4 @@ namespace ServerService
 
         #endregion
     }
-    #endregion
 }

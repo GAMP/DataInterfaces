@@ -4,12 +4,21 @@ using System.Runtime.Serialization;
 
 namespace ServerService
 {
-    #region USERSTATECHANGEEVENTARGS
+    /// <summary>
+    /// User state changed event args.
+    /// </summary>
     [Serializable()]
     [DataContract()]
     public class UserStateChangeEventArgs : UserIdEventArgsBase
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="userId">User id.</param>
+        /// <param name="hostId">Host id.</param>
+        /// <param name="newState">New state.</param>
+        /// <param name="oldState">Old state.</param>
         public UserStateChangeEventArgs(int userId, int hostId, LoginState newState, LoginState oldState)
             : base(userId)
         {
@@ -51,11 +60,14 @@ namespace ServerService
         #endregion
 
         #region OVERRIDES
+        /// <summary>
+        /// Converts to string.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
-            return String.Format("User Id:{0} New State {1} Old State: {2}", this.UserId, this.NewState, this.OldState);
+            return string.Format("User Id:{0} New State {1} Old State: {2}", this.UserId, this.NewState, this.OldState);
         }
         #endregion
     }
-    #endregion
 }

@@ -14,6 +14,11 @@ namespace IntegrationLib
     public class ClaimTypeBase : IClaimType
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="resource">Resource.</param>
+        /// <param name="operation">Operation.</param>
         public ClaimTypeBase(string resource, string operation)
         {
             if (string.IsNullOrWhiteSpace(resource))
@@ -22,8 +27,8 @@ namespace IntegrationLib
             if (string.IsNullOrWhiteSpace(operation))
                 throw new ArgumentNullException(nameof(operation));
 
-            this.Resource = resource;
-            this.Operation = operation;
+            Resource = resource;
+            Operation = operation;
         } 
         #endregion
 
@@ -51,6 +56,10 @@ namespace IntegrationLib
 
         #region FUNCTIONS
 
+        /// <summary>
+        /// Gets all claim types.
+        /// </summary>
+        /// <returns>Claim types.</returns>
         public static IEnumerable<IClaimType> GetClaimTypes()
         {
             return Enum.GetValues(typeof(GizmoClaimTypes))

@@ -12,10 +12,14 @@ namespace SharedLib.Dispatcher
     public class IOperationBase : IOperation
     {
         #region CONSTRUCTORS
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="cmd">Operation command.</param>
         public IOperationBase(IDispatcherCommand cmd)
         {
-            this.Command = cmd ?? throw new ArgumentNullException(nameof(cmd));
-            this.Dispatcher = cmd.Dispatcher;
+            Command = cmd ?? throw new ArgumentNullException(nameof(cmd));
+            Dispatcher = cmd.Dispatcher;
         }
         #endregion
 
@@ -117,7 +121,7 @@ namespace SharedLib.Dispatcher
         public void RaiseOperationUpdate(params object[] parameters)
         {
             RaiseOperationUpdateWithParam(parameters);
-        }     
+        }
 
         /// <summary>
         /// Raises operation update.
@@ -169,7 +173,7 @@ namespace SharedLib.Dispatcher
             var previousState = this.state;
             this.state = state;
 
-           RaiseOperationStateChangeWithArgs(new OperationStateEventArgs(previousState, state, param));
+            RaiseOperationStateChangeWithArgs(new OperationStateEventArgs(previousState, state, param));
         }
 
         #endregion
@@ -225,7 +229,7 @@ namespace SharedLib.Dispatcher
             }
             else
             {
-                return default(T);
+                return default;
             }
         }
 
@@ -262,7 +266,7 @@ namespace SharedLib.Dispatcher
         /// <returns>True or false.</returns>
         public bool TryGetParameterAt<T>(object[] parameters, int index, out T parameter)
         {
-            parameter = default(T);
+            parameter = default;
 
             if (parameters == null)
                 return false;
@@ -321,71 +325,123 @@ namespace SharedLib.Dispatcher
 
         #region PROTECTED FUNCTIONS
 
+        /// <summary>
+        /// Raises operation state event.
+        /// </summary>
+        /// <param name="args">Args.</param>
         protected void RaiseOperationStateChangeWithArgs(OperationStateEventArgs args)
         {
             StateChange?.Invoke(this, args);
         }
 
+        /// <summary>
+        /// Raises operation update event.
+        /// </summary>
+        /// <param name="args">Args.</param>
         protected void RaiseOperationUpdateWithArgs(OperationUpdateArgs args)
         {
             OperationUpdate?.Invoke(this, args);
         }
 
+        /// <summary>
+        /// Riases invalid parameters state event.
+        /// </summary>
         protected void RaiseInvalidParams()
         {
             RaiseInvalidParamsWithParam();
         }
 
+        /// <summary>
+        /// Riases invalid parameters state event with parameter.
+        /// </summary>
+        /// <param name="param">Operation parameter.</param>
         protected void RaiseInvalidParamsWithParam(object param = null)
         {
             RaiseOperationStateChangeWithParam(OperationState.InvalidParameters, param);
         }
 
+        /// <summary>
+        /// Riases invalid parameters state event with parameters array.
+        /// </summary>
+        /// <param name="parameters">Operation parameters array.</param>
         protected void RaiseInvalidParams(params object[] parameters)
         {
             RaiseInvalidParamsWithParam(parameters);
         }
 
+        /// <summary>
+        /// Raises started state event.
+        /// </summary>
         protected void RaiseStarted()
         {
             RaiseStartedWithParam();
         }
 
+        /// <summary>
+        /// Raises started state event with parameter.
+        /// </summary>
+        /// <param name="param">Operation parameter.</param>
         protected void RaiseStartedWithParam(object param = null)
         {
             RaiseOperationStateChangeWithParam(OperationState.Started, param);
         }
 
+        /// <summary>
+        /// Raises started state event.
+        /// </summary>
+        /// <param name="parameters">Operation parameters array.</param>
         protected void RaiseStarted(params object[] parameters)
         {
             RaiseStartedWithParam(parameters);
         }
 
+        /// <summary>
+        /// Raises failed state event.
+        /// </summary>
         protected void RaiseFailed()
         {
             RaiseFailedWithParam();
         }
 
+        /// <summary>
+        /// Raises failed state event with parameter.
+        /// </summary>
+        /// <param name="param">Operation parameter.</param>
         protected void RaiseFailedWithParam(object param = null)
         {
             RaiseOperationStateChangeWithParam(OperationState.Failed, param);
         }
 
+        /// <summary>
+        /// Raises failed state event with parameter array.
+        /// </summary>
+        /// <param name="parameters">Parameter array.</param>
         protected void RaiseFailed(params object[] parameters)
         {
             RaiseFailedWithParam(parameters);
         }
 
+        /// <summary>
+        /// Raises completed state event.
+        /// </summary>
         protected void RaiseCompleted()
         {
             RaiseCompletedWithParam();
         }
 
+        /// <summary>
+        /// Raises completed state event.
+        /// </summary>
+        /// <param name="param">Operation parameter.</param>
         protected void RaiseCompletedWithParam(object param = null)
         {
             RaiseOperationStateChangeWithParam(OperationState.Completed, param);
         }
 
+        /// <summary>
+        /// Raises completed state event with parameters array.
+        /// </summary>
+        /// <param name="parameters">Parameters array.</param>
         protected void RaiseCompleted(params object[] parameters)
         {
             RaiseCompletedWithParam(parameters);

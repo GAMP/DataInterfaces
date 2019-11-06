@@ -7,6 +7,12 @@ namespace ServerService
     /// </summary>
     public interface IUserProfileHook
     {
-        void PostUserProfileCreate(IUserProfile profile);
+        #region FUNCTIONS
+        /// <summary>
+        /// Post create profile function.
+        /// </summary>
+        /// <param name="profile">Created profile.</param>
+        void PostUserProfileCreate(IUserProfile profile); 
+        #endregion
     }
 }

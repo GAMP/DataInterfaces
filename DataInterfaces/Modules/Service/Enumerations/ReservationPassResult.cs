@@ -1,5 +1,8 @@
 ﻿namespace ServerService
 {
+    /// <summary>
+    /// Reservation pass result.
+    /// </summary>
     public enum ReservationPassResult
     {
         /// <summary>

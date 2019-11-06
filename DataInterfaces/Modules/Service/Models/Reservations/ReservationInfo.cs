@@ -41,6 +41,9 @@ namespace ServerService
             get; set;
         }
 
+        /// <summary>
+        /// Gets or sets note.
+        /// </summary>
         [DataMember(EmitDefaultValue = false)]
         [ProtoMember(3)]
         public string Note
@@ -48,6 +51,9 @@ namespace ServerService
             get; set;
         }
 
+        /// <summary>
+        /// Gets or sets duration.
+        /// </summary>
         [DataMember(EmitDefaultValue = false)]
         [ProtoMember(4)]
         public int Duration
@@ -55,6 +61,9 @@ namespace ServerService
             get; set;
         }
 
+        /// <summary>
+        /// Gets or sets contact phone.
+        /// </summary>
         [DataMember(EmitDefaultValue = false)]
         [ProtoMember(5)]
         public string ContactPhone
@@ -62,6 +71,9 @@ namespace ServerService
             get; set;
         }
 
+        /// <summary>
+        /// Gets or sets contact email.
+        /// </summary>
         [DataMember(EmitDefaultValue = false)]
         [ProtoMember(6)]
         public string ContactEmail
@@ -69,6 +81,9 @@ namespace ServerService
             get; set;
         }
 
+        /// <summary>
+        /// Gets or sets date.
+        /// </summary>
         [DataMember()]
         [ProtoMember(7)]
         public DateTime Date
@@ -76,6 +91,9 @@ namespace ServerService
             get; set;
         }
 
+        /// <summary>
+        /// Gets or sets pin.
+        /// </summary>
         [DataMember()]
         [ProtoMember(8)]
         public string Pin
@@ -83,6 +101,9 @@ namespace ServerService
             get; set;
         }
 
+        /// <summary>
+        /// Gets or sets status.
+        /// </summary>
         [DataMember()]
         [ProtoMember(9)]
         public ReservationStatus Status
@@ -90,6 +111,9 @@ namespace ServerService
             get; set;
         }
 
+        /// <summary>
+        /// Gets or sets end date.
+        /// </summary>
         [DataMember()]
         [ProtoMember(10)]
         public DateTime EndDate

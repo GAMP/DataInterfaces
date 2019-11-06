@@ -4,13 +4,20 @@ using System.Runtime.Serialization;
 
 namespace ServerService
 {
-    #region WAITINGLINEEVENTARGS
+    /// <summary>
+    /// Waiting line event args.
+    /// </summary>
     [Serializable()]
     [DataContract()]
     public class WaitingLineEventArgs : EventArgs
     {
         #region CONSTRUCTOR
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="hostGroupId">Host group id.</param>
+        /// <param name="activeEntries">Active entries.</param>
         public WaitingLineEventArgs(int? hostGroupId, IEnumerable<WaitingEntryInfo> activeEntries)
         {
             ActiveEntries = activeEntries ?? throw new ArgumentNullException(nameof(activeEntries));
@@ -41,5 +48,4 @@ namespace ServerService
 
         #endregion
     }
-    #endregion
 }

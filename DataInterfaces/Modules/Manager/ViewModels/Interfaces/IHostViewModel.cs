@@ -178,30 +178,45 @@ namespace Manager.ViewModels
 
         #region VISUAL
 
+        /// <summary>
+        /// Gets or sets icon id.
+        /// </summary>
         int? IconId
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Gets or sets x position.
+        /// </summary>
         int X
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Gets or sets y position.
+        /// </summary>
         int Y
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Gets or sets width.
+        /// </summary>
         int Width
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Gets or sets height.
+        /// </summary>
         int Height
         {
             get;

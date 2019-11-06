@@ -1,8 +1,16 @@
-﻿namespace ServerService
+﻿using Localization;
+
+namespace ServerService
 {
-    #region PointTransactionErrorCode
+    /// <summary>
+    /// Points transaction error codes.
+    /// </summary>
     public enum PointTransactionErrorCode
     {
+        /// <summary>
+        /// Unspecified.
+        /// </summary>
+        [Localized("UNSPECIFIED")]
         Unspecified = 0,
         /// <summary>
         /// Set when we try to execute transaction with zero amount.
@@ -17,5 +25,4 @@
         /// </summary>
         TransactionTypeNotSupported = 3,
     }
-    #endregion
 }

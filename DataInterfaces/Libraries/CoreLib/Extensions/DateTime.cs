@@ -43,14 +43,16 @@ namespace CoreLib
         /// <summary>
         /// Converts provided day of week second to weekly value.
         /// </summary>
-        /// <param name="time">Date time.</param>
+        /// <param name="dayOfWeek">Day of week.</param>
+        /// <param name="daySecond">Day second.</param>
         /// <returns>Weekly second value.</returns>
+        /// <exception cref="ArgumentException">thrown if <paramref name="daySecond"/>exceeds number of seconds in day.</exception>
         public static double WeeklySecond(DayOfWeek dayOfWeek, double daySecond)
         {
             if (daySecond > 86400)
                 throw new ArgumentException(nameof(daySecond), nameof(daySecond));
 
-            return (((int)(daySecond / 60) * 60)) + ((int)dayOfWeek * 86400);
+            return ((int)(daySecond / 60) * 60) + ((int)dayOfWeek * 86400);
         }
 
         /// <summary>

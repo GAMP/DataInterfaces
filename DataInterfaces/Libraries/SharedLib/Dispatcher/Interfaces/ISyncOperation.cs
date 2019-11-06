@@ -4,7 +4,9 @@ using System.Threading;
 
 namespace SharedLib.Dispatcher
 {
-    #region ISyncOperation
+    /// <summary>
+    /// Dispatcher operation interface implementation.
+    /// </summary>
     public interface ISyncOperation
     {
         #region FUNCTIONS
@@ -213,5 +215,4 @@ namespace SharedLib.Dispatcher
 
         #endregion
     }
-    #endregion
 }

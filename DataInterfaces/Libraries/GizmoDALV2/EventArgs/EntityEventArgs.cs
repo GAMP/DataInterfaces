@@ -5,49 +5,80 @@ using System.Runtime.Serialization;
 
 namespace GizmoDALV2
 {
-    #region ENTITYEVENTARGS
+    /// <summary>
+    /// Entity event arguments.
+    /// </summary>
+    /// <typeparam name="T">Entity type.</typeparam>
     [Serializable()]
     [DataContract()]
     public class EntityEventArgs<T> : EventArgs, IEntityEventArgs
     {
         #region CONSTRUCTOR
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="type">Entity type.</param>
+        /// <param name="addedItem">Added items.</param>
+        /// <param name="removedItem">Removed items.</param>
         public EntityEventArgs(EntityEventType type, T addedItem, T removedItem)
             : this(type)
         {
             if (addedItem != null)
-                this.AddedItems = new List<T>() { addedItem };
+                AddedItems = new List<T>() { addedItem };
 
             if (removedItem != null)
-                this.RemovedItems = new List<T>() { removedItem };            
+                RemovedItems = new List<T>() { removedItem };            
         }
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="type">Entity type.</param>
+        /// <param name="addedItems">Added items.</param>
+        /// <param name="removedItems">Removed items.</param>
         public EntityEventArgs(EntityEventType type, IEnumerable<T> addedItems, IEnumerable<T> removedItems)
             : this(type)
         {
-            this.Type = type;
+            Type = type;
 
             if (addedItems != null)
-                this.AddedItems = new List<T>(addedItems);
+                AddedItems = new List<T>(addedItems);
 
             if (removedItems != null)
-                this.RemovedItems = new List<T>(removedItems);
+                RemovedItems = new List<T>(removedItems);
         }
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="type">Entity type.</param>
         public EntityEventArgs(EntityEventType type)
         {
-            this.Type = type;
+            Type = type;
         }
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="type">Entity type.</param>
+        /// <param name="added">Added items.</param>
+        /// <param name="removed">Removed items.</param>
         public EntityEventArgs(EntityEventType type, object added,object removed):this(type, (T)added, (T)removed)
         {
-            this.Type = type;
+            Type = type;
         }
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="type">Entity type.</param>
+        /// <param name="added">Added items.</param>
+        /// <param name="removed">Removed items.</param>
         public EntityEventArgs(EntityEventType type, IEnumerable<object> added, IEnumerable<object> removed)
             : this(type, added.Cast<T>(), removed.Cast<T>())
         {
-            this.Type = type;
+            Type = type;
         }
 
         #endregion
@@ -62,12 +93,12 @@ namespace GizmoDALV2
 
         IEnumerable<object> IEntityEventArgs.RemovedItems
         {
-            get { return this.RemovedItems.Cast<object>(); }
+            get { return RemovedItems.Cast<object>(); }
         }
 
         IEnumerable<object> IEntityEventArgs.AddedItems
         {
-            get { return this.AddedItems.Cast<object>(); }
+            get { return AddedItems.Cast<object>(); }
         }
 
         #endregion
@@ -126,5 +157,4 @@ namespace GizmoDALV2
 
         #endregion
     }
-    #endregion
 }

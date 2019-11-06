@@ -3,6 +3,9 @@ using System.Threading.Tasks;
 
 namespace Manager.Modules
 {
+    /// <summary>
+    /// User detail section module interface.
+    /// </summary>
     public interface IUserDetailSectionModule
     {
         #region FUNCTIONS

@@ -2,6 +2,9 @@
 
 namespace CyClone
 {
+    /// <summary>
+    /// File sync operation types.
+    /// </summary>
     [Flags()]
     public enum FileSyncOperation
     {

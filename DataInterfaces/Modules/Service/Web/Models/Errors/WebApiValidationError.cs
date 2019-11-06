@@ -10,6 +10,11 @@ namespace ServerService.Web.Api
     public class WebApiValidationError : WebApiError
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="propertyName">Property name.</param>
+        /// <param name="errorMessage">Validation error message.</param>
         public WebApiValidationError(string propertyName, string errorMessage) : base(errorMessage)
         {
             PropertyName = propertyName;
@@ -25,7 +30,7 @@ namespace ServerService.Web.Api
         public string PropertyName
         {
             get; protected set;
-        } 
+        }
         #endregion
     }
 }

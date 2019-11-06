@@ -2,6 +2,9 @@
 
 namespace CoreLib
 {
+    /// <summary>
+    /// System status implementation interface.
+    /// </summary>
     public interface ISystemStatus
     {
         #region PROPERTIES

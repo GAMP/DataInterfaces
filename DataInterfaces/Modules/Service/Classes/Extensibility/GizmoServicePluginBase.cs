@@ -3,16 +3,15 @@ using System.ComponentModel.Composition;
 
 namespace ServerService
 {
+    /// <summary>
+    /// Gizmo service plugin base.
+    /// </summary>
     [PartNotDiscoverable()]
     [InheritedExport(typeof(IGizmoServicePlugin))]
     public abstract class GizmoServicePluginBase : IGizmoServicePlugin, 
         IPartImportsSatisfiedNotification,
         IDisposable
     {
-        #region FIELDS
-        protected bool isDisposed;
-        #endregion
-
         #region PROPERTIES
 
         /// <summary>

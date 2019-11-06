@@ -1,5 +1,8 @@
 ﻿namespace CoreLib.Diagnostics
 {
+    /// <summary>
+    /// Core process kill info interface.
+    /// </summary>
     public interface ICoreProcessKillInfo
     {
         #region PROPERTIES

@@ -2,6 +2,9 @@
 
 namespace IntegrationLib
 {
+    /// <summary>
+    /// Execution divertion plugin implementation interface.
+    /// </summary>
     public interface IExecutionDivertPlugin
     {
         #region FUNCTIONS

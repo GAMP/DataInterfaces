@@ -135,6 +135,16 @@ namespace ServerService
         }
 
         /// <summary>
+        /// Total amount sepnt on fixed time.
+        /// </summary>
+        [DataMember()]
+        [ProtoMember(13)]
+        public decimal TotalFixedTimeSpent
+        {
+            get; set;
+        }
+
+        /// <summary>
         /// Timespan representing membership duration.
         /// </summary>
         [IgnoreDataMember()]
@@ -145,7 +155,17 @@ namespace ServerService
             {
                 return DateTime.Now.Subtract(Created);
             }
-        } 
+        }
+        
+        /// <summary>
+        /// Total amount spent on time.
+        /// </summary>
+        [IgnoreDataMember()]
+        [ProtoIgnore()]
+        public decimal TotalTimeSpent
+        {
+            get { return TotalFixedTimeSpent + TotalSessionSpent + TotalTimeProductSpent; }
+        }
 
         #endregion
     }

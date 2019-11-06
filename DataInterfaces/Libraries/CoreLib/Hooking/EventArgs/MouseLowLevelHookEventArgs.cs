@@ -8,6 +8,14 @@ namespace CoreLib.Hooking
     public class MouseLowLevelHookEventArgs : HookEventArgsBase
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="button">Button.</param>
+        /// <param name="x">X position.</param>
+        /// <param name="y">Y position.</param>
+        /// <param name="flags">Flags.</param>
+        /// <param name="clickCount">Click count.</param>
         public MouseLowLevelHookEventArgs(MouseButtons button, int x, int y, uint flags, int clickCount)
         {
             Button = button;

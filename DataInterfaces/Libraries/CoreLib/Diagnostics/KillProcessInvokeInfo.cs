@@ -2,6 +2,9 @@
 
 namespace CoreLib.Diagnostics
 {
+    /// <summary>
+    /// Kill process invoke info.
+    /// </summary>
     public class KillProcessInvokeInfo : MarshalByRefObject
     {
         #region CONSTRUCTOR

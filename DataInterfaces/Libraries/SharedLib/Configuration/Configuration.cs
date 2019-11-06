@@ -1,4 +1,5 @@
 ﻿using Client;
+using Client.ViewModels;
 using Manager;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,9 @@ using System.Runtime.Serialization;
 namespace SharedLib.Configuration
 {
     #region CONFIGBASE
+    /// <summary>
+    /// Configuration base class.
+    /// </summary>
     [Serializable()]
     [DataContract()]
     public abstract class ConfigBase
@@ -40,7 +44,7 @@ namespace SharedLib.Configuration
         /// <summary>
         /// Gets validation results.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Grouped validation results.</returns>
         public IEnumerable<IGrouping<string, ValidationResult>> GetValidationResults()
         {
             //create new validation contect
@@ -87,11 +91,17 @@ namespace SharedLib.Configuration
     #endregion
 
     #region CONFIGURATION
+    /// <summary>
+    /// Service configuration root class.
+    /// </summary>
     [Serializable()]
     [DataContract()]
     public class ConfigurationRoot : ConfigBase
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
         public ConfigurationRoot()
         {
             Service = new ServiceConfig();
@@ -141,6 +151,9 @@ namespace SharedLib.Configuration
         #endregion
 
         #region OVERRIDES
+        /// <summary>
+        /// Sets default values.
+        /// </summary>
         public override void SetDefaults()
         {
             base.SetDefaults();
@@ -154,11 +167,17 @@ namespace SharedLib.Configuration
 
     #region GLOBALCONFIGURATION
 
+    /// <summary>
+    /// Global configuration class.
+    /// </summary>
     [Serializable()]
     [DataContract()]
     public class GlobalConfiguration : ConfigBase
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
         public GlobalConfiguration()
         {
             Network = new GlobalNetworkCfg();
@@ -204,6 +223,9 @@ namespace SharedLib.Configuration
             get; set;
         }
 
+        /// <summary>
+        /// Waiting lines configuration.
+        /// </summary>
         [Category("Waiting Line")]
         [Description("Waiting line configuration.")]
         [DataMember(Order = 2)]
@@ -212,7 +234,9 @@ namespace SharedLib.Configuration
             get; set;
         }
 
-
+        /// <summary>
+        /// Reservation configuration.
+        /// </summary>
         [Category("Reservations")]
         [Description("Reservations configuration.")]
         [DataMember(Order = 3)]
@@ -224,6 +248,9 @@ namespace SharedLib.Configuration
         #endregion
 
         #region OVERRIDES
+        /// <summary>
+        /// Sets default values.
+        /// </summary>
         public override void SetDefaults()
         {
             Network.SetDefaults();
@@ -232,6 +259,9 @@ namespace SharedLib.Configuration
         #endregion
     }
 
+    /// <summary>
+    /// Waiting line configuration class.
+    /// </summary>
     [Serializable()]
     [DataContract()]
     public class WaitingLineConfig : ConfigBase
@@ -291,6 +321,9 @@ namespace SharedLib.Configuration
         }
     }
 
+    /// <summary>
+    /// Global network configuration class.
+    /// </summary>
     [DataContract()]
     [Serializable()]
     public class GlobalNetworkCfg : ConfigBase
@@ -337,6 +370,9 @@ namespace SharedLib.Configuration
         #endregion
     }
 
+    /// <summary>
+    /// Global subcscription configuration class.
+    /// </summary>
     [DataContract()]
     [Serializable()]
     public class GlobalSubscriptionConfig : ConfigBase
@@ -373,6 +409,9 @@ namespace SharedLib.Configuration
     }
 
     #region RESERVATIONCONFIG
+    /// <summary>
+    /// Reservation configuration class.
+    /// </summary>
     [Category("Reservations")]
     [Serializable()]
     [DataContract()]
@@ -395,7 +434,7 @@ namespace SharedLib.Configuration
         /// </summary>
         [DataMember(Order = 1)]
         [DefaultValue(30)]
-        [Range(0,int.MaxValue)]
+        [Range(0, int.MaxValue)]
         public int LoginBlockTime
         {
             get; set;
@@ -430,11 +469,17 @@ namespace SharedLib.Configuration
 
     #region SERVICECONFIGURATION
 
+    /// <summary>
+    /// Service configuration class.
+    /// </summary>
     [Serializable()]
     [DataContract()]
     public class ServiceConfig : ConfigBase
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
         public ServiceConfig()
         {
             Network = new ServiceNetworkConfig();
@@ -446,6 +491,7 @@ namespace SharedLib.Configuration
             Backup = new ServiceBackupConfig();
             SMTP = new SMTPConfig();
             SMSGateway = new SMSGatewayConfig();
+            Scheduler = new SchedulerConfig();
         }
         #endregion
 
@@ -475,6 +521,9 @@ namespace SharedLib.Configuration
             set;
         }
 
+        /// <summary>
+        /// Web configuration.
+        /// </summary>
         [Category("Web")]
         [Description("Web configuration.")]
         [DataMember(Order = 2)]
@@ -518,25 +567,45 @@ namespace SharedLib.Configuration
             get; set;
         }
 
+        /// <summary>
+        /// SMTP configuration.
+        /// </summary>
         [Category("SMTP Server")]
         [Description("SMTP Server configuration.")]
         [DataMember(Order = 6)]
         public SMTPConfig SMTP
         {
-            get;set;
+            get; set;
         }
 
+        /// <summary>
+        /// SMS Gateway configuration.
+        /// </summary>
         [Category("SMS Gateway")]
         [Description("SMS Gateway configuration.")]
         [DataMember(Order = 7)]
         public SMSGatewayConfig SMSGateway
         {
-            get;set;
+            get; set;
+        }
+
+        /// <summary>
+        /// Scheduler configuration.
+        /// </summary>
+        [Category("Scheduler")]
+        [Description("Scheduler configuration.")]
+        [DataMember(Order = 8)]
+        public SchedulerConfig Scheduler
+        {
+            get; set;
         }
 
         #endregion
 
         #region OVERRIDE
+        /// <summary>
+        /// Sets default values.
+        /// </summary>
         public override void SetDefaults()
         {
             base.SetDefaults();
@@ -552,6 +621,9 @@ namespace SharedLib.Configuration
         #endregion
     }
 
+    /// <summary>
+    /// Service network configuration class.
+    /// </summary>
     [Serializable()]
     [DataContract()]
     public class ServiceNetworkConfig : ConfigBase
@@ -711,6 +783,9 @@ namespace SharedLib.Configuration
         #endregion
     }
 
+    /// <summary>
+    /// Service database configuration class.
+    /// </summary>
     [Serializable()]
     [DataContract()]
     public class ServiceDatabaseConfig : ConfigBase
@@ -746,6 +821,9 @@ namespace SharedLib.Configuration
             set;
         }
 
+        /// <summary>
+        /// Database command timeout.
+        /// </summary>
         [Category("Database")]
         [DefaultValue(null)]
         [Description("Specifies database command timeout.")]
@@ -758,6 +836,9 @@ namespace SharedLib.Configuration
         #endregion
     }
 
+    /// <summary>
+    /// Service general configuration class.
+    /// </summary>
     [DataContract()]
     [Serializable()]
     public class ServiceGeneralConfig : ConfigBase
@@ -826,6 +907,9 @@ namespace SharedLib.Configuration
             get; set;
         }
 
+        /// <summary>
+        /// Memebr auto invoice.
+        /// </summary>
         [Category("General")]
         [Description("Members auto invoice settings.")]
         [DataMember(Order = 5)]
@@ -834,17 +918,23 @@ namespace SharedLib.Configuration
             get; set;
         }
 
+        /// <summary>
+        /// Guest auto invoice.
+        /// </summary>
         [Category("General")]
         [Description("Guets auto invoice settings.")]
         [DataMember(Order = 6)]
         public AutoInvoiceConfig GuestAutoInvoice
         {
             get; set;
-        } 
+        }
 
         #endregion
     }
 
+    /// <summary>
+    /// Service backup configuration class.
+    /// </summary>
     [DataContract()]
     [Serializable()]
     public class ServiceBackupConfig : ConfigBase
@@ -893,6 +983,9 @@ namespace SharedLib.Configuration
 
         #region OVERRIDES
 
+        /// <summary>
+        /// Sets default values.
+        /// </summary>
         public override void SetDefaults()
         {
             base.SetDefaults();
@@ -903,12 +996,18 @@ namespace SharedLib.Configuration
         #endregion
     }
 
+    /// <summary>
+    /// Auto invoice configuration class.
+    /// </summary>
     [Serializable()]
     [DataContract()]
     public class AutoInvoiceConfig : ConfigBase
     {
         #region PROPERTIES
 
+        /// <summary>
+        /// Auto invoice.
+        /// </summary>
         [DataMember(Order = 0)]
         [DefaultValue(false)]
         public bool AutoInvoice
@@ -916,6 +1015,9 @@ namespace SharedLib.Configuration
             get; set;
         }
 
+        /// <summary>
+        /// After minutes.
+        /// </summary>
         [DataMember(Order = 1)]
         [Range(1, int.MaxValue)]
         [DefaultValue(30)]
@@ -924,6 +1026,9 @@ namespace SharedLib.Configuration
             get; set;
         }
 
+        /// <summary>
+        /// Auto pay.
+        /// </summary>
         [DataMember(Order = 2)]
         [Range(1, int.MaxValue)]
         [DefaultValue(false)]
@@ -936,6 +1041,9 @@ namespace SharedLib.Configuration
     }
 
     #region SERVICEWEBCONFIG
+    /// <summary>
+    /// Service web configuration class.
+    /// </summary>
     [DataContract()]
     [Serializable()]
     public class ServiceWebConfig : ConfigBase
@@ -1006,10 +1114,10 @@ namespace SharedLib.Configuration
         /// Gets or sets Token secret.
         /// </summary>
         [DefaultValue(null)]
-        [DataMember(Order = 6,IsRequired =false)]
+        [DataMember(Order = 6, IsRequired = false)]
         public string TokenSecret
         {
-            get;set;
+            get; set;
         }
 
         /// <summary>
@@ -1019,7 +1127,7 @@ namespace SharedLib.Configuration
         [DataMember(Order = 7, IsRequired = false)]
         public string ExternalHostName
         {
-            get;set;
+            get; set;
         }
 
         /// <summary>
@@ -1030,12 +1138,15 @@ namespace SharedLib.Configuration
         [DataMember(Order = 7, IsRequired = false)]
         public int? ExternalPort
         {
-            get;set;
+            get; set;
         }
     }
     #endregion
 
     #region SERVICEFILESYSTEMCONFIG
+    /// <summary>
+    /// Service file system configuration class.
+    /// </summary>
     [Serializable()]
     [DataContract()]
     public class ServiceFileSystemConfig : ConfigBase
@@ -1075,6 +1186,9 @@ namespace SharedLib.Configuration
     #endregion
 
     #region SMTPCONFIG
+    /// <summary>
+    /// Service SMTP configuration class.
+    /// </summary>
     [Serializable()]
     [DataContract()]
     public class SMTPConfig : ConfigBase
@@ -1159,7 +1273,7 @@ namespace SharedLib.Configuration
         [EmailNullEmpty()]
         public string ReplyToAddress
         {
-            get;set;
+            get; set;
         }
 
         #endregion
@@ -1167,11 +1281,17 @@ namespace SharedLib.Configuration
     #endregion
 
     #region SMSGATEWAYCONFIG
+    /// <summary>
+    /// SMS gateway configuration class.
+    /// </summary>
     [DataContract()]
     [Serializable()]
     public class SMSGatewayConfig : ConfigBase
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
         public SMSGatewayConfig()
         {
         }
@@ -1190,7 +1310,7 @@ namespace SharedLib.Configuration
         [DataMember()]
         public bool IsEnabled
         {
-            get;set;
+            get; set;
         }
 
         /// <summary>
@@ -1227,7 +1347,52 @@ namespace SharedLib.Configuration
         [DataMember()]
         public SMSGatewayProvider Provider
         {
-            get;set;
+            get; set;
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #region SCHEDULERCONFIG
+    /// <summary>
+    /// Scheduler configuration class.
+    /// </summary>
+    [DataContract()]
+    [Serializable()]
+    public class SchedulerConfig : ConfigBase
+    {
+        #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        public SchedulerConfig()
+        {
+        }
+        #endregion
+
+        #region FIELDS
+        private IList<ServerService.Reporting.ReportScheduledTask> tasks;
+        #endregion
+
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets scheduler tasks.
+        /// </summary>
+        [DataMember()]
+        public IList<ServerService.Reporting.ReportScheduledTask> Tasks
+        {
+            get
+            {
+                if (tasks == null)
+                    tasks = new List<ServerService.Reporting.ReportScheduledTask>();
+                return tasks;
+            }
+            set
+            {
+                tasks = value;
+            }
         }
 
         #endregion
@@ -1235,6 +1400,9 @@ namespace SharedLib.Configuration
     #endregion
 
     #region SMSGATEWAYPARAMETER
+    /// <summary>
+    /// SMS Gateway parameter configuration class.
+    /// </summary>
     [DataContract()]
     [Serializable()]
     public class SMSGatewayParameter
@@ -1301,6 +1469,9 @@ namespace SharedLib.Configuration
 
     #region CLIENTCONFIGURATION
 
+    /// <summary>
+    /// Client configuration class.
+    /// </summary>
     [Category("Client")]
     [Description("Client configuration.")]
     [Serializable()]
@@ -1308,6 +1479,9 @@ namespace SharedLib.Configuration
     public class ClientConfig : ConfigBase
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
         public ClientConfig()
         {
             General = new ClientGeneralConfig();
@@ -1474,6 +1648,9 @@ namespace SharedLib.Configuration
             set;
         }
 
+        /// <summary>
+        /// General configuration.
+        /// </summary>
         [Category("Client")]
         [Description("General settings.")]
         [DataMember()]
@@ -1483,6 +1660,9 @@ namespace SharedLib.Configuration
             set;
         }
 
+        /// <summary>
+        /// Shell configuration.
+        /// </summary>
         [Category("Client")]
         [Description("Shell settings.")]
         [DataMember()]
@@ -1495,15 +1675,23 @@ namespace SharedLib.Configuration
         #endregion
 
         #region OVERRIDES
+
+        /// <summary>
+        /// Sets default values.
+        /// </summary>
         public override void SetDefaults()
         {
             base.SetDefaults();
             General.SetDefaults();
             Shell.SetDefaults();
         }
+
         #endregion
     }
 
+    /// <summary>
+    /// Client general configuration class.
+    /// </summary>
     [Category("General")]
     [Serializable()]
     [DataContract()]
@@ -1554,29 +1742,50 @@ namespace SharedLib.Configuration
             set;
         }
 
+        /// <summary>
+        /// Gets or sets if client ordering is enabled.
+        /// </summary>
         [Category("General")]
         [Description("Enables or disables client ordering.")]
         [DefaultValue(true)]
         [DataMember(Order = 3)]
         public bool IsOrderingEnabled
         {
-            get;set;
+            get; set;
         }
 
+        /// <summary>
+        /// Gets or sets if client registrations are enabled.
+        /// </summary>
         [Category("General")]
         [Description("Enables or disables client user registration.")]
         [DefaultValue(false)]
-        [DataMember(Order =4)]
+        [DataMember(Order = 4)]
         public bool IsClientRegistrationEnabled
         {
-            get;set;
+            get; set;
         }
 
+        /// <summary>
+        /// Gets or set client registration verification method.
+        /// </summary>
         [Category("General")]
         [Description("Gets or sets client registration verification method.")]
         [DefaultValue(RegistrationVerificationMethod.None)]
         [DataMember(Order = 5)]
         public RegistrationVerificationMethod VerificationMethod
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or set if concurrent execution limit is enabled.
+        /// </summary>
+        [Category("General")]
+        [Description("Gets or set if concurrent execution limit is enabled.")]
+        [DefaultValue(false)]
+        [DataMember(Order = 6)]
+        public bool IsConcurrentExecutionLimitEnabled
         {
             get;set;
         }
@@ -1584,12 +1793,18 @@ namespace SharedLib.Configuration
         #endregion
     }
 
+    /// <summary>
+    /// Client shell configuration class.
+    /// </summary>
     [Category("Shell")]
     [Serializable()]
     [DataContract()]
     public class ClientShellConfig : ConfigBase
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
         public ClientShellConfig()
         {
         }
@@ -1623,6 +1838,9 @@ namespace SharedLib.Configuration
             set;
         }
 
+        /// <summary>
+        /// Gets or sets client language.
+        /// </summary>
         [Category("Shell")]
         [Description("Specifies client language")]
         [DefaultValue("English")]
@@ -1659,6 +1877,9 @@ namespace SharedLib.Configuration
             set;
         }
 
+        /// <summary>
+        /// Get or sets time left warning minutes.
+        /// </summary>
         [Category("Shell")]
         [DefaultValue(0)]
         [DataMember(Order = 5)]
@@ -1667,6 +1888,9 @@ namespace SharedLib.Configuration
             get; set;
         }
 
+        /// <summary>
+        /// Gets or sets time left warning type.
+        /// </summary>
         [Category("Shell")]
         [DefaultValue(TimeLeftWarningType.All)]
         [DataMember(Order = 6)]
@@ -1688,6 +1912,9 @@ namespace SharedLib.Configuration
             set;
         }
 
+        /// <summary>
+        /// Gets or sets if star menu is disabled.
+        /// </summary>
         [Category("Shell")]
         [Description("Enables or disables shell start menu.")]
         [DefaultValue(false)]
@@ -1697,6 +1924,9 @@ namespace SharedLib.Configuration
             get; set;
         }
 
+        /// <summary>
+        /// Gets or sets if sticky shell is enabled.
+        /// </summary>
         [Category("Shell")]
         [Description("Enables or disables sticky shell.")]
         [DefaultValue(false)]
@@ -1706,13 +1936,16 @@ namespace SharedLib.Configuration
             get; set;
         }
 
+        /// <summary>
+        /// Gets or sets if desktop switching is disabled.
+        /// </summary>
         [Category("Shell")]
         [Description("Enables or disables desktop switching.")]
         [DefaultValue(true)]
         [DataMember(Order = 10)]
         public bool DisableDesktopSwitching
         {
-            get;set;
+            get; set;
         }
 
         #endregion       
@@ -1820,6 +2053,11 @@ namespace SharedLib.Configuration
         #endregion
 
         #region IComparable
+        /// <summary>
+        /// Compares configuration.
+        /// </summary>
+        /// <param name="other">Other instance.</param>
+        /// <returns>True if configuration equals the <paramref name="other"/>, otherwise false.</returns>
         public int CompareTo(ServiceConnectionConfig other)
         {
             int result;
@@ -1851,12 +2089,18 @@ namespace SharedLib.Configuration
     #endregion
 
     #region MANAGERCONFIG
+    /// <summary>
+    /// Mamager configuration class.
+    /// </summary>
     [Category("Manager")]
     [Serializable()]
     [DataContract()]
     public class ManagerConfig : ConfigBase
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
         public ManagerConfig()
         {
             Modules = new List<ManagerModuleConfig>();
@@ -1888,6 +2132,9 @@ namespace SharedLib.Configuration
             }
         }
 
+        /// <summary>
+        /// Gets or sets last used operator name.
+        /// </summary>
         [Category("Manager")]
         [DataMember(Order = 0, IsRequired = false, EmitDefaultValue = false)]
         public string LastOperator
@@ -1895,6 +2142,9 @@ namespace SharedLib.Configuration
             get; set;
         }
 
+        /// <summary>
+        /// Gets or sets manager language.
+        /// </summary>
         [Category("Manager")]
         [DataMember(Order = 0, IsRequired = false, EmitDefaultValue = false)]
         public string Language
@@ -1902,6 +2152,9 @@ namespace SharedLib.Configuration
             get; set;
         }
 
+        /// <summary>
+        /// Gets or sets manager modules configurations.
+        /// </summary>
         [Category("Modules")]
         [DataMember(EmitDefaultValue = true)]
         public List<ManagerModuleConfig> Modules
@@ -1909,6 +2162,9 @@ namespace SharedLib.Configuration
             get; set;
         }
 
+        /// <summary>
+        /// Gets or sets if overlay detail is enabled.
+        /// </summary>
         [Category("User Interface")]
         [DataMember()]
         public bool OverlayDetailEnabled
@@ -1924,19 +2180,35 @@ namespace SharedLib.Configuration
         [DataMember()]
         public UserSearchFields ExtendedUserSearchFields
         {
-            get;set;
+            get; set;
         }
 
+        /// <summary>
+        /// Gets or sets if user search should be prefered.
+        /// </summary>
         [Category("Functionality")]
         [DataMember()]
         public bool PreferUserSearch
         {
-            get;set;
+            get; set;
         }
 
+        /// <summary>
+        /// POS Devices config.
+        /// </summary>
         [Category("Devices")]
         [DataMember()]
         public DevicesConfig Devices
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets notification settings.
+        /// </summary>
+        [Category("Notifications")]
+        [DataMember()]
+        public ManagerNotificationsConfig Notifications
         {
             get; set;
         }
@@ -1946,6 +2218,9 @@ namespace SharedLib.Configuration
     #endregion    
 
     #region MANAGERMODULECONFIG
+    /// <summary>
+    /// Manager modules configuration class.
+    /// </summary>
     [Category("Modules")]
     [Serializable()]
     [DataContract()]
@@ -1972,6 +2247,9 @@ namespace SharedLib.Configuration
     #endregion
 
     #region DEVICESCONFIG
+    /// <summary>
+    /// Manager devices configuration class.
+    /// </summary>
     [Category("Devices")]
     [Serializable()]
     [DataContract()]
@@ -1979,6 +2257,9 @@ namespace SharedLib.Configuration
     {
         #region PROPERTIES
 
+        /// <summary>
+        /// Gets or sets cash drawer configuration.
+        /// </summary>
         [Category("Cash Drawer")]
         [DataMember()]
         public POSDeviceConfig CashDrawer
@@ -1986,6 +2267,9 @@ namespace SharedLib.Configuration
             get; set;
         }
 
+        /// <summary>
+        /// Gets or sets barcode scanner configuration.
+        /// </summary>
         [Category("Barcode Scanner")]
         [DataMember()]
         public POSDeviceConfig BarcodeScanner
@@ -1993,6 +2277,9 @@ namespace SharedLib.Configuration
             get; set;
         }
 
+        /// <summary>
+        /// Gets or sets pos printer configuration.
+        /// </summary>
         [Category("POS Printer")]
         [DataMember()]
         public POSDevicePrinterConfig Printer
@@ -2005,6 +2292,9 @@ namespace SharedLib.Configuration
     #endregion
 
     #region POSDEVICECONFIG
+    /// <summary>
+    /// POS device configuration.
+    /// </summary>
     [Category("Devices")]
     [Serializable()]
     [DataContract()]
@@ -2012,12 +2302,18 @@ namespace SharedLib.Configuration
     {
         #region PROPERTIES
 
+        /// <summary>
+        /// Gets or sets device name.
+        /// </summary>
         [DataMember(Order = 0)]
         public string Name
         {
             get; set;
         }
 
+        /// <summary>
+        /// Gets or sets device provider.
+        /// </summary>
         [DataMember(Order = 1)]
         public string Provider
         {
@@ -2029,6 +2325,9 @@ namespace SharedLib.Configuration
     #endregion
 
     #region POSDEVICEPRINTERCONFIG
+    /// <summary>
+    /// POS printer configuration.
+    /// </summary>
     [Category("Devices")]
     [Serializable()]
     [DataContract()]
@@ -2063,19 +2362,58 @@ namespace SharedLib.Configuration
         [DataMember()]
         public bool DepositReceiptEnabled
         {
-            get;set;
+            get; set;
         }
 
+        /// <summary>
+        /// Gets or sets receipt count.
+        /// </summary>
         [DataMember()]
         public int? ReceiptCount
         {
-            get;set;
+            get; set;
         }
 
+        /// <summary>
+        /// Gets or sets deposit receipt count.
+        /// </summary>
         [DataMember()]
         public int? DepositReceiptCount
         {
-            get;set;
+            get; set;
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #region MANAGERNOTIFICATIONSCONFIG
+    /// <summary>
+    /// Manager notifications config.
+    /// </summary>
+    [DataContract()]
+    [Serializable()]
+    public class ManagerNotificationsConfig : ConfigBase
+    {
+        #region PROPERTIES
+
+        /// <summary>
+        /// Indicates if new order sound is enabled.
+        /// </summary>
+        [DefaultValue(false)]
+        [DataMember()]
+        public bool NewOrderSoundEnabled
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// New order sound file path.
+        /// </summary>
+        [DataMember()]
+        public string NewOrderSoundFile
+        {
+            get; set;
         }
 
         #endregion
@@ -2162,22 +2500,38 @@ namespace SharedLib.Configuration
             get; set;
         }
 
+        /// <summary>
+        /// Gets or sets default app sorting.
+        /// </summary>
+        [DefaultValue(AppSort.DateAdded)]
+        [DataMember()]
+        public AppSort DefaultAppSort
+        {
+            get;set;
+        }
+
         #endregion
 
         #region OVERRIDES
 
+        /// <summary>
+        /// Sets default values.
+        /// </summary>
         public override void SetDefaults()
         {
             base.SetDefaults();
 
             Rotator?.SetDefaults();
-        } 
+        }
 
         #endregion
     }
     #endregion
 
     #region ROTATORCONFIG
+    /// <summary>
+    /// Rotator configuration.
+    /// </summary>
     [Category("Rotator")]
     [Serializable()]
     [DataContract()]
@@ -2210,9 +2564,9 @@ namespace SharedLib.Configuration
         /// </summary>
         [DefaultValue(RotatorFileOrder.Random)]
         [DataMember()]
-        public RotatorFileOrder RotatorFileOrder
+        public RotatorFileOrder FileOrder
         {
-            get;set;
+            get; set;
         }
 
         #endregion

@@ -3,12 +3,18 @@ using System.Runtime.Serialization;
 
 namespace ServerService
 {
-    #region HOSTIDARGSBASE
+    /// <summary>
+    /// Base arguments for host events.
+    /// </summary>
     [Serializable()]
     [DataContract()]
     public abstract class HostIdArgsBase : EventArgs
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="hostId">Host id.</param>
         public HostIdArgsBase(int hostId)
             : base()
         {
@@ -28,5 +34,4 @@ namespace ServerService
         }
         #endregion
     }
-    #endregion
 }

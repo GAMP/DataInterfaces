@@ -8,6 +8,14 @@ namespace CoreLib.Hooking
     public class MouseHookEventArgs : HookEventArgsBase
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="x">X position.</param>
+        /// <param name="y">Y position.</param>
+        /// <param name="extra">Extra data.</param>
+        /// <param name="hitTest">Hit test.</param>
+        /// <param name="hWnd">Window handle.</param>
         public MouseHookEventArgs(int x, int y, int extra, int hitTest, IntPtr hWnd)
         {
             X = x;
@@ -68,9 +76,12 @@ namespace CoreLib.Hooking
         #endregion
 
         #region OVERRIDES
+        /// <summary>
+        /// Converts to string.
+        /// </summary>
         public override string ToString()
         {
-            return String.Format("X:{0} Y{1} HWND{2} HITTEST{3} EXTRA{4}", X, Y, Hwnd, HitTest, Extra);
+            return string.Format("X:{0} Y{1} HWND{2} HITTEST{3} EXTRA{4}", X, Y, Hwnd, HitTest, Extra);
         }
         #endregion
     }

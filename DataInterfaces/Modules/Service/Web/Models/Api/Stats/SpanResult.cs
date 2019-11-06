@@ -25,6 +25,9 @@ namespace ServerService
 
         #region PROPERTIES
 
+        /// <summary>
+        /// Gets total seconds.
+        /// </summary>
         [DataMember(Order = 2)]
         [ProtoMember(3)]
         public double TotalSeconds
@@ -32,6 +35,9 @@ namespace ServerService
             get; protected set;
         }
 
+        /// <summary>
+        /// Gets total minutes.
+        /// </summary>
         [DataMember(Order = 1)]
         [ProtoMember(2)]
         public double TotalMinutes
@@ -39,6 +45,9 @@ namespace ServerService
             get { return TimeSpan.FromSeconds(TotalSeconds).TotalMinutes; }
         }
 
+        /// <summary>
+        /// Gets total hours.
+        /// </summary>
         [DataMember(Order = 0)]
         [ProtoMember(1)]
         public double TotalHours

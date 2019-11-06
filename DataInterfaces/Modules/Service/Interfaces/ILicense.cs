@@ -2,8 +2,13 @@
 
 namespace ServerService
 {
+    /// <summary>
+    /// Service license interface.
+    /// </summary>
     public interface ILicense
     {
+        #region PROPERTIES
+
         /// <summary>
         /// Gets total count.
         /// </summary>
@@ -72,6 +77,8 @@ namespace ServerService
         /// <summary>
         /// Gets trial expiration date.
         /// </summary>
-        DateTime TrialExpires { get; }  
+        DateTime TrialExpires { get; }   
+
+        #endregion
     }
 }

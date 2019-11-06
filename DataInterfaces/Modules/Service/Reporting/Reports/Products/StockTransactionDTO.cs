@@ -1,19 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ServerService.Reporting.Reports.Products
 {
+    /// <summary>
+    /// Stock Transaction.
+    /// </summary>
     [Serializable]
     [DataContract]
     public class StockTransactionDTO
     {
+        /// <summary>
+        /// The creation time of the transaction.
+        /// </summary>
         [DataMember]
         public DateTime CreatedTime { get; set; }
 
+        /// <summary>
+        /// Number of items left in stock after the transaction.
+        /// </summary>
         [DataMember]
         public decimal OnHand { get; set; }
     }

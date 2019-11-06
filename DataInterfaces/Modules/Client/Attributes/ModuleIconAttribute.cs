@@ -11,6 +11,10 @@ namespace Client
     {
         #region CONSTRUCTOR
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="iconResource">Icon resource.</param>
         public ModuleIconAttribute(string iconResource)
         {
             if (string.IsNullOrWhiteSpace(iconResource))

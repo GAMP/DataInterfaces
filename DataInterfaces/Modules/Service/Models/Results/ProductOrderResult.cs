@@ -15,14 +15,25 @@ namespace ServerService
     {
         #region CONSTRUCTOR
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
         public ProductOrderResult()
         { }
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="result">Order result.</param>
         public ProductOrderResult(OrderResult result)
         {
             Result = result;
         }
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="failReason">Order fail reason.</param>
         public ProductOrderResult(OrderFailReason failReason)
         {
             FailReason = failReason;

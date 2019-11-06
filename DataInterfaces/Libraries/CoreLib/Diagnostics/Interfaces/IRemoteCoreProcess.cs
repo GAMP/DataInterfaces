@@ -1,11 +1,17 @@
-﻿using System;
-
-namespace CoreLib.Diagnostics
+﻿namespace CoreLib.Diagnostics
 {
-    #region IRemoteCoreProcess
+    /// <summary>
+    /// Remote core process interface.
+    /// </summary>
     public interface IRemoteCoreProcess
     {
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets message dispatcher.
+        /// </summary>
         SharedLib.Dispatcher.IMessageDispatcher Dispatcher { get; }
-    } 
-    #endregion
+
+        #endregion
+    }
 }

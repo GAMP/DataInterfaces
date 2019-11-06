@@ -9,6 +9,9 @@ namespace CyClone.Core
     public class SyncProgressEventArgs : EventArgs
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
         public SyncProgressEventArgs()
         { }
         #endregion

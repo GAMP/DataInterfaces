@@ -3,6 +3,9 @@ using System.Threading.Tasks;
 
 namespace Client
 {
+    /// <summary>
+    /// Client app image handling inteface.
+    /// </summary>
     public interface IAppImageHandler
     {
         #region FUNCTIONS

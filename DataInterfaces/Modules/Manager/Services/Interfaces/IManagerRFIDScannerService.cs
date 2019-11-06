@@ -3,6 +3,9 @@ using System.Threading.Tasks;
 
 namespace Manager.Services
 {
+    /// <summary>
+    /// RFID Scanner service.
+    /// </summary>
     public interface IManagerRFIDScannerService
     {
         #region FUNCTIONS

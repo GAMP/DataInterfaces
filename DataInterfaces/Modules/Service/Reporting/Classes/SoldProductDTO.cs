@@ -1,57 +1,71 @@
-﻿using ServerService.Reporting;
-using System;
+﻿using System;
 using System.Runtime.Serialization;
 
 namespace ServerService.Reporting
 {
+    /// <summary>
+    /// Sold Product Information.
+    /// </summary>
     [Serializable]
     [DataContract]
-    public class SoldProductDTO : NamedDecimalContainerDTO
+    public class SoldProductDTO
     {
         /// <summary>
-        /// Gets or sets the product id.
+        /// Product Id.
         /// </summary>
         [DataMember]
         public int Id { get; set; }
 
         /// <summary>
-        /// Gets or sets the unit price for this product.
+        /// Product name.
+        /// </summary>
+        [DataMember]
+        public string ProductName { get; set; }
+
+        /// <summary>
+        /// The cost of the product.
+        /// </summary>
+        [DataMember]
+        public decimal Value { get; set; }
+
+        /// <summary>
+        /// The unit price of the product.
         /// </summary>
         [DataMember]
         public decimal UnitPrice { get; set; }
 
         /// <summary>
-        /// Gets or sets the amount of items sold for this product.
+        /// The number of items sold of the product.
         /// </summary>
         [DataMember]
         public decimal Quantity { get; set; }
 
         /// <summary>
-        /// Gets or sets the tax rate for this product.
+        /// The tax rate of the product.
         /// </summary>
         [DataMember]
         public decimal TaxRate { get; set; }
 
         /// <summary>
-        /// Gets or sets the tax amount for this product.
+        /// The tax amount of the product.
         /// </summary>
         [DataMember]
         public decimal Tax { get; set; }
 
         /// <summary>
-        /// Gets or sets the amount of items returned for this product.
+        /// The number of items returned of the product.
         /// </summary>
         [DataMember]
         public decimal Returned { get; set; }
 
         /// <summary>
-        /// Gets or sets the cost in points for this product.
+        /// The cost in points of the product.
         /// </summary>
         [DataMember]
         public int? Points { get; set; }
 
         /// <summary>
-        /// Gets or sets the points award for this product.
+        /// The points award of the product.
         /// </summary>
         [DataMember]
         public int PointsAward { get; set; }

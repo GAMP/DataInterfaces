@@ -55,6 +55,8 @@
     <Prefer32Bit>false</Prefer32Bit>
     <LangVersion>latest</LangVersion>
     <DocumentationFile>bin\Debug\DataInterfaces.xml</DocumentationFile>
+    <NoWarn>
+    </NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -91,15 +93,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\GizmoService\packages\Microsoft.Xaml.Behaviors.Wpf.1.0.1\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\Manager\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.3\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="protobuf-net, Version=2.4.0.0, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
-      <HintPath>..\..\GizmoService\packages\protobuf-net.2.4.0\lib\net40\protobuf-net.dll</HintPath>
+      <HintPath>..\..\Manager\packages\protobuf-net.2.4.1\lib\net40\protobuf-net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -150,6 +152,14 @@
     <Compile Include="Libraries\CoreLib\Enumerations\ProcessExitCode.cs" />
     <Compile Include="Libraries\CoreLib\Enumerations\RestrictionType.cs" />
     <Compile Include="Libraries\CoreLib\Extensions\Byte.cs" />
+    <Compile Include="Libraries\GizmoDALV2\Enumerations\SQLStringSize.cs" />
+    <Compile Include="Libraries\GizmoDALV2\Exceptions\NonUniqueEntityException.cs" />
+    <Compile Include="Libraries\SharedLib\Classes\PropertyChangedEventArgsEx.cs" />
+    <Compile Include="Libraries\SharedLib\Dispatcher\EventArgs\DispatcherConnectionEventArgs.cs" />
+    <Compile Include="Libraries\SharedLib\Dispatcher\EventArgs\DispatcherExceptionEventArgs.cs" />
+    <Compile Include="Libraries\SharedLib\Dispatcher\EventArgs\DispatcherStateEventArgs.cs" />
+    <Compile Include="Libraries\SharedLib\Dispatcher\EventArgs\OperationEventArgsBase.cs" />
+    <Compile Include="Libraries\SharedLib\Dispatcher\EventArgs\OperationUpdateArgs.cs" />
     <Compile Include="Libraries\SkinInterfaces\Extensions\CollectionView.cs" />
     <Compile Include="Libraries\SkinInterfaces\Extensions\DataGrid.cs" />
     <Compile Include="Libraries\CoreLib\Extensions\DateTime.cs" />
@@ -184,9 +194,7 @@
     <Compile Include="Libraries\cyClone\Core\Interfaces\IBufferManager.cs" />
     <Compile Include="Libraries\cyClone\Core\Interfaces\IcyMapping.cs" />
     <Compile Include="Libraries\cyClone\Security\Delegates.cs" />
-    <Compile Include="Libraries\GizmoDALV2\DataSize.cs" />
-    <Compile Include="Libraries\IntegrationLib\Classes\ApiParameterDocAttribute.cs" />
-    <Compile Include="Libraries\IntegrationLib\Classes\ApiDocAttribute.cs" />
+    <Compile Include="Libraries\GizmoDALV2\Enumerations\SQLByteArraySize.cs" />
     <Compile Include="Libraries\IntegrationLib\Enumerations\LoginResult.cs" />
     <Compile Include="Libraries\NetLib\EventArgs\ConnectDisconnectEventArgs.cs" />
     <Compile Include="Libraries\NetLib\EventArgs\ConnectionChangedArgs.cs" />
@@ -206,6 +214,7 @@
     <Compile Include="Modules\Client\EventArgs\OutOfOrderStateEventArgs.cs" />
     <Compile Include="Modules\Client\EventArgs\OverlayEventArgs.cs" />
     <Compile Include="Modules\Client\EventArgs\ProfilesChangeEventArgs.cs" />
+    <Compile Include="Modules\Client\EventArgs\ReservationChangeEventArgs.cs" />
     <Compile Include="Modules\Client\EventArgs\SecurityStateArgs.cs" />
     <Compile Include="Modules\Client\EventArgs\UserEventArgs.cs" />
     <Compile Include="Modules\Client\EventArgs\UserProfileChangeArgs.cs" />
@@ -221,9 +230,18 @@
     <Compile Include="Modules\Manager\Enumerations\ManagerMessageDialogResult.cs" />
     <Compile Include="Modules\Manager\Enumerations\ManagerMessageDialogStyle.cs" />
     <Compile Include="Modules\Manager\Enumerations\UserSearchFields.cs" />
+    <Compile Include="Modules\Manager\ViewModels\Enumerations\InvoiceFilterStatus.cs" />
+    <Compile Include="Modules\Manager\ViewModels\Enumerations\NotificationType.cs" />
+    <Compile Include="Modules\Service\Classes\HtmlToPdfConverterSettings.cs" />
+    <Compile Include="Modules\Service\Classes\MailAttachement.cs" />
     <Compile Include="Modules\Service\Interfaces\Extensibility\IUserServiceAsync.cs" />
+    <Compile Include="Modules\Service\Interfaces\Services\IHtmlToPdfConverterService.cs" />
     <Compile Include="Modules\Service\Interfaces\Services\IHtmlViewLocalizerService.cs" />
+    <Compile Include="Modules\Service\Interfaces\Services\IReportMailerService.cs" />
+    <Compile Include="Modules\Service\Interfaces\Services\IReportExporter.cs" />
+    <Compile Include="Modules\Service\Interfaces\Services\IReportMailTaskProcessorService.cs" />
     <Compile Include="Modules\Service\Models\ProductOrderInfoProduct.cs" />
+    <Compile Include="Modules\Service\Models\Reservations\ClientReservationData.cs" />
     <Compile Include="Modules\Service\Models\Reservations\ReservationHostInfo.cs" />
     <Compile Include="Modules\Service\Models\Reservations\ReservationUserInfo.cs" />
     <Compile Include="Modules\Service\Models\Results\AccountCreationByEmailResult.cs" />
@@ -232,6 +250,7 @@
     <Compile Include="Modules\Service\Models\Results\Verifications\Base\VerificationResultBase.cs" />
     <Compile Include="Modules\Service\Models\Results\Verifications\EmailVerificationStartResult.cs" />
     <Compile Include="Modules\Service\Models\Results\Verifications\MobilePhoneVerificationStartResult.cs" />
+    <Compile Include="Modules\Service\Models\UserBaseModel.cs" />
     <Compile Include="Modules\Service\Models\UserSessionInfoExtended.cs" />
     <Compile Include="Modules\Service\Models\Ordering\ClientProductOrder.cs" />
     <Compile Include="Modules\Service\Models\Ordering\ClientProductOrderEntry.cs" />
@@ -240,6 +259,8 @@
     <Compile Include="Modules\Service\Models\Reports\Items\OperatorInvoicePaymentSummary.cs" />
     <Compile Include="Modules\Service\Models\Reports\Items\SaleReportProductEntry.cs" />
     <Compile Include="Modules\Service\Models\ResourceCreatedByInfo.cs" />
+    <Compile Include="Modules\Service\Models\User\UserAddParameters.cs" />
+    <Compile Include="Modules\Service\Models\User\UserUpdateParameters.cs" />
     <Compile Include="Modules\Service\Models\WaitingLineInfo.cs" />
     <Compile Include="Libraries\GizmoDALV2\Enumerations\EntityEventType.cs" />
     <Compile Include="Libraries\GizmoDALV2\EventArgs\EntityEventArgs.cs" />
@@ -403,8 +424,8 @@
     <Compile Include="Modules\Service\Classes\BackupInfo.cs" />
     <Compile Include="Modules\Service\Models\Results\BackupResult.cs" />
     <Compile Include="Modules\Service\Models\Filters\DepositTransactionInfoFilter.cs" />
-    <Compile Include="Modules\Service\Models\Filters\FinancialTransactionFilterBase.cs" />
-    <Compile Include="Modules\Service\Models\Filters\TakeSkipFilterBase.cs" />
+    <Compile Include="Modules\Service\Models\Filters\Base\FinancialTransactionFilterBase.cs" />
+    <Compile Include="Modules\Service\Models\Filters\Base\TakeSkipFilterBase.cs" />
     <Compile Include="Modules\Service\Models\LicenseKeyReservationInfo.cs" />
     <Compile Include="Modules\Service\Models\Reports\Items\OperatorBasicSummary.cs" />
     <Compile Include="Modules\Service\Models\OrderLineState.cs" />
@@ -429,7 +450,76 @@
     <Compile Include="Modules\Service\Models\Reports\ShiftReport.cs" />
     <Compile Include="Modules\Service\Models\Reports\ShiftSummaryReport.cs" />
     <Compile Include="Modules\Service\Models\Reports\SaleSummaryReport.cs" />
+    <Compile Include="Modules\Service\Reporting\Classes\ExportFilterViewModel.cs" />
+    <Compile Include="Modules\Service\Reporting\Classes\ReportMailRecipient.cs" />
+    <Compile Include="Modules\Service\Reporting\Classes\ReportScheduledTaskExecution.cs" />
+    <Compile Include="Modules\Service\Reporting\Interfaces\IReportFilterViewModel.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Applications\LicenseReportFilterViewModel.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Applications\ApplicationReportFilterViewModel.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Assets\AssetDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Classes\ChartGroupDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Classes\ExportFilterValueDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Classes\ExportFieldDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Classes\ExportRowDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Classes\ExportDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Classes\ReportMailTask.cs" />
+    <Compile Include="Modules\Service\Reporting\Classes\ReportScheduledTask.cs" />
+    <Compile Include="Modules\Service\Reporting\Enumerations\ReportPeriodTypes.cs" />
+    <Compile Include="Modules\Service\Reporting\Enumerations\ReportTypes.cs" />
+    <Compile Include="Modules\Service\Reporting\Interfaces\IReportFilter.cs" />
+    <Compile Include="Modules\Service\Reporting\Classes\OrderDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Classes\ReportFilterBaseDTO.cs" />
     <Compile Include="Modules\Service\Reporting\Classes\ErrorDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Classes\AutocompleteListItemDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Classes\UserSessionDetailsDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Enumerations\ExportFieldTypes.cs" />
+    <Compile Include="Modules\Service\Reporting\Enumerations\ExportTypes.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Applications\ApplicationsReportFilterViewModel.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Applications\ExecutableExecutionInfoDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Applications\LicenseInfoDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Applications\ApplicationReportFilterDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Applications\ApplicationReportDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Applications\LicenseReportDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Applications\LicensesReportDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Applications\LicenseReportFilterDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Applications\LicensesReportFilterViewModel.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Applications\LicensesReportFilterDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Applications\ExecutableInfoDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Applications\LicenseUsageInfoDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Assets\AssetsLogReportFilterViewModel.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Financial\Enumerations\OrdersLogReportTypes.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Financial\FinancialReportFilterViewModel.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Financial\InvoiceReportFilterViewModel.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Financial\InvoicesLogReportFilterViewModel.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Financial\OrdersLogReportFilterViewModel.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Financial\OrdersLogReportFilterDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Financial\OrdersLogReportDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Financial\ZLogReportFilterViewModel.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\HostUsage\HostUsageReportFilterViewModel.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Overview\OverviewReportFilterViewModel.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Products\Enumerations\ProductTransactionTypes.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Products\ProductsLogReportFilterViewModel.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Products\ProductTransactionDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Products\ProductReportFilterViewModel.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Products\ProductsReportDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Products\ProductsReportFilterViewModel.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Products\ProductsReportFilterDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Products\ProductsLogReportDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Products\ProductsLogReportFilterDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Products\StockReportFilterViewModel.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Shifts\ShiftsLogReportFilterViewModel.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Transactions\TransactionsLogReportFilterViewModel.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Users\Enumerations\UserReportTypes.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Users\SessionsLogReportDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Users\SessionsLogReportFilterViewModel.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Users\SessionsLogReportFilterDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Users\UserDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Users\UserExportRecordDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Users\UserReportDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Classes\ExportFilterDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Users\UserReportFilterDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Users\UserReportFilterViewModel.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Users\UsersReportFilterViewModel.cs" />
     <Compile Include="Modules\Service\Web\Models\Api\Stats\SpanResult.cs" />
     <Compile Include="Modules\Service\Models\UsageSessionInfo.cs" />
     <Compile Include="Modules\Service\Models\UserBalance.cs" />
@@ -444,17 +534,17 @@
     <Compile Include="Modules\Service\Models\UserProductTime.cs" />
     <Compile Include="Modules\Service\Reporting\Classes\AccountTransactionDTO.cs" />
     <Compile Include="Modules\Service\Reporting\Classes\ChartRecordPeriodDTO.cs" />
-    <Compile Include="Modules\Service\Reporting\Classes\TimeUsageChartRecordDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Products\TimeUsageChartRecordDTO.cs" />
     <Compile Include="Modules\Service\Reporting\Classes\ExpirableProductDTO.cs" />
     <Compile Include="Modules\Service\Reporting\Classes\RefundDTO.cs" />
-    <Compile Include="Modules\Service\Reporting\Reports\Apps\AppDetailsDTO.cs" />
-    <Compile Include="Modules\Service\Reporting\Reports\Apps\TopAppsReportDTO.cs" />
-    <Compile Include="Modules\Service\Reporting\Reports\Apps\TopAppsReportFilterDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Applications\ApplicationInfoDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Applications\ApplicationsReportDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Applications\ApplicationsReportFilterDTO.cs" />
     <Compile Include="Modules\Service\Reporting\Reports\Assets\AssetTransactionDTO.cs" />
     <Compile Include="Modules\Service\Reporting\Reports\Assets\AssetsLogReportDTO.cs" />
     <Compile Include="Modules\Service\Reporting\Reports\Assets\AssetsLogReportFilterDTO.cs" />
     <Compile Include="Modules\Service\Reporting\Classes\ChartRecordDTO.cs" />
-    <Compile Include="Modules\Service\Reporting\Classes\DateUtilizationChartDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Classes\PeriodUtilizationChartRecordDTO.cs" />
     <Compile Include="Modules\Service\Reporting\Reports\Financial\Enumerations\InvoicesLogVoidedStatusTypes.cs" />
     <Compile Include="Modules\Service\Reporting\Reports\Financial\Enumerations\InvoicesLogPaymentStatusTypes.cs" />
     <Compile Include="Modules\Service\Reporting\Classes\InvoiceDTO.cs" />
@@ -468,23 +558,21 @@
     <Compile Include="Modules\Service\Reporting\Reports\Financial\InvoiceReportFilterDTO.cs" />
     <Compile Include="Modules\Service\Reporting\Reports\Financial\FinancialReportFilterDTO.cs" />
     <Compile Include="Modules\Service\Reporting\Reports\Financial\FinancialReportUserGroupInvoicesDTO.cs" />
-    <Compile Include="Modules\Service\Reporting\Reports\HostUsage\HostsGroupDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\HostUsage\HostGroupUsageInfoDTO.cs" />
     <Compile Include="Modules\Service\Reporting\Reports\HostUsage\HostUsageReportDTO.cs" />
     <Compile Include="Modules\Service\Reporting\Reports\HostUsage\HostUsageReportFilterDTO.cs" />
-    <Compile Include="Modules\Service\Reporting\Reports\HostUsage\SessionCostGroupedDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\HostUsage\UserSessionCostGroupDTO.cs" />
     <Compile Include="Modules\Service\Reporting\Classes\InvoiceLineDTO.cs" />
     <Compile Include="Modules\Service\Reporting\Classes\InvoicePaymentDTO.cs" />
-    <Compile Include="Modules\Service\Reporting\Classes\InvoicesInfoDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Financial\FinancialSummaryRecordDTO.cs" />
     <Compile Include="Modules\Service\Reporting\Classes\MemberCountersDTO.cs" />
     <Compile Include="Modules\Service\Reporting\Classes\NamedDecimalContainerDTO.cs" />
-    <Compile Include="Modules\Service\Reporting\Classes\NamedInstanceDTO.cs" />
-    <Compile Include="Modules\Service\Reporting\Classes\NamedIntegerContainerDTO.cs" />
     <Compile Include="Modules\Service\Enumerations\BackupResultCode.cs" />
     <Compile Include="Modules\Service\Enumerations\GizmoClaimTypes.cs" />
     <Compile Include="Modules\Service\Enumerations\ReportEntryType.cs" />
     <Compile Include="Modules\Service\Enumerations\UsageType.cs" />
-    <Compile Include="Modules\Service\Reporting\Reports\Financial\Enumerations\FinancialReportType.cs" />
-    <Compile Include="Modules\Service\Reporting\Reports\HostUsage\Enumerations\HostUsageReportType.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Financial\Enumerations\FinancialReportTypes.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\HostUsage\Enumerations\HostUsageReportTypes.cs" />
     <Compile Include="Modules\Service\Reporting\Reports\Transactions\Enumerations\OperatorsLogActionTypes.cs" />
     <Compile Include="Modules\Service\Reporting\Classes\ListItemDTO.cs" />
     <Compile Include="Modules\Service\Reporting\Reports\Transactions\OperatorTransactionDTO.cs" />
@@ -502,17 +590,16 @@
     <Compile Include="Modules\Service\Reporting\Reports\Products\StockReportDTO.cs" />
     <Compile Include="Modules\Service\Reporting\Reports\Products\StockReportFilterDTO.cs" />
     <Compile Include="Modules\Service\Reporting\Classes\ReportBaseDTO.cs" />
-    <Compile Include="Modules\Service\Reporting\Classes\ReportFilterBaseDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Classes\DateRangeReportFilterBaseDTO.cs" />
     <Compile Include="Modules\Service\Reporting\Classes\UserSessionDTO.cs" />
-    <Compile Include="Modules\Service\Reporting\Classes\SessionCostBaseDTO.cs" />
-    <Compile Include="Modules\Service\Reporting\Classes\SessionCostDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Classes\UserSessionCostDTO.cs" />
     <Compile Include="Modules\Service\Reporting\Reports\Shifts\ShiftDetailsDTO.cs" />
     <Compile Include="Modules\Service\Reporting\Reports\Shifts\ShiftDTO.cs" />
     <Compile Include="Modules\Service\Reporting\Reports\Shifts\ShiftsLogReportDTO.cs" />
     <Compile Include="Modules\Service\Reporting\Reports\Shifts\ShiftsLogReportFilterDTO.cs" />
-    <Compile Include="Modules\Service\Reporting\Reports\Users\UserDetailsDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Users\TopUserInfoDTO.cs" />
     <Compile Include="Modules\Service\Reporting\Reports\Users\TopUsersReportDTO.cs" />
-    <Compile Include="Modules\Service\Reporting\Reports\Users\TopUsersReportFilterDTO.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Users\UsersReportFilterDTO.cs" />
     <Compile Include="Modules\Service\Reporting\Reports\Users\TopUsersReportUserGroupDTO.cs" />
     <Compile Include="Modules\Service\Models\Reservations\ReservationInfo.cs" />
     <Compile Include="Modules\Service\Web\Models\Api\Stats\UserBaseDTO.cs" />
@@ -547,8 +634,8 @@
     <Compile Include="Modules\Service\Enumerations\Errors\StockErrorCodes.cs" />
     <Compile Include="Modules\Service\Enumerations\Errors\WaitingLineErrorCode.cs" />
     <Compile Include="Modules\Service\Enumerations\Errors\ReservationErrorCode.cs" />
-    <Compile Include="Modules\Service\Reporting\Reports\Overview\Enumerations\OverviewReportChartType.cs" />
-    <Compile Include="Modules\Service\Reporting\Reports\Shifts\Enumerations\ShiftsLogReportType.cs" />
+    <Compile Include="Modules\Service\Reporting\Enumerations\ReportChartPeriodType.cs" />
+    <Compile Include="Modules\Service\Reporting\Reports\Shifts\Enumerations\ShiftsLogReportTypes.cs" />
     <Compile Include="Modules\Service\EventArgs\AppRatedEventArgs.cs" />
     <Compile Include="Modules\Service\EventArgs\AppStatEventArgs.cs" />
     <Compile Include="Modules\Service\EventArgs\BillingOptionsChangedEventArgs.cs" />
@@ -563,7 +650,7 @@
     <Compile Include="Modules\Service\EventArgs\OrderInvoicePaymentEventArgs.cs" />
     <Compile Include="Modules\Service\EventArgs\OrderStatusChangeEventArgs.cs" />
     <Compile Include="Modules\Service\EventArgs\ReservationEventArgs.cs" />
-    <Compile Include="Modules\Service\Models\Filters\RecordFilterBase.cs" />
+    <Compile Include="Modules\Service\Models\Filters\Base\DateRangeFilterBase.cs" />
     <Compile Include="Modules\Service\Models\Filters\ReservationFilter.cs" />
     <Compile Include="Modules\Service\EventArgs\UsageSessionChangedEventArgs.cs" />
     <Compile Include="Modules\Service\EventArgs\UserBalanceCloseEventArgs.cs" />
@@ -670,7 +757,7 @@
     <Compile Include="Modules\Service\Interfaces\ILogService.cs" />
     <Compile Include="Libraries\NetLib\Delegates.cs" />
     <Compile Include="Libraries\NetLib\EventArgs\ConnectDisconnectEndpointEventArgs.cs" />
-    <Compile Include="Libraries\SharedLib\Dispatcher\EventArgs.cs" />
+    <Compile Include="Libraries\SharedLib\Dispatcher\EventArgs\OperationStateEventArgs.cs" />
     <Compile Include="Libraries\SharedLib\Interfaces\INewsFeed.cs" />
     <Compile Include="Libraries\SharedLib\Applications\IRating.cs" />
     <Compile Include="Libraries\SharedLib\Classes\InternalDate.cs" />
@@ -756,7 +843,6 @@
     <Compile Include="Modules\Service\Interfaces\ILicense.cs" />
     <Compile Include="Libraries\SharedLib\Applications\IAppProfile.cs" />
     <Compile Include="Libraries\SharedLib\Applications\ICategory.cs" />
-    <Compile Include="Libraries\SharedLib\Applications\IClonable.cs" />
     <Compile Include="Libraries\SharedLib\Applications\IDeploymentProfile.cs" />
     <Compile Include="Libraries\SharedLib\Applications\IItemVisualOptionsBase.cs" />
     <Compile Include="Libraries\SharedLib\Applications\IPersonalUserFileBase.cs" />
@@ -790,7 +876,6 @@
     <Compile Include="Libraries\SharedLib\User\Interfaces\IUserProfile.cs" />
     <Compile Include="Libraries\IntegrationLib\Interfaces\IApplicationLicense.cs" />
     <Compile Include="Libraries\SharedLib\Classes\Shared.cs" />
-    <Compile Include="Libraries\SharedLib\User\Interfaces\IUserTimeStatus.cs" />
     <Compile Include="Libraries\SharedLib\ViewModels\Interfaces\IMessageBoxModel.cs" />
     <Compile Include="Libraries\SharedLib\ViewModels\Interfaces\INotifyWindowViewModel.cs" />
     <Compile Include="Libraries\SkinInterfaces\Behaviours\CommandBehavior.cs" />

@@ -4,23 +4,29 @@ using System.Runtime.Serialization;
 
 namespace ServerService.Reporting.Reports.Financial
 {
+    /// <summary>
+    /// Financial Report Filter.
+    /// </summary>
     [Serializable]
     [DataContract]
-    public class FinancialReportFilterDTO : ReportFilterBaseDTO
+    public class FinancialReportFilterDTO : DateRangeReportFilterBaseDTO
     {
-        [DataMember]
-        public List<ListItemDTO> Operators { get; set; }
-
+        /// <summary>
+        /// Filter Operator Id.
+        /// </summary>
         [DataMember]
         public int? OperatorId { get; set; }
 
-        [DataMember]
-        public List<ListItemDTO> Registers { get; set; }
-
+        /// <summary>
+        /// Filter Register Id.
+        /// </summary>
         [DataMember]
         public int? RegisterId { get; set; }
 
+        /// <summary>
+        /// Filter Financial Report Type.
+        /// </summary>
         [DataMember]
-        public FinancialReportType ReportType { get; set; }
+        public FinancialReportTypes FinancialReportType { get; set; }
     }
 }

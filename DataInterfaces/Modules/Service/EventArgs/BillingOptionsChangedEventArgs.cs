@@ -4,15 +4,22 @@ using System.Runtime.Serialization;
 
 namespace ServerService
 {
-    #region BILLINGOPTIONSCHANGEDEVENTARGS
+    /// <summary>
+    /// Billing option changed args.
+    /// </summary>
     [Serializable()]
     [DataContract()]
     public class BillingOptionsChangedEventArgs : UserProfileChangeEventArgs
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="userId">User id.</param>
+        /// <param name="options">Billing options.</param>
         public BillingOptionsChangedEventArgs(int userId, BillingOption? options) : base(userId, UserChangeType.BillingOptions)
         {
-            this.Options = options;
+            Options = options;
         }
         #endregion
 
@@ -20,11 +27,11 @@ namespace ServerService
         /// <summary>
         /// Gets billing options.
         /// </summary>
+        [DataMember()]
         public BillingOption? Options
         {
             get; protected set;
         }
         #endregion
     }
-    #endregion
 }

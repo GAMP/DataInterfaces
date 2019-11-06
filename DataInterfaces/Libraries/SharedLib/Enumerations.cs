@@ -4,62 +4,147 @@ using Localization;
 
 namespace SharedLib
 {
-    #region ActivationType
+    #region OBSOLETE
+
+    #region CONTAINERITEMEVENTTYPE
+    /// <summary>
+    /// Container event types.
+    /// </summary>
+    [Serializable()]
+    [Obsolete()]
+    public enum ContainerItemEventType
+    {
+        /// <summary>
+        /// Occours when item is added to container.
+        /// <remarks>NewItems propery contains added items.</remarks>
+        /// </summary>
+        Added = 0,
+        /// <summary>
+        /// Occours when shared item is unasigned.
+        /// <remarks>NewItems propery contains unasigned items.</remarks>
+        /// </summary>
+        UnAssigned = 4,
+        /// <summary>
+        /// Occours when item is removed from container.
+        /// <remarks>NewItems propery contains removed items.</remarks>
+        /// </summary>
+        Removed = 8,
+        /// <summary>
+        /// Occours when item is replaced/updated.
+        /// </summary>
+        Replaced = 16,
+    }
+    #endregion
+
+    #endregion
+
+    #region ACTIVATIONTYPE
     /// <summary>
     /// Common activation deactivation types.
     /// </summary>
     [Flags()]
     public enum ActivationType
     {
+        /// <summary>
+        /// Disabled.
+        /// </summary>
         [Description("Disabled")]
         Disabled = 0,
+        /// <summary>
+        /// Startup.
+        /// </summary>
         [Description("Startup")]
         Startup = 1,
+        /// <summary>
+        /// Shut down.
+        /// </summary>
         [Description("Shutdown")]
         Shutdown = 2,
+        /// <summary>
+        /// Login.
+        /// </summary>
         [Description("Login")]
         Login = 4,
+        /// <summary>
+        /// Logout.
+        /// </summary>
         [Description("Logout")]
         Logout = 8,
+        /// <summary>
+        /// Pre launch.
+        /// </summary>
         [Description("Pre Launch")]
         PreLaunch = 16,
+        /// <summary>
+        /// Pre deploy.
+        /// </summary>
         [Description("Pre Deploy")]
         PreDeploy = 32,
+        /// <summary>
+        /// Post termination.
+        /// </summary>
         [Description("Post Termination")]
         PostTermination = 64,
+        /// <summary>
+        /// Pre license management.
+        /// </summary>
         [Description("Pre License Management")]
         PreLicenseManagement = 128,
     }
     #endregion
 
-    #region TaskType
+    #region TASKTYPE
+    /// <summary>
+    /// Task types.
+    /// </summary>
     [Serializable()]
     public enum TaskType
     {
+        /// <summary>
+        /// Process.
+        /// </summary>
         [CanUserAssign(true)]
         [Localized("TASK_PROCESS")]
         [Description("Process")]
         Process,
+        /// <summary>
+        /// Script.
+        /// </summary>
         [CanUserAssign(true)]
         [Localized("TASK_SCRIPT")]
         [Description("Script")]
         Script,
+        /// <summary>
+        /// File system.
+        /// </summary>
         [Obsolete()]
         [CanUserAssign(false)]
         [Description("File System")]
         FileSystem,
+        /// <summary>
+        /// Chain.
+        /// </summary>
         [Obsolete()]
         [CanUserAssign(false)]
         [Description("Task Chain")]
         Chain,
+        /// <summary>
+        /// Notification.
+        /// </summary>
         [CanUserAssign(true)]
         [Localized("TASK_NOTIFICATION")]
         [Description("Notification")]
         Notification,
+        /// <summary>
+        /// Junction.
+        /// </summary>
         [CanUserAssign(true)]
         [Localized("TASK_JUNCTION")]
         [Description("Junction")]
         Junction,
+        /// <summary>
+        /// All types.
+        /// </summary>
         [CanUserAssign(false)]
         [Localized("ALL")]
         [Description("All Types")]
@@ -73,11 +158,29 @@ namespace SharedLib
     /// </summary>
     public enum QueueStatus
     {
+        /// <summary>
+        /// Queued.
+        /// </summary>
         Queued = 0,
+        /// <summary>
+        /// Active.
+        /// </summary>
         Active = 1,
+        /// <summary>
+        /// Paused.
+        /// </summary>
         Paused = 2,
+        /// <summary>
+        /// Canceled.
+        /// </summary>
         Canceled = 3,
+        /// <summary>
+        /// Failed.
+        /// </summary>
         Failed = 4,
+        /// <summary>
+        /// Completed.
+        /// </summary>
         Completed = 5,
     }
     #endregion
@@ -234,10 +337,25 @@ namespace SharedLib
     /// </summary>
     public enum ClientEventTypes
     {
+        /// <summary>
+        /// Lock state.
+        /// </summary>
         LockState,
+        /// <summary>
+        /// Id change.
+        /// </summary>
         IdChange,
+        /// <summary>
+        /// Security state.
+        /// </summary>
         SecurityState,
+        /// <summary>
+        /// Out of order state.
+        /// </summary>
         OutOfOrderState,
+        /// <summary>
+        /// Maintenance.
+        /// </summary>
         Maintenance,
     }
     #endregion
@@ -366,33 +484,7 @@ namespace SharedLib
         /// </summary>
         ExecutingTask,
     }
-    #endregion
-
-    #region CONTAINERITEMEVENTTYPE
-    [Serializable()]
-    public enum ContainerItemEventType
-    {
-        /// <summary>
-        /// Occours when item is added to container.
-        /// <remarks>NewItems propery contains added items.</remarks>
-        /// </summary>
-        Added = 0,
-        /// <summary>
-        /// Occours when shared item is unasigned.
-        /// <remarks>NewItems propery contains unasigned items.</remarks>
-        /// </summary>
-        UnAssigned = 4,
-        /// <summary>
-        /// Occours when item is removed from container.
-        /// <remarks>NewItems propery contains removed items.</remarks>
-        /// </summary>
-        Removed = 8,
-        /// <summary>
-        /// Occours when item is replaced/updated.
-        /// </summary>
-        Replaced = 16,
-    }
-    #endregion
+    #endregion    
 
     #region LOGOUTACTION
     /// <summary>
@@ -400,84 +492,180 @@ namespace SharedLib
     /// </summary>
     public enum LogoutAction
     {
+        /// <summary>
+        /// No action.
+        /// </summary>
         [Localized("LOGOUT_ACTION_NONE")]
         NoAction = -1,
+        /// <summary>
+        /// Reboot.
+        /// </summary>
         [Localized("LOGOUT_ACTION_REBOOT")]
         Reboot = 0,
+        /// <summary>
+        /// Close programs.
+        /// </summary>
         [Localized("LOGOUT_ACTION_CLOSE_PROGRAMS")]
         ClosePrograms = 1,
+        /// <summary>
+        /// Turn off.
+        /// </summary>
         [Localized("LOGOUT_ACTION_TURN_OFF")]
         TurnOff = 2,
+        /// <summary>
+        /// Log off.
+        /// </summary>
         [Localized("LOGOUT_ACTION_LOG_OFF")]
         LogOff = 3,
+        /// <summary>
+        /// Stand by.
+        /// </summary>
         [Localized("LOGOUT_ACTION_STAND_BY")]
         StandBy = 4,
+        /// <summary>
+        /// Maintenance.
+        /// </summary>
         AdminMode = 5,
     }
     #endregion
 
     #region NOTIFICATIONBUTTONS
+    /// <summary>
+    /// Notfication buttons.
+    /// </summary>
     public enum NotificationButtons
     {
+        /// <summary>
+        /// None.
+        /// </summary>
         None = 0,
+        /// <summary>
+        /// Ok.
+        /// </summary>
         Ok = 1,
+        /// <summary>
+        /// Yes.
+        /// </summary>
         Yes = 2,
+        /// <summary>
+        /// No.
+        /// </summary>
         No = 3,
+        /// <summary>
+        /// Cancel.
+        /// </summary>
         Cancel = 4,
     }
     #endregion
 
     #region TIMELEFTWARNINGTYPE
+    /// <summary>
+    /// Time left warning types.
+    /// </summary>
     [Flags()]
     public enum TimeLeftWarningType
     {
+        /// <summary>
+        /// None.
+        /// </summary>
         [Localized("TIME_LEFT_WARNING_TYPE_NONE")]
         None = 0,
+        /// <summary>
+        /// Visual.
+        /// </summary>
         [Localized("TIME_LEFT_WARNING_TYPE_VISUAL")]
         Visual = 1,
+        /// <summary>
+        /// Audible.
+        /// </summary>
         [Localized("TIME_LEFT_WARNING_TYPE_AUDIBLE")]
         Audible = 2,
+        /// <summary>
+        /// Minimize active windows.
+        /// </summary>
         [Localized("TIME_LEFT_WARNING_TYPE_MINIMIZE_WINDOWS")]
         MinimizeWindows = 4,
+        /// <summary>
+        /// All.
+        /// </summary>
         All = Visual | Audible | TimeLeftWarningType.MinimizeWindows
     }
     #endregion
 
     #region AGERATINGTYPE
+    /// <summary>
+    /// Age rating types.
+    /// </summary>
     public enum AgeRatingType
     {
+        /// <summary>
+        /// None.
+        /// </summary>
         [Description("None")]
         None = 0,
+        /// <summary>
+        /// Manual.
+        /// </summary>
         [Description("Manual")]
         Manual = 1,
+        /// <summary>
+        /// ESRB.
+        /// </summary>
         [Description("ESRB")]
         ESRB = 2,
+        /// <summary>
+        /// PEGI.
+        /// </summary>
         [Description("PEGI")]
         PEGI = 3,
     }
     #endregion    
 
     #region PEGI
+    /// <summary>
+    /// PEGI types.
+    /// </summary>
     public enum PEGI
     {
+        /// <summary>
+        /// Three (3)
+        /// </summary>
         [Description("Three (3)")]
         [AgeRating(3)]
         Three = -1,
+        /// <summary>
+        /// Four (4)
+        /// </summary>
         [AgeRating(4)]
         [Description("Four (4)")]
         Four = -2,
+        /// <summary>
+        /// "Six (6)
+        /// </summary>
         [AgeRating(6)]
         [Description("Six (6)")]
         Six = -3,
+        /// <summary>
+        /// Seven (7)
+        /// </summary>
         [AgeRating(7)]
         [Description("Seven (7)")]
         Seven = -4,
+        /// <summary>
+        /// Twelve (12)
+        /// </summary>
         [AgeRating(12)]
         [Description("Twelve (12)")]
         Twelve = -5,
+        /// <summary>
+        /// Sixteen (16)
+        /// </summary>
         [Description("Sixteen (16)")]
         [AgeRating(16)]
         Sixteen = -6,
+        /// <summary>
+        /// Eighteen (18)
+        /// </summary>
         [Description("Eighteen (18)")]
         [AgeRating(18)]
         Eighteen = -7,
@@ -485,29 +673,56 @@ namespace SharedLib
     #endregion
 
     #region ESRB
+    /// <summary>
+    /// ESRB types.
+    /// </summary>
     public enum ESRB
     {
+        /// <summary>
+        /// Early Childhood (EC)
+        /// </summary>
         [Description("Early Childhood (EC)")]
         [AgeRating(3)]
         EarlyChildHood = -21,
+        /// <summary>
+        /// Everyone (E)
+        /// </summary>
         [Description("Everyone (E)")]
         [AgeRating(6)]
         EveryOne = -22,
+        /// <summary>
+        /// Everyone 10+ (E10+)
+        /// </summary>
         [Description("Everyone 10+ (E10+)")]
         [AgeRating(10)]
         EveryOneTenPlus = -23,
+        /// <summary>
+        /// Teen (T)
+        /// </summary>
         [Description("Teen (T)")]
         [AgeRating(13)]
         Teen = -24,
+        /// <summary>
+        /// Mature (M)
+        /// </summary>
         [Description("Mature (M)")]
         [AgeRating(17)]
         Matrue = -25,
+        /// <summary>
+        /// Adults Only (AO)
+        /// </summary>
         [Description("Adults Only (AO)")]
         [AgeRating(18)]
         AdaultsOnly = -26,
+        /// <summary>
+        /// Rating Pending (RP)
+        /// </summary>
         [Description("Rating Pending (RP)")]
         [AgeRating(0)]
         RatingPending = -27,
+        /// <summary>
+        /// Kids to Adults (K-A)
+        /// </summary>
         [Description("Kids to Adults (K-A)")]
         [AgeRating(6)]
         KidsToAdaults = -28,
@@ -515,26 +730,53 @@ namespace SharedLib
     #endregion
 
     #region DURATIONRANGE
+    /// <summary>
+    /// Duration ranges.
+    /// </summary>
     public enum DurationRange
     {
+        /// <summary>
+        /// Today.
+        /// </summary>
         [Localized("PERIOD_TODAY")]
         Today = 0,
+        /// <summary>
+        /// Week.
+        /// </summary>
         [Localized("PERIOD_WEEK")]
         Weeek = 1,
+        /// <summary>
+        /// Month.
+        /// </summary>
         [Localized("PERIOD_MONTH")]
         Month = 2,
+        /// <summary>
+        /// Year.
+        /// </summary>
         [Localized("PERIOD_YEAR")]
         Year = 3,
+        /// <summary>
+        /// Unlimited.
+        /// </summary>
         [Localized("PERIOD_UNLIMITED")]
         Unlimited = 5,
     }
     #endregion
 
     #region FILTERRESULTDIRECTION
+    /// <summary>
+    /// Filter result direction.
+    /// </summary>
     public enum FilterResultDirection
     {
+        /// <summary>
+        /// Top.
+        /// </summary>
         [Localized("FILTER_TOP")]
         Top,
+        /// <summary>
+        /// Bottom.
+        /// </summary>
         [Localized("FILTER_BOTTOM")]
         Bottom,
     }
@@ -547,7 +789,13 @@ namespace SharedLib
     [Flags]
     public enum LicenseReservationType
     {
+        /// <summary>
+        /// First available.
+        /// </summary>
         FirstAvailable = 0,
+        /// <summary>
+        /// One from each.
+        /// </summary>
         OneFromEach = 1,
     }
     #endregion
@@ -570,9 +818,18 @@ namespace SharedLib
     #endregion
 
     #region IPVERSION
+    /// <summary>
+    /// IP Versions.
+    /// </summary>
     public enum IPVersion
     {
+        /// <summary>
+        /// V4.
+        /// </summary>
         IPV4 = 0,
+        /// <summary>
+        /// V6.
+        /// </summary>
         IPV6 = 1,
     }
     #endregion
@@ -616,6 +873,9 @@ namespace SharedLib
     #endregion
 
     #region HOSTEVENTTYPE
+    /// <summary>
+    /// Host event types.
+    /// </summary>
     public enum HostEventType
     {
         /// <summary>
@@ -643,135 +903,324 @@ namespace SharedLib
         /// </summary>
         Updated = 5,
 
+        /// <summary>
+        /// Deleted.
+        /// </summary>
         Deleted = 6,
+
+        /// <summary>
+        /// Undeleted.
+        /// </summary>
         Undeleted = 7,
     }
     #endregion
 
     #region FREESPACEALLOCATIONS
+    /// <summary>
+    /// Free space allocations.
+    /// </summary>
     public enum FreeSpaceAllocations
     {
+        /// <summary>
+        /// Zero.
+        /// </summary>
         Zero = 0,
+        /// <summary>
+        /// Five percent.
+        /// </summary>
         Five = 5,
+        /// <summary>
+        /// Ten percent.
+        /// </summary>
         Ten = 10,
+        /// <summary>
+        /// Fifteen percent.
+        /// </summary>
         FifTeen = 15,
+        /// <summary>
+        /// Twenty percent.
+        /// </summary>
         Twenty = 20,
+        /// <summary>
+        /// Twenty five percent.
+        /// </summary>
         TwentyFive = 25,
+        /// <summary>
+        /// Thirty percent.
+        /// </summary>
         Thirty = 30,
     }
     #endregion
 
     #region CONFIGURATIONSECTION
+    /// <summary>
+    /// Configuration sections.
+    /// </summary>
     public enum ConfigurationSection
     {
+        /// <summary>
+        /// Unspecified.
+        /// </summary>
         Unspecified = 0,
+        /// <summary>
+        /// General.
+        /// </summary>
         [Localized("CFG_SECTION_GENERAL")]
         General,
+        /// <summary>
+        /// Server.
+        /// </summary>
         [Localized("CFG_SECTION_SERVER")]
         Server,
+        /// <summary>
+        /// Client.
+        /// </summary>
         [Localized("CFG_SECTION_CLIENT")]
         Client,
+        /// <summary>
+        /// Profiles.
+        /// </summary>
         [Localized("CFG_SECTION_PROFILES")]
         Profiles,
+        /// <summary>
+        /// Operators.
+        /// </summary>
         [Localized("CFG_SECTION_OPERATORS")]
         Operators,
+        /// <summary>
+        /// Subscription.
+        /// </summary>
         [Localized("CFG_SECTION_SUBSCRIPTION")]
         Subscription,
+        /// <summary>
+        /// Variables.
+        /// </summary>
         [Localized("CFG_SECTION_VARIABLES")]
         Variables,
+        /// <summary>
+        /// Plugins.
+        /// </summary>
         [Localized("CFG_SECTION_PLUGINS")]
         Plugins,
+        /// <summary>
+        /// Web.
+        /// </summary>
         [Localized("CFG_SECTION_WEB")]
         Web,
+        /// <summary>
+        /// Network.
+        /// </summary>
         [Localized("CFG_SECTION_NETWORK")]
         Network,
+        /// <summary>
+        /// Database.
+        /// </summary>
         [Localized("CFG_SECTION_DATABSE")]
         Database,
+        /// <summary>
+        /// File system.
+        /// </summary>
         [Localized("CFG_SECTION_FILE_SYSTEM")]
         FileSystem,
+        /// <summary>
+        /// Shell.
+        /// </summary>
         [Localized("CFG_SECTION_SHELL")]
         Shell,
+        /// <summary>
+        /// Tasks.
+        /// </summary>
         [Localized("CFG_SECTION_TASKS")]
         Tasks,
+        /// <summary>
+        /// Client misc.
+        /// </summary>
         [Localized("CFG_SECTION_CLIENT_MISC")]
         ClientMisc,
+        /// <summary>
+        /// Server misc.
+        /// </summary>
         [Localized("CFG_SECTION_SERVER_MISC")]
         ServerMisc,
+        /// <summary>
+        /// Host groups.
+        /// </summary>
         [Localized("CFG_SECTION_HOST_GROUPS")]
         HostGroups,
+        /// <summary>
+        /// User groups.
+        /// </summary>
         [Localized("CFG_SECTION_USER_GROUPS")]
         UserGroups,
+        /// <summary>
+        /// Application groups.
+        /// </summary>
         [Localized("CFG_SECTION_APP_GROUPS")]
         ApplicationGroups,
+        /// <summary>
+        /// Security profiles.
+        /// </summary>
         [Localized("CFG_SECTION_SECURITY_PROFILES")]
         SecurityProfiles,
+        /// <summary>
+        /// Client settings.
+        /// </summary>
         [Localized("CFG_CLIENT_SETTINGS")]
         ClientSettings,
+        /// <summary>
+        /// Host layout groups.
+        /// </summary>
         [Localized("CFG_HOST_LAYOUT_GROUPS")]
         HostLayoutGroups,
+        /// <summary>
+        /// Hosts.
+        /// </summary>
         [Localized("CFG_SECTION_HOSTS")]
         Hosts,
+        /// <summary>
+        /// Financial.
+        /// </summary>
         [Localized("CFG_SECTION_FINANCIAL")]
         Financial,
+        /// <summary>
+        /// Monetary units.
+        /// </summary>
         [Localized("CFG_SECTION_MONETARY_UNITS")]
         MonetaryUnits,
+        /// <summary>
+        /// Tax.
+        /// </summary>
         [Localized("CFG_SECTION_TAX")]
         Tax,
+        /// <summary>
+        /// Products.
+        /// </summary>
         [Localized("CFG_SECTION_PRODUCTS")]
         Products,
+        /// <summary>
+        /// Product groups.
+        /// </summary>
         [Localized("CFG_SECTION_PRODUCT_GROUPS")]
         ProductGroups,
+        /// <summary>
+        /// Currencies.
+        /// </summary>
         [Localized("CFG_SECTION_CURRENCIES")]
         Currencies,
+        /// <summary>
+        /// Billing profiles.
+        /// </summary>
         [Localized("CFG_SECTION_BILLING_PROFILES")]
         BillingProfiles,
+        /// <summary>
+        /// Attributes.
+        /// </summary>
         [Localized("CFG_SECTION_ATTRIBUTES")]
         Attributes,
+        /// <summary>
+        /// Presets.
+        /// </summary>
         [Localized("CFG_SECTION_PRESETS")]
         Presets,
+        /// <summary>
+        /// Priority.
+        /// </summary>
         [Localized("CFG_SECTION_PRIORITY")]
         Priority,
+        /// <summary>
+        /// Registers.
+        /// </summary>
         [Localized("CFG_SECTION_REGISTERS")]
         Registers,
+        /// <summary>
+        /// Assets.
+        /// </summary>
         [Localized("CFG_SECTION_ASSETS")]
         Assets,
+        /// <summary>
+        /// Business.
+        /// </summary>
         [Localized("CFG_SECTION_BUSINESS")]
         Business,
+        /// <summary>
+        /// Waiting lines.
+        /// </summary>
         [Localized("CFG_SECTION_WAITING_LINES")]
         WaitingLines,
+        /// <summary>
+        /// Payment methods.
+        /// </summary>
         [Localized("CFG_SECTION_PAYMENT_METHODS")]
         PaymentMethods,
+        /// <summary>
+        /// Reservations.
+        /// </summary>
+        [Localized("CFG_SECTION_RESERVATIONS")]
+        Reservations,
     }
     #endregion
 
     #region DATABASETYPE
+    /// <summary>
+    /// Database types.
+    /// </summary>
     public enum DatabaseType
     {
+        /// <summary>
+        /// MYSQL.
+        /// </summary>
         [CanUserAssign(false)]
         MYSQL = 0,
+        /// <summary>
+        /// MSSQL EXPRESS.
+        /// </summary>
         [CanUserAssign(true)]
         MSSQLEXPRESS = 2,
+        /// <summary>
+        /// MS SQL.
+        /// </summary>
         [CanUserAssign(true)]
         MSSQL = 1,
+        /// <summary>
+        /// LOCAL DB.
+        /// </summary>
         [CanUserAssign(false)]
         LOCALDB = 3,
+        /// <summary>
+        /// SQL LITE.
+        /// </summary>
         [CanUserAssign(false)]
         SQLITE = 4,
     }
     #endregion
 
     #region SQLSERVERAUTHENTICATION
+    /// <summary>
+    /// SQL server authentication types.
+    /// </summary>
     public enum SQLServerAuthentication
     {
+        /// <summary>
+        /// Unspecified.
+        /// </summary>
         Unspecified = 0,
+        /// <summary>
+        /// Server.
+        /// </summary>
         [CanUserAssign(true)]
         Server = 1,
+        /// <summary>
+        /// Integrated.
+        /// </summary>
         [CanUserAssign(true)]
         Integrated = 2,
     }
     #endregion
 
     #region USERROLES
+    /// <summary>
+    /// User roles.
+    /// </summary>
     [Flags()]
     public enum UserRoles
     {
@@ -799,6 +1248,9 @@ namespace SharedLib
     #endregion
 
     #region USERCHANGETYPE
+    /// <summary>
+    /// User change type.
+    /// </summary>
     public enum UserChangeType
     {
         /// <summary>
@@ -899,48 +1351,144 @@ namespace SharedLib
     /// </summary>
     public enum HostPropertyType
     {
+        /// <summary>
+        /// IP Address.
+        /// </summary>
         IpAddress = 0,
+        /// <summary>
+        /// Host name.
+        /// </summary>
         HostName = 1,
+        /// <summary>
+        /// Dispatcher id.
+        /// </summary>
         DispatcherId = 2,
+        /// <summary>
+        /// Is connected.
+        /// </summary>
         IsConnected = 3,
+        /// <summary>
+        /// Module.
+        /// </summary>
         Module = 4,
+        /// <summary>
+        /// Is secured.
+        /// </summary>
         IsSecured = 5,
+        /// <summary>
+        /// Port.
+        /// </summary>
         Port = 6,
+        /// <summary>
+        /// Operating system.
+        /// </summary>
         OperatingSystem = 7,
+        /// <summary>
+        /// Data sent.
+        /// </summary>
         DataSent = 8,
+        /// <summary>
+        /// Data received.
+        /// </summary>
         DataReceived = 9,
+        /// <summary>
+        /// Is locked.
+        /// </summary>
         IsLocked = 10,
+        /// <summary>
+        /// Id.
+        /// </summary>
         Id = 11,
+        /// <summary>
+        /// Is out of order.
+        /// </summary>
         IsOutOfOrder = 12,
+        /// <summary>
+        /// Is in maintenance mode.
+        /// </summary>
         IsMaintenanceMode = 13,
+        /// <summary>
+        /// Host group id.
+        /// </summary>
         HostGroupId = 14,
+        /// <summary>
+        /// Number.
+        /// </summary>
         Number = 15,
+        /// <summary>
+        /// Mac address.
+        /// </summary>
         MacAddress = 16,
+        /// <summary>
+        /// Maximum users.
+        /// </summary>
         MaximumUsers = 17,
+        /// <summary>
+        /// Name.
+        /// </summary>
         Name = 18,
+        /// <summary>
+        /// Icon id.
+        /// </summary>
         IconId = 19,
+        /// <summary>
+        /// State.
+        /// </summary>
         State = 20,
     }
     #endregion
 
     #region USERRESERVERESULT
+    /// <summary>
+    /// User reserve result.
+    /// </summary>
     public enum UserReserveResult
     {
-        Sucess = 0,
+        /// <summary>
+        /// Success.
+        /// </summary>
+        Success = 0,
+        /// <summary>
+        /// Failed.
+        /// </summary>
         Failed = 1,
+        /// <summary>
+        /// Invalid user group.
+        /// </summary>
         InvalidUserGroupId = 2,
+        /// <summary>
+        /// In use.
+        /// </summary>
         InUse = 3,
+        /// <summary>
+        /// Max reservation reached.
+        /// </summary>
         MaxReservationsReached = 4,
+        /// <summary>
+        /// Invalid host.
+        /// </summary>
         InvalidHost = 5,
+        /// <summary>
+        /// Invalid slot.
+        /// </summary>
         InvalidSlot = 6,
     }
     #endregion
 
     #region USERLOGOUTFLAGS
+    /// <summary>
+    /// User logout flags.
+    /// </summary>
     [Flags()]
     public enum UserLogoutFlags
     {
+        /// <summary>
+        /// None.
+        /// </summary>
         None = 0,
+        /// <summary>
+        /// Supress logout action.
+        /// </summary>
         SupressLogoutAction = 1,
     }
     #endregion
@@ -951,44 +1499,101 @@ namespace SharedLib
     /// </summary>
     public enum PowerSaveMode
     {
+        /// <summary>
+        /// None.
+        /// </summary>
         [Localized("NONE")]
         None = 0,
+        /// <summary>
+        /// Shut down.
+        /// </summary>
         [Localized("POWER_SAVE_MODE_SHUT_DOWN")]
         Shutdown = 1,
+        /// <summary>
+        /// Sleep.
+        /// </summary>
         [Localized("POWER_SAVE_MODE_SLEEP")]
         Sleep = 2
     }
     #endregion
 
     #region ORDERRESULT
+    /// <summary>
+    /// Order result.
+    /// </summary>
     public enum OrderResult
     {
+        /// <summary>
+        /// On hold.
+        /// </summary>
         OnHold = 0,
+        /// <summary>
+        /// Accepted.
+        /// </summary>
         Accepted = 1,
+        /// <summary>
+        /// Completed.
+        /// </summary>
         Completed = 2,
+        /// <summary>
+        /// Failed.
+        /// </summary>
         Failed = 3,
     }
     #endregion
 
     #region ORDERFAILREASON
+    /// <summary>
+    /// Order fail reason.
+    /// </summary>
     public enum OrderFailReason
     {
+        /// <summary>
+        /// None.
+        /// </summary>
         None = 0,
+        /// <summary>
+        /// Insufficient balance.
+        /// </summary>
         InsufficientBalance = 1,
+        /// <summary>
+        /// Invalid payment method.
+        /// </summary>
         InvalidPaymentMethod = 2,
+        /// <summary>
+        /// Invalid order.
+        /// </summary>
         InvalidOrder = 3,
+        /// <summary>
+        /// Ordering is disabled.
+        /// </summary>
         OrderingDisabled = 4,
+        /// <summary>
+        /// Invalid user id.
+        /// </summary>
         InvalidUserId = 5,
     }
     #endregion
 
     #region PRODUCTTYPE
+    /// <summary>
+    /// Product types.
+    /// </summary>
     public enum ProductType
     {
+        /// <summary>
+        /// Product.
+        /// </summary>
         [Localized("PRODUCT_TYPE_PRODUCT")]
         Product,
+        /// <summary>
+        /// Time product.
+        /// </summary>
         [Localized("PRODUCT_TYPE_TIME")]
         ProductTime,
+        /// <summary>
+        /// Bundle.
+        /// </summary>
         [Localized("PRODUCT_TYPE_BUNDLE")]
         ProductBundle,
     }
@@ -996,138 +1601,362 @@ namespace SharedLib
 
     #region CONST ERROR CODES
 
+    /// <summary>
+    /// Base codes.
+    /// </summary>
     public class BASE_CODES
     {
-        public const int SUCESS = 0;
+        /// <summary>
+        /// Success.
+        /// </summary>
+        public const int SUCCESS = 0;
+
+        /// <summary>
+        /// Failure.
+        /// </summary>
         public const int FAILURE = 1;
     }
 
+    /// <summary>
+    /// Token error codes.
+    /// </summary>
     public class TOKEN_ERROR_CODES
     {
+        /// <summary>
+        /// Invalid token.
+        /// </summary>
         public const int INVALID_TOKEN = 101;
+        /// <summary>
+        /// Expired token.
+        /// </summary>
         public const int EXPIRED_TOKEN = 102;
+        /// <summary>
+        /// Revoked token.
+        /// </summary>
         public const int REVOKED_TOKEN = 103;
+        /// <summary>
+        /// Used token.
+        /// </summary>
         public const int USED_TOKEN = 104;
+        /// <summary>
+        /// Invalid token input.
+        /// </summary>
         public const int INVALID_TOKEN_INPUT = 105;
     }
 
+    /// <summary>
+    /// Verification error codes.
+    /// </summary>
     public class VERIFICATION_ERROR_CODES
     {
+        /// <summary>
+        /// Invalid verification.
+        /// </summary>
         public const int INVALID_VERIFICATION = 201;
+        /// <summary>
+        /// Used verification.
+        /// </summary>
         public const int USED_VERIFICATION = 202;
     }
 
+    /// <summary>
+    /// Confirmation error codes.
+    /// </summary>
     public class CONFIRMATION_ERROR_CODES
     {
+        /// <summary>
+        /// Invalid confirmation.
+        /// </summary>
         public const int INVALID_CONFIRMATION_CODE = 301;
     }
 
+    /// <summary>
+    /// Extended error codes.
+    /// </summary>
     public class EXTENDED_ERROR_CODES
     {
-        public const int PARTIAL_SUCESS = 401;
+        /// <summary>
+        /// Partial success.
+        /// </summary>
+        public const int PARTIAL_SUCCESS = 401;
+        /// <summary>
+        /// Invalid input.
+        /// </summary>
         public const int INVALID_INPUT = 402;
+        /// <summary>
+        /// Invalid user id.
+        /// </summary>
         public const int INVALID_USER_ID = 403;
+        /// <summary>
+        /// Invalid user group.
+        /// </summary>
         public const int INVALID_USER_GROUP = 404;
+        /// <summary>
+        /// Non unique input.
+        /// </summary>
         public const int NON_UNIQUE_INPUT = 405;
     }
 
+    /// <summary>
+    /// Delivery error codes.
+    /// </summary>
     public class DELIVERY_ERROR_CODES
     {
+        /// <summary>
+        /// Failed.
+        /// </summary>
         public const int DELIVERY_FAILED = 501;
+        /// <summary>
+        /// No route.
+        /// </summary>
         public const int NO_ROUTE = 502;
     }
 
     #endregion
 
     #region VERIFICATIONSTARTRESULTCODE
+    /// <summary>
+    /// Verification start result code.
+    /// </summary>
     public enum VerificationStartResultCode
     {
-        Sucess = BASE_CODES.SUCESS,
+        /// <summary>
+        /// Success.
+        /// </summary>
+        Success = BASE_CODES.SUCCESS,
+        /// <summary>
+        /// Failed.
+        /// </summary>
         Failed = BASE_CODES.FAILURE,
+        /// <summary>
+        /// No route.
+        /// </summary>
         NoRouteForDelivery = DELIVERY_ERROR_CODES.NO_ROUTE,
+        /// <summary>
+        /// Delivery failed.
+        /// </summary>
         DeliveryFailed = DELIVERY_ERROR_CODES.DELIVERY_FAILED,
+        /// <summary>
+        /// Invalid user id.
+        /// </summary>
         InvalidUserId = EXTENDED_ERROR_CODES.INVALID_USER_ID,
+        /// <summary>
+        /// Invalid input.
+        /// </summary>
         InvalidInput = EXTENDED_ERROR_CODES.INVALID_INPUT,
+        /// <summary>
+        /// Non unique input.
+        /// </summary>
         NonUniqueInput = EXTENDED_ERROR_CODES.NON_UNIQUE_INPUT,
     }
     #endregion
 
     #region VERIFICATIONCOMPLETERESULTCODE
+    /// <summary>
+    /// Verification complete result.
+    /// </summary>
     public enum VerificationCompleteResultCode
     {
-        Sucess = BASE_CODES.SUCESS,
+        /// <summary>
+        /// Success.
+        /// </summary>
+        Success = BASE_CODES.SUCCESS,
+        /// <summary>
+        /// Failure.
+        /// </summary>
         Failure = BASE_CODES.FAILURE,
+        /// <summary>
+        /// Invalid token.
+        /// </summary>
         InvalidToken = TOKEN_ERROR_CODES.INVALID_TOKEN,
+        /// <summary>
+        /// Invalid token input.
+        /// </summary>
         InvalidTokenInput = TOKEN_ERROR_CODES.INVALID_TOKEN_INPUT,
+        /// <summary>
+        /// Expired token.
+        /// </summary>
         ExpiredToken = TOKEN_ERROR_CODES.EXPIRED_TOKEN,
+        /// <summary>
+        /// Used token.
+        /// </summary>
         UsedToken = TOKEN_ERROR_CODES.USED_TOKEN,
+        /// <summary>
+        /// Revoked token.
+        /// </summary>
         RevokedToken = TOKEN_ERROR_CODES.REVOKED_TOKEN,
+        /// <summary>
+        /// Invalid verification.
+        /// </summary>
         InvalidVerification = VERIFICATION_ERROR_CODES.INVALID_VERIFICATION,
+        /// <summary>
+        /// Used verification.
+        /// </summary>
         AlreadyVerified = VERIFICATION_ERROR_CODES.USED_VERIFICATION,
-        PartialSucess = EXTENDED_ERROR_CODES.PARTIAL_SUCESS,
+        /// <summary>
+        /// Partial success.
+        /// </summary>
+        PartialSuccess = EXTENDED_ERROR_CODES.PARTIAL_SUCCESS,
+        /// <summary>
+        /// Invalid confirmation code.
+        /// </summary>
         InvalidConfirmationCode = CONFIRMATION_ERROR_CODES.INVALID_CONFIRMATION_CODE,
     }
     #endregion
 
     #region ACCOUNTCREATIONBYTOKENCOMPLETERESULTCODE
+    /// <summary>
+    /// Account create by token completion result.
+    /// </summary>
     public enum AccountCreationByTokenCompleteResultCode
     {
-        Sucess = BASE_CODES.SUCESS,
+        /// <summary>
+        /// Success.
+        /// </summary>
+        Success = BASE_CODES.SUCCESS,
+        /// <summary>
+        /// Failure.
+        /// </summary>
         Failure = BASE_CODES.FAILURE,
+        /// <summary>
+        /// Invalid token.
+        /// </summary>
         InvalidToken = TOKEN_ERROR_CODES.INVALID_TOKEN,
+        /// <summary>
+        /// Invalid token input.
+        /// </summary>
         InvalidTokenInput = TOKEN_ERROR_CODES.INVALID_TOKEN_INPUT,
+        /// <summary>
+        /// Expired token.
+        /// </summary>
         ExpiredToken = TOKEN_ERROR_CODES.EXPIRED_TOKEN,
+        /// <summary>
+        /// Used token.
+        /// </summary>
         UsedToken = TOKEN_ERROR_CODES.USED_TOKEN,
+        /// <summary>
+        /// Revoked token.
+        /// </summary>
         RevokedToken = TOKEN_ERROR_CODES.REVOKED_TOKEN,
+        /// <summary>
+        /// Invalid verification.
+        /// </summary>
         InvalidVerification = VERIFICATION_ERROR_CODES.INVALID_VERIFICATION,
+        /// <summary>
+        /// Already verified.
+        /// </summary>
         AlreadyVerified = VERIFICATION_ERROR_CODES.USED_VERIFICATION,
+        /// <summary>
+        /// Invalid input.
+        /// </summary>
         InvalidInput = EXTENDED_ERROR_CODES.INVALID_INPUT,
+        /// <summary>
+        /// Invalid user group.
+        /// </summary>
         NoUserGroup = EXTENDED_ERROR_CODES.INVALID_USER_GROUP,
     }
     #endregion
 
     #region ACCOUNTCREATIONCOMPLETERESULTCODE
+    /// <summary>
+    /// Account create completion result.
+    /// </summary>
     public enum AccountCreationCompleteResultCode
     {
-        Sucess = BASE_CODES.SUCESS,
+        /// <summary>
+        /// Success.
+        /// </summary>
+        Success = BASE_CODES.SUCCESS,
+
+        /// <summary>
+        /// Failure.
+        /// </summary>
         Failure = BASE_CODES.FAILURE,
+
+        /// <summary>
+        /// Invalid input.
+        /// </summary>
         InvalidInput = EXTENDED_ERROR_CODES.INVALID_INPUT,
+
+        /// <summary>
+        /// No user group.
+        /// </summary>
         NoUserGroup = EXTENDED_ERROR_CODES.INVALID_USER_GROUP,
+
+        /// <summary>
+        /// None unique input.
+        /// </summary>
         NonUniqueInput = EXTENDED_ERROR_CODES.NON_UNIQUE_INPUT,
     }
     #endregion
 
     #region SMSSENDRESULTCODE
+    /// <summary>
+    /// SMS send result.
+    /// </summary>
     public enum SMSSendResultCode
     {
+        /// <summary>
+        /// Sent.
+        /// </summary>
         Sent = 0,
+        /// <summary>
+        /// Failed.
+        /// </summary>
         Failed = 1,
     }
     #endregion
 
     #region SMSGATEWAYPROVIDER
+    /// <summary>
+    /// Known sms gateway providers.
+    /// </summary>
     public enum SMSGatewayProvider
     {
+        /// <summary>
+        /// Custom.
+        /// </summary>
         Custom = 0,
+        /// <summary>
+        /// Nexmo.
+        /// </summary>
         Nexmo = 1,
+        /// <summary>
+        /// Twilio.
+        /// </summary>
         Twilio = 2,
-        SMSC=3,
+        /// <summary>
+        /// SMC.
+        /// </summary>
+        SMSC = 3,
     }
     #endregion
 
     #region SMSGATEWAYPARAMETEROPTION
+    /// <summary>
+    /// SMS gatweay parameter options.
+    /// </summary>
     [Flags()]
     public enum SMSGatewayParameterOption
     {
+        /// <summary>
+        /// None.
+        /// </summary>
         None = 0,
     }
     #endregion
 
     #region PRODUCTORDERPASSRESULT
+    /// <summary>
+    /// Product order pass result.
+    /// </summary>
     public enum ProductOrderPassResult
     {
-        [Localized("PRODUCT_ORDER_PASS_RESULT_SUCESS")]
-        Sucess = 0,
+        /// <summary>
+        /// Success.
+        /// </summary>
+        [Localized("PRODUCT_ORDER_PASS_RESULT_SUCCESS")]
+        Success = 0,
         /// <summary>
         /// Invalid user id passed.
         /// </summary>
@@ -1172,6 +2001,9 @@ namespace SharedLib
     #endregion
 
     #region REGISTRATIONVERIFICATIONMETHOD
+    /// <summary>
+    /// Registration verification methods.
+    /// </summary>
     [Flags()]
     public enum RegistrationVerificationMethod
     {
@@ -1190,19 +2022,37 @@ namespace SharedLib
         /// </summary>
         [Localized("REGISTER_VERIFICATION_METHOD_MOBILE_PHONE")]
         MobilePhone = 2,
-    } 
+    }
     #endregion
 
     #region STORABLE ENUMERATIONS
 
     #region MODULEENUM
+    /// <summary>
+    /// Module type enumeration.
+    /// </summary>
     [Flags()]
     public enum ModuleEnum
     {
+        /// <summary>
+        /// Unknown.
+        /// </summary>
         Unknown = 0,
+        /// <summary>
+        /// Manager.
+        /// </summary>
         Manager = 1,
+        /// <summary>
+        /// Client.
+        /// </summary>
         Client = 2,
+        /// <summary>
+        /// Service.
+        /// </summary>
         Service = 4,
+        /// <summary>
+        /// Any.
+        /// </summary>
         Any = Manager | Client | Service,
     }
     #endregion
@@ -1214,33 +2064,96 @@ namespace SharedLib
     [Flags()]
     public enum ModuleScopes
     {
+        /// <summary>
+        /// None.
+        /// </summary>
         None = 0,
+        /// <summary>
+        /// Client.
+        /// </summary>
         Client = 1,
+        /// <summary>
+        /// Server.
+        /// </summary>
         Server = 2,
+        /// <summary>
+        /// Manager.
+        /// </summary>
         Manager = 4,
+        /// <summary>
+        /// Global.
+        /// </summary>
         Global = Client | Server | Manager,
     }
     #endregion    
 
     #region LOGCATEGORIES
+    /// <summary>
+    /// Log categories.
+    /// </summary>
     [Flags()]
     [Serializable()]
     public enum LogCategories
     {
+        /// <summary>
+        /// None.
+        /// </summary>
         None = 0,
+        /// <summary>
+        /// Generic.
+        /// </summary>
         Generic = 1,
+        /// <summary>
+        /// Network.
+        /// </summary>
         Network = 2,
+        /// <summary>
+        /// Database.
+        /// </summary>
         Database = 4,
+        /// <summary>
+        /// File system.
+        /// </summary>
         FileSystem = 8,
+        /// <summary>
+        /// Task.
+        /// </summary>
         Task = 16,
+        /// <summary>
+        /// Dispatcher.
+        /// </summary>
         Dispatcher = 32,
+        /// <summary>
+        /// Command.
+        /// </summary>
         Command = 64,
+        /// <summary>
+        /// Operation.
+        /// </summary>
         Operation = 128,
+        /// <summary>
+        /// User interface.
+        /// </summary>
         UserInterface = 256,
+        /// <summary>
+        /// Configuration.
+        /// </summary>
         Configuration = 512,
+        /// <summary>
+        /// Subscription.
+        /// </summary>
         Subscription = 1024,
+        /// <summary>
+        /// Trace.
+        /// </summary>
         Trace = 2048,
+        /// <summary>
+        /// User.
+        /// </summary>
         User = 4096,
+        /// <summary>
+        /// All.
+        /// </summary>
         All = Generic | Network | Database | FileSystem | Task | Dispatcher | Command | Operation | UserInterface | Configuration | Subscription | Trace | User
     }
     #endregion
@@ -1253,11 +2166,29 @@ namespace SharedLib
     [Serializable()]
     public enum EventTypes
     {
+        /// <summary>
+        /// None.
+        /// </summary>
         None = 0,
+        /// <summary>
+        /// Information.
+        /// </summary>
         Information = 1,
+        /// <summary>
+        /// Warning.
+        /// </summary>
         Warning = 2,
+        /// <summary>
+        /// Error.
+        /// </summary>
         Error = 4,
+        /// <summary>
+        /// Event.
+        /// </summary>
         Event = 8,
+        /// <summary>
+        /// All.
+        /// </summary>
         All = Information | Warning | Error | Event
     }
     #endregion
@@ -1356,13 +2287,25 @@ namespace SharedLib
     [Flags()]
     public enum Sex
     {
+        /// <summary>
+        /// Unspecified.
+        /// </summary>
         Unspecified = 0,
+        /// <summary>
+        /// Male.
+        /// </summary>
         Male = 1,
+        /// <summary>
+        /// Female.
+        /// </summary>
         Female = 2,
     }
     #endregion
 
     #region USERSESSIONSTATE
+    /// <summary>
+    /// User session states.
+    /// </summary>
     [Flags()]
     public enum SessionState
     {
@@ -1400,39 +2343,90 @@ namespace SharedLib
     [Flags()]
     public enum GroupOverrides
     {
+        /// <summary>
+        /// None.
+        /// </summary>
         None = 0,
+        /// <summary>
+        /// Applications.
+        /// </summary>
         Applications = 1,
+        /// <summary>
+        /// Security.
+        /// </summary>
         Security = 2,
+        /// <summary>
+        /// Age rating.
+        /// </summary>
         AgeRating = 4,
     }
     #endregion
 
     #region WEEKDAYS
+    /// <summary>
+    /// Week days.
+    /// </summary>
     [Flags()]
     public enum WeekDays
     {
+        /// <summary>
+        /// None.
+        /// </summary>
         None = 0,
+        /// <summary>
+        /// Sunday.
+        /// </summary>
         Sunday = 1,
+        /// <summary>
+        /// Monday.
+        /// </summary>
         Monday = 2,
+        /// <summary>
+        /// Tuesday.
+        /// </summary>
         Tuesday = 4,
+        /// <summary>
+        /// Wednesday.
+        /// </summary>
         Wednesday = 8,
+        /// <summary>
+        /// Thursday.
+        /// </summary>
         Thursday = 16,
+        /// <summary>
+        /// Friday.
+        /// </summary>
         Friday = 32,
+        /// <summary>
+        /// Saturday.
+        /// </summary>
         Saturday = 64,
     }
     #endregion
 
     #region BILLRATESTEPACTION
+    /// <summary>
+    /// Bill rate step actions.
+    /// </summary>
     public enum BillRateStepAction
     {
+        /// <summary>
+        /// Charge.
+        /// </summary>
         [Localized("STEP_ACTION_CHARGE")]
         Charge = 0,
+        /// <summary>
+        /// Loop to.
+        /// </summary>
         [Localized("STEP_ACTION_LOOP_TO")]
         LoopTo = 1,
     }
     #endregion
 
     #region DEPLOYOPTIONTYPE
+    /// <summary>
+    /// Deployment options.
+    /// </summary>
     [Flags()]
     public enum DeployOptionType : int
     {
@@ -1482,28 +2476,74 @@ namespace SharedLib
     #endregion
 
     #region PERSONALUSERFILEOPTIONTYPE
+    /// <summary>
+    /// Personal file options.
+    /// </summary>
     [Flags()]
     public enum PersonalUserFileOptionType
     {
+        /// <summary>
+        /// None.
+        /// </summary>
         None = 0,
+        /// <summary>
+        /// Cleanup.
+        /// </summary>
         CleanUp = 1,
+        /// <summary>
+        /// Store.
+        /// </summary>
         Store = 2,
+        /// <summary>
+        /// Include sub directories.
+        /// </summary>
         IncludeSubDirectories = 4,
     }
     #endregion
 
     #region EXECUTABLEOPTIONTYPE
+    /// <summary>
+    /// Executable options.
+    /// </summary>
     [Flags()]
     public enum ExecutableOptionType
     {
+        /// <summary>
+        /// None.
+        /// </summary>
         None = 0,
+        /// <summary>
+        /// Auto launch.
+        /// </summary>
         AutoLaunch = 1,
+        /// <summary>
+        /// Monitor children.
+        /// </summary>
         MonitorChildren = 2,
+        /// <summary>
+        /// Multi run.
+        /// </summary>
         MultiRun = 4,
+        /// <summary>
+        /// Kill children.
+        /// </summary>
         KillChildren = 8,
+        /// <summary>
+        /// Count all instances.
+        /// </summary>
         CountAllInstances = 16,
+        /// <summary>
+        /// Quick launch.
+        /// </summary>
         QuickLaunch = 32,
+        /// <summary>
+        /// Shell execute.
+        /// </summary>
         ShellExecute = 64,
+        /// <summary>
+        /// Ignore concurrent execution limit.
+        /// </summary>
+        IgnoreConcurrentExecutionLimit = 128,
     }
     #endregion
 
@@ -1513,14 +2553,29 @@ namespace SharedLib
     /// </summary>
     public enum RunMode
     {
+        /// <summary>
+        /// Full screen.
+        /// </summary>
         [Localized("RUN_MODE_FULL_SCREEN")]
         FullScreen = 0,
+        /// <summary>
+        /// Minimized.
+        /// </summary>
         [Localized("RUN_MODE_MINIMIZED")]
         Minimized = 1,
+        /// <summary>
+        /// Maximized.
+        /// </summary>
         [Localized("RUN_MODE_MAXIMIZED")]
         Maximized = 2,
+        /// <summary>
+        /// Hidden.
+        /// </summary>
         [Localized("RUN_MODE_HIDDEN")]
         Hidden = 3,
+        /// <summary>
+        /// Normal.
+        /// </summary>
         [Localized("RUN_MODE_NORMAL")]
         Normal = 4
     }
@@ -1602,33 +2657,69 @@ namespace SharedLib
     #endregion
 
     #region APPOPTIONTYPE
+    /// <summary>
+    /// Application options.
+    /// </summary>
     [Flags()]
     public enum AppOptionType
     {
+        /// <summary>
+        /// None.
+        /// </summary>
         None = 0,
+        /// <summary>
+        /// Halt execution on any error.
+        /// </summary>
         HaltOnError = 1,
     }
     #endregion
 
     #region USERGROUPOPTIONTYPE
+    /// <summary>
+    /// User group options.
+    /// </summary>
     [Flags()]
     public enum UserGroupOptionType
     {
+        /// <summary>
+        /// None.
+        /// </summary>
         None = 0,
+        /// <summary>
+        /// Enable personal storage.
+        /// </summary>
         EnablePersonalStorage = 1,
+        /// <summary>
+        /// Hide logout button.
+        /// </summary>
         HideLogoutButton = 2,
+        /// <summary>
+        /// Disallow manual login.
+        /// </summary>
         DisallowManualLogin = 4,
+        /// <summary>
+        /// Allow guest use.
+        /// </summary>
         GuestUse = 8,
+        /// <summary>
+        /// Allow only guest use.
+        /// </summary>
         GuestUseOnly = 16,
         /// <summary>
         /// Enables or disables personal files.
         /// </summary>
         EnablePersonalFiles = 32,
+        /// <summary>
+        /// Disallow login from manager.
+        /// </summary>
         DisallowLoginFromManager = 64,
     }
     #endregion
 
     #region CREDITLIMITOPTIONTYPE
+    /// <summary>
+    /// Credit limit options.
+    /// </summary>
     [Flags()]
     public enum CreditLimitOptionType
     {
@@ -1645,15 +2736,30 @@ namespace SharedLib
     #endregion
 
     #region TIMEPOINTAWARDOPTIONTYPE
+    /// <summary>
+    /// Time product award options.
+    /// </summary>
     public enum TimePointAwardOptionType
     {
+        /// <summary>
+        /// None.
+        /// </summary>
         None = 0,
+        /// <summary>
+        /// Time.
+        /// </summary>
         Time = 1,
+        /// <summary>
+        /// Money.
+        /// </summary>
         Money = 2
     }
     #endregion
 
     #region HOSTSTATE
+    /// <summary>
+    /// Host state.
+    /// </summary>
     [Flags()]
     public enum HostState
     {
@@ -1673,36 +2779,75 @@ namespace SharedLib
     #endregion
 
     #region HOSTGROUPOPTIONTYPE
+    /// <summary>
+    /// Host group options.
+    /// </summary>
     [Flags()]
     public enum HostGroupOptionType
     {
+        /// <summary>
+        /// None.
+        /// </summary>
         None = 0,
     }
     #endregion
 
     #region PERIODOPTIONTYPE
+    /// <summary>
+    /// Period options.
+    /// </summary>
     [Flags()]
     public enum PeriodOptionType
     {
+        /// <summary>
+        /// None.
+        /// </summary>
         None = 0,
+        /// <summary>
+        /// Has day time range.
+        /// </summary>
         HasDayTimeRange = 1,
+        /// <summary>
+        /// Has date range.
+        /// </summary>
         HasDateRange = 2,
     }
     #endregion
 
     #region STOCKOPTIONTYPE
+    /// <summary>
+    /// Stock options.
+    /// </summary>
     [Flags()]
     public enum StockOptionType
     {
+        /// <summary>
+        /// None.
+        /// </summary>
         None = 0,
+        /// <summary>
+        /// Enable stock.
+        /// </summary>
         EnableStock = 1,
+        /// <summary>
+        /// Disallow out of stock sale.
+        /// </summary>
         DisallowSaleIfOutOfStock = 2,
+        /// <summary>
+        /// Alert out of stock.
+        /// </summary>
         Alert = 4,
+        /// <summary>
+        /// Target different product.
+        /// </summary>
         TargetDifferentProduct = 8,
     }
     #endregion
 
     #region BUNDLESTOCKOPTIONTYPE
+    /// <summary>
+    /// Bundle stock options.
+    /// </summary>
     [Flags()]
     public enum BundleStockOptionType
     {
@@ -1723,11 +2868,17 @@ namespace SharedLib
     /// </summary>
     public enum ProductBundleOptionType
     {
+        /// <summary>
+        /// None.
+        /// </summary>
         None,
     }
     #endregion
 
     #region ORDEROPTIONTYPE
+    /// <summary>
+    /// Order options.
+    /// </summary>
     [Flags()]
     public enum OrderOptionType
     {
@@ -1756,87 +2907,160 @@ namespace SharedLib
     /// </summary>
     public enum PurchaseOptionType
     {
+        /// <summary>
+        /// And.
+        /// </summary>
         [Localized("AND")]
         And = 0,
+        /// <summary>
+        /// Or.
+        /// </summary>
         [Localized("OR")]
         Or = 1
     }
     #endregion
 
     #region PRODUCTSORTOPTIONTYPE
+    /// <summary>
+    /// Product sort options.
+    /// </summary>
     public enum ProductSortOptionType
     {
+        /// <summary>
+        /// Default.
+        /// </summary>
         [Localized("MANUAL")]
         Default = 0,
+        /// <summary>
+        /// Name.
+        /// </summary>
         [Localized("NAME")]
         Name = 1,
+        /// <summary>
+        /// Created.
+        /// </summary>
         [Localized("CREATION_TIME")]
         Created = 2
     }
     #endregion
 
     #region BILLRATEOPTIONTYPE
+    /// <summary>
+    /// Billing rate options.
+    /// </summary>
     public enum BillRateOptionType
     {
+        /// <summary>
+        /// None.
+        /// </summary>
         None = 0,
+        /// <summary>
+        /// Is step based.
+        /// </summary>
         IsStepBased = 1,
     }
     #endregion
 
     #region PRODUCTTIMEEXPIRATIONOPTIONTYPE
+    /// <summary>
+    /// Product time expiration options.
+    /// </summary>
     [Flags()]
     public enum ProductTimeExpirationOptionType
     {
+        /// <summary>
+        /// None.
+        /// </summary>
         None = 0,
+        /// <summary>
+        /// At logout.
+        /// </summary>
         ExpiresAtLogout = 1,
+        /// <summary>
+        /// At date.
+        /// </summary>
         [Obsolete()]
         ExpiresAtDate = 2,
+        /// <summary>
+        /// After time.
+        /// </summary>
         ExpireAfterTime = 4,
+        /// <summary>
+        /// At day time.
+        /// </summary>
         ExpireAtDayTime = 8,
     }
     #endregion
 
     #region PRODUCTTIMEUSAGEOPTIONTYPE
+    /// <summary>
+    /// Product time usage options.
+    /// </summary>
     [Flags()]
     public enum ProductTimeUsageOptionType
     {
+        /// <summary>
+        /// None.
+        /// </summary>
         None = 0,
+        /// <summary>
+        /// Maximum usage.
+        /// </summary>
         HasMaximumUsage = 1,
+        /// <summary>
+        /// Maximum daily usage.
+        /// </summary>
         HasMaximumDailyUsage = 2,
     }
     #endregion
 
     #region EXPIREFROMOPTIONTYPE
+    /// <summary>
+    /// Expire from options.
+    /// </summary>
     public enum ExpireFromOptionType
     {
+        /// <summary>
+        /// Purchase.
+        /// </summary>
         [Localized("EXPIRE_FROM_PURCHASE")]
         Purchase = 0,
+        /// <summary>
+        /// Use.
+        /// </summary>
         [Localized("EXPIRE_FROM_USE")]
         Use = 1
     }
     #endregion
 
     #region EXPIREAFTERTYPE
+    /// <summary>
+    /// Expire after types.
+    /// </summary>
     public enum ExpireAfterType
     {
+        /// <summary>
+        /// Day.
+        /// </summary>
         [Localized("DAY_PLURAL")]
         Day = 0,
+        /// <summary>
+        /// Hour.
+        /// </summary>
         [Localized("HOUR_PLURAL")]
         Hour = 1,
+        /// <summary>
+        /// Minute.
+        /// </summary>
         [Localized("MINUTE_PLURAL")]
         Minute = 2,
     }
-    #endregion
-
-    #region UNITOFMEASUREOPTIONTYPE
-    [Flags()]
-    public enum UnitOfMeasureOptionType
-    {
-        None = 0,
-    }
-    #endregion
+    #endregion    
 
     #region DISCOUNTAMOUNTTYPE
+    /// <summary>
+    /// Discount amount types.
+    /// </summary>
     public enum DiscountAmountType
     {
         /// <summary>
@@ -1898,8 +3122,17 @@ namespace SharedLib
     /// </summary>
     public enum DiscountTargetType
     {
+        /// <summary>
+        /// Unspecified.
+        /// </summary>
         Unspecified = 0,
+        /// <summary>
+        /// Product groups.
+        /// </summary>
         ProductGroups = 1,
+        /// <summary>
+        /// Product.
+        /// </summary>
         Product = 2,
     }
     #endregion
@@ -1930,17 +3163,30 @@ namespace SharedLib
     #endregion
 
     #region PAYMENTMETHODOPTIONTYPE
+    /// <summary>
+    /// Payment method options.
+    /// </summary>
     [Flags()]
     public enum PaymentMethodOptionType
     {
+        /// <summary>
+        /// None.
+        /// </summary>
         None = 0,
     }
     #endregion
 
     #region PAYMENTMETHODTYPE
+    /// <summary>
+    /// Known payment method types.
+    /// </summary>
     public enum PaymentMethodType
     {
+        /// <summary>
+        /// Undefined.
+        /// </summary>
         Undefined = 0,
+
         /// <summary>
         /// Cash payment.
         /// </summary>
@@ -1967,14 +3213,10 @@ namespace SharedLib
     }
     #endregion
 
-    #region ROUNDOPTIONTYPE
-    public enum RoundOptionType
-    {
-        None = 0,
-    }
-    #endregion
-
     #region DEPOSITTRANSACTIONTYPE
+    /// <summary>
+    /// Deposit transaction types.
+    /// </summary>
     public enum DepositTransactionType
     {
         /// <summary>
@@ -2001,6 +3243,9 @@ namespace SharedLib
     #endregion
 
     #region LOYALITYPOINTSTRANSACTIONTYPE
+    /// <summary>
+    /// Loyality points transaction type.
+    /// </summary>
     public enum LoyalityPointsTransactionType
     {
         /// <summary>
@@ -2027,42 +3272,87 @@ namespace SharedLib
     #endregion
 
     #region STOCKTRANSACTIONTYPE
+    /// <summary>
+    /// Stock transaction type.
+    /// </summary>
     public enum StockTransactionType
     {
+        /// <summary>
+        /// Add.
+        /// </summary>
         [Localized("STOCK_TRANSACTION_ADD")]
         Add = 0,
+        /// <summary>
+        /// Remove.
+        /// </summary>
         [Localized("STOCK_TRANSACTION_REMOVE")]
         Remove = 1,
+        /// <summary>
+        /// Sale.
+        /// </summary>
         [Localized("STOCK_TRANSACTION_SALE")]
         Sale = 2,
+        /// <summary>
+        /// Set.
+        /// </summary>
         [Localized("STOCK_TRANSACTION_SET")]
         Set = 3,
+        /// <summary>
+        /// Return.
+        /// </summary>
         [Localized("STOCK_TRANSACTION_RETURN")]
         Return = 4,
     }
     #endregion
 
     #region ORDERSTATUS
+    /// <summary>
+    /// Order status.
+    /// </summary>
     public enum OrderStatus
     {
+        /// <summary>
+        /// On hold.
+        /// </summary>
         [Localized("ORDER_STATUS_ON_HOLD")]
         OnHold = 0,
+        /// <summary>
+        /// Completed.
+        /// </summary>
         [Localized("ORDER_STATUS_COMPLETED")]
         Completed = 1,
+        /// <summary>
+        /// Canceled.
+        /// </summary>
         [Localized("ORDER_STATUS_CANCELED")]
         Canceled = 2,
+        /// <summary>
+        /// Accepted.
+        /// </summary>
         [Localized("ORDER_STATUS_ACCEPTED")]
         Accepted = 3,
     }
     #endregion
 
     #region INVOICESTATUS
+    /// <summary>
+    /// Invoice status.
+    /// </summary>
     public enum InvoiceStatus
     {
+        /// <summary>
+        /// Unpaid.
+        /// </summary>
         [Localized("INVOICE_STATUS_UNPAID")]
         Unpaid = 0,
+        /// <summary>
+        /// Partially paid.
+        /// </summary>
         [Localized("INVOICE_STATUS_PARTIALLY_PAID")]
         PartialyPaid = 1,
+        /// <summary>
+        /// Paid.
+        /// </summary>
         [Localized("INVOICE_STATUS_PAID")]
         Paid = 2,
     }
@@ -2074,117 +3364,228 @@ namespace SharedLib
     /// </summary>
     public enum ScriptTypes
     {
-        [CanUserAssignAttribute(true)]
+        /// <summary>
+        /// Batch.
+        /// </summary>
+        [CanUserAssign(true)]
         [Description("Batch")]
         Batch,
-        [CanUserAssignAttribute(true)]
+        /// <summary>
+        /// VB Script.
+        /// </summary>
+        [CanUserAssign(true)]
         [Description("Visual Basic")]
         VbScript,
-        [CanUserAssignAttribute(true)]
+        /// <summary>
+        /// Auto it script.
+        /// </summary>
+        [CanUserAssign(true)]
         [Description("Autoit")]
         AutoItScript,
-        [CanUserAssignAttribute(true)]
+        /// <summary>
+        /// Registry script.
+        /// </summary>
+        [CanUserAssign(true)]
         [Description("Registry")]
         RegistryScript,
     }
     #endregion
 
     #region TASKPROCESSOPTIONTYPE
+    /// <summary>
+    /// Task process options.
+    /// </summary>
     [Flags()]
     public enum TaskProcessOptionType
     {
+        /// <summary>
+        /// None.
+        /// </summary>
         None = 0,
+        /// <summary>
+        /// Wait.
+        /// </summary>
         Wait = 1,
+        /// <summary>
+        /// No window.
+        /// </summary>
         NoWindow = 2,
     }
     #endregion
 
     #region TASKJUNCTIONOPTIONTYPE
+    /// <summary>
+    /// Task junction options.
+    /// </summary>
     [Flags()]
     public enum TaskJunctionOptionType
     {
+        /// <summary>
+        /// None.
+        /// </summary>
         None = 0,
+        /// <summary>
+        /// Delete destination.
+        /// </summary>
         DeleteDestination = 1,
     }
     #endregion
 
     #region TASKNOTIFICATIONOPTIONTYPE
+    /// <summary>
+    /// Task notification options.
+    /// </summary>
     [Flags()]
     public enum TaskNotificationOptionType
     {
+        /// <summary>
+        /// None.
+        /// </summary>
         None = 0,
+        /// <summary>
+        /// Wait.
+        /// </summary>
         Wait = 1,
     }
     #endregion
 
     #region PERSONALFILEACTIVATIONTYPE
+    /// <summary>
+    /// Personal file activation type.
+    /// </summary>
     public enum PersonalFileActivationType
     {
+        /// <summary>
+        /// Launch.
+        /// </summary>
         [Localized("PERSONAL_FILE_ACTIVATION_TYPE_LAUNCH")]
         Launch = 0,
+        /// <summary>
+        /// Login.
+        /// </summary>
         [Localized("PERSONAL_FILE_ACTIVATION_TYPE_LOGIN")]
         Login = 1,
     }
     #endregion
 
     #region PERSONALFILEDEACTIVATIONTYPE
+    /// <summary>
+    /// Personal file de-activation type.
+    /// </summary>
     public enum PersonalFileDeactivationType
     {
+        /// <summary>
+        /// Logout.
+        /// </summary>
         [Localized("LOGOUT")]
         Logout = 0
     }
     #endregion
 
     #region CLIENTTASKACTIVATIONTYPE
+    /// <summary>
+    /// Client task activation types.
+    /// </summary>
     [Flags()]
     public enum ClientTaskActivationType
     {
+        /// <summary>
+        /// Disabled.
+        /// </summary>
         [Obsolete()]
         [Description("Disabled")]
         Disabled = 0,
+        /// <summary>
+        /// Startup.
+        /// </summary>
         [Description("Startup")]
         Startup = 1,
+        /// <summary>
+        /// Shut down.
+        /// </summary>
         [Description("Shutdown")]
         Shutdown = 2,
+        /// <summary>
+        /// Login.
+        /// </summary>
         [Description("Login")]
         Login = 4,
+        /// <summary>
+        /// Logout.
+        /// </summary>
         [Description("Logout")]
         Logout = 8,
     }
     #endregion
 
     #region EXECUTABLETASKACTIVATIONTYPE
+    /// <summary>
+    /// Executable task activation types.
+    /// </summary>
     [Flags()]
     public enum ExecutableTaskActivationType
     {
+        /// <summary>
+        /// Pre launch/
+        /// </summary>
         [Description("Pre Launch")]
         PreLaunch = 16,
+        /// <summary>
+        /// Post deploy.
+        /// </summary>
         [Description("Pre Deploy")]
         PreDeploy = 32,
+        /// <summary>
+        /// Post termination.
+        /// </summary>
         [Description("Post Termination")]
         PostTermination = 64,
+        /// <summary>
+        /// Pre licenses management.
+        /// </summary>
         [Description("Pre License Management")]
         PreLicenseManagement = 128,
     }
     #endregion
 
     #region LOGICALOPERATOR
+    /// <summary>
+    /// Logical operator.
+    /// </summary>
     public enum LogicalOperator
     {
+        /// <summary>
+        /// And.
+        /// </summary>
         [Localized("AND")]
         And,
+        /// <summary>
+        /// Or.
+        /// </summary>
         [Localized("OR")]
         Or,
     }
     #endregion
 
-    #region NOTESEVIRITY
-    public enum NoteSevirity
+    #region NOTESEVERITY
+    /// <summary>
+    /// Note severity.
+    /// </summary>
+    public enum NoteSeverity
     {
+        /// <summary>
+        /// Green.
+        /// </summary>
         [Localized("NOTE_SEVIRITY_GREEN")]
         Green = 0,
+        /// <summary>
+        /// Yellow.
+        /// </summary>
         [Localized("NOTE_SEVIRITY_YELLOW")]
         Yellow = 1,
+        /// <summary>
+        /// Red.
+        /// </summary>
         [Localized("NOTE_SEVIRITY_RED")]
         Red = 2,
     }
@@ -2197,6 +3598,10 @@ namespace SharedLib
     [Flags()]
     public enum NoteOptions
     {
+        /// <summary>
+        /// None.
+        /// </summary>
+        [Localized("NONE")]
         None = 0,
     }
     #endregion
@@ -2208,17 +3613,33 @@ namespace SharedLib
     [Flags()]
     public enum UserNoteOptions
     {
+        /// <summary>
+        /// None.
+        /// </summary>
+        [Localized("NONE")]
         None = 0,
     }
     #endregion
 
     #region SHIFTOPTION
+    /// <summary>
+    /// Shift option.
+    /// </summary>
     public enum ShiftOption
     {
+        /// <summary>
+        /// Disabled.
+        /// </summary>
         [Localized("SHIFT_OPTION_DISABLED")]
         Disabled = 0,
+        /// <summary>
+        /// Optional.
+        /// </summary>
         [Localized("SHIFT_OPTION_OPTIONAL")]
         Optional = 1,
+        /// <summary>
+        /// Mandatory.
+        /// </summary>
         [Localized("SHIFT_OPTION_MANDATORY")]
         Mandatory = 2,
     }
@@ -2268,30 +3689,66 @@ namespace SharedLib
     /// </summary>
     public enum OrderLinePayType
     {
+        /// <summary>
+        /// Mixed.
+        /// </summary>
         Mixed = 2,
+        /// <summary>
+        /// Points.
+        /// </summary>
         Points = 1,
+        /// <summary>
+        /// Cash.
+        /// </summary>
         Cash = 0,
     }
     #endregion
 
     #region REFUNDSTATUS
+    /// <summary>
+    /// Refund status.
+    /// </summary>
     public enum RefundStatus
     {
+        /// <summary>
+        /// None.
+        /// </summary>
         [Localized("REFUND_STATUS_NONE")]
         None,
+        /// <summary>
+        /// Partial.
+        /// </summary>
         [Localized("REFUND_STATUS_PARTIAL")]
         Partial,
+        /// <summary>
+        /// Full.
+        /// </summary>
         [Localized("REFUND_STATUS_FULL")]
         Full,
     }
     #endregion
 
     #region BILLINGOPTION
+    /// <summary>
+    /// Billing options.
+    /// </summary>
     public enum BillingOption
     {
+        /// <summary>
+        /// None.
+        /// </summary>
         None = 0,
+        /// <summary>
+        /// Disable time offers.
+        /// </summary>
         DisableTimeOffer = 1,
+        /// <summary>
+        /// Disable fixed time.
+        /// </summary>
         DisableFixedTime = 2,
+        /// <summary>
+        /// Disable deposits.
+        /// </summary>
         DisableDeposit = 4,
     }
     #endregion
@@ -2303,10 +3760,19 @@ namespace SharedLib
     [Flags()]
     public enum WaitingLineTimeoutOption
     {
+        /// <summary>
+        /// None.
+        /// </summary>
         [Localized("WAITING_LINE_TIMEOUT_OPTION_NONE")]
         None = 0,
+        /// <summary>
+        /// Remove.
+        /// </summary>
         [Localized("WAITING_LINE_TIMEOUT_OPTION_REMOVE")]
         Remove = 1,
+        /// <summary>
+        /// Next in line.
+        /// </summary>
         [Localized("WAITING_LINE_TIMEOUT_OPTION_NEXT_IN_LINE")]
         NextInLine = 2,
     }
@@ -2318,10 +3784,19 @@ namespace SharedLib
     /// </summary>
     public enum WaitingLineState
     {
+        /// <summary>
+        /// Active.
+        /// </summary>
         [Localized("WAITING_LINE_SATE_ACTIVE")]
         Active = 0,
+        /// <summary>
+        /// Processed.
+        /// </summary>
         [Localized("WAITING_LINE_SATE_PROCESSED")]
         Processed = 2,
+        /// <summary>
+        /// Cancel.
+        /// </summary>
         [Localized("WAITING_LINE_SATE_CANCEL")]
         Cancel = 1,
     }
@@ -2348,11 +3823,11 @@ namespace SharedLib
         /// <summary>
         /// Create account token.
         /// </summary>
-        CreateAccount=3,
+        CreateAccount = 3,
         /// <summary>
         /// Reset password token.
         /// </summary>
-        ResetPassword=4,
+        ResetPassword = 4,
     }
     #endregion
 
@@ -2381,12 +3856,15 @@ namespace SharedLib
     #endregion
 
     #region RESERVATIONSTATUS
+    /// <summary>
+    /// Reservation status.
+    /// </summary>
     public enum ReservationStatus
     {
         /// <summary>
-        /// Reservation is active.
+        /// Reservation is waiting.
         /// </summary>
-        Active = 0,
+        Waiting = 0,
         /// <summary>
         /// Reservation is canceled by operator.
         /// </summary>
@@ -2407,18 +3885,39 @@ namespace SharedLib
     #endregion
 
     #region VERIFICATIONSTATUS
+    /// <summary>
+    /// Verification status.
+    /// </summary>
     public enum VerificationStatus
     {
+        /// <summary>
+        /// Unverified.
+        /// </summary>
         Unverified = 0,
+        /// <summary>
+        /// Verified.
+        /// </summary>
         Verified = 1,
     }
     #endregion
-    
+
     #region ORDERSOURCE
+    /// <summary>
+    /// Client order source.
+    /// </summary>
     public enum OrderSource
     {
+        /// <summary>
+        /// Default. (POS)
+        /// </summary>
         Default = 0,
+        /// <summary>
+        /// Client machine.
+        /// </summary>
         Client = 1,
+        /// <summary>
+        /// Web portal.
+        /// </summary>
         Web = 2,
     }
     #endregion

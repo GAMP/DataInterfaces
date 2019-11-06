@@ -3,6 +3,9 @@ using CoreLib;
 
 namespace CyClone.Core
 {
+    /// <summary>
+    /// File syncer implementation interface.
+    /// </summary>
     public interface IcySync
     {
         #region EVENTS

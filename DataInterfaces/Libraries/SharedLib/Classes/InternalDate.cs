@@ -41,7 +41,7 @@ namespace SharedLib
         }
 
         /// <summary>
-        /// Gets current date time based on system ticks.
+        /// Gets current date time.
         /// </summary>
         public static DateTime Now
         {

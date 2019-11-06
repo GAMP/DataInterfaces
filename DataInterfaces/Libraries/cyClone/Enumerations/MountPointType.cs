@@ -1,5 +1,8 @@
 ﻿namespace CyClone
 {
+    /// <summary>
+    /// Mount point types.
+    /// </summary>
     public enum MountPointType : uint
     {
         /// <summary>

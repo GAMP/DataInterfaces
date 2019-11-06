@@ -4,17 +4,21 @@ using System.Runtime.Serialization;
 
 namespace ServerService
 {
-    #region USERSESSIONCHANGEDEVENTARGS
+    /// <summary>
+    /// User session changed event args.
+    /// </summary>
     [Serializable()]
     [DataContract()]
     public class UserSessionChangedEventArgs : UserIdEventArgsBase
     {
         #region CONSTRUCTOR
         /// <summary>
-        /// Creates new instance user session state change.
+        /// Creates new instance.
         /// </summary>
         /// <param name="userId">User id.</param>
-        /// <param name="state">New state.</param>
+        /// <param name="hostId">Host id.</param>
+        /// <param name="slot">Slot.</param>
+        /// <param name="state">State.</param>
         /// <param name="span">Span.</param>
         public UserSessionChangedEventArgs(int userId, int hostId, int slot, SessionState state, double span) : base(userId)
         {
@@ -64,5 +68,4 @@ namespace ServerService
 
         #endregion
     }
-    #endregion
 }

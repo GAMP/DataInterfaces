@@ -37,16 +37,31 @@ namespace CoreLib
             SetFeatureValue(FEATURE_BROWSER_EMULATION, version);
         }
 
+        /// <summary>
+        /// Enables GPU Rendering.
+        /// </summary>
+        /// <param name="value">Indicates if GPU rendering should be enabled.</param>
         public static void SetGPURendering(int value)
         {
             SetFeatureValue(FEATURE_GPU_RENDERING, value);
         }
 
+        /// <summary>
+        /// Sets feature value.
+        /// </summary>
+        /// <param name="featureKey">Feature key.</param>
+        /// <param name="value">Feature value.</param>
         private static void SetFeatureValue(string featureKey, int value)
         {
             SetFeatureValue(AppDomain.CurrentDomain.FriendlyName, featureKey, value);
         }
 
+        /// <summary>
+        /// Sets feature value for given process name.
+        /// </summary>
+        /// <param name="processName">Process name.</param>
+        /// <param name="featureKey">Feature key.</param>
+        /// <param name="value">Feature value.</param>
         private static void SetFeatureValue(string processName, string featureKey, int value)
         {
             if (string.IsNullOrWhiteSpace(processName))
@@ -90,16 +105,31 @@ namespace CoreLib
             return GetEmulationVersion(AppDomain.CurrentDomain.FriendlyName);
         }
 
+        /// <summary>
+        /// Gets GPU rendering value.
+        /// </summary>
+        /// <returns></returns>
         public static int? GetGPURenderingFeature()
         {
             return GetFeatureValue(FEATURE_GPU_RENDERING);
         }
 
+        /// <summary>
+        /// Gets feature value.
+        /// </summary>
+        /// <param name="feature"></param>
+        /// <returns></returns>
         public static int? GetFeatureValue(string feature)
         {
             return GetFeatureValue(AppDomain.CurrentDomain.FriendlyName, feature);
         }
 
+        /// <summary>
+        /// Gets feature value for given process name.
+        /// </summary>
+        /// <param name="processName">Process name.</param>
+        /// <param name="feature">Feature.</param>
+        /// <returns></returns>
         public static int? GetFeatureValue(string processName, string feature)
         {
             if (string.IsNullOrWhiteSpace(processName))
@@ -118,16 +148,47 @@ namespace CoreLib
 
         #region ENUMS
 
+        /// <summary>
+        /// Internet explorer versions.
+        /// </summary>
         public enum IEVersion : int
         {
+
+            /// <summary>
+            /// IE11001.
+            /// </summary>
             IE11001 = 11001,
+            /// <summary>
+            /// IE11000.
+            /// </summary>
             IE11000 = 11000,
+            /// <summary>
+            /// IE10001.
+            /// </summary>
             IE10001 = 10001,
+            /// <summary>
+            /// IE10000
+            /// </summary>
             IE10000 = 10000,
+            /// <summary>
+            /// IE9999.
+            /// </summary>
             IE9999 = 9999,
+            /// <summary>
+            /// IE9000.
+            /// </summary>
             IE9000 = 9000,
+            /// <summary>
+            /// IE8888.
+            /// </summary>
             IE8888 = 8888,
+            /// <summary>
+            /// IE8000.
+            /// </summary>
             IE8000 = 8000,
+            /// <summary>
+            /// IE7000.
+            /// </summary>
             IE7000 = 7000,
         }
 

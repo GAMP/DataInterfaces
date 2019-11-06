@@ -2,6 +2,9 @@
 
 namespace System.Linq.Expressions
 {
+    /// <summary>
+    /// Filter set implementation interface.
+    /// </summary>
     public interface IFilterSet : IList<Filter>
     {
         #region PROPERTIES

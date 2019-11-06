@@ -2,6 +2,9 @@
 
 namespace CyClone.Core
 {
+    /// <summary>
+    /// Remote file info interface.
+    /// </summary>
     public interface IcyRemoteFileSystemInfo : IcyFileSystemInfo
     {
         #region PROPERTIES

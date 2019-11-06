@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Localization
 {
@@ -11,24 +8,25 @@ namespace Localization
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
     public class LocalizedAttribute : Attribute
     {
-        #region Constructor
-     
+        #region CONSTRUCTOR
+
         /// <summary>
         /// Creates new instance of attribute.
         /// </summary>
-        /// <param name="resource_key">Resource key.</param>
-        public LocalizedAttribute(string resource_key,bool localize=true)
+        /// <param name="resourceKey">Resource key.</param>
+        /// <param name="localize">Indicates if value should be localized.</param>
+        public LocalizedAttribute(string resourceKey,bool localize=true)
         {
-            if (string.IsNullOrWhiteSpace(resource_key))
+            if (string.IsNullOrWhiteSpace(resourceKey))
                 throw new ArgumentNullException("ResourceKey", "Resource key may not be null or empty.");
         
-            this.ResourceKey = resource_key;
-            this.Localize = localize;
+            ResourceKey = resourceKey;
+            Localize = localize;
         } 
 
         #endregion
 
-        #region Properties
+        #region PROPERTIES
 
         /// <summary>
         /// Gets the resource key for this attribute.

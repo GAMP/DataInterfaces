@@ -8,6 +8,10 @@ namespace System.Windows.Data
     public class LimitedListCollectionView : ListCollectionView, IEnumerable
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="list">Source IList.</param>
         public LimitedListCollectionView(IList list)
             : base(list)
         {
@@ -16,18 +20,34 @@ namespace System.Windows.Data
         #endregion
 
         #region PROPERTIES
+
+        /// <summary>
+        /// Gets or sets maximum items.
+        /// </summary>
         public int MaxItems { get; set; }
+        
         #endregion
 
         #region OVERRIDES
 
+        /// <summary>
+        /// Gets item count.
+        /// </summary>
         public override int Count { get { return Math.Min(base.Count, MaxItems); } }
 
+        /// <summary>
+        /// Moves current to last.
+        /// </summary>
+        /// <returns>True for success, otherwise false.</returns>
         public override bool MoveCurrentToLast()
         {
             return base.MoveCurrentToPosition(Count - 1);
         }
 
+        /// <summary>
+        /// Moves current to next.
+        /// </summary>
+        /// <returns>True for success, otherwise false.</returns>
         public override bool MoveCurrentToNext()
         {
             if (base.CurrentPosition == Count - 1)
@@ -36,6 +56,10 @@ namespace System.Windows.Data
                 return base.MoveCurrentToNext();
         }
 
+        /// <summary>
+        /// Moves current to previous.
+        /// </summary>
+        /// <returns>True for success, otherwise false.</returns>
         public override bool MoveCurrentToPrevious()
         {
             if (base.IsCurrentAfterLast)
@@ -44,6 +68,11 @@ namespace System.Windows.Data
                 return base.MoveCurrentToPrevious();
         }
 
+        /// <summary>
+        /// Moves current to specified position.
+        /// </summary>
+        /// <param name="position">Position index.</param>
+        /// <returns>True for success, otherwise false.</returns>
         public override bool MoveCurrentToPosition(int position)
         {
             if (position < Count)
@@ -56,6 +85,10 @@ namespace System.Windows.Data
 
         #region IEnumerable Members
 
+        /// <summary>
+        /// Gets enumerator.
+        /// </summary>
+        /// <returns>Enumerator.</returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
             do

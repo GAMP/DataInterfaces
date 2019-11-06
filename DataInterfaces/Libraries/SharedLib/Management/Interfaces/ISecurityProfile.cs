@@ -2,6 +2,9 @@
 
 namespace SharedLib.Management
 {
+    /// <summary>
+    /// Security profile implementation interface.
+    /// </summary>
     public interface ISecurityProfile
     {
         #region PROPERTIES

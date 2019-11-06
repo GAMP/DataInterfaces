@@ -3,11 +3,25 @@ using System.Runtime.Serialization;
 
 namespace ServerService.Web.Api
 {
+    /// <summary>
+    /// Generic web api response with result.
+    /// </summary>
+    /// <typeparam name="T">Result type.</typeparam>
     [DataContract()]
     public class WebApiResponse<T> : WebApiResponseBase
     {
         #region CONSTRUCTOR
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        public WebApiResponse() {}
+
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="result">Result type.</param>
+        /// <param name="statusCode">HTTP Status code.</param>
         public WebApiResponse(T result, int statusCode) : base(statusCode)
         {
             Result = result;
@@ -24,7 +38,7 @@ namespace ServerService.Web.Api
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public string Version
         {
-            get;protected set;
+            get;set;
         }
 
         /// <summary>
@@ -34,7 +48,7 @@ namespace ServerService.Web.Api
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public string Message
         {
-            get; protected set;
+            get; set;
         }
 
         /// <summary>
@@ -44,7 +58,7 @@ namespace ServerService.Web.Api
         [DataMember(EmitDefaultValue = false, IsRequired = false)]
         public T Result
         {
-            get; protected set;
+            get; set;
         } 
 
         #endregion

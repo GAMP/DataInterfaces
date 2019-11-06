@@ -5,7 +5,6 @@ using System.Runtime.Serialization;
 
 namespace CoreLib.Hooking
 {
-    #region KeyHook
     /// <summary>
     /// Key hook configuration class.
     /// </summary>
@@ -19,6 +18,7 @@ namespace CoreLib.Hooking
         /// </summary>
         /// <param name="key">Key.</param>
         /// <param name="modifiers">Key Modifiers.</param>
+        /// <param name="state">Key state.</param>
         public KeyHook(Keys key, ModifierKeys modifiers, KeyState state)
         {
             Key = key;
@@ -73,5 +73,4 @@ namespace CoreLib.Hooking
         }
         #endregion
     }
-    #endregion
 }

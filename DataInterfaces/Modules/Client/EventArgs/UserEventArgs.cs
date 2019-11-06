@@ -12,6 +12,14 @@ namespace Client
     public class UserEventArgs : EventArgs
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="profile">User profile.</param>
+        /// <param name="state">State.</param>
+        /// <param name="oldState">Old state.</param>
+        /// <param name="failReason">Fail reason.</param>
+        /// <param name="requiredInfo">Required info.</param>
         public UserEventArgs(IUserProfile profile,
             LoginState state,
             LoginState oldState = LoginState.LoggedOut,

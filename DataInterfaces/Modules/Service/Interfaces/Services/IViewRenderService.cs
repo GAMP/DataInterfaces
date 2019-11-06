@@ -3,7 +3,7 @@
 namespace ServerService.Services
 {
     /// <summary>
-    /// Razror view renderer service interface.
+    /// Razor view renderer service interface.
     /// </summary>
     public interface IViewRenderService
     {

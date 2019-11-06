@@ -5,6 +5,13 @@
     /// </summary>
     public interface IUserModuleMainView : IViewColumns
     {
-        void ScrollToSlected();
+        #region FUNCTIONS
+        
+        /// <summary>
+        /// Scrolls to selected user.
+        /// </summary>
+        void ScrollToSlected(); 
+
+        #endregion
     }  
 }

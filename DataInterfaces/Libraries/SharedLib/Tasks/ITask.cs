@@ -3,9 +3,13 @@ using CoreLib.Threading;
 
 namespace SharedLib.Tasks
 {
-    #region ITask
+    /// <summary>
+    /// Task implementation inteface.
+    /// </summary>
     public interface ITask
     {
+        #region FUNCTIONS
+        
         /// <summary>
         /// Executes the task.
         /// </summary>
@@ -20,7 +24,11 @@ namespace SharedLib.Tasks
         /// Executes the task.
         /// </summary>
         /// <param name="abortHandle">Abort handle.</param>
-        void Execute(IAbortHandle abortHandle);
+        void Execute(IAbortHandle abortHandle); 
+
+        #endregion
+
+        #region PROPERTIES
 
         /// <summary>
         /// Gets if task is currently active.
@@ -33,7 +41,8 @@ namespace SharedLib.Tasks
         ICoreProcessStartInfo StartInfo
         {
             get;
-        }
+        } 
+
+        #endregion
     } 
-    #endregion
 }

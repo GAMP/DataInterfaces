@@ -1,26 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace ServerService.Reporting.Reports.Shifts
 {
+    /// <summary>
+    /// Shifts Log Report Filter.
+    /// </summary>
     [Serializable]
     [DataContract]
-    public class ShiftsLogReportFilterDTO : ReportFilterBaseDTO
+    public class ShiftsLogReportFilterDTO : DateRangeReportFilterBaseDTO
     {
-        [DataMember]
-        public List<ListItemDTO> Operators { get; set; }
-
+        /// <summary>
+        /// Filter Operator Id.
+        /// </summary>
         [DataMember]
         public int? OperatorId { get; set; }
 
-        [DataMember]
-        public List<ListItemDTO> Registers { get; set; }
-
+        /// <summary>
+        /// Filter Register Id.
+        /// </summary>
         [DataMember]
         public int? RegisterId { get; set; }
 
+        /// <summary>
+        /// Filter Shifts Log Report Type.
+        /// </summary>
         [DataMember]
-        public ShiftsLogReportType ReportType { get; set; }
+        public ShiftsLogReportTypes ShiftsLogReportType { get; set; }
     }
 }

@@ -1,30 +1,42 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 
 namespace SharedLib
 {
-    #region PropertyChangeNotifier
+    /// <summary>
+    /// Property change notifier class.
+    /// </summary>
     public sealed class PropertyChangeNotifier : DependencyObject, IDisposable
-    {
-        #region Member Variables
-        private WeakReference _propertySource;
-        #endregion
-
-        #region Constructor
+    {    
+        #region CONSTRUCTOR
+        
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="propertySource">Property source object.</param>
+        /// <param name="path">Property path.</param>
         public PropertyChangeNotifier(DependencyObject propertySource, string path)
             : this(propertySource, new PropertyPath(path))
         {
         }
+
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="propertySource">>Property source object.</param>
+        /// <param name="property">Dependency property.</param>
         public PropertyChangeNotifier(DependencyObject propertySource, DependencyProperty property)
             : this(propertySource, new PropertyPath(property))
         {
         }
+
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="propertySource">>Property source object.</param>
+        /// <param name="property">Property path.</param>
         public PropertyChangeNotifier(DependencyObject propertySource, PropertyPath property)
         {
             if (null == propertySource)
@@ -40,9 +52,27 @@ namespace SharedLib
             };
             BindingOperations.SetBinding(this, ValueProperty, binding);
         }
+
         #endregion
 
-        #region PropertySource
+        #region EVENTS
+
+        /// <summary>
+        /// Occurs on value change.
+        /// </summary>
+        public event DependencyPropertyChangedEventHandler ValueChanged;
+
+        #endregion
+
+        #region FIELDS
+        private WeakReference _propertySource;
+        #endregion        
+
+        #region PROPERTYSOURCE
+
+        /// <summary>
+        /// Gets property source object.
+        /// </summary>
         public DependencyObject PropertySource
         {
             get
@@ -52,8 +82,8 @@ namespace SharedLib
                     // note, it is possible that accessing the target property
                     // will result in an exception so i’ve wrapped this check
                     // in a try catch
-                    return this._propertySource.IsAlive
-                    ? this._propertySource.Target as DependencyObject
+                    return _propertySource.IsAlive
+                    ? _propertySource.Target as DependencyObject
                     : null;
                 }
                 catch
@@ -62,11 +92,13 @@ namespace SharedLib
                 }
             }
         }
+
         #endregion
 
-        #region Value
+        #region VALUE
+
         /// <summary>
-        /// Identifies the <see cref=”Value”/> dependency property
+        /// Identifies the <see cref="Value"/> dependency property
         /// </summary>
         public static readonly DependencyProperty ValueProperty = DependencyProperty.Register("Value",
             typeof(object), typeof(PropertyChangeNotifier), 
@@ -74,16 +106,14 @@ namespace SharedLib
 
         private static void OnPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-
             PropertyChangeNotifier notifier = (PropertyChangeNotifier)d;
-            if (null != notifier.ValueChanged)
-                notifier.ValueChanged(notifier, e);
+            notifier.ValueChanged?.Invoke(notifier, e);
         }
 
         /// <summary>
         /// Returns/sets the value of the property
         /// </summary>
-        /// <seealso cref=”ValueProperty”/>
+        /// <seealso cref="ValueProperty"/>
         [Description("Returns/sets the value of the property")]
         [Category("Behavior")]
         [Bindable(true)]
@@ -91,25 +121,26 @@ namespace SharedLib
         {
             get
             {
-                return (object)this.GetValue(PropertyChangeNotifier.ValueProperty);
+                return GetValue(ValueProperty);
             }
             set
             {
-                this.SetValue(PropertyChangeNotifier.ValueProperty, value);
+                SetValue(ValueProperty, value);
             }
         }
-        #endregion
 
-        #region Events
-        public event DependencyPropertyChangedEventHandler ValueChanged;
-        #endregion
+        #endregion        
 
         #region IDisposable Members
+
+        /// <summary>
+        /// Disposes the object.
+        /// </summary>
         public void Dispose()
         {
             BindingOperations.ClearBinding(this, ValueProperty);
         }
+
         #endregion
     }
-    #endregion
 }

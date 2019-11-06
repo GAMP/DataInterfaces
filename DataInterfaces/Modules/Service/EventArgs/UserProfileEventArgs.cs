@@ -4,7 +4,6 @@ using System.Runtime.Serialization;
 
 namespace ServerService
 {
-    #region USERPROFILEEVENTARGS
     /// <summary>
     /// User profile event arguments.
     /// </summary>
@@ -13,12 +12,15 @@ namespace ServerService
     public class UserProfileEventArgs : UserProfileChangeEventArgs
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="userId">User id.</param>
+        /// <param name="userProfile">User profile.</param>
+        /// <param name="type">Change type.</param>
         public UserProfileEventArgs(int userId, object userProfile, UserChangeType type) : base(userId, type)
         {
-            if (userProfile == null)
-                throw new ArgumentNullException(nameof(userProfile));
-
-            this.UserProfile = userProfile;
+            UserProfile = userProfile ?? throw new ArgumentNullException(nameof(userProfile));
         }
         #endregion
 
@@ -34,11 +36,10 @@ namespace ServerService
         [DataMember()]
         public object UserProfile
         {
-            get { return this.userProfile; }
-            protected set { this.userProfile = value; }
+            get { return userProfile; }
+            protected set { userProfile = value; }
         }
 
         #endregion
     }
-    #endregion
 }

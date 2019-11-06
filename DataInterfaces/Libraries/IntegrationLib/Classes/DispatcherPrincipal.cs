@@ -13,6 +13,11 @@ namespace IntegrationLib
     {
         #region CONSTRUCTOR
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="dispatcher">Dispatcher.</param>
+        /// <param name="identity">Identity.</param>
         public DispatcherPrincipal(IMessageDispatcher dispatcher, IUserIdentity identity)
             : base(identity)
         {

@@ -21,6 +21,9 @@ namespace ServerService
 
         #region PROPERTIES
 
+        /// <summary>
+        /// Shift id.
+        /// </summary>
         [DataMember()]
         [ProtoMember(1)]
         public int ShiftId
@@ -28,6 +31,9 @@ namespace ServerService
             get; set;
         }
 
+        /// <summary>
+        /// Start cash.
+        /// </summary>
         [DataMember()]
         [ProtoMember(2)]
         public decimal StartCash
@@ -35,6 +41,9 @@ namespace ServerService
             get; set;
         }
 
+        /// <summary>
+        /// Total pay ins.
+        /// </summary>
         [DataMember()]
         [ProtoMember(3)]
         public decimal PayIns
@@ -42,6 +51,9 @@ namespace ServerService
             get; set;
         }
 
+        /// <summary>
+        /// Total pay outs.
+        /// </summary>
         [DataMember()]
         [ProtoMember(4)]
         public decimal PayOuts
@@ -49,6 +61,9 @@ namespace ServerService
             get; set;
         }
 
+        /// <summary>
+        /// Total withdrawals.
+        /// </summary>
         [DataMember()]
         [ProtoMember(5)]
         public decimal Withdrawals
@@ -56,15 +71,18 @@ namespace ServerService
             get; set;
         }
 
+        /// <summary>
+        /// Payments.
+        /// </summary>
         [DataMember()]
         [ProtoMember(6)]
         public Dictionary<int, PaymentSummary> Payments
         {
             get
             {
-                if (this.payments == null)
-                    this.payments = new Dictionary<int, PaymentSummary>();
-                return this.payments;
+                if (payments == null)
+                    payments = new Dictionary<int, PaymentSummary>();
+                return payments;
             }
             set
             {
@@ -72,15 +90,18 @@ namespace ServerService
             }
         }
 
+        /// <summary>
+        /// Deposit payments.
+        /// </summary>
         [DataMember()]
         [ProtoMember(7)]
         public Dictionary<int, PaymentSummary> DepositPayments
         {
             get
             {
-                if (this.deposits == null)
-                    this.deposits = new Dictionary<int, PaymentSummary>();
-                return this.deposits;
+                if (deposits == null)
+                    deposits = new Dictionary<int, PaymentSummary>();
+                return deposits;
             }
             set
             {
@@ -88,19 +109,22 @@ namespace ServerService
             }
         }
 
+        /// <summary>
+        /// Refunds.
+        /// </summary>
         [DataMember()]
         [ProtoMember(8)]
         public Dictionary<int,PaymentSummary> Refunds
         {
             get
             {
-                if (this.refunds == null)
-                    this.refunds = new Dictionary<int, PaymentSummary>();
-                return this.refunds;
+                if (refunds == null)
+                    refunds = new Dictionary<int, PaymentSummary>();
+                return refunds;
             }
             set
             {
-                this.refunds = value;
+                refunds = value;
             }
         }
 

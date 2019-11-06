@@ -332,6 +332,7 @@ namespace SharedLib.Commands
         UserEmailExist = 29,
         EmailVerificationStateInfoGet = 30,
         MobilePhoneVerificationStateInfoGet = 31,
+        ReservationDataGet =33,
     }
     #endregion
 
@@ -938,6 +939,7 @@ namespace SharedLib.Commands
         UserBalanceEvent = 0,
         EntityEvent = 1,
         EventBatch = 2,
+        ReservationChange =3,
     }
     #endregion
 

@@ -2,10 +2,17 @@
 
 namespace Client
 {
+    /// <summary>
+    /// Client activity event args.
+    /// </summary>
     [Serializable()]
     public class ClientActivityEventArgs : EventArgs
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="activity">Current activity.</param>
         public ClientActivityEventArgs(ClientStartupActivity activity)
         {
             Activity = activity;

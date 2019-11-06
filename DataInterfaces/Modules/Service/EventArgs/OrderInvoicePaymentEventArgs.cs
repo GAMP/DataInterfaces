@@ -3,12 +3,23 @@ using System.Runtime.Serialization;
 
 namespace ServerService
 {
-    #region ORDERINVOICEPAYMENTEVENTARGS
+    /// <summary>
+    /// Order invoice payment event args.
+    /// </summary>
     [Serializable()]
     [DataContract()]
     public class OrderInvoicePaymentEventArgs : OrderInvoicedEventArgs
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="orderId">Order id.</param>
+        /// <param name="userId">User id.</param>
+        /// <param name="invoiceId">Invoice id.</param>
+        /// <param name="paymentMethodId">Payment method id.</param>
+        /// <param name="amount">Amount.</param>
+        /// <param name="outstanding">Outstanding.</param>
         public OrderInvoicePaymentEventArgs(int orderId,
             int userId,
             int invoiceId,
@@ -53,5 +64,4 @@ namespace ServerService
 
         #endregion
     }
-    #endregion
 }

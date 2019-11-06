@@ -4,21 +4,31 @@ using System.Runtime.Serialization;
 
 namespace ServerService
 {
-    #region LICENSERESERVATIONEVENTARGS
+    /// <summary>
+    /// Licenses reservation event args.
+    /// </summary>
     [Serializable()]
     [DataContract()]
     public class LicenseReservationEventArgs : EventArgs
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="reservation">License reservation.</param>
+        /// <param name="released">Indicates a release.</param>
         public LicenseReservationEventArgs(ILicenseReservation reservation, bool released)
         {
             Released = released;
-            Reservation = reservation ?? throw new ArgumentNullException("reservation");
+            Reservation = reservation ?? throw new ArgumentNullException(nameof(reservation));
         }
         #endregion
 
         #region PROPERTIES
 
+        /// <summary>
+        /// Gets if reservation was released.
+        /// </summary>
         [DataMember()]
         public bool Released
         {
@@ -26,6 +36,9 @@ namespace ServerService
             private set;
         }
 
+        /// <summary>
+        /// Gets license reservation.
+        /// </summary>
         [DataMember()]
         public ILicenseReservation Reservation
         {
@@ -35,5 +48,4 @@ namespace ServerService
 
         #endregion
     }
-    #endregion
 }

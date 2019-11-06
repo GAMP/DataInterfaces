@@ -12,6 +12,8 @@ namespace Manager.Modules
     /// </summary>
     public interface IUserModuleSelectionProvider : ISingleGetSelectionProvider<IUserMemberViewModel>
     {
+        #region PROPERTIES
+
         /// <summary>
         /// Gets selected user id.
         /// </summary>
@@ -25,31 +27,49 @@ namespace Manager.Modules
         /// <summary>
         /// Gets if single is selected and not logged in.
         /// </summary>
-        bool? IsSelectedLoggedOut { get; }
-    } 
+        bool? IsSelectedLoggedOut { get; } 
+        
+        #endregion
+    }
     #endregion
 
     #region ISelectedChangedEvent
+    /// <summary>
+    /// Selected changed event provider.
+    /// </summary>
+    /// <typeparam name="T">Item type.</typeparam>
     public interface ISelectedChangedEvent<T>
     {
+        #region EVENTS
         /// <summary>
         /// Raised when selected item changes.
         /// </summary>
-        event EventHandler<SelectedChangeEventArgs<T>> SelectedChanged;
+        event EventHandler<SelectedChangeEventArgs<T>> SelectedChanged; 
+        #endregion
     }
     #endregion
 
     #region ISelectionChangedEvent
+    /// <summary>
+    /// Selection changed event provider.
+    /// </summary>
+    /// <typeparam name="T">Item type.</typeparam>
     public interface ISelectionChangedEvent<T>
     {
+        #region EVENTS
         /// <summary>
         /// Raised when selected items changed.
         /// </summary>
-        event EventHandler<SelectionChangedEventArgs> SelectionChanged;
+        event EventHandler<SelectionChangedEventArgs> SelectionChanged; 
+        #endregion
     }
     #endregion
 
     #region ISingleGetSelectionProvider
+    /// <summary>
+    /// Single selection provider interface.
+    /// </summary>
+    /// <typeparam name="T">Item type.</typeparam>
     public interface ISingleGetSelectionProvider<T> : ISelectedChangedEvent<T>
     {
         #region PROPERTIES
@@ -60,12 +80,16 @@ namespace Manager.Modules
         T SelectedItem { get; }
 
         #endregion
-    } 
+    }
     #endregion
 
     #region IMultiSelectSelectionProvider
+    /// <summary>
+    /// Multi selection provider interface.
+    /// </summary>
+    /// <typeparam name="T">Item type.</typeparam>
     public interface IMultiSelectSelectionProvider<T> : ISingleGetSelectionProvider<T>,
-    ISelectionChangedEvent<T>
+        ISelectionChangedEvent<T>
     {
         #region PROPERTIES
 
@@ -78,6 +102,6 @@ namespace Manager.Modules
         }
 
         #endregion
-    } 
+    }
     #endregion
 }

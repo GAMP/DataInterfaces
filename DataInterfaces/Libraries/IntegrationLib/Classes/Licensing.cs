@@ -79,6 +79,7 @@ namespace IntegrationLib
 
         /// <summary>
         /// Gets or sets licenses comment.
+        /// </summary>
         /// <remarks>
         /// This can be an actual serial number if the license object is binary file.
         /// This can help you track individual licenses.

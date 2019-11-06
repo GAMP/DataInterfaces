@@ -14,9 +14,25 @@ namespace ServerService
     {
         #region CONSTRUCTOR
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
         public UserBalance()
         { }
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="userId">User id.</param>
+        /// <param name="deposits">Deposits.</param>
+        /// <param name="points">Points.</param>
+        /// <param name="onInvoices">On invoices.</param>
+        /// <param name="onInvoicedUsage">On invoiced usage.</param>
+        /// <param name="onActiveUsage">On active usage.</param>
+        /// <param name="totalUserTime">Total time.</param>
+        /// <param name="totalCreditedTime">Total credited time.</param>
+        /// <param name="timeProduct">Total time on time products.</param>
+        /// <param name="timeFixed">Total time on fixed time products.</param>
         public UserBalance(int userId,
             decimal deposits,
             int points,

@@ -2,6 +2,9 @@
 
 namespace Client
 {
+    /// <summary>
+    /// Client plugin base class.
+    /// </summary>
     [PartNotDiscoverable()]
     [InheritedExport(typeof(IClientPlugin))]
     public abstract class ClientPluginBase : 

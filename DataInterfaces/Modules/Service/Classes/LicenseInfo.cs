@@ -5,11 +5,18 @@ using System.Runtime.Serialization;
 
 namespace ServerService
 {
+    /// <summary>
+    /// Server license info class.
+    /// </summary>
     [Serializable()]
     [DataContract()]
     public class LicenseInfo : ILicense
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="parameters"></param>
         public LicenseInfo(Dictionary<string, object> parameters)
         {
             Parameters = parameters ?? throw new ArgumentNullException(nameof(parameters));
@@ -165,6 +172,9 @@ namespace ServerService
 
         #region PRIVATE
 
+        /// <summary>
+        /// Gets or sets parameters.
+        /// </summary>
         protected Dictionary<string, object> Parameters
         {
             get { return parameters; }

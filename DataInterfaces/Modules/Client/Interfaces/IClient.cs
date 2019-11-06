@@ -368,11 +368,26 @@ namespace Client
         /// <returns>Type instance.</returns>
         T JsonDeserializeConfig<T>(string fileName) where T : SharedLib.Configuration.SkinConfig;
 
+        /// <summary>
+        /// Adds a message to log.
+        /// </summary>
+        /// <param name="message">Message.</param>
         void LogAdd(string message);
 
+        /// <summary>
+        /// Adds a message to log.
+        /// </summary>
+        /// <param name="message">Message.</param>
+        /// <param name="category">Message category.</param>
         void LogAdd(string message, LogCategories category);
 
-        void LogAddError(string messgae, Exception ex, LogCategories category);
+        /// <summary>
+        /// Adds a error message to log.
+        /// </summary>
+        /// <param name="message">Message.</param>
+        /// <param name="ex">Exception.</param>
+        /// <param name="category">Message category.</param>
+        void LogAddError(string message, Exception ex, LogCategories category);
 
         #endregion
     }

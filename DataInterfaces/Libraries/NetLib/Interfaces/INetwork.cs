@@ -2,12 +2,14 @@
 
 namespace NetLib
 {
-    #region INetwork
+    /// <summary>
+    /// Network based class implementation interface.
+    /// </summary>
     public interface INetwork
     {
         #region EVENTS
         /// <summary>
-        /// Occours when one of network connections is changed.
+        /// Occurs when one of network connections is changed.
         /// </summary>
         event EventHandler<ConnectionChangedArgs> ConnectionChanged;
         #endregion
@@ -32,5 +34,4 @@ namespace NetLib
         
         #endregion
     } 
-    #endregion
 }

@@ -3,9 +3,15 @@ using CoreLib;
 
 namespace SharedLib
 {
-    #region IRestriction
+    /// <summary>
+    /// Restriction implementation interface.
+    /// </summary>
     public interface IRestriction
     {
+        #region PROPERTIES
+        /// <summary>
+        /// Id.
+        /// </summary>
         int Id { get; set; }
 
         /// <summary>
@@ -21,9 +27,9 @@ namespace SharedLib
         /// <summary>
         /// Gets or sets security profile id.
         /// </summary>
-        int ProfileId { get; set; }
+        int ProfileId { get; set; } 
+        #endregion
     } 
-    #endregion
 
     #region Restriction
     /// <summary>
@@ -32,50 +38,35 @@ namespace SharedLib
     [Serializable()]
     public class Restriction : ItemObject, IRestriction
     {
-        #region Constructor
+        #region CONSTRUCTOR
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
         public Restriction()
         { 
         }
-
-        public Restriction(int profileId)
-        {
-            this.ProfileId = ProfileId;
-        }
-
-        public Restriction(RestrictionType type, string parameter):this()
-        {
-            if (!String.IsNullOrWhiteSpace(parameter))
-            {
-                this.Parameter = parameter;
-                this.Type = type;
-            }
-            else
-            {
-                throw new NullReferenceException("Restriction parameter cannot be null or empty.");
-            }
-        }
-        
+       
         #endregion
 
-        #region Fields
+        #region FIELDS
         private string parameter;
         private RestrictionType type;
         private int profileId;
         #endregion
 
-        #region Properties
+        #region PROPERTIES
 
         /// <summary>
         /// Gets or sets security profile id.
         /// </summary>
         public int ProfileId
         {
-            get { return this.profileId; }
+            get { return profileId; }
             set
             {
-                this.profileId = value;
-                this.RaisePropertyChanged("ProfileId");
+                profileId = value;
+                RaisePropertyChanged("ProfileId");
             }
         }
 
@@ -84,11 +75,11 @@ namespace SharedLib
         /// </summary>
         public string Parameter
         {
-            get { return this.parameter; }
+            get { return parameter; }
             set
             {
-                this.parameter = value;
-                this.RaisePropertyChanged("Parameter");
+                parameter = value;
+                RaisePropertyChanged("Parameter");
             }
         }
 
@@ -97,11 +88,11 @@ namespace SharedLib
         /// </summary>
         public RestrictionType Type
         {
-            get { return this.type; }
+            get { return type; }
             set
             {
-                this.type = value;
-                this.RaisePropertyChanged("Type");
+                type = value;
+                RaisePropertyChanged("Type");
             }
         }
         

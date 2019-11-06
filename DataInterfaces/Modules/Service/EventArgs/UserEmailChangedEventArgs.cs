@@ -4,12 +4,20 @@ using System.Runtime.Serialization;
 
 namespace ServerService
 {
-    #region USEREMAILCHANGEDEVENTARGS
+    /// <summary>
+    /// User email changed event args.
+    /// </summary>
     [Serializable()]
     [DataContract()]
     public class UserEmailChangedEventArgs : UserProfileChangeEventArgs
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="userId">User id.</param>
+        /// <param name="oldEmail">Old email.</param>
+        /// <param name="newEmail">New email.</param>
         public UserEmailChangedEventArgs(int userId, string oldEmail, string newEmail)
             : base(userId, UserChangeType.Email)
         {
@@ -23,6 +31,7 @@ namespace ServerService
         /// <summary>
         /// Gets new email value.
         /// </summary>
+        [DataMember()]
         public string NewEmail
         {
             get;
@@ -32,6 +41,7 @@ namespace ServerService
         /// <summary>
         /// Gets old email value.
         /// </summary>
+        [DataMember()]
         public string OldEmail
         {
             get;
@@ -40,5 +50,4 @@ namespace ServerService
 
         #endregion
     }
-    #endregion
 }

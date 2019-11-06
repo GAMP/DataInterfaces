@@ -1,5 +1,8 @@
 ﻿namespace NetLib
 {
+    /// <summary>
+    /// <see cref="IConnection"/> data flags.
+    /// </summary>
     public enum DataFlags
     {
         /// <summary>

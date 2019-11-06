@@ -24,6 +24,10 @@ namespace SharedLib.Services
             }
         }
 
+        /// <summary>
+        /// Shows the message.
+        /// </summary>
+        /// <param name="message">Message.</param>
         public virtual void ShowMessage(string message)
         {
             this.ShowMessage(null, message);

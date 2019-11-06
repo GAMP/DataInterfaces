@@ -4,6 +4,9 @@ using System.Threading.Tasks;
 
 namespace Manager.Services
 {
+    /// <summary>
+    /// Core process factory interface.
+    /// </summary>
     public interface ICoreProcessFactory
     {
         #region FUNCTIONS

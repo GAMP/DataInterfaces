@@ -5,7 +5,9 @@ using System.Runtime.Serialization;
 
 namespace ServerService
 {
-    #region HOSTPROPERTIESCHANGEDEVENTARGS
+    /// <summary>
+    /// Host properties changed event args.
+    /// </summary>
     [Serializable()]
     [DataContract()]
     public class HostPropertiesChangedEventArgs : HostIdArgsBase
@@ -25,9 +27,13 @@ namespace ServerService
             {
                 { type, value }
             };
-
         }
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="hostId">Host id.</param>
+        /// <param name="properties">Properties.</param>
         public HostPropertiesChangedEventArgs(int hostId, IDictionary<HostPropertyType, object> properties)
             : base(hostId)
         {
@@ -45,13 +51,14 @@ namespace ServerService
         /// <summary>
         /// Gets affected properties.
         /// </summary>
+        [DataMember()]
         public IDictionary<HostPropertyType, object> Properties
         {
             get
             {
-                if (this.properties == null)
-                    this.properties = new Dictionary<HostPropertyType, object>();
-                return this.properties;
+                if (properties == null)
+                    properties = new Dictionary<HostPropertyType, object>();
+                return properties;
             }
             private set
             {
@@ -70,7 +77,7 @@ namespace ServerService
         /// <returns>True if exists, otherwise false.</returns>
         public bool HasProperty(HostPropertyType type)
         {
-            return this.Properties.ContainsKey(type);
+            return Properties.ContainsKey(type);
         }
 
         /// <summary>
@@ -81,10 +88,9 @@ namespace ServerService
         /// <returns>Property value.</returns>
         public T GetProperty<T>(HostPropertyType type)
         {
-            return (T)this.Properties[type];
+            return (T)Properties[type];
         }
 
         #endregion
     }
-    #endregion
 }

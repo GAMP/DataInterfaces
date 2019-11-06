@@ -3,11 +3,19 @@ using System.Runtime.Serialization;
 
 namespace Client
 {
+    /// <summary>
+    /// Language change event args.
+    /// </summary>
     [Serializable()]
     [DataContract()]
     public class LanguageChangeEventArgs : EventArgs
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="settingsLanguage">Settings language.</param>
+        /// <param name="preferedUILanguage">Prefered UI language.</param>
         public LanguageChangeEventArgs(string settingsLanguage, string preferedUILanguage)
         {
             SettingsLanguage = settingsLanguage;

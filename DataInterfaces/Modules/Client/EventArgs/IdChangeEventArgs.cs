@@ -2,10 +2,18 @@
 
 namespace Client
 {
+    /// <summary>
+    /// Client id changed event args.
+    /// </summary>
     [Serializable()]
     public class IdChangeEventArgs : EventArgs
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="newId">New id.</param>
+        /// <param name="oldId">Old id.</param>
         public IdChangeEventArgs(int newId, int oldId)
         {
             NewId = newId;

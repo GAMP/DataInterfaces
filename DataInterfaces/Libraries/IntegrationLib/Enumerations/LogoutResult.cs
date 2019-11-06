@@ -2,6 +2,9 @@
 
 namespace IntegrationLib
 {
+    /// <summary>
+    /// Logout result.
+    /// </summary>
     [Flags()]
     public enum LogoutResult
     {

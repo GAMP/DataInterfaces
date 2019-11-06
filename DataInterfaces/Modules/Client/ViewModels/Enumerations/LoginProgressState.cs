@@ -8,9 +8,21 @@
     /// </remarks>
     public enum LoginProgressState : int
     {
+        /// <summary>
+        /// Initial.
+        /// </summary>
         Initial = 0,
+        /// <summary>
+        /// Login.
+        /// </summary>
         Login = 1,
+        /// <summary>
+        /// Failed.
+        /// </summary>
         Failed = 2,
+        /// <summary>
+        /// Logout.
+        /// </summary>
         Logout = 3,
     }
 }

@@ -15,15 +15,34 @@ namespace ServerService
     {
         #region CONSTRUCTOR
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="code">Result code.</param>
         public BackupResult(BackupResultCode code) : this(null, code, null)
         { }
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="ex">Exception.</param>
         public BackupResult(Exception ex) : this(null, BackupResultCode.Failed, ex)
         { }
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="fileName">Backup file name.</param>
+        /// <param name="code">Result code.</param>
         public BackupResult(string fileName, BackupResultCode code) : this(fileName, code, null)
         { }
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="fileName">Backup file name.</param>
+        /// <param name="code">Result code.</param>
+        /// <param name="ex">Exception.</param>
         public BackupResult(string fileName, BackupResultCode code, Exception ex)
         {
             BackupFile = fileName;

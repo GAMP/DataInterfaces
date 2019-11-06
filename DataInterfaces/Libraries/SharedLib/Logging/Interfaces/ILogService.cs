@@ -2,9 +2,13 @@
 
 namespace SharedLib.Logging
 {
-    #region ILogService
+    /// <summary>
+    /// Log service implementation interface.
+    /// </summary>
     public interface ILogService
     {
+        #region FUNCTIONS
+        
         /// <summary>
         /// Adds message to the log.
         /// </summary>
@@ -24,8 +28,8 @@ namespace SharedLib.Logging
         /// <param name="messgae">String message.</param>
         /// <param name="ex">Exception.</param>
         /// <param name="category">Log category.</param>
-        void LogAddError(string messgae, Exception ex, LogCategories category);
+        void LogAddError(string messgae, Exception ex, LogCategories category); 
 
+        #endregion
     }
-    #endregion
 }

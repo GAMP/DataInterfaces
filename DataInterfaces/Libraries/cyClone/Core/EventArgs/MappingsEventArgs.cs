@@ -11,6 +11,12 @@ namespace CyClone.Core
     public class MappingsEventArgs : EventArgs
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="action">Action.</param>
+        /// <param name="added">Added.</param>
+        /// <param name="removed">Removed.</param>
         public MappingsEventArgs(NotifyCollectionChangedAction action,
            List<IMappingsConfiguration> added,
            List<IMappingsConfiguration> removed)
@@ -72,6 +78,9 @@ namespace CyClone.Core
         #endregion
 
         #region OVERRIDES
+        /// <summary>
+        /// Converts to string.
+        /// </summary>
         public override string ToString()
         {
             return string.Format("Change Action {0} Added Items {1} Removed Items {2}", Action, AddedItems.Count, RemovedItems.Count);

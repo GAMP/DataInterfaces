@@ -2,10 +2,20 @@
 
 namespace NetLib
 {
+    /// <summary>
+    /// <see cref="IConnection"/> Sent/Received event args.
+    /// </summary>
     public class SentReceivedEventArgs : EventArgs
     {
         #region CONSTRUCTOR
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="buffer">Buffer.</param>
+        /// <param name="offset">Offset.</param>
+        /// <param name="size">Size.</param>
+        /// <param name="flags">Flags.</param>
         public SentReceivedEventArgs(byte[] buffer, int offset, int size, DataFlags flags)
         {
             Buffer = buffer ?? throw new ArgumentNullException(nameof(buffer));

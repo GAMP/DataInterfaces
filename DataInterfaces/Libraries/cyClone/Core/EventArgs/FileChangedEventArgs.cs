@@ -2,6 +2,9 @@
 
 namespace CyClone.Core
 {
+    /// <summary>
+    /// File changed event args.
+    /// </summary>
     [Serializable()]
     public class FileChangedEventArgs : EventArgs
     {

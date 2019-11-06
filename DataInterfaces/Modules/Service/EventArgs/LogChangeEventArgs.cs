@@ -3,11 +3,12 @@ using System.Runtime.Serialization;
 
 namespace ServerService
 {
-    #region LOGCHANGEEVENTARGS
+    /// <summary>
+    /// Log change event args.
+    /// </summary>
     [Serializable()]
     [DataContract()]
     public class LogChangeEventArgs : EventArgs
     {
     }
-    #endregion    
 }

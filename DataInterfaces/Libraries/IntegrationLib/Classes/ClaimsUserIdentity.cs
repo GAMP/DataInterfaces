@@ -17,11 +17,24 @@ namespace IntegrationLib
     {
         #region CONSTRUCTOR
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="name">User name.</param>
+        /// <param name="userId">User id.</param>
+        /// <param name="role">User role.</param>
         public ClaimsUserIdentity(string name, int userId, UserRoles role)
          : this(name,userId,role, Enumerable.Empty<Claim>())
         {
         }
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="name">User name.</param>
+        /// <param name="userId">User id.</param>
+        /// <param name="role">User role.</param>
+        /// <param name="claims">User claims.</param>
         public ClaimsUserIdentity(string name, int userId, UserRoles role, IEnumerable<Claim> claims):base(name)
         {
             AddClaims(claims);

@@ -3,10 +3,16 @@
 namespace CyClone.Core
 {
     #region IcyFileInfo
+    /// <summary>
+    /// File info implementation interface.
+    /// </summary>
     public interface IcyFileInfo : IcyFileSystemInfo
     {
         #region PROPERTIES
 
+        /// <summary>
+        /// Gets or sets hash.
+        /// </summary>
         string Hash { get; set; }
 
         #endregion

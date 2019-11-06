@@ -7,9 +7,12 @@ using System.Threading.Tasks;
 
 namespace ServerService.Reporting.Reports.Overview
 {
+    /// <summary>
+    /// Overview Report Filter.
+    /// </summary>
     [Serializable]
     [DataContract]
-    public class OverviewReportFilterDTO : ReportFilterBaseDTO
+    public class OverviewReportFilterDTO : DateRangeReportFilterBaseDTO
     {
 
     }

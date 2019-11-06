@@ -1,13 +1,22 @@
 ﻿using SharedLib;
 using System;
+using System.Runtime.Serialization;
 
 namespace ServerService
 {
-    #region HOSTIDEVENTARGS
+    /// <summary>
+    /// Host event args with host id.
+    /// </summary>
     [Serializable()]
     public class HostIdEventArgs : HostIdArgsBase
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="hostId">Host id.</param>
+        /// <param name="type">Event type.</param>
+        /// <param name="parameters">Parameters.</param>
         public HostIdEventArgs(int hostId, HostEventType type, object parameters)
             : base(hostId)
         {
@@ -15,15 +24,22 @@ namespace ServerService
             Parameters = parameters;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hostId">Host id.</param>
+        /// <param name="type">Event type.</param>
         public HostIdEventArgs(int hostId, HostEventType type)
             : this(hostId, type, null)
         { }
         #endregion
 
         #region PROPERTIES
+
         /// <summary>
         /// Gets type.
         /// </summary>
+        [DataMember()]
         public HostEventType Type
         {
             get;
@@ -33,6 +49,7 @@ namespace ServerService
         /// <summary>
         /// Gets parameters.
         /// </summary>
+        [DataMember()]
         public object Parameters
         {
             get;
@@ -42,14 +59,15 @@ namespace ServerService
         /// <summary>
         /// Gets parameters as array.
         /// </summary>
+        [DataMember()]
         public object[] ParametersArray
         {
             get
             {
-                return this.Parameters as object[];
+                return Parameters as object[];
             }
         }
+
         #endregion
     }
-    #endregion
 }

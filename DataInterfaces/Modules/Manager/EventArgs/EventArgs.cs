@@ -6,9 +6,16 @@ using System.Security.Principal;
 namespace Manager
 {
     #region AUTHEVENTARGS
+    /// <summary>
+    /// Auth event args.
+    /// </summary>
     public class AuthEventArgs : EventArgs
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="identity">User identity.</param>
         public AuthEventArgs(IIdentity identity)
         {
             Identity = identity ?? throw new ArgumentNullException(nameof(identity));
@@ -29,9 +36,17 @@ namespace Manager
     #endregion
 
     #region CURRENTSERVICECHANGEDEVENTARGS
+    /// <summary>
+    /// Current service changed event args.
+    /// </summary>
     public class CurrentServiceChangedEventArgs : SelectedChangeEventArgs<IRemoteGizmoService>
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="current">Current service.</param>
+        /// <param name="previous">Previous service.</param>
         public CurrentServiceChangedEventArgs(IRemoteGizmoService current, IRemoteGizmoService previous)
         {
             Current = current;
@@ -42,9 +57,16 @@ namespace Manager
     #endregion
 
     #region RFIDEVENTARGS
+    /// <summary>
+    /// Rfid event args.
+    /// </summary>
     public abstract class RFIDEventArgs : EventArgs
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="readerName">Reader name.</param>
         public RFIDEventArgs(string readerName)
         {
             if (string.IsNullOrWhiteSpace(readerName))
@@ -118,6 +140,9 @@ namespace Manager
     #endregion
 
     #region PERMISSIONCHANGEEVENTARGS
+    /// <summary>
+    /// Permission change event args.
+    /// </summary>
     public class PermissionChangeEventArgs : EventArgs
     { }
     #endregion

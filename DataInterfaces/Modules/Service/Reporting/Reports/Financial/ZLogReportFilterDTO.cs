@@ -4,9 +4,12 @@ using System.Runtime.Serialization;
 
 namespace ServerService.Reporting.Reports.Financial
 {
+    /// <summary>
+    /// Z Log Report Filter.
+    /// </summary>
     [Serializable]
     [DataContract]
-    public class ZLogReportFilterDTO : ReportFilterBaseDTO
+    public class ZLogReportFilterDTO : DateRangeReportFilterBaseDTO
     {
 
     }

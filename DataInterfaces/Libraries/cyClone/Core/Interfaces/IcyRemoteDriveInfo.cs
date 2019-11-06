@@ -2,6 +2,9 @@
 
 namespace CyClone.Core
 {
+    /// <summary>
+    /// Remote drive interface.
+    /// </summary>
     public interface IcyRemoteDriveInfo : IcyDriveInfo
     {
         #region PROPERTIES

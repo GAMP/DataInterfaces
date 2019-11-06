@@ -9,7 +9,7 @@ namespace CoreLib
     public static class ByteExtensions
     {
         #region FUNCTIONS
-        
+
         /// <summary>
         /// Checks if two byte array match.
         /// </summary>
@@ -54,6 +54,15 @@ namespace CoreLib
             }
         }
 
+        /// <summary>
+        /// Checks if sequence equals.
+        /// </summary>
+        /// <param name="source">Source.</param>
+        /// <param name="sourceIndex">Source index.</param>
+        /// <param name="destination">Destination.</param>
+        /// <param name="destinationIndex">Destination index.</param>
+        /// <param name="count">Count.</param>
+        /// <returns>True if equals, otherwise false.</returns>
         public static bool SequenceEquals(this byte[] source, int sourceIndex, byte[] destination, int destinationIndex, int count)
         {
             if (source == null)
@@ -144,7 +153,7 @@ namespace CoreLib
 
             if (buffer.Length < (offset + count))
                 throw new ArgumentException("Buffer is smaller than offset and count combined.", nameof(offset));
-        } 
+        }
 
         #endregion
     }

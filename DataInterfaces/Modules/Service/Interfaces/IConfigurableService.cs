@@ -4,6 +4,9 @@ using System.Threading.Tasks;
 namespace ServerService
 {
     #region IConfigurableService
+    /// <summary>
+    /// Configurable service interface.
+    /// </summary>
     public interface IConfigurableService
     {
         #region FUNCTIONS
@@ -25,6 +28,9 @@ namespace ServerService
     #endregion
 
     #region IConfigurableServiceAsync
+    /// <summary>
+    /// Configurable service async interface.
+    /// </summary>
     public interface IConfigurableServiceAsync : IConfigurableService
     {
         #region FUNCTIONS

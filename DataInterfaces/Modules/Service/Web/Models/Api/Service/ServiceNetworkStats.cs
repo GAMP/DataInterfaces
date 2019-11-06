@@ -2,6 +2,9 @@
 
 namespace ServerService.Web.Api.Controllers.Models
 {
+    /// <summary>
+    /// Service network stats.
+    /// </summary>
     [DataContract()]
     public class ServiceNetworkStats
     {

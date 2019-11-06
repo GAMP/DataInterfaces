@@ -2,6 +2,9 @@
 
 namespace System.ComponentModel.DataAnnotations
 {
+    /// <summary>
+    /// Path invalid characters validation attribute.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
     public class PathInvalidCharactersValidationAttribute : ValidationAttribute
     {
@@ -23,6 +26,11 @@ namespace System.ComponentModel.DataAnnotations
 
         #region OVERRIDES
 
+        /// <summary>
+        /// Gets if value is valid.
+        /// </summary>
+        /// <param name="value">Value.</param>
+        /// <returns>True or false.</returns>
         public override bool IsValid(object value)
         {
             if (value is string PATH_STRING)

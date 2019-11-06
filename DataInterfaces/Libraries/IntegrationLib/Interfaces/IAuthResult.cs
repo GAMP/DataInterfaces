@@ -3,10 +3,13 @@ using System.Collections.Generic;
 
 namespace IntegrationLib
 {
+    /// <summary>
+    /// Authentication result implementation interface.
+    /// </summary>
     public interface IAuthResult
     {
         #region PROPERTIES
-        
+
         /// <summary>
         /// Gets custom data dictionary.
         /// </summary>
@@ -25,7 +28,7 @@ namespace IntegrationLib
         /// <summary>
         /// Gets result.
         /// </summary>
-        LoginResult Result { get; set; } 
+        LoginResult Result { get; set; }
 
         #endregion
     }

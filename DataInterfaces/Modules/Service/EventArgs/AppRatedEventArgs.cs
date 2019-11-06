@@ -3,18 +3,28 @@ using System.Runtime.Serialization;
 
 namespace ServerService
 {
-    #region APPRATEDEVENTARGS
+    /// <summary>
+    /// App rated event args.
+    /// </summary>
     [DataContract()]
     [Serializable()]
     public class AppRatedEventArgs : UserIdEventArgsBase
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="userId">User id.</param>
+        /// <param name="appId">App id.</param>
+        /// <param name="userRating">User rating value.</param>
+        /// <param name="appRating">Global rating value.</param>
+        /// <param name="count">Total rates count.</param>
         public AppRatedEventArgs(int userId, int appId, int userRating, int appRating, int count) : base(userId)
         {
-            this.AppId = appId;
-            this.UserRating = userRating;
-            this.AppRating = appRating;
-            this.RatesCount = count;
+            AppId = appId;
+            UserRating = userRating;
+            AppRating = appRating;
+            RatesCount = count;
         }
         #endregion
 
@@ -51,7 +61,7 @@ namespace ServerService
         }
 
         /// <summary>
-        /// Gets total ratings count.
+        /// Gets total rates count.
         /// </summary>
         [DataMember()]
         public int RatesCount
@@ -62,5 +72,4 @@ namespace ServerService
 
         #endregion
     }
-    #endregion
 }

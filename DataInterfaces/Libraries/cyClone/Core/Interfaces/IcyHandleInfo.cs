@@ -2,6 +2,9 @@
 
 namespace CyClone.Core
 {
+    /// <summary>
+    /// Handle info interface.
+    /// </summary>
     public interface IcyHandleInfo
     {
         #region PROPERTIES

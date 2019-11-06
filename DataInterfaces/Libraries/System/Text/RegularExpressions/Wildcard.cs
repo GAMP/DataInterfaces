@@ -2,7 +2,7 @@
 {
     /// <summary>
     /// Represents a wildcard running on the
-    /// <see cref="System.Text.RegularExpressions"/> engine.
+    /// <see cref="RegularExpressions"/> engine.
     /// </summary>
     public class Wildcard : Regex
     {
@@ -22,7 +22,7 @@
         /// </summary>
         /// <param name="pattern">The wildcard pattern to match.</param>
         /// <param name="options">A combination of one or more
-        /// <see cref="System.Text.RegexOptions"/>.</param>
+        /// <see cref="RegexOptions"/>.</param>
         public Wildcard(string pattern, RegexOptions options)
             : base(WildcardToRegex(pattern), options)
         {

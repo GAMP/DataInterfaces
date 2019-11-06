@@ -2,9 +2,16 @@
 
 namespace Client
 {
+    /// <summary>
+    /// Profiles change event args.
+    /// </summary>
     public class ProfilesChangeEventArgs : EventArgs
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="isInitial">Indicates if change is initial.</param>
         public ProfilesChangeEventArgs(bool isInitial)
         {
             IsInitial = isInitial;

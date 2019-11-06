@@ -3,21 +3,24 @@ using System;
 
 namespace Client
 {
+    /// <summary>
+    /// Client application ratred event args.
+    /// </summary>
     [Serializable()]
     public class ApplicationRateEventArgs : EventArgs
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="appId">App id.</param>
+        /// <param name="overallRating">Overall rating.</param>
+        /// <param name="userRating">User rating.</param>
         public ApplicationRateEventArgs(int appId, IRating overallRating, IRating userRating)
         {
-            if (overallRating == null)
-                throw new ArgumentNullException("overallRating");
-
-            if (userRating == null)
-                throw new ArgumentNullException("userRating");
-
             ApplicationId = appId;
-            OverallRating = overallRating;
-            UserRating = userRating;
+            OverallRating = overallRating ?? throw new ArgumentNullException("overallRating");
+            UserRating = userRating ?? throw new ArgumentNullException("userRating");
         }
         #endregion
 

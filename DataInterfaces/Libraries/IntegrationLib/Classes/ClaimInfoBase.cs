@@ -12,7 +12,12 @@ namespace IntegrationLib
     public class ClaimTypeInfoBase : ClaimTypeBase, IClaimTypeInfo
     {
         #region CONSTRUCTOR
-        public ClaimTypeInfoBase(string resource, string operation):base(resource,operation)
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="resource">Resource.</param>
+        /// <param name="operation">Operation.</param>
+        public ClaimTypeInfoBase(string resource, string operation) : base(resource, operation)
         {
         }
         #endregion
@@ -52,7 +57,7 @@ namespace IntegrationLib
         [DataMember()]
         public virtual Enum Type
         {
-            get;set;
+            get; set;
         }
 
         /// <summary>
@@ -61,7 +66,7 @@ namespace IntegrationLib
         [DataMember()]
         public virtual Enum[] DependsOn
         {
-            get;set;
+            get; set;
         }
 
         #endregion        

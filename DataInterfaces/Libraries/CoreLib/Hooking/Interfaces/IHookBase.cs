@@ -2,6 +2,9 @@
 
 namespace CoreLib.Hooking
 {
+    /// <summary>
+    /// Base hook implementation interface.
+    /// </summary>
     public interface IHookBase
     {
         #region PROPERTIES

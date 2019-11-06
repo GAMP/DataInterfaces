@@ -13,6 +13,9 @@ namespace ServerService
     public class ShiftCountSummary
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
         public ShiftCountSummary()
         { }
         #endregion

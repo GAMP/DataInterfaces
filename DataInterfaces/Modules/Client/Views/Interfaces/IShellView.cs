@@ -66,7 +66,7 @@ namespace Client
         /// <param name="content">Overlay content.</param>
         /// <param name="allowClosing">Specifies if automatic closing should occur.</param>
         /// <param name="ct">Cancelation token.</param>
-        /// <returns>>Associated task.</returns>
+        /// <returns>Associated task.</returns>
         Task ShowOverlayAsync(object content, bool allowClosing, CancellationToken ct);
 
         /// <summary>
@@ -87,9 +87,36 @@ namespace Client
         /// </summary>
         event EventHandler<OverlayEventArgs> OverlayEvent;
 
+        /// <summary>
+        /// Shows overlay.
+        /// </summary>
+        /// <param name="mediaModel">Media model.</param>
+        /// <returns>Associated task.</returns>
         Task ShowOverlayAsync(IMediaViewModel mediaModel);
+
+        /// <summary>
+        /// Shows overlay.
+        /// </summary>
+        /// <param name="mediaModel">Media model.</param>
+        /// <param name="allowClosing">Indicates if closing is allowed.</param>
+        /// <returns>Associated task.</returns>
         Task ShowOverlayAsync(IMediaViewModel mediaModel, bool allowClosing);
+
+        /// <summary>
+        /// Shows overlay.
+        /// </summary>
+        /// <param name="mediaModel">Media model.</param>
+        /// <param name="ct">Cancellation token.</param>
+        /// <returns>Associated task.</returns>
         Task ShowOverlayAsync(IMediaViewModel mediaModel, CancellationToken ct);
+
+        /// <summary>
+        /// Shows overlay.
+        /// </summary>
+        /// <param name="mediaModel">Media model.</param>
+        /// <param name="allowClosing">Indicates if closing is allowed.</param>
+        /// <param name="ct">Cancellation token.</param>
+        /// <returns>Associated task.</returns>
         Task ShowOverlayAsync(IMediaViewModel mediaModel, bool allowClosing, CancellationToken ct);
 
         #endregion

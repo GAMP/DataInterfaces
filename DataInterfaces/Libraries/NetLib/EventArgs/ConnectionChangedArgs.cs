@@ -2,13 +2,21 @@
 
 namespace NetLib
 {
+    /// <summary>
+    /// Connection changed event args.
+    /// </summary>
     public class ConnectionChangedArgs : EventArgs
     {
         #region CONSTUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="oldConnection">Old connection.</param>
+        /// <param name="newConnection">New connection.</param>
         public ConnectionChangedArgs(IConnection oldConnection, IConnection newConnection)
         {
-            this.OldConnection = oldConnection;
-            this.NewConnection = newConnection;
+            OldConnection = oldConnection;
+            NewConnection = newConnection;
         }
         #endregion
 

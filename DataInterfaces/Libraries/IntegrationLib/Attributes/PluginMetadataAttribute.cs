@@ -12,9 +12,17 @@ namespace IntegrationLib
     {
         #region CONSTRUCTOR
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
         public PluginMetadataAttribute()
         { }
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="name">Plugin name.</param>
+        /// <param name="version">Plugin version.</param>
         public PluginMetadataAttribute(string name, string version)
             : base(typeof(IPlugin))
         {
@@ -22,6 +30,12 @@ namespace IntegrationLib
             Version = version;
         }
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="name">Plugin name.</param>
+        /// <param name="version">Plugin version.</param>
+        /// <param name="description">Plugin description.</param>
         public PluginMetadataAttribute(string name, string version, string description)
             : this(name, version)
         {
@@ -30,6 +44,13 @@ namespace IntegrationLib
             Description = description;
         }
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="name">Plugin name.</param>
+        /// <param name="version">Plugin version.</param>
+        /// <param name="description">Plugin description.</param>
+        /// <param name="iconResource">Icon resource.</param>
         public PluginMetadataAttribute(string name, string version, string description, string iconResource)
             : this(name, version, description)
         {

@@ -11,7 +11,7 @@ namespace CoreLib
     public static partial class EnumerableExtensions
     {
         #region FUNCTIONS
-        
+
         /// <summary>
         /// Gets if collection is equal to null or empty.
         /// </summary>
@@ -25,6 +25,9 @@ namespace CoreLib
             return !collection.Any();
         }
 
+        /// <summary>
+        /// Selects a chunk.
+        /// </summary>
         public static IEnumerable<IEnumerable<T>> Chunks<T>(this IEnumerable<T> enumerable,
                                             int chunkSize)
         {
@@ -51,9 +54,9 @@ namespace CoreLib
         /// <summary>
         /// Returns the index of an item in a sequence.
         /// </summary>
-        /// <typeparam name="T">The type of the elements of source.</typeparam>
+        /// <typeparam name="TSource">Item source type.</typeparam>
         /// <param name="source">A sequence containing elements.</param>
-        /// <param name="item">The item to locate.</param>        
+        /// <param name="item">The item to locate.</param>       
         /// <returns>The index of the entry if it was found in the sequence; otherwise, -1.</returns>
         public static int IndexOf<TSource>(this IEnumerable<TSource> source, TSource item)
         {
@@ -63,11 +66,11 @@ namespace CoreLib
         /// <summary>
         /// Returns the index of an item in a sequence.
         /// </summary>
-        /// <typeparam name="T">The type of the elements of source.</typeparam>
+        /// <typeparam name="TSource">Item source type.</typeparam>
         /// <param name="source">A sequence containing elements.</param>
         /// <param name="item">The item to locate.</param>
-        /// <param name="itemComparer">The item equality comparer to use.  Pass null to use the default comparer.</param>
-        /// <returns>The index of the entry if it was found in the sequence; otherwise, -1.</returns></returns>
+        /// <param name="itemComparer">The item equality comparer to use.  Pass null to use the default comparer.</param>   
+        /// <returns>The index of the entry if it was found in the sequence; otherwise, -1.</returns>
         public static int IndexOf<TSource>(this IEnumerable<TSource> source, TSource item, IEqualityComparer<TSource> itemComparer)
         {
             if (source == null)
@@ -89,6 +92,9 @@ namespace CoreLib
             return -1;
         }
 
+        /// <summary>
+        /// Recursively selects items.
+        /// </summary>
         public static IEnumerable<T> SelectRecursive<T>(this IEnumerable<T> source, Func<T, IEnumerable<T>> selector)
         {
             foreach (var parent in source)
@@ -99,7 +105,7 @@ namespace CoreLib
                 foreach (var child in SelectRecursive(children, selector))
                     yield return child;
             }
-        } 
+        }
 
         #endregion
     }

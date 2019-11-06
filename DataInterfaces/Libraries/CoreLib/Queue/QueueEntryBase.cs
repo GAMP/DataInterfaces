@@ -132,19 +132,37 @@ namespace CoreLib.Queue
 
         #region VIRTUAL
 
+        /// <summary>
+        /// Called on can pause command.
+        /// </summary>
+        /// <param name="param">Parameter.</param>
+        /// <returns>True or false.</returns>
         protected virtual bool OnCanPauseCommand(object param)
         {
             return false;
         }
 
+        /// <summary>
+        /// Called on pause command.
+        /// </summary>
+        /// <param name="param">Parameter.</param>
         protected virtual void OnPauseCommand(object param)
         { }
 
+        /// <summary>
+        /// Called on can cancel command.
+        /// </summary>
+        /// <param name="param">Parameter.</param>
+        /// <returns>True or false.</returns>
         protected virtual bool OnCanCancelCommand(object param)
         {
             return !CancelToken.IsCancellationRequested;
         }
 
+        /// <summary>
+        /// Called on cancel command.
+        /// </summary>
+        /// <param name="param">Parameter.</param>
         protected virtual void OnCancelCommand(object param)
         {
             CancelTokenSource.Cancel();

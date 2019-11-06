@@ -2,7 +2,9 @@
 
 namespace SharedLib.Commands
 {
-    #region OperationState
+    /// <summary>
+    /// Dispatcher operation states.
+    /// </summary>
     [Flags()]
     public enum OperationState : uint
     {
@@ -18,8 +20,10 @@ namespace SharedLib.Commands
 
         /// <summary>
         /// This flags the operation completion.
-        /// <remarks>This should be only set when operation has fully completed.
         /// </summary>
+        /// <remarks>
+        /// This should be only set when operation has fully completed.
+        /// </remarks>
         Completed = 2,
 
         /// <summary>
@@ -62,5 +66,4 @@ namespace SharedLib.Commands
         /// </summary>
         ConnectionChange = 4096,
     }
-    #endregion
 }

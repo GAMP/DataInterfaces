@@ -24,7 +24,7 @@ namespace SkinInterfaces
     ///                <i:Interaction.Behaviors>
     ///                    <CinchV2:SelectorDoubleClickCommandBehavior Command="{Binding SomeViewModelCommand}" />
     ///                </i:Interaction.Behaviors>
-    ///         </TextBox>
+    ///         </ListView>
     ///         
     /// AND IN YOUR VIEW MODEL YOU WOULD HAVE A ICOMMAND DECLARED SOMETHING LIKE THIS
     /// 

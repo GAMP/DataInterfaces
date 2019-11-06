@@ -480,11 +480,18 @@ namespace SharedLib
     #endregion
 
     #region PropertyMapAttribute
+    /// <summary>
+    /// Property map attribute.
+    /// </summary>
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true, Inherited = true)]
     public class PropertyMapAttribute : Attribute
     {
         #region CONSTRUCTOR
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="propertyName">Property name.</param>
         public PropertyMapAttribute(string propertyName)
         {
             if (string.IsNullOrWhiteSpace(propertyName))
@@ -515,6 +522,9 @@ namespace SharedLib
 
         #region OVERRIDES
 
+        /// <summary>
+        /// Gets type id.
+        /// </summary>
         public override object TypeId
         {
             get
@@ -562,6 +572,7 @@ namespace SharedLib
         /// <param name="operation">Filter opertation.</param>
         /// <param name="groupName">Filter group name.</param>
         /// <param name="includedOnNull">Indicates if filter should be included on null values.</param>
+        /// <param name="ignore">Indicates if property should be ignored when calling get filters function.</param>
         public FilterPropertyAttribute(string propertyName, Op operation, string groupName, bool includedOnNull, bool ignore) : base(propertyName)
         {
             Operation = operation;

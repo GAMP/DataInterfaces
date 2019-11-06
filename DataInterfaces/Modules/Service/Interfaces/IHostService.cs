@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 namespace ServerService
 {
     #region IHostService
+    /// <summary>
+    /// Host service.
+    /// </summary>
     public interface IHostService
     {
         #region EVENTS
@@ -59,6 +62,9 @@ namespace ServerService
     }
     #endregion
 
+    /// <summary>
+    /// Host async service.
+    /// </summary>
     public interface IHostServiceAsync : IHostService
     {
         /// <summary>

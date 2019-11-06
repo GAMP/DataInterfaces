@@ -1,6 +1,8 @@
 ﻿namespace IntegrationLib
 {
-    #region HttpCredentials
+    /// <summary>
+    /// HTTP Credentials.
+    /// </summary>
     public class HttpCredentials
     {
         #region Properties
@@ -25,5 +27,4 @@
 
         #endregion
     }
-    #endregion
 }

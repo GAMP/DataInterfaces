@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace System.Threading.Tasks
 {
+    /// <summary>
+    /// Parallel class extensions.
+    /// </summary>
     public static class ParallelEx
     {
         /// <summary>
@@ -64,11 +67,17 @@ namespace System.Threading.Tasks
             if (exceptions.Count > 0) throw new AggregateException(exceptions);
         }
 
+        /// <summary>
+        /// Executes for each async.
+        /// </summary>
+        /// <typeparam name="T">Object type.</typeparam>
+        /// <returns>Associated task.</returns>
         public static Task ForEachAsync<T>(this IEnumerable<T> source, int dop, Func<T, Task> body)
         {
             return Task.WhenAll(
                 from partition in Partitioner.Create(source).GetPartitions(dop)
-                select Task.Run(async delegate {
+                select Task.Run(async delegate
+                {
                     using (partition)
                         while (partition.MoveNext())
                             await body(partition.Current);

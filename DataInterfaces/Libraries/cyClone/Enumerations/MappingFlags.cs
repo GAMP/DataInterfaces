@@ -2,6 +2,9 @@
 
 namespace CyClone
 {
+    /// <summary>
+    /// Mapping flags.
+    /// </summary>
     [Flags()]
     public enum MappingFlags
     {

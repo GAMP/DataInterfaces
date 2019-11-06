@@ -2,6 +2,9 @@
 
 namespace ServerService
 {
+    /// <summary>
+    /// Log service.
+    /// </summary>
     public interface ILogService
     {
         #region EVENTS

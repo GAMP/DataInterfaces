@@ -2,6 +2,9 @@
 
 namespace IntegrationLib
 {
+    /// <summary>
+    /// P
+    /// </summary>
     public interface IProvidePrincipal
     {
         #region FUNCTIONS

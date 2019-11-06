@@ -1,21 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace ServerService.Reporting.Reports.Hosts
 {
+    /// <summary>
+    /// Host Usage Report Filter.
+    /// </summary>
     [Serializable]
     [DataContract]
-    public class HostUsageReportFilterDTO : ReportFilterBaseDTO
+    public class HostUsageReportFilterDTO : DateRangeReportFilterBaseDTO
     {
+        /// <summary>
+        /// Filter Host Usage Report Type.
+        /// </summary>
         [DataMember]
-        public HostUsageReportType ReportType { get; set; }
-
-        [DataMember]
-        public List<ListItemDTO> HostGroups { get; set; }
-
+        public HostUsageReportTypes HostUsageReportType { get; set; }
+        
+        /// <summary>
+        /// Filter Host Group Id.
+        /// </summary>
         [DataMember]
         public int? HostGroupId { get; set; }
-
     }
 }

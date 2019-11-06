@@ -2,6 +2,9 @@
 
 namespace IntegrationLib
 {
+    /// <summary>
+    /// License reservation implementation interface.
+    /// </summary>
     public interface ILicenseReservation
     {
         #region PROPERTIES

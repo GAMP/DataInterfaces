@@ -4,9 +4,20 @@ using System.IO;
 
 namespace CyClone.Security
 {
+    /// <summary>
+    /// Access verification event args.
+    /// </summary>
     public class VerifyAccessEventArgs : EventArgs
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="path">File path.</param>
+        /// <param name="dispatcher">Requesting dispatcher.</param>
+        /// <param name="access">Desired access.</param>
+        /// <param name="mode">File mode.</param>
+        /// <param name="sucess">Result.</param>
         public VerifyAccessEventArgs(string path,
             IMessageDispatcher dispatcher,
             FileAccess access,

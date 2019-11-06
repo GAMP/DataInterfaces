@@ -1,14 +1,21 @@
 ﻿using IntegrationLib;
 using SharedLib.Dispatcher;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Security.Principal;
 
 namespace Manager
 {
+    /// <summary>
+    /// Manager dispatcher principal.
+    /// </summary>
     public class ManagerDispatcherPrincipal : ClaimsPrincipal
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
         public ManagerDispatcherPrincipal()
         { }
         #endregion
@@ -40,7 +47,7 @@ namespace Manager
         {
             get
             {
-                return this.UserIdentity;
+                return UserIdentity;
             }
         }
 
@@ -51,10 +58,10 @@ namespace Manager
         {
             get
             {
-                if (this.UserIdentity == null)
-                    return new List<Claim>();
+                if (UserIdentity == null)
+                    return Enumerable.Empty<Claim>();
 
-                return this.UserIdentity.Claims;
+                return UserIdentity.Claims;
             }
         }
 
@@ -70,10 +77,10 @@ namespace Manager
         /// <returns>True or false.</returns>
         public override bool HasClaim(string type, string value)
         {
-            if (this.UserIdentity == null)
+            if (UserIdentity == null)
                 return false;
 
-            return this.UserIdentity.HasClaim(type, value);
+            return UserIdentity.HasClaim(type, value);
         } 
 
         #endregion

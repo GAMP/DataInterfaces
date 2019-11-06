@@ -10,6 +10,10 @@ namespace Client
     public class ModuleDisplayOrderAttribute : Attribute
     {
         #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="order">Display order.</param>
         public ModuleDisplayOrderAttribute(int order)
         {
             DisplayOrder = order;

@@ -37,6 +37,9 @@ namespace Client
         #endregion
 
         #region IPartImportsSatisfiedNotification
+        /// <summary>
+        /// Called once all imports satisfied.
+        /// </summary>
         public virtual void OnImportsSatisfied()
         {
         }

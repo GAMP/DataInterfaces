@@ -9,6 +9,9 @@ using System.Runtime.Serialization;
 
 namespace CoreLib
 {
+    /// <summary>
+    /// Enumerator extensions.
+    /// </summary>
     public static class EnumeratorExtension
     {
         /// <summary>
@@ -30,6 +33,11 @@ namespace CoreLib
             return attribs.Length > 0 ? attribs[0].Guid : Guid.Empty;
         }
 
+        /// <summary>
+        /// Gets special folder attribute value from an enumeration.
+        /// </summary>
+        /// <param name="value">Enum value.</param>
+        /// <returns></returns>
         public static Environment.SpecialFolder GetSpecialFolderValue(this Enum value)
         {
             // Get the type
@@ -67,11 +75,20 @@ namespace CoreLib
             return (attributes.Length > 0) ? attributes[0].ResourceKey : value.ToString();
         }
 
+        /// <summary>
+        /// Gets flags.
+        /// </summary>
+        /// <param name="value">Enum value.</param>
         public static IEnumerable<Enum> GetFlags(this Enum value)
         {
             return GetFlags(value, Enum.GetValues(value.GetType()).Cast<Enum>().ToArray());
         }
 
+        /// <summary>
+        /// Gets individual flags.
+        /// </summary>
+        /// <param name="value">Enum value.</param>
+        /// <returns></returns>
         public static IEnumerable<Enum> GetIndividualFlags(this Enum value)
         {
             return GetFlags(value, GetFlagValues(value.GetType()).ToArray());

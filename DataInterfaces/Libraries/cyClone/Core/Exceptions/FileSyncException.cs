@@ -5,11 +5,23 @@ using System.Text;
 
 namespace CyClone.Core
 {
+    /// <summary>
+    /// File sync exception.
+    /// </summary>
     [Serializable()]
+    [DataContract()]
     public class FileSyncException : Exception, ISerializable
     {
         #region CONSTRUCTOR
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="message">Exception message.</param>
+        /// <param name="error">Error code.</param>
+        /// <param name="sourceFile">Source file.</param>
+        /// <param name="destinationFile">Destination file.</param>
+        /// <param name="inner">Inner exception.</param>
         public FileSyncException(string message,
             FileSyncOperation error,
             IcyFileSystemInfo sourceFile,
@@ -22,14 +34,31 @@ namespace CyClone.Core
             DestinationFile = destinationFile;
         }
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="message">Exception message.</param>
         public FileSyncException(string message)
             : base(message)
         { }
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
         public FileSyncException() : base() { }
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="message">Exception message.</param>
+        /// <param name="inner">Inner exception.</param>
         public FileSyncException(string message, System.Exception inner) : base(message, inner) { }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="info">Serialization info.</param>
+        /// <param name="context">Serialization context.</param>
         protected FileSyncException(SerializationInfo info,
             StreamingContext context)
             : base(info, context)
@@ -49,6 +78,7 @@ namespace CyClone.Core
         /// <summary>
         /// Gets the operation error.
         /// </summary>
+        [DataMember()]
         public FileSyncOperation Operation
         {
             get;
@@ -58,6 +88,7 @@ namespace CyClone.Core
         /// <summary>
         /// Gets the source file info.
         /// </summary>
+        [DataMember()]
         public IcyFileSystemInfo SourceFile
         {
             get;
@@ -67,6 +98,7 @@ namespace CyClone.Core
         /// <summary>
         /// Gets the destination file info.
         /// </summary>
+        [DataMember()]
         public IcyFileSystemInfo DestinationFile
         {
             get;
@@ -77,6 +109,10 @@ namespace CyClone.Core
 
         #region OVERRIDES
 
+        /// <summary>
+        /// Converts to string.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             StringBuilder builder = new StringBuilder();

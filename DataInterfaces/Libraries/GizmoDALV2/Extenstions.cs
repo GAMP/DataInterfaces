@@ -3,9 +3,16 @@ using System.Data.SqlTypes;
 
 namespace GizmoDALV2
 {
-    #region DatExtensions
+    /// <summary>
+    /// Date extenstions.
+    /// </summary>
     public static class DateExtensions
     {
+        /// <summary>
+        /// Gets SQL db date time.
+        /// </summary>
+        /// <param name="time">Time.</param>
+        /// <returns>SQL DateTime.</returns>
         public static DateTime GetDbDateTime(this DateTime time)
         {
             return time <= SqlDateTime.MinValue.Value ? SqlDateTime.MinValue.Value : time;
@@ -41,5 +48,4 @@ namespace GizmoDALV2
             return time.IsSQLMinDate() || time.IsSQLMaxDate();
         }
     }
-    #endregion
 }

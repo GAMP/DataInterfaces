@@ -3,6 +3,9 @@ using System.Threading.Tasks;
 
 namespace CyClone.Core
 {
+    /// <summary>
+    /// File system info interface.
+    /// </summary>
     public interface IcyFileSystemInfo
     {
         #region PROPERTIES

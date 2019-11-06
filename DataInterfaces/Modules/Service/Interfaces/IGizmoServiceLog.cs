@@ -3,6 +3,9 @@ using System;
 
 namespace ServerService
 {
+    /// <summary>
+    /// Gizmo service log interface.
+    /// </summary>
     public interface IGizmoServiceLog
     {
         #region FUNCTIONS

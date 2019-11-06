@@ -17,7 +17,7 @@
         /// Allocates buffer of specified size.
         /// </summary>
         /// <param name="minimumLength">Buffer size.</param>
-        /// <returns>Allocated buffer that is at least <paramref name="minimumLength"/> in length.</>.</returns>
+        /// <returns>Allocated buffer that is at least <paramref name="minimumLength"/> in length.</returns>
         byte[] Rent(int minimumLength); 
 
         #endregion

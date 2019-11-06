@@ -3,7 +3,6 @@ using System;
 
 namespace NetLib
 {
-    #region IConnection
     /// <summary>
     /// Base network connection interface.
     /// </summary>
@@ -11,18 +10,39 @@ namespace NetLib
     {
         #region EVENTS   
 
+        /// <summary>
+        /// Occurs on exception.
+        /// </summary>
         event EventHandler<ExceptionEventArgs> Exception;
 
+        /// <summary>
+        /// Occurs on disconnection.
+        /// </summary>
         event EventHandler<ConnectDisconnectEventArgs> EndpointDisconnected;
 
+        /// <summary>
+        /// Occurs on connection.
+        /// </summary>
         event EventHandler<ConnectDisconnectEventArgs> EndpointConnected;
 
+        /// <summary>
+        /// Occurs once all data is received.
+        /// </summary>
         event EventHandler<SentReceivedEventArgs> Received;
 
+        /// <summary>
+        /// Occurs on data reception.
+        /// </summary>
         event EventHandler<SendReceiveArgs> Receiving;
 
+        /// <summary>
+        /// Occurs on data sending.
+        /// </summary>
         event EventHandler<SendReceiveArgs> Sending;
 
+        /// <summary>
+        /// Occurs once all data is sent.
+        /// </summary>
         event EventHandler<SentReceivedEventArgs> Sent;
 
         #endregion
@@ -52,7 +72,7 @@ namespace NetLib
         /// <summary>
         /// Gets if receiving.
         /// </summary>
-        bool IsReceiving { get; } 
+        bool IsReceiving { get; }
 
         /// <summary>
         /// Gets or sets receive chunk size.
@@ -78,15 +98,30 @@ namespace NetLib
 
         #region FUNCTIONS
 
+        /// <summary>
+        /// Closes the connection.
+        /// </summary>
         void Close();
 
-        void Receive();   
+        /// <summary>
+        /// Starts reception.
+        /// </summary>
+        void Receive();
 
+        /// <summary>
+        /// Shuts down the connection.
+        /// </summary>
         void ShutDown();
 
+        /// <summary>
+        /// Sends data over connection.
+        /// </summary>
+        /// <param name="buffer">Data buffer.</param>
+        /// <param name="offset">Buffer offset.</param>
+        /// <param name="size">Size.</param>
+        /// <returns>Bytes transfered.</returns>
         int Send(byte[] buffer, int offset, int size);
 
         #endregion
     }
-    #endregion
 }

@@ -13,7 +13,9 @@ namespace SkinInterfaces
     /// <summary>
     /// This markup extension locates the first focusable child and returns it.
     /// It is intended to be used with FocusManager.FocusedElement:
-    /// <Window ... FocusManager.FocusedElement={ft:FirstFocusedElement} />
+    /// <example>
+    /// <Window ... FocusManager.FocusedElement={ft:FirstFocusedElement} />"
+    /// </example>
     /// </summary>
     public class FirstFocusedElementExtension : MarkupExtension
     {

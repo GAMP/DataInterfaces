@@ -3,7 +3,9 @@ using CoreLib;
 
 namespace SharedLib
 {
-    #region ISecurityPolicy
+    /// <summary>
+    /// Security policy implementation interface.
+    /// </summary>
     public interface ISecurityPolicy
     {
         #region PROPERTIES
@@ -25,9 +27,11 @@ namespace SharedLib
 
         #endregion
     }
-    #endregion
 
     #region SecurityPolicy
+    /// <summary>
+    /// Security policy.
+    /// </summary>
     [Serializable()]
     public class SecurityPolicy : ItemObject, ISecurityPolicy
     {

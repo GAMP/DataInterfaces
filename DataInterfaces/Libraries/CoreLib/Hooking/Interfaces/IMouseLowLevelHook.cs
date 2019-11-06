@@ -2,6 +2,9 @@
 
 namespace CoreLib.Hooking
 {
+    /// <summary>
+    /// Low level mouse hook implementation.
+    /// </summary>
     public interface IMouseLowLevelHook : IHookBase
     {
         #region EVENTS
