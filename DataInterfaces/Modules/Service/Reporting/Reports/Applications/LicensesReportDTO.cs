@@ -12,25 +12,25 @@ namespace ServerService.Reporting.Reports.Applications
     public class LicensesReportDTO : ReportBaseDTO
     {
         /// <summary>
-        /// Filter License Id.
+        /// Filtered License Id.
         /// </summary>
         [DataMember]
         public int? LicenseId { get; set; }
 
         /// <summary>
-        /// Filter License Name.
+        /// Filtered License Name.
         /// </summary>
         [DataMember]
         public int? LicenseName { get; set; }
 
         /// <summary>
-        /// Filter Application Id.
+        /// Filtered Application Id.
         /// </summary>
         [DataMember]
         public int? ApplicationId { get; set; }
 
         /// <summary>
-        /// Filter Application Name.
+        /// Filtered Application Name.
         /// </summary>
         [DataMember]
         public int? ApplicationName { get; set; }

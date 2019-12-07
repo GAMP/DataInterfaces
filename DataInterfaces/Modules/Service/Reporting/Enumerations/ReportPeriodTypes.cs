@@ -3,7 +3,7 @@
     /// <summary>
     /// Specifies the period type of the report.
     /// </summary>
-    public enum ReportPeriodTypes : short
+    public enum ReportPeriodTypes
     {
         /// <summary>
         /// Daily report.
@@ -18,16 +18,16 @@
         /// <summary>
         /// Monthly report.
         /// </summary>
-        Monthly = 3,
+        Monthly = 4,
 
         /// <summary>
         /// Yearly report.
         /// </summary>
-        Yearly = 4,
+        Yearly = 8,
 
         /// <summary>
         /// Custom report.
         /// </summary>
-        Custom = 5
+        Custom = 16
     }
 }

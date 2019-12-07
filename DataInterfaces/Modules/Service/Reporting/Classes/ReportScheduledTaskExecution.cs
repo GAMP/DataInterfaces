@@ -17,6 +17,12 @@ namespace ServerService.Reporting
         public ReportScheduledTask Task { get; set; }
 
         /// <summary>
+        /// Cron expression that represents the schedule to execute the task.
+        /// </summary>
+        [DataMember]
+        public string Schedule { get; set; }
+
+        /// <summary>
         /// Last execution.
         /// </summary>
         [DataMember]

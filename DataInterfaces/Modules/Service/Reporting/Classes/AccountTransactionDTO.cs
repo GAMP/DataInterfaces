@@ -14,13 +14,11 @@ namespace ServerService.Reporting
         /// <summary>
         /// The creation time of the account transaction.
         /// </summary>
-        [DataMember]
         public DateTime CreatedTime { get; set; }
 
         /// <summary>
         /// The type of the transaction.
         /// </summary>
-        [DataMember]
         public DepositTransactionType TransactionType { get; set; }
 
         /// <summary>
@@ -56,25 +54,16 @@ namespace ServerService.Reporting
         /// <summary>
         /// The Id of the operator performed the account transaction.
         /// </summary>
-        [DataMember]
         public int? OperatorId { get; set; }
-
-        /// <summary>
-        /// The Id of the shift in which the account transaction was created.
-        /// </summary>
-        [DataMember]
-        public int? ShiftId { get; set; }
-
+        
         /// <summary>
         /// The Id of the group to which the user belongs.
         /// </summary>
-        [DataMember]
         public int UserGroupId { get; set; }
 
         /// <summary>
         /// The user is guest.
         /// </summary>
-        [DataMember]
         public bool IsGuest { get; set; }
     }
 }

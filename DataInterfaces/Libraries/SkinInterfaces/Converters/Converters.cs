@@ -630,8 +630,13 @@ namespace SkinInterfaces.Converters
                         return 4;
                     case RegistryHive.PerformanceData:
                         return 5;
+
+                    //TODO: MIGRATION: Core API does not contain this value
+#if NETFRAMEWORK
                     case RegistryHive.DynData:
                         return 6;
+#endif
+
                     default:
                         return 0;
                 }
@@ -660,8 +665,13 @@ namespace SkinInterfaces.Converters
                         return RegistryHive.CurrentConfig;
                     case 5:
                         return RegistryHive.PerformanceData;
+
+                    //TODO: MIGRATION: Core API does not contain this value
+#if NETFRAMEWORK
                     case 6:
                         return RegistryHive.DynData;
+#endif
+
                 }
                 return 0;
             }

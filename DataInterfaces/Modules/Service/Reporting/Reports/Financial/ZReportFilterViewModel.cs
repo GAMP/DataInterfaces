@@ -1,16 +1,16 @@
-﻿using SharedLib;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 
 namespace ServerService.Reporting.Reports.Financial
 {
     /// <summary>
-    /// Orders Log Report Filter View Model.
+    /// Z Report Filter.
     /// </summary>
     [Serializable]
     [DataContract]
-    public class OrdersLogReportFilterViewModel : OrdersLogReportFilterDTO, IReportFilter, IReportFilterViewModel
+    public class ZReportFilterViewModel : ZReportFilterDTO, IReportFilter, IReportFilterViewModel
     {
         /// <summary>
         /// Start week day for weekly report default period.
@@ -41,18 +41,6 @@ namespace ServerService.Reporting.Reports.Financial
         /// </summary>
         [DataMember]
         public bool? Partial { get; set; }
-
-        /// <summary>
-        /// List of available operators to filter.
-        /// </summary>
-        [DataMember]
-        public List<ListItemDTO> Operators { get; set; }
-
-        /// <summary>
-        /// List of available users to filter.
-        /// </summary>
-        [DataMember]
-        public List<ListItemDTO> Users { get; set; }
 
     }
 }

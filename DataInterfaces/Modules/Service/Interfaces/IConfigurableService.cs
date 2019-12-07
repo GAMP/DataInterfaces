@@ -1,4 +1,5 @@
 ﻿using SharedLib.Configuration;
+using System;
 using System.Threading.Tasks;
 
 namespace ServerService
@@ -9,8 +10,17 @@ namespace ServerService
     /// </summary>
     public interface IConfigurableService
     {
+        #region EVENTS
+
+        /// <summary>
+        /// Occurs on settings file (service.json) change.
+        /// </summary>
+        event EventHandler<SettingsChangedEventArgs> SettingsChange;
+
+        #endregion
+
         #region FUNCTIONS
-        
+
         /// <summary>
         /// Gets service configuration.
         /// </summary>
@@ -21,9 +31,9 @@ namespace ServerService
         /// Sets service configuration.
         /// </summary>
         /// <param name="configuration">Service configuration root.</param>
-        void ConfigurationSet(ConfigurationRoot configuration); 
+        void ConfigurationSet(ConfigurationRoot configuration);
 
-        #endregion
+        #endregion        
     }
     #endregion
 

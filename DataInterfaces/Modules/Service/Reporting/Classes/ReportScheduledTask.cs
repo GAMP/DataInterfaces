@@ -24,11 +24,20 @@ namespace ServerService.Reporting
         public bool IsActive { get; set; }
 
         /// <summary>
-        /// Cron expression that represents the schedule to execute the task.
+        /// The time to execute the task.
+        /// </summary>
+        [DataMember()]
+        public TimeSpan? Time
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// The report period type of the task.
         /// </summary>
         [DataMember]
-        public string Schedule { get; set; }
-        
+        public ReportPeriodTypes ReportPeriodType { get; set; }
+
         /// <summary>
         /// List of recipiends e-mails to send 
         /// </summary>

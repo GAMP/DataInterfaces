@@ -1157,6 +1157,11 @@ namespace SharedLib
         /// </summary>
         [Localized("CFG_SECTION_RESERVATIONS")]
         Reservations,
+        /// <summary>
+        /// Reservations.
+        /// </summary>
+        [Localized("CFG_SECTION_BACKUP")]
+        Backup,
     }
     #endregion
 
@@ -2531,6 +2536,7 @@ namespace SharedLib
         /// <summary>
         /// Count all instances.
         /// </summary>
+        [Obsolete("We dont use this anywhere")]
         CountAllInstances = 16,
         /// <summary>
         /// Quick launch.

@@ -20,7 +20,7 @@ namespace ServerService.Reporting.Reports.Products
         /// Product information.
         /// </summary>
         [DataMember]
-        public SoldProductDTO Product { get; set; }
+        public GroupProductSoldDTO Product { get; set; }
 
     }
 }

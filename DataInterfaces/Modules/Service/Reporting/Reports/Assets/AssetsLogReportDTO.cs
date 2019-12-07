@@ -12,61 +12,61 @@ namespace ServerService.Reporting.Reports.Assets
     public class AssetsLogReportDTO : ReportBaseDTO
     {
         /// <summary>
-        /// Filter Asset Type Id.
+        /// Filtered Asset Type Id.
         /// </summary>
         [DataMember]
         public int? AssetTypeId { get; set; }
 
         /// <summary>
-        /// Filter Asset Type Name.
+        /// Filtered Asset Type Name.
         /// </summary>
         [DataMember]
         public string AssetTypeName { get; set; }
 
         /// <summary>
-        /// Filter Asset Id.
+        /// Filtered Asset Id.
         /// </summary>
         [DataMember]
         public int? AssetId { get; set; }
 
         /// <summary>
-        /// Filter Asset Name.
+        /// Filtered Asset Name.
         /// </summary>
         [DataMember]
         public string AssetName { get; set; }
 
         /// <summary>
-        /// Filter Check Out Operator Id.
+        /// Filtered Check Out Operator Id.
         /// </summary>
         [DataMember]
         public int? CheckOutOperatorId { get; set; }
 
         /// <summary>
-        /// Filter Check Out Operator Name.
+        /// Filtered Check Out Operator Name.
         /// </summary>
         [DataMember]
         public string CheckOutOperatorName { get; set; }
 
         /// <summary>
-        /// Filter Check In Operator Id.
+        /// Filtered Check In Operator Id.
         /// </summary>
         [DataMember]
         public int? CheckInOperatorId { get; set; }
 
         /// <summary>
-        /// Filter Check In Operator Name.
+        /// Filtered Check In Operator Name.
         /// </summary>
         [DataMember]
         public string CheckInOperatorName { get; set; }
 
         /// <summary>
-        /// Filter User Id.
+        /// Filtered User Id.
         /// </summary>
         [DataMember]
         public int? UserId { get; set; }
 
         /// <summary>
-        /// Filter User Name.
+        /// Filtered User Name.
         /// </summary>
         [DataMember]
         public string UserName { get; set; }

@@ -12,7 +12,7 @@ namespace ServerService.Reporting.Reports.Financial
     public class InvoiceReportDTO : ReportBaseDTO
     {
         /// <summary>
-        /// Filter Invoice Id.
+        /// Filtered Invoice Id.
         /// </summary>
         [DataMember]
         public int InvoiceId { get; set; }

@@ -17,6 +17,7 @@ namespace ServerService.Reporting
         /// </summary>
         [DataMember]
         [Required()]
+        [EmailAddress()]
         public string Email { get; set; }
 
         /// <summary>

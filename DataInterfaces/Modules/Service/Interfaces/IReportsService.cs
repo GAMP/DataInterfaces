@@ -116,6 +116,13 @@ namespace ServerService
         Task<FinancialReportDTO> GetFinancialReportAsync(FinancialReportFilterDTO filters);
 
         /// <summary>
+        /// Returns the Z report that match the specified filters.
+        /// </summary>
+        /// <param name="filters">The filters to apply when retrieving the data for this report.</param>
+        /// <returns></returns>
+        Task<ZReportDTO> GetZReportAsync(ZReportFilterDTO filters);
+
+        /// <summary>
         /// Returns the invoices report that match the specified filters.
         /// </summary>
         /// <param name="filters">The filters to apply when retrieving the data for this report.</param>
@@ -253,7 +260,7 @@ namespace ServerService
         /// </summary>
         /// <param name="filters">The filters to apply when retrieving the data for this report.</param>
         /// <returns></returns>
-        Task<TopUsersReportDTO> GetTopUsersReportAsync(UsersReportFilterDTO filters);
+        Task<TopUsersReportDTO> GetTopUsersReportAsync(TopUsersReportFilterDTO filters);
 
         /// <summary>
         /// Returns the user report that match the specified filters.
@@ -281,7 +288,14 @@ namespace ServerService
         /// </summary>
         /// <param name="filters">The filters to apply when retrieving the data for this report.</param>
         /// <returns></returns>
-        Task<OrdersLogReportDTO> GetOrdersLogReportAsync(OrdersLogReportFilterDTO filters);
+        Task<OrdersLogReportDTO> GetOrdersLogReportAsync(OrdersReportFilterDTO filters);
+
+        /// <summary>
+        /// Returns the orders statistics report that match the specified filters.
+        /// </summary>
+        /// <param name="filters">The filters to apply when retrieving the data for this report.</param>
+        /// <returns></returns>
+        Task<OrdersStatisticsReportDTO> GetOrdersStatisticsReportAsync(OrdersReportFilterDTO filters);
 
         /// <summary>
         /// Returns the products log report that match the specified filters.

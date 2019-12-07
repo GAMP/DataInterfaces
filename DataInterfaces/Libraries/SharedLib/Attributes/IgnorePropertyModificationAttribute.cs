@@ -2,7 +2,6 @@
 
 namespace SharedLib
 {
-    #region IgnorePropertyModificationAttribute
     /// <summary>
     /// This attribute should be used on properties that not to be considered as modified during property change.
     /// </summary>
@@ -10,5 +9,4 @@ namespace SharedLib
     public class IgnorePropertyModificationAttribute : Attribute
     {
     }
-    #endregion
 }

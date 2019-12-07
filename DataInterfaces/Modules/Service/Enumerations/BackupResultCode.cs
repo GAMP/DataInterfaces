@@ -1,6 +1,5 @@
 ﻿namespace ServerService
 {
-    #region BackupResultCode
     /// <summary>
     /// Backup result codes.
     /// </summary>
@@ -23,5 +22,4 @@
         /// </summary>
         Failed = 3
     }
-    #endregion
 }

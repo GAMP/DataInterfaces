@@ -1,6 +1,5 @@
 ﻿namespace ServerService
 {
-    #region InvoiceErrorCode
     /// <summary>
     /// Invoice error codes.
     /// </summary>
@@ -15,5 +14,4 @@
         /// </summary>
         AmountLessThanOutstanding,
     }
-    #endregion
 }

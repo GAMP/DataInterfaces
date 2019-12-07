@@ -17,12 +17,6 @@ namespace ServerService.Reporting
         public ReportTypes ReportType { get; set; }
 
         /// <summary>
-        /// The report period type of the task.
-        /// </summary>
-        [DataMember]
-        public ReportPeriodTypes ReportPeriodType { get; set; }
-
-        /// <summary>
         /// Report parameters to pass on execution.
         /// </summary>
         [DataMember]

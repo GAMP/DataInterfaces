@@ -29,6 +29,12 @@ namespace ServerService.Reporting
         public DateTime CreatedTime { get; set; }
 
         /// <summary>
+        /// The cost in points of the product.
+        /// </summary>
+        [DataMember]
+        public int Points { get; set; }
+
+        /// <summary>
         /// Points award of the invoice line.
         /// </summary>
         [DataMember]

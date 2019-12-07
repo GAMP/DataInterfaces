@@ -1,6 +1,5 @@
 ﻿namespace ServerService
 {
-    #region ReservationErrorCode
     /// <summary>
     /// Reservation error codes.
     /// </summary>
@@ -35,6 +34,5 @@
         /// Reservation overlaps.
         /// </summary>
         Overlap = 5,
-    } 
-    #endregion
+    }
 }

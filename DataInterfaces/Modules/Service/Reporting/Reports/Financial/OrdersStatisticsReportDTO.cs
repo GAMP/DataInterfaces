@@ -6,46 +6,59 @@ using System.Runtime.Serialization;
 namespace ServerService.Reporting.Reports.Financial
 {
     /// <summary>
-    /// Orders Log Report Filter.
+    /// Orders Log Report.
     /// </summary>
     [Serializable]
     [DataContract]
-    public class OrdersLogReportFilterDTO : DateRangeReportFilterBaseDTO
+    public class OrdersStatisticsReportDTO : ReportBaseDTO
     {
         /// <summary>
-        /// Filter Order Source.
+        /// Filtered Order Source.
         /// </summary>
         [DataMember]
         public OrderSource? OrderSource { get; set; }
 
         /// <summary>
-        /// Filter Order Status.
+        /// Filtered Order Status.
         /// </summary>
         [DataMember]
         public OrderStatus? OrderStatus { get; set; }
 
         /// <summary>
-        /// Filter Operator Id.
+        /// Filtered Operator Id.
         /// </summary>
         [DataMember]
         public int? OperatorId { get; set; }
 
         /// <summary>
-        /// Filter User Id.
+        /// Filtered Operator Name.
+        /// </summary>
+        [DataMember]
+        public string OperatorName { get; set; }
+
+        /// <summary>
+        /// Filtered User Id.
         /// </summary>
         [DataMember]
         public int? UserId { get; set; }
 
         /// <summary>
-        /// Filter User Name.
+        /// Filtered User Name.
         /// </summary>
         [DataMember]
         public string UserName { get; set; }
-
+        
         /// <summary>
-        /// Filter Orders Log Report Type.
+        /// List of records for the average delivery time per operator chart.
         /// </summary>
         [DataMember]
-        public OrdersLogReportTypes OrdersLogReportType { get; set; }
+        public List<ChartGroupDTO> OperatorsPerformance { get; set; } = new List<ChartGroupDTO>();
+
+        /// <summary>
+        /// List of records for the orders per operator chart.
+        /// </summary>
+        [DataMember]
+        public List<ChartGroupDTO> OrdersChart { get; set; } = new List<ChartGroupDTO>();
+
     }
 }

@@ -51,7 +51,7 @@ namespace ServerService.Reporting.Reports.Shifts
         /// The name of the operator who ended the shift.
         /// </summary>
         [DataMember]
-        public string EndedBy { get; set; }
+        public string EndedByOperatorName { get; set; }
 
         /// <summary>
         /// The time the shift started.

@@ -12,7 +12,7 @@ namespace ServerService.Reporting.Reports.Users
     public class TopUsersReportDTO : ReportBaseDTO
     {
         /// <summary>
-        /// Filter number of top users to display.
+        /// Filtered number of top users to display.
         /// </summary>
         [DataMember]
         public int TopUsersNumber { get; set; }

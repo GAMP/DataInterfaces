@@ -12,37 +12,37 @@ namespace ServerService.Reporting.Reports.Users
     public class SessionsLogReportDTO : ReportBaseDTO
     {
         /// <summary>
-        /// Filter User Id.
+        /// Filtered User Id.
         /// </summary>
         [DataMember]
         public int? UserId { get; set; }
 
         /// <summary>
-        /// Filter User Name.
+        /// Filtered User Name.
         /// </summary>
         [DataMember]
         public string UserName { get; set; }
 
         /// <summary>
-        /// Filter Host Id.
+        /// Filtered Host Id.
         /// </summary>
         [DataMember]
         public int? HostId { get; set; }
 
         /// <summary>
-        /// Filter Host Name.
+        /// Filtered Host Name.
         /// </summary>
         [DataMember]
         public string HostName { get; set; }
 
         /// <summary>
-        /// Filter Operator Id.
+        /// Filtered Operator Id.
         /// </summary>
         [DataMember]
         public int? OperatorId { get; set; }
 
         /// <summary>
-        /// Filter Operator Name.
+        /// Filtered Operator Name.
         /// </summary>
         [DataMember]
         public string OperatorName { get; set; }

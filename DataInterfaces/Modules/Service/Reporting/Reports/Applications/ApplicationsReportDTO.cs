@@ -12,13 +12,13 @@ namespace ServerService.Reporting.Reports.Applications
     public class ApplicationsReportDTO : ReportBaseDTO
     {
         /// <summary>
-        /// Filter User Id.
+        /// Filtered User Id.
         /// </summary>
         [DataMember]
         public int? UserId { get; set; }
 
         /// <summary>
-        /// Filter User Name.
+        /// Filtered User Name.
         /// </summary>
         [DataMember]
         public string UserName { get; set; }

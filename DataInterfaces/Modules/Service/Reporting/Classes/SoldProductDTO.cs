@@ -23,12 +23,6 @@ namespace ServerService.Reporting
         public string ProductName { get; set; }
 
         /// <summary>
-        /// The cost of the product.
-        /// </summary>
-        [DataMember]
-        public decimal Value { get; set; }
-
-        /// <summary>
         /// The unit price of the product.
         /// </summary>
         [DataMember]
@@ -41,6 +35,24 @@ namespace ServerService.Reporting
         public decimal Quantity { get; set; }
 
         /// <summary>
+        /// The cost of the product.
+        /// </summary>
+        [DataMember]
+        public decimal Value { get; set; }
+
+        /// <summary>
+        /// The cost in points of the product.
+        /// </summary>
+        [DataMember]
+        public int PointsValue { get; set; }
+
+        /// <summary>
+        /// The points award of the product.
+        /// </summary>
+        [DataMember]
+        public int PointsAward { get; set; }
+
+        /// <summary>
         /// The tax rate of the product.
         /// </summary>
         [DataMember]
@@ -51,23 +63,5 @@ namespace ServerService.Reporting
         /// </summary>
         [DataMember]
         public decimal Tax { get; set; }
-
-        /// <summary>
-        /// The number of items returned of the product.
-        /// </summary>
-        [DataMember]
-        public decimal Returned { get; set; }
-
-        /// <summary>
-        /// The cost in points of the product.
-        /// </summary>
-        [DataMember]
-        public int? Points { get; set; }
-
-        /// <summary>
-        /// The points award of the product.
-        /// </summary>
-        [DataMember]
-        public int PointsAward { get; set; }
     }
 }

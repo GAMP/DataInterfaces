@@ -19,7 +19,6 @@ namespace ServerService.Reporting.Reports.Users
         /// <summary>
         /// Filter User Name.
         /// </summary>
-        [DataMember]
         public string UserName { get; set; }
 
         /// <summary>

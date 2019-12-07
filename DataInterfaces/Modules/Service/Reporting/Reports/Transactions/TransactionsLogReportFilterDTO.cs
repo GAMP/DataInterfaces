@@ -31,7 +31,6 @@ namespace ServerService.Reporting.Reports.Transactions
         /// <summary>
         /// Filter User Name.
         /// </summary>
-        [DataMember]
         public string UserName { get; set; }
 
         /// <summary>

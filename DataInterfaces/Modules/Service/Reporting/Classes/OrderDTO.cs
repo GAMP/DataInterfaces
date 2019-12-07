@@ -45,7 +45,7 @@ namespace ServerService.Reporting
         /// Order status name.
         /// </summary>
         [DataMember]
-        public string OrderStatusLiteral { get; set; }
+        public string OrderStatusName { get; set; }
         
         /// <summary>
         /// The Id of the operator that handled the order.
@@ -116,7 +116,6 @@ namespace ServerService.Reporting
         /// <summary>
         /// Number of items within the order.
         /// </summary>
-        [DataMember]
         public int ItemNumber { get; set; }
 
         /// <summary>
@@ -128,7 +127,6 @@ namespace ServerService.Reporting
         /// <summary>
         /// The invoice that was created for the order, null if there is no related invoice.
         /// </summary>
-        [DataMember]
         public InvoiceDTO Invoice { get; set; }
 
     }

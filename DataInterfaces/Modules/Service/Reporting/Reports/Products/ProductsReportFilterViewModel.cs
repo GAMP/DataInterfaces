@@ -50,5 +50,11 @@ namespace ServerService.Reporting.Reports.Products
         [DataMember]
         public List<ListItemDTO> Products { get; set; }
 
+        /// <summary>
+        /// Filter Product Id.
+        /// </summary>
+        [DataMember]
+        public int? ProductId { get; set; }
+
     }
 }

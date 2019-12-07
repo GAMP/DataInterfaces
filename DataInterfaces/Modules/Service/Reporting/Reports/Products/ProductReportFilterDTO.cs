@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 
 namespace ServerService.Reporting.Reports.Products
@@ -14,6 +15,7 @@ namespace ServerService.Reporting.Reports.Products
         /// Filter Product Id.
         /// </summary>
         [DataMember]
+        [Required]
         public int ProductId { get; set; }
 
         /// <summary>

@@ -9,7 +9,7 @@ namespace ServerService.Reporting.Reports.Products
     /// </summary>
     [Serializable]
     [DataContract]
-    public class ProductTransactionDTO : ReportBaseDTO
+    public class ProductTransactionDTO
     {
         /// <summary>
         /// The time the transaction performed.

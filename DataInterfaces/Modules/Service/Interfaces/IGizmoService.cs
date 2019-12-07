@@ -15,7 +15,8 @@ namespace ServerService
         IConfigurableService,
         IUserService,
         IDbContextProvider<IGizmoDBContext>,
-        IReportsService
+        IReportsService,
+        IBackupService
     {
         #region FUNCTIONS
         

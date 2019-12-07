@@ -12,43 +12,43 @@ namespace ServerService.Reporting.Reports.Transactions
     public class TransactionsLogReportDTO : ReportBaseDTO
     {
         /// <summary>
-        /// Filter Operator Id.
+        /// Filtered Operator Id.
         /// </summary>
         [DataMember]
         public int? OperatorId { get; set; }
 
         /// <summary>
-        /// Filter Operator Name.
+        /// Filtered Operator Name.
         /// </summary>
         [DataMember]
         public string OperatorName { get; set; }
 
         /// <summary>
-        /// Filter Register Id.
+        /// Filtered Register Id.
         /// </summary>
         [DataMember]
         public int? RegisterId { get; set; }
 
         /// <summary>
-        /// Filter Register Name.
+        /// Filtered Register Name.
         /// </summary>
         [DataMember]
         public string RegisterName { get; set; }
 
         /// <summary>
-        /// Filter User Id.
+        /// Filtered User Id.
         /// </summary>
         [DataMember]
         public int? UserId { get; set; }
 
         /// <summary>
-        /// Filter User Name.
+        /// Filtered User Name.
         /// </summary>
         [DataMember]
         public string UserName { get; set; }
 
         /// <summary>
-        /// Filter Transactions Log Action Type.
+        /// Filtered Transactions Log Action Type.
         /// </summary>
         [DataMember]
         public TransactionsLogActionTypes? TransactionsLogActionType { get; set; }

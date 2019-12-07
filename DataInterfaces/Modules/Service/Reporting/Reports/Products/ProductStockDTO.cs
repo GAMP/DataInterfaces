@@ -8,8 +8,20 @@ namespace ServerService.Reporting.Reports.Products
     /// </summary>
     [Serializable]
     [DataContract]
-    public class ProductStockDTO : SoldProductDTO
+    public class ProductStockDTO
     {
+        /// <summary>
+        /// Product Id.
+        /// </summary>
+        [DataMember]
+        public int Id { get; set; }
+
+        /// <summary>
+        /// Product name.
+        /// </summary>
+        [DataMember]
+        public string ProductName { get; set; }
+
         /// <summary>
         /// Initial number of items in stock.
         /// </summary>
@@ -33,6 +45,18 @@ namespace ServerService.Reporting.Reports.Products
         /// </summary>
         [DataMember]
         public decimal Set { get; set; }
+
+        /// <summary>
+        /// The number of items sold of the product.
+        /// </summary>
+        [DataMember]
+        public decimal Sold { get; set; }
+
+        /// <summary>
+        /// The number of items returned of the product.
+        /// </summary>
+        [DataMember]
+        public decimal Returned { get; set; }
 
         /// <summary>
         /// Number of items the stock left with.

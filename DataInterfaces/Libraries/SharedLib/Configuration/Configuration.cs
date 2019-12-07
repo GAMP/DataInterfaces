@@ -1048,6 +1048,8 @@ namespace SharedLib.Configuration
     [Serializable()]
     public class ServiceWebConfig : ConfigBase
     {
+        #region PROPERTIES
+        
         /// <summary>
         /// Gets or sets if web portal enabled.
         /// </summary>
@@ -1139,7 +1141,9 @@ namespace SharedLib.Configuration
         public int? ExternalPort
         {
             get; set;
-        }
+        } 
+
+        #endregion
     }
     #endregion
 

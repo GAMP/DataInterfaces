@@ -12,13 +12,13 @@ namespace ServerService.Reporting.Reports.Products
     public class ProductsReportDTO : ReportBaseDTO
     {
         /// <summary>
-        /// Filter User Id.
+        /// Filtered User Id.
         /// </summary>
         [DataMember]
         public int? UserId { get; set; }
 
         /// <summary>
-        /// Filter User Name.
+        /// Filtered User Name.
         /// </summary>
         [DataMember]
         public string UserName { get; set; }
@@ -27,7 +27,7 @@ namespace ServerService.Reporting.Reports.Products
         /// List of products.
         /// </summary>
         [DataMember]
-        public List<SoldProductDTO> Products { get; set; } = new List<SoldProductDTO>();
+        public List<GroupedProductSalesDTO> Products { get; set; } = new List<GroupedProductSalesDTO>();
 
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿//TODO: MIGRATION: Identity model is not available in .net core
+#if (NETFRAMEWORK)
+using System;
 using System.IdentityModel.Services;
 using System.Linq;
 using System.Reflection;
@@ -93,3 +95,6 @@ namespace SkinInterfaces
         #endregion
     }
 }
+
+#endif
+

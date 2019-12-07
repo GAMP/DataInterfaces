@@ -11,18 +11,13 @@
         Simple = 1,
 
         /// <summary>
-        /// Categories are grouped by member group.
+        /// Categories are grouped by user group.
         /// </summary>
-        GroupByMemberGroup = 2,
+        GroupByUserGroup = 2,
 
         /// <summary>
         /// All records are displayed.
         /// </summary>
-        Detailed = 3,
-
-        /// <summary>
-        /// Z report.
-        /// </summary>
-        Z = 4
+        Detailed = 3
     }
 }

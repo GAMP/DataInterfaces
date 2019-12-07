@@ -2,7 +2,6 @@
 
 namespace ServerService
 {
-    #region PaymentErrorCode
     /// <summary>
     /// Payment error codes.
     /// </summary>
@@ -34,5 +33,4 @@ namespace ServerService
         [Localized("PAYMENTERRORCODE_INALID_PAYMENT_METHOD")]
         InvalidPaymentMethod = 4,
     }
-    #endregion
 }

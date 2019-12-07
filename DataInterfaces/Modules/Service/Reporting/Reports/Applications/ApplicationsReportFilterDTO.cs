@@ -11,12 +11,6 @@ namespace ServerService.Reporting.Reports.Applications
     public class ApplicationsReportFilterDTO : DateRangeReportFilterBaseDTO
     {
         /// <summary>
-        /// Filter Application Id.
-        /// </summary>
-        [DataMember]
-        public int? ApplicationId { get; set; }
-
-        /// <summary>
         /// Filter User Id.
         /// </summary>
         [DataMember]

@@ -12,37 +12,37 @@ namespace ServerService.Reporting.Reports.Financial
     public class InvoicesLogReportDTO : ReportBaseDTO
     {
         /// <summary>
-        /// Filter Payment Status Type.
+        /// Filtered Payment Status Type.
         /// </summary>
         [DataMember]
         public InvoicesLogPaymentStatusTypes? PaymentStatusType { get; set; }
 
         /// <summary>
-        /// Filter Voided Status Type.
+        /// Filtered Voided Status Type.
         /// </summary>
         [DataMember]
         public InvoicesLogVoidedStatusTypes? VoidedStatusType { get; set; }
 
         /// <summary>
-        /// Filter Operator Id.
+        /// Filtered Operator Id.
         /// </summary>
         [DataMember]
         public int? OperatorId { get; set; }
 
         /// <summary>
-        /// Filter Operator Name.
+        /// Filtered Operator Name.
         /// </summary>
         [DataMember]
         public string OperatorName { get; set; }
-        
+
         /// <summary>
-        /// Filter Register Id.
+        /// Filtered Register Id.
         /// </summary>
         [DataMember]
         public int? RegisterId { get; set; }
 
         /// <summary>
-        /// Filter Register Name.
+        /// Filtered Register Name.
         /// </summary>
         [DataMember]
         public string RegisterName { get; set; }

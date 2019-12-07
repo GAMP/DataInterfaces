@@ -11,9 +11,9 @@
         Simple = 1,
 
         /// <summary>
-        /// Host categories are grouped by member group.
+        /// Host categories are grouped by user group.
         /// </summary>
-        GroupByMemberGroup = 2,
+        GroupByUserGroup = 2,
 
         /// <summary>
         /// All records are displayed.

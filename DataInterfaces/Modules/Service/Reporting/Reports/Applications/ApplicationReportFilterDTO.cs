@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 
 namespace ServerService.Reporting.Reports.Applications
@@ -14,6 +15,7 @@ namespace ServerService.Reporting.Reports.Applications
         /// Filter Application Id.
         /// </summary>
         [DataMember]
+        [Required]
         public int ApplicationId { get; set; }
 
         /// <summary>

@@ -12,12 +12,6 @@ namespace ServerService.Reporting.Reports.Applications
     public class LicensesReportFilterDTO : DateRangeReportFilterBaseDTO
     {
         /// <summary>
-        /// Filter License Id.
-        /// </summary>
-        [DataMember]
-        public int? LicenseId { get; set; }
-
-        /// <summary>
         /// Filter Application Id.
         /// </summary>
         [DataMember]

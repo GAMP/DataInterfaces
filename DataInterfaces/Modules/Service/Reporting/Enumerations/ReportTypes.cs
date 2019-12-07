@@ -118,6 +118,12 @@
         /// <summary>
         /// Log of orders.
         /// </summary>
-        OrdersLogReport = 23
+        OrdersLogReport = 23,
+
+        /// <summary>
+        /// Statistics of orders.
+        /// </summary>
+        OrdersStatisticsReport = 24
+
     }
 }

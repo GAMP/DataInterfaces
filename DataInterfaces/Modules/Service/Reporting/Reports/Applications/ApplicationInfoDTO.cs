@@ -65,10 +65,5 @@ namespace ServerService.Reporting.Reports.Applications
         [DataMember]
         public string AverageDailyExecutionTime { get; set; }
 
-        /// <summary>
-        /// List of executables that belongs to the application and ran within the reporting period.
-        /// </summary>
-        [DataMember]
-        public List<ExecutableExecutionInfoDTO> Executables { get; set; } = new List<ExecutableExecutionInfoDTO>();
     }
 }

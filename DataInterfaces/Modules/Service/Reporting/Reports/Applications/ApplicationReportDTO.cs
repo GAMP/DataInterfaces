@@ -12,25 +12,25 @@ namespace ServerService.Reporting.Reports.Applications
     public class ApplicationReportDTO : ReportBaseDTO
     {
         /// <summary>
-        /// Filter User Id.
+        /// Filtered User Id.
         /// </summary>
         [DataMember]
         public int? UserId { get; set; }
 
         /// <summary>
-        /// Filter User Name.
+        /// Filtered User Name.
         /// </summary>
         [DataMember]
         public string UserName { get; set; }
 
         /// <summary>
-        /// Filter Application Id.
+        /// Filtered Application Id.
         /// </summary>
         [DataMember]
         public int ApplicationId { get; set; }
 
         /// <summary>
-        /// Filter Application Name.
+        /// Filtered Application Name.
         /// </summary>
         [DataMember]
         public string ApplicationName { get; set; }
@@ -40,17 +40,21 @@ namespace ServerService.Reporting.Reports.Applications
         /// </summary>
         [DataMember]
         public ApplicationInfoDTO Application { get; set; }
+     
+        /// <summary>
+        /// List of executables that belongs to the application and ran within the reporting period.
+        /// </summary>
+        [DataMember]
+        public List<ExecutableExecutionSummaryDTO> Executables { get; set; } = new List<ExecutableExecutionSummaryDTO>();
 
         /// <summary>
         /// List of records for the runtime per user group chart.
         /// </summary>
-        [DataMember]
         public List<ChartGroupDTO> HoursPerUserGroupChart { get; set; } = new List<ChartGroupDTO>();
 
         /// <summary>
         /// List of records for the runtime per host group chart.
         /// </summary>
-        [DataMember]
         public List<ChartGroupDTO> HoursPerHostGroupChart { get; set; } = new List<ChartGroupDTO>();
     }
 }

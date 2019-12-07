@@ -56,13 +56,11 @@ namespace ServerService.Reporting.Reports.Overview
         /// <summary>
         /// List of records for the utilization chart.
         /// </summary>
-        [DataMember]
         public List<PeriodUtilizationChartRecordDTO> UtilizationChart { get; set; } = new List<PeriodUtilizationChartRecordDTO>();
 
         /// <summary>
         /// List of records for the financial chart.
         /// </summary>
-        [DataMember]
         public List<ChartRecordDTO> FinancialChart { get; set; } = new List<ChartRecordDTO>();
 
         /// <summary>

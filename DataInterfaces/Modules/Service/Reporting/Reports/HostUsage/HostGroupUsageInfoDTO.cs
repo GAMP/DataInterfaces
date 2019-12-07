@@ -54,15 +54,14 @@ namespace ServerService.Reporting.Reports.Hosts
         public decimal UtilizationPercentage { get; set; }
 
         /// <summary>
-        /// List of records for the estimated value per host group chart.
+        /// List of records for the estimated value per host group.
         /// </summary>
         [DataMember]
-        public List<UserSessionCostGroupDTO> GroupSessionsCost { get; set; } = new List<UserSessionCostGroupDTO>();
+        public List<GroupSessionsEstimationDTO> GroupSessionsEstimations { get; set; } = new List<GroupSessionsEstimationDTO>();
 
         /// <summary>
         /// List of records for the utilization charts.
         /// </summary>
-        [DataMember]
         public List<PeriodUtilizationChartRecordDTO> UtilizationChart { get; set; } = new List<PeriodUtilizationChartRecordDTO>();
 
     }

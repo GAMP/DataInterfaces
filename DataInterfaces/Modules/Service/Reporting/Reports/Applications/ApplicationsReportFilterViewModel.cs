@@ -47,5 +47,11 @@ namespace ServerService.Reporting.Reports.Applications
         [DataMember]
         public List<ListItemDTO> Applications { get; set; }
 
+        /// <summary>
+        /// Filter Application Id.
+        /// </summary>
+        [DataMember]
+        public int? ApplicationId { get; set; }
+
     }
 }

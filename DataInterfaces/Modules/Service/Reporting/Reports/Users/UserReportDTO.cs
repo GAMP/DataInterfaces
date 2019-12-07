@@ -92,19 +92,16 @@ namespace ServerService.Reporting.Reports.Users
         /// <summary>
         /// User's profile picture.
         /// </summary>
-        [DataMember]
         public byte[] Photo { get; set; }
 
         /// <summary>
         /// List of records for the average daily session time chart.
         /// </summary>
-        [DataMember]
         public List<ChartRecordDTO> SessionTimeChartRecords { get; set; } = new List<ChartRecordDTO>();
 
         /// <summary>
         /// List of records for the average daily spend chart.
         /// </summary>
-        [DataMember]
         public List<ChartRecordDTO> InvoicesChartRecords { get; set; } = new List<ChartRecordDTO>();
 
     }

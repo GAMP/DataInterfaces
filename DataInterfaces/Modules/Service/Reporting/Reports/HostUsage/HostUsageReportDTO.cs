@@ -12,19 +12,19 @@ namespace ServerService.Reporting.Reports.Hosts
     public class HostUsageReportDTO : ReportBaseDTO
     {
         /// <summary>
-        /// Filter Host Group Id.
+        /// Filtered Host Group Id.
         /// </summary>
         [DataMember]
         public int? HostGroupId { get; set; }
 
         /// <summary>
-        /// Filter Host Group Name.
+        /// Filtered Host Group Name.
         /// </summary>
         [DataMember]
         public string HostGroupName { get; set; }
 
         /// <summary>
-        /// Filter Host Usage Report Type.
+        /// Filtered Host Usage Report Type.
         /// </summary>
         [DataMember]
         public HostUsageReportTypes HostUsageReportType { get; set; }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 
 namespace ServerService.Reporting.Reports.Financial
@@ -27,6 +28,7 @@ namespace ServerService.Reporting.Reports.Financial
         /// Filter Financial Report Type.
         /// </summary>
         [DataMember]
+        [Required]
         public FinancialReportTypes FinancialReportType { get; set; }
     }
 }

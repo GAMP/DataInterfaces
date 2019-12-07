@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 
 namespace ServerService.Reporting.Reports.Shifts
@@ -26,6 +27,7 @@ namespace ServerService.Reporting.Reports.Shifts
         /// Filter Shifts Log Report Type.
         /// </summary>
         [DataMember]
+        [Required]
         public ShiftsLogReportTypes ShiftsLogReportType { get; set; }
     }
 }

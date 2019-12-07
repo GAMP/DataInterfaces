@@ -4,17 +4,24 @@ using System.Linq.Expressions;
 namespace SharedLib
 {
     #region RoleAssignableAttribute
+    /// <summary>
+    /// Role assignable attribute.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
     public class RoleAssignableAttribute : Attribute
     {
-        #region Constructor
+        #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="assignable">Indicates if role is assignable.</param>
         public RoleAssignableAttribute(bool assignable)
         {
             Assignable = assignable;
         }
         #endregion
 
-        #region Properties
+        #region PROPERTIES
         /// <summary>
         /// Gets if role is assignable.
         /// </summary>
@@ -28,13 +35,24 @@ namespace SharedLib
     #endregion
 
     #region CanUserAssignAttribute
+    /// <summary>
+    /// User assignable attribute.
+    /// </summary>
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
     public class CanUserAssignAttribute : Attribute
     {
+        #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="assignable">Indicates if user assignable.</param>
         public CanUserAssignAttribute(bool assignable)
         {
             Assignable = assignable;
         }
+        #endregion
+
+        #region PROPERTIES
 
         /// <summary>
         /// Gets if item can be assigned by the user.
@@ -44,10 +62,16 @@ namespace SharedLib
             get;
             protected set;
         }
+
+        #endregion
     }
     #endregion
 
     #region IsGameModeAttibute
+    /// <summary>
+    /// Game mode attribute.
+    /// Used to indicate wether the application mode is game. 
+    /// </summary>
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
     public sealed class IsGameModeAttibute : Attribute
     { }
@@ -59,21 +83,27 @@ namespace SharedLib
     /// </summary>
     public class GUIDAttribute : Attribute
     {
-        #region Constructor
+        #region CONSTRUCTOR
 
-        public GUIDAttribute(string guidString)
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="guid">Guid.</param>
+        /// <exception cref="ArgumentNullException"> thrown if <paramref name="guid"/> is equal to null or empty string.</exception>
+        public GUIDAttribute(string guid)
         {
-            if (string.IsNullOrWhiteSpace(guidString))
-                throw new ArgumentNullException(nameof(guidString));
-
-            Guid = new Guid(guidString);
-        }
-
-        public GUIDAttribute(Guid guid)
-        {
-            if (guid == null)
+            if (string.IsNullOrWhiteSpace(guid))
                 throw new ArgumentNullException(nameof(guid));
 
+            Guid = new Guid(guid);
+        }
+
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="guid">Guid instance.</param>
+        public GUIDAttribute(Guid guid)
+        {
             Guid = guid;
         }
 
@@ -102,29 +132,36 @@ namespace SharedLib
     /// </summary>
     public class SpecialFolderAttribute : Attribute
     {
-        #region Fields
-        private Environment.SpecialFolder folderType = (Environment.SpecialFolder)65535;
-        #endregion
+        #region CONSTRUCTOR
 
-        #region Constructor
-
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
         public SpecialFolderAttribute()
         {
         }
 
-        public SpecialFolderAttribute(System.Environment.SpecialFolder knownFolderType)
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="specialFolderType">Special folder type.</param>
+        public SpecialFolderAttribute(Environment.SpecialFolder specialFolderType)
         {
-            SpecialFolder = knownFolderType;
+            SpecialFolder = specialFolderType;
         }
 
         #endregion
 
-        #region Properties
+        #region FIELDS
+        private Environment.SpecialFolder folderType = (Environment.SpecialFolder)65535;
+        #endregion
+
+        #region PROPERTIES
 
         /// <summary>
         /// Gets the folder type for this attribute.
         /// </summary>
-        public System.Environment.SpecialFolder SpecialFolder
+        public Environment.SpecialFolder SpecialFolder
         {
             get { return folderType; }
             protected set { folderType = value; }
@@ -140,7 +177,7 @@ namespace SharedLib
     /// </summary>
     public class AgeRatingAttribute : Attribute
     {
-        #region Constructor
+        #region CONSTRUCTOR
 
         /// <summary>
         /// Creates new age attribute.
@@ -152,7 +189,7 @@ namespace SharedLib
         }
         #endregion
 
-        #region Properties
+        #region PROPERTIES
 
         /// <summary>
         /// Gets attributes age value.
@@ -168,9 +205,12 @@ namespace SharedLib
     #endregion
 
     #region PolicyAttribute
+    /// <summary>
+    /// Policy attribute.
+    /// </summary>
     public class PolicyAttribute : Attribute
     {
-        #region Constructor
+        #region CONSTRUCTOR
         /// <summary>
         /// Creates new instance of the attribute.
         /// </summary>
@@ -202,11 +242,11 @@ namespace SharedLib
         }
         #endregion
 
-        #region Fields
+        #region FIELDS
         private Microsoft.Win32.RegistryHive hive = Microsoft.Win32.RegistryHive.CurrentUser;
         #endregion
 
-        #region Properties
+        #region PROPERTIES
 
         /// <summary>
         /// Gets registry path of restriction attribute.
@@ -255,7 +295,7 @@ namespace SharedLib
 
         #endregion
 
-        #region Functions
+        #region FUNCTIONS
         /// <summary>
         /// Converts enable flag to registry value object.
         /// </summary>
@@ -344,16 +384,30 @@ namespace SharedLib
     #endregion
 
     #region SystemPolicyAttribute
+    /// <summary>
+    /// System policy attribute.
+    /// </summary>
     public class SystemPolicyAttribute : PolicyAttribute
     {
-        #region Constructor
+        #region CONSTRUCTOR
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="description">Dscription.</param>
+        /// <param name="valueName">Value name.</param>
         public SystemPolicyAttribute(string description, string valueName = "")
             : base("Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System", description, valueName)
         {
             Category = "System";
         }
 
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="description">Dscription.</param>
+        /// <param name="hive">Registry hive.</param>
+        /// <param name="valueName">Value name.</param>
         public SystemPolicyAttribute(string description, Microsoft.Win32.RegistryHive hive, string valueName = "")
             : base("Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System", description, valueName)
         {
@@ -362,8 +416,44 @@ namespace SharedLib
         }
 
         #endregion
+    }
+    #endregion
 
-        #region Ovverdies
+    #region WindowsSystemPolicyAttribute
+    /// <summary>
+    /// Windows security policy attribute.
+    /// </summary>
+    public class WindowsSystemPolicyAttribute : PolicyAttribute
+    {
+        #region CONSTRUCTOR
+
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="description">Dscription.</param>
+        /// <param name="valueName">Value name.</param>
+        public WindowsSystemPolicyAttribute(string description, string valueName = "")
+            : base(@"Software\Policies\Microsoft\Windows\System", description, valueName)
+        {
+            Category = "System";
+        }
+
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="description">Dscription.</param>
+        /// <param name="hive">Registry hive.</param>
+        /// <param name="valueName">Value name.</param>
+        public WindowsSystemPolicyAttribute(string description, Microsoft.Win32.RegistryHive hive, string valueName = "")
+            : base(@"Software\Policies\Microsoft\Windows\System", description, valueName)
+        {
+            Category = "System";
+            Hive = hive;
+        }
+
+        #endregion
+
+        #region OVERRIDES
         public override object GetValueForAttribute(bool enable)
         {
             var returnValue = base.GetValueForAttribute(enable);
@@ -384,32 +474,18 @@ namespace SharedLib
     }
     #endregion
 
-    #region WindowsSystemPolicyAttribute
-    public class WindowsSystemPolicyAttribute : PolicyAttribute
-    {
-        #region Constructor
-
-        public WindowsSystemPolicyAttribute(string description, string valueName = "")
-            : base(@"Software\Policies\Microsoft\Windows\System", description, valueName)
-        {
-            Category = "System";
-        }
-
-        public WindowsSystemPolicyAttribute(string description, Microsoft.Win32.RegistryHive hive, string valueName = "")
-            : base(@"Software\Policies\Microsoft\Windows\System", description, valueName)
-        {
-            Category = "System";
-            Hive = hive;
-        }
-
-        #endregion
-    } 
-    #endregion
-
     #region NetworkPolicyAttribute
+    /// <summary>
+    /// Network policy attribute.
+    /// </summary>
     public class NetworkPolicyAttribute : PolicyAttribute
     {
-        #region Constructor
+        #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="description">Dscription.</param>
+        /// <param name="valueName">Value name.</param>
         public NetworkPolicyAttribute(string description, string valueName = "")
             : base("Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Network", description, valueName)
         {
@@ -420,9 +496,17 @@ namespace SharedLib
     #endregion
 
     #region CommonDialogPolicyAttribute
+    /// <summary>
+    /// Common dialog policy attribute.
+    /// </summary>
     public class CommonDialogPolicyAttribute : PolicyAttribute
     {
-        #region Constructor
+        #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="description">Dscription.</param>
+        /// <param name="valueName">Value name.</param>
         public CommonDialogPolicyAttribute(string description, string valueName = "")
             : base("Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Comdlg32", description, valueName)
         {
@@ -433,9 +517,17 @@ namespace SharedLib
     #endregion
 
     #region NoEnumPolicyAttribute
+    /// <summary>
+    /// No enumeration policy attribute.
+    /// </summary>
     public class NoEnumPolicyAttribute : PolicyAttribute
     {
-        #region Constructor
+        #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="description">Dscription.</param>
+        /// <param name="valueName">Value name.</param>
         public NoEnumPolicyAttribute(string description, string valueName = "")
             : base("Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\NonEnum", description, valueName)
         {
@@ -446,9 +538,17 @@ namespace SharedLib
     #endregion
 
     #region UsbStorPolicyAttribute
+    /// <summary>
+    /// USB Stor policy attribute.
+    /// </summary>
     public class UsbStorPolicyAttribute : PolicyAttribute
     {
-        #region Constructor
+        #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="description">Dscription.</param>
+        /// <param name="valueName">Value name.</param>
         public UsbStorPolicyAttribute(string description, string valueName = "")
             : base("System\\CurrentControlSet\\Services\\UsbStor", description, valueName)
         {
@@ -457,7 +557,12 @@ namespace SharedLib
         }
         #endregion
 
-        #region Ovverdies
+        #region OVERRIDES
+        /// <summary>
+        /// Gets value for the attribute.
+        /// </summary>
+        /// <param name="enable">Enable parameter.</param>
+        /// <returns>Value.</returns>
         public override object GetValueForAttribute(bool enable)
         {
             return enable ? 4 : 3;
@@ -467,9 +572,17 @@ namespace SharedLib
     #endregion
 
     #region UninstallAttribute
+    /// <summary>
+    /// Uninstall policy attribute.
+    /// </summary>
     public class UninstallAttribute : PolicyAttribute
     {
-        #region Constructor
+        #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="description">Dscription.</param>
+        /// <param name="valueName">Value name.</param>
         public UninstallAttribute(string description, string valueName = "")
             : base(@"Software\Microsoft\Windows\CurrentVersion\Policies\Uninstall", description, valueName)
         {

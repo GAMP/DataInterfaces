@@ -17,13 +17,13 @@ namespace ServerService.Reporting
         public string Name { get; set; }
 
         /// <summary>
-        /// Filter Date From.
+        /// Filtered Date From.
         /// </summary>
         [DataMember]
         public DateTime DateFrom { get; set; }
 
         /// <summary>
-        /// Filter Date To.
+        /// Filtered Date To.
         /// </summary>
         [DataMember]
         public DateTime DateTo { get; set; }

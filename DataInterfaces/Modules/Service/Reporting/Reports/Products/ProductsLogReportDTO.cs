@@ -12,31 +12,31 @@ namespace ServerService.Reporting.Reports.Products
     public class ProductsLogReportDTO : ReportBaseDTO
     {
         /// <summary>
-        /// Filter Product Id.
+        /// Filtered Product Id.
         /// </summary>
         [DataMember]
         public int? ProductId { get; set; }
 
         /// <summary>
-        /// Filter Product Name.
+        /// Filtered Product Name.
         /// </summary>
         [DataMember]
         public string ProductName { get; set; }
 
         /// <summary>
-        /// Filter Operator Id.
+        /// Filtered Operator Id.
         /// </summary>
         [DataMember]
         public int? OperatorId { get; set; }
 
         /// <summary>
-        /// Filter Operator Id.
+        /// Filtered Operator Id.
         /// </summary>
         [DataMember]
         public string OperatorName { get; set; }
 
         /// <summary>
-        /// Filter Product Transaction Type Id.
+        /// Filtered Product Transaction Type Id.
         /// </summary>
         [DataMember]
         public ProductTransactionTypes? ProductTransactionType { get; set; }
