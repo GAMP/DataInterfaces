@@ -872,6 +872,8 @@ namespace SharedLib.Commands
 
         WakeOnLan = 237,
         ManagerModuleInfoGet = 214,
+        ClientModuleInfoGet = 281,
+        ServerModuleInfoGet = 282,
 
         #region ASSETS 
 
@@ -909,7 +911,13 @@ namespace SharedLib.Commands
 
         #endregion
 
-        //max 276
+        ReservationAdd = 276,
+        ReservationStatusSet = 277,
+        ReservationInfoGet = 278,
+        ReservationGet = 279,
+        ReservationUpdate = 280,
+
+        //max 283
     }
     #endregion
 

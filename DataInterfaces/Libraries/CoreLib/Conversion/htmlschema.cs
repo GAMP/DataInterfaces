@@ -132,7 +132,7 @@ namespace HTMLConverter
         /// <param name="currentElementName">
         /// string representing current element name
         /// </param>
-        /// <param name="elementName"></param>
+        /// <param name="nextElementName"></param>
         /// string representing name of the next element that will start
         internal static bool ClosesOnNextElementStart(string currentElementName, string nextElementName)
         {

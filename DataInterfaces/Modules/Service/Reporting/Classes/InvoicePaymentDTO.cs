@@ -124,5 +124,11 @@ namespace ServerService.Reporting
         /// </summary>
         [DataMember]
         public DateTime? VoidCreatedTime { get; set; }
+
+        /// <summary>
+        /// The Id of the operator that performed the void.
+        /// </summary>
+        [DataMember]
+        public int? VoidOperatorId { get; set; }
     }
 }

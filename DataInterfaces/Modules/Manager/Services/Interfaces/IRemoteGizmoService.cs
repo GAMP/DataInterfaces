@@ -16,7 +16,8 @@ namespace Manager.Services
         IHostServiceAsync,
         IConfigurableServiceAsync,
         IUserServiceAsync,
-        ILogService        
+        ILogService,
+        IReservationService
     {
 
         /// <summary>

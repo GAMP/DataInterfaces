@@ -1,4 +1,5 @@
 ﻿using SharedLib;
+using System;
 using System.Runtime.Serialization;
 
 namespace ServerService
@@ -6,6 +7,7 @@ namespace ServerService
     /// <summary>
     /// Reservation filter.
     /// </summary>
+    [Serializable()]
     [DataContract()]
     public class ReservationFilter : DateRangeFilterBase
     {

@@ -34,6 +34,12 @@ namespace ServerService.Reporting.Reports.Transactions
         public string UserName { get; set; }
 
         /// <summary>
+        /// Filter Void Operator Id.
+        /// </summary>
+        [DataMember]
+        public int? VoidOperatorId { get; set; }
+
+        /// <summary>
         /// Filter Transactions Log Action Type.
         /// </summary>
         [DataMember]

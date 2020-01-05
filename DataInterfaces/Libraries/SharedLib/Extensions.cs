@@ -139,7 +139,7 @@ namespace SharedLib.Extensions
         /// <summary>
         /// Returns the index of an item in a sequence.
         /// </summary>
-        /// <typeparam name="T">The type of the elements of source.</typeparam>
+        /// <typeparam name="TSource">The type of the elements of source.</typeparam>
         /// <param name="source">A sequence containing elements.</param>
         /// <param name="item">The item to locate.</param>        
         /// <returns>The index of the entry if it was found in the sequence; otherwise, -1.</returns>
@@ -151,7 +151,7 @@ namespace SharedLib.Extensions
         /// <summary>
         /// Returns the index of an item in a sequence.
         /// </summary>
-        /// <typeparam name="T">The type of the elements of source.</typeparam>
+        /// <typeparam name="TSource">The type of the elements of source.</typeparam>
         /// <param name="source">A sequence containing elements.</param>
         /// <param name="item">The item to locate.</param>
         /// <param name="itemComparer">The item equality comparer to use.  Pass null to use the default comparer.</param>

@@ -114,8 +114,6 @@ namespace ServerService
         /// <summary>
         /// Gets or sets end date.
         /// </summary>
-        [DataMember()]
-        [ProtoMember(10)]
         public DateTime EndDate
         {
             get { return Date.AddMinutes(Duration); }
@@ -143,7 +141,7 @@ namespace ServerService
         /// <summary>
         /// Gets or sets reserved host info.
         /// </summary>
-        [ProtoMember(500)]
+        [ProtoMember(501)]
         [DataMember(EmitDefaultValue = false)]
         public IEnumerable<ReservationHostInfo> Hosts
         {

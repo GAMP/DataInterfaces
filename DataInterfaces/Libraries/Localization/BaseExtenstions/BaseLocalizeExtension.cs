@@ -234,7 +234,6 @@ namespace Localization.Extensions
         /// Resolves the localized value of the current Assembly, Dict, Key pair.
         /// </summary>
         /// <param name="resolvedValue">The resolved value.</param>
-        /// <param name="targetCulture">The target culture.</param>
         /// <returns>
         /// True if the resolve was success, otherwise false.
         /// </returns>

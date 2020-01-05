@@ -5,66 +5,6 @@ using System.Windows.Input;
 
 namespace SkinInterfaces
 {
-    /// <summary>
-    /// Is a Trigger that invokes a bound Command when some 
-    /// Event occurs on the attached FrameworkElement
-    /// </summary>
-    /// <remarks>
-    /// Recommended usage:
-    /// <code>
-    /// IN YOUR VIEW HAVE SOMETHING LIKE THIS
-    /// 
-    /// 
-    ///             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-    ///             xmlns:CinchV2="clr-namespace:Cinch;assembly=Cinch.WPF"
-    ///
-    ///            <Rectangle x:Name="rectangle" >
-    ///                <i:Interaction.Triggers>
-    ///                    <i:EventTrigger EventName="MouseLeftButtonDown">
-    ///                        <CinchV2:EventToCommandTrigger 
-    ///                             Command="{Binding ViewEventToVMFiredCommand}" 
-    ///                             CommandParameter="5"/>
-    ///                    </i:EventTrigger>
-    ///                    <i:EventTrigger EventName="MouseLeftButtonUp">
-    ///                        <CinchV2:EventToCommandTrigger 
-    ///                             Command="{Binding ViewEventToVMFiredCommand2}" 
-    ///                             CommandParameter="{Binding ActualWidth, ElementName=rectangle}"/>
-    ///                    </i:EventTrigger>
-    ///                </i:Interaction.Triggers>
-    ///            </Rectangle>
-    ///     
-    /// 
-    /// AND YOU MAY HAVE SOMETHING LIKE THIS IN YOUR VIEWMODEL
-    /// 
-    ///         public SimpleCommand<Object,EventToCommandArgs> ViewEventToVMFiredCommand { get; private set; }
-    ///         public SimpleCommand<Object, EventToCommandArgs> ViewEventToVMFiredCommand2 { get; private set; }
-    ///
-    ///         ViewEventToVMFiredCommand = new SimpleCommand<Object,EventToCommandArgs>(
-    ///             (parameter) => { return true; },
-    ///             ExecuteViewEventToVMFiredCommand);
-    ///
-    ///         ViewEventToVMFiredCommand2 = new SimpleCommand<Object, EventToCommandArgs>(
-    ///            (parameter) => { return true; },
-    ///            ExecuteViewEventToVMFiredCommand2);
-    ///
-    ///         private void ExecuteViewEventToVMFiredCommand(EventToCommandArgs args)
-    ///         {
-    ///             ICommand commandRan = args.CommandRan;
-    ///             Object o = args.CommandParameter;
-    ///             EventArgs ea = args.EventArgs;
-    ///             var sender = args.Sender;
-    ///         }
-    ///
-    ///         private void ExecuteViewEventToVMFiredCommand2(EventToCommandArgs args)
-    ///         {
-    ///             ICommand commandRan = args.CommandRan;
-    ///             Object o = args.CommandParameter;
-    ///             EventArgs ea = args.EventArgs;
-    ///             var sender = args.Sender;
-    ///         }
-    ///
-    /// </code>
-    /// </remarks>
     public class EventToCommandTrigger : TriggerAction<FrameworkElement>
     {
         #region Overrides

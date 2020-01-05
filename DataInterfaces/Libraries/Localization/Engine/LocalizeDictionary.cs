@@ -322,14 +322,11 @@ namespace Localization.Engine
 
         /// <summary>
         /// Looks up the ResourceManagers for the searched <paramref name="resourceKey"/>
-        /// in the <paramref name="resourceDictionary"/> in the <paramref name="resourceAssembly"/>
         /// with the passed culture. If the searched one does not exists with the passed culture, is will searched
         /// until the invariant culture is used.
         /// </summary>
-        /// <param name="resourceAssembly">The resource assembly (e.g.: <c>BaseLocalizeExtension</c>). NULL = Name of the executing assembly</param>
         /// <param name="resourceDictionary">The dictionary to look up (e.g.: ResHelp, Resources, ...). NULL = Name of the default resource file (Resources)</param>
         /// <param name="resourceKey">The key of the searched entry (e.g.: <c>btnHelp</c>, Cancel, ...). NULL = Exception</param>
-        /// <param name="cultureToUse">The culture to use.</param>
         /// <returns>
         /// TRUE if the searched one is found, otherwise FALSE
         /// </returns>

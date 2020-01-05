@@ -135,7 +135,8 @@ namespace SkinInterfaces
         #endregion
 
         #region Protected Methods
-        /// <param name="parameter">The EventArgs of the fired event.</param>
+        /// <param name="clickedItem">The EventArgs of the fired event.</param>
+        /// <param name="parameter">Parameter.</param>
         protected void Invoke(object clickedItem, MouseButtonEventArgs parameter)
         {
             if (IsAssociatedElementDisabled())

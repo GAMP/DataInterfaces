@@ -150,7 +150,6 @@ namespace HTMLConverter
         /// <param name="xamlParentElement">
         /// Parent xaml element, to which new converted element will be added
         /// </param>
-        /// <param name="htmlElement">
         /// Source html element subject to convert to xaml.
         /// </param>
         /// <param name="inheritedProperties">
@@ -1788,7 +1787,6 @@ namespace HTMLConverter
         /// <param name="columnStarts">
         /// Array list representing starting coordinates of all columns in the table
         /// </param>
-        /// <param name="columnStart">
         /// Starting coordinate of column we wish to insert into columnStart
         /// </param>
         /// <param name="columnIndex">

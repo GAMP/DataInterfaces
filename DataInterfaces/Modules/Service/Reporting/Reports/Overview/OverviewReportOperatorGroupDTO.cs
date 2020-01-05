@@ -50,19 +50,19 @@ namespace ServerService.Reporting.Reports.Overview
         /// Number of products the operator sold.
         /// </summary>
         [DataMember]
-        public int ProductsSold { get; set; }
+        public decimal ProductsSold { get; set; }
 
         /// <summary>
         /// Number of time offers the operator sold.
         /// </summary>
         [DataMember]
-        public int TimeOffersSold { get; set; }
+        public decimal TimeOffersSold { get; set; }
 
         /// <summary>
         /// Number of bundles the operator sold.
         /// </summary>
         [DataMember]
-        public int BundlesSold { get; set; }
+        public decimal BundlesSold { get; set; }
 
         /// <summary>
         /// Number of voids the operator performed.

@@ -3878,7 +3878,7 @@ namespace SharedLib
         /// <summary>
         /// Reservation is canceld by user.
         /// </summary>
-        CancledByUser = 2,
+        CanceledByUser = 2,
         /// <summary>
         /// Reservation canceld do to no user entry.
         /// </summary>

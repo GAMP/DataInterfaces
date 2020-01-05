@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
-    <TargetFrameworks>net461;netcoreapp3.0</TargetFrameworks><!--net461;netcoreapp3.0;netstandard2.1-->
+    <TargetFrameworks>net461;netcoreapp3.1</TargetFrameworks><!--net461;netcoreapp3.0;netstandard2.1-->
     <LangVersion>latest</LangVersion>
     <Product>Data Interfaces Library</Product>
     <Description>Data Interfaces Library</Description>
@@ -11,6 +11,7 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <UseWindowsForms>true</UseWindowsForms>
+    <NoWarn>1591;1570;1573;0612</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,7 +28,7 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)'=='netcoreapp3.0'">
+  <ItemGroup Condition="'$(TargetFramework)'=='netcoreapp3.1'">
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
     <PackageReference Include="System.ComponentModel.Composition" Version="4.7.0" />
   </ItemGroup>

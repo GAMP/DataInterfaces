@@ -7,44 +7,6 @@ using Microsoft.Xaml.Behaviors;
 
 namespace SkinInterfaces
 {
-    /// <summary>
-    /// A simple selector double click Behaviour that calls a bound ViewModel Command
-    /// when the user double clicks the Selector
-    /// </summary>
-    /// <remarks>
-    /// Recommended usage:
-    /// <code>
-    /// IN YOUR VIEW HAVE SOMETHING LIKE THIS
-    /// 
-    /// 
-    ///         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-    ///         xmlns:CinchV2="clr-namespace:Cinch;assembly=Cinch.WPF"
-    ///         
-    ///         <ListView ItemsSource="{Binding People}" IsSynchronizedWithCurrentItem="True">
-    ///                <i:Interaction.Behaviors>
-    ///                    <CinchV2:SelectorDoubleClickCommandBehavior Command="{Binding SomeViewModelCommand}" />
-    ///                </i:Interaction.Behaviors>
-    ///         </ListView>
-    ///         
-    /// AND IN YOUR VIEW MODEL YOU WOULD HAVE A ICOMMAND DECLARED SOMETHING LIKE THIS
-    /// 
-    /// 
-    ///         public SimpleCommand<Object, EventToCommandArgs> SelectorDoubleClickCommand { get; private set; }
-    ///         
-    ///         SelectorDoubleClickCommand = new SimpleCommand<Object, EventToCommandArgs>(
-    ///                    (parameter) => { return true; },
-    ///                    ExecuteSelectorDoubleClickCommand);
-    /// 
-    /// 
-    ///         private void ExecuteSelectorDoubleClickCommand(EventToCommandArgs args)
-    ///         {
-    ///             ICommand commandRan = args.CommandRan;
-    ///             Object o = args.CommandParameter;
-    ///             EventArgs ea = args.EventArgs;
-    ///             var sender = args.Sender;
-    ///         }
-    /// </code>
-    /// </remarks>
     public class SelectorKeyUpCommandBehavior : Behavior<Selector>
     {
         #region Overrides
@@ -137,7 +99,8 @@ namespace SkinInterfaces
         #endregion
 
         #region Protected Methods
-        /// <param name="parameter">The EventArgs of the fired event.</param>
+        /// <param name="clickedItem">The EventArgs of the fired event.</param>
+        /// <param name="parameter">Parameter.</param>
         protected void Invoke(object clickedItem, KeyEventArgs parameter)
         {
             if (IsAssociatedElementDisabled())
@@ -309,7 +272,8 @@ namespace SkinInterfaces
         #endregion
 
         #region Protected Methods
-        /// <param name="parameter">The EventArgs of the fired event.</param>
+        /// <param name="clickedItem">The EventArgs of the fired event.</param>
+        /// <param name="parameter">Parameter.</param>
         protected void Invoke(object clickedItem, KeyEventArgs parameter)
         {
             if (IsAssociatedElementDisabled())

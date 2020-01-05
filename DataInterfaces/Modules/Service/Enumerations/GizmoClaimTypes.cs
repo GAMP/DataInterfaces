@@ -184,6 +184,12 @@
         [ClaimDescription(@"User", "Edit", "PERMISSION_GROUP_USER", "PERMISSION_ACTION_USER_EDIT")]
         UserEdit,
 
+        /// <summary>
+        /// Edit user permission.
+        /// </summary>
+        [ClaimDescription(@"User", "AccessStats", "PERMISSION_GROUP_USER", "PERMISSION_ACTION_USER_ACCESS_STATS")]
+        UserAccessStats,
+
         #endregion
 
         #region LOG

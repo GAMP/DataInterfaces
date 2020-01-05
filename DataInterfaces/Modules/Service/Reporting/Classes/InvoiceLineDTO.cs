@@ -177,6 +177,11 @@ namespace ServerService.Reporting
         /// </summary>
         [DataMember]
         public int? ShiftId { get; set; }
-        
+
+        /// <summary>
+        /// The Id of the operator that performed the void.
+        /// </summary>
+        [DataMember]
+        public int? VoidOperatorId { get; set; }
     }
 }
