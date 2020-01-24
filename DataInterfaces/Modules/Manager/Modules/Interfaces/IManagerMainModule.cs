@@ -16,5 +16,10 @@ namespace Manager.Modules
         /// Gets current manager side module.
         /// </summary>
         IManagerSideModule CurrentSideModule { get; }
+
+        /// <summary>
+        /// Gets or set manager command line arguments.
+        /// </summary>
+        string[] CommandLineArgs { get; set; }
     }
 }

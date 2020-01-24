@@ -3929,4 +3929,13 @@ namespace SharedLib
     #endregion
 
     #endregion
+    
+    #region SoundNotificationBalanceOptions
+    public enum SoundNotificationBalanceOptions : int
+    {
+        All = 0,
+        NegativeBalanceOnly = 1
+    }
+    #endregion
+
 }

@@ -9,5 +9,15 @@
         /// New order notification.
         /// </summary>
         NewOrder = 0,
+
+        /// <summary>
+        /// Guest logout notification.
+        /// </summary>
+        GuestLogout = 1,
+
+        /// <summary>
+        /// Member logout notification.
+        /// </summary>
+        MemberLogout = 2,
     }
 }

@@ -2420,6 +2420,64 @@ namespace SharedLib.Configuration
             get; set;
         }
 
+        /// <summary>
+        /// Indicates if guest logout sound is enabled.
+        /// </summary>
+        [DefaultValue(false)]
+        [DataMember()]
+        public bool GuestLogoutSoundEnabled
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Guest logout sound file path.
+        /// </summary>
+        [DataMember()]
+        public string GuestLogoutSoundFile
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Guest logout sound balance.
+        /// </summary>
+        [DefaultValue(SoundNotificationBalanceOptions.All)]
+        [DataMember()]
+        public SoundNotificationBalanceOptions GuestLogoutSoundBalance
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Indicates if member logout sound is enabled.
+        /// </summary>
+        [DefaultValue(false)]
+        [DataMember()]
+        public bool MemberLogoutSoundEnabled
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Member logout sound file path.
+        /// </summary>
+        [DataMember()]
+        public string MemberLogoutSoundFile
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Member logout sound balance.
+        /// </summary>
+        [DefaultValue(SoundNotificationBalanceOptions.All)]
+        [DataMember()]
+        public SoundNotificationBalanceOptions MemberLogoutSoundBalance
+        {
+            get; set;
+        }
+
         #endregion
     }
     #endregion

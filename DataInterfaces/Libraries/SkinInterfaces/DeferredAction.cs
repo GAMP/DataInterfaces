@@ -61,7 +61,15 @@ namespace SkinInterfaces
                 throw new ArgumentNullException(nameof(delay));
 
             // Fire action when time elapses (with no subsequent calls).
-            timer.Change(delay, TimeSpan.FromMilliseconds(-1));
+            timer?.Change(delay, TimeSpan.FromMilliseconds(-1));
+        }
+
+        /// <summary>
+        /// Cancells deferred action.
+        /// </summary>
+        public void Cancel()
+        {
+            timer?.Change(Timeout.Infinite, Timeout.Infinite);
         }
 
         #endregion
