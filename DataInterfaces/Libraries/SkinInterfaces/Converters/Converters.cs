@@ -84,8 +84,6 @@ namespace SkinInterfaces.Converters
     }
     #endregion
 
-    #region TIMESPAN
-
     #region DoubleSecondsToHoursConverter
     public class DoubleSecondsToHoursConverter : IValueConverter
     {
@@ -138,8 +136,6 @@ namespace SkinInterfaces.Converters
 
         #endregion
     }
-    #endregion
-
     #endregion
 
     #region BytesConverter
@@ -1126,6 +1122,22 @@ namespace SkinInterfaces.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == null)
+                return Visibility.Hidden;
+
+            return Visibility.Visible;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return Binding.DoNothing;
+        }
+    }
+
+    public class NotNullToVisibilityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value != null)
                 return Visibility.Hidden;
 
             return Visibility.Visible;

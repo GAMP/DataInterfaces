@@ -12,6 +12,9 @@ namespace ServerService.Web.MemberRegistration.Models
         public bool IsClientRegistrationEnabled { get; set; }
 
         [DataMember]
+        public bool IsWebRegistrationEnabled { get; set; }
+
+        [DataMember]
         public RegistrationVerificationMethod VerificationMethod { get; set; }
 
         [DataMember]

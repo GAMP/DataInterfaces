@@ -66,6 +66,25 @@ namespace CoreLib
         }
 
         /// <summary>
+        /// Truncates the string to max length.
+        /// </summary>
+        /// <param name="value">String value.</param>
+        /// <param name="maxLength">Max length.</param>
+        /// <param name="notNull">Indicates if specified <paramref name="value"/> should be checked for null or emptines.</param>
+        /// <returns>Truncated string.</returns>
+        /// <exception cref="ArgumentNullException">thrown if specified <paramref name="value"/> is null or empty string and <paramref name="notNull"/> is set to true.</exception>
+        public static string WithMaxLength(this string value, int maxLength, bool notNull = false)
+        {
+            if (notNull)
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new ArgumentNullException(nameof(value));
+            }
+
+            return value?.Length > maxLength ? value.Substring(0, maxLength) : value;
+        }
+
+        /// <summary>
         /// Formats string with named parameters.
         /// </summary>
         /// <param name="str">String.</param>

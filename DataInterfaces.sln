@@ -3,14 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29509.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataInterfaces", "DataInterfaces\DataInterfaces.csproj", "{2B78ABDF-4EFD-4344-985E-B41FBDADA5AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataInterfaces", "DataInterfaces\DataInterfaces.csproj", "{2B78ABDF-4EFD-4344-985E-B41FBDADA5AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Core Port|Any CPU = Core Port|Any CPU
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2B78ABDF-4EFD-4344-985E-B41FBDADA5AA}.Core Port|Any CPU.ActiveCfg = Core Port|Any CPU
+		{2B78ABDF-4EFD-4344-985E-B41FBDADA5AA}.Core Port|Any CPU.Build.0 = Core Port|Any CPU
 		{2B78ABDF-4EFD-4344-985E-B41FBDADA5AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2B78ABDF-4EFD-4344-985E-B41FBDADA5AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B78ABDF-4EFD-4344-985E-B41FBDADA5AA}.Release|Any CPU.ActiveCfg = Release|Any CPU

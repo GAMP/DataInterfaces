@@ -2,25 +2,44 @@
 using SharedLib.Commands;
 using SharedLib.Dispatcher.Exceptions;
 using CoreLib;
+using System.Security.Claims;
 
 namespace SharedLib.Dispatcher
 {
-    #region IOperationBase
     /// <summary>
     /// Dispatcher operation base class.
     /// </summary>
+#if NETFRAMEWORK
     public class IOperationBase : IOperation
+#else
+    public class IOperationBase : SecureExecutionClassBase ,IOperation
+#endif
     {
         #region CONSTRUCTORS
+
+#if (NETCORE)
         /// <summary>
         /// Creates new instance.
         /// </summary>
         /// <param name="cmd">Operation command.</param>
-        public IOperationBase(IDispatcherCommand cmd)
+        /// <param name="isSecure">Indicates if security checks should be made upon class creation.</param>
+        public IOperationBase(IDispatcherCommand cmd, bool isSecure = false) : base(isSecure)
         {
             Command = cmd ?? throw new ArgumentNullException(nameof(cmd));
             Dispatcher = cmd.Dispatcher;
         }
+#endif
+
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="cmd">Operation command.</param>
+        public IOperationBase(IDispatcherCommand cmd) : base()
+        {
+            Command = cmd ?? throw new ArgumentNullException(nameof(cmd));
+            Dispatcher = cmd.Dispatcher;
+        }
+
         #endregion
 
         #region EVENTS
@@ -457,5 +476,4 @@ namespace SharedLib.Dispatcher
 
         #endregion        
     }
-    #endregion
 }

@@ -891,6 +891,7 @@ namespace SharedLib.Commands
         AssetCheckInByUser = 250,
         AssetCheckOut = 245,
         AssetInfoGet = 249,
+        AssetCheckoutInfoGet = 283,
 
         AssetTransactionGet = 248,
 
@@ -917,7 +918,7 @@ namespace SharedLib.Commands
         ReservationGet = 279,
         ReservationUpdate = 280,
 
-        //max 283
+        //max 284
     }
     #endregion
 

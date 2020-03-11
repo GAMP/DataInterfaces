@@ -1,13 +1,13 @@
-﻿//TODO: MIGRATION: Identity model is not available in .net core
-#if (NETFRAMEWORK)
-using System;
-using System.IdentityModel.Services;
+﻿using System;
 using System.Linq;
 using System.Reflection;
 using System.Security.Claims;
 using System.Security.Permissions;
 using System.Threading;
 using System.Windows.Input;
+#if NETFRAMEWORK
+using System.IdentityModel.Services;
+#endif
 
 namespace SkinInterfaces
 {
@@ -48,6 +48,7 @@ namespace SkinInterfaces
         {
             bool isAuthorized = true;
 
+#if NETFRAMEWORK
             var claimAttributes = (ClaimsPrincipalPermissionAttribute[])methodInfo.GetCustomAttributes(typeof(ClaimsPrincipalPermissionAttribute), true);
 
             if (claimAttributes.Count() == 0)
@@ -63,7 +64,21 @@ namespace SkinInterfaces
                 if (!isAuthorized)
                     break;
             }
+#else
+ var claimAttributes = (CodeSecurityAttribute[])methodInfo.GetCustomAttributes(typeof(CodeSecurityAttribute), true);
 
+            if (claimAttributes.Count() == 0)
+                return true;
+
+            foreach (var claimRequest in claimAttributes)
+            {
+                if (Thread.CurrentPrincipal is ClaimsPrincipal currentPrincipal)
+                    isAuthorized = currentPrincipal.HasClaim(claimRequest.Resource, claimRequest.Operation);            
+
+                if (!isAuthorized)
+                    break;
+            }
+#endif
             return isAuthorized;
         }
 
@@ -95,6 +110,4 @@ namespace SkinInterfaces
         #endregion
     }
 }
-
-#endif
 

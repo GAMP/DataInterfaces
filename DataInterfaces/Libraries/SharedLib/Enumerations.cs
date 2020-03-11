@@ -3875,18 +3875,6 @@ namespace SharedLib
         /// Reservation is canceled by operator.
         /// </summary>
         Canceled = 1,
-        /// <summary>
-        /// Reservation is canceld by user.
-        /// </summary>
-        CanceledByUser = 2,
-        /// <summary>
-        /// Reservation canceld do to no user entry.
-        /// </summary>
-        CanceledNoEntry = 3,
-        /// <summary>
-        /// Reservation is expired due to expiration rule.
-        /// </summary>
-        Expired = 4,
     }
     #endregion
 

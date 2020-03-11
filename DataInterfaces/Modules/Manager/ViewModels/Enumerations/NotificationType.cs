@@ -19,5 +19,10 @@
         /// Member logout notification.
         /// </summary>
         MemberLogout = 2,
+
+        /// <summary>
+        /// Client disconnect notification.
+        /// </summary>
+        ClientDisconnect = 3,
     }
 }

@@ -1769,7 +1769,7 @@ namespace SharedLib.Configuration
         {
             get; set;
         }
-
+        
         /// <summary>
         /// Gets or set client registration verification method.
         /// </summary>
@@ -1792,6 +1792,18 @@ namespace SharedLib.Configuration
         public bool IsConcurrentExecutionLimitEnabled
         {
             get;set;
+        }
+
+        /// <summary>
+        /// Gets or sets if web registrations are enabled.
+        /// </summary>
+        [Category("General")]
+        [Description("Enables or disables web user registration.")]
+        [DefaultValue(false)]
+        [DataMember(Order = 7)]
+        public bool IsWebRegistrationEnabled
+        {
+            get; set;
         }
 
         #endregion
@@ -2198,6 +2210,16 @@ namespace SharedLib.Configuration
         }
 
         /// <summary>
+        /// Gets or sets if user info requested is default option.
+        /// </summary>
+        [Category("Functionality")]
+        [DataMember()]
+        public bool IsUserInfoRequestedByDefault
+        {
+            get; set;
+        }
+
+        /// <summary>
         /// POS Devices config.
         /// </summary>
         [Category("Devices")]
@@ -2478,6 +2500,25 @@ namespace SharedLib.Configuration
             get; set;
         }
 
+        /// <summary>
+        /// Indicates if client disconnect sound is enabled.
+        /// </summary>
+        [DefaultValue(false)]
+        [DataMember()]
+        public bool ClientDisconnectSoundEnabled
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Client disconnect sound file path.
+        /// </summary>
+        [DataMember()]
+        public string ClientDisconnectSoundFile
+        {
+            get; set;
+        }
+        
         #endregion
     }
     #endregion
@@ -2538,6 +2579,7 @@ namespace SharedLib.Configuration
         /// Gets or sets default wallpaper.
         /// </summary>
         [DataMember()]
+        [DefaultValue("wallpaper.jpg")]
         public string Wallpaper
         {
             get; set;

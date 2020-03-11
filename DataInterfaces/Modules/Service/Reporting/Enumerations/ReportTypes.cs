@@ -1,5 +1,4 @@
-﻿using DataInterfaces.Modules.Service.Attributes;
-using Localization;
+﻿using Localization;
 
 namespace ServerService.Reporting
 {
@@ -131,6 +130,7 @@ namespace ServerService.Reporting
         /// Report for all users.
         /// </summary>
         [Localized("REPORTS_USERS_REPORT_TITLE")]
+        [HiddenReport]
         UsersReport = 20,
 
         /// <summary>

@@ -19,7 +19,7 @@ namespace SharedLib
         /// </summary>
         public WindowShowParams()
         {
-            StarupLocation = WindowStartupLocation.CenterOwner;
+            StartupLocation = WindowStartupLocation.CenterOwner;
             SizeToContent = SizeToContent.WidthAndHeight;
             AllowClosing = true;
             AllowDrag = true;
@@ -134,7 +134,7 @@ namespace SharedLib
         }
 
         /// <summary>
-        /// Gets or sets window owner.
+        /// Gets or sets window owner handle.
         /// </summary>
         [IgnoreDataMember()]
         public IntPtr Owner
@@ -177,7 +177,7 @@ namespace SharedLib
         /// Window startup location.
         /// </summary>
         [DataMember()]
-        public WindowStartupLocation StarupLocation
+        public WindowStartupLocation StartupLocation
         {
             get;
             set;

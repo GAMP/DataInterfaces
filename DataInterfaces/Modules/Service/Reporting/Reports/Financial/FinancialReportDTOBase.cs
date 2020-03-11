@@ -78,16 +78,10 @@ namespace ServerService.Reporting.Reports.Financial
         public List<FinancialSummaryRecordDTO> SalesSummary { get; set; } = new List<FinancialSummaryRecordDTO>();
 
         /// <summary>
-        /// Summary of voids with refund to cash.
+        /// Summary of voids grouped by refund method.
         /// </summary>
         [DataMember]
-        public FinancialSummaryRecordDTO VoidInvoicesPaidCash { get; set; } = new FinancialSummaryRecordDTO();
-
-        /// <summary>
-        /// Summary voids with refund to deposit.
-        /// </summary>
-        [DataMember]
-        public FinancialSummaryRecordDTO VoidInvoicesToDeposit { get; set; } = new FinancialSummaryRecordDTO();
+        public List<FinancialSummaryRecordDTO> VoidInvoicesPaidCash { get; set; } = new List<FinancialSummaryRecordDTO>();
 
         /// <summary>
         /// Summary of voids with no refund or unpaid.
