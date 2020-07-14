@@ -3660,19 +3660,13 @@ namespace SharedLib
         /// <summary>
         /// Pay in.
         /// </summary>
-        PayIn,
+        [Localized("PAY_IN")]
+        PayIn = 1,
         /// <summary>
         /// Pay out.
         /// </summary>
-        PayOut,
-        /// <summary>
-        /// Drop.
-        /// </summary>
-        Drop,
-        /// <summary>
-        /// Inventory purchase.
-        /// </summary>
-        InventoryPurchase,
+        [Localized("PAY_OUT")]
+        PayOut = 2
     }
     #endregion
 

@@ -24,5 +24,10 @@
         /// Only voids and refunds are included.
         /// </summary>
         VoidsRefunds = 4,
+
+        /// <summary>
+        /// Only pay in and pay out transactions are included.
+        /// </summary>
+        PayInOut = 5,
     }
 }

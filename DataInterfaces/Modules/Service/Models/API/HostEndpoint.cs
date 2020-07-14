@@ -1,5 +1,7 @@
 ﻿using ProtoBuf;
 using System;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 
 namespace ServerService.Web.Api.Controllers.Models
@@ -18,7 +20,9 @@ namespace ServerService.Web.Api.Controllers.Models
         /// Gets or sets maximum users.
         /// </summary>
         [DataMember()]
-        [ProtoMember(1)]
+        [ProtoMember(1)]     
+        [DefaultValue(1)]
+        [Range(1,int.MaxValue)]
         public int MaximumUsers
         {
             get;

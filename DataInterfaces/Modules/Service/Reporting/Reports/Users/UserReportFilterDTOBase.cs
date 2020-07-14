@@ -8,12 +8,13 @@ namespace ServerService.Reporting.Reports.Users
     /// </summary>
     [Serializable]
     [DataContract]
-    public class UserReportFilterDTO : UserReportFilterBaseDTO
+    public class UserReportFilterBaseDTO: DateRangeReportFilterBaseDTO
     {
         /// <summary>
-        /// Filter User Name.
+        /// Filter User Id.
         /// </summary>
-        public string UserName { get; set; }
+        [DataMember]
+        public int? UserId { get; set; }
 
     }
 }

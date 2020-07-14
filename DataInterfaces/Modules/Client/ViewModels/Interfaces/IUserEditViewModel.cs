@@ -64,7 +64,12 @@ namespace Client.ViewModels
         /// Validates the model.
         /// </summary>
         /// <returns>True if model is valid , otherwise false.</returns>
-        bool Validate(); 
+        bool Validate();
+
+        /// <summary>
+        /// Resets validation errors.
+        /// </summary>
+        void ResetValidation();
 
         #endregion
     } 

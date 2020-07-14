@@ -333,6 +333,8 @@ namespace SharedLib.Commands
         EmailVerificationStateInfoGet = 30,
         MobilePhoneVerificationStateInfoGet = 31,
         ReservationDataGet =33,
+        UserGroupDefaultRequiredInfoGet = 34,
+        AgreementGet=35,
     }
     #endregion
 
@@ -918,7 +920,9 @@ namespace SharedLib.Commands
         ReservationGet = 279,
         ReservationUpdate = 280,
 
-        //max 284
+        RegisterTransactionInfoGet = 284,
+        RegisterTransactionAdd = 285,
+        //max 286
     }
     #endregion
 

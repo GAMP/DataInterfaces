@@ -21,6 +21,7 @@ namespace ServerService
         private Dictionary<int, OperatorInvoicePaymentSummary> invoicedByOperator;
         private Dictionary<int, OperatorBasicSummary> withdrawalsByOperator;
         private Dictionary<int, OperatorBasicSummary> refundsByOperator;
+        private Dictionary<int, OperatorBasicSummary> payInsOutsByOperator;
         private Dictionary<int, OperatorBasicSummary> voidsByOperator;
         private Dictionary<int, OperatorBasicSummary> totalsByOperator;
         #endregion
@@ -35,7 +36,7 @@ namespace ServerService
         {
             get
             {
-                return this.Proceeds - this.Withdrawals - this.CashRefunds; 
+                return this.Proceeds - this.Withdrawals - this.CashRefunds + this.PayInsOutsTotal; 
             }
         }
 
@@ -191,6 +192,16 @@ namespace ServerService
             get; set;
         }
 
+        /// <summary>
+        /// Total amount of pay ins/outs.
+        /// </summary>
+        [DataMember()]
+        [ProtoMember(19)]
+        public decimal PayInsOutsTotal
+        {
+            get; set;
+        }
+
         #region GROUPS
 
         [DataMember()]
@@ -334,6 +345,22 @@ namespace ServerService
             set
             {
                 this.totalsByOperator = value;
+            }
+        }
+
+        [DataMember()]
+        [ProtoMember(109)]
+        public Dictionary<int, OperatorBasicSummary> PayInsOutsByOperator
+        {
+            get
+            {
+                if (this.payInsOutsByOperator == null)
+                    this.payInsOutsByOperator = new Dictionary<int, OperatorBasicSummary>();
+                return this.payInsOutsByOperator;
+            }
+            set
+            {
+                this.payInsOutsByOperator = value;
             }
         }
 

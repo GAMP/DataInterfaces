@@ -9,6 +9,9 @@ namespace ServerService.Web.MemberRegistration.Models
     public class MemberRegistrationViewModel : RegistrationCompleteModel
     {
         [DataMember]
+        public string Token { get; set; }
+
+        [DataMember]
         public bool IsClientRegistrationEnabled { get; set; }
 
         [DataMember]
@@ -28,6 +31,9 @@ namespace ServerService.Web.MemberRegistration.Models
 
         [DataMember]
         public string CurrentCallingCode { get; set; }
+
+        [DataMember]
+        public string Agreement { get; set; }
 
     }
 }

@@ -799,7 +799,7 @@ namespace SharedLib.Configuration
         /// 0 MySQL 1 MSSQL
         /// </remarks>
         [Category("Database")]
-        [DefaultValue(0)]
+        [DefaultValue(DatabaseType.MSSQLEXPRESS)]
         [Description("Specifies database type.")]
         [DataMember()]
         public DatabaseType DbType

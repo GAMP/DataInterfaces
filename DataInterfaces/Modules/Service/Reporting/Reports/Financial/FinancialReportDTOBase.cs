@@ -99,5 +99,12 @@ namespace ServerService.Reporting.Reports.Financial
         /// List of available payment methods.
         /// </summary>
         public List<ListItemDTO> PaymentMethods { get; set; } = new List<ListItemDTO>();
+
+        /// <summary>
+        /// List of register transactions performed during the reporting period.
+        /// </summary>
+        [DataMember]
+        public List<RegisterTransactionDTO> RegisterTransactions { get; set; } = new List<RegisterTransactionDTO>();
+
     }
 }

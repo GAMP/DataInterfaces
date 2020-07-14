@@ -240,7 +240,7 @@ namespace CoreLib
         /// <summary>
         /// Disable Shut Down.
         /// </summary>
-        [ExplorerPolicy("Disable Shut Down")]
+        [ExplorerPolicy("Disable Shut Down , Restart or Sleep")]
         NoClose = 32,
 
         /// <summary>

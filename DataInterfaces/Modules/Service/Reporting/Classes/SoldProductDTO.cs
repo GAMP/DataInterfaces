@@ -63,5 +63,11 @@ namespace ServerService.Reporting
         /// </summary>
         [DataMember]
         public decimal Tax { get; set; }
+
+        /// <summary>
+        /// The product has been sold as part of a bundle.
+        /// </summary>
+        [DataMember]
+        public bool IsInBundle { get; set; }
     }
 }

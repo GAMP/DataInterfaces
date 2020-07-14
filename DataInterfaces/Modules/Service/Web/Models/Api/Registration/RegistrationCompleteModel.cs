@@ -15,16 +15,6 @@ namespace ServerService.Web.Api.Controllers.Models
         #region PROPERTIES
 
         /// <summary>
-        /// Verification token.
-        /// </summary>
-        [DataMember(Order =0)]
-        [Required()]
-        public string Token
-        {
-            get; set;
-        }
-
-        /// <summary>
         /// Username.
         /// </summary>
         [DataMember(Order = 1)]
@@ -41,13 +31,14 @@ namespace ServerService.Web.Api.Controllers.Models
         [DataMember(Order = 1)]
         public int? UserGroupId
         {
-            get;set;
+            get; set;
         }
 
         /// <summary>
         /// Optional first name.
         /// </summary>
         [StringLength(45)]
+        [CharacterOnly()]
         [DataMember()]
         public string FirstName
         {
@@ -58,6 +49,7 @@ namespace ServerService.Web.Api.Controllers.Models
         /// Optional last name.
         /// </summary>
         [StringLength(45)]
+        [CharacterOnly()]
         [DataMember()]
         public string LastName
         {
@@ -117,6 +109,7 @@ namespace ServerService.Web.Api.Controllers.Models
         /// Optional phone number.
         /// </summary>
         [StringLength(20)]
+        [PhoneNullEmpty()]
         [DataMember()]
         public string Phone
         {
@@ -127,6 +120,7 @@ namespace ServerService.Web.Api.Controllers.Models
         /// Optional mobile phone number.
         /// </summary>
         [StringLength(20)]
+        [PhoneNullEmpty()]
         [DataMember()]
         public string MobilePhone
         {
@@ -137,6 +131,7 @@ namespace ServerService.Web.Api.Controllers.Models
         /// Optional email.
         /// </summary>
         [StringLength(254)]
+        [EmailNullEmpty()]
         [DataMember()]
         public string Email
         {

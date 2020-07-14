@@ -201,5 +201,10 @@
         LogClear,
 
         #endregion
+
+        #region WEB API
+        [ClaimDescription(@"WebApi", "*", "PERMISSION_GROUP_WEB_API", "PERMISSION_ACTION_WEB_API")]
+        WebApi,
+        #endregion
     }
 }

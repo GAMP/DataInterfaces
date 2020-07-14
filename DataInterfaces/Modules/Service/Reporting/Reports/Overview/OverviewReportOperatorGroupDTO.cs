@@ -71,6 +71,12 @@ namespace ServerService.Reporting.Reports.Overview
         public int Voids { get; set; }
 
         /// <summary>
+        /// Total amount of register transactions performed by the operator.
+        /// </summary>
+        [DataMember]
+        public decimal RegisterTransactionsTotal { get; set; }
+
+        /// <summary>
         /// Operator revenue.
         /// </summary>
         [DataMember]

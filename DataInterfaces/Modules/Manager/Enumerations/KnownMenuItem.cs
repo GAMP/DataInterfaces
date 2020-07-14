@@ -68,6 +68,11 @@
         /// Shift manage.
         /// </summary>
         public static readonly string Shift_Manage = "66376d8f-e407-4a40-8714-acc86cb1add3";
+        
+        /// <summary>
+        /// Shift manage.
+        /// </summary>
+        public static readonly string Shift_PayInOut = "fb21bf21-31a0-474a-bff0-515617f9b9de";
 
         /// <summary>
         /// Hosts allow negative.

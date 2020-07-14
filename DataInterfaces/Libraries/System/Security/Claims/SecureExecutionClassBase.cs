@@ -13,12 +13,12 @@ namespace System.Security.Claims
         /// <summary>
         /// Static attribute type, cache it to improve performance.
         /// </summary>
-        private static readonly Type attibuteType = typeof(CodeSecurityAttribute);
+        private static readonly Type attibuteType = typeof(ClaimsPrincipalPermissionAttribute);
         /// <summary>
         /// Attribute per type cache.
         /// List is used instead of IEnumerable to increase performance.
         /// </summary>
-        private static readonly ConcurrentDictionary<int, List<CodeSecurityAttribute>> cache = new ConcurrentDictionary<int, List<CodeSecurityAttribute>>();
+        private static readonly ConcurrentDictionary<int, List<ClaimsPrincipalPermissionAttribute>> cache = new ConcurrentDictionary<int, List<ClaimsPrincipalPermissionAttribute>>();
         #endregion
 
         #region CONSTRUCTOR
@@ -37,7 +37,7 @@ namespace System.Security.Claims
                 var typeHashCode = type.GetHashCode();
 
                 //get code security attributes
-                var codeSecurityAttributes = cache.GetOrAdd(typeHashCode, (e) => type.GetCustomAttributes(attibuteType, true).OfType<CodeSecurityAttribute>().ToList());
+                var codeSecurityAttributes = cache.GetOrAdd(typeHashCode, (e) => type.GetCustomAttributes(attibuteType, true).OfType<ClaimsPrincipalPermissionAttribute>().ToList());
 
                 //demand any required code security
                 foreach (var pm in codeSecurityAttributes)

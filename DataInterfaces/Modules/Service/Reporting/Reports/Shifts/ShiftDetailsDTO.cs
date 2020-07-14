@@ -47,6 +47,18 @@ namespace ServerService.Reporting.Reports.Shifts
         public decimal Refunds { get; set; }
 
         /// <summary>
+        /// Total amount of pay ins in this shift for this payment method.
+        /// </summary>
+        [DataMember]
+        public decimal PayIns { get; set; }
+
+        /// <summary>
+        /// Total amount of pay outs in this shift for this payment method.
+        /// </summary>
+        [DataMember]
+        public decimal PayOuts { get; set; }
+
+        /// <summary>
         /// Amount expected the shift to end with for this payment method.
         /// </summary>
         [DataMember]

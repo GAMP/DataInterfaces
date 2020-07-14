@@ -67,7 +67,6 @@ namespace ServerService.Web.Api.Controllers.Models
             get; set;
         }
 
-        #endregion
-        
+        #endregion        
     }
 }

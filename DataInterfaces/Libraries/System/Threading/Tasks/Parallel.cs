@@ -67,6 +67,11 @@ namespace System.Threading.Tasks
             if (exceptions.Count > 0) throw new AggregateException(exceptions);
         }
 
+        public static Task ParallelInvokeAsync<TEventArgs>(object sender, IEnumerable<EventHandler<TEventArgs>> invocationList, TEventArgs args) where TEventArgs : EventArgs
+        {
+            return Task.Run(() => ParallelInvoke(sender, invocationList, args));
+        }
+
         /// <summary>
         /// Executes for each async.
         /// </summary>

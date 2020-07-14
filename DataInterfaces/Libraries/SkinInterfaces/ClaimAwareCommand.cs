@@ -2,11 +2,11 @@
 using System.Linq;
 using System.Reflection;
 using System.Security.Claims;
-using System.Security.Permissions;
 using System.Threading;
 using System.Windows.Input;
 #if NETFRAMEWORK
 using System.IdentityModel.Services;
+using System.Security.Permissions;
 #endif
 
 namespace SkinInterfaces
@@ -49,6 +49,22 @@ namespace SkinInterfaces
             bool isAuthorized = true;
 
 #if NETFRAMEWORK
+            var claimAttributes = (System.IdentityModel.Services.ClaimsPrincipalPermissionAttribute[])methodInfo.GetCustomAttributes(typeof(System.IdentityModel.Services.ClaimsPrincipalPermissionAttribute), true);
+
+            if (claimAttributes.Count() == 0)
+                return true;
+
+            foreach (var claimRequest in claimAttributes)
+            {
+                if (Thread.CurrentPrincipal is ClaimsPrincipal currentPrincipal)
+                {
+                    isAuthorized = claimRequest.Action == System.Security.Permissions.SecurityAction.Demand ? currentPrincipal.HasClaim(claimRequest.Resource, claimRequest.Operation) : true;
+                }
+
+                if (!isAuthorized)
+                    break;
+            }
+#else
             var claimAttributes = (ClaimsPrincipalPermissionAttribute[])methodInfo.GetCustomAttributes(typeof(ClaimsPrincipalPermissionAttribute), true);
 
             if (claimAttributes.Count() == 0)
@@ -58,22 +74,13 @@ namespace SkinInterfaces
             {
                 if (Thread.CurrentPrincipal is ClaimsPrincipal currentPrincipal)
                 {
-                    isAuthorized = claimRequest.Action == SecurityAction.Demand ? currentPrincipal.HasClaim(claimRequest.Resource, claimRequest.Operation) : true;
+                    isAuthorized = currentPrincipal.HasClaim(claimRequest.Resource, claimRequest.Operation);
+                }
+                else
+                {
+                    isAuthorized = false;
                 }
 
-                if (!isAuthorized)
-                    break;
-            }
-#else
- var claimAttributes = (CodeSecurityAttribute[])methodInfo.GetCustomAttributes(typeof(CodeSecurityAttribute), true);
-
-            if (claimAttributes.Count() == 0)
-                return true;
-
-            foreach (var claimRequest in claimAttributes)
-            {
-                if (Thread.CurrentPrincipal is ClaimsPrincipal currentPrincipal)
-                    isAuthorized = currentPrincipal.HasClaim(claimRequest.Resource, claimRequest.Operation);            
 
                 if (!isAuthorized)
                     break;

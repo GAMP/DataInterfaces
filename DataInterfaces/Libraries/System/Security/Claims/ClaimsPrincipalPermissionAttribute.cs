@@ -1,20 +1,41 @@
-﻿using System.Threading;
+﻿using System.Security.Permissions;
+using System.Threading;
 
 namespace System.Security.Claims
 {
     /// <summary>
     /// Code security attribute.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple =true, Inherited =true)]
-    public sealed class CodeSecurityAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
+    public class ClaimsPrincipalPermissionAttribute : Attribute
     {
         #region CONSTRCUTOR
+
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="action">Security action.</param>
+        public ClaimsPrincipalPermissionAttribute(SecurityAction action)
+        {
+            Action = action;
+        }
+
         /// <summary>
         /// Creates new instance.
         /// </summary>
         /// <param name="resource">Resource.</param>
         /// <param name="operation">Operation.</param>
-        public CodeSecurityAttribute(string resource, string operation)
+        public ClaimsPrincipalPermissionAttribute(string resource, string operation) : this(SecurityAction.Assert, resource, operation)
+        {
+        }
+
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        /// <param name="action">Security action.</param>
+        /// <param name="resource">Resource.</param>
+        /// <param name="operation">Operation.</param>
+        public ClaimsPrincipalPermissionAttribute(SecurityAction action, string resource, string operation)
         {
             if (string.IsNullOrWhiteSpace(resource))
                 throw new ArgumentNullException(nameof(resource));
@@ -22,15 +43,17 @@ namespace System.Security.Claims
             if (string.IsNullOrWhiteSpace(operation))
                 throw new ArgumentNullException(nameof(operation));
 
+            Action = action;
             Resource = resource;
             Operation = operation;
         }
+
         #endregion
 
         #region PROPERTIES
-        
+
         /// <summary>
-        /// Gets operation.
+        /// Gets or sets operation.
         /// </summary>
         public string Operation
         {
@@ -38,9 +61,17 @@ namespace System.Security.Claims
         }
 
         /// <summary>
-        /// Gets resource.
+        /// Gets or sets resource.
         /// </summary>
         public string Resource
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets action.
+        /// </summary>
+        public SecurityAction Action
         {
             get; set;
         }
@@ -58,7 +89,7 @@ namespace System.Security.Claims
             if (Thread.CurrentPrincipal is ClaimsPrincipal identity)
             {
                 //check if required claim is present
-                if (identity.HasClaim(Resource, Operation) ==false)
+                if (identity.HasClaim(Resource, Operation) == false)
                     throw new SecurityException();
             }
         }

@@ -31,18 +31,6 @@ namespace SharedLib
                 var args = new PropertyChangedEventArgs(propertyName);
 
                 handler(this, args);
-
-                ////check if already on UI thread
-                //if (Application.Current != null && !Application.Current.Dispatcher.CheckAccess())
-                //{
-                //    //invoke on UI thread
-                //    Application.Current.Dispatcher.BeginInvoke(handler, this, args);
-                //}
-                //else
-                //{
-                //    //invoke on current thread
-                //    handler(this, args);
-                //}
             }
 
             this.OnPropertyChanged(propertyName);

@@ -24,7 +24,7 @@ namespace IntegrationLib
         /// <param name="userId">User id.</param>
         /// <param name="role">User role.</param>
         public ClaimsUserIdentity(string name, int userId, UserRoles role)
-         : this(name,userId,role, Enumerable.Empty<Claim>())
+         : this(name, userId, role, Enumerable.Empty<Claim>())
         {
         }
 
@@ -35,7 +35,7 @@ namespace IntegrationLib
         /// <param name="userId">User id.</param>
         /// <param name="role">User role.</param>
         /// <param name="claims">User claims.</param>
-        public ClaimsUserIdentity(string name, int userId, UserRoles role, IEnumerable<Claim> claims):base(name)
+        public ClaimsUserIdentity(string name, int userId, UserRoles role, IEnumerable<Claim> claims) : base(name)
         {
             AddClaims(claims);
             UserId = userId;
