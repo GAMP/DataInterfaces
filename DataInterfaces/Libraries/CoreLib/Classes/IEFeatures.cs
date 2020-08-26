@@ -11,6 +11,11 @@ namespace CoreLib
         #region FEATURES
         private static readonly string FEATURE_BROWSER_EMULATION = @"SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION";
         private static readonly string FEATURE_GPU_RENDERING = @"SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_GPU_RENDERING";
+        private static readonly string FEATURE_NINPUT_LEGACYMODE = @"SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_NINPUT_LEGACYMODE";
+        private static readonly string FEATURE_LOCALMACHINE_LOCKDOWN = @"SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_LOCALMACHINE_LOCKDOWN";
+        private static readonly string FEATURE_BLOCK_LMZ_SCRIPT = @"SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BLOCK_LMZ_SCRIPT";
+        private static readonly string FEATURE_BLOCK_LMZ_OBJECT = @"SOFTWARE\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BLOCK_LMZ_OBJECT";
+
         #endregion
 
         #region FUNCTIONS
@@ -44,6 +49,26 @@ namespace CoreLib
         public static void SetGPURendering(int value)
         {
             SetFeatureValue(FEATURE_GPU_RENDERING, value);
+        }
+
+        public static void SetLocalMachineLockdown(bool enable)
+        {
+            SetFeatureValue(FEATURE_LOCALMACHINE_LOCKDOWN, enable ? 1 :0);
+        }
+
+        public static void SetBlockLMZScript(bool enable)
+        {
+            SetFeatureValue(FEATURE_BLOCK_LMZ_SCRIPT, enable ? 1 : 0);
+        }
+
+        public static void SetNinputLegacyMode(bool enable)
+        {
+            SetFeatureValue(FEATURE_NINPUT_LEGACYMODE, enable ? 1 : 0);
+        }
+
+        public static void SetBlockLMZObject(bool enable)
+        {
+            SetFeatureValue(FEATURE_BLOCK_LMZ_OBJECT, enable ? 1 : 0);
         }
 
         /// <summary>

@@ -9,6 +9,7 @@ using SharedLib.User;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using ServerService;
+using System.Collections.Generic;
 
 namespace Client
 {
@@ -348,6 +349,14 @@ namespace Client
         /// By default null or empty passwords are allowed.
         /// </remarks>
         LoginResult Login(string username, string password);
+
+        /// <summary>
+        /// Logins user.
+        /// </summary>
+        /// <param name="authHeaders">Authentication headers.</param>
+        /// <param name="allowEmptyPasswords">Indicates if empty passwords should be allowed.</param>
+        /// <returns>>Login result.</returns>
+        LoginResult Login(Dictionary<string, object> authHeaders, bool allowEmptyPasswords);
 
         /// <summary>
         /// Logs out current user asynchronously.

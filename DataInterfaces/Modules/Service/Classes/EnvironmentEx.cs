@@ -11,7 +11,7 @@ namespace ServerService
     public static class EnvironmentEx
     {
         #region STATIC FIELDS
-        private static readonly string PROCESS_ENVIRONEMENT = Environment.GetEnvironmentVariable("PROCESS_ENVIRONMENT");
+        private static readonly string PROCESS_ENVIRONMENT = Environment.GetEnvironmentVariable("PROCESS_ENVIRONMENT");
         #endregion
 
         #region PROPERTIES
@@ -23,7 +23,7 @@ namespace ServerService
         {
             get
             {
-                return PROCESS_ENVIRONEMENT == "DOCKER";
+                return PROCESS_ENVIRONMENT == "DOCKER";
             }
         }
 
