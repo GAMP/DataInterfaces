@@ -57,9 +57,6 @@ namespace SkinInterfaces
         /// </param>
         public void Defer(TimeSpan delay)
         {
-            if (delay == null)
-                throw new ArgumentNullException(nameof(delay));
-
             // Fire action when time elapses (with no subsequent calls).
             timer?.Change(delay, TimeSpan.FromMilliseconds(-1));
         }

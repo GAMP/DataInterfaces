@@ -3920,4 +3920,13 @@ namespace SharedLib
     }
     #endregion
 
+    #region RFIDScanUserCardActions
+    public enum RFIDScanUserCardActions : int
+    {
+        OpenUserInfoWindow = 0,
+        OpenUserSalesWindow = 1,
+        OpenUserDepositWindow = 2
+    }
+    #endregion
+
 }

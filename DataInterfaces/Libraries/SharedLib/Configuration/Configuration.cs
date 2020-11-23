@@ -2313,6 +2313,26 @@ namespace SharedLib.Configuration
             get; set;
         }
 
+        /// <summary>
+        /// Gets or sets RFID scanner configuration.
+        /// </summary>
+        [Category("RFID Scanner")]
+        [DataMember()]
+        public POSDeviceRFIDConfig RFIDScanner
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets pos fiscal printer configuration.
+        /// </summary>
+        [Category("POS Printer")]
+        [DataMember()]
+        public POSDeviceFiscalPrinterConfig FiscalPrinter
+        {
+            get; set;
+        }
+
         #endregion
     }
     #endregion
@@ -2405,6 +2425,55 @@ namespace SharedLib.Configuration
         /// </summary>
         [DataMember()]
         public int? DepositReceiptCount
+        {
+            get; set;
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #region POSDEVICERFIDCONFIG
+    /// <summary>
+    /// POS RFID configuration.
+    /// </summary>
+    [Category("Devices")]
+    [Serializable()]
+    [DataContract()]
+    public class POSDeviceRFIDConfig : POSDeviceConfig
+    {
+        #region PROPERTIES
+
+        /// <summary>
+        /// RFID Scan User Card Default Action.
+        /// </summary>
+        [DefaultValue(RFIDScanUserCardActions.OpenUserInfoWindow)]
+        [DataMember()]
+        public RFIDScanUserCardActions ScanUserCardDefaultAction
+        {
+            get; set;
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #region POSDEVICEFISCALPRINTERCONFIG
+    /// <summary>
+    /// POS printer configuration.
+    /// </summary>
+    [Category("Devices")]
+    [Serializable()]
+    [DataContract()]
+    public class POSDeviceFiscalPrinterConfig : POSDeviceConfig
+    {
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets or sets access password.
+        /// </summary>
+        [DataMember()]
+        public string AccessPassword
         {
             get; set;
         }

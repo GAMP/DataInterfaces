@@ -686,6 +686,7 @@ namespace SharedLib.Commands
         LanguageGet = 129,
         SkinGet = 130,
         SystemLicenseGet = 131,
+        SystemLicenseGetV2 = 286,
         #endregion        
 
         #region TASK
@@ -922,7 +923,7 @@ namespace SharedLib.Commands
 
         RegisterTransactionInfoGet = 284,
         RegisterTransactionAdd = 285,
-        //max 286
+        //max 287
     }
     #endregion
 

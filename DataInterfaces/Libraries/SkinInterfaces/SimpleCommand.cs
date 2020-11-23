@@ -109,9 +109,9 @@ namespace SkinInterfaces
                 if (canExecuteMethod == null) return true;
                 return canExecuteMethod(parameter);
             }
-            catch (Exception ex)
+            catch
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -125,9 +125,9 @@ namespace SkinInterfaces
                 if (completedHandler != null)
                     completedHandler.Invoke(parameter);
             }
-            catch (Exception ex)
+            catch
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -137,9 +137,9 @@ namespace SkinInterfaces
             {
                 return CanExecute((T1)parameter);
             }
-            catch (Exception ex)
+            catch
             {
-                throw ex;
+                throw;
             }
         }
 
@@ -149,9 +149,9 @@ namespace SkinInterfaces
             {
                 Execute((T2)parameter);
             }
-            catch (Exception ex)
+            catch
             {
-                throw ex;
+                throw;
             }
         }
 

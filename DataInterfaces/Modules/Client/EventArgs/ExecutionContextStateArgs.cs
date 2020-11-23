@@ -45,7 +45,7 @@ namespace Client
         #region PROPERTIES
 
         /// <summary>
-        /// Gets or sets executable id.
+        /// Gets executable id.
         /// </summary>
         public int ExecutableId
         {

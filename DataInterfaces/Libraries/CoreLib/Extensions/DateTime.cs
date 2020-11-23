@@ -19,9 +19,6 @@ namespace CoreLib
         /// </returns>
         public static int Age(this DateTime birthDate)
         {
-            if (birthDate == null)
-                throw new ArgumentNullException(nameof(birthDate));
-
             var yearsOld = DateTime.Today.Year - birthDate.Year;
             if (DateTime.Today < birthDate.AddYears(yearsOld)) yearsOld--;
             return yearsOld;
@@ -34,9 +31,6 @@ namespace CoreLib
         /// <returns>Weekly second value.</returns>
         public static double WeeklySecond(this DateTime dt)
         {
-            if (dt == null)
-                throw new ArgumentNullException(nameof(dt));
-
             return WeeklySecond(dt.DayOfWeek, dt.TimeOfDay.TotalSeconds);
         }
 
@@ -62,9 +56,6 @@ namespace CoreLib
         /// <returns>New date time value.</returns>
         public static DateTime WithoutMilliSeconds(this DateTime dt)
         {
-            if (dt == null)
-                throw new ArgumentNullException(nameof(dt));
-
             return new DateTime(dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second, dt.Kind);
         }
 
@@ -85,9 +76,6 @@ namespace CoreLib
         /// <returns></returns>
         public static DateTime StartOfTheDay(this DateTime dt)
         {
-            if (dt == null)
-                throw new ArgumentNullException(nameof(dt));
-
             return new DateTime(dt.Year, dt.Month, dt.Day);
         }
 
@@ -111,9 +99,6 @@ namespace CoreLib
         /// <returns>Start of the week DateTime.</returns>
         public static DateTime StartOfWeek(this DateTime dt, DayOfWeek? firstDayOfWeek, TimeSpan? dayStartTime)
         {
-            if (dt == null)
-                throw new ArgumentNullException(nameof(dt));
-
             //start time should not contain more than 24 hours
             if (dayStartTime.HasValue && dayStartTime.Value.TotalHours > 24)
                 throw new ArgumentOutOfRangeException(nameof(dayStartTime));
@@ -140,9 +125,6 @@ namespace CoreLib
         /// <returns>Resulted date time.</returns>
         public static DateTime StartOfMonth(this DateTime dt)
         {
-            if (dt == null)
-                throw new ArgumentNullException(nameof(dt));
-
             return new DateTime(dt.Year, dt.Month, 1);
         }
 
@@ -153,9 +135,6 @@ namespace CoreLib
         /// <returns>Resulted date time.</returns>
         public static DateTime StartOfCurrentMonth(this DateTime dt)
         {
-            if (dt == null)
-                throw new ArgumentNullException(nameof(dt));
-
             return new DateTime(dt.Year, dt.Month, 1);
         }
 
@@ -166,9 +145,6 @@ namespace CoreLib
         /// <returns>Previous month start date.</returns>
         public static DateTime StartOfPreviousMonth(this DateTime dt)
         {
-            if (dt == null)
-                throw new ArgumentNullException(nameof(dt));
-
             var previousMonthDate = dt.AddMonths(-1);
 
             return new DateTime(previousMonthDate.Year, previousMonthDate.Month, 1);
@@ -181,9 +157,6 @@ namespace CoreLib
         /// <returns>Resulted date time.</returns>
         public static DateTime StartOfYear(this DateTime dt)
         {
-            if (dt == null)
-                throw new ArgumentNullException(nameof(dt));
-
             return new DateTime(dt.Year, 1, 1);
         }
 
@@ -194,9 +167,6 @@ namespace CoreLib
         /// <returns>Resulted date time.</returns>
         public static DateTime StartOfPreviousYear(this DateTime dt)
         {
-            if (dt == null)
-                throw new ArgumentNullException(nameof(dt));
-
             var previousYearDate = dt.AddYears(-1);
 
             return new DateTime(previousYearDate.Year, 1, 1);

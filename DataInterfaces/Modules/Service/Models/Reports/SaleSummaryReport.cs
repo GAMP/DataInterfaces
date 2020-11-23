@@ -36,7 +36,7 @@ namespace ServerService
         {
             get
             {
-                return this.Proceeds - this.Withdrawals - this.CashRefunds + this.PayInsOutsTotal; 
+                return this.Proceeds - this.Withdrawals - this.RefundsTotal + this.PayInsOutsTotal; 
             }
         }
 

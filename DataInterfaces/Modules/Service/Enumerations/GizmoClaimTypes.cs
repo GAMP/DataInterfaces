@@ -14,7 +14,7 @@
         /// <summary>
         /// Sale at custom permission.
         /// </summary>
-        [ClaimDescription(@"Sale", "CustomPrice", new GizmoClaimTypes[] { Sale }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_CUSTOM_PRICE", IsAssignable = false)]
+        [ClaimDescription(@"Sale", "CustomPrice", new GizmoClaimTypes[] { Sale }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_CUSTOM_PRICE")]
         SaleCustomPrice,
 
         /// <summary>

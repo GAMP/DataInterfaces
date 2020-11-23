@@ -8,7 +8,7 @@ namespace CoreLib
     /// </summary>
     public enum SecurityPolicyType
     {
-        #region Messenger
+        #region MESSENGER
 
         /// <summary>
         /// Disable Collaboration Applications.
@@ -68,7 +68,7 @@ namespace CoreLib
 
         #endregion
 
-        #region Internet Explorer Toolbars
+        #region INTERNET EXPLORER TOOLBARS
 
         /// <summary>
         /// Disable the ability to change toolbar selection.
@@ -100,7 +100,7 @@ namespace CoreLib
 
         #endregion
 
-        #region Internet Explorer Security
+        #region INTERNET EXPLORER SECURITY
 
         /// <summary>
         /// Always prompt user when downloading files.
@@ -223,7 +223,7 @@ namespace CoreLib
 
         #endregion
 
-        #region Explorer
+        #region EXPLORER
 
         /// <summary>
         /// Remove folders button.
@@ -347,7 +347,7 @@ namespace CoreLib
 
         #endregion
 
-        #region System
+        #region SYSTEM
 
         /// <summary>
         /// Disable the Change Password Button.
@@ -387,7 +387,7 @@ namespace CoreLib
 
         #endregion
 
-        #region Network
+        #region NETWORK
 
         /// <summary>
         /// Hide Entire Network in Network Neighborhood.
@@ -397,7 +397,7 @@ namespace CoreLib
 
         #endregion
 
-        #region Common Dialog
+        #region COMMON DIALOG
 
         /// <summary>
         /// Remove back button.
@@ -419,7 +419,7 @@ namespace CoreLib
 
         #endregion
 
-        #region NoEnum
+        #region NOENUM
 
         /// <summary>
         /// Hide My Computer.
@@ -441,20 +441,34 @@ namespace CoreLib
 
         #endregion
 
-        #region UsbStor
+        #region USBSTOR
+
         /// <summary>
         /// Disable USB Mass Storage.
         /// </summary>
         [UsbStorPolicy("Disable USB Mass Storage", "Start")]
         UsbStorage = 58,
+
         #endregion
 
-        #region Uninstall
+        #region UNINSTALL
+
         /// <summary>
         /// Disable Add/Remove Programs (Windows XP Only).
         /// </summary>
-        [Uninstall("Disable Add/Remove Programs (Windows XP Only)")]
-        NoAddRemovePrograms = 46
+        [UninstallPolicy("Disable Add/Remove Programs (Windows XP Only)")]
+        NoAddRemovePrograms = 46,
+
+        #endregion
+
+        #region CHROME
+        
+        /// <summary>
+        /// Disable Chrome downloads.
+        /// </summary>
+        [ChromePolicy("Disable Chrome downloads", "DownloadRestrictions")]
+        ChromeNoDownload = 65, 
+
         #endregion
     }
 }

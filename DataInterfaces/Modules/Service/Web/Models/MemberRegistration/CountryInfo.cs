@@ -28,5 +28,7 @@ namespace ServerService.Web.MemberRegistration.Models
         [DataMember(Name = "nativeName")]
         public string NativeName { get; set; }
 
+        [DataMember(Name = "callingCode")]
+        public string CallingCode { get; set; }
     }
 }

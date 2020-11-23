@@ -116,8 +116,10 @@ namespace Client
         /// </summary>
         /// <param name="process">Process instance.</param>
         /// <param name="isMain">Indicates that the process is main parent process.</param>
-        /// <remarks>This function ensures that process will be started and added to the context and child process and exit events will be handled.</remarks>
-        /// <returns>Process.Start() return value.</returns>
+        /// <remarks>This function ensures that process will be started and added to the context and any child process created and terminated events will be handled.<br></br>
+        /// <b>The process specified by <paramref name="process"/> parameter must not be running.</b>
+        /// </remarks>
+        /// <returns><a href="https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics.process.start">Process.Start()</a> return value.</returns>
         bool AddProcessIfStarted(Process process, bool isMain);
 
         /// <summary>
