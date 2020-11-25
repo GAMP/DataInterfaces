@@ -46,5 +46,23 @@ namespace ServerService.Reporting.Reports.Shifts
         /// </summary>
         [DataMember]
         public List<ShiftDTO> Shifts { get; set; }
+
+        /// <summary>
+        /// Total duration of the shifts as text.
+        /// </summary>
+        [DataMember]
+        public string TotalDuration { get; set; }
+
+        /// <summary>
+        /// Total amount expected the shifts to end with excluding start cash.
+        /// </summary>
+        [DataMember]
+        public decimal? TotalExpectedExcludingStartCash { get; set; }
+
+        /// <summary>
+        /// Total difference between the expected and the actual amount.
+        /// </summary>
+        [DataMember]
+        public decimal? TotalDifference { get; set; }
     }
 }

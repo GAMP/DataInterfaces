@@ -66,6 +66,12 @@ namespace ServerService.Reporting.Reports.Shifts
         public DateTime? EndTime { get; set; }
 
         /// <summary>
+        /// Duration of the shift in minutes.
+        /// </summary>
+        [DataMember]
+        public int DurationMinutes { get; set; }
+
+        /// <summary>
         /// Duration of the shift as text.
         /// </summary>
         [DataMember]
