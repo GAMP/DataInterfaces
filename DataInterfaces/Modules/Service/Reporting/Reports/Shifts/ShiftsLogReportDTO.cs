@@ -48,6 +48,12 @@ namespace ServerService.Reporting.Reports.Shifts
         public List<ShiftDTO> Shifts { get; set; }
 
         /// <summary>
+        /// Total amount expected the active shifts to end with excluding start cash.
+        /// </summary>
+        [DataMember]
+        public decimal? TotalExpectedExcludingStartCashActive { get; set; }
+
+        /// <summary>
         /// Total duration of the shifts as text.
         /// </summary>
         [DataMember]
