@@ -1923,9 +1923,9 @@ namespace SharedLib
         /// </summary>
         Custom = 0,
         /// <summary>
-        /// Nexmo.
+        /// Vonage.
         /// </summary>
-        Nexmo = 1,
+        Vonage = 1,
         /// <summary>
         /// Twilio.
         /// </summary>
