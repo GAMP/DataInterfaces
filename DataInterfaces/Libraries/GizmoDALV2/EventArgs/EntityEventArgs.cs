@@ -101,6 +101,11 @@ namespace GizmoDALV2
             get { return AddedItems.Cast<object>(); }
         }
 
+        IEnumerable<object> IEntityEventArgs.AllItems
+        {
+            get { return AllItems.Cast<object>(); }
+        }
+
         #endregion
 
         /// <summary>
@@ -131,6 +136,12 @@ namespace GizmoDALV2
                 return this.addedItems;
             }
             protected set { this.addedItems = value; }
+        }
+
+        [IgnoreDataMember()]
+        public IEnumerable<T> AllItems
+        {
+            get { return AddedItems.Union(RemovedItems); }
         }
 
         /// <summary>

@@ -42,6 +42,11 @@ namespace GizmoDALV2
             get;
         }
 
+        /// <summary>
+        /// Gets all items.
+        /// </summary>
+        IEnumerable<object> AllItems { get; }
+
         #endregion
     }
 }
