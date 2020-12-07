@@ -41,14 +41,14 @@ namespace ServerService
         /// <param name="hostId">Host id.</param>
         /// <param name="types">Property types.</param>
         /// <returns>Properties dictionary.</returns>
-        IDictionary<HostPropertyType, object> HostGetProperties(int hostId, HashSet<HostPropertyType> types);
+        Dictionary<HostPropertyType, object> HostGetProperties(int hostId, HashSet<HostPropertyType> types);
 
         /// <summary>
         /// Gets properties for host.
         /// </summary>
         /// <param name="hostId">Host id.</param>
         /// <returns>Properties dictionary.</returns>
-        IDictionary<HostPropertyType, object> HostGetProperties(int hostId);
+        Dictionary<HostPropertyType, object> HostGetProperties(int hostId);
 
         /// <summary>
         /// Gets host ids where property equals to specified value.
@@ -81,14 +81,14 @@ namespace ServerService
         /// <param name="hostId">Host id.</param>
         /// <param name="types">Property types.</param>
         /// <returns>Associated task.</returns>
-        Task<IDictionary<HostPropertyType, object>> HostGetPropertiesAsync(int hostId, HashSet<HostPropertyType> types);
+        Task<Dictionary<HostPropertyType, object>> HostGetPropertiesAsync(int hostId, HashSet<HostPropertyType> types);
 
         /// <summary>
         /// Gets properties for host.
         /// </summary>
         /// <param name="hostId">Host id.</param>
         /// <returns>Associated task.</returns>
-        Task<IDictionary<HostPropertyType, object>> HostGetPropertiesAsync(int hostId);
+        Task<Dictionary<HostPropertyType, object>> HostGetPropertiesAsync(int hostId);
     }
 
 }

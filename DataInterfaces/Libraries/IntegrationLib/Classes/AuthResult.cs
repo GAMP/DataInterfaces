@@ -113,7 +113,7 @@ namespace IntegrationLib
             //get base members
             Result = (LoginResult)info.GetValue(nameof(Result), typeof(LoginResult));
             RequiredInfo = (UserInfoTypes)info.GetValue(nameof(RequiredInfo), typeof(UserInfoTypes));
-            Custom = (Dictionary<string,object>)info.GetValue(nameof(Custom), typeof(Dictionary<string, object>));
+            Custom = (Dictionary<string, object>)info.GetValue(nameof(Custom), typeof(Dictionary<string, object>));
 
             if (info.MemberCount < 5)
                 return;
@@ -130,7 +130,7 @@ namespace IntegrationLib
 
             //get claims collection
             var claims = (IEnumerable<SerializableClaim>)info.GetValue(nameof(Identity.Claims), typeof(IEnumerable<SerializableClaim>));
-           
+
             //create claim list
             var userClaims = claims.Select(cl => new System.Security.Claims.Claim(cl.Type, cl.Value)).ToList();
 
@@ -154,14 +154,16 @@ namespace IntegrationLib
             info.AddValue(nameof(Identity.AuthenticationType), Identity.AuthenticationType);
             info.AddValue(nameof(Identity.Role), Identity.Role);
             info.AddValue(nameof(Identity.Claims), Identity.Claims.Select(e => new SerializableClaim(e.Type, e.Value)).ToList());
-        } 
-        
+        }
+
         #endregion
 
         #region SerializableClaim
         [Serializable()]
-        private class SerializableClaim
+        public class SerializableClaim
         {
+            #region CONSTRUCTOR
+
             public SerializableClaim(string type, string value)
             {
                 if (string.IsNullOrWhiteSpace(type))
@@ -173,9 +175,17 @@ namespace IntegrationLib
                 Type = type;
                 Value = value;
             }
+            
+            #endregion
+
+            #region FIELDS
 
             string claimType;
             string claimValue;
+
+            #endregion
+
+            #region PROPERTIES
 
             public string Type
             {
@@ -189,7 +199,8 @@ namespace IntegrationLib
                 protected set { claimType = value; }
             }
 
-        } 
+            #endregion
+        }
         #endregion
     }
 }
