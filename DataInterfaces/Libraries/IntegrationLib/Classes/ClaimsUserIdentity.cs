@@ -13,7 +13,7 @@ namespace IntegrationLib
     /// </summary>
     [Serializable()]
     [DataContract()]
-    public class ClaimsUserIdentity : GenericIdentity, IUserIdentity
+    public class ClaimsUserIdentity : GenericIdentity, IUserIdentity , ISerializable
     {
         #region CONSTRUCTOR
 
@@ -64,6 +64,39 @@ namespace IntegrationLib
         {
             get;
             protected set;
+        }
+
+        #endregion
+
+        #region ISerializable
+
+        public ClaimsUserIdentity(SerializationInfo info, StreamingContext context)
+            :base(info.GetString(nameof(Name)), info.GetString(nameof(AuthenticationType)))
+        {
+            //get user id
+            UserId= info.GetInt32(nameof(UserId));
+
+            //get user role
+            Role = (UserRoles)info.GetValue(nameof(Role), typeof(UserRoles));
+
+            //get claims collection
+            //TEMPORARY reusing the class from auth result so we dont break compatibility with older builds
+            var claims = (IEnumerable<AuthResult.SerializableClaim>)info.GetValue(nameof(Claims), typeof(IEnumerable<AuthResult.SerializableClaim>));
+
+            //create claim list
+            var userClaims = claims.Select(cl => new Claim(cl.Type, cl.Value)).ToList();
+
+            //add user claims
+            AddClaims(userClaims);  
+        }
+
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue(nameof(Name), Name);
+            info.AddValue(nameof(UserId), UserId);
+            info.AddValue(nameof(AuthenticationType), AuthenticationType);
+            info.AddValue(nameof(Role), Role);
+            info.AddValue(nameof(Claims), Claims.Select(e => new AuthResult.SerializableClaim(e.Type, e.Value)).ToList());
         }
 
         #endregion
