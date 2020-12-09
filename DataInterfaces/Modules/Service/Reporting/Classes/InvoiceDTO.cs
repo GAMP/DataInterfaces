@@ -59,6 +59,12 @@ namespace ServerService.Reporting
         public string UserName { get; set; }
 
         /// <summary>
+        /// The Id of the user group the customer belongs to.
+        /// </summary>
+        [DataMember]
+        public int? UserGroupId { get; set; }
+
+        /// <summary>
         /// Order source name.
         /// </summary>
         [DataMember]
