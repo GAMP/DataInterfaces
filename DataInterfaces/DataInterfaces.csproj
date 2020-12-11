@@ -37,19 +37,18 @@
 
 	<ItemGroup>
 		<PackageReference Include="protobuf-net" Version="2.4.6" />
-		<PackageReference Include="System.Memory" Version="4.5.4" />
 	</ItemGroup>
 	
 	<ItemGroup Condition="'$(TargetFramework)'=='net461'">
+		
 		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.19" />
-	</ItemGroup>
-	
-	<ItemGroup Condition="'$(TargetFramework)'=='net461'">	
+		
 		<Reference Include="System.Windows.Forms" />
 		<Reference Include="System.ComponentModel.Composition" />
 		<Reference Include="System.ComponentModel.DataAnnotations" />
 		<Reference Include="System.IdentityModel" />
 		<Reference Include="System.IdentityModel.Services" />
+	
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)'=='net5.0'">
