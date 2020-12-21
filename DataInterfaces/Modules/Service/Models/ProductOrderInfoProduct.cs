@@ -73,7 +73,17 @@ namespace ServerService
         public ProductType Type
         {
             get; set;
-        } 
+        }
+
+        /// <summary>
+        /// Bundle line id.
+        /// </summary>
+        [ProtoMember(7)]
+        [DataMember()]
+        public int? BundleLineId
+        {
+            get; set;
+        }
 
         #endregion
     }
