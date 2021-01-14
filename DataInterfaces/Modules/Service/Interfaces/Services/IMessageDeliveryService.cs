@@ -8,7 +8,7 @@
         #region PROPERTIES
 
         /// <summary>
-        /// Gets if service can dispatch messages.
+        /// Gets if service can currently dispatch messages.
         /// </summary>
         bool CanDispatch { get; }
 
