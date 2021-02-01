@@ -64,6 +64,12 @@ namespace ServerService.Reporting.Reports.Overview
         public List<ChartRecordDTO> FinancialChart { get; set; } = new List<ChartRecordDTO>();
 
         /// <summary>
+        /// Total pay in-out.
+        /// </summary>
+        [DataMember]
+        public decimal TotalPayInOut { get; set; }
+
+        /// <summary>
         /// Total revenue.
         /// </summary>
         [DataMember]
