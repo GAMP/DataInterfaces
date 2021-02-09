@@ -332,9 +332,9 @@ namespace SharedLib.Commands
         UserEmailExist = 29,
         EmailVerificationStateInfoGet = 30,
         MobilePhoneVerificationStateInfoGet = 31,
-        ReservationDataGet =33,
+        ReservationDataGet = 33,
         UserGroupDefaultRequiredInfoGet = 34,
-        AgreementGet=35,
+        AgreementGet = 35,
     }
     #endregion
 
@@ -804,6 +804,7 @@ namespace SharedLib.Commands
         InvoicePaymentAdd = 192,
         InvoicePaymentGet = 193,
         InvoiceVoid = 258,
+        InvoiceRefundGet = 287,
         #endregion
 
         #region SETTING
@@ -923,7 +924,7 @@ namespace SharedLib.Commands
 
         RegisterTransactionInfoGet = 284,
         RegisterTransactionAdd = 285,
-        //max 287
+        //max 288
     }
     #endregion
 
@@ -953,7 +954,7 @@ namespace SharedLib.Commands
         UserBalanceEvent = 0,
         EntityEvent = 1,
         EventBatch = 2,
-        ReservationChange =3,
+        ReservationChange = 3,
     }
     #endregion
 
