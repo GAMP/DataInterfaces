@@ -156,6 +156,16 @@ namespace ServerService
             get;set;
         }
 
+        /// <summary>
+        /// Gets or sets created time.
+        /// </summary>
+        [DataMember()]
+        [ProtoMember(15)]
+        public DateTime CreatedTime
+        {
+            get; set;
+        }
+
         #endregion
     }
 }

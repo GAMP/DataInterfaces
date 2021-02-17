@@ -2683,6 +2683,16 @@ namespace SharedLib.Configuration
             get;set;
         }
 
+        /// <summary>
+        /// Gets or sets default product sorting.
+        /// </summary>
+        [DefaultValue(ProductSort.Name)]
+        [DataMember()]
+        public ProductSort DefaultProductSort
+        {
+            get; set;
+        }
+
         #endregion
 
         #region OVERRIDES
