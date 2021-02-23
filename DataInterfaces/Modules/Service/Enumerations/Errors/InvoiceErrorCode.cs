@@ -13,5 +13,9 @@
         /// Set when we try to fully repay an invoice with amount less than outstanding amount.
         /// </summary>
         AmountLessThanOutstanding,
+        /// <summary>
+        /// Set when we try to perform an action on a void invoice.
+        /// </summary>
+        Void,
     }
 }

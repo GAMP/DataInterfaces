@@ -21,5 +21,9 @@
         /// Set when we have a TargetDifferentProduct flag on product stock option while not actually targeting specific product.
         /// </summary>
         TargetProductNotSet = 3,
+        /// <summary>
+        /// Set when we try to create a stock transaction with invalid type.
+        /// </summary>
+        InvalidType = 4,
     }
 }
