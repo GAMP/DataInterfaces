@@ -1964,6 +1964,18 @@ namespace SharedLib.Configuration
             get; set;
         }
 
+        /// <summary>
+        /// Gets or sets user time notifications.
+        /// </summary>
+        [Category("Shell")]
+        [Description("Specifies time notifications.")]
+        [DataMember(Order = 11)]
+        public List<ServerService.TimeNotification> TimeNotifications
+        {
+            get;
+            set;
+        }
+
         #endregion       
     }
 
