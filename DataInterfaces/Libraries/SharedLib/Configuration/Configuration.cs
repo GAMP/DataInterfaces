@@ -2251,6 +2251,16 @@ namespace SharedLib.Configuration
             get; set;
         }
 
+        /// <summary>
+        /// Gets or sets financial settings.
+        /// </summary>
+        [Category("Financial")]
+        [DataMember()]
+        public ManagerFinancialConfig Financial
+        {
+            get; set;
+        }
+
         #endregion
     }
     #endregion    
@@ -2600,6 +2610,30 @@ namespace SharedLib.Configuration
             get; set;
         }
         
+        #endregion
+    }
+    #endregion
+
+    #region MANAGERFINANCIALCONFIG
+    /// <summary>
+    /// Manager financial config.
+    /// </summary>
+    [DataContract()]
+    [Serializable()]
+    public class ManagerFinancialConfig : ConfigBase
+    {
+        #region PROPERTIES
+
+        /// <summary>
+        /// Indicates whether deposits are always used for payments.
+        /// </summary>
+        [DefaultValue(false)]
+        [DataMember()]
+        public bool AlwaysUseDeposits
+        {
+            get; set;
+        }
+
         #endregion
     }
     #endregion
