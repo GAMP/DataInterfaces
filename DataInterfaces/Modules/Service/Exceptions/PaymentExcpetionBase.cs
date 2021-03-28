@@ -10,7 +10,7 @@ namespace ServerService.Exceptions
     /// <typeparam name="TErrorCode">Payment error code tyepe.</typeparam>
     [Serializable()]
     [DataContract()]
-    public abstract class PaymentExcpetionBase<TErrorCode> : ErrorCodeExceptionBase<TErrorCode>
+    public abstract class PaymentExcpetionBase<TErrorCode> : ErrorCodeExceptionBase<TErrorCode> where TErrorCode : Enum
     {
         #region CONSTRUCTOR
 

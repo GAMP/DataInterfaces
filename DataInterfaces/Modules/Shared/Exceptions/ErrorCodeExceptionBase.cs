@@ -11,7 +11,7 @@ namespace Gizmo.Shared.Exceptions
     /// <typeparam name="TErrorCode">Error code type.</typeparam>
     [DataContract()]
     [Serializable()]
-    public abstract class ErrorCodeExceptionBase<TErrorCode> : Exception
+    public abstract class ErrorCodeExceptionBase<TErrorCode> : Exception where TErrorCode : Enum
     {
         #region CONSTRUCTOR
 
