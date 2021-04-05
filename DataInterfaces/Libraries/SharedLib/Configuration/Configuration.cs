@@ -2222,6 +2222,16 @@ namespace SharedLib.Configuration
         }
 
         /// <summary>
+        /// Gets or sets new user action.
+        /// </summary>
+        [Category("Functionality")]
+        [DataMember()]
+        public NewUserAction NewUserAction
+        {
+            get; set;
+        }
+
+        /// <summary>
         /// Gets or sets if user info requested is default option.
         /// </summary>
         [Category("Functionality")]
