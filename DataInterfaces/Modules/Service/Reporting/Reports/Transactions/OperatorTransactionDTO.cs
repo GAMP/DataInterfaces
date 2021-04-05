@@ -69,5 +69,11 @@ namespace ServerService.Reporting.Reports.Transactions
         /// </summary>
         [DataMember]
         public string RegisterName { get; set; }
+
+        /// <summary>
+        /// Note.
+        /// </summary>
+        [DataMember]
+        public string Note { get; set; }
     }
 }

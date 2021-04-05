@@ -125,6 +125,12 @@ namespace ServerService.Reporting
         public int? InvoiceId { get; set; }
 
         /// <summary>
+        /// User note for the order.
+        /// </summary>
+        [DataMember]
+        public string UserNote { get; set; }
+
+        /// <summary>
         /// The invoice that was created for the order, null if there is no related invoice.
         /// </summary>
         public InvoiceDTO Invoice { get; set; }
