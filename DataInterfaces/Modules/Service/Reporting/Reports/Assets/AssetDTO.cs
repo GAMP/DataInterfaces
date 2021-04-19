@@ -15,5 +15,11 @@ namespace ServerService.Reporting.Reports.Assets
         /// </summary>
         [DataMember]
         public int AssetTypeId { get; set; }
+
+        /// <summary>
+        /// Asset Type Id.
+        /// </summary>
+        [DataMember]
+        public int Number { get; set; }
     }
 }

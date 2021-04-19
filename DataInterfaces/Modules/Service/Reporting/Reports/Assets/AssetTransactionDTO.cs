@@ -17,6 +17,12 @@ namespace ServerService.Reporting.Reports.Assets
         public string AssetType { get; set; }
 
         /// <summary>
+        /// Asset number.
+        /// </summary>
+        [DataMember]
+        public int AssetNumber { get; set; }
+
+        /// <summary>
         /// Asset name.
         /// </summary>
         [DataMember]
