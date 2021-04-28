@@ -11,6 +11,7 @@
         /// </summary>
         [ClaimDescription(@"Sale", "*", "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE")]
         Sale,
+
         /// <summary>
         /// Sale at custom permission.
         /// </summary>
@@ -91,10 +92,34 @@
         ManagementTasks,
 
         /// <summary>
+        /// Management access processes permission.
+        /// </summary>
+        [ClaimDescription(@"Management", "Processes", "PERMISSION_GROUP_MANAGEMENT", "PERMISSION_ACTION_MANAGEMENT_PROCESSES")]
+        ManageProcesses,
+
+        /// <summary>
+        /// Management access files permission.
+        /// </summary>
+        [ClaimDescription(@"Management", "Files", "PERMISSION_GROUP_MANAGEMENT", "PERMISSION_ACTION_MANAGEMENT_FILES")]
+        ManageFiles,
+
+        /// <summary>
         /// Management maintenance mode permission.
         /// </summary>
         [ClaimDescription(@"Management", "Maintenance", "PERMISSION_GROUP_MANAGEMENT", "PERMISSION_ACTION_MANAGEMENT_MAINTENANCE")]
         ManageMaintenance,
+
+        /// <summary>
+        /// Management security permission.
+        /// </summary>
+        [ClaimDescription(@"Management", "Security", "PERMISSION_GROUP_MANAGEMENT", "PERMISSION_ACTION_MANAGEMENT_SECURITY")]
+        ManageSecurity,
+
+        /// <summary>
+        /// Management lock state permission.
+        /// </summary>
+        [ClaimDescription(@"Management", "LockState", "PERMISSION_GROUP_MANAGEMENT", "PERMISSION_ACTION_MANAGEMENT_LOCK_STATE")]
+        ManageLockState,
 
         #endregion
 
@@ -197,8 +222,31 @@
         /// <summary>
         /// Access log permission.
         /// </summary>
+        [ClaimDescription(@"Log", "*", "PERMISSION_GROUP_LOG", "PERMISSION_ACTION_LOG_ACCESS")]
+        LogAccess,
+
+        /// <summary>
+        /// Clear log permission.
+        /// </summary>
         [ClaimDescription(@"Log", "Clear", "PERMISSION_GROUP_LOG", "PERMISSION_ACTION_LOG_CLEAR")]
         LogClear,
+
+        #endregion
+
+
+        #region LOG
+
+        /// <summary>
+        /// Access waiting lines permission.
+        /// </summary>
+        [ClaimDescription(@"WaitingLines", "*", "PERMISSION_GROUP_WAITING_LINES", "PERMISSION_ACTION_WAITING_LINES_ACCESS")]
+        WaitingLinesAccess,
+
+        /// <summary>
+        /// Manage waiting lines permission.
+        /// </summary>
+        [ClaimDescription(@"WaitingLines", "Manage", "PERMISSION_GROUP_WAITING_LINES", "PERMISSION_ACTION_WAITING_LINES_MANAGE")]
+        WaitingLinesManage,
 
         #endregion
 
