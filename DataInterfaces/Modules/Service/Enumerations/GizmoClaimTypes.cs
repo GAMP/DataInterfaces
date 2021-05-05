@@ -49,6 +49,48 @@
         Withdraw,
 
         /// <summary>
+        /// View invoices permission.
+        /// </summary>
+        [ClaimDescription(@"Sale", "ViewInvoices", new GizmoClaimTypes[] { Sale }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_VIEW_INVOICES")]
+        ViewInvoices,
+
+        /// <summary>
+        /// View only unpaid invoices permission.
+        /// </summary>
+        [ClaimDescription(@"Sale", "ViewInvoicesUnpaidOnly", new GizmoClaimTypes[] { ViewInvoices }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_VIEW_INVOICES_UNPAID_ONLY")]
+        ViewInvoicesUnpaidOnly,
+
+        /// <summary>
+        /// View only business day invoices permission.
+        /// </summary>
+        [ClaimDescription(@"Sale", "ViewInvoicesBusinessDayOnly", new GizmoClaimTypes[] { ViewInvoices }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_VIEW_INVOICES_BUSINESS_DAY_ONLY")]
+        ViewInvoicesBusinessDayOnly,
+
+        /// <summary>
+        /// View deposits permission.
+        /// </summary>
+        [ClaimDescription(@"Sale", "ViewDeposits", new GizmoClaimTypes[] { Sale }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_VIEW_DEPOSITS")]
+        ViewDeposits,
+
+        /// <summary>
+        /// View only business day deposits permission.
+        /// </summary>
+        [ClaimDescription(@"Sale", "ViewDepositsBusinessDayOnly", new GizmoClaimTypes[] { ViewDeposits }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_VIEW_DEPOSITS_BUSINESS_DAY_ONLY")]
+        ViewDepositsBusinessDayOnly,
+
+        /// <summary>
+        /// View pay in/out permission.
+        /// </summary>
+        [ClaimDescription(@"Sale", "ViewPayInOut", new GizmoClaimTypes[] { Sale }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_VIEW_PAY_IN_OUT")]
+        ViewPayInOut,
+
+        /// <summary>
+        /// View only business day pay in/out permission.
+        /// </summary>
+        [ClaimDescription(@"Sale", "ViewPayInOutBusinessDayOnly", new GizmoClaimTypes[] { ViewPayInOut }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_VIEW_PAY_IN_OUT_BUSINESS_DAY_ONLY")]
+        ViewPayInOutBusinessDayOnly,
+
+        /// <summary>
         /// Sale delete time purchases permission.
         /// </summary>
         [ClaimDescription(@"Sale", "DeleteTimePurchases", "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_DELETE_TIME_PURCHASES")]
@@ -88,19 +130,19 @@
         /// <summary>
         /// Management access tasks permission.
         /// </summary>
-        [ClaimDescription(@"Management", "Tasks", new GizmoClaimTypes[] { Management }, "PERMISSION_GROUP_MANAGEMENT", "PERMISSION_ACTION_MANAGEMENT_TASKS", IsAssignable = false)]
+        [ClaimDescription(@"Management", "Tasks", new GizmoClaimTypes[] { Management }, "PERMISSION_GROUP_MANAGEMENT", "PERMISSION_ACTION_MANAGEMENT_TASKS")]
         ManagementTasks,
 
         /// <summary>
         /// Management access processes permission.
         /// </summary>
-        [ClaimDescription(@"Management", "Processes", "PERMISSION_GROUP_MANAGEMENT", "PERMISSION_ACTION_MANAGEMENT_PROCESSES")]
+        [ClaimDescription(@"Management", "Processes", new GizmoClaimTypes[] { Management }, "PERMISSION_GROUP_MANAGEMENT", "PERMISSION_ACTION_MANAGEMENT_PROCESSES")]
         ManageProcesses,
 
         /// <summary>
         /// Management access files permission.
         /// </summary>
-        [ClaimDescription(@"Management", "Files", "PERMISSION_GROUP_MANAGEMENT", "PERMISSION_ACTION_MANAGEMENT_FILES")]
+        [ClaimDescription(@"Management", "Files", new GizmoClaimTypes[] { Management }, "PERMISSION_GROUP_MANAGEMENT", "PERMISSION_ACTION_MANAGEMENT_FILES")]
         ManageFiles,
 
         /// <summary>
@@ -120,6 +162,12 @@
         /// </summary>
         [ClaimDescription(@"Management", "LockState", "PERMISSION_GROUP_MANAGEMENT", "PERMISSION_ACTION_MANAGEMENT_LOCK_STATE")]
         ManageLockState,
+
+        /// <summary>
+        /// Management module restart permission.
+        /// </summary>
+        [ClaimDescription(@"Management", "ModuleRestart", "PERMISSION_GROUP_MANAGEMENT", "PERMISSION_ACTION_MANAGEMENT_MODULE_RESTART")]
+        ManageModuleRestart,
 
         #endregion
 
@@ -228,7 +276,7 @@
         /// <summary>
         /// Clear log permission.
         /// </summary>
-        [ClaimDescription(@"Log", "Clear", "PERMISSION_GROUP_LOG", "PERMISSION_ACTION_LOG_CLEAR")]
+        [ClaimDescription(@"Log", "Clear", new GizmoClaimTypes[] { LogAccess }, "PERMISSION_GROUP_LOG", "PERMISSION_ACTION_LOG_CLEAR")]
         LogClear,
 
         #endregion
@@ -245,7 +293,7 @@
         /// <summary>
         /// Manage waiting lines permission.
         /// </summary>
-        [ClaimDescription(@"WaitingLines", "Manage", "PERMISSION_GROUP_WAITING_LINES", "PERMISSION_ACTION_WAITING_LINES_MANAGE")]
+        [ClaimDescription(@"WaitingLines", "Manage", new GizmoClaimTypes[] { WaitingLinesAccess }, "PERMISSION_GROUP_WAITING_LINES", "PERMISSION_ACTION_WAITING_LINES_MANAGE")]
         WaitingLinesManage,
 
         #endregion
