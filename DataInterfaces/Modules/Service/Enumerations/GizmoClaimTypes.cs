@@ -37,6 +37,30 @@
         SaleNoVoidInvoices,
 
         /// <summary>
+        /// Void used time invoices permission.
+        /// </summary>
+        [ClaimDescription(@"Sale", "VoidUsedTimeInvoices", new GizmoClaimTypes[] { SaleNoVoidInvoices }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_VOID_USED_TIME_INVOICES")]
+        VoidUsedTimeInvoices,
+
+        /// <summary>
+        /// Void closed shift invoices permission.
+        /// </summary>
+        [ClaimDescription(@"Sale", "VoidClosedShiftInvoices", new GizmoClaimTypes[] { SaleNoVoidInvoices }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_VOID_CLOSED_SHIFT_INVOICES")]
+        VoidClosedShiftInvoices,
+
+        /// <summary>
+        /// Void other operator invoices permission.
+        /// </summary>
+        [ClaimDescription(@"Sale", "VoidOtherOperatorInvoices", new GizmoClaimTypes[] { SaleNoVoidInvoices }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_VOID_OTHER_OPERATOR_INVOICES")]
+        VoidOtherOperatorInvoices,
+
+        /// <summary>
+        /// Void previous business day invoices permission.
+        /// </summary>
+        [ClaimDescription(@"Sale", "VoidPreviousBusinessDayInvoices", new GizmoClaimTypes[] { SaleNoVoidInvoices }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_VOID_PREVIOUS_BUSINESSDAY_INVOICES")]
+        VoidPreviousBusinessDayInvoices,
+
+        /// <summary>
         /// Sale deposit permission.
         /// </summary>
         [ClaimDescription(@"Sale", "Deposit", new GizmoClaimTypes[] { Sale }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_DEPOSIT")]
@@ -79,16 +103,16 @@
         ViewDepositsBusinessDayOnly,
 
         /// <summary>
-        /// View pay in/out permission.
+        /// View register transactions permission.
         /// </summary>
-        [ClaimDescription(@"Sale", "ViewPayInOut", new GizmoClaimTypes[] { Sale }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_VIEW_PAY_IN_OUT")]
-        ViewPayInOut,
+        [ClaimDescription(@"Sale", "ViewRegisterTransactions", new GizmoClaimTypes[] { Sale }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_VIEW_PAY_IN_OUT")]
+        ViewRegisterTransactions,
 
         /// <summary>
-        /// View only business day pay in/out permission.
+        /// View only business day register transactions permission.
         /// </summary>
-        [ClaimDescription(@"Sale", "ViewPayInOutBusinessDayOnly", new GizmoClaimTypes[] { ViewPayInOut }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_VIEW_PAY_IN_OUT_BUSINESS_DAY_ONLY")]
-        ViewPayInOutBusinessDayOnly,
+        [ClaimDescription(@"Sale", "ViewRegisterTransactionsBusinessDayOnly", new GizmoClaimTypes[] { ViewRegisterTransactions }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_VIEW_PAY_IN_OUT_BUSINESS_DAY_ONLY")]
+        ViewRegisterTransactionsBusinessDayOnly,
 
         /// <summary>
         /// Sale delete time purchases permission.
