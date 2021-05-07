@@ -57,8 +57,8 @@
         /// <summary>
         /// Void previous business day invoices permission.
         /// </summary>
-        [ClaimDescription(@"Sale", "VoidPreviousBusinessDayInvoices", new GizmoClaimTypes[] { SaleNoVoidInvoices }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_VOID_PREVIOUS_BUSINESSDAY_INVOICES")]
-        VoidPreviousBusinessDayInvoices,
+        [ClaimDescription(@"Sale", "VoidPastDaysInvoices", new GizmoClaimTypes[] { SaleNoVoidInvoices }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_VOID_PAST_DAYS_INVOICES")]
+        VoidPastDaysInvoices,
 
         /// <summary>
         /// Sale deposit permission.
@@ -75,44 +75,44 @@
         /// <summary>
         /// View invoices permission.
         /// </summary>
-        [ClaimDescription(@"Sale", "ViewInvoices", new GizmoClaimTypes[] { Sale }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_VIEW_INVOICES")]
+        [ClaimDescription(@"Sale", "ViewInvoices", "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_VIEW_INVOICES")]
         ViewInvoices,
 
         /// <summary>
         /// View only unpaid invoices permission.
         /// </summary>
-        [ClaimDescription(@"Sale", "ViewInvoicesUnpaidOnly", new GizmoClaimTypes[] { ViewInvoices }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_VIEW_INVOICES_UNPAID_ONLY")]
-        ViewInvoicesUnpaidOnly,
+        [ClaimDescription(@"Sale", "ViewPaidInvoices", new GizmoClaimTypes[] { ViewInvoices }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_VIEW_PAID_INVOICES")]
+        ViewPaidInvoices,
 
         /// <summary>
         /// View only business day invoices permission.
         /// </summary>
-        [ClaimDescription(@"Sale", "ViewInvoicesBusinessDayOnly", new GizmoClaimTypes[] { ViewInvoices }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_VIEW_INVOICES_BUSINESS_DAY_ONLY")]
-        ViewInvoicesBusinessDayOnly,
+        [ClaimDescription(@"Sale", "ViewPastDaysInvoices", new GizmoClaimTypes[] { ViewInvoices }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_VIEW_PAST_DAYS_INVOICES")]
+        ViewPastDaysInvoices,
 
         /// <summary>
         /// View deposits permission.
         /// </summary>
-        [ClaimDescription(@"Sale", "ViewDeposits", new GizmoClaimTypes[] { Sale }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_VIEW_DEPOSITS")]
+        [ClaimDescription(@"Sale", "ViewDeposits", "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_VIEW_DEPOSITS")]
         ViewDeposits,
 
         /// <summary>
         /// View only business day deposits permission.
         /// </summary>
-        [ClaimDescription(@"Sale", "ViewDepositsBusinessDayOnly", new GizmoClaimTypes[] { ViewDeposits }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_VIEW_DEPOSITS_BUSINESS_DAY_ONLY")]
-        ViewDepositsBusinessDayOnly,
+        [ClaimDescription(@"Sale", "ViewPastDaysDeposits", new GizmoClaimTypes[] { ViewDeposits }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_VIEW_PAST_DAYS_DEPOSITS")]
+        ViewPastDaysDeposits,
 
         /// <summary>
         /// View register transactions permission.
         /// </summary>
-        [ClaimDescription(@"Sale", "ViewRegisterTransactions", new GizmoClaimTypes[] { Sale }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_VIEW_PAY_IN_OUT")]
+        [ClaimDescription(@"Sale", "ViewRegisterTransactions", "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_VIEW_REGISTER_TRANSACTIONS")]
         ViewRegisterTransactions,
 
         /// <summary>
         /// View only business day register transactions permission.
         /// </summary>
-        [ClaimDescription(@"Sale", "ViewRegisterTransactionsBusinessDayOnly", new GizmoClaimTypes[] { ViewRegisterTransactions }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_VIEW_PAY_IN_OUT_BUSINESS_DAY_ONLY")]
-        ViewRegisterTransactionsBusinessDayOnly,
+        [ClaimDescription(@"Sale", "ViewPastDaysRegisterTransactions", new GizmoClaimTypes[] { ViewRegisterTransactions }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_VIEW_PAST_DAYS_REGISTER_TRANSACTIONS")]
+        ViewPastDaysRegisterTransactions,
 
         /// <summary>
         /// Sale delete time purchases permission.
