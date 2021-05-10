@@ -403,9 +403,10 @@ namespace SharedLib
         #region OVERRIDES
         public override object GetValueForAttribute(bool enable)
         {
-            return enable ? 3 : 0;
+            return enable ? 3 : PolicyValueDeleteResult.Instance;
         }
         #endregion
     }
     #endregion
+ 
 }
