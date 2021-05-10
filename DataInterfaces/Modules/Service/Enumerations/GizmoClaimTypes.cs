@@ -136,11 +136,31 @@
         #endregion
 
         #region STOCK
+
         /// <summary>
         /// Stock permission.
         /// </summary>
-        [ClaimDescription(@"Stock", "*", "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_STOCK")]
-        Stock,
+        [ClaimDescription(@"Stock", "*", "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_STOCK_ACCESS")]
+        StockAccess,
+
+        /// <summary>
+        /// Stock permission.
+        /// </summary>
+        [ClaimDescription(@"Stock", "Manage", new GizmoClaimTypes[] { StockAccess }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_STOCK_MANAGE")]
+        StockManage,
+
+        /// <summary>
+        /// Stock permission.
+        /// </summary>
+        [ClaimDescription(@"Stock", "ViewStockTransactions", "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_STOCK_VIEW_STOCK_TRANSACTIONS")]
+        ViewStockTransactions,
+
+        /// <summary>
+        /// Stock permission.
+        /// </summary>
+        [ClaimDescription(@"Stock", "ViewPastDaysStockTransactions", new GizmoClaimTypes[] { ViewStockTransactions }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_STOCK_VIEW_PAST_DAYS_STOCK_TRANSACTIONS")]
+        ViewPastDaysStockTransactions,
+
         #endregion
 
         #region MANAGEMENT
@@ -305,8 +325,7 @@
 
         #endregion
 
-
-        #region LOG
+        #region WAITING_LINES
 
         /// <summary>
         /// Access waiting lines permission.
