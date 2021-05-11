@@ -170,7 +170,59 @@ namespace CoreLib
             var previousYearDate = dt.AddYears(-1);
 
             return new DateTime(previousYearDate.Year, 1, 1);
-        } 
+        }
+
+        public static int CompareToMinute(this DateTime dt, DateTime value)
+        {
+            if (dt.Year < value.Year)
+                return -1;
+
+            if (dt.Year > value.Year)
+                return +1;
+
+            if (dt.Year == value.Year)
+            {
+                if (dt.Month < value.Month)
+                    return -1;
+
+                if (dt.Month > value.Month)
+                    return +1;
+
+                if (dt.Month == value.Month)
+                {
+                    if (dt.Day < value.Day)
+                        return -1;
+
+                    if (dt.Day > value.Day)
+                        return +1;
+
+                    if (dt.Day == value.Day)
+                    {
+                        if (dt.Hour < value.Hour)
+                            return -1;
+
+                        if (dt.Hour > value.Hour)
+                            return +1;
+
+                        if (dt.Hour == value.Hour)
+                        {
+                            if (dt.Minute < value.Minute)
+                                return -1;
+
+                            if (dt.Minute > value.Minute)
+                                return +1;
+
+                            if (dt.Minute == value.Minute)
+                            {
+                                return 0;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return 0;
+        }
 
         #endregion
     }
