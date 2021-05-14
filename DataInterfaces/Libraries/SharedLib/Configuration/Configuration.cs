@@ -929,6 +929,31 @@ namespace SharedLib.Configuration
             get; set;
         }
 
+        /// <summary>
+        /// Gets or sets if members should relogin automatically.
+        /// </summary>
+        [DefaultValue(false)]
+        [Category("General")]
+        [Description("Enable or disable members automatic relogin.")]
+        [DataMember(Order = 7)]
+        public bool AutomaticReloginMembers
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets if guests should relogin automatically.
+        /// </summary>
+        [DefaultValue(false)]
+        [Category("General")]
+        [Description("Enable or disable guests automatic relogin.")]
+        [DataMember(Order = 8)]
+        public bool AutomaticReloginGuests
+        {
+            get;
+            set;
+        }
         #endregion
     }
 
