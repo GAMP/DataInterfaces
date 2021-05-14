@@ -898,7 +898,7 @@ namespace SharedLib.Configuration
         /// <summary>
         /// Gets or sets client auto downgrade should be enabled.
         /// </summary>
-        [DefaultValue(false)]
+        [DefaultValue(true)]
         [Category("General")]
         [Description("Specifies client auto downgrade should be enabled.")]
         [DataMember(Order = 4)]
@@ -1009,7 +1009,7 @@ namespace SharedLib.Configuration
         /// Auto invoice.
         /// </summary>
         [DataMember(Order = 0)]
-        [DefaultValue(false)]
+        [DefaultValue(true)]
         public bool AutoInvoice
         {
             get; set;
@@ -1019,8 +1019,8 @@ namespace SharedLib.Configuration
         /// After minutes.
         /// </summary>
         [DataMember(Order = 1)]
-        [Range(1, int.MaxValue)]
-        [DefaultValue(30)]
+        [Range(0, int.MaxValue)]
+        [DefaultValue(0)]
         public int AfterMinutes
         {
             get; set;
@@ -1030,8 +1030,7 @@ namespace SharedLib.Configuration
         /// Auto pay.
         /// </summary>
         [DataMember(Order = 2)]
-        [Range(1, int.MaxValue)]
-        [DefaultValue(false)]
+        [DefaultValue(true)]
         public bool AutoPay
         {
             get; set;
@@ -2637,7 +2636,7 @@ namespace SharedLib.Configuration
         /// <summary>
         /// Indicates whether deposits are always used for payments.
         /// </summary>
-        [DefaultValue(false)]
+        [DefaultValue(true)]
         [DataMember()]
         public bool AlwaysUseDeposits
         {
