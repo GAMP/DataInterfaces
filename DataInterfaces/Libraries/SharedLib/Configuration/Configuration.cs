@@ -954,6 +954,19 @@ namespace SharedLib.Configuration
             get;
             set;
         }
+
+        /// <summary>
+        /// Gets or sets if disconnected clients should logout.
+        /// </summary>
+        [DefaultValue(false)]
+        [Category("General")]
+        [Description("Enable or disable logout for disconnected clients.")]
+        [DataMember(Order = 9)]
+        public bool LogoutDisconnectedClients
+        {
+            get;
+            set;
+        }
         #endregion
     }
 
