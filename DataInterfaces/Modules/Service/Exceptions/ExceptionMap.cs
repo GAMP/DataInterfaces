@@ -14,7 +14,7 @@ namespace Gizmo.Server.Web
         #endregion
 
         #region PRIVATE STATIC FIELDS
-        private static Dictionary<Type, int> _cache = new Dictionary<Type, int>()
+        private static readonly Dictionary<Type, int> _cache = new Dictionary<Type, int>()
         {
             {typeof(AssetErrorCode),7 },
             {typeof(BillingProfileErrorCode),8 },
