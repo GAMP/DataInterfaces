@@ -1,36 +1,32 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup Condition="'$(Configuration)'=='Debug' or '$(Configuration)'=='Release'">
-		<TargetFrameworks>net461</TargetFrameworks>
-		<UseWindowsForms>true</UseWindowsForms>
-		<UseWpf>true</UseWpf>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)'=='NET_5_DEBUG' or '$(Configuration)'=='NET_5_RELEASE'">
-		<TargetFrameworks>net5.0</TargetFrameworks>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)'=='NET_5_WIN_DEBUG' or '$(Configuration)'=='NET_5_WIN_RELEASE'">
-		<TargetFrameworks>net5.0-windows</TargetFrameworks>
-		<UseWindowsForms>true</UseWindowsForms>
-		<UseWpf>true</UseWpf>
-	</PropertyGroup>
-
 	<PropertyGroup>
+		
+		<TargetFrameworks>net5.0-windows;net461</TargetFrameworks>
+		<Configurations>Debug;Release;NET_5_WIN_DEBUG;NET_5_WIN_RELEASE</Configurations>
+		
+		<UseWindowsForms>true</UseWindowsForms>
+		<UseWpf>true</UseWpf>
 		<LangVersion>latest</LangVersion>
 		<Product>Data Interfaces Library</Product>
 		<Description>Data Interfaces Library</Description>
 		<Copyright>NETProjects</Copyright>
 		<Company>NETProjects</Company>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-		<NoWarn>1591;1570;1573;0612</NoWarn>
-		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-		<Optimize>true</Optimize>
-		<Configurations>Debug;Release;NET_5_DEBUG;NET_5_RELEASE;NET_5_WIN_DEBUG;NET_5_WIN_RELEASE</Configurations>
+		<NoWarn>1591;1570;1573;0612</NoWarn>	
+		
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)'=='NET_5_DEBUG' or '$(Configuration)'=='NET_5_WIN_DEBUG' or '$(Configuration)'=='Debug'">
+	<PropertyGroup Condition="'$(Configuration)'=='Debug' or '$(Configuration)'=='Release'">
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)'=='NET_5_WIN_DEBUG' or '$(Configuration)'=='NET_5_WIN_RELEASE'">
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)'=='NET_5_WIN_DEBUG' or '$(Configuration)'=='Debug'">
 		<Optimize>false</Optimize>
 		<DefineConstants>DEBUG;TRACE</DefineConstants>
 	</PropertyGroup>
@@ -38,17 +34,17 @@
 	<ItemGroup>
 		<PackageReference Include="protobuf-net" Version="2.4.6" />
 	</ItemGroup>
-	
+
 	<ItemGroup Condition="'$(TargetFramework)'=='net461'">
-		
+
 		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.19" />
-		
+
 		<Reference Include="System.Windows.Forms" />
 		<Reference Include="System.ComponentModel.Composition" />
 		<Reference Include="System.ComponentModel.DataAnnotations" />
 		<Reference Include="System.IdentityModel" />
 		<Reference Include="System.IdentityModel.Services" />
-	
+
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)'=='net5.0'">
