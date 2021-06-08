@@ -967,6 +967,19 @@ namespace SharedLib.Configuration
             get;
             set;
         }
+
+        /// <summary>
+        /// Gets or sets if should withhold unpaid session deposits.
+        /// </summary>
+        [DefaultValue(false)]
+        [Category("General")]
+        [Description("Enable or disable withhold unpaid session deposits.")]
+        [DataMember(Order = 10)]
+        public bool WithholdUnpaidSessionDeposits
+        {
+            get;
+            set;
+        }
         #endregion
     }
 
