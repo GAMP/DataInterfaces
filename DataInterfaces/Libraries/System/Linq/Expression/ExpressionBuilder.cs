@@ -11,11 +11,16 @@ namespace System.Linq.Expressions
     public static class ExpressionBuilder
     {
         #region STATIC FIELDS
-        private static MethodInfo compareMethod = typeof(string).GetMethod("Compare", new[] { typeof(string), typeof(string), typeof(StringComparison) });
-        private static MethodInfo containsMethod = typeof(string).GetMethod("Contains");
-        private static MethodInfo startsWithMethod = typeof(string).GetMethod("StartsWith", new Type[] { typeof(string) });
-        private static MethodInfo endsWithMethod = typeof(string).GetMethod("EndsWith", new Type[] { typeof(string) });
-        private static MethodInfo hasFlagMethod = typeof(Enum).GetMethod("HasFlag", new Type[] { typeof(Enum) });
+        private static readonly MethodInfo compareMethod = typeof(string).GetMethod("Compare", new[] { typeof(string), typeof(string), typeof(StringComparison) });
+#if NET5_0_OR_GREATER
+        //fixes .net5 AmbiguousMatchException
+        private static readonly MethodInfo containsMethod = typeof(string).GetMethod("Contains",new[] { typeof(string) });
+#else
+        private static readonly MethodInfo containsMethod = typeof(string).GetMethod("Contains"); 
+#endif
+        private static readonly MethodInfo startsWithMethod = typeof(string).GetMethod("StartsWith", new Type[] { typeof(string) });
+        private static readonly MethodInfo endsWithMethod = typeof(string).GetMethod("EndsWith", new Type[] { typeof(string) });
+        private static readonly MethodInfo hasFlagMethod = typeof(Enum).GetMethod("HasFlag", new Type[] { typeof(Enum) });
         #endregion
 
         #region STATIC FUNCTIONS
@@ -28,8 +33,8 @@ namespace System.Linq.Expressions
         /// <returns></returns>
         public static Expression<Func<T, bool>> GetExpression<T>(IEnumerable<Filter> filter)
         {
-            if (filter == null || filter.Count() == 0)
-                return ExpressionBuilder.True<T>();
+            if (filter == null || !filter.Any())
+                return True<T>();
 
             ParameterExpression param = Expression.Parameter(typeof(T), "t");
             Expression exp = null;
@@ -76,11 +81,10 @@ namespace System.Linq.Expressions
         private static Expression GetExpression<T>(ParameterExpression param, Filter filter)
         {
             object filterValue = filter.Value;
-            string filterName = filter.PropertyName;
             Op operation = filter.Operation;
 
             MemberExpression member = Expression.Property(param, filter.PropertyName);
-            ConstantExpression constant = null;
+            ConstantExpression constant;
 
             #region NULLABLE HANDLING
             if (filterValue != null && IsNullableType(member.Type))
@@ -176,7 +180,7 @@ namespace System.Linq.Expressions
         /// <param name="expr2">Second expression.</param>
         /// <returns></returns>
         public static Expression<Func<T, bool>> And<T>(this Expression<Func<T, bool>> expr1,
-                                                             Expression<Func<T, bool>> expr2)
+            Expression<Func<T, bool>> expr2)
         {
             var invokedExpr = Expression.Invoke(expr2, expr1.Parameters.Cast<Expression>());
             return Expression.Lambda<Func<T, bool>>(Expression.AndAlso(expr1.Body, invokedExpr), expr1.Parameters);
