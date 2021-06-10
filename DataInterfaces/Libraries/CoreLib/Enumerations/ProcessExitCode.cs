@@ -29,5 +29,9 @@
         /// Terminated on session end.
         /// </summary>
         SessionEnded = -517,
+        /// <summary>
+        /// System power event such as shutdown or restart.
+        /// </summary>
+        SystemPowerEvent = -518,
     }
 }
