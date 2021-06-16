@@ -21,5 +21,9 @@
         /// Set when deposit transaction would cause user into negative balance.
         /// </summary>
         NegativeBalanceNotAllowed,
+        /// <summary>
+        /// Set when user deposits are withheld for unpaid session time.
+        /// </summary>
+        DepositsWithheldForUnpaidSessions,
     }
 }
