@@ -40,8 +40,11 @@ namespace Client
         bool IsAborting { get; }
 
         /// <summary>
-        /// Gets if context is alive (have running processes).
+        /// Gets if context is alive.
         /// </summary>
+        /// <remarks>
+        /// <b>Context will be considered alive if there are still tracked processes that have not exited.</b>
+        /// </remarks>
         bool IsAlive { get; }
 
         /// <summary>
@@ -109,6 +112,8 @@ namespace Client
         /// </summary>
         /// <param name="process">Process instance.</param>
         /// <param name="isMain">Indicates that the process is main parent process.</param>
+        /// <exception cref="ArgumentNullException">thrown in case the specified <paramref name="process"/> is equal to null.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">thorwn in case the specified <paramref name="process"/> does not have associated process id (not running).</exception>
         void AddProcess(Process process, bool isMain);
 
         /// <summary>
@@ -120,15 +125,19 @@ namespace Client
         /// <b>The process specified by <paramref name="process"/> parameter must not be running.</b>
         /// </remarks>
         /// <returns><a href="https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics.process.start">Process.Start()</a> return value.</returns>
+        /// <exception cref="ArgumentNullException">thrown in case the specified <paramref name="process"/> is equal to null.</exception>
         bool AddProcessIfStarted(Process process, bool isMain);
 
         /// <summary>
         /// Tries to obtain full executable file name.
         /// </summary>
         /// <param name="processId">Process id.</param>
-        /// <param name="fileName">Found file name.</param>
-        /// <returns>True if process name found else false.</returns>
-        bool TryGetProcessFileName(int processId, out string fileName);
+        /// <param name="processFileName">Found file name.</param>
+        /// <returns>True if process is tracked by context and full file name was obtained and not equal to null or empty string, otherwise false.</returns>
+        /// <remarks>
+        /// The value of <paramref name="processFileName"/> might be null or empty string in case we have failed obtaining full process file name durring process addition.
+        /// </remarks>
+        bool TryGetProcessFileName(int processId, out string processFileName);
 
         /// <summary>
         /// Writes a message to client log.

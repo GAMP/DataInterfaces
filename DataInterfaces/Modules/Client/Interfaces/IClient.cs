@@ -116,19 +116,14 @@ namespace Client
 
         /// <summary>
         /// Gets the client id.
+        /// </summary>
         /// <remarks>
         /// This property is used to represent the client number.
         /// </remarks>
-        /// </summary>
         int Id
         {
             get;
         }
-
-        /// <summary>
-        /// Gets or sets if trace messages should be logged.
-        /// </summary>
-        bool LogTraceMessages { get; set; }
 
         /// <summary>
         /// Gets client version ifnormation.
