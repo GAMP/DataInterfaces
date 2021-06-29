@@ -108,12 +108,14 @@ namespace Client
         bool TryActivate();
 
         /// <summary>
-        /// Adds a process to execution context.
+        /// Adds an existing process to execution context.
         /// </summary>
         /// <param name="process">Process instance.</param>
         /// <param name="isMain">Indicates that the process is main parent process.</param>
         /// <exception cref="ArgumentNullException">thrown in case the specified <paramref name="process"/> is equal to null.</exception>
         /// <exception cref="ArgumentOutOfRangeException">thorwn in case the specified <paramref name="process"/> does not have associated process id (not running).</exception>
+        /// <exception cref="InvalidOperationException">thorwn in case the System.Diagnostics.Process.Id property has not been set or there is no process associated with this System.Diagnostics.Process object.</exception>
+        /// <remarks>The specified <paramref name="process"/> instance must be running and have process id associated with it.</remarks>
         void AddProcess(Process process, bool isMain);
 
         /// <summary>
@@ -124,8 +126,8 @@ namespace Client
         /// <remarks>This function ensures that process will be started and added to the context and any child process created and terminated events will be handled.<br></br>
         /// <b>The process specified by <paramref name="process"/> parameter must not be running.</b>
         /// </remarks>
-        /// <returns><a href="https://docs.microsoft.com/en-us/dotnet/api/system.diagnostics.process.start">Process.Start()</a> return value.</returns>
-        /// <exception cref="ArgumentNullException">thrown in case the specified <paramref name="process"/> is equal to null.</exception>
+        /// <returns>True if new process was started and successfully added to the context.</returns>
+        /// <exception cref="ArgumentNullException">thrown in case the specified <paramref name="process"/> is equal to null or there is no process file name set in Process.StartInfo.</exception>
         bool AddProcessIfStarted(Process process, bool isMain);
 
         /// <summary>
@@ -135,6 +137,7 @@ namespace Client
         /// <param name="processFileName">Found file name.</param>
         /// <returns>True if process is tracked by context and full file name was obtained and not equal to null or empty string, otherwise false.</returns>
         /// <remarks>
+        /// <b>This call is only valid for tracked processes that have not yet exited.</b><br/>
         /// The value of <paramref name="processFileName"/> might be null or empty string in case we have failed obtaining full process file name durring process addition.
         /// </remarks>
         bool TryGetProcessFileName(int processId, out string processFileName);
