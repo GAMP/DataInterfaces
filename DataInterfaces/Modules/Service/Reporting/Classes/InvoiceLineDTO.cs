@@ -107,10 +107,22 @@ namespace ServerService.Reporting
         public decimal UnitPrice { get; set; }
 
         /// <summary>
+        /// Unit cost.
+        /// </summary>
+        [DataMember]
+        public decimal? UnitCost { get; set; }
+
+        /// <summary>
         /// Quantity.
         /// </summary>
         [DataMember]
         public decimal Quantity { get; set; }
+
+        /// <summary>
+        /// Total cost.
+        /// </summary>
+        [DataMember]
+        public decimal? TotalCost { get; set; }
 
         /// <summary>
         /// The value of the invoice line.

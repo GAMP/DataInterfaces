@@ -29,10 +29,22 @@ namespace ServerService.Reporting
         public decimal UnitPrice { get; set; }
 
         /// <summary>
+        /// The unit cost of the product.
+        /// </summary>
+        [DataMember]
+        public decimal UnitCost { get; set; }
+
+        /// <summary>
         /// The number of items sold of the product.
         /// </summary>
         [DataMember]
         public decimal Quantity { get; set; }
+
+        /// <summary>
+        /// The total cost of the products.
+        /// </summary>
+        [DataMember]
+        public decimal TotalCost { get; set; }
 
         /// <summary>
         /// The cost of the product.
