@@ -59,6 +59,12 @@ namespace ServerService.Reporting.Reports.Transactions
         public decimal? Total { get; set; }
 
         /// <summary>
+        /// Payment Method Id.
+        /// </summary>
+        [DataMember]
+        public int PaymentMethodId { get; set; }
+
+        /// <summary>
         /// Payment Method Name.
         /// </summary>
         [DataMember]
