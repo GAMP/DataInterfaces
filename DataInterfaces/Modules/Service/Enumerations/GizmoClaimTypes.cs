@@ -341,6 +341,22 @@
 
         #endregion
 
+        #region REGISTER_TRANSACTIONS
+
+        /// <summary>
+        /// Create pay in register transactions permission.
+        /// </summary>
+        [ClaimDescription(@"RegisterTransactions", "RegisterTransactionsPayIn", "PERMISSION_GROUP_REGISTER_TRANSACTIONS", "PERMISSION_REGISTER_TRANSACTIONS_PAY_IN")]
+        RegisterTransactionsPayIn,
+
+        /// <summary>
+        /// Create pay out register transactions permission.
+        /// </summary>
+        [ClaimDescription(@"RegisterTransactions", "RegisterTransactionsPayOut", "PERMISSION_GROUP_REGISTER_TRANSACTIONS", "PERMISSION_REGISTER_TRANSACTIONS_PAY_OUT")]
+        RegisterTransactionsPayOut,
+
+        #endregion
+
         #region WEB API
         [ClaimDescription(@"WebApi", "*", "PERMISSION_GROUP_WEB_API", "PERMISSION_ACTION_WEB_API")]
         WebApi,
