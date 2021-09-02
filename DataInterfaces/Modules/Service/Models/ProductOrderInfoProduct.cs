@@ -85,6 +85,16 @@ namespace ServerService
             get; set;
         }
 
+        /// <summary>
+        /// Pay type.
+        /// </summary>
+        [ProtoMember(8)]
+        [DataMember()]
+        public OrderLinePayType PayType
+        {
+            get; set;
+        }
+
         #endregion
     }
 }
