@@ -48,7 +48,7 @@
 
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)'=='net6.0' or '$(TargetFramework)'=='net6.0-windows'">
+	<ItemGroup Condition="'$(TargetFramework)'=='net6.0'">
 		<Compile Remove="Modules\Client\**\*" />
 		<Compile Remove="Modules\Manager\**\*" />
 
@@ -105,7 +105,7 @@
 		<PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)'=='net5.0-windows'">
+	<ItemGroup Condition="'$(TargetFramework)'=='net6.0-windows'">
 		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.19" />
 	</ItemGroup>
 
