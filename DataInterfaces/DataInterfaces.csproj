@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		
-		<TargetFrameworks>net5.0-windows;net461</TargetFrameworks>
+		<TargetFrameworks>net6.0-windows;net461</TargetFrameworks>
 		<Configurations>Debug;Release;NET_5_WIN_DEBUG;NET_5_WIN_RELEASE</Configurations>
 		<!--<RuntimeIdentifiers>win-x64;win-x86</RuntimeIdentifiers>-->
 		
@@ -48,7 +48,7 @@
 
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)'=='net5.0'">
+	<ItemGroup Condition="'$(TargetFramework)'=='net6.0' or '$(TargetFramework)'=='net6.0-windows'">
 		<Compile Remove="Modules\Client\**\*" />
 		<Compile Remove="Modules\Manager\**\*" />
 
@@ -99,7 +99,7 @@
 		<Compile Include="Libraries\IntegrationLib\Interfaces\IDispatcherPrincipal.cs" />
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)'=='net5.0' or '$(TargetFramework)'=='net5.0-windows'">
+	<ItemGroup Condition="'$(TargetFramework)'=='net6.0' or '$(TargetFramework)'=='net6.0-windows'">
 		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
 		<PackageReference Include="System.ComponentModel.Composition" Version="5.0.0" />
 		<PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
