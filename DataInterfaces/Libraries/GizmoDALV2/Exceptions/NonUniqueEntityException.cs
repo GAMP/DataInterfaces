@@ -13,6 +13,19 @@ namespace GizmoDALV2
     {
         #region CONSTRUCTOR
 
+        public NonUniqueEntityValueException():base()
+        {
+        }
+
+        public NonUniqueEntityValueException(string message):base(message)
+        {
+        }
+
+        public NonUniqueEntityValueException(string message, Exception inner)
+           : base(message, inner)
+        {
+        }
+
         /// <summary>
         /// Creates new instance.
         /// </summary>

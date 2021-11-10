@@ -924,7 +924,20 @@ namespace SharedLib.Commands
 
         RegisterTransactionInfoGet = 284,
         RegisterTransactionAdd = 285,
-        //max 288
+        
+
+        DeviceCreate = 288,
+        DeviceUpdate = 299,
+        DeviceGet = 300,
+        DeviceHostGet = 301,
+        DeviceHostAdd = 302,
+        DeviceHostRemove = 303,
+        DeviceDelete = 304,
+        DeviceUndelete = 305,
+        DeviceEnable = 306,
+        DeviceDisable = 307,
+
+        //max 307
     }
     #endregion
 
