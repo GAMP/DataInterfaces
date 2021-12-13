@@ -1158,10 +1158,15 @@ namespace SharedLib
         [Localized("CFG_SECTION_RESERVATIONS")]
         Reservations,
         /// <summary>
-        /// Reservations.
+        /// Backup.
         /// </summary>
         [Localized("CFG_SECTION_BACKUP")]
         Backup,
+        /// <summary>
+        /// HdmiDevices.
+        /// </summary>
+        [Localized("CFG_SECTION_HDMI_DEVICES")]
+        HdmiDevices
     }
     #endregion
 
