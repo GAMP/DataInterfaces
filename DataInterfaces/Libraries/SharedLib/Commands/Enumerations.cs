@@ -933,7 +933,6 @@ namespace SharedLib.Commands
         DeviceHostAdd = 302,
         DeviceHostRemove = 303,
         DeviceDelete = 304,
-        DeviceUndelete = 305,
         DeviceEnable = 306,
         DeviceDisable = 307,
 
