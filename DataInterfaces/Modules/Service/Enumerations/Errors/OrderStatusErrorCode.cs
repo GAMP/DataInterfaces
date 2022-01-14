@@ -22,8 +22,12 @@
         /// </summary>
         AlreadyAccepted = 3,
         /// <summary>
-        /// Already invocied.
+        /// Already invoiced.
         /// </summary>
         AlreadyInvoiced = 4,
+        /// <summary>
+        /// Not accepted.
+        /// </summary>
+        NotAccepted = 5,
     }
 }
