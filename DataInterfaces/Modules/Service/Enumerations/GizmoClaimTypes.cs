@@ -125,6 +125,12 @@
         /// </summary>
         [ClaimDescription(@"Sale", "ManualOpenCashDrawer", "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_MANUAL_OPEN_CASH_DRAWER")]
         SaleManualOpenCashDrawer,
+
+        /// <summary>
+        /// Sale modify billing options permission.
+        /// </summary>
+        [ClaimDescription(@"Sale", "ModifyBillingOptions", "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_MODIFY_BILLING_OPTIONS")]
+        SaleModifyBillingOptions,
         #endregion
 
         #region SHIFT
