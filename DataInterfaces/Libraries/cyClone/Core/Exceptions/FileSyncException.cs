@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using System.Security.Permissions;
 using System.Text;
 
 namespace CyClone.Core
@@ -129,7 +128,6 @@ namespace CyClone.Core
 
         #region ISerializable
 
-        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
