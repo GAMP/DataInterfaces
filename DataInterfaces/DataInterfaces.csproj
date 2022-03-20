@@ -48,6 +48,16 @@
 
 	</ItemGroup>
 
+	<ItemGroup Condition="'$(TargetFramework)'=='net6.0-windows'">
+		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.19" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)'=='net6.0' or '$(TargetFramework)'=='net6.0-windows'">
+		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+		<PackageReference Include="System.ComponentModel.Composition" Version="5.0.0" />
+		<PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
+	</ItemGroup>
+
 	<ItemGroup Condition="'$(TargetFramework)'=='net6.0'">
 		<Compile Remove="Modules\Client\**\*" />
 		<Compile Remove="Modules\Manager\**\*" />
@@ -97,16 +107,6 @@
 		<Compile Include="Libraries\IntegrationLib\Interfaces\IPlugin.cs" />
 		<Compile Include="Libraries\IntegrationLib\Interfaces\IClaimType.cs" />
 		<Compile Include="Libraries\IntegrationLib\Interfaces\IDispatcherPrincipal.cs" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(TargetFramework)'=='net6.0' or '$(TargetFramework)'=='net6.0-windows'">
-		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
-		<PackageReference Include="System.ComponentModel.Composition" Version="5.0.0" />
-		<PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(TargetFramework)'=='net6.0-windows'">
-		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.19" />
-	</ItemGroup>
+	</ItemGroup>	
 
 </Project>
