@@ -1508,6 +1508,7 @@ namespace SharedLib.Configuration
     public class FinancialConfig : ConfigBase
     {
         #region PROPERTIES
+
         /// <summary>
         /// Gets or sets time sale vat.
         /// </summary>
@@ -1517,6 +1518,29 @@ namespace SharedLib.Configuration
         {
             get; set;
         }
+
+        //TODO: A REPLACE INT WITH FiscalPrinterTaxSystemTypes enum
+
+        /// <summary>
+        /// Gets or sets fiscal printer products tax system type.
+        /// </summary>
+        [DataMember()]
+        [DefaultValue(0)]
+        public int FiscalPrinterProductsTaxSystemType
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets fiscal printer services tax system type.
+        /// </summary>
+        [DataMember()]
+        [DefaultValue(0)]
+        public int FiscalPrinterServicesTaxSystemType
+        {
+            get; set;
+        }
+
         #endregion
     }
     #endregion
