@@ -284,6 +284,12 @@
         UserManualLogin,
 
         /// <summary>
+        /// Add user permission.
+        /// </summary>
+        [ClaimDescription(@"User", "Add", "PERMISSION_GROUP_USER", "PERMISSION_ACTION_USER_ADD")]
+        UserAdd,
+
+        /// <summary>
         /// Delete user permission.
         /// </summary>
         [ClaimDescription(@"User", "Delete", "PERMISSION_GROUP_USER", "PERMISSION_ACTION_USER_DELETE")]
