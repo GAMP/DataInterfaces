@@ -25,5 +25,9 @@
         /// Set when user deposits are withheld for unpaid session time.
         /// </summary>
         DepositsWithheldForUnpaidSessions,
+        /// <summary>
+        /// Set when we try to void already voided deposit payment.
+        /// </summary>
+        AlreadyVoided,
     }
 }
