@@ -20,7 +20,7 @@ namespace ServerService
         public DepositTransactionType? Type
         {
             get; set;
-        } 
+        }
 
         #endregion
     }

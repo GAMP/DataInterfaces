@@ -183,7 +183,47 @@ namespace ServerService
         {
             get; set;
         }
-        
+
+        /// <summary>
+        /// If the deposit is voided.
+        /// </summary>
+        [DataMember()]
+        [ProtoMember(18)]
+        public bool IsVoided
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// If the deposit is voided.
+        /// </summary>
+        [DataMember()]
+        [ProtoMember(19)]
+        public DateTime? VoidedDate
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// The deposit payment Id of the deposit.
+        /// </summary>
+        [DataMember()]
+        [ProtoMember(20)]
+        public int? DepositPaymentId
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// If the withdraw is a void.
+        /// </summary>
+        [DataMember()]
+        [ProtoMember(21)]
+        public bool IsVoid
+        {
+            get; set;
+        }
+
         #endregion
     }
 }
