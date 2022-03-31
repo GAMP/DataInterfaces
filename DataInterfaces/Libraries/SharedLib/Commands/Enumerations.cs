@@ -774,6 +774,7 @@ namespace SharedLib.Commands
         DepositWithdraw = 180,
         DepositPaymentGet = 181,
         DepositTransactionInfoGet = 271,
+        DepositVoid = 308,
         #endregion
 
         #region POINTS
@@ -936,7 +937,7 @@ namespace SharedLib.Commands
         DeviceEnable = 306,
         DeviceDisable = 307,
 
-        //max 307
+        //max 308
     }
     #endregion
 
