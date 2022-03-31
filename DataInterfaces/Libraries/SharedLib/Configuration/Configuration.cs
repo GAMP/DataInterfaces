@@ -1510,6 +1510,15 @@ namespace SharedLib.Configuration
         #region PROPERTIES
 
         /// <summary>
+        /// Gets or sets business vat id.
+        /// </summary>
+        [DataMember()]
+        public string BusinessVatId
+        {
+            get;set;
+        }
+
+        /// <summary>
         /// Gets or sets time sale vat.
         /// </summary>
         [DataMember()]
@@ -1519,26 +1528,58 @@ namespace SharedLib.Configuration
             get; set;
         }
 
+        /// <summary>
+        /// Gets or sets global tax system.
+        /// </summary>
+        [DataMember()]
+        [DefaultValue(GlobalTaxSystems.None)]
+        public GlobalTaxSystems GlobalTaxSystem
+        {
+            get;set;
+        }
+
         //TODO: A REPLACE INT WITH FiscalPrinterTaxSystemTypes enum
 
         /// <summary>
-        /// Gets or sets fiscal printer products tax system type.
+        /// Gets or sets products tax system type.
         /// </summary>
         [DataMember()]
         [DefaultValue(0)]
-        public int FiscalPrinterProductsTaxSystemType
+        public int ProductsTaxSystemType
         {
             get; set;
         }
 
         /// <summary>
-        /// Gets or sets fiscal printer services tax system type.
+        /// Gets or sets services tax system type.
         /// </summary>
         [DataMember()]
         [DefaultValue(0)]
-        public int FiscalPrinterServicesTaxSystemType
+        public int ServicesTaxSystemType
         {
             get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets if deposits should be treated as service sale.
+        /// </summary>
+        [DataMember()]
+        [DefaultValue(false)]
+        public bool TreatDepositsAsService
+        {
+            get;set;
+        }
+
+        /// <summary>
+        /// Gets or sets deposit service name.
+        /// </summary>
+        /// <remarks>
+        /// This value is used when deposits are treated as service sale. 
+        /// </remarks>
+        [DataMember()]
+        public string DepositServiceName
+        {
+            get;set;
         }
 
         #endregion

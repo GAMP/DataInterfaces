@@ -3952,4 +3952,14 @@ namespace SharedLib
     }
     #endregion
 
+    #region GlobalTaxSystems
+    /// <summary>
+    /// Global tax system codes.
+    /// </summary>
+    public enum GlobalTaxSystems
+    {
+        None = 0,
+        Russia = 1
+    } 
+    #endregion
 }
