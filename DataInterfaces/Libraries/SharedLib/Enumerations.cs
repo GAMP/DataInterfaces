@@ -1939,7 +1939,25 @@ namespace SharedLib
         /// SMC.
         /// </summary>
         SMSC = 3,
+        /// <summary>
+        /// Red SMS.
+        /// </summary>
+        RedSms=4,
     }
+    #endregion
+
+    #region SMSGATEWAYCONFIRMATIONTYPE
+    public enum SmsGatewayConfirmationType
+    {
+        /// <summary>
+        /// SMS confrimation method.
+        /// </summary>
+        SMS = 0,
+        /// <summary>
+        /// Flash call confirmation method.
+        /// </summary>
+        FlashCall = 1,
+    } 
     #endregion
 
     #region SMSGATEWAYPARAMETEROPTION
