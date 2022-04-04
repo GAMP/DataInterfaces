@@ -15,6 +15,7 @@ namespace ServerService
     {
         #region FIELDS
         private Dictionary<int, PaymentSummary> payments;
+        private Dictionary<int, PaymentSummary> withdrawals;
         private Dictionary<int, PaymentSummary> deposits;
         private Dictionary<int, PaymentSummary> refunds;
         #endregion
@@ -66,9 +67,18 @@ namespace ServerService
         /// </summary>
         [DataMember()]
         [ProtoMember(5)]
-        public decimal Withdrawals
+        public Dictionary<int, PaymentSummary> Withdrawals
         {
-            get; set;
+            get
+            {
+                if (withdrawals == null)
+                    withdrawals = new Dictionary<int, PaymentSummary>();
+                return withdrawals;
+            }
+            set
+            {
+                this.withdrawals = value;
+            }
         }
 
         /// <summary>

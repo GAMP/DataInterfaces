@@ -187,7 +187,7 @@ namespace ServerService
         /// </summary>
         [DataMember()]
         [ProtoMember(17)]
-        public decimal Withdrawals
+        public Dictionary<int, PaymentSummary> Withdrawals
         {
             get; set;
         }

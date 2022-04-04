@@ -54,6 +54,12 @@ namespace ServerService.Reporting.Reports.Financial
         public List<AccountTransactionDTO> Withdrawals { get; set; } = new List<AccountTransactionDTO>();
 
         /// <summary>
+        /// List of deposit void operations performed during the reporting period.
+        /// </summary>
+        [DataMember]
+        public List<AccountTransactionDTO> DepositVoids { get; set; } = new List<AccountTransactionDTO>();
+
+        /// <summary>
         /// List of invoices grouped based on financial report type.
         /// </summary>
         [DataMember]

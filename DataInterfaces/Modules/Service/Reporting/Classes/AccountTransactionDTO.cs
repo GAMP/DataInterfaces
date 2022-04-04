@@ -65,5 +65,10 @@ namespace ServerService.Reporting
         /// The user is guest.
         /// </summary>
         public bool IsGuest { get; set; }
+
+        /// <summary>
+        /// Is Void.
+        /// </summary>
+        public bool IsVoid { get; set; }
     }
 }
