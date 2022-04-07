@@ -3202,6 +3202,10 @@ namespace SharedLib
         /// None.
         /// </summary>
         None = 0,
+        /// <summary>
+        /// Indicates that method is non-fiscal and does not require a receipt.
+        /// </summary>
+        NonFiscal=1,
     }
     #endregion
 

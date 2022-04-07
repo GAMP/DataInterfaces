@@ -1583,10 +1583,10 @@ namespace SharedLib.Configuration
         }
 
         /// <summary>
-        /// Gets or sets if fiscal receipts printing is enabled.
+        /// Gets or sets if fiscal printing is enabled.
         /// </summary>
         [DefaultValue(false)]
-        public bool PrintFiscalReceipts
+        public bool EnableFiscalPrinter
         {
             get;set;
         }
