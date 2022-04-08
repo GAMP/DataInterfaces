@@ -22,5 +22,15 @@ namespace ServerService.Exceptions
         /// </summary>
         [Localized("FISCAL_PRINTER_SHIFT_CLOSED")]
         ShiftClosed =2,
+        /// <summary>
+        /// Fiscal printer driver error.
+        /// </summary>
+        [Localized("FISCAL_PRINTER_DRIVER_ERROR")]
+        DriverError =3,
+        /// <summary>
+        /// Fiscal printer error.
+        /// </summary>
+        [Localized("FISCAL_PRINTER_ERROR")]
+        PrinterError =4,
     }
 }
