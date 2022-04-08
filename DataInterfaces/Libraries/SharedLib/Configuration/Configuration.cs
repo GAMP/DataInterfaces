@@ -1586,6 +1586,7 @@ namespace SharedLib.Configuration
         /// Gets or sets if fiscal printing is enabled.
         /// </summary>
         [DefaultValue(false)]
+        [DataMember()]
         public bool EnableFiscalPrinter
         {
             get;set;
