@@ -1587,7 +1587,6 @@ namespace SharedLib.Configuration
         /// </summary>
         [DataMember()]
         [DefaultValue(false)]
-        [DataMember()]
         public bool EnableFiscalPrinter
         {
             get;set;
