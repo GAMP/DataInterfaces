@@ -51,7 +51,7 @@ namespace GizmoDALV2
         /// <param name="entityKey">Entity key.</param>
         /// <returns>Found entity.</returns>
         /// <exception cref="EntityNotFoundException">In case no entity found with given key.</exception>
-        TEntity DemandFind<TEntity>(int entityKey);
+        TEntity DemandFind<TEntity>(int entityKey) where TEntity : class;
 
         /// <summary>
         /// Demand find entity.
@@ -60,7 +60,7 @@ namespace GizmoDALV2
         /// <param name="entityKeys">Entity keys.</param>
         /// <returns>Found entity.</returns>
         /// <exception cref="EntityNotFoundException">In case no entity found with given key.</exception>
-        TEntity DemandFind<TEntity>(object[] entityKeys);
+        TEntity DemandFind<TEntity>(object[] entityKeys) where TEntity : class;
 
         /// <summary>
         /// Checks if credentials are valid.

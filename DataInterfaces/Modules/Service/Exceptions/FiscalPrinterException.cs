@@ -13,6 +13,15 @@ namespace ServerService.Exceptions
     {
         #region CONSTRUCTOR
 
+        public FiscalPrinterException(string message, FiscalPrinterErrorCodes errorCode, int? pritnerOrDrieverErrorCode) : base(message, errorCode)
+        {
+            PrinterOrDriverErrorCode = pritnerOrDrieverErrorCode;
+        }
+
+        public FiscalPrinterException(string message, FiscalPrinterErrorCodes errorCode) : base(message, errorCode)
+        {
+        }
+
         /// <summary>
         /// Creates new instance.
         /// </summary>
@@ -28,7 +37,38 @@ namespace ServerService.Exceptions
         protected FiscalPrinterException(SerializationInfo info,
            StreamingContext context)
             : base(info, context)
-        { }
+        {
+            if (info != null)
+            {
+                PrinterOrDriverErrorCode = (int?)info.GetValue(nameof(PrinterOrDriverErrorCode), typeof(int?));
+            }
+        }
+
+        #endregion
+
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets or sets optional printer or driver error code.
+        /// </summary>
+        public int? PrinterOrDriverErrorCode
+        {
+            get; set;
+        }
+
+        #endregion
+
+        #region OVERRIDES
+
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+
+            if (info != null)
+            {
+                info.AddValue(nameof(PrinterOrDriverErrorCode), PrinterOrDriverErrorCode);
+            }
+        }
 
         #endregion
     }
