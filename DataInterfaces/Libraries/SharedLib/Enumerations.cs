@@ -3962,7 +3962,9 @@ namespace SharedLib
     /// </summary>
     public enum GlobalTaxSystems
     {
+        [Localized("GLOBAL_TAX_SYSTEM_NONE")]
         None = 0,
+        [Localized("GLOBAL_TAX_SYSTEM_RUSSIA")]
         Russia = 1
     } 
     #endregion
