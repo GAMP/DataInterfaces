@@ -2926,7 +2926,11 @@ namespace SharedLib
         /// <summary>
         /// Restricts product sale.
         /// </summary>
-        RestrictSale = 4
+        RestrictSale = 4,
+        /// <summary>
+        /// If the product is service.
+        /// </summary>
+        IsService = 8
     }
     #endregion
 
