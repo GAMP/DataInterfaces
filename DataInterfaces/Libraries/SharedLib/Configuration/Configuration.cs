@@ -2874,6 +2874,16 @@ namespace SharedLib.Configuration
             get; set;
         }
 
+        /// <summary>
+        /// Gets or sets if should hide app info.
+        /// </summary>
+        [DefaultValue(false)]
+        [DataMember()]
+        public bool HideAppInfo
+        {
+            get; set;
+        }
+
         #endregion
 
         #region OVERRIDES
