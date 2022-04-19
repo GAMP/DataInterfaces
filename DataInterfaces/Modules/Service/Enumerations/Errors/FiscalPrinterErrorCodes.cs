@@ -57,5 +57,15 @@ namespace ServerService.Exceptions
         /// </summary>
         [Localized("FISCAL_PRINTER_ERROR_DEPOSIT_NOT_MATCH_SERVICES")]
         DepositsNotMatchServices = 9,
+        /// <summary>
+        /// Partially paid orders not allowed.
+        /// </summary>
+        [Localized("FISCAL_PRINTER_ERROR_PARTIAL_PAYMENT_NOT_ALLOWED")]
+        PartiallyPaidNotAllowed =10,
+        /// <summary>
+        /// Mulitple payment methods not allowed.
+        /// </summary>
+        [Localized("FISCAL_PRINTER_ERROR_MULTIPLE_PAYMENT_METHODS_NOT_ALLOWED")]
+        MultiplePaymentMethodsNotAllowed =11,
     }
 }
