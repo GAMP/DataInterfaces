@@ -335,6 +335,7 @@ namespace SharedLib.Commands
         ReservationDataGet = 33,
         UserGroupDefaultRequiredInfoGet = 34,
         AgreementGet = 35,
+        MobileExist = 36,
     }
     #endregion
 
