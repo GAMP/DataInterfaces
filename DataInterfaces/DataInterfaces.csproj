@@ -2,12 +2,9 @@
 
 	<PropertyGroup>
 		
-		<TargetFrameworks>net6.0-windows;net461</TargetFrameworks>
-		<Configurations>Debug;Release;NET_5_WIN_DEBUG;NET_5_WIN_RELEASE</Configurations>
-		<!--<RuntimeIdentifiers>win-x64;win-x86</RuntimeIdentifiers>-->
-		
-		<UseWindowsForms>true</UseWindowsForms>
-		<UseWpf>true</UseWpf>
+		<TargetFrameworks>net6.0-windows;net6.0;net461</TargetFrameworks>
+		<Configurations>Debug;Release;NET_5_WIN_DEBUG;NET_5_WIN_RELEASE;NET_6_DEBUG;NET_6_RELEASE</Configurations>
+
 		<LangVersion>latest</LangVersion>
 		<Product>Data Interfaces Library</Product>
 		<Description>Data Interfaces Library</Description>
@@ -15,9 +12,17 @@
 		<Company>NETProjects</Company>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-        <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+		<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-		<NoWarn>1591;1570;1573;0612</NoWarn>	
+		<NoWarn>1591;1570;1573;0612</NoWarn>
+
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(TargetFramework)'=='net6.0-windows' or '$(TargetFramework)'=='net461'">
+		
+		<!--enable wpf and winform when compiling for windows only-->
+		<UseWindowsForms>true</UseWindowsForms>
+		<UseWpf>true</UseWpf>
 		
 	</PropertyGroup>
 
