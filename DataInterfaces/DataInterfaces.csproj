@@ -71,7 +71,6 @@
 
 		<Compile Remove="Libraries\SkinInterfaces\**\*" />
 		<Compile Remove="Libraries\SharedLib\ViewModels\**\*" />
-		<Compile Remove="Libraries\SharedLib\Management\**\*" />
 		<Compile Remove="Libraries\IntegrationLib\**\*" />
 		<Compile Remove="Libraries\Localization\**\*" />
 		<Compile Remove="Libraries\System\Windows\Data\**\*" />
@@ -87,8 +86,7 @@
 		<Compile Remove="Libraries\SharedLib\Classes\WindowShowParams.cs" />
 		<Compile Remove="Libraries\SharedLib\Classes\Delegates.cs" />
 		<Compile Remove="Libraries\SharedLib\Classes\Shared.cs" />
-		<Compile Remove="Libraries\SharedLib\Classes\PropertyChangeNotifier.cs" />
-
+	
 		<Compile Remove="Modules\Manager\ViewModels\Interfaces\IUserViewModelLocator.cs" />
 		<Compile Remove="Modules\Manager\Modules\Interfaces\IUserModuleSelectionProvider.cs" />
 
@@ -97,8 +95,8 @@
 		<Compile Include="Modules\Manager\Enumerations\**\*" />
 		<Compile Include="Libraries\IntegrationLib\Enumerations\**\*" />
 		<Compile Include="Libraries\Localization\Attributes\**\*" />
-		<Compile Include="Libraries\SharedLib\Management\Interfaces\**\*" />
 
+		<Compile Include="Modules\Client\EventArgs\**\*" />
 
 		<Compile Include="Libraries\IntegrationLib\Interfaces\IApplicationLicenseKey.cs" />
 		<Compile Include="Libraries\IntegrationLib\Interfaces\IApplicationLicense.cs" />	
@@ -115,6 +113,10 @@
 		<Compile Include="Libraries\IntegrationLib\Classes\License Management\ApplicationLicenseBase.cs" />
 		<Compile Include="Libraries\IntegrationLib\Classes\License Management\ApplicationLicense.cs" />
 		<Compile Include="Libraries\IntegrationLib\Classes\License Management\LicenseReservation.cs" />
+		<Compile Include="Libraries\IntegrationLib\Classes\HttpCredentials.cs" />
+		<Compile Include="Libraries\IntegrationLib\Classes\DispatcherPrincipal.cs" />
+		<Compile Include="Libraries\IntegrationLib\Classes\UserProfileBase.cs" />
+		<Compile Include="Libraries\IntegrationLib\Classes\TokenResult.cs" />
 	</ItemGroup>	
 
 </Project>
