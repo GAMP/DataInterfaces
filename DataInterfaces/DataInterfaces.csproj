@@ -101,7 +101,7 @@
 
 
 		<Compile Include="Libraries\IntegrationLib\Interfaces\IApplicationLicenseKey.cs" />
-		<Compile Include="Libraries\IntegrationLib\Interfaces\IApplicationLicense.cs" />
+		<Compile Include="Libraries\IntegrationLib\Interfaces\IApplicationLicense.cs" />	
 		<Compile Include="Libraries\IntegrationLib\Interfaces\ILicenseReservation.cs" />
 		<Compile Include="Libraries\IntegrationLib\Interfaces\IUserIdentity.cs" />
 		<Compile Include="Libraries\IntegrationLib\Interfaces\IAuthResult.cs" />
@@ -112,6 +112,9 @@
 		<Compile Include="Libraries\IntegrationLib\Interfaces\IPlugin.cs" />
 		<Compile Include="Libraries\IntegrationLib\Interfaces\IClaimType.cs" />
 		<Compile Include="Libraries\IntegrationLib\Interfaces\IDispatcherPrincipal.cs" />
+		<Compile Include="Libraries\IntegrationLib\Classes\License Management\ApplicationLicenseBase.cs" />
+		<Compile Include="Libraries\IntegrationLib\Classes\License Management\ApplicationLicense.cs" />
+		<Compile Include="Libraries\IntegrationLib\Classes\License Management\LicenseReservation.cs" />
 	</ItemGroup>	
 
 </Project>
