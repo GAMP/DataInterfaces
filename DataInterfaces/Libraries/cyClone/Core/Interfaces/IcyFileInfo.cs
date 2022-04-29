@@ -19,9 +19,9 @@ namespace CyClone.Core
 
         #region FUNCTIONS
 
-        Stream Open(FileMode Mode, FileAccess Access, FileShare Share, int BufferSize, FileOptions Options);
-        Stream Open(FileMode Mode, FileAccess Access);
-        Stream Open(FileMode Mode);
+        Stream Open(FileMode mode, FileAccess acess, FileShare share, int bufferSize, FileOptions options);
+        Stream Open(FileMode mode, FileAccess acess);
+        Stream Open(FileMode mode);
         Stream OpenRead(); 
 
         #endregion
