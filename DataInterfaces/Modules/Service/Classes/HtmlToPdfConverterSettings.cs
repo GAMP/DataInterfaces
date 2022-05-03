@@ -30,6 +30,10 @@
 
             //Set additional delay
             this.AdditionalDelay = 2000;
+
+            //Set viewport size
+            this.ViewportWidth = 1024;
+            this.ViewportHeight = 768;
         }
 
         /// <summary>
@@ -74,6 +78,16 @@
         /// Gets or sets a value indicating whether [split images].
         /// </summary>
         public bool SplitImages { get; set; }
+
+        /// <summary>
+        /// Set viewport width.
+        /// </summary>
+        public int ViewportWidth { get; set; }
+
+        /// <summary>
+        /// Set viewport height.
+        /// </summary>
+        public int ViewportHeight { get; set; }
     }
         
     /// <summary>
