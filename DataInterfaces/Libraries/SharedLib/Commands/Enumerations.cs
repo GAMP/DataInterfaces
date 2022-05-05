@@ -336,6 +336,7 @@ namespace SharedLib.Commands
         UserGroupDefaultRequiredInfoGet = 34,
         AgreementGet = 35,
         MobileExist = 36,
+        Grace = 37,
     }
     #endregion
 
