@@ -2118,6 +2118,7 @@ namespace SharedLib.Configuration
         /// </summary>
         [Category("Shell")]
         [Description("Specifies grace period time.")]
+        [DefaultValue(1)]
         [DataMember(Order = 13)]
         public int GracePeriodTime
         {
