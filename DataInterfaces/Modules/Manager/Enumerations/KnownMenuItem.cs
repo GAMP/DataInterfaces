@@ -75,6 +75,16 @@
         public static readonly string Shift_PayInOut = "fb21bf21-31a0-474a-bff0-515617f9b9de";
 
         /// <summary>
+        /// Shift manage.
+        /// </summary>
+        public static readonly string Shift_PrintXReport = "47a2409f-3c96-4ce2-a796-51ac8b36720b";
+
+        /// <summary>
+        /// Shift manage.
+        /// </summary>
+        public static readonly string Shift_PrintZReport = "de73742c-a7d5-4119-a6c4-1b7bd5693b61";
+
+        /// <summary>
         /// Hosts allow negative.
         /// </summary>
         public static readonly string Hosts_Allow_Negative = "a7864b22-c393-4d0e-9689-2c5cc9d10c9c";
