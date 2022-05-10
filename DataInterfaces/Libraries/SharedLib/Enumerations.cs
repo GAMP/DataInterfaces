@@ -2360,7 +2360,11 @@ namespace SharedLib
         /// <summary>
         /// Session is moving.
         /// </summary>
-        Move = 16 | Active
+        Move = 16 | Active,
+        /// <summary>
+        /// Grace period.
+        /// </summary>
+        Grace = 32 | Active
     }
     #endregion
 
