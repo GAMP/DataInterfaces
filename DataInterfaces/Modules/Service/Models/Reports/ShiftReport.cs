@@ -14,6 +14,7 @@ namespace ServerService
     public class ShiftReport
     {
         #region FIELDS
+        private Dictionary<int, PaymentSummary> withdrawals;
         private Dictionary<int, PaymentSummary> payments;
         private Dictionary<int, PaymentSummary> deposits;
         private Dictionary<int, PaymentSummary> refunds;
@@ -189,7 +190,16 @@ namespace ServerService
         [ProtoMember(17)]
         public Dictionary<int, PaymentSummary> Withdrawals
         {
-            get; set;
+            get
+            {
+                if (withdrawals == null)
+                    withdrawals = new Dictionary<int, PaymentSummary>();
+                return withdrawals;
+            }
+            set
+            {
+                withdrawals = value;
+            }
         }
 
         /// <summary>

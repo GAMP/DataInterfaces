@@ -2101,6 +2101,31 @@ namespace SharedLib.Configuration
             set;
         }
 
+        /// <summary>
+        /// Gets or sets if grace period is enabled.
+        /// </summary>
+        [Category("Shell")]
+        [Description("Enables or disables grace period.")]
+        [DataMember(Order = 12)]
+        public bool IsGracePeriodEnabled
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets the grace period time.
+        /// </summary>
+        [Category("Shell")]
+        [Description("Specifies grace period time.")]
+        [DefaultValue(1)]
+        [DataMember(Order = 13)]
+        public int GracePeriodTime
+        {
+            get;
+            set;
+        }
+
         #endregion       
     }
 
