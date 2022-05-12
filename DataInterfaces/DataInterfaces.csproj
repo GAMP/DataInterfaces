@@ -1,10 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		
+	<PropertyGroup>		
 		<TargetFrameworks>net6.0-windows;net6.0;net461</TargetFrameworks>
-		<Configurations>Debug;Release;NET_5_WIN_DEBUG;NET_5_WIN_RELEASE;NET_6_DEBUG;NET_6_RELEASE</Configurations>
-
+		<Configurations>Debug;Release;</Configurations>
 		<LangVersion>latest</LangVersion>
 		<Product>Data Interfaces Library</Product>
 		<Description>Data Interfaces Library</Description>
@@ -15,7 +13,6 @@
 		<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<NoWarn>1591;1570;1573;0612</NoWarn>
-
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(TargetFramework)'=='net6.0-windows' or '$(TargetFramework)'=='net461'">
@@ -26,13 +23,11 @@
 		
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)'=='Debug' or '$(Configuration)'=='Release'">
+	<PropertyGroup Condition="'$(Configuration)'=='Release'">
+		<Optimize>true</Optimize>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)'=='NET_5_WIN_DEBUG' or '$(Configuration)'=='NET_5_WIN_RELEASE'">
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)'=='NET_5_WIN_DEBUG' or '$(Configuration)'=='Debug'">
+	<PropertyGroup Condition="'$(Configuration)'=='Debug'">
 		<Optimize>false</Optimize>
 		<DefineConstants>DEBUG;TRACE</DefineConstants>
 	</PropertyGroup>
