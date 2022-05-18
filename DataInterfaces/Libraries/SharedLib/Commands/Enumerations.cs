@@ -942,7 +942,12 @@ namespace SharedLib.Commands
         PrintXReport = 309,
         PrintZReport = 310,
 
-        //max 310
+        UserAgreementGet = 311,
+        UserAgreementCreate = 312,
+        UserAgreementUpdate = 313,
+        UserAgreementDelete = 314,
+
+        //max 314
     }
     #endregion
 
