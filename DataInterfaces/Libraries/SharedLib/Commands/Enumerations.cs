@@ -337,6 +337,9 @@ namespace SharedLib.Commands
         AgreementGet = 35,
         MobileExist = 36,
         Grace = 37,
+        UserAgreementGet = 38,
+        UserAgreementStatesGet = 39,
+        UserAgreementSetState = 40,
     }
     #endregion
 
