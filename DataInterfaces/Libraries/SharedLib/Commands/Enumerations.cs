@@ -949,8 +949,9 @@ namespace SharedLib.Commands
         UserAgreementCreate = 312,
         UserAgreementUpdate = 313,
         UserAgreementDelete = 314,
+        UserAgreementResetStates = 315,
 
-        //max 314
+        //max 315
     }
     #endregion
 
