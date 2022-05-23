@@ -33,7 +33,12 @@ namespace ServerService.Web.MemberRegistration.Models
         public string CurrentCallingCode { get; set; }
 
         [DataMember]
-        public string Agreement { get; set; }
+        public Dictionary<int, System.Tuple<bool, string>> Agreements { get; set; }
+        
+        [DataMember]
+        public string ProcessedUserAgreements { get; set; }
 
+        [DataMember]
+        public string BusinessName { get; set; }
     }
 }
