@@ -18,8 +18,12 @@
         /// </summary>
         Void,
         /// <summary>
-        /// Set when invoice would cause user into negative balance.
+        /// Set when we try to create an invoice for a user with disabled credit.
         /// </summary>
-        NegativeBalanceNotAllowed,
+        NoCredit,
+        /// <summary>
+        /// Set when invoice would cause user to exceed credit limit.
+        /// </summary>
+        CreditLimitReached,
     }
 }
