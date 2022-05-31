@@ -73,6 +73,12 @@
         Withdraw,
 
         /// <summary>
+        /// Sale void deposits permission.
+        /// </summary>
+        [ClaimDescription(@"Sale", "VoidDeposit", new GizmoClaimTypes[] { Sale }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_VOID_DEPOSIT")]
+        VoidDeposits,
+
+        /// <summary>
         /// View invoices permission.
         /// </summary>
         [ClaimDescription(@"Sale", "ViewInvoices", "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_VIEW_INVOICES")]
@@ -131,6 +137,12 @@
         /// </summary>
         [ClaimDescription(@"Sale", "ModifyBillingOptions", "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_MODIFY_BILLING_OPTIONS")]
         SaleModifyBillingOptions,
+
+        /// <summary>
+        /// Sale modify billing options permission.
+        /// </summary>
+        [ClaimDescription(@"Sale", "AllowTimeCredit", "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_ALLOW_TIME_CREDIT")]
+        AllowTimeCredit,
         #endregion
 
         #region SHIFT
