@@ -75,8 +75,14 @@
         /// <summary>
         /// Sale void deposits permission.
         /// </summary>
-        [ClaimDescription(@"Sale", "VoidDeposit", new GizmoClaimTypes[] { Sale }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_VOID_DEPOSIT")]
+        [ClaimDescription(@"Sale", "VoidDeposits", new GizmoClaimTypes[] { Sale }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_VOID_DEPOSITS")]
         VoidDeposits,
+
+        /// <summary>
+        /// Sale allow time credit permission.
+        /// </summary>
+        [ClaimDescription(@"Sale", "AllowTimeCredit", new GizmoClaimTypes[] { Sale }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_ALLOW_TIME_CREDIT")]
+        AllowTimeCredit,
 
         /// <summary>
         /// View invoices permission.
@@ -138,11 +144,6 @@
         [ClaimDescription(@"Sale", "ModifyBillingOptions", "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_MODIFY_BILLING_OPTIONS")]
         SaleModifyBillingOptions,
 
-        /// <summary>
-        /// Sale modify billing options permission.
-        /// </summary>
-        [ClaimDescription(@"Sale", "AllowTimeCredit", "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_ALLOW_TIME_CREDIT")]
-        AllowTimeCredit,
         #endregion
 
         #region SHIFT
