@@ -17,5 +17,9 @@
         /// Set when we try to perform an action on a void invoice.
         /// </summary>
         Void,
+        /// <summary>
+        /// Set when invoice would cause user into negative balance.
+        /// </summary>
+        NegativeBalanceNotAllowed,
     }
 }
