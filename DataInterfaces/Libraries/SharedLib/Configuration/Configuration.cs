@@ -980,6 +980,19 @@ namespace SharedLib.Configuration
             get;
             set;
         }
+
+        /// <summary>
+        /// Gets or sets if should auto login guests after deposit or time sale.
+        /// </summary>
+        [DefaultValue(false)]
+        [Category("General")]
+        [Description("Enable or disable auto login guests after deposit or time sale.")]
+        [DataMember(Order = 11)]
+        public bool AutoLoginGuestsAfterDepositOrTimeSale
+        {
+            get;
+            set;
+        }
         #endregion
     }
 
