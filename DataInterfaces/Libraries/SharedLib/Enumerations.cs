@@ -2765,6 +2765,11 @@ namespace SharedLib
         /// Enable per user credit limit.
         /// </summary>
         EnablePerUserCreditLimit = 2,
+
+        SalesCreditLimited = 4,
+        SalesCreditUnlimited = 8,
+        TimeCreditLimited = 16,
+        TimeCreditUnlimited = 32,
     }
     #endregion
 

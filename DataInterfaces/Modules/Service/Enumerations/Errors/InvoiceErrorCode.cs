@@ -17,5 +17,13 @@
         /// Set when we try to perform an action on a void invoice.
         /// </summary>
         Void,
+        /// <summary>
+        /// Set when we try to create an invoice for a user with disabled credit.
+        /// </summary>
+        NoCredit,
+        /// <summary>
+        /// Set when invoice would cause user to exceed credit limit.
+        /// </summary>
+        CreditLimitReached,
     }
 }

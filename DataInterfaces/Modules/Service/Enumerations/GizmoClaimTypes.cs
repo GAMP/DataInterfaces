@@ -73,6 +73,30 @@
         Withdraw,
 
         /// <summary>
+        /// Sale void deposits permission.
+        /// </summary>
+        [ClaimDescription(@"Sale", "VoidDeposits", new GizmoClaimTypes[] { Sale }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_VOID_DEPOSITS")]
+        VoidDeposits,
+
+        /// <summary>
+        /// Sale manual open cash drawer permission.
+        /// </summary>
+        [ClaimDescription(@"Sale", "ManualOpenCashDrawer", new GizmoClaimTypes[] { Sale }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_MANUAL_OPEN_CASH_DRAWER")]
+        SaleManualOpenCashDrawer,
+
+        /// <summary>
+        /// Sale modify billing options permission.
+        /// </summary>
+        [ClaimDescription(@"Sale", "ModifyBillingOptions", new GizmoClaimTypes[] { Sale }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_MODIFY_BILLING_OPTIONS")]
+        SaleModifyBillingOptions,
+
+        /// <summary>
+        /// Sale allow time credit permission.
+        /// </summary>
+        [ClaimDescription(@"Sale", "AllowTimeCredit", new GizmoClaimTypes[] { Sale }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_ALLOW_TIME_CREDIT")]
+        AllowTimeCredit,
+
+        /// <summary>
         /// View invoices permission.
         /// </summary>
         [ClaimDescription(@"Sale", "ViewInvoices", "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_VIEW_INVOICES")]
@@ -120,17 +144,6 @@
         [ClaimDescription(@"Sale", "DeleteTimePurchases", "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_DELETE_TIME_PURCHASES")]
         SaleNoDeleteTimePurchases,
 
-        /// <summary>
-        /// Sale manual open cash drawer permission.
-        /// </summary>
-        [ClaimDescription(@"Sale", "ManualOpenCashDrawer", "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_MANUAL_OPEN_CASH_DRAWER")]
-        SaleManualOpenCashDrawer,
-
-        /// <summary>
-        /// Sale modify billing options permission.
-        /// </summary>
-        [ClaimDescription(@"Sale", "ModifyBillingOptions", "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_MODIFY_BILLING_OPTIONS")]
-        SaleModifyBillingOptions,
         #endregion
 
         #region SHIFT
