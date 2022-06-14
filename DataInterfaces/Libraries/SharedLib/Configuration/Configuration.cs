@@ -1324,6 +1324,16 @@ namespace SharedLib.Configuration
         }
 
         /// <summary>
+        /// Gets or sets if SMTP security.
+        /// </summary>
+        [DataMember()]
+        [DefaultValue(SMTPSecurity.SSL)]
+        public SMTPSecurity SMTPSecurity
+        {
+            get; set;
+        }
+
+        /// <summary>
         /// Gets or sets if SMTP is enabled.
         /// </summary>
         [DataMember()]
