@@ -19,6 +19,13 @@ namespace Client.ViewModels
         /// </summary>
         IExecutionChangedAwareCommand CancelCommand { get; set; }
 
+        bool ShowOldPassword { get; set; }
+
+        /// <summary>
+        /// Gets old password.
+        /// </summary>
+        string OldPassword { get; }
+
         /// <summary>
         /// Gets current password.
         /// </summary>

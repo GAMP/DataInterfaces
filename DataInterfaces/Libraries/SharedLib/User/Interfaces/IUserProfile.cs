@@ -109,10 +109,15 @@ namespace SharedLib.User
         /// </summary>
         bool IsEnabled { get; set; }
 
+        /// <summary>
+        /// Gets or sets if user can change password.
+        /// </summary>
+        bool CanChangePassword { get; set; }
+
         #endregion
 
         #region FUNCTIONS
-        
+
         /// <summary>
         /// Reset profile to default values.
         /// </summary>

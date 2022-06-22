@@ -33,6 +33,7 @@ namespace IntegrationLib
         protected UserRoles role;
         protected Sex sex = Sex.Male;
         protected bool isEnabled = true;
+        protected bool canChangePassword;
         #endregion
 
         #region PROPERTIES
@@ -292,6 +293,20 @@ namespace IntegrationLib
             }
         }
 
+        /// <summary>
+        /// Gets or sets if user can change password.
+        /// </summary>
+        [DataMember()]
+        public virtual bool CanChangePassword
+        {
+            get { return canChangePassword; }
+            set
+            {
+                canChangePassword = value;
+                RaisePropertyChanged("CanChangePassword");
+            }
+        }
+
         #endregion
 
         #region FUNCTIONS
@@ -315,6 +330,7 @@ namespace IntegrationLib
             Role = UserRoles.None;
             UserName = string.Empty;
             IsEnabled = false;
+            CanChangePassword = false;
         }
         #endregion
     }

@@ -340,6 +340,7 @@ namespace SharedLib.Commands
         UserAgreementGet = 38,
         UserAgreementStatesGet = 39,
         UserAgreementSetState = 40,
+        ChangeUserPassword = 41,
     }
     #endregion
 
