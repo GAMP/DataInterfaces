@@ -3989,6 +3989,22 @@ namespace SharedLib
         None = 0,
         [Localized("GLOBAL_TAX_SYSTEM_RUSSIA")]
         Russia = 1
-    } 
+    }
+    #endregion
+
+    #region SMTPSecurity
+    /// <summary>
+    /// SMTP Security.
+    /// </summary>
+    public enum SMTPSecurity
+    {
+        [Localized("SMTP_SECURITY_NONE")]
+        None = 0,
+        [Localized("SMTP_SECURITY_SSL")]
+        SSL = 1,
+        [Localized("SMTP_SECURITY_STARTTLS")]
+        STARTTLS = 2
+
+    }
     #endregion
 }
