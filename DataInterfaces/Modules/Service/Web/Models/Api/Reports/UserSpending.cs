@@ -57,10 +57,20 @@ namespace ServerService.Web.Api.Controllers.Models
         }
 
         /// <summary>
+        /// Total deposits spent.
+        /// </summary>
+        [DataMember()]
+        [ProtoMember(5)]
+        public decimal CreditCard
+        {
+            get; set;
+        }
+
+        /// <summary>
         /// Total points spent.
         /// </summary>
         [DataMember()]
-        [ProtoMember(4)]
+        [ProtoMember(6)]
         public int Points
         {
             get;set;
@@ -73,7 +83,7 @@ namespace ServerService.Web.Api.Controllers.Models
         [ProtoIgnore()]
         public decimal Total
         {
-            get { return Cash + Deposits; }
+            get { return Cash + Deposits + CreditCard; }
         }
 
         #endregion
