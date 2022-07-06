@@ -3228,7 +3228,11 @@ namespace SharedLib
         /// <summary>
         /// Indicates that method is non-fiscal and does not require a receipt.
         /// </summary>
-        NonFiscal=1,
+        NonFiscal = 1,
+        /// <summary>
+        /// Indicates that method is used in fiscal printer as credit card.
+        /// </summary>
+        IsCreditCard = 2
     }
     #endregion
 
