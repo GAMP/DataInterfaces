@@ -2932,6 +2932,16 @@ namespace SharedLib.Configuration
             get; set;
         }
 
+        /// <summary>
+        /// Indicates if user can lock UI.
+        /// </summary>
+        [DefaultValue(false)]
+        [DataMember()]
+        public bool AllowUserLock
+        {
+            get; set;
+        }
+
         #endregion
 
         #region OVERRIDES
