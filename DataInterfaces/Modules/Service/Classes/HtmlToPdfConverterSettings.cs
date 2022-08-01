@@ -89,7 +89,7 @@
         /// </summary>
         public int ViewportHeight { get; set; }
     }
-        
+
     /// <summary>
     /// Enumerator that represents the PDF page orientations. Default value is Portrait.
     /// </summary>
@@ -128,7 +128,7 @@
         /// Gets or sets the top margin size. Default value: 40 pixels
         /// </summary>
         public float Top { get; set; }
-        
+
         /// <summary>
         /// Gets or sets the right margin size. Default value: 40 pixels
         /// </summary>
@@ -154,5 +154,4 @@
         }
 
     }
-
 }
