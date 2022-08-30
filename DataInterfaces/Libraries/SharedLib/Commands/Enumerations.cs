@@ -952,7 +952,11 @@ namespace SharedLib.Commands
         UserAgreementDelete = 314,
         UserAgreementResetStates = 315,
 
-        //max 315
+        PaymentProviderMetadataGet=316,
+        StoreOptionsRead=317,
+        StoreOptionsWrite=318,
+
+        //max 318
     }
     #endregion
 
