@@ -3,13 +3,10 @@ using System.Runtime.Serialization;
 
 namespace Gizmo.Shared.Exceptions
 {
-    #region ERRORCODEEXCEPTIONBASE
-
     /// <summary>
     /// Generic error code exception.
     /// </summary>
     /// <typeparam name="TErrorCode">Error code type.</typeparam>
-    [DataContract()]
     [Serializable()]
     public abstract class ErrorCodeExceptionBase<TErrorCode> : Exception where TErrorCode : Enum
     {
@@ -94,10 +91,9 @@ namespace Gizmo.Shared.Exceptions
         /// <summary>
         /// Gets exception error code.
         /// </summary>
-        [DataMember()]
         public TErrorCode ErrorCode
         {
-            get; protected set;
+            get;
         }
 
         #endregion
@@ -115,6 +111,4 @@ namespace Gizmo.Shared.Exceptions
 
         #endregion
     }
-
-    #endregion
 }
