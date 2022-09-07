@@ -245,6 +245,17 @@ namespace SharedLib.Configuration
             get; set;
         }
 
+        /// <summary>
+        /// Gets or sets payment providers configuration.
+        /// </summary>
+        [Category("Payment Providers")]
+        [Description("Payment providers configuration.")]
+        [DataMember(Order = 4)]
+        public PaymentProvidersConfig PaymentProviders
+        {
+            get; set;
+        }
+
         #endregion
 
         #region OVERRIDES
@@ -2997,6 +3008,48 @@ namespace SharedLib.Configuration
         [DefaultValue(RotatorFileOrder.Random)]
         [DataMember()]
         public RotatorFileOrder FileOrder
+        {
+            get; set;
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #region PAYMENTPROVIDERSCONFIG
+    /// <summary>
+    /// Global payment providers configuration.
+    /// </summary>
+    [Serializable()]
+    [DataContract()]
+    public class PaymentProvidersConfig : ConfigBase
+    {
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets or sets if custom value is allowed.
+        /// </summary>
+        [DataMember()]
+        public bool AllowCustomValue
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets minimum amount.
+        /// </summary>
+        [DataMember()]
+        public decimal MinimumAmount
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets presets.
+        /// </summary>
+        [DataMember()]
+        [DefaultValue(null)]
+        public List<decimal> Presets
         {
             get; set;
         }
