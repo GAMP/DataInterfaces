@@ -341,6 +341,8 @@ namespace SharedLib.Commands
         UserAgreementStatesGet = 39,
         UserAgreementSetState = 40,
         ChangeUserPassword = 41,
+        OnlinePaymentsConfigurationGet = 42,
+        PaymentIntentCreate = 43,
     }
     #endregion
 

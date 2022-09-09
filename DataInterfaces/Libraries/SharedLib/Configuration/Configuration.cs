@@ -2953,6 +2953,16 @@ namespace SharedLib.Configuration
             get; set;
         }
 
+        /// <summary>
+        /// Indicates if user can deposit online.
+        /// </summary>
+        [DefaultValue(false)]
+        [DataMember()]
+        public bool ShowUserDepositOnline
+        {
+            get; set;
+        }
+
         #endregion
 
         #region OVERRIDES

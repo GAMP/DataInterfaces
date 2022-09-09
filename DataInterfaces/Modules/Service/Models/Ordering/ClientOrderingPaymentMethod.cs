@@ -50,6 +50,15 @@ namespace ServerService
             get;set;
         }
 
+        /// <summary>
+        /// Payment method is online.
+        /// </summary>
+        [ProtoMember(5)]
+        public bool IsOnline
+        {
+            get; set;
+        }
+
         #endregion
     }
 }
