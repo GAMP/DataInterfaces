@@ -1,4 +1,4 @@
-﻿using Localization;
+﻿using Gizmo;
 
 namespace ServerService.Reporting
 {
