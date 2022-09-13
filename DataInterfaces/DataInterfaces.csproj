@@ -61,7 +61,7 @@
 	<ItemGroup Condition="'$(TargetFramework)'=='net6.0'">
 		<Compile Remove="Modules\Client\**\*" />
 		<Compile Remove="Modules\Manager\**\*" />
-
+		<Compile Remove="Modules\Shared\Localization\**\*" />
 		<Compile Remove="Libraries\CoreLib\Queue\QueueEntryBase.cs" />
 
 		<Compile Remove="Libraries\SkinInterfaces\**\*" />
