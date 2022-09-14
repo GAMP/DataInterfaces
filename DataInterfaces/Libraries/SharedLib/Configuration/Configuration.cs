@@ -2956,7 +2956,7 @@ namespace SharedLib.Configuration
         /// <summary>
         /// Indicates if user can deposit online.
         /// </summary>
-        [DefaultValue(false)]
+        [DefaultValue(true)]
         [DataMember()]
         public bool ShowUserDepositOnline
         {
