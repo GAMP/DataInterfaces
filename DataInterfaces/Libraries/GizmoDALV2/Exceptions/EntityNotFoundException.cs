@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Gizmo.Server.Exceptions;
+using Gizmo.Server.Web.Api;
+using System;
 using System.Runtime.Serialization;
 
 namespace GizmoDALV2
@@ -11,6 +13,7 @@ namespace GizmoDALV2
     /// </remarks>
     [DataContract()]
     [Serializable()]
+    [ExceptionFilterCode(WebApiErrorCode.EntityNotFound)]
     public class EntityNotFoundException : Exception
     {
         #region CONSTRUCTOR
@@ -96,6 +99,8 @@ namespace GizmoDALV2
                 info.AddValue(nameof(Keys), Keys);
             }
         }
+
+        public override string Message => $"Specified entity Id {EntityKey}, type {EntityType} not found.";
 
         #endregion
 

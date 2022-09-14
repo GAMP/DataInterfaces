@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Gizmo.Server.Exceptions;
+using Gizmo.Server.Web.Api;
+using System;
 using System.Runtime.Serialization;
 
 namespace GizmoDALV2
@@ -9,6 +11,7 @@ namespace GizmoDALV2
     /// </summary>
     [DataContract()]
     [Serializable()]
+    [ExceptionFilterCode(WebApiErrorCode.NonUniqueEntityValue)]
     public class NonUniqueEntityValueException : Exception
     {
         #region CONSTRUCTOR
@@ -79,6 +82,8 @@ namespace GizmoDALV2
                 info.AddValue(nameof(Value), Value);
             }
         }
+
+        public override string Message => $"Specified entity {EntityType} property : {PropertyName} value : {Value} is not unique.";
 
         #endregion
 

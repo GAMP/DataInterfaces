@@ -61,13 +61,12 @@
 	<ItemGroup Condition="'$(TargetFramework)'=='net6.0'">
 		<Compile Remove="Modules\Client\**\*" />
 		<Compile Remove="Modules\Manager\**\*" />
-
+		<Compile Remove="Modules\Shared\Localization\**\*" />
 		<Compile Remove="Libraries\CoreLib\Queue\QueueEntryBase.cs" />
 
 		<Compile Remove="Libraries\SkinInterfaces\**\*" />
 		<Compile Remove="Libraries\SharedLib\ViewModels\**\*" />
 		<Compile Remove="Libraries\IntegrationLib\**\*" />
-		<Compile Remove="Libraries\Localization\**\*" />
 		<Compile Remove="Libraries\System\Windows\Data\**\*" />
 		<Compile Remove="Libraries\System\Windows\Forms\**\*" />
 		<Compile Remove="Libraries\GizmoShell\**\*" />
@@ -113,6 +112,10 @@
 		<Compile Include="Libraries\IntegrationLib\Classes\DispatcherPrincipal.cs" />
 		<Compile Include="Libraries\IntegrationLib\Classes\UserProfileBase.cs" />
 		<Compile Include="Libraries\IntegrationLib\Classes\TokenResult.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Gizmo.Shared\Gizmo.Shared.csproj" />
 	</ItemGroup>	
 
 </Project>

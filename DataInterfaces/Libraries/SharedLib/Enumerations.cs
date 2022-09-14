@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
-using Localization;
+using Gizmo;
 
 namespace SharedLib
 {
