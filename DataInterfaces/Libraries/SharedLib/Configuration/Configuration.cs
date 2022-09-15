@@ -1201,21 +1201,10 @@ namespace SharedLib.Configuration
         /// </summary>
         [DefaultValue("localhost")]
         [DataMember(Order = 7, IsRequired = false)]
-        public string ExternalHostName
+        public string ExternalHost
         {
             get; set;
         }
-
-        /// <summary>
-        /// Gets or sets external port.
-        /// </summary>
-        [DefaultValue(80)]
-        [Range(1, 65536)]
-        [DataMember(Order = 7, IsRequired = false)]
-        public int? ExternalPort
-        {
-            get; set;
-        } 
 
         #endregion
     }
