@@ -1452,40 +1452,6 @@ namespace SharedLib.Configuration
 
         #endregion
     }
-    #endregion
-
-    #region SMSGATEWAYPARAMETER
-    /// <summary>
-    /// SMS Gateway parameter configuration class.
-    /// </summary>
-    [DataContract()]
-    [Serializable()]
-    public class SMSGatewayParameter
-    {
-        #region PROPERTIES
-
-        /// <summary>
-        /// Gets or sets parameter name.
-        /// </summary>
-        [DataMember()]
-        [Required()]
-        public string Name
-        {
-            get; set;
-        }
-
-        /// <summary>
-        /// Gets or sets parameter value.
-        /// </summary>
-        [DataMember()]
-        [Required()]
-        public string Value
-        {
-            get; set;
-        }
-
-        #endregion
-    }
     #endregion    
 
     #endregion

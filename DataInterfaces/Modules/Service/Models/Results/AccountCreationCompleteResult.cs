@@ -1,5 +1,5 @@
-﻿using ProtoBuf;
-using SharedLib;
+﻿using Gizmo;
+using ProtoBuf;
 using System;
 using System.Runtime.Serialization;
 
