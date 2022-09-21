@@ -1946,34 +1946,6 @@ namespace SharedLib
     }
     #endregion
 
-    #region SMSGATEWAYCONFIRMATIONTYPE
-    public enum SmsGatewayConfirmationType
-    {
-        /// <summary>
-        /// SMS confrimation method.
-        /// </summary>
-        SMS = 0,
-        /// <summary>
-        /// Flash call confirmation method.
-        /// </summary>
-        FlashCall = 1,
-    } 
-    #endregion
-
-    #region SMSGATEWAYPARAMETEROPTION
-    /// <summary>
-    /// SMS gatweay parameter options.
-    /// </summary>
-    [Flags()]
-    public enum SMSGatewayParameterOption
-    {
-        /// <summary>
-        /// None.
-        /// </summary>
-        None = 0,
-    }
-    #endregion
-
     #region PRODUCTORDERPASSRESULT
     /// <summary>
     /// Product order pass result.

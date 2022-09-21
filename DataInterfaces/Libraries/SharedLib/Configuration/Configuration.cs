@@ -1374,10 +1374,6 @@ namespace SharedLib.Configuration
         }
         #endregion
 
-        #region FIELDS
-        private IList<SMSGatewayParameter> parameters;
-        #endregion
-
         #region PROPERTIES
 
         /// <summary>
@@ -1397,24 +1393,6 @@ namespace SharedLib.Configuration
         public string GatewayUrl
         {
             get; set;
-        }
-
-        /// <summary>
-        /// Gets gateway parameters.
-        /// </summary>
-        [DataMember()]
-        public IList<SMSGatewayParameter> Parameters
-        {
-            get
-            {
-                if (parameters == null)
-                    parameters = new List<SMSGatewayParameter>();
-                return parameters;
-            }
-            set
-            {
-                parameters = value;
-            }
         }
 
         /// <summary>
@@ -1502,16 +1480,6 @@ namespace SharedLib.Configuration
         [DataMember()]
         [Required()]
         public string Value
-        {
-            get; set;
-        }
-
-        /// <summary>
-        /// Gets or sets parameter options.
-        /// </summary>
-        [DefaultValue(SMSGatewayParameterOption.None)]
-        [DataMember(EmitDefaultValue = false)]
-        public SMSGatewayParameterOption Options
         {
             get; set;
         }
