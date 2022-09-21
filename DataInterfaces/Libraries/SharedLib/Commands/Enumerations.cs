@@ -957,8 +957,9 @@ namespace SharedLib.Commands
         PaymentProviderMetadataGet=316,
         StoreOptionsRead=317,
         StoreOptionsWrite=318,
+        SmsProviderMetadataGet = 319,
 
-        //max 318
+        //max 319
     }
     #endregion
 
