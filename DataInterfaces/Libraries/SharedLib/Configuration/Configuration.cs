@@ -661,7 +661,7 @@ namespace SharedLib.Configuration
         [DefaultValue("0.0.0.0")]
         [Description("Network bind address for client connections.")]
         [DataMember(Order = 1)]
-        [IPV4Annotation()]
+        [IPV4ValidationAttribute()]
         public string BindIpAddress
         {
             get;
@@ -716,7 +716,7 @@ namespace SharedLib.Configuration
         [Category("Network")]
         [DefaultValue("224.0.0.0")]
         [Description("Multicast data transmission address.")]
-        [IPV4Annotation()]
+        [IPV4ValidationAttribute()]
         [DataMember(Order = 5)]
         public string MulticastIpAddress
         {
@@ -1347,7 +1347,7 @@ namespace SharedLib.Configuration
         /// Gets or sets reply to address.
         /// </summary>
         [DataMember()]
-        [EmailNullEmpty()]
+        [EmailNullEmptyValidation()]
         public string ReplyToAddress
         {
             get; set;

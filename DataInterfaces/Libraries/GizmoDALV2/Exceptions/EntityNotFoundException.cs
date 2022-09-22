@@ -1,5 +1,4 @@
 ﻿using Gizmo.Server.Exceptions;
-using Gizmo.Server.Web.Api;
 using System;
 using System.Runtime.Serialization;
 
@@ -13,7 +12,7 @@ namespace GizmoDALV2
     /// </remarks>
     [DataContract()]
     [Serializable()]
-    [ExceptionFilterCode(WebApiErrorCode.EntityNotFound)]
+    [ExceptionFilterCode(ExceptionCode.EntityNotFound)]
     public class EntityNotFoundException : Exception
     {
         #region CONSTRUCTOR

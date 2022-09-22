@@ -1,12 +1,12 @@
-﻿using System;
-
-namespace ServerService
+﻿namespace ServerService
 {
     /// <summary>
     /// Mail Attachement.
     /// </summary>
-    public class MailAttachement
+    public sealed class MailAttachement
     {
+        #region PROPERTIES
+        
         /// <summary>
         /// Name of the attached file.
         /// </summary>
@@ -15,7 +15,9 @@ namespace ServerService
         /// <summary>
         /// Buffer of the attached file.
         /// </summary>
-        public byte[] Data { get; set; }
+        public byte[] Data { get; set; } 
+
+        #endregion
 
     }
 }

@@ -22,7 +22,6 @@ namespace ServerService.Services
         /// <param name="subject">Subject of the mail.</param>
         /// <param name="attachements">List of MailAttachement to attach to mail.</param>
         /// <param name="ct">CancellationToken</param>
-        /// <returns></returns>
         Task SendMailAsync(string html, string mailSender, string senderName, string recepient, string recepientName, string subject, List<MailAttachement> attachements, CancellationToken ct = default); 
 
         #endregion
