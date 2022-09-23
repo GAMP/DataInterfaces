@@ -1387,20 +1387,10 @@ namespace SharedLib.Configuration
         }
 
         /// <summary>
-        /// Gets or sets gateway url.
+        /// Gets or sets current provider guid.
         /// </summary>
         [DataMember()]
-        public string GatewayUrl
-        {
-            get; set;
-        }
-
-        /// <summary>
-        /// Gets or sets selected provider.
-        /// </summary>
-        [DefaultValue(SMSGatewayProvider.Custom)]
-        [DataMember()]
-        public SMSGatewayProvider Provider
+        public Guid? Current
         {
             get; set;
         }
