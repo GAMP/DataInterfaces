@@ -343,6 +343,7 @@ namespace SharedLib.Commands
         ChangeUserPassword = 41,
         OnlinePaymentsConfigurationGet = 42,
         PaymentIntentCreate = 43,
+        RecoveryMethodGet=44,
     }
     #endregion
 
