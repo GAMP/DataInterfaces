@@ -1,5 +1,4 @@
 ﻿using Gizmo;
-using SharedLib;
 using System.Runtime.Serialization;
 
 namespace ServerService.Web.MemberRegistration.Models
