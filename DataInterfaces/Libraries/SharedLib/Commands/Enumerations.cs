@@ -344,6 +344,7 @@ namespace SharedLib.Commands
         OnlinePaymentsConfigurationGet = 42,
         PaymentIntentCreate = 43,
         RecoveryMethodGet=44,
+        TokenIsValidGet=45,
     }
     #endregion
 
