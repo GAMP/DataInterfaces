@@ -1878,6 +1878,18 @@ namespace SharedLib.Configuration
             get; set;
         }
 
+        /// <summary>
+        /// Gets or set user password recovery method.
+        /// </summary>
+        [Category("General")]
+        [Description("Gets or sets user password recovery method.")]
+        [DefaultValue(Gizmo.UserRecoveryMethod.None)]
+        [DataMember(Order = 8)]
+        public Gizmo.UserRecoveryMethod RecoveryMethod
+        {
+            get; set;
+        }
+
         #endregion
     }
 
