@@ -1123,7 +1123,7 @@ namespace SharedLib.Configuration
     public class ServiceWebConfig : ConfigBase
     {
         #region PROPERTIES
-        
+
         /// <summary>
         /// Gets or sets if web portal enabled.
         /// </summary>
@@ -1462,7 +1462,7 @@ namespace SharedLib.Configuration
         [DataMember()]
         public string BusinessVatId
         {
-            get;set;
+            get; set;
         }
 
         /// <summary>
@@ -1482,7 +1482,7 @@ namespace SharedLib.Configuration
         [DefaultValue(GlobalTaxSystems.None)]
         public GlobalTaxSystems GlobalTaxSystem
         {
-            get;set;
+            get; set;
         }
 
         //TODO: A REPLACE INT WITH FiscalPrinterTaxSystemTypes enum
@@ -1514,7 +1514,7 @@ namespace SharedLib.Configuration
         [DefaultValue(false)]
         public bool TreatDepositsAsService
         {
-            get;set;
+            get; set;
         }
 
         /// <summary>
@@ -1526,7 +1526,7 @@ namespace SharedLib.Configuration
         [DataMember()]
         public string DepositServiceName
         {
-            get;set;
+            get; set;
         }
 
         /// <summary>
@@ -1536,7 +1536,7 @@ namespace SharedLib.Configuration
         [DefaultValue(false)]
         public bool EnableFiscalPrinter
         {
-            get;set;
+            get; set;
         }
 
         #endregion
@@ -1841,7 +1841,7 @@ namespace SharedLib.Configuration
         {
             get; set;
         }
-        
+
         /// <summary>
         /// Gets or set client registration verification method.
         /// </summary>
@@ -1863,7 +1863,7 @@ namespace SharedLib.Configuration
         [DataMember(Order = 6)]
         public bool IsConcurrentExecutionLimitEnabled
         {
-            get;set;
+            get; set;
         }
 
         /// <summary>
@@ -2728,7 +2728,7 @@ namespace SharedLib.Configuration
         {
             get; set;
         }
-        
+
         #endregion
     }
     #endregion
@@ -2845,7 +2845,7 @@ namespace SharedLib.Configuration
         [DataMember()]
         public AppSort DefaultAppSort
         {
-            get;set;
+            get; set;
         }
 
         /// <summary>
@@ -2985,6 +2985,24 @@ namespace SharedLib.Configuration
         [DataMember()]
         [DefaultValue(null)]
         public List<decimal> Presets
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets payment success redirect url.
+        /// </summary>
+        [DefaultValue("https://www.gizmopowered.net/payment/success")]
+        public string PaymentSuccessUrl
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets payment cancel redirect url.
+        /// </summary>
+        [DefaultValue("https://www.gizmopowered.net/payment/failure")]
+        public string PaymentCancelUrl
         {
             get; set;
         }
