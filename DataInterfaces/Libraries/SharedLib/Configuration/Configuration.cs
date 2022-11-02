@@ -183,6 +183,7 @@ namespace SharedLib.Configuration
             Network = new GlobalNetworkCfg();
             Subscription = new GlobalSubscriptionConfig();
             Reservation = new ReservationConfig();
+            PaymentProviders = new PaymentProvidersConfig();
         }
         #endregion
 
@@ -2888,6 +2889,16 @@ namespace SharedLib.Configuration
             get; set;
         }
 
+        /// <summary>
+        /// Indicates if host qr code should be shown.
+        /// </summary>
+        [DefaultValue(false)]
+        [DataMember()]
+        public bool ShowHostQrCode
+        {
+            get;set;
+        }
+
         #endregion
 
         #region OVERRIDES
@@ -2993,6 +3004,7 @@ namespace SharedLib.Configuration
         /// Gets payment success redirect url.
         /// </summary>
         [DefaultValue("https://www.gizmopowered.net/payment/success")]
+        [DataMember()]
         public string PaymentSuccessUrl
         {
             get; set;
@@ -3002,6 +3014,7 @@ namespace SharedLib.Configuration
         /// Gets payment cancel redirect url.
         /// </summary>
         [DefaultValue("https://www.gizmopowered.net/payment/failure")]
+        [DataMember()]
         public string PaymentCancelUrl
         {
             get; set;
