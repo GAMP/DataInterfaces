@@ -2894,7 +2894,7 @@ namespace SharedLib.Configuration
         /// </summary>
         [DefaultValue(false)]
         [DataMember()]
-        public bool ShowHostQrCode
+        public bool ShowHostQRCode
         {
             get;set;
         }

@@ -59,6 +59,15 @@ namespace ServerService
             get; set;
         }
 
+        /// <summary>
+        /// Indicates client payment method.
+        /// </summary>
+        [ProtoMember(6)]
+        public bool IsClient
+        {
+            get;set;
+        }
+
         #endregion
     }
 }
