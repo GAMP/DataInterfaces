@@ -38,7 +38,7 @@ namespace ServerService.Web.Api.Controllers.Models
         /// Optional first name.
         /// </summary>
         [StringLength(45)]
-        [CharacterOnly()]
+        [CharacterOnlyValidation()]
         [DataMember()]
         public string FirstName
         {
@@ -49,7 +49,7 @@ namespace ServerService.Web.Api.Controllers.Models
         /// Optional last name.
         /// </summary>
         [StringLength(45)]
-        [CharacterOnly()]
+        [CharacterOnlyValidation()]
         [DataMember()]
         public string LastName
         {
@@ -109,7 +109,7 @@ namespace ServerService.Web.Api.Controllers.Models
         /// Optional phone number.
         /// </summary>
         [StringLength(20)]
-        [PhoneNullEmpty()]
+        [PhoneNullEmptyValidation()]
         [DataMember()]
         public string Phone
         {
@@ -120,7 +120,7 @@ namespace ServerService.Web.Api.Controllers.Models
         /// Optional mobile phone number.
         /// </summary>
         [StringLength(20)]
-        [PhoneNullEmpty()]
+        [PhoneNullEmptyValidation()]
         [DataMember()]
         public string MobilePhone
         {
@@ -131,7 +131,7 @@ namespace ServerService.Web.Api.Controllers.Models
         /// Optional email.
         /// </summary>
         [StringLength(254)]
-        [EmailNullEmpty()]
+        [EmailNullEmptyValidation()]
         [DataMember()]
         public string Email
         {

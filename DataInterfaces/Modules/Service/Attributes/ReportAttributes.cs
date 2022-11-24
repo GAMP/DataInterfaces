@@ -2,7 +2,10 @@
 
 namespace ServerService
 {
-    public class HiddenReportAttribute : Attribute
+    /// <summary>
+    /// Hidden report attribute.
+    /// </summary>
+    public sealed class HiddenReportAttribute : Attribute
     {
     }
 }

@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Markup;
 using System.IO;
 using CoreLib;
+using Gizmo;
 
 [assembly: XmlnsDefinition("http://schemas.root-project.org/xaml/presentation", "Localization.Engine")]
 [assembly: XmlnsDefinition("http://schemas.root-project.org/xaml/presentation", "Localization.Extensions")]

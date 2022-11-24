@@ -4,7 +4,7 @@
     /// Represents a wildcard running on the
     /// <see cref="RegularExpressions"/> engine.
     /// </summary>
-    public class Wildcard : Regex
+    public sealed class Wildcard : Regex
     {
         #region CONSTRUCTOR
 

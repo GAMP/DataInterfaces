@@ -18,6 +18,11 @@
         int DisplayOrder { get; }
 
         /// <summary>
+        /// Gets if payment method is client.
+        /// </summary>
+        bool IsClient { get; }
+
+        /// <summary>
         /// Gets if method is built in.
         /// </summary>
         bool IsBuiltInMethod { get; }

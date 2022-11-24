@@ -343,6 +343,11 @@ namespace SharedLib.Commands
         ChangeUserPassword = 41,
         OnlinePaymentsConfigurationGet = 42,
         PaymentIntentCreate = 43,
+        RecoveryMethodGet = 44,
+        TokenIsValidGet = 45,
+        RecoveryByMobileStart = 46,
+        RecoveryByEmailStart = 47,
+        RecoveryPasswordComplete = 48,
     }
     #endregion
 
@@ -957,8 +962,9 @@ namespace SharedLib.Commands
         PaymentProviderMetadataGet=316,
         StoreOptionsRead=317,
         StoreOptionsWrite=318,
+        SmsProviderMetadataGet = 319,
 
-        //max 318
+        //max 319
     }
     #endregion
 

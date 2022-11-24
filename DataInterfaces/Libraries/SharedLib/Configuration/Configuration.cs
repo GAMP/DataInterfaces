@@ -183,6 +183,7 @@ namespace SharedLib.Configuration
             Network = new GlobalNetworkCfg();
             Subscription = new GlobalSubscriptionConfig();
             Reservation = new ReservationConfig();
+            PaymentProviders = new PaymentProvidersConfig();
         }
         #endregion
 
@@ -661,7 +662,7 @@ namespace SharedLib.Configuration
         [DefaultValue("0.0.0.0")]
         [Description("Network bind address for client connections.")]
         [DataMember(Order = 1)]
-        [IPV4Annotation()]
+        [IPV4ValidationAttribute()]
         public string BindIpAddress
         {
             get;
@@ -716,7 +717,7 @@ namespace SharedLib.Configuration
         [Category("Network")]
         [DefaultValue("224.0.0.0")]
         [Description("Multicast data transmission address.")]
-        [IPV4Annotation()]
+        [IPV4ValidationAttribute()]
         [DataMember(Order = 5)]
         public string MulticastIpAddress
         {
@@ -1123,7 +1124,7 @@ namespace SharedLib.Configuration
     public class ServiceWebConfig : ConfigBase
     {
         #region PROPERTIES
-        
+
         /// <summary>
         /// Gets or sets if web portal enabled.
         /// </summary>
@@ -1201,21 +1202,10 @@ namespace SharedLib.Configuration
         /// </summary>
         [DefaultValue("localhost")]
         [DataMember(Order = 7, IsRequired = false)]
-        public string ExternalHostName
+        public string ExternalHost
         {
             get; set;
         }
-
-        /// <summary>
-        /// Gets or sets external port.
-        /// </summary>
-        [DefaultValue(80)]
-        [Range(1, 65536)]
-        [DataMember(Order = 7, IsRequired = false)]
-        public int? ExternalPort
-        {
-            get; set;
-        } 
 
         #endregion
     }
@@ -1358,7 +1348,7 @@ namespace SharedLib.Configuration
         /// Gets or sets reply to address.
         /// </summary>
         [DataMember()]
-        [EmailNullEmpty()]
+        [EmailNullEmptyValidation()]
         public string ReplyToAddress
         {
             get; set;
@@ -1385,10 +1375,6 @@ namespace SharedLib.Configuration
         }
         #endregion
 
-        #region FIELDS
-        private IList<SMSGatewayParameter> parameters;
-        #endregion
-
         #region PROPERTIES
 
         /// <summary>
@@ -1402,38 +1388,10 @@ namespace SharedLib.Configuration
         }
 
         /// <summary>
-        /// Gets or sets gateway url.
+        /// Gets or sets current provider guid.
         /// </summary>
         [DataMember()]
-        public string GatewayUrl
-        {
-            get; set;
-        }
-
-        /// <summary>
-        /// Gets gateway parameters.
-        /// </summary>
-        [DataMember()]
-        public IList<SMSGatewayParameter> Parameters
-        {
-            get
-            {
-                if (parameters == null)
-                    parameters = new List<SMSGatewayParameter>();
-                return parameters;
-            }
-            set
-            {
-                parameters = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets selected provider.
-        /// </summary>
-        [DefaultValue(SMSGatewayProvider.Custom)]
-        [DataMember()]
-        public SMSGatewayProvider Provider
+        public Guid? Current
         {
             get; set;
         }
@@ -1485,50 +1443,6 @@ namespace SharedLib.Configuration
 
         #endregion
     }
-    #endregion
-
-    #region SMSGATEWAYPARAMETER
-    /// <summary>
-    /// SMS Gateway parameter configuration class.
-    /// </summary>
-    [DataContract()]
-    [Serializable()]
-    public class SMSGatewayParameter
-    {
-        #region PROPERTIES
-
-        /// <summary>
-        /// Gets or sets parameter name.
-        /// </summary>
-        [DataMember()]
-        [Required()]
-        public string Name
-        {
-            get; set;
-        }
-
-        /// <summary>
-        /// Gets or sets parameter value.
-        /// </summary>
-        [DataMember()]
-        [Required()]
-        public string Value
-        {
-            get; set;
-        }
-
-        /// <summary>
-        /// Gets or sets parameter options.
-        /// </summary>
-        [DefaultValue(SMSGatewayParameterOption.None)]
-        [DataMember(EmitDefaultValue = false)]
-        public SMSGatewayParameterOption Options
-        {
-            get; set;
-        }
-
-        #endregion
-    }
     #endregion    
 
     #endregion
@@ -1549,7 +1463,7 @@ namespace SharedLib.Configuration
         [DataMember()]
         public string BusinessVatId
         {
-            get;set;
+            get; set;
         }
 
         /// <summary>
@@ -1569,7 +1483,7 @@ namespace SharedLib.Configuration
         [DefaultValue(GlobalTaxSystems.None)]
         public GlobalTaxSystems GlobalTaxSystem
         {
-            get;set;
+            get; set;
         }
 
         //TODO: A REPLACE INT WITH FiscalPrinterTaxSystemTypes enum
@@ -1601,7 +1515,7 @@ namespace SharedLib.Configuration
         [DefaultValue(false)]
         public bool TreatDepositsAsService
         {
-            get;set;
+            get; set;
         }
 
         /// <summary>
@@ -1613,7 +1527,7 @@ namespace SharedLib.Configuration
         [DataMember()]
         public string DepositServiceName
         {
-            get;set;
+            get; set;
         }
 
         /// <summary>
@@ -1623,7 +1537,7 @@ namespace SharedLib.Configuration
         [DefaultValue(false)]
         public bool EnableFiscalPrinter
         {
-            get;set;
+            get; set;
         }
 
         #endregion
@@ -1928,7 +1842,7 @@ namespace SharedLib.Configuration
         {
             get; set;
         }
-        
+
         /// <summary>
         /// Gets or set client registration verification method.
         /// </summary>
@@ -1950,7 +1864,7 @@ namespace SharedLib.Configuration
         [DataMember(Order = 6)]
         public bool IsConcurrentExecutionLimitEnabled
         {
-            get;set;
+            get; set;
         }
 
         /// <summary>
@@ -1961,6 +1875,18 @@ namespace SharedLib.Configuration
         [DefaultValue(false)]
         [DataMember(Order = 7)]
         public bool IsWebRegistrationEnabled
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or set user password recovery method.
+        /// </summary>
+        [Category("General")]
+        [Description("Gets or sets user password recovery method.")]
+        [DefaultValue(Gizmo.UserRecoveryMethod.None)]
+        [DataMember(Order = 8)]
+        public Gizmo.UserRecoveryMethod RecoveryMethod
         {
             get; set;
         }
@@ -2803,7 +2729,7 @@ namespace SharedLib.Configuration
         {
             get; set;
         }
-        
+
         #endregion
     }
     #endregion
@@ -2920,7 +2846,7 @@ namespace SharedLib.Configuration
         [DataMember()]
         public AppSort DefaultAppSort
         {
-            get;set;
+            get; set;
         }
 
         /// <summary>
@@ -2961,6 +2887,16 @@ namespace SharedLib.Configuration
         public bool ShowUserDepositOnline
         {
             get; set;
+        }
+
+        /// <summary>
+        /// Indicates if host qr code should be shown.
+        /// </summary>
+        [DefaultValue(false)]
+        [DataMember()]
+        public bool ShowHostQRCode
+        {
+            get;set;
         }
 
         #endregion
@@ -3060,6 +2996,26 @@ namespace SharedLib.Configuration
         [DataMember()]
         [DefaultValue(null)]
         public List<decimal> Presets
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets payment success redirect url.
+        /// </summary>
+        [DefaultValue("https://www.gizmopowered.net/payment/success")]
+        [DataMember()]
+        public string PaymentSuccessUrl
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets payment cancel redirect url.
+        /// </summary>
+        [DefaultValue("https://www.gizmopowered.net/payment/failure")]
+        [DataMember()]
+        public string PaymentCancelUrl
         {
             get; set;
         }
