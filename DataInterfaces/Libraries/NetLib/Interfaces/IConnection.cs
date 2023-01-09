@@ -122,6 +122,12 @@ namespace NetLib
         /// <returns>Bytes transfered.</returns>
         int Send(byte[] buffer, int offset, int size);
 
+        /// <summary>
+        /// Connects to specified URI.
+        /// </summary>
+        /// <param name="uri"></param>
+        public void Connect(Uri uri);
+
         #endregion
     }
 }

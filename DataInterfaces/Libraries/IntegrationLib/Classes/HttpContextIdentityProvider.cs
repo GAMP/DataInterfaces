@@ -14,7 +14,8 @@ namespace IntegrationLib
         /// </summary>
         public static HttpContextIdentityProvider Current
         {
-            get; set;
+            get; 
+            set;
         }
 
         /// <summary>

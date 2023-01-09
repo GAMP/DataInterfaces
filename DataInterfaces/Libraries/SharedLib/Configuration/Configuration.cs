@@ -2188,6 +2188,19 @@ namespace SharedLib.Configuration
             get; set;
         }
 
+        /// <summary>
+        /// Gets service connection type.
+        /// 0 TCP.
+        /// 1 Web Socket (ws).
+        /// 2 Secure Web Socket (wss).
+        /// </summary>
+        [DefaultValue(0)]
+        [DataMember()]
+        public int Type
+        {
+            get;set;
+        }
+
         #endregion
 
         #region IComparable
