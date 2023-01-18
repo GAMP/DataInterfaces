@@ -115,7 +115,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Submodules\Gizmo.Shared\Gizmo.Shared.csproj" />
+	  <ProjectReference Include="..\..\Gizmo.Shared\Gizmo.Shared.csproj" />
 	</ItemGroup>	
 
 </Project>
