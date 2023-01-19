@@ -5,6 +5,10 @@ VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataInterfaces", "DataInterfaces\DataInterfaces.csproj", "{2B78ABDF-4EFD-4344-985E-B41FBDADA5AA}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gizmo.Shared", "Submodules\Gizmo.Shared\Gizmo.Shared.csproj", "{8E6F1784-E7EC-4D44-A02B-5CC6A6C4F96A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{73611344-0D90-4ACF-BC9B-6A012F10C2B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +19,16 @@ Global
 		{2B78ABDF-4EFD-4344-985E-B41FBDADA5AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B78ABDF-4EFD-4344-985E-B41FBDADA5AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B78ABDF-4EFD-4344-985E-B41FBDADA5AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E6F1784-E7EC-4D44-A02B-5CC6A6C4F96A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E6F1784-E7EC-4D44-A02B-5CC6A6C4F96A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E6F1784-E7EC-4D44-A02B-5CC6A6C4F96A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E6F1784-E7EC-4D44-A02B-5CC6A6C4F96A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8E6F1784-E7EC-4D44-A02B-5CC6A6C4F96A} = {73611344-0D90-4ACF-BC9B-6A012F10C2B5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {91139F51-794A-4CF3-ADE2-7694A248B3F8}
