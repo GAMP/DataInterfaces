@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace GizmoDALV2
 {
@@ -9,7 +10,7 @@ namespace GizmoDALV2
     public interface IDbContextProvider<TContext> where TContext : IDisposable
     {
         #region FUNCTIONS
-        
+
         /// <summary>
         /// Gets database context.
         /// </summary>
@@ -20,7 +21,19 @@ namespace GizmoDALV2
         /// Gets non-proxy database context.
         /// </summary>
         /// <returns>New context instance.</returns>
-        TContext GetDbNonProxyContext(); 
+        TContext GetDbNonProxyContext();
+
+        /// <summary>
+        /// Gets database context.
+        /// </summary>
+        /// <returns>New context instance.</returns>
+        Task<TContext> GetDbContextAsync();
+
+        /// <summary>
+        /// Gets non-proxy database context.
+        /// </summary>
+        /// <returns>New context instance.</returns>
+        Task<TContext> GetDbNonProxyContextAsync();
 
         #endregion
     }
