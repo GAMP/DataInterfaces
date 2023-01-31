@@ -1,11 +1,9 @@
-﻿using System.Threading.Tasks;
-
-namespace GizmoDALV2
+﻿namespace GizmoDALV2
 {
     /// <summary>
-    /// Database GIZMO database context provider interface.
+    /// Database context provider interface.
     /// </summary>
-    public interface IGizmoDbContextProvider
+    public interface IGizmoDbContextProvider //TODO: IDisposable?
     {
         #region FUNCTIONS
 
@@ -20,18 +18,6 @@ namespace GizmoDALV2
         /// </summary>
         /// <returns>New context instance.</returns>
         IGizmoDBContext GetDbNonProxyContext();
-
-        /// <summary>
-        /// Gets database context.
-        /// </summary>
-        /// <returns>New context instance.</returns>
-        Task<IGizmoDBContext> GetDbContextAsync();
-
-        /// <summary>
-        /// Gets non-proxy database context.
-        /// </summary>
-        /// <returns>New context instance.</returns>
-        Task<IGizmoDBContext> GetDbNonProxyContextAsync();
 
         #endregion
     }

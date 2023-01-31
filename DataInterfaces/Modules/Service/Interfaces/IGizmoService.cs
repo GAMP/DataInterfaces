@@ -14,7 +14,7 @@ namespace ServerService
         ILicenseManagmentService,
         IConfigurableService,
         IUserService,
-        IDbContextProvider<IGizmoDBContext>,
+        IGizmoDbContextProvider,
         IReportsService,
         IBackupService,
         ISettingsService
