@@ -23,12 +23,12 @@ namespace Client
         /// <summary>
         /// Occurs on client shutdown.
         /// </summary>
-        event EventHandler<ShutDownEventArgs> ShutDown;
+        event EventHandler<Gizmo.Client.ShutDownEventArgs> ShutDown;
 
         /// <summary>
         /// Occurs on client startup.
         /// </summary>
-        event EventHandler<StartUpEventArgs> StartUp;
+        event EventHandler<Gizmo.Client.StartUpEventArgs> StartUp;
 
         /// <summary>
         /// Occurs once user updates his profile.
@@ -38,7 +38,7 @@ namespace Client
         /// <summary>
         /// Occurs once user updates his password.
         /// </summary>
-        event EventHandler<UserPasswordChangeEventArgs> UserPasswordChange;
+        event EventHandler<Gizmo.Client.UserPasswordChangeEventArgs> UserPasswordChange;
 
         /// <summary>
         /// Occurs on user login state change.
@@ -48,17 +48,17 @@ namespace Client
         /// <summary>
         /// Occurs on input lock state change.
         /// </summary>
-        event EventHandler<LockStateEventArgs> LockStateChange;
+        event EventHandler<Gizmo.Client.LockStateEventArgs> LockStateChange;
 
         /// <summary>
         /// Occurs on client id change.
         /// </summary>
-        event EventHandler<IdChangeEventArgs> IdChange;
+        event EventHandler<Gizmo.Client.IdChangeEventArgs> IdChange;
 
         /// <summary>
         /// Occurs on securtiy change.
         /// </summary>
-        event EventHandler<SecurityStateArgs> SecurityStateChange;
+        event EventHandler<Gizmo.Client.SecurityStateArgs> SecurityStateChange;
 
         /// <summary>
         /// Occurs on execution context collection change.
@@ -78,7 +78,7 @@ namespace Client
         /// <summary>
         /// Occurs on out of order state change.
         /// </summary>
-        event EventHandler<OutOfOrderStateEventArgs> OutOfOrderStateChange;
+        event EventHandler<Gizmo.Client.OutOfOrderStateEventArgs> OutOfOrderStateChange;
 
         /// <summary>
         /// Occurs once application was rated by user.
@@ -88,22 +88,22 @@ namespace Client
         /// <summary>
         /// Occurs on app profile configuration change.
         /// </summary>
-        event EventHandler<ProfilesChangeEventArgs> AppProfilesChange;
+        event EventHandler<Gizmo.Client.ProfilesChangeEventArgs> AppProfilesChange;
 
         /// <summary>
         /// Occurs on security profiles configuration change.
         /// </summary>
-        event EventHandler<ProfilesChangeEventArgs> SecurityProfilesChange;
+        event EventHandler<Gizmo.Client.ProfilesChangeEventArgs> SecurityProfilesChange;
 
         /// <summary>
         /// Occurs on group configuration change.
         /// </summary>
-        event EventHandler<EventArgs> GroupConfigurationChange;
+        event EventHandler<Gizmo.Client.GroupConfigurationChangeEventArgs> GroupConfigurationChange;
 
         /// <summary>
         /// Occurs on maintenace mode change.
         /// </summary>
-        event EventHandler<MaintenanceEventArgs> MaintenanceModeChange;
+        event EventHandler<Gizmo.Client.MaintenanceEventArgs> MaintenanceModeChange;
 
         /// <summary>
         /// Occurs on order status change.
