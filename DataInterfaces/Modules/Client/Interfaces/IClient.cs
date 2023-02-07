@@ -68,12 +68,12 @@ namespace Client
         /// <summary>
         /// Occurs on execution context state change.
         /// </summary>
-        event EventHandler<ExecutionContextStateArgs> ExecutionContextStateChage;
+        event EventHandler<Gizmo.Client.ExecutionContextStateArgs> ExecutionContextStateChage;
 
         /// <summary>
         /// Occurs on current activity change.
         /// </summary>
-        event EventHandler<ClientActivityEventArgs> ActivityChange;
+        event EventHandler<Gizmo.Client.ClientActivityEventArgs> ActivityChange;
 
         /// <summary>
         /// Occurs on out of order state change.
@@ -83,7 +83,7 @@ namespace Client
         /// <summary>
         /// Occurs once application was rated by user.
         /// </summary>
-        event EventHandler<ApplicationRateEventArgs> ApplicationRated;
+        event EventHandler<Gizmo.Client.ApplicationRateEventArgs> ApplicationRated;
 
         /// <summary>
         /// Occurs on app profile configuration change.
@@ -108,7 +108,7 @@ namespace Client
         /// <summary>
         /// Occurs on order status change.
         /// </summary>
-        event EventHandler<OrderStatusChangeEventArgs> OrderStatusChange;
+        event EventHandler<Gizmo.Client.OrderStatusChangeEventArgs> OrderStatusChange;
 
         #endregion
 
