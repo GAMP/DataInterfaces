@@ -38,7 +38,7 @@ namespace Client.ViewModels
         /// <summary>
         /// Gets or sets required user profile fields.
         /// </summary>
-        UserInfoTypes RequiredUserInfo { get; set; }
+        Gizmo.UserInfoTypes RequiredUserInfo { get; set; }
 
         /// <summary>
         /// Gets or sets accept command.

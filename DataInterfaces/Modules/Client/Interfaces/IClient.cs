@@ -42,7 +42,7 @@ namespace Client
         /// <summary>
         /// Occurs on user login state change.
         /// </summary>
-        event EventHandler<UserEventArgs> LoginStateChange;
+        event EventHandler<Gizmo.Client.UserEventArgs> LoginStateChange;
 
         /// <summary>
         /// Occurs on input lock state change.
@@ -217,7 +217,7 @@ namespace Client
         /// <summary>
         /// Gets the current user login state.
         /// </summary>
-        LoginState LoginState { get; }
+        Gizmo.LoginState LoginState { get; }
 
         /// <summary>
         /// Gets if module shutdowon or restart is initiated.
