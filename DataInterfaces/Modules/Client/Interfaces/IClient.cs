@@ -42,7 +42,7 @@ namespace Client
         /// <summary>
         /// Occurs on user login state change.
         /// </summary>
-        event EventHandler<Gizmo.Client.UserEventArgs> LoginStateChange;
+        event EventHandler<Gizmo.Client.UserLoginStateChangeEventArgs> LoginStateChange;
 
         /// <summary>
         /// Occurs on input lock state change.
