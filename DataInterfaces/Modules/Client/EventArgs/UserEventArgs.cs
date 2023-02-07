@@ -1,5 +1,4 @@
-﻿using SharedLib.User;
-using IntegrationLib;
+﻿using IntegrationLib;
 using SharedLib;
 using System;
 
@@ -20,7 +19,7 @@ namespace Client
         /// <param name="oldState">Old state.</param>
         /// <param name="failReason">Fail reason.</param>
         /// <param name="requiredInfo">Required info.</param>
-        public UserEventArgs(IUserProfile profile,
+        public UserEventArgs(Gizmo.IUserProfile profile,
             LoginState state,
             LoginState oldState = LoginState.LoggedOut,
             LoginResult failReason = LoginResult.Sucess,
@@ -39,7 +38,7 @@ namespace Client
         /// <summary>
         /// Gets the user profile that caused the event.
         /// </summary>
-        public IUserProfile UserProfile
+        public Gizmo.IUserProfile UserProfile
         {
             get;
             protected set;

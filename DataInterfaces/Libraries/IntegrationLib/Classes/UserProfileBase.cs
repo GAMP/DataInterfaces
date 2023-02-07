@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
 using SharedLib;
-using SharedLib.User;
 
 namespace IntegrationLib
 {
@@ -10,7 +9,7 @@ namespace IntegrationLib
     /// </summary>
     [Serializable()]
     [DataContract()]
-    public class UserProfileBase : ItemObject, IUserProfile
+    public class UserProfileBase : ItemObject, Gizmo.IUserProfile
     {
         #region FIELDS
         protected string
@@ -30,8 +29,8 @@ namespace IntegrationLib
         protected DateTime
             birthDate,
             registered;
-        protected UserRoles role;
-        protected Sex sex = Sex.Male;
+        protected Gizmo.UserRoles role;
+        protected Gizmo.Sex sex = Gizmo.Sex.Male;
         protected bool isEnabled = true;
         protected bool canChangePassword;
         #endregion
@@ -237,7 +236,7 @@ namespace IntegrationLib
         /// Gets or sets users sex.
         /// </summary>
         [DataMember()]
-        public virtual Sex Sex
+        public virtual Gizmo.Sex Sex
         {
             get { return sex; }
             set
@@ -251,7 +250,7 @@ namespace IntegrationLib
         /// Gets or sets user role.
         /// </summary>
         [DataMember()]
-        public virtual UserRoles Role
+        public virtual Gizmo.UserRoles Role
         {
             get { return role; }
             set
@@ -266,7 +265,7 @@ namespace IntegrationLib
         /// </summary>
         public virtual bool IsAdmin
         {
-            get { return Role == UserRoles.Operator; }
+            get { return Role == Gizmo.UserRoles.Operator; }
             set { }
         }
 
@@ -275,7 +274,7 @@ namespace IntegrationLib
         /// </summary>
         public virtual bool IsGuest
         {
-            get { return Role == UserRoles.Guest; }
+            get { return Role == Gizmo.UserRoles.Guest; }
             set { }
         }
 
@@ -326,8 +325,8 @@ namespace IntegrationLib
             MobilePhone = string.Empty;
             Phone = string.Empty;
             PostCode = string.Empty;
-            Sex = Sex.Unspecified;
-            Role = UserRoles.None;
+            Sex = Gizmo.Sex.Unspecified;
+            Role = Gizmo.UserRoles.None;
             UserName = string.Empty;
             IsEnabled = false;
             CanChangePassword = false;

@@ -20,7 +20,7 @@ namespace IntegrationLib
         /// <summary>
         /// Gets identity user role.
         /// </summary>
-        UserRoles Role { get; } 
+        Gizmo.UserRoles Role { get; } 
 
         /// <summary>
         /// Gets user claims.

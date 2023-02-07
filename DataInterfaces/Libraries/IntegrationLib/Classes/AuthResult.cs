@@ -126,7 +126,7 @@ namespace IntegrationLib
             var name = info.GetString(nameof(Identity.Name));
             var userId = info.GetInt32(nameof(Identity.UserId));
             var authenticationType = info.GetString(nameof(Identity.AuthenticationType));
-            var role = (UserRoles)info.GetValue(nameof(Identity.Role), typeof(UserRoles));
+            var role = (Gizmo.UserRoles)info.GetValue(nameof(Identity.Role), typeof(Gizmo.UserRoles));
 
             //get claims collection
             var claims = (IEnumerable<SerializableClaim>)info.GetValue(nameof(Identity.Claims), typeof(IEnumerable<SerializableClaim>));

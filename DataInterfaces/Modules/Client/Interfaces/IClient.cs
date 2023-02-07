@@ -5,7 +5,6 @@ using IntegrationLib;
 using System.Windows;
 using SharedLib.ViewModels;
 using CoreLib.Hooking;
-using SharedLib.User;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using ServerService;
@@ -33,7 +32,7 @@ namespace Client
         /// <summary>
         /// Occurs once user updates his profile.
         /// </summary>
-        event EventHandler<UserProfileChangeArgs> UserProfileChange;
+        event EventHandler<Gizmo.Client.UserProfileChangeArgs> UserProfileChange;
 
         /// <summary>
         /// Occurs once user updates his password.
@@ -185,7 +184,7 @@ namespace Client
         /// <summary>
         /// Gets current user profile.
         /// </summary>
-        IUserProfile CurrentUser { get; }
+        Gizmo.IUserProfile CurrentUser { get; }
 
         /// <summary>
         /// Gets current user identity.
@@ -321,7 +320,7 @@ namespace Client
         /// Sets current user info.
         /// </summary>
         /// <param name="profile">User profile.</param>
-        void SetUserInfo(IUserProfile profile);
+        void SetUserInfo(Gizmo.IUserProfile profile);
 
         /// <summary>
         /// Logins user asynchronously.

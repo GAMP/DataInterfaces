@@ -23,7 +23,7 @@ namespace IntegrationLib
         /// <param name="name">User name.</param>
         /// <param name="userId">User id.</param>
         /// <param name="role">User role.</param>
-        public ClaimsUserIdentity(string name, int userId, UserRoles role)
+        public ClaimsUserIdentity(string name, int userId, Gizmo.UserRoles role)
          : this(name, userId, role, Enumerable.Empty<Claim>())
         {
         }
@@ -35,7 +35,7 @@ namespace IntegrationLib
         /// <param name="userId">User id.</param>
         /// <param name="role">User role.</param>
         /// <param name="claims">User claims.</param>
-        public ClaimsUserIdentity(string name, int userId, UserRoles role, IEnumerable<Claim> claims) : base(name)
+        public ClaimsUserIdentity(string name, int userId, Gizmo.UserRoles role, IEnumerable<Claim> claims) : base(name)
         {
             AddClaims(claims);
             UserId = userId;
@@ -60,7 +60,7 @@ namespace IntegrationLib
         /// Gets user role.
         /// </summary>
         [DataMember(Order = 1)]
-        public UserRoles Role
+        public Gizmo.UserRoles Role
         {
             get;
             protected set;
@@ -77,7 +77,7 @@ namespace IntegrationLib
             UserId= info.GetInt32(nameof(UserId));
 
             //get user role
-            Role = (UserRoles)info.GetValue(nameof(Role), typeof(UserRoles));
+            Role = (Gizmo.UserRoles)info.GetValue(nameof(Role), typeof(Gizmo.UserRoles));
 
             //get claims collection
             //TEMPORARY reusing the class from auth result so we dont break compatibility with older builds

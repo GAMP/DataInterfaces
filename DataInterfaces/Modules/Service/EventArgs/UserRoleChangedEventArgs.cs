@@ -18,7 +18,7 @@ namespace ServerService
         /// <param name="userId">User id.</param>
         /// <param name="oldRole">Old role.</param>
         /// <param name="newRole">New role.</param>
-        public UserRoleChangedEventArgs(int userId, UserRoles oldRole, UserRoles newRole)
+        public UserRoleChangedEventArgs(int userId, Gizmo.UserRoles oldRole, Gizmo.UserRoles newRole)
             : base(userId, UserChangeType.Role)
         {
             OldRole = oldRole;
@@ -32,7 +32,7 @@ namespace ServerService
         /// Old role.
         /// </summary>
         [DataMember()]
-        public UserRoles OldRole
+        public Gizmo.UserRoles OldRole
         {
             get;
             protected set;
@@ -42,7 +42,7 @@ namespace ServerService
         /// New role.
         /// </summary>
         [DataMember()]
-        public UserRoles NewRole
+        public Gizmo.UserRoles NewRole
         {
             get;
             protected set;

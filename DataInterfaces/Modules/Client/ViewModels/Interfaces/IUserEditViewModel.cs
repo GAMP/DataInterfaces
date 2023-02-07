@@ -1,5 +1,4 @@
 ﻿using SharedLib;
-using SharedLib.User;
 using SkinInterfaces;
 
 namespace Client.ViewModels
@@ -7,7 +6,7 @@ namespace Client.ViewModels
     /// <summary>
     /// User profile edit view model interface.
     /// </summary>
-    public interface IUserProfileEditViewModel : ISourceConverter<IUserProfile>
+    public interface IUserProfileEditViewModel : ISourceConverter<Gizmo.IUserProfile>
     {
         #region PROPERTIES
 

@@ -1,6 +1,4 @@
-﻿using SharedLib.User;
-
-namespace ServerService
+﻿namespace ServerService
 {
     /// <summary>
     /// Temporary inteface do not implement.
@@ -12,7 +10,7 @@ namespace ServerService
         /// Post create profile function.
         /// </summary>
         /// <param name="profile">Created profile.</param>
-        void PostUserProfileCreate(IUserProfile profile); 
+        void PostUserProfileCreate(Gizmo.IUserProfile profile); 
         #endregion
     }
 }
