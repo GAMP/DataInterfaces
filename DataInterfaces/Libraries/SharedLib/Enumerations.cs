@@ -1579,52 +1579,6 @@ namespace SharedLib
     }
     #endregion
 
-    #region SMSSENDRESULTCODE
-    /// <summary>
-    /// SMS send result.
-    /// </summary>
-    public enum SMSSendResultCode
-    {
-        /// <summary>
-        /// Sent.
-        /// </summary>
-        Sent = 0,
-        /// <summary>
-        /// Failed.
-        /// </summary>
-        Failed = 1,
-    }
-    #endregion
-
-    #region SMSGATEWAYPROVIDER
-    /// <summary>
-    /// Known sms gateway providers.
-    /// </summary>
-    public enum SMSGatewayProvider
-    {
-        /// <summary>
-        /// Custom.
-        /// </summary>
-        Custom = 0,
-        /// <summary>
-        /// Vonage.
-        /// </summary>
-        Vonage = 1,
-        /// <summary>
-        /// Twilio.
-        /// </summary>
-        Twilio = 2,
-        /// <summary>
-        /// SMC.
-        /// </summary>
-        SMSC = 3,
-        /// <summary>
-        /// Red SMS.
-        /// </summary>
-        RedSms=4,
-    }
-    #endregion
-
     #region PRODUCTORDERPASSRESULT
     /// <summary>
     /// Product order pass result.
