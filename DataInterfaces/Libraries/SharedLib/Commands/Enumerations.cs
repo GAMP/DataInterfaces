@@ -348,6 +348,9 @@ namespace SharedLib.Commands
         RecoveryByMobileStart = 46,
         RecoveryByEmailStart = 47,
         RecoveryPasswordComplete = 48,
+        GetDefaultUserGroupRequiredInfo = 49,
+        MemberRegistrationByTokenComplete = 50,
+        MemberRegistrationComplete = 51,
     }
     #endregion
 
