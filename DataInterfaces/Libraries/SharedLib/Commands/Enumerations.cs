@@ -351,6 +351,8 @@ namespace SharedLib.Commands
         GetDefaultUserGroupRequiredInfo = 49,
         MemberRegistrationByTokenComplete = 50,
         MemberRegistrationComplete = 51,
+        UserAgreementAccept = 52,
+        UserAgreementReject = 53
     }
     #endregion
 
