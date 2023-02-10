@@ -356,6 +356,7 @@ namespace SharedLib.Commands
         UserProfileGet = 54,
         UserProfileUpdate = 55,
         UserPasswordUpdate = 56,
+        UserBalanceModelGet = 57,
     }
     #endregion
 
