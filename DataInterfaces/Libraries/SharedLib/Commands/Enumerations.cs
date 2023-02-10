@@ -358,6 +358,8 @@ namespace SharedLib.Commands
         UserPasswordUpdate = 56,
         UserBalanceModelGet = 57,
         UserAgreementsPendingGet = 58,
+        UserUsageSessionGet = 59,
+        ClientReservationGet = 60,
     }
     #endregion
 
