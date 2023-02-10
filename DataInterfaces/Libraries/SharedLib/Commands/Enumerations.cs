@@ -352,7 +352,10 @@ namespace SharedLib.Commands
         MemberRegistrationByTokenComplete = 50,
         MemberRegistrationComplete = 51,
         UserAgreementAccept = 52,
-        UserAgreementReject = 53
+        UserAgreementReject = 53,
+        UserProfileGet = 54,
+        UserProfileUpdate = 55,
+        UserPasswordUpdate = 56,
     }
     #endregion
 
