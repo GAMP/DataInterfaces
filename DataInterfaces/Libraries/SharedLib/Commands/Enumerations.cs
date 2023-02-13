@@ -156,8 +156,8 @@ namespace SharedLib.Commands
         AppLinkGet = 2,
         DeploymentGet = 19,
         PersonalFileGet = 20,
-        NewsGet = 21,
-        FeedsGet = 22,
+        NewsGet = 22,
+        FeedsGet = 23,
     }
     #endregion
 
