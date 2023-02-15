@@ -232,6 +232,12 @@
         [ClaimDescription(@"Management", "ModuleRestart", "PERMISSION_GROUP_MANAGEMENT", "PERMISSION_ACTION_MANAGEMENT_MODULE_RESTART")]
         ManageModuleRestart,
 
+        /// <summary>
+        /// Management power on endpoints permission.
+        /// </summary>
+        [ClaimDescription(@"Management", "PowerOnEndpoints", "PERMISSION_GROUP_MANAGEMENT", "PERMISSION_ACTION_MANAGEMENT_POWER_ON_ENDPOINTS")]
+        ManagePowerOnEndpoints,
+
         #endregion
 
         /// <summary>
