@@ -1904,6 +1904,29 @@ namespace SharedLib.Configuration
             get; set;
         }
 
+        /// <summary>
+        /// Gets or set confirmation code length.
+        /// </summary>
+        [Category("General")]
+        [Description("Gets or sets confirmation code length.")]
+        [DefaultValue(6)]
+        [DataMember(Order = 9)]
+        public int ConfirmationCodeLength
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or set confirmation code characters.
+        /// </summary>
+        [Category("General")]
+        [Description("Gets or sets confirmation code characters.")]
+        [DefaultValue(Gizmo.KeyGenerationCharacters.Alphanumeric)]
+        [DataMember(Order = 10)]
+        public Gizmo.KeyGenerationCharacters ConfirmationCodeCharacters
+        {
+            get; set;
+        }
         #endregion
     }
 
