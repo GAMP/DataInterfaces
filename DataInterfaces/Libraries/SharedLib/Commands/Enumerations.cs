@@ -362,6 +362,10 @@ namespace SharedLib.Commands
         UserAgreementsPendingGet = 58,
         UserUsageSessionGet = 59,
         ClientReservationGet = 60,
+        UserProductGroupsGet = 61,
+        UserProductsGet = 62,
+        UserProductGet = 63,
+        UserPaymentMethodsAsync = 64,
     }
     #endregion
 
