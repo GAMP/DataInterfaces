@@ -1005,6 +1005,19 @@ namespace SharedLib.Configuration
             get;
             set;
         }
+
+        /// <summary>
+        /// Gets or sets if should execute batch files on computers.
+        /// </summary>
+        [DefaultValue(false)]
+        [Category("General")]
+        [Description("Execute batch files on computers.")]
+        [DataMember(Order = 12)]
+        public bool ExecuteBatchFilesOnComputers
+        {
+            get;
+            set;
+        }
         #endregion
     }
 
@@ -1891,6 +1904,29 @@ namespace SharedLib.Configuration
             get; set;
         }
 
+        /// <summary>
+        /// Gets or set confirmation code length.
+        /// </summary>
+        [Category("General")]
+        [Description("Gets or sets confirmation code length.")]
+        [DefaultValue(6)]
+        [DataMember(Order = 9)]
+        public int ConfirmationCodeLength
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or set confirmation code characters.
+        /// </summary>
+        [Category("General")]
+        [Description("Gets or sets confirmation code characters.")]
+        [DefaultValue(Gizmo.KeyGenerationCharacters.Alphanumeric)]
+        [DataMember(Order = 10)]
+        public Gizmo.KeyGenerationCharacters ConfirmationCodeCharacters
+        {
+            get; set;
+        }
         #endregion
     }
 
