@@ -158,9 +158,12 @@ namespace SharedLib.Commands
         PersonalFileGet = 20,
         NewsGet = 22,
         FeedsGet = 23,
-        UserEnterprisesGet = 24,
+        UserApplicationEnterprisesGet = 24,
         UserApplicationCategoriesGet = 25,
         UserApplicationsGet = 26,
+        UserApplicationLinksGet = 27,
+        UserExecutablesGet = 28,
+        UserExecutablePersonalFilesGet = 29,
     }
     #endregion
 
