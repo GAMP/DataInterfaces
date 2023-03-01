@@ -372,9 +372,10 @@ namespace SharedLib.Commands
         UserUsageSessionGet = 59,
         ClientReservationGet = 60,
         UserProductGroupsGet = 61,
-        UserProductsGet = 62,
-        UserProductGet = 63,
-        UserPaymentMethodsGet = 64,
+        UserProductGroupGet = 62,
+        UserProductsGet = 63,
+        UserProductGet = 64,
+        UserPaymentMethodsGet = 65,
     }
     #endregion
 
