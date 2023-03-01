@@ -161,9 +161,12 @@ namespace SharedLib.Commands
         UserApplicationEnterprisesGet = 24,
         UserApplicationCategoriesGet = 25,
         UserApplicationsGet = 26,
-        UserApplicationLinksGet = 27,
-        UserExecutablesGet = 28,
-        UserExecutablePersonalFilesGet = 29,
+        UserApplicationGet = 27,
+        UserApplicationLinksGet = 28,
+        UserExecutablesGet = 29,
+        UserExecutableGet = 30,
+        UserPersonalFilesGet = 31,
+        UserExecutablePersonalFilesGet = 32,
     }
     #endregion
 
