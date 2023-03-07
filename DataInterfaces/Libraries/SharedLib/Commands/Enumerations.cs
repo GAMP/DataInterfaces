@@ -376,6 +376,7 @@ namespace SharedLib.Commands
         UserProductsGet = 63,
         UserProductGet = 64,
         UserPaymentMethodsGet = 65,
+        UserPaymentMethodGet = 66,
     }
     #endregion
 
