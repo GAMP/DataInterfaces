@@ -1910,6 +1910,7 @@ namespace SharedLib.Configuration
         [Category("General")]
         [Description("Gets or sets confirmation code length.")]
         [DefaultValue(6)]
+        [Range(4, 8)]
         [DataMember(Order = 9)]
         public int ConfirmationCodeLength
         {
@@ -1922,6 +1923,7 @@ namespace SharedLib.Configuration
         [Category("General")]
         [Description("Gets or sets confirmation code characters.")]
         [DefaultValue(Gizmo.KeyGenerationCharacters.Alphanumeric)]
+        [EnumValueValidation]
         [DataMember(Order = 10)]
         public Gizmo.KeyGenerationCharacters ConfirmationCodeCharacters
         {
