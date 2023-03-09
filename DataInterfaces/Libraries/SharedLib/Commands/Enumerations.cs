@@ -159,14 +159,17 @@ namespace SharedLib.Commands
         NewsGet = 22,
         FeedsGet = 23,
         UserApplicationEnterprisesGet = 24,
-        UserApplicationCategoriesGet = 25,
-        UserApplicationsGet = 26,
-        UserApplicationGet = 27,
-        UserApplicationLinksGet = 28,
-        UserExecutablesGet = 29,
-        UserExecutableGet = 30,
-        UserPersonalFilesGet = 31,
-        UserExecutablePersonalFilesGet = 32,
+        UserApplicationEnterpriseGet = 25,
+        UserApplicationCategoriesGet = 26,
+        UserApplicationCategoryGet = 27,
+        UserApplicationsGet = 28,
+        UserApplicationGet = 29,
+        UserApplicationLinksGet = 30,
+        UserApplicationLinkGet = 31,
+        UserExecutablesGet = 32,
+        UserExecutableGet = 33,
+        UserPersonalFilesGet = 34,
+        UserPersonalFileGet = 35,
     }
     #endregion
 
@@ -967,7 +970,7 @@ namespace SharedLib.Commands
 
         RegisterTransactionInfoGet = 284,
         RegisterTransactionAdd = 285,
-        
+
 
         DeviceCreate = 288,
         DeviceUpdate = 299,
@@ -988,9 +991,9 @@ namespace SharedLib.Commands
         UserAgreementDelete = 314,
         UserAgreementResetStates = 315,
 
-        PaymentProviderMetadataGet=316,
-        StoreOptionsRead=317,
-        StoreOptionsWrite=318,
+        PaymentProviderMetadataGet = 316,
+        StoreOptionsRead = 317,
+        StoreOptionsWrite = 318,
         SmsProviderMetadataGet = 319,
 
         //max 319
