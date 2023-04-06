@@ -67,7 +67,7 @@ namespace Client
         /// <summary>
         /// Occurs on execution context state change.
         /// </summary>
-        event EventHandler<Gizmo.Client.ClientExecutionContextStateArgs> ExecutionContextStateChage;
+        event EventHandler<Gizmo.Client.ClientExecutionContextStateArgs> ExecutionContextStateChange;
 
         /// <summary>
         /// Occurs on current activity change.
