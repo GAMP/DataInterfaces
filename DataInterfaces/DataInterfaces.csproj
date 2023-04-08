@@ -111,7 +111,6 @@
 		<Compile Include="Libraries\IntegrationLib\Classes\HttpCredentials.cs" />
 		<Compile Include="Libraries\IntegrationLib\Classes\DispatcherPrincipal.cs" />
 		<Compile Include="Libraries\IntegrationLib\Classes\UserProfileBase.cs" />
-		<Compile Include="Libraries\IntegrationLib\Classes\TokenResult.cs" />
 	</ItemGroup>
 
 	<ItemGroup>
