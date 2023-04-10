@@ -171,6 +171,8 @@ namespace SharedLib.Commands
         UserPersonalFilesGet = 34,
         UserPersonalFileGet = 35,
         NewsGet = 36,
+        PopularExecutablesGet = 37,
+        PopularProductsGet = 38,
     }
     #endregion
 
