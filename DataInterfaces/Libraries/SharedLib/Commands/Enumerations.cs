@@ -176,7 +176,6 @@ namespace SharedLib.Commands
         PopularProductsGet = 39,
         UserPopularApplicationsGet = 40,
         UserPopularExecutablesGet = 41,
-        UserPopularProductsGet = 42,
     }
     #endregion
 
@@ -387,6 +386,8 @@ namespace SharedLib.Commands
         UserProductGet = 64,
         UserPaymentMethodsGet = 65,
         UserPaymentMethodGet = 66,
+        UserPopularProductsGet = 67,
+        UserOrdersGet = 68,
     }
     #endregion
 
