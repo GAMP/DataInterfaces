@@ -388,6 +388,8 @@ namespace SharedLib.Commands
         UserPaymentMethodGet = 66,
         UserPopularProductsGet = 67,
         UserOrdersGet = 68,
+        UserProductAvailabilityCheck = 69,
+        UserOrderCreate = 70,
     }
     #endregion
 
