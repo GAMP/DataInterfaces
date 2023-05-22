@@ -390,6 +390,8 @@ namespace SharedLib.Commands
         UserOrdersGet = 68,
         UserProductAvailabilityCheck = 69,
         UserOrderCreate = 70,
+        UserHostGroupsGet = 71,
+        UserHostGroupGet = 72,
     }
     #endregion
 
