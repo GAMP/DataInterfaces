@@ -392,6 +392,7 @@ namespace SharedLib.Commands
         UserOrderCreate = 70,
         UserHostGroupsGet = 71,
         UserHostGroupGet = 72,
+        NextHostReservationGet = 73,
     }
     #endregion
 
