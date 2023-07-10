@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using ServerService;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Client
 {
@@ -393,5 +394,7 @@ namespace Client
         void LogAddError(string message, Exception ex, LogCategories category);
 
         #endregion
+
+        void CreateNotification(string title, string message, bool wait, Action callback, CancellationToken cancellationToken = default);
     }
 }
