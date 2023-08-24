@@ -16,17 +16,17 @@ namespace CyClone.Core
         System.IO.FileAttributes Attributes { get; set; }
 
         /// <summary>
-        /// Gets or sets creation time.
+        /// Gets or sets UTC creation time.
         /// </summary>
         DateTime CreationTime { get; set; }
 
         /// <summary>
-        /// Gets or sets last access time.
+        /// Gets or sets UTC last access time.
         /// </summary>
         DateTime LastAccessTime { get; set; }
 
         /// <summary>
-        /// Gets or sets last write time.
+        /// Gets or sets UTC last write time.
         /// </summary>
         DateTime LastWriteTime { get; set; }
 
