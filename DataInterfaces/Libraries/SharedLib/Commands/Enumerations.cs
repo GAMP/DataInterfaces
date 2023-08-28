@@ -394,6 +394,7 @@ namespace SharedLib.Commands
         UserHostGroupGet = 72,
         NextHostReservationGet = 73,
         ClientOptionsGet =74,
+        UserUsageTimeLevelsGet = 75,
     }
     #endregion
 
