@@ -396,6 +396,9 @@ namespace SharedLib.Commands
         ClientOptionsGet =74,
         UserUsageTimeLevelsGet = 75,
         UserCreditLimitGet = 76,
+        AssistanceRequestCreate = 77,
+        AssistanceRequestAnyPendingGet = 78,
+        AssistanceRequestPendingCancel = 79,
     }
     #endregion
 
