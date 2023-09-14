@@ -1017,7 +1017,10 @@ namespace SharedLib.Commands
         StoreOptionsWrite = 318,
         SmsProviderMetadataGet = 319,
 
-        //max 319
+        AssistanceRequestTypesGet = 320,
+        AssistanceRequestTypeCreate = 321,
+        AssistanceRequestTypeUpdate = 322,
+        //max 322
     }
     #endregion
 
