@@ -1020,7 +1020,8 @@ namespace SharedLib.Commands
         AssistanceRequestTypesGet = 320,
         AssistanceRequestTypeCreate = 321,
         AssistanceRequestTypeUpdate = 322,
-        //max 322
+        AssistanceRequestTypeDelete = 323,
+        //max 323
     }
     #endregion
 
