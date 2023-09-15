@@ -396,6 +396,11 @@ namespace SharedLib.Commands
         ClientOptionsGet = 74,
         UserUsageTimeLevelsGet = 75,
         UserCreditLimitGet = 76,
+        AssistanceRequestTypesGet = 77,
+        AssistanceRequestTypeGet = 78,
+        AssistanceRequestCreate = 79,
+        AssistanceRequestAnyPendingGet = 80,
+        AssistanceRequestPendingCancel = 81,
     }
     #endregion
 
@@ -1012,7 +1017,13 @@ namespace SharedLib.Commands
         StoreOptionsWrite = 318,
         SmsProviderMetadataGet = 319,
 
-        //max 319
+        AssistanceRequestTypesGet = 320,
+        AssistanceRequestTypeCreate = 321,
+        AssistanceRequestTypeUpdate = 322,
+        AssistanceRequestTypeDelete = 323,
+        AssistanceRequestsGet = 324,
+        AssistanceRequestAccept = 325,
+        //max 325
     }
     #endregion
 

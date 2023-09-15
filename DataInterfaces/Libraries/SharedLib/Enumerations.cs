@@ -1166,7 +1166,12 @@ namespace SharedLib
         /// HdmiDevices.
         /// </summary>
         [Localized("CFG_SECTION_HDMI_DEVICES")]
-        HdmiDevices
+        HdmiDevices,
+        /// <summary>
+        /// AssistanceRequestTypes.
+        /// </summary>
+        [Localized("CFG_SECTION_ASSISTANCE_REQUEST_TYPES")]
+        AssistanceRequestTypes
     }
     #endregion
 
