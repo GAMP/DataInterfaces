@@ -1055,6 +1055,7 @@ namespace SharedLib.Commands
         EntityEvent = 1,
         EventBatch = 2,
         ReservationChange = 3,
+        APIEventMessage = 4,
     }
     #endregion
 
