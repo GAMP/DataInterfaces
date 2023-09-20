@@ -340,6 +340,18 @@ namespace SharedLib.Dispatcher
             return HasOpParametersBetween(0, index) ? Command.ParamsArray[index] == null : false;
         }
 
+        protected bool MessagePackTryReadObject<T>(int parameterIndex, out T obj)
+        {
+            obj = default;
+            if (TryGetParameterAt<byte[]>(parameterIndex, out var array))
+            {
+                obj = (T)MessagePack.MessagePackSerializer.Deserialize(typeof(T), array);
+                return true;
+            }
+
+            return false;
+        }
+
         #endregion
 
         #region PROTECTED FUNCTIONS
