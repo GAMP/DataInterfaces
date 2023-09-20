@@ -97,6 +97,12 @@
         AllowTimeCredit,
 
         /// <summary>
+        /// Sale disable receipt print permission.
+        /// </summary>
+        [ClaimDescription(@"Sale", "AllowDisableReceiptPrint", new GizmoClaimTypes[] { Sale }, "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_ALLOW_DISABLE_RECEIPT_PRINT")]
+        SaleAllowDisableReceiptPrint,
+
+        /// <summary>
         /// View invoices permission.
         /// </summary>
         [ClaimDescription(@"Sale", "ViewInvoices", "PERMISSION_GROUP_SALE", "PERMISSION_ACTION_SALE_VIEW_INVOICES")]
