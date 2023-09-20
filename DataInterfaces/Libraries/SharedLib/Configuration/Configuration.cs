@@ -2781,6 +2781,25 @@ namespace SharedLib.Configuration
             get; set;
         }
 
+        /// <summary>
+        /// Indicates if client assistance request sound is enabled.
+        /// </summary>
+        [DefaultValue(false)]
+        [DataMember()]
+        public bool NewAssistanceRequestSoundEnabled
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Client assistance request sound file path.
+        /// </summary>
+        [DataMember()]
+        public string NewAssistanceRequestSoundFile
+        {
+            get; set;
+        }
+
         #endregion
     }
     #endregion

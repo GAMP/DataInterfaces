@@ -24,5 +24,10 @@
         /// Client disconnect notification.
         /// </summary>
         ClientDisconnect = 3,
+
+        /// <summary>
+        /// Client assistance request notification.
+        /// </summary>
+        ClientAssistanceRequest = 4,
     }
 }
