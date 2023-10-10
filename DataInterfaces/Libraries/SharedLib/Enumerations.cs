@@ -1206,6 +1206,11 @@ namespace SharedLib
         /// </summary>
         [CanUserAssign(false)]
         SQLITE = 4,
+        /// <summary>
+        /// POSTGRE.
+        /// </summary>
+        [CanUserAssign(false)]
+        POSTGRE=5,
     }
     #endregion
 
