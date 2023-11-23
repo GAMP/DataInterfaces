@@ -401,6 +401,7 @@ namespace SharedLib.Commands
         AssistanceRequestCreate = 79,
         AssistanceRequestAnyPendingGet = 80,
         AssistanceRequestPendingCancel = 81,
+        UserGroupRequiredInfoGet = 82,
     }
     #endregion
 
