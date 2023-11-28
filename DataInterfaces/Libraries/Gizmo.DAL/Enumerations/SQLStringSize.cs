@@ -1,4 +1,4 @@
-﻿namespace GizmoDALV2
+﻿namespace Gizmo.DAL
 {
     /// <summary>
     /// SQL String sizes.

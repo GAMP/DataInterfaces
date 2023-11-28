@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GizmoDALV2
+namespace Gizmo.DAL
 {
     /// <summary>
     /// Database transaction implementation interface.

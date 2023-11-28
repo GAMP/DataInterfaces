@@ -1,4 +1,4 @@
-﻿using GizmoDALV2;
+﻿using Gizmo.DAL;
 using IntegrationLib;
 using ServerService;
 using SharedLib;

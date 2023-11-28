@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data.SqlTypes;
 
-namespace GizmoDALV2
+namespace Gizmo.DAL
 {
     /// <summary>
     /// Date extenstions.

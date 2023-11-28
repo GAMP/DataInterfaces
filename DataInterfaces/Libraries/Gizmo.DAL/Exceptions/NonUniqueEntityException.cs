@@ -2,7 +2,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace GizmoDALV2
+namespace Gizmo.DAL
 {
     /// <summary>
     /// Non unique entity value exception.
