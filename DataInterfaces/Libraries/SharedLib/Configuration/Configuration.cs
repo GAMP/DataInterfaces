@@ -1018,6 +1018,17 @@ namespace SharedLib.Configuration
             get;
             set;
         }
+
+        /// <summary>
+        /// Members age-hour restrictions.
+        /// </summary>
+        [Category("General")]
+        [Description("Members age-hour restrictions.")]
+        [DataMember(Order = 13)]
+        public AgeHourRestrictionConfig AgeHourRestrictions
+        {
+            get; set;
+        }
         #endregion
     }
 
@@ -3093,4 +3104,82 @@ namespace SharedLib.Configuration
         #endregion
     }
     #endregion
+
+    #region AGEHOURRESTRICTIONCONFIG
+    /// <summary>
+    /// Age-Hour restriction configuration class.
+    /// </summary>
+    [DataContract()]
+    [Serializable()]
+    public class AgeHourRestrictionConfig : ConfigBase
+    {
+        #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        public AgeHourRestrictionConfig()
+        {
+        }
+        #endregion
+
+        #region FIELDS
+        private IList<AgeHourRestriction> restrictions;
+        #endregion
+
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets or sets if age-hour restrictions are enabled.
+        /// </summary>
+        [DataMember()]
+        [DefaultValue(false)]
+        public bool IsEnabled { get; set; }
+
+        /// <summary>
+        /// Gets restrictions.
+        /// </summary>
+        [DataMember()]
+        public IList<AgeHourRestriction> Restrictions
+        {
+            get
+            {
+                if (restrictions == null)
+                    restrictions = new List<AgeHourRestriction>();
+                return restrictions;
+            }
+            set
+            {
+                restrictions = value;
+            }
+        }
+
+        #endregion
+    }
+    #endregion
+
+    /// <summary>
+    /// Age-Hour restriction.
+    /// </summary>
+    [Serializable]
+    [DataContract]
+    public class AgeHourRestriction
+    {
+        /// <summary>
+        /// Maximum age.
+        /// </summary>
+        [DataMember]
+        public int MaximumAge { get; set; }
+
+        /// <summary>
+        /// The start time of the restriction.
+        /// </summary>
+        [DataMember]
+        public TimeSpan TimeFrom { get; set; }
+
+        /// <summary>
+        /// The end time of the restriction.
+        /// </summary>
+        [DataMember]
+        public TimeSpan TimeTo { get; set; }
+    }
 }
