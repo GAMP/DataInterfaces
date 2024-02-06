@@ -36,5 +36,12 @@ namespace ServerService.Services
         /// <param name="converterSettings">Converter settings.</param>
         /// <returns></returns>
         MemoryStream ConvertToPdfFromUrl(string url, HtmlToPdfConverterSettings converterSettings);
+
+        /// <summary>
+        /// Converts an html page to pdf.
+        /// </summary>
+        /// <param name="html">Html.</param>
+        /// <returns>Pdf stream.</returns>
+        Stream FromHtmlString(string html);
     }
 }
