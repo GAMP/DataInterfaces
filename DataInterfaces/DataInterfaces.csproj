@@ -93,6 +93,7 @@
 
 		<Compile Include="Modules\Client\EventArgs\**\*" />
 
+    <Compile Include="Libraries\IntegrationLib\Interfaces\IPluginSettings.cs" />
 		<Compile Include="Libraries\IntegrationLib\Interfaces\IApplicationLicenseKey.cs" />
 		<Compile Include="Libraries\IntegrationLib\Interfaces\IApplicationLicense.cs" />	
 		<Compile Include="Libraries\IntegrationLib\Interfaces\ILicenseReservation.cs" />
