@@ -2,7 +2,7 @@
 using System.Data;
 using System.Linq;
 
-namespace GizmoDALV2
+namespace Gizmo.DAL
 {
     /// <summary>
     /// Gizmo Database context inteface.    
