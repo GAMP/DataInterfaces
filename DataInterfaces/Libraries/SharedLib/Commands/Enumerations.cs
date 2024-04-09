@@ -494,6 +494,7 @@ namespace SharedLib.Commands
         GetMaintenanceMode = 15,
         RDPSessionStart = 16,
         RemoteSessionConnect =17,
+        GetScreenImageEx = 18,
     }
     #endregion
 
