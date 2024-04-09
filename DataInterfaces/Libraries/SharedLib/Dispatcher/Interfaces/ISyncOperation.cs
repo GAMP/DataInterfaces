@@ -214,5 +214,14 @@ namespace SharedLib.Dispatcher
         bool IsStarted { get; }
 
         #endregion
+
+        /// <summary>
+        /// Operation lock.
+        /// </summary>
+        /// <remarks>
+        /// This should be used in order to block async operations on the object instance.<br></br>
+        /// The value is lazy initialized and never null.
+        /// </remarks>
+        public SemaphoreSlim OperationLock { get; }
     }
 }
