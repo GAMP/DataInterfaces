@@ -3010,6 +3010,11 @@ namespace SharedLib
         /// </summary>
         [Localized("ORDER_STATUS_ACCEPTED")]
         Accepted = 3,
+        /// <summary>
+        /// Processing.
+        /// </summary>
+        [Localized("ORDER_STATUS_PROCESSING")]
+        Processing = 4,
     }
     #endregion
 
