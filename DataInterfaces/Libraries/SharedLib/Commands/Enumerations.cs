@@ -176,7 +176,7 @@ namespace SharedLib.Commands
         PopularProductsGet = 39,
         UserPopularApplicationsGet = 40,
         UserPopularExecutablesGet = 41,
-        AgeRatingGet = 42
+        ExecutablesAgeRatingGet = 42
     }
     #endregion
 
