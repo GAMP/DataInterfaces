@@ -5,7 +5,7 @@ using System.Linq;
 namespace Gizmo.DAL
 {
     /// <summary>
-    /// Gizmo Database context inteface.    
+    /// Gizmo Database context interface.    
     /// </summary>
     /// <remarks>
     /// It is always safe to cast this interface to Entity Framework DbContext.
@@ -29,7 +29,7 @@ namespace Gizmo.DAL
         /// <summary>
         /// Gets queryable db set for specified type.
         /// </summary>
-        /// <typeparam name="TEntity">Entiity type.</typeparam>
+        /// <typeparam name="TEntity">Entity type.</typeparam>
         /// <returns>IQueryable Entity set.</returns>
         IQueryable<TEntity> QueryableSet<TEntity>() where TEntity : class;
         
