@@ -10,7 +10,7 @@ namespace IntegrationLib
     public enum LoginResult
     {
         /// <summary>
-        /// Login was sucessfull.
+        /// Login was successful.
         /// </summary>
         [Localized("LOGIN_RESULT_SUCESS")]
         Sucess = 0,
