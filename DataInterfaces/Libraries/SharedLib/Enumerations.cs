@@ -3547,6 +3547,9 @@ namespace SharedLib
         /// Reservation is canceled by operator.
         /// </summary>
         Canceled = 1,
+
+        //TODO : Timeout will indicate that user did not use reservation within specified timeout period
+        //TODO : Manually completed will indicate that operator manually completed reservation
     }
     #endregion
 
