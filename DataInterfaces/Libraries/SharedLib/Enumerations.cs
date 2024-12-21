@@ -2568,7 +2568,11 @@ namespace SharedLib
         /// <summary>
         /// If the product is marked product.
         /// </summary>
-        IsMarkedProduct = 16
+        IsMarkedProduct = 16,
+        /// <summary>
+        /// Requires preparation.
+        /// </summary>
+        RequiresPreparation = 32,
     }
     #endregion
 
@@ -3543,13 +3547,26 @@ namespace SharedLib
         /// Reservation is waiting.
         /// </summary>
         Waiting = 0,
+
+        /// <summary>
+        /// Active status.
+        /// </summary>
+        Active = 2,
+
         /// <summary>
         /// Reservation is canceled by operator.
         /// </summary>
         Canceled = 1,
 
-        //TODO : Timeout will indicate that user did not use reservation within specified timeout period
-        //TODO : Manually completed will indicate that operator manually completed reservation
+        /// <summary>
+        /// Expired.
+        /// </summary>
+        Expired = 3,
+
+        /// <summary>
+        /// Completed.
+        /// </summary>
+        Completed = 4,
     }
     #endregion
 
@@ -3635,7 +3652,6 @@ namespace SharedLib
         SSL = 1,
         [Localized("SMTP_SECURITY_STARTTLS")]
         STARTTLS = 2
-
     }
     #endregion
 }
