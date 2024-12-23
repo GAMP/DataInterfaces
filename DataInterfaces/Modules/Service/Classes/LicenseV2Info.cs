@@ -206,7 +206,7 @@ namespace ServerService
         [DataMember()]
         public bool IsLocalExpired
         {
-            get { return ExpirationDate <= InternalDate.Now; }
+            get { return ExpirationDate <= DateTime.Now; }
         }
 
         /// <summary>
@@ -215,7 +215,7 @@ namespace ServerService
         [DataMember()]
         public bool IsLocalTrialExpired
         {
-            get { return TrialExpirationDate <= InternalDate.Now; }
+            get { return TrialExpirationDate <= DateTime.Now; }
         }
 
         /// <summary>

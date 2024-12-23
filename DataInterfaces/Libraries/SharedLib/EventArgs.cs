@@ -270,7 +270,7 @@ namespace SharedLib
             Endpoint = endpoint;
             EventType = type;
             Exception = exception;
-            Time = InternalDate.Now;
+            Time = DateTime.Now;
         }
 
         #endregion

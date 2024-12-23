@@ -53,7 +53,7 @@ namespace SharedLib
         /// </summary>
         public static string CultureInvariantNow
         {
-            get { return InternalDate.Now.ToString(CultureInfo.InvariantCulture); }
+            get { return DateTime.Now.ToString(CultureInfo.InvariantCulture); }
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace SharedLib
         /// </summary>
         public static DateTime UtcNow
         {
-            get { return InternalDate.Now.ToUniversalTime(); }
+            get { return DateTime.Now.ToUniversalTime(); }
         }
 
         #endregion
