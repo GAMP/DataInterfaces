@@ -2573,6 +2573,10 @@ namespace SharedLib
         /// Requires preparation.
         /// </summary>
         RequiresPreparation = 32,
+        /// <summary>
+        /// If the product is excise product.
+        /// </summary>
+        IsExcise = 64,
     }
     #endregion
 
