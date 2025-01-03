@@ -269,69 +269,7 @@ namespace SharedLib.Configuration
             Subscription.SetDefaults();
         }
         #endregion
-    }
-
-    /// <summary>
-    /// Waiting line configuration class.
-    /// </summary>
-    [Serializable()]
-    [DataContract()]
-    public class WaitingLineConfig : ConfigBase
-    {
-        /// <summary>
-        /// Gets or sets if logout grace period should be enabled.
-        /// </summary>
-        [DefaultValue(false)]
-        [DataMember()]
-        public bool EnableLogoutGreacePeriod
-        {
-            get; set;
-        }
-
-        /// <summary>
-        /// Gets or sets logout grace period in minutes.
-        /// </summary>
-        [DefaultValue(30)]
-        [Range(1, int.MaxValue)]
-        [DataMember()]
-        public int LogoutGracePeriod
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Gets or sets if user should be removed from all waiting lines on login.
-        /// </summary>
-        [DefaultValue(true)]
-        [DataMember()]
-        public bool RemoveFromAllOnLogin
-        {
-            get; set;
-        }
-
-        /// <summary>
-        /// Gets waiting line next in line time.
-        /// </summary>
-        [DefaultValue(30)]
-        [Range(1, int.MaxValue)]
-        [DataMember()]
-        public int NextInLineTime
-        {
-            get; set;
-        }
-
-        /// <summary>
-        /// Gets global waiting line remove time.
-        /// </summary>
-        [DefaultValue(30)]
-        [Range(1, int.MaxValue)]
-        [DataMember()]
-        public int RemoveTime
-        {
-            get; set;
-        }
-    }
+    }    
 
     /// <summary>
     /// Global network configuration class.
@@ -419,63 +357,6 @@ namespace SharedLib.Configuration
 
         #endregion
     }
-
-    #region RESERVATIONCONFIG
-    /// <summary>
-    /// Reservation configuration class.
-    /// </summary>
-    [Category("Reservations")]
-    [Serializable()]
-    [DataContract()]
-    public class ReservationConfig : ConfigBase
-    {
-        #region PROPERTIES
-
-        /// <summary>
-        /// Enables blocking login on hosts with upcoming reservations.
-        /// </summary>
-        [DataMember(Order = 0)]
-        [DefaultValue(true)]
-        public bool EnableLoginBlock
-        {
-            get; set;
-        }
-
-        /// <summary>
-        /// Time in minutes before upcoming reservation to block login.
-        /// </summary>
-        [DataMember(Order = 1)]
-        [DefaultValue(30)]
-        [Range(0, int.MaxValue)]
-        public int LoginBlockTime
-        {
-            get; set;
-        }
-
-        /// <summary>
-        /// Enables unblocking login for active reservation.
-        /// </summary>
-        [DataMember(Order = 2)]
-        [DefaultValue(false)]
-        public bool EnableLoginUnblock
-        {
-            get; set;
-        }
-
-        /// <summary>
-        /// Time in minutes before unblocking login for active reservation.
-        /// </summary>
-        [DataMember(Order = 3)]
-        [DefaultValue(30)]
-        [Range(0, int.MaxValue)]
-        public int LoginUnblockTime
-        {
-            get; set;
-        }
-
-        #endregion
-    }
-    #endregion
 
     #endregion
 
@@ -1033,70 +914,6 @@ namespace SharedLib.Configuration
     }
 
     /// <summary>
-    /// Service backup configuration class.
-    /// </summary>
-    [DataContract()]
-    [Serializable()]
-    public class ServiceBackupConfig : ConfigBase
-    {
-        #region PROPERTIES
-
-        /// <summary>
-        /// Gets or sets if backup is enabled.
-        /// </summary>
-        [DataMember()]
-        [DefaultValue(true)]
-        public bool IsEnabled
-        {
-            get; set;
-        }
-
-        /// <summary>
-        /// Gets or sets backup folder.
-        /// </summary>
-        [DataMember()]
-        public string BackupFolder
-        {
-            get; set;
-        }
-
-        /// <summary>
-        /// Gets or sets maximum amount of backup files to keep.
-        /// </summary>
-        [DefaultValue(30)]
-        [DataMember()]
-        public int MaxFiles
-        {
-            get; set;
-        }
-
-        /// <summary>
-        /// Gets or sets backup time.
-        /// </summary>
-        [DataMember()]
-        public TimeSpan? Time
-        {
-            get; set;
-        }
-
-        #endregion
-
-        #region OVERRIDES
-
-        /// <summary>
-        /// Sets default values.
-        /// </summary>
-        public override void SetDefaults()
-        {
-            base.SetDefaults();
-
-            Time = new TimeSpan(6, 0, 0);
-        }
-
-        #endregion
-    }
-
-    /// <summary>
     /// Auto invoice configuration class.
     /// </summary>
     [Serializable()]
@@ -1233,196 +1050,7 @@ namespace SharedLib.Configuration
 
         #endregion
     }
-    #endregion
-
-    #region SERVICEFILESYSTEMCONFIG
-    /// <summary>
-    /// Service file system configuration class.
-    /// </summary>
-    [Serializable()]
-    [DataContract()]
-    public class ServiceFileSystemConfig : ConfigBase
-    {
-        #region PROPERTIES
-
-        /// <summary>
-        /// Gets or sets path to the user data storage.
-        /// </summary>
-        [DefaultValue("UserData")]
-        [Category("File System")]
-        [StringLength(255)]
-        [Required()]
-        [DataMember()]
-        public string UsersDataPath
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Gets the path to users profile defaults directory.
-        /// </summary>
-        [DefaultValue("DefaultUserFiles")]
-        [Category("File System")]
-        [StringLength(255)]
-        [Required()]
-        [DataMember()]
-        public string DefaultsUserDataPath
-        {
-            get;
-            set;
-        }
-
-        #endregion
-    }
-    #endregion
-
-    #region SMTPCONFIG
-    /// <summary>
-    /// Service SMTP configuration class.
-    /// </summary>
-    [Serializable()]
-    [DataContract()]
-    public class SMTPConfig : ConfigBase
-    {
-        #region PROPERTIES
-
-        /// <summary>
-        /// Gets or sets SMTP server host.
-        /// </summary>
-        [DataMember()]
-        [Required()]
-        public string Host
-        {
-            get; set;
-        }
-
-        /// <summary>
-        /// Gets or sets mail server port.
-        /// </summary>
-        [DataMember()]
-        [DefaultValue(465)]
-        [Range(1, 65536)]
-        public int Port
-        {
-            get; set;
-        }
-
-        /// <summary>
-        /// Gets or sets username.
-        /// </summary>
-        [DataMember()]
-        [StringLength(255)]
-        public string Username
-        {
-            get; set;
-        }
-
-        /// <summary>
-        /// Gets or sets password.
-        /// </summary>
-        [DataMember()]
-        [StringLength(255)]
-        public string Password
-        {
-            get; set;
-        }
-
-        /// <summary>
-        /// Gets or sets if authentication should be used.
-        /// </summary>
-        [DataMember()]
-        [DefaultValue(false)]
-        public bool EnableAuthentication
-        {
-            get; set;
-        }
-
-        /// <summary>
-        /// Gets or sets if SSL should be used.
-        /// </summary>
-        [DataMember()]
-        [DefaultValue(true)]
-        public bool UseSSL
-        {
-            get; set;
-        }
-
-        /// <summary>
-        /// Gets or sets if SMTP security.
-        /// </summary>
-        [DataMember()]
-        [DefaultValue(SMTPSecurity.SSL)]
-        public SMTPSecurity SMTPSecurity
-        {
-            get; set;
-        }
-
-        /// <summary>
-        /// Gets or sets if SMTP is enabled.
-        /// </summary>
-        [DataMember()]
-        [DefaultValue(false)]
-        public bool IsEnabled
-        {
-            get; set;
-        }
-
-        /// <summary>
-        /// Gets or sets reply to address.
-        /// </summary>
-        [DataMember()]
-        [EmailNullEmptyValidation()]
-        public string ReplyToAddress
-        {
-            get; set;
-        }
-
-        #endregion
-    }
-    #endregion
-
-    #region SMSGATEWAYCONFIG
-    /// <summary>
-    /// SMS gateway configuration class.
-    /// </summary>
-    [DataContract()]
-    [Serializable()]
-    public class SMSGatewayConfig : ConfigBase
-    {
-        #region CONSTRUCTOR
-        /// <summary>
-        /// Creates new instance.
-        /// </summary>
-        public SMSGatewayConfig()
-        {
-        }
-        #endregion
-
-        #region PROPERTIES
-
-        /// <summary>
-        /// Gets or sets if gateway is enabled.
-        /// </summary>
-        [DefaultValue(false)]
-        [DataMember()]
-        public bool IsEnabled
-        {
-            get; set;
-        }
-
-        /// <summary>
-        /// Gets or sets current provider guid.
-        /// </summary>
-        [DataMember()]
-        public Guid? Current
-        {
-            get; set;
-        }
-
-        #endregion
-    }
-    #endregion
+    #endregion    
 
     #region SCHEDULERCONFIG
     /// <summary>
@@ -1469,103 +1097,6 @@ namespace SharedLib.Configuration
     }
     #endregion    
 
-    #endregion
-
-    #region FINANCIALCONFIG
-    /// <summary>
-    /// Global financial configuration.
-    /// </summary>
-    [Serializable()]
-    [DataContract()]
-    public class FinancialConfig : ConfigBase
-    {
-        #region PROPERTIES
-
-        /// <summary>
-        /// Gets or sets business vat id.
-        /// </summary>
-        [DataMember()]
-        public string BusinessVatId
-        {
-            get; set;
-        }
-
-        /// <summary>
-        /// Gets or sets time sale vat.
-        /// </summary>
-        [DataMember()]
-        [Range(0, 100)]
-        public decimal TimeSaleVAT
-        {
-            get; set;
-        }
-
-        /// <summary>
-        /// Gets or sets global tax system.
-        /// </summary>
-        [DataMember()]
-        [DefaultValue(GlobalTaxSystems.None)]
-        public GlobalTaxSystems GlobalTaxSystem
-        {
-            get; set;
-        }
-
-        //TODO: A REPLACE INT WITH FiscalPrinterTaxSystemTypes enum
-
-        /// <summary>
-        /// Gets or sets products tax system type.
-        /// </summary>
-        [DataMember()]
-        [DefaultValue(0)]
-        public int ProductsTaxSystemType
-        {
-            get; set;
-        }
-
-        /// <summary>
-        /// Gets or sets services tax system type.
-        /// </summary>
-        [DataMember()]
-        [DefaultValue(0)]
-        public int ServicesTaxSystemType
-        {
-            get; set;
-        }
-
-        /// <summary>
-        /// Gets or sets if deposits should be treated as service sale.
-        /// </summary>
-        [DataMember()]
-        [DefaultValue(false)]
-        public bool TreatDepositsAsService
-        {
-            get; set;
-        }
-
-        /// <summary>
-        /// Gets or sets deposit service name.
-        /// </summary>
-        /// <remarks>
-        /// This value is used when deposits are treated as service sale. 
-        /// </remarks>
-        [DataMember()]
-        public string DepositServiceName
-        {
-            get; set;
-        }
-
-        /// <summary>
-        /// Gets or sets if fiscal printing is enabled.
-        /// </summary>
-        [DataMember()]
-        [DefaultValue(false)]
-        public bool EnableFiscalPrinter
-        {
-            get; set;
-        }
-
-        #endregion
-    }
     #endregion
 
     #region CLIENTCONFIGURATION
@@ -3043,6 +2574,160 @@ namespace SharedLib.Configuration
     }
     #endregion
 
+    #region RESERVATIONCONFIG
+    /// <summary>
+    /// Reservation configuration class.
+    /// </summary>
+    [Category("Reservations")]
+    [Serializable()]
+    [DataContract()]
+    public class ReservationConfig : ConfigBase
+    {
+        #region PROPERTIES
+
+        /// <summary>
+        /// Enables blocking login on hosts with upcoming reservations.
+        /// </summary>
+        [DataMember(Order = 0)]
+        [DefaultValue(true)]
+        public bool EnableLoginBlock
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Time in minutes before upcoming reservation to block login.
+        /// </summary>
+        [DataMember(Order = 1)]
+        [DefaultValue(30)]
+        [Range(0, int.MaxValue)]
+        public int LoginBlockTime
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Enables unblocking login for active reservation.
+        /// </summary>
+        [DataMember(Order = 2)]
+        [DefaultValue(false)]
+        public bool EnableLoginUnblock
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Time in minutes before unblocking login for active reservation.
+        /// </summary>
+        [DataMember(Order = 3)]
+        [DefaultValue(30)]
+        [Range(0, int.MaxValue)]
+        public int LoginUnblockTime
+        {
+            get; set;
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #region FINANCIALCONFIG
+    /// <summary>
+    /// Global financial configuration.
+    /// </summary>
+    [Serializable()]
+    [DataContract()]
+    public class FinancialConfig : ConfigBase
+    {
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets or sets business vat id.
+        /// </summary>
+        [DataMember()]
+        public string BusinessVatId
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets time sale vat.
+        /// </summary>
+        [DataMember()]
+        [Range(0, 100)]
+        public decimal TimeSaleVAT
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets global tax system.
+        /// </summary>
+        [DataMember()]
+        [DefaultValue(GlobalTaxSystems.None)]
+        public GlobalTaxSystems GlobalTaxSystem
+        {
+            get; set;
+        }
+
+        //TODO: A REPLACE INT WITH FiscalPrinterTaxSystemTypes enum
+
+        /// <summary>
+        /// Gets or sets products tax system type.
+        /// </summary>
+        [DataMember()]
+        [DefaultValue(0)]
+        public int ProductsTaxSystemType
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets services tax system type.
+        /// </summary>
+        [DataMember()]
+        [DefaultValue(0)]
+        public int ServicesTaxSystemType
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets if deposits should be treated as service sale.
+        /// </summary>
+        [DataMember()]
+        [DefaultValue(false)]
+        public bool TreatDepositsAsService
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets deposit service name.
+        /// </summary>
+        /// <remarks>
+        /// This value is used when deposits are treated as service sale. 
+        /// </remarks>
+        [DataMember()]
+        public string DepositServiceName
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets if fiscal printing is enabled.
+        /// </summary>
+        [DataMember()]
+        [DefaultValue(false)]
+        public bool EnableFiscalPrinter
+        {
+            get; set;
+        }
+
+        #endregion
+    }
+    #endregion
+
     #region PAYMENTPROVIDERSCONFIG
     /// <summary>
     /// Global payment providers configuration.
@@ -3157,6 +2842,7 @@ namespace SharedLib.Configuration
     }
     #endregion
 
+    #region AGEHOURRESTRICTION
     /// <summary>
     /// Age-Hour restriction.
     /// </summary>
@@ -3182,4 +2868,324 @@ namespace SharedLib.Configuration
         [DataMember]
         public TimeSpan TimeTo { get; set; }
     }
+    #endregion
+
+    #region SERVICEBACKUPCONFIG
+    /// <summary>
+    /// Service backup configuration class.
+    /// </summary>
+    [DataContract()]
+    [Serializable()]
+    public class ServiceBackupConfig : ConfigBase
+    {
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets or sets if backup is enabled.
+        /// </summary>
+        [DataMember()]
+        [DefaultValue(true)]
+        public bool IsEnabled
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets backup folder.
+        /// </summary>
+        [DataMember()]
+        public string BackupFolder
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets maximum amount of backup files to keep.
+        /// </summary>
+        [DefaultValue(30)]
+        [DataMember()]
+        public int MaxFiles
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets backup time.
+        /// </summary>
+        [DataMember()]
+        public TimeSpan? Time
+        {
+            get; set;
+        }
+
+        #endregion
+
+        #region OVERRIDES
+
+        /// <summary>
+        /// Sets default values.
+        /// </summary>
+        public override void SetDefaults()
+        {
+            base.SetDefaults();
+
+            Time = new TimeSpan(6, 0, 0);
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #region SMTPCONFIG
+    /// <summary>
+    /// Service SMTP configuration class.
+    /// </summary>
+    [Serializable()]
+    [DataContract()]
+    public class SMTPConfig : ConfigBase
+    {
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets or sets SMTP server host.
+        /// </summary>
+        [DataMember()]
+        [Required()]
+        public string Host
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets mail server port.
+        /// </summary>
+        [DataMember()]
+        [DefaultValue(465)]
+        [Range(1, 65536)]
+        public int Port
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets username.
+        /// </summary>
+        [DataMember()]
+        [StringLength(255)]
+        public string Username
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets password.
+        /// </summary>
+        [DataMember()]
+        [StringLength(255)]
+        public string Password
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets if authentication should be used.
+        /// </summary>
+        [DataMember()]
+        [DefaultValue(false)]
+        public bool EnableAuthentication
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets if SSL should be used.
+        /// </summary>
+        [DataMember()]
+        [DefaultValue(true)]
+        public bool UseSSL
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets if SMTP security.
+        /// </summary>
+        [DataMember()]
+        [DefaultValue(SMTPSecurity.SSL)]
+        public SMTPSecurity SMTPSecurity
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets if SMTP is enabled.
+        /// </summary>
+        [DataMember()]
+        [DefaultValue(false)]
+        public bool IsEnabled
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets reply to address.
+        /// </summary>
+        [DataMember()]
+        [EmailNullEmptyValidation()]
+        public string ReplyToAddress
+        {
+            get; set;
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #region SMSGATEWAYCONFIG
+    /// <summary>
+    /// SMS gateway configuration class.
+    /// </summary>
+    [DataContract()]
+    [Serializable()]
+    public class SMSGatewayConfig : ConfigBase
+    {
+        #region CONSTRUCTOR
+        /// <summary>
+        /// Creates new instance.
+        /// </summary>
+        public SMSGatewayConfig()
+        {
+        }
+        #endregion
+
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets or sets if gateway is enabled.
+        /// </summary>
+        [DefaultValue(false)]
+        [DataMember()]
+        public bool IsEnabled
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets current provider guid.
+        /// </summary>
+        [DataMember()]
+        public Guid? Current
+        {
+            get; set;
+        }
+
+        #endregion
+    }
+    #endregion
+
+    #region WAITINGLINECONFIG
+    /// <summary>
+    /// Waiting line configuration class.
+    /// </summary>
+    [Serializable()]
+    [DataContract()]
+    public class WaitingLineConfig : ConfigBase
+    {
+        /// <summary>
+        /// Gets or sets if logout grace period should be enabled.
+        /// </summary>
+        [DefaultValue(false)]
+        [DataMember()]
+        public bool EnableLogoutGreacePeriod
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets or sets logout grace period in minutes.
+        /// </summary>
+        [DefaultValue(30)]
+        [Range(1, int.MaxValue)]
+        [DataMember()]
+        public int LogoutGracePeriod
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets if user should be removed from all waiting lines on login.
+        /// </summary>
+        [DefaultValue(true)]
+        [DataMember()]
+        public bool RemoveFromAllOnLogin
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets waiting line next in line time.
+        /// </summary>
+        [DefaultValue(30)]
+        [Range(1, int.MaxValue)]
+        [DataMember()]
+        public int NextInLineTime
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// Gets global waiting line remove time.
+        /// </summary>
+        [DefaultValue(30)]
+        [Range(1, int.MaxValue)]
+        [DataMember()]
+        public int RemoveTime
+        {
+            get; set;
+        }
+    }
+    #endregion
+
+    #region SERVICEFILESYSTEMCONFIG
+    /// <summary>
+    /// Service file system configuration class.
+    /// </summary>
+    [Serializable()]
+    [DataContract()]
+    public class ServiceFileSystemConfig : ConfigBase
+    {
+        #region PROPERTIES
+
+        /// <summary>
+        /// Gets or sets path to the user data storage.
+        /// </summary>
+        [DefaultValue("UserData")]
+        [Category("File System")]
+        [StringLength(255)]
+        [Required()]
+        [DataMember()]
+        public string UsersDataPath
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets the path to users profile defaults directory.
+        /// </summary>
+        [DefaultValue("DefaultUserFiles")]
+        [Category("File System")]
+        [StringLength(255)]
+        [Required()]
+        [DataMember()]
+        public string DefaultsUserDataPath
+        {
+            get;
+            set;
+        }
+
+        #endregion
+    }
+    #endregion
 }
