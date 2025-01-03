@@ -2568,7 +2568,11 @@ namespace SharedLib
         /// <summary>
         /// If the product is marked product.
         /// </summary>
-        IsMarkedProduct = 16
+        IsMarkedProduct = 16,
+        /// <summary>
+        /// If the product is excise product.
+        /// </summary>
+        IsExcise = 64,
     }
     #endregion
 
