@@ -10,29 +10,44 @@ namespace SharedLib.Management
         #region PROPERTIES
         
         /// <summary>
-        /// Gets profile id.
+        /// Security profile id.
         /// </summary>
         int Id { get; set; }
 
         /// <summary>
-        /// Gets disabled drives flag.
+        /// Disabled drives flag.
         /// </summary>
         int DisabledDrives { get; }
 
         /// <summary>
-        /// Gets profile name.
+        /// Security profile name.
         /// </summary>
         string Name { get; }
 
         /// <summary>
-        /// Gets policies.
+        /// Policies.
         /// </summary>
         List<ISecurityPolicy> Policies { get; }
 
         /// <summary>
-        /// Gets restrictions.
+        /// Restrictions.
         /// </summary>
-        List<IRestriction> Restrictions { get; } 
+        List<IRestriction> Restrictions { get; }
+
+        /// <summary>
+        /// Enable sticky shell.
+        /// </summary>
+        bool StickyShell { get; }
+
+        /// <summary>
+        /// Disable start menu.
+        /// </summary>
+        bool DisableStartMenu { get; }
+
+        /// <summary>
+        /// Disable desktop switching.
+        /// </summary>
+        bool DisableDesktopSwitching { get; }
 
         #endregion
     }
