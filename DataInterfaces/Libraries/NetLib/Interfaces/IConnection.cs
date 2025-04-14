@@ -8,8 +8,6 @@ namespace NetLib
     /// </summary>
     public interface IConnection
     {
-        #region EVENTS   
-
         /// <summary>
         /// Occurs on exception.
         /// </summary>
@@ -44,10 +42,6 @@ namespace NetLib
         /// Occurs once all data is sent.
         /// </summary>
         event EventHandler<SentReceivedEventArgs> Sent;
-
-        #endregion
-
-        #region PROPERTIES
 
         /// <summary>
         /// Gets or sets if chunking enabled.
@@ -94,10 +88,6 @@ namespace NetLib
         /// </summary>
         ulong BytesSent { get; }
 
-        #endregion
-
-        #region FUNCTIONS
-
         /// <summary>
         /// Closes the connection.
         /// </summary>
@@ -119,15 +109,13 @@ namespace NetLib
         /// <param name="buffer">Data buffer.</param>
         /// <param name="offset">Buffer offset.</param>
         /// <param name="size">Size.</param>
-        /// <returns>Bytes transfered.</returns>
+        /// <returns>Bytes transferred.</returns>
         int Send(byte[] buffer, int offset, int size);
 
         /// <summary>
         /// Connects to specified URI.
         /// </summary>
-        /// <param name="uri"></param>
+        /// <param name="uri">Connection URI.</param>
         public void Connect(Uri uri);
-
-        #endregion
     }
 }
