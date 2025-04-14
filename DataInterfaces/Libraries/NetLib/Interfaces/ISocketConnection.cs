@@ -4,14 +4,12 @@ using System.Net.Sockets;
 namespace NetLib
 {
     /// <summary>
-    /// Socket connection inteface.
+    /// Socket connection interface.
     /// </summary>
     public interface ISocketConnection : IConnection
     {
-        #region EVENTS
-
         /// <summary>
-        /// Rised on new connection.
+        /// Raised on new connection.
         /// </summary>
         event NewConnectionDelegate NewConnection;
 
@@ -29,10 +27,6 @@ namespace NetLib
         /// Raised on endpoint connection failure.
         /// </summary>
         event EndpointEventDelegate EndpointConnectionFailed;
-
-        #endregion
-
-        #region PROPERTIES
 
         /// <summary>
         /// Gets internal socket instance.
@@ -69,10 +63,6 @@ namespace NetLib
         /// </summary>
         int SendBufferSize { get; set; }
 
-        #endregion
-
-        #region FUNCTIONS
-
         /// <summary>
         /// Starts listening.
         /// </summary>
@@ -106,7 +96,7 @@ namespace NetLib
         void Close(int timeOut);
 
         /// <summary>
-        /// Connects to sepcified endpoint.
+        /// Connects to specified endpoint.
         /// </summary>
         /// <param name="remoteEP">Endpoint.</param>
         void Connect(EndPoint remoteEP);
@@ -188,7 +178,5 @@ namespace NetLib
         /// <param name="remoteEP">Endpoint.</param>
         /// <returns>Amount of bytes sent.</returns>
         int SendTo(byte[] buffer, ref EndPoint remoteEP);
-
-        #endregion
     }
 }

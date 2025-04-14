@@ -1,5 +1,7 @@
 ﻿using CoreLib;
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace NetLib
 {
@@ -9,37 +11,37 @@ namespace NetLib
     public interface IConnection
     {
         /// <summary>
-        /// Occurs on exception.
+        /// Raised on exception.
         /// </summary>
         event EventHandler<ExceptionEventArgs> Exception;
 
         /// <summary>
-        /// Occurs on disconnection.
+        /// Raised on disconnection.
         /// </summary>
         event EventHandler<ConnectDisconnectEventArgs> EndpointDisconnected;
 
         /// <summary>
-        /// Occurs on connection.
+        /// Raised on connection.
         /// </summary>
         event EventHandler<ConnectDisconnectEventArgs> EndpointConnected;
 
         /// <summary>
-        /// Occurs once all data is received.
+        /// Raised once all data is received.
         /// </summary>
         event EventHandler<SentReceivedEventArgs> Received;
 
         /// <summary>
-        /// Occurs on data reception.
+        /// Raised on data reception.
         /// </summary>
         event EventHandler<SendReceiveArgs> Receiving;
 
         /// <summary>
-        /// Occurs on data sending.
+        /// Raised on data sending.
         /// </summary>
         event EventHandler<SendReceiveArgs> Sending;
 
         /// <summary>
-        /// Occurs once all data is sent.
+        /// Raised once all data is sent.
         /// </summary>
         event EventHandler<SentReceivedEventArgs> Sent;
 
@@ -111,6 +113,16 @@ namespace NetLib
         /// <param name="size">Size.</param>
         /// <returns>Bytes transferred.</returns>
         int Send(byte[] buffer, int offset, int size);
+
+        /// <summary>
+        /// Asynchronously sends data over connection.
+        /// </summary>
+        /// <param name="buffer">Data buffer.</param>
+        /// <param name="offset">Buffer offset.</param>
+        /// <param name="size">Size.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
+        /// <returns>Bytes transferred.</returns>
+        Task<int> SendAsync(byte[] buffer, int offset, int size, CancellationToken cancellationToken);
 
         /// <summary>
         /// Connects to specified URI.
