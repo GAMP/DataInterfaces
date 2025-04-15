@@ -5,9 +5,8 @@ namespace NetLib
     /// <summary>
     /// Connection changed event args.
     /// </summary>
-    public class ConnectionChangedArgs : EventArgs
+    public sealed class ConnectionChangedArgs : EventArgs
     {
-        #region CONSTUCTOR
         /// <summary>
         /// Creates new instance.
         /// </summary>
@@ -18,9 +17,6 @@ namespace NetLib
             OldConnection = oldConnection;
             NewConnection = newConnection;
         }
-        #endregion
-
-        #region PROPERTIES
 
         /// <summary>
         /// Gets old connection.
@@ -31,7 +27,7 @@ namespace NetLib
         public IConnection OldConnection
         {
             get;
-            protected set;
+            private set;
         }
 
         /// <summary>
@@ -40,9 +36,7 @@ namespace NetLib
         public IConnection NewConnection
         {
             get;
-            protected set;
+            private set;
         }
-
-        #endregion
     }
 }

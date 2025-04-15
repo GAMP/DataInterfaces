@@ -100,7 +100,7 @@ namespace SharedLib.Commands
         bool NeedsResponseToState(CommandStates newState);
 
         /// <summary>
-        /// Updaates current command state.
+        /// Updates current command state.
         /// </summary>
         /// <param name="state">New command state.</param>
         /// <param name="parameters">State change additional parameters.</param>

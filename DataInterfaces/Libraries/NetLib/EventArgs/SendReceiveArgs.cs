@@ -3,33 +3,27 @@
     /// <summary>
     /// Send receive args.
     /// </summary>
-    public class SendReceiveArgs : SentReceivedEventArgs
+    public sealed class SendReceiveArgs : SentReceivedEventArgs
     {
-        #region CONSTRUCTOR
-
         /// <summary>
         /// Creates new instance.
         /// </summary>
         /// <param name="buffer">Buffer.</param>
         /// <param name="offset">Offset.</param>
-        /// <param name="transfered">Transfered.</param>
+        /// <param name="transferred">Transferred.</param>
         /// <param name="totalSize">Total size.</param>
         /// <param name="dataLeft">Data left.</param>
         /// <param name="flags">Flags.</param>
-        public SendReceiveArgs(byte[] buffer, int offset, int transfered, int totalSize, int dataLeft, DataFlags flags) : base(buffer, offset, totalSize, flags)
+        public SendReceiveArgs(byte[] buffer, int offset, int transferred, int totalSize, int dataLeft, DataFlags flags) : base(buffer, offset, totalSize, flags)
         {
-            Transfered = transfered;
+            Transferred = transferred;
             DataLeft = dataLeft;
         }
 
-        #endregion
-
-        #region PROPERTIES
-
         /// <summary>
-        /// Gets transfered amount.
+        /// Gets transferred amount.
         /// </summary>
-        public int Transfered
+        public int Transferred
         {
             get; protected set;
         }
@@ -50,7 +44,5 @@
         {
             get { return DataLeft == 0; }
         }
-
-        #endregion
     }
 }

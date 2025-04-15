@@ -6,9 +6,8 @@ namespace NetLib
     /// <summary>
     /// Connection/Disconnection event args.
     /// </summary>
-    public class ConnectDisconnectEndpointEventArgs : ConnectDisconnectEventArgs
+    public sealed class ConnectDisconnectEndpointEventArgs : ConnectDisconnectEventArgs
     {
-        #region CONSTRUCTOR
         /// <summary>
         /// Creates new instance.
         /// </summary>
@@ -17,19 +16,14 @@ namespace NetLib
         {
             Endpoint = ep ?? throw new ArgumentNullException(nameof(ep));
         }
-        #endregion
-
-        #region PROPERTIES
-
+ 
         /// <summary>
         /// Gets endpoint.
         /// </summary>
         public EndPoint Endpoint
         {
-            get; protected set;
+            get; private set;
         }
-
-        #endregion
     } 
 }
 

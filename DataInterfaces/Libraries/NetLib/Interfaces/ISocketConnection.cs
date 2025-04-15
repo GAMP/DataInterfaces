@@ -122,14 +122,14 @@ namespace NetLib
         void Disconnect(bool reuseSocket);
 
         /// <summary>
-        /// Receives.
+        /// Receives data from socket.
         /// </summary>
         /// <param name="buffer">Buffer.</param>
         /// <returns>Amount of bytes read from socket.</returns>
         int Receive(byte[] buffer);
 
         /// <summary>
-        /// Receives.
+        /// Receives data from socket.
         /// </summary>
         /// <param name="buffer">Buffer.</param>
         /// <param name="offset">Buffer offset.</param>
@@ -139,7 +139,7 @@ namespace NetLib
         int Receive(byte[] buffer, int offset, int size, SocketFlags socketFlags);
 
         /// <summary>
-        /// Receives.
+        /// Receives data from socket.
         /// </summary>
         /// <param name="buffer">Buffer.</param>
         /// <param name="size">Amount to read from socket.</param>
@@ -148,14 +148,14 @@ namespace NetLib
         int Receive(byte[] buffer, int size, SocketFlags socketFlags);
 
         /// <summary>
-        /// Sends.
+        /// Sends data over socket.
         /// </summary>
         /// <param name="buffer">Buffer.</param>
         /// <returns>Amount of bytes sent.</returns>
         int Send(byte[] buffer);
 
         /// <summary>
-        /// 
+        /// Sends data over socket.
         /// </summary>
         /// <param name="buffer">Buffer.</param>
         /// <param name="size">Amount to write to socket.</param>
@@ -164,7 +164,7 @@ namespace NetLib
         int Send(byte[] buffer, int size, SocketFlags socketFlags);
 
         /// <summary>
-        /// 
+        /// Sends data over socket.
         /// </summary>
         /// <param name="buffer">Buffer.</param>
         /// <param name="socketFlags">Socket flags.</param>
@@ -172,7 +172,7 @@ namespace NetLib
         int Send(byte[] buffer, SocketFlags socketFlags);
 
         /// <summary>
-        /// Sends to.
+        /// Sends data over socket to specified endpoint.
         /// </summary>
         /// <param name="buffer">Buffer.</param>
         /// <param name="remoteEP">Endpoint.</param>

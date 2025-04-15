@@ -1,4 +1,6 @@
-﻿using CoreLib;
+﻿#nullable enable
+
+using CoreLib;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -6,48 +8,49 @@ using System.Threading.Tasks;
 namespace NetLib
 {
     /// <summary>
-    /// Base network connection interface.
+    /// Generic network connection interface.
     /// </summary>
     public interface IConnection
     {
         /// <summary>
         /// Raised on exception.
         /// </summary>
-        event EventHandler<ExceptionEventArgs> Exception;
+        event EventHandler<ExceptionEventArgs>? Exception;
 
         /// <summary>
         /// Raised on disconnection.
         /// </summary>
-        event EventHandler<ConnectDisconnectEventArgs> EndpointDisconnected;
+        event EventHandler<ConnectDisconnectEventArgs>? EndpointDisconnected;
 
         /// <summary>
         /// Raised on connection.
         /// </summary>
-        event EventHandler<ConnectDisconnectEventArgs> EndpointConnected;
-
-        /// <summary>
-        /// Raised once all data is received.
-        /// </summary>
-        event EventHandler<SentReceivedEventArgs> Received;
-
-        /// <summary>
-        /// Raised on data reception.
-        /// </summary>
-        event EventHandler<SendReceiveArgs> Receiving;
-
-        /// <summary>
-        /// Raised on data sending.
-        /// </summary>
-        event EventHandler<SendReceiveArgs> Sending;
+        event EventHandler<ConnectDisconnectEventArgs>? EndpointConnected;
 
         /// <summary>
         /// Raised once all data is sent.
         /// </summary>
-        event EventHandler<SentReceivedEventArgs> Sent;
+        event EventHandler<SentReceivedEventArgs>? Sent;
+
+        /// <summary>
+        /// Raised once all data is received.
+        /// </summary>
+        event EventHandler<SentReceivedEventArgs>? Received;
+
+        /// <summary>
+        /// Raised on data reception.
+        /// </summary>
+        event EventHandler<SendReceiveArgs>? Receiving;
+
+        /// <summary>
+        /// Raised on data sending.
+        /// </summary>
+        event EventHandler<SendReceiveArgs>? Sending;
 
         /// <summary>
         /// Gets or sets if chunking enabled.
         /// </summary>
+        /// <exception cref="NotSupportedException"> thrown on attempt to enable chunking on connection that does not support it.</exception>
         bool IsChunkingEnabled { get; set; }
 
         /// <summary>
@@ -61,11 +64,6 @@ namespace NetLib
         bool IsConnected { get; }
 
         /// <summary>
-        /// Gets if connecting.
-        /// </summary>
-        bool IsConnecting { get; }
-
-        /// <summary>
         /// Gets if receiving.
         /// </summary>
         bool IsReceiving { get; }
@@ -73,11 +71,13 @@ namespace NetLib
         /// <summary>
         /// Gets or sets receive chunk size.
         /// </summary>
+        /// <exception cref="ArgumentException"></exception>
         uint ReceiveChunkSize { get; set; }
 
         /// <summary>
         /// Gets send chunk size.
         /// </summary>
+        /// <exception cref="ArgumentException"></exception>
         uint SendChunkSize { get; set; }
 
         /// <summary>
@@ -122,7 +122,7 @@ namespace NetLib
         /// <param name="size">Size.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>Bytes transferred.</returns>
-        Task<int> SendAsync(byte[] buffer, int offset, int size, CancellationToken cancellationToken);
+        Task<int> SendAsync(byte[] buffer, int offset, int size, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Connects to specified URI.
