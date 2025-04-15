@@ -59,6 +59,11 @@ namespace NetLib
         bool IsChunkingSupported { get; }
 
         /// <summary>
+        /// Gets if connecting.
+        /// </summary>
+        bool IsConnecting { get; }
+
+        /// <summary>
         /// Gets if connected.
         /// </summary>
         bool IsConnected { get; }
