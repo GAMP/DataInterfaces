@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SharedLib.Commands
 {
@@ -39,7 +35,7 @@ namespace SharedLib.Commands
         SendFailed = 128,
         
         /// <summary>
-        /// Occours when command carries an operation or a state update and requested command is not present.
+        /// Occurs when command carries an operation or a state update and requested command is not present.
         /// </summary>
         RequestNotFound = 256,
         
@@ -49,12 +45,12 @@ namespace SharedLib.Commands
         UnhandledOperationException = 512,
         
         /// <summary>
-        /// Occours when command data is not recognized.
+        /// Occurs when command data is not recognized.
         /// </summary>
-        Unrecongnized = 1024,
+        Unrecognized = 1024,
         
         /// <summary>
-        /// Command cannot execute due to authorozation.
+        /// Command cannot execute due to authorization.
         /// </summary>
         UnAuthorized = 2048,
         
