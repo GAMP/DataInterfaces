@@ -43,7 +43,7 @@ namespace SharedLib.Commands
         IMessageDispatcher Dispatcher { get; set; }
 
         /// <summary>
-        /// Gets if command requiers a response based on its current state.
+        /// Gets if command requires a response based on its current state.
         /// </summary>
         bool NeedsResponse { get; }
 
