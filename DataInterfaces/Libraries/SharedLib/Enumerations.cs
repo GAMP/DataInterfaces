@@ -3571,6 +3571,16 @@ namespace SharedLib
         /// Completed.
         /// </summary>
         Completed = 4,
+
+        /// <summary>
+        /// Released.
+        /// </summary>
+        Released = 5,
+
+        /// <summary>
+        /// Moved.
+        /// </summary>
+        Moved = 6,
     }
     #endregion
 
