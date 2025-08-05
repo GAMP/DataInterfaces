@@ -2690,6 +2690,13 @@ namespace SharedLib
         /// Maximum daily usage.
         /// </summary>
         HasMaximumDailyUsage = 2,
+        /// <summary>
+        /// Reservation.
+        /// </summary>
+        /// <remarks>
+        /// Indicates that product can be used for reservations.
+        /// </remarks>
+        Reservation = 4,
     }
     #endregion
 
