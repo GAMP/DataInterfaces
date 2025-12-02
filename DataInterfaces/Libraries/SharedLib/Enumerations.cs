@@ -1209,7 +1209,7 @@ namespace SharedLib
         /// <summary>
         /// POSTGRE.
         /// </summary>
-        [CanUserAssign(false)]
+        [CanUserAssign(true)]
         POSTGRE=5,
     }
     #endregion
