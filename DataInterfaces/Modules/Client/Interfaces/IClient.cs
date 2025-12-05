@@ -7,7 +7,6 @@ using SharedLib.ViewModels;
 using CoreLib.Hooking;
 using System.ComponentModel;
 using System.Threading.Tasks;
-using ServerService;
 using System.Collections.Generic;
 using System.Threading;
 
@@ -126,7 +125,7 @@ namespace Client
         }
 
         /// <summary>
-        /// Gets client version ifnormation.
+        /// Gets client version information.
         /// </summary>
         string VersionInfo { get; }
 
@@ -178,7 +177,7 @@ namespace Client
         bool IsInputLocked { get; set; }
 
         /// <summary>
-        /// Gets or set client langauge.
+        /// Gets or set client language.
         /// </summary>
         string Language { get; set; }
 
@@ -221,7 +220,7 @@ namespace Client
         Gizmo.LoginState LoginState { get; }
 
         /// <summary>
-        /// Gets if module shutdowon or restart is initiated.
+        /// Gets if module shutdown or restart is initiated.
         /// </summary>
         bool IsShuttingDown { get; }
 
@@ -254,7 +253,7 @@ namespace Client
         /// <summary>
         /// Sets the system power state.
         /// </summary>
-        /// <param name="state">Requested power satate.</param>
+        /// <param name="state">Requested power state.</param>
         /// <param name="force">Bool enable forcing.</param>
         /// <returns>True or false.</returns>
         /// <remarks>If user logged in no user data will be saved.</remarks>
@@ -275,16 +274,22 @@ namespace Client
         /// <summary>
         /// Shows notification window.
         /// </summary>
+
+        [Obsolete()]
         MessageBoxResult NotifyUser(string message, string title, MessageBoxButton buttons, MessageBoxImage icon, bool dialog);
 
         /// <summary>
         /// Shows notification window.
         /// </summary>
+
+        [Obsolete()]
         MessageBoxResult NotifyUser(string message, string title, bool dialog);
 
         /// <summary>
         /// Shows notification window.
         /// </summary>
+
+        [Obsolete()]
         MessageBoxResult NotifyUser(string message, WindowShowParams parameters, out INotifyWindowViewModel splashModel);
 
         /// <summary>
@@ -293,6 +298,8 @@ namespace Client
         /// <param name="message">Message.</param>
         /// <param name="parameters">Parameters.</param>
         /// <returns>Notification model instance.</returns>
+
+        [Obsolete()]
         INotifyWindowViewModel CreateNotificationModel(string message, WindowShowParams parameters);
 
         /// <summary>
@@ -395,6 +402,14 @@ namespace Client
 
         #endregion
 
+        /// <summary>
+        /// Creates notification.
+        /// </summary>
+        /// <param name="title">Title.</param>
+        /// <param name="message">Message.</param>
+        /// <param name="wait">Wait for acknowledgment flag.</param>
+        /// <param name="callback">Callback.</param>
+        /// <param name="cancellationToken">Cancellation token.</param>
         void CreateNotification(string title, string message, bool wait, Action callback, CancellationToken cancellationToken = default);
     }
 }
