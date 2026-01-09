@@ -143,9 +143,12 @@ namespace SharedLib.Commands
         GetApplicationStat = 8,
         ReserveLicenseBatch = 9,
         ReleaseLicenseBatch = 10,
+        [Obsolete()]
         GetAppContainer = 11,
+        [Obsolete()]
         GetAppInfoContainer = 12,
         GetAppInfoUserContainer = 13,
+        [Obsolete()]
         GetNewsContainer = 3,
         AppEvent = 14,
         AppExeExecutionGraphGet = 15,
