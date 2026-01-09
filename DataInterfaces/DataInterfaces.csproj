@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>		
-		<TargetFrameworks>net6.0-windows;net6.0;net461</TargetFrameworks>
+		<TargetFrameworks>net10.0-windows;net10.0</TargetFrameworks>
 		<Configurations>Debug;Release;</Configurations>
 		<LangVersion>latest</LangVersion>
 		<Product>Data Interfaces Library</Product>
@@ -14,9 +14,11 @@
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<NoWarn>1591;1570;1573;0612</NoWarn>
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
+    <NoWarn>$(NoWarn);SYSLIB0003</NoWarn>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(TargetFramework)'=='net6.0-windows' or '$(TargetFramework)'=='net461'">
+	<PropertyGroup Condition="'$(TargetFramework)'=='net10.0-windows'">
 		
 		<!--enable wpf and winform when compiling for windows only-->
 		<UseWindowsForms>true</UseWindowsForms>
@@ -35,31 +37,18 @@
 
 	<ItemGroup>
 		<PackageReference Include="protobuf-net" Version="2.4.6" />
+	</ItemGroup>	
+
+	<ItemGroup Condition="'$(TargetFramework)'=='net10.0-windows'">
+		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)'=='net461'">
-
-		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.19" />
-
-		<Reference Include="System.Windows.Forms" />
-		<Reference Include="System.ComponentModel.Composition" />
-		<Reference Include="System.ComponentModel.DataAnnotations" />
-		<Reference Include="System.IdentityModel" />
-		<Reference Include="System.IdentityModel.Services" />
-
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(TargetFramework)'=='net6.0-windows'">
-		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.19" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(TargetFramework)'=='net6.0' or '$(TargetFramework)'=='net6.0-windows'">
+	<ItemGroup Condition="'$(TargetFramework)'=='net10.0' or '$(TargetFramework)'=='net10.0-windows'">
 		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
-		<PackageReference Include="System.ComponentModel.Composition" Version="5.0.0" />
-		<PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
+		<PackageReference Include="System.ComponentModel.Composition" Version="10.0.1" />
 	</ItemGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)'=='net6.0'">
+	<ItemGroup Condition="'$(TargetFramework)'=='net10.0'">
 		<Compile Remove="Modules\Client\**\*" />
 		<Compile Remove="Modules\Manager\**\*" />
 		<Compile Remove="Modules\Shared\Localization\**\*" />
