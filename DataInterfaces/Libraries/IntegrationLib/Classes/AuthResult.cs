@@ -120,7 +120,7 @@ namespace IntegrationLib
 
             //check if result is sucessfull
             //if not we dont need to read any idenity properties to the serialization context
-            if (Result != LoginResult.Sucess)
+            if (Result != LoginResult.Success)
                 return;
 
             var name = info.GetString(nameof(Identity.Name));
@@ -146,7 +146,7 @@ namespace IntegrationLib
 
             //check if result is sucessfull
             //if not we dont need to add any idenity properties to the serialization context
-            if (Result != LoginResult.Sucess || Identity == null)
+            if (Result != LoginResult.Success || Identity == null)
                 return;
 
             info.AddValue(nameof(Identity.Name), Identity.Name);

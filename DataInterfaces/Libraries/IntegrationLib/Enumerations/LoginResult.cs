@@ -13,7 +13,7 @@ namespace IntegrationLib
         /// Login was successful.
         /// </summary>
         [Localized("LOGIN_RESULT_SUCESS")]
-        Sucess = 0,
+        Success = 0,
         /// <summary>
         /// Invalid parameters specified.
         /// </summary>

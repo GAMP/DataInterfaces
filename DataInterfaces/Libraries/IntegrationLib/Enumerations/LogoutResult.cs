@@ -9,15 +9,15 @@ namespace IntegrationLib
     public enum LogoutResult
     {
         /// <summary>
-        /// Logout was sucessfull.
+        /// Logout was successful.
         /// </summary>
-        Sucess = 0,
+        Success = 0,
         /// <summary>
         /// User is not logged in.
         /// </summary>
         NotLoggedIn = 1,
         /// <summary>
-        /// Loggout occurred locally.
+        /// Logout occurred locally.
         /// </summary>
         LoggedOutLocally = 2,
         /// <summary>
