@@ -60,7 +60,6 @@
 		<Compile Remove="Libraries\System\Windows\Forms\**\*" />
 		<Compile Remove="Libraries\GizmoShell\**\*" />
 		<Compile Remove="Libraries\CoreLib\Hooking\**\*" />
-		<Compile Remove="Libraries\CoreLib\Conversion\**\*" />
 
 		<Compile Remove="Libraries\System\Windows\Data\LimitCollectionView.cs" />
 		<Compile Remove="Libraries\Modules\Manager\ViewModels\Interfaces\IViewModelLocatorList.cs" />

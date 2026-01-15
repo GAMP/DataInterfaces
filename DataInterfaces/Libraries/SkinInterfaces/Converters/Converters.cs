@@ -996,34 +996,7 @@ namespace SkinInterfaces.Converters
             throw new NotImplementedException();
         }
     }
-    #endregion  
-
-    #region HTMLToXAMLConverter
-    public class HTMLToFlowDocumentConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            try
-            {
-                if (!string.IsNullOrWhiteSpace(value as string))
-                {
-                    var doc = HTMLConverter.HtmlToXamlConverter.ConvertHtmlToXaml(value as string, true);
-                    FlowDocument document = (FlowDocument)XamlReader.Parse(doc);
-                    return document;
-                }
-            }
-            catch
-            {
-            }
-            return null;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-    #endregion
+    #endregion      
 
     #region MetaDataIconConverter
     public class MetaDataIconConverter : IValueConverter
