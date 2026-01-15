@@ -50,25 +50,24 @@
 
 	<ItemGroup Condition="'$(TargetFramework)'=='net10.0'">
     
-   	<Compile Remove="Libraries\SkinInterfaces\**\*" />       	
-
-		<Compile Remove="Libraries\CoreLib\Queue\QueueEntryBase.cs" />    
+   	<Compile Remove="Libraries\SkinInterfaces\**\*" />  
+    
 		<Compile Remove="Libraries\SharedLib\ViewModels\**\*" />
 		<Compile Remove="Libraries\System\Windows\Data\**\*" />
 		<Compile Remove="Libraries\System\Windows\Forms\**\*" />
 		<Compile Remove="Libraries\GizmoShell\**\*" />
 		<Compile Remove="Libraries\CoreLib\Hooking\**\*" />
-		<Compile Remove="Libraries\System\Windows\Data\LimitCollectionView.cs" />
+
+    <Compile Remove="Libraries\CoreLib\Queue\QueueEntryBase.cs" />
+    <Compile Remove="Libraries\System\Windows\Data\LimitCollectionView.cs" />
 		<Compile Remove="Libraries\Modules\Manager\ViewModels\Interfaces\IViewModelLocatorList.cs" />
 		<Compile Remove="Libraries\SharedLib\Delegates.cs" />
 		<Compile Remove="Libraries\SharedLib\Classes\WindowShowParams.cs" />
 		<Compile Remove="Libraries\SharedLib\Classes\Delegates.cs" />
 		<Compile Remove="Libraries\SharedLib\Classes\Shared.cs" />
 
+		<Compile Include="Libraries\SharedLib\ViewModels\Interfaces\IView.cs" />
     <Compile Remove="Modules\Shared\Localization\**\*" />
-
-		<Compile Include="Libraries\Localization\Attributes\**\*" />
-		<Compile Include="Libraries\SharedLib\ViewModels\Interfaces\IView.cs" />		
 
 	</ItemGroup>
 
