@@ -49,39 +49,27 @@
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)'=='net10.0'">
-		<Compile Remove="Modules\Client\**\*" />
-		<Compile Remove="Modules\Manager\**\*" />
-		<Compile Remove="Modules\Shared\Localization\**\*" />
-		<Compile Remove="Libraries\CoreLib\Queue\QueueEntryBase.cs" />
+    
+   	<Compile Remove="Libraries\SkinInterfaces\**\*" />       	
 
-		<Compile Remove="Libraries\SkinInterfaces\**\*" />
+		<Compile Remove="Libraries\CoreLib\Queue\QueueEntryBase.cs" />    
 		<Compile Remove="Libraries\SharedLib\ViewModels\**\*" />
 		<Compile Remove="Libraries\System\Windows\Data\**\*" />
 		<Compile Remove="Libraries\System\Windows\Forms\**\*" />
 		<Compile Remove="Libraries\GizmoShell\**\*" />
 		<Compile Remove="Libraries\CoreLib\Hooking\**\*" />
-
 		<Compile Remove="Libraries\System\Windows\Data\LimitCollectionView.cs" />
 		<Compile Remove="Libraries\Modules\Manager\ViewModels\Interfaces\IViewModelLocatorList.cs" />
 		<Compile Remove="Libraries\SharedLib\Delegates.cs" />
-		<Compile Remove="Libraries\SharedLib\Services\MessageService.cs" />
 		<Compile Remove="Libraries\SharedLib\Classes\WindowShowParams.cs" />
 		<Compile Remove="Libraries\SharedLib\Classes\Delegates.cs" />
 		<Compile Remove="Libraries\SharedLib\Classes\Shared.cs" />
-	
-		<Compile Remove="Modules\Manager\ViewModels\Interfaces\IUserViewModelLocator.cs" />
-		<Compile Remove="Modules\Manager\Modules\Interfaces\IUserModuleSelectionProvider.cs" />
 
-		<Compile Include="Modules\Client\Enumerations\**\*" />
-		<Compile Include="Modules\Client\ViewModels\Enumerations\**\*" />
-		<Compile Include="Modules\Manager\Enumerations\**\*" />
+    <Compile Remove="Modules\Shared\Localization\**\*" />
 
 		<Compile Include="Libraries\Localization\Attributes\**\*" />
-		<Compile Include="Libraries\SharedLib\ViewModels\Interfaces\IView.cs" />
-		
-		<Compile Include="Modules\Client\EventArgs\**\*" />
+		<Compile Include="Libraries\SharedLib\ViewModels\Interfaces\IView.cs" />		
 
-		<Compile Include="Modules\Client\Interfaces\**\*" />
 	</ItemGroup>
 
 	<ItemGroup>
