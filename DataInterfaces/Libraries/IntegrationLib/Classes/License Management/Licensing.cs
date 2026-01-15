@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Windows.Controls;
-using System.Windows;
 using SharedLib;
 using Client;
 
@@ -22,26 +20,6 @@ namespace IntegrationLib
         public virtual void Uninstall(IApplicationLicense license)
         {
             //do nothing
-        }
-
-        public virtual IApplicationLicenseKey GetLicense(ILicenseProfile profile, ref bool additionHandled, Window owner)
-        {
-            return null;
-        }
-
-        public virtual IApplicationLicenseKey EditLicense(IApplicationLicenseKey key, ILicenseProfile profile, ref bool additionHandled, Window owner)
-        {
-            return null;
-        }
-
-        public virtual bool CanEdit
-        {
-            get { return false; }
-        }
-
-        public virtual bool CanAdd
-        {
-            get { return true; }
         }
 
         #endregion
@@ -78,8 +56,8 @@ namespace IntegrationLib
         /// <param name="settings">IPluginSettings instance.</param>
         public void Initialize(IPluginSettings settings)
         {
-            this.Settings = settings ?? throw new ArgumentNullException("Plugin settings may not be null");
-            this.OnInitialized(settings);
+            Settings = settings ?? throw new ArgumentNullException("Plugin settings may not be null");
+            OnInitialized(settings);
         }
 
         /// <summary>
@@ -91,17 +69,12 @@ namespace IntegrationLib
         }
 
         /// <summary>
-        /// When ovveriden should return a new instance of plugin settings.
+        /// When overridden should return a new instance of plugin settings.
         /// <remarks>Plugin settings instance must be marked serializable and implement IPluginSettings.</remarks>
         /// </summary>
         /// <returns>IPlugin settings instance for this plugin.</returns>
         public abstract IPluginSettings GetSettingsInstance();
 
-        /// <summary>
-        /// This method will be called internaly when Configuration ui is requested.
-        /// </summary>
-        /// <returns></returns>
-        public abstract UserControl GetConfigurationUI();
 
         /// <summary>
         /// Casts the settings instance to specified type.

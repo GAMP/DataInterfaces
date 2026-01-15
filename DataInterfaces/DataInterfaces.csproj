@@ -56,7 +56,6 @@
 
 		<Compile Remove="Libraries\SkinInterfaces\**\*" />
 		<Compile Remove="Libraries\SharedLib\ViewModels\**\*" />
-		<Compile Remove="Libraries\IntegrationLib\**\*" />
 		<Compile Remove="Libraries\System\Windows\Data\**\*" />
 		<Compile Remove="Libraries\System\Windows\Forms\**\*" />
 		<Compile Remove="Libraries\GizmoShell\**\*" />
@@ -77,31 +76,13 @@
 		<Compile Include="Modules\Client\Enumerations\**\*" />
 		<Compile Include="Modules\Client\ViewModels\Enumerations\**\*" />
 		<Compile Include="Modules\Manager\Enumerations\**\*" />
-		<Compile Include="Libraries\IntegrationLib\Enumerations\**\*" />
-		<Compile Include="Libraries\Localization\Attributes\**\*" />
 
+		<Compile Include="Libraries\Localization\Attributes\**\*" />
+		<Compile Include="Libraries\SharedLib\ViewModels\Interfaces\IView.cs" />
+		
 		<Compile Include="Modules\Client\EventArgs\**\*" />
 
-    <Compile Include="Libraries\IntegrationLib\Interfaces\IPluginSettings.cs" />
-		<Compile Include="Libraries\IntegrationLib\Interfaces\IApplicationLicenseKey.cs" />
-		<Compile Include="Libraries\IntegrationLib\Interfaces\IApplicationLicense.cs" />	
-		<Compile Include="Libraries\IntegrationLib\Interfaces\ILicenseReservation.cs" />
-		<Compile Include="Libraries\IntegrationLib\Interfaces\IUserIdentity.cs" />
-		<Compile Include="Libraries\IntegrationLib\Interfaces\IAuthResult.cs" />
-		<Compile Include="Libraries\IntegrationLib\Classes\AuthResult.cs" />
-		<Compile Include="Libraries\IntegrationLib\Classes\ClaimsUserIdentity.cs" />
-		<Compile Include="Libraries\IntegrationLib\Classes\ClaimTypeBase.cs" />
-		<Compile Include="Libraries\IntegrationLib\Classes\HttpContextIdentityProvider.cs" />
-		<Compile Include="Libraries\IntegrationLib\Interfaces\IPlugin.cs" />
-		<Compile Include="Libraries\IntegrationLib\Interfaces\IClaimType.cs" />
-		<Compile Include="Libraries\IntegrationLib\Interfaces\IDispatcherPrincipal.cs" />
-		<Compile Include="Libraries\IntegrationLib\Classes\License Management\ApplicationLicenseBase.cs" />
-		<Compile Include="Libraries\IntegrationLib\Classes\License Management\ApplicationLicenseKeyBase.cs" />
-		<Compile Include="Libraries\IntegrationLib\Classes\License Management\ApplicationLicense.cs" />
-		<Compile Include="Libraries\IntegrationLib\Classes\License Management\LicenseReservation.cs" />
-		<Compile Include="Libraries\IntegrationLib\Classes\HttpCredentials.cs" />
-		<Compile Include="Libraries\IntegrationLib\Classes\DispatcherPrincipal.cs" />
-		<Compile Include="Libraries\IntegrationLib\Classes\UserProfileBase.cs" />
+		<Compile Include="Modules\Client\Interfaces\**\*" />
 	</ItemGroup>
 
 	<ItemGroup>

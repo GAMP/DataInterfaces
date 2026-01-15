@@ -2,9 +2,9 @@
 using CoreLib;
 using SharedLib;
 using IntegrationLib;
-using System.Windows;
-using SharedLib.ViewModels;
-using CoreLib.Hooking;
+#if WINDOWS
+using CoreLib.Hooking; 
+#endif
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -143,6 +143,7 @@ namespace Client
         /// </summary>
         IntPtr ShellWindowHandle { get; }
 
+#if WINDOWS
         /// <summary>
         /// Gets client module keyboard hook instance.
         /// </summary>
@@ -159,7 +160,8 @@ namespace Client
         /// Gets client module shell hook instance.
         /// </summary>
         [Obsolete("Will be replaced or updated in new releases. Do not use.")]
-        IShellHook ShellHook { get; }
+        IShellHook ShellHook { get; } 
+#endif
 
         /// <summary>
         /// Gets or sets if security is enabled.
@@ -271,26 +273,26 @@ namespace Client
         /// </summary>
         void Restart();
 
-        /// <summary>
-        /// Shows notification window.
-        /// </summary>
+        ///// <summary>
+        ///// Shows notification window.
+        ///// </summary>
 
-        [Obsolete()]
-        MessageBoxResult NotifyUser(string message, string title, MessageBoxButton buttons, MessageBoxImage icon, bool dialog);
+        //[Obsolete()]
+        //MessageBoxResult NotifyUser(string message, string title, MessageBoxButton buttons, MessageBoxImage icon, bool dialog);
 
-        /// <summary>
-        /// Shows notification window.
-        /// </summary>
+        ///// <summary>
+        ///// Shows notification window.
+        ///// </summary>
 
-        [Obsolete()]
-        MessageBoxResult NotifyUser(string message, string title, bool dialog);
+        //[Obsolete()]
+        //MessageBoxResult NotifyUser(string message, string title, bool dialog);
 
-        /// <summary>
-        /// Shows notification window.
-        /// </summary>
+        ///// <summary>
+        ///// Shows notification window.
+        ///// </summary>
 
-        [Obsolete()]
-        MessageBoxResult NotifyUser(string message, WindowShowParams parameters, out INotifyWindowViewModel splashModel);
+        //[Obsolete()]
+        //MessageBoxResult NotifyUser(string message, WindowShowParams parameters, out INotifyWindowViewModel splashModel);
 
         /// <summary>
         /// Creates notification model.
@@ -299,8 +301,8 @@ namespace Client
         /// <param name="parameters">Parameters.</param>
         /// <returns>Notification model instance.</returns>
 
-        [Obsolete()]
-        INotifyWindowViewModel CreateNotificationModel(string message, WindowShowParams parameters);
+        //[Obsolete()]
+        //INotifyWindowViewModel CreateNotificationModel(string message, WindowShowParams parameters);
 
         /// <summary>
         /// Gets localized resource from current language dictionary.
