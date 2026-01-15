@@ -373,14 +373,6 @@ namespace Client
         /// </summary>
         void Logout();
 
-        ///// <summary>
-        ///// Deserialize skin json configuration file to specified type.
-        ///// </summary>
-        ///// <typeparam name="T">Type.</typeparam>
-        ///// <param name="fileName">File name.</param>
-        ///// <returns>Type instance.</returns>
-        //T JsonDeserializeConfig<T>(string fileName) where T : SharedLib.Configuration.SkinConfig;
-
         /// <summary>
         /// Adds a message to log.
         /// </summary>

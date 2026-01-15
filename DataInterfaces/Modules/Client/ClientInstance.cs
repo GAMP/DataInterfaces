@@ -5,8 +5,6 @@
     /// </summary>
     public static class ClientInstance
     {
-        #region PROPERTIES
-        
         /// <summary>
         /// Gets or sets current client instance.
         /// </summary>
@@ -14,8 +12,6 @@
         {
             get;
             set;
-        } 
-
-        #endregion
+        }
     }
 }
