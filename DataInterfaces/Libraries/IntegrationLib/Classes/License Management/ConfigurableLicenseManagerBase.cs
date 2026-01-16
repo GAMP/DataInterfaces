@@ -1,54 +1,29 @@
 ﻿using System;
-using SharedLib;
-using Client;
 
 namespace IntegrationLib
 {
-    #region LicenseManagerBase
     /// <summary>
-    /// License manager base class.
+    /// Configurable license manager base class.
     /// </summary>
-    public abstract class LicenseManagerBase : PropertyChangedNotificator, ILicenseManagerPlugin
-    {
-        #region Functions
-
-        public virtual void Install(IApplicationLicense license, IExecutionContext context, ref bool processCreated)
-        {
-            //do nothing
-        }
-
-        public virtual void Uninstall(IApplicationLicense license)
-        {
-            //do nothing
-        }
-
-        #endregion
-    }
-    #endregion
-
-    #region ConfigurableLicenseManagerBase
+    /// <remarks>
+    /// Use this base class when implementing license manager plugins that require configuration settings.
+    /// </remarks>
     public abstract class ConfigurableLicenseManagerBase : LicenseManagerBase, IConfigurableLicenseManager
     {
-        #region Fields
         private IPluginSettings settings;
-        #endregion
 
-        #region Properties
         /// <summary>
         /// Gets plugin settings instance.
         /// </summary>
         public IPluginSettings Settings
         {
-            get { return this.settings; }
+            get { return settings; }
             protected set
             {
-                this.settings = value;
-                this.RaisePropertyChanged("Settings");
+                settings = value;
+                RaisePropertyChanged("Settings");
             }
         }
-        #endregion
-
-        #region Functions
 
         /// <summary>
         /// Initializes plugin to stored settings.
@@ -75,7 +50,6 @@ namespace IntegrationLib
         /// <returns>IPlugin settings instance for this plugin.</returns>
         public abstract IPluginSettings GetSettingsInstance();
 
-
         /// <summary>
         /// Casts the settings instance to specified type.
         /// </summary>
@@ -83,7 +57,7 @@ namespace IntegrationLib
         /// <returns>Settings instance.</returns>
         public T SettingsAs<T>()
         {
-            return (T)this.Settings;
+            return (T)Settings;
         }
 
         /// <summary>
@@ -91,11 +65,8 @@ namespace IntegrationLib
         /// </summary>
         protected void ThrowIfSettingsTypeInvalid()
         {
-            if (this.Settings.GetType() != this.GetSettingsInstance().GetType())
+            if (Settings.GetType() != GetSettingsInstance().GetType())
                 throw new ArgumentException("Settings", "Plugin settings type is invalid");
         }
-
-        #endregion
     }
-    #endregion
 }
