@@ -1,4 +1,6 @@
-﻿using System;
+﻿#nullable enable
+
+using System;
 using SharedLib.Applications;
 using System.Diagnostics;
 using SharedLib;
@@ -13,16 +15,10 @@ namespace Client
     /// </remarks>
     public interface IExecutionContext
     {
-        #region EVENTS
-
         /// <summary>
-        /// Occours when execution state changes.
+        /// Occurs when execution state changes.
         /// </summary>
-        event EventHandler<ExecutionContextStateArgs> ExecutionStateChaged;
-
-        #endregion        
-
-        #region PROPERTIES
+        event EventHandler<ExecutionContextStateArgs>? ExecutionStateChanged;
 
         /// <summary>
         /// Gets executable instance of this context.
@@ -83,13 +79,9 @@ namespace Client
         bool HasCompleted { get; }
 
         /// <summary>
-        /// Gets if the executable should be autolaunched.
+        /// Gets if the executable should be auto launched.
         /// </summary>
         bool AutoLaunch { get; }
-
-        #endregion
-
-        #region FUNCTIONS
 
         /// <summary>
         /// Destroys context.
@@ -113,8 +105,8 @@ namespace Client
         /// <param name="process">Process instance.</param>
         /// <param name="isMain">Indicates that the process is main parent process.</param>
         /// <exception cref="ArgumentNullException">thrown in case the specified <paramref name="process"/> is equal to null.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">thorwn in case the specified <paramref name="process"/> does not have associated process id (not running).</exception>
-        /// <exception cref="InvalidOperationException">thorwn in case the System.Diagnostics.Process.Id property has not been set or there is no process associated with this System.Diagnostics.Process object.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">thrown in case the specified <paramref name="process"/> does not have associated process id (not running).</exception>
+        /// <exception cref="InvalidOperationException">thrown in case the System.Diagnostics.Process.Id property has not been set or there is no process associated with this System.Diagnostics.Process object.</exception>
         /// <remarks>The specified <paramref name="process"/> instance must be running and have process id associated with it.</remarks>
         void AddProcess(Process process, bool isMain);
 
@@ -138,7 +130,7 @@ namespace Client
         /// <returns>True if process is tracked by context and full file name was obtained and not equal to null or empty string, otherwise false.</returns>
         /// <remarks>
         /// <b>This call is only valid for tracked processes that have not yet exited.</b><br/>
-        /// The value of <paramref name="processFileName"/> might be null or empty string in case we have failed obtaining full process file name durring process addition.
+        /// The value of <paramref name="processFileName"/> might be null or empty string in case we have failed obtaining full process file name during process addition.
         /// </remarks>
         bool TryGetProcessFileName(int processId, out string processFileName);
 
@@ -152,7 +144,5 @@ namespace Client
         /// Kills context.
         /// </summary>
         void Kill();
-
-        #endregion
     }
 }
