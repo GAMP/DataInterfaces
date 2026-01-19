@@ -1,5 +1,6 @@
 ﻿using SharedLib;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 
 namespace IntegrationLib
@@ -22,33 +23,34 @@ namespace IntegrationLib
         /// Gets or sets keys string value.
         /// </summary>
         [IgnoreDataMember()]
+        [Name("Value")]
         public string Value
         {
-            get { return this.value; }
+            get { return value; }
             set
             {
                 this.value = value;
-                this.RaisePropertyChanged("Value");
-                this.RaisePropertyChanged("KeyString");
+                RaisePropertyChanged("Value");
+                RaisePropertyChanged("KeyString");
             }
         }
 
         /// <summary>
-        /// When overriden should return key string representation.
+        /// When overridden should return key string representation.
         /// </summary>
         [DataMember()]
         public virtual string KeyString
         {
-            get { return this.Value; }
+            get { return Value; }
         }
 
         /// <summary>
-        /// When ovveriden returns if current key is valid.
+        /// When overridden returns if current key is valid.
         /// </summary>
         [IgnoreDataMember()]
         public virtual bool IsValid
         {
-            get { return !String.IsNullOrWhiteSpace(this.Value); }
+            get { return !string.IsNullOrWhiteSpace(Value); }
         }
 
         #endregion
