@@ -13,11 +13,7 @@ namespace IntegrationLib
     public abstract class ApplicationLicenseKeyBase : PropertyChangedNotificator,
         IApplicationLicenseKey
     {
-        #region FIELDS
         private string value;
-        #endregion
-
-        #region PROPERTIES
 
         /// <summary>
         /// Gets or sets keys string value.
@@ -52,7 +48,5 @@ namespace IntegrationLib
         {
             get { return !string.IsNullOrWhiteSpace(Value); }
         }
-
-        #endregion
     }
 }
