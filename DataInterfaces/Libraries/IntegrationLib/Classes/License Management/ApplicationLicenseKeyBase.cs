@@ -20,7 +20,7 @@ namespace IntegrationLib
         /// </summary>
         [IgnoreDataMember()]
         [Name("Value")]
-        public string Value
+        public virtual string Value
         {
             get { return value; }
             set
