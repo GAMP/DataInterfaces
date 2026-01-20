@@ -18,6 +18,7 @@ namespace IntegrationLib
         /// <summary>
         /// Gets or sets keys string value.
         /// </summary>
+        [Display(Order = 0)]
         [IgnoreDataMember()]
         [Name("Value")]
         public virtual string Value
