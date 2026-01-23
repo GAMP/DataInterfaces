@@ -29,7 +29,7 @@ namespace IntegrationLib
         protected DateTime
             birthDate,
             registered;
-        protected Gizmo.UserRoles role;
+        protected Gizmo.Server.UserRoles role;
         protected Gizmo.Sex sex = Gizmo.Sex.Male;
         protected bool isEnabled = true;
         protected bool canChangePassword;
@@ -250,7 +250,7 @@ namespace IntegrationLib
         /// Gets or sets user role.
         /// </summary>
         [DataMember()]
-        public virtual Gizmo.UserRoles Role
+        public virtual Gizmo.Server.UserRoles Role
         {
             get { return role; }
             set
@@ -265,7 +265,7 @@ namespace IntegrationLib
         /// </summary>
         public virtual bool IsAdmin
         {
-            get { return Role == Gizmo.UserRoles.Operator; }
+            get { return Role == Gizmo.Server.UserRoles.Operator; }
             set { }
         }
 
@@ -274,7 +274,7 @@ namespace IntegrationLib
         /// </summary>
         public virtual bool IsGuest
         {
-            get { return Role == Gizmo.UserRoles.Guest; }
+            get { return Role == Gizmo.Server.UserRoles.Guest; }
             set { }
         }
 
@@ -326,7 +326,7 @@ namespace IntegrationLib
             Phone = string.Empty;
             PostCode = string.Empty;
             Sex = Gizmo.Sex.Unspecified;
-            Role = Gizmo.UserRoles.None;
+            Role = Gizmo.Server.UserRoles.None;
             UserName = string.Empty;
             IsEnabled = false;
             CanChangePassword = false;
