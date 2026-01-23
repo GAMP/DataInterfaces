@@ -1,7 +1,7 @@
 ﻿namespace ServerService
 {
     /// <summary>
-    /// Temporary inteface do not implement.
+    /// Temporary interface do not implement.
     /// </summary>
     public interface IUserProfileHook
     {

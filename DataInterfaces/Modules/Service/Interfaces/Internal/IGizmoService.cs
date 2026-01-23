@@ -11,13 +11,10 @@ namespace ServerService
     public interface IGizmoService :
         IHostService,
         IGizmoServiceLog,
-        ILicenseManagmentService,
-        IConfigurableService,
-        IUserService,
         IGizmoDbContextProvider,
         IReportsService,
         IBackupService,
-        ISettingsService
+        IUserService
     {
         #region FUNCTIONS
         
