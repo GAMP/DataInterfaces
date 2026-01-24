@@ -70,10 +70,6 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\Gizmo.Shared\Gizmo.Shared.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Modules\Service\Interfaces\Services\" />
 	</ItemGroup>	
 
 </Project>
