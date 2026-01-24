@@ -1611,6 +1611,27 @@ namespace SharedLib
     }
     #endregion
 
+    #region ORDERSOURCE
+    /// <summary>
+    /// Client order source.
+    /// </summary>
+    public enum OrderSource
+    {
+        /// <summary>
+        /// Default. (POS)
+        /// </summary>
+        Default = 0,
+        /// <summary>
+        /// Client machine.
+        /// </summary>
+        Client = 1,
+        /// <summary>
+        /// Web portal.
+        /// </summary>
+        Web = 2,
+    }
+    #endregion
+
     #region STORABLE ENUMERATIONS
 
     #region MODULEENUM
@@ -2919,28 +2940,7 @@ namespace SharedLib
         /// </summary>
         Moved = 6,
     }
-    #endregion
-
-    #region ORDERSOURCE
-    /// <summary>
-    /// Client order source.
-    /// </summary>
-    public enum OrderSource
-    {
-        /// <summary>
-        /// Default. (POS)
-        /// </summary>
-        Default = 0,
-        /// <summary>
-        /// Client machine.
-        /// </summary>
-        Client = 1,
-        /// <summary>
-        /// Web portal.
-        /// </summary>
-        Web = 2,
-    }
-    #endregion
+    #endregion    
 
     #endregion      
 }

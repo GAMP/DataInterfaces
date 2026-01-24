@@ -1,6 +1,5 @@
 ﻿using SharedLib;
 using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace ServerService.Reporting.Reports.Financial
