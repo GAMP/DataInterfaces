@@ -246,23 +246,6 @@ namespace SharedLib
     }
     #endregion
 
-    #region DESKTOPITEMTYPE
-    /// <summary>
-    /// Desktop item type enumeration.
-    /// </summary>
-    public enum DesktopItemType
-    {
-        /// <summary>
-        /// View is virtual.
-        /// </summary>
-        Virtual,
-        /// <summary>
-        /// View is file or virtual file.
-        /// </summary>
-        File,
-    }
-    #endregion
-
     #region LOGINSTATE
     /// <summary>
     /// Login state enumeration.
@@ -349,7 +332,7 @@ namespace SharedLib
         /// </summary>
         Unmounting,
         /// <summary>
-        /// Executable has exited. This only occures when all children has exited thus executable is considered dead and finalized.
+        /// Executable has exited. This only occurs when all children has exited thus executable is considered dead and finalized.
         /// </summary>
         Finalized,
         /// <summary>
@@ -693,41 +676,7 @@ namespace SharedLib
         [AgeRating(6)]
         KidsToAdaults = -28,
     }
-    #endregion
-
-    #region DURATIONRANGE
-    /// <summary>
-    /// Duration ranges.
-    /// </summary>
-    public enum DurationRange
-    {
-        /// <summary>
-        /// Today.
-        /// </summary>
-        [Localized("PERIOD_TODAY")]
-        Today = 0,
-        /// <summary>
-        /// Week.
-        /// </summary>
-        [Localized("PERIOD_WEEK")]
-        Weeek = 1,
-        /// <summary>
-        /// Month.
-        /// </summary>
-        [Localized("PERIOD_MONTH")]
-        Month = 2,
-        /// <summary>
-        /// Year.
-        /// </summary>
-        [Localized("PERIOD_YEAR")]
-        Year = 3,
-        /// <summary>
-        /// Unlimited.
-        /// </summary>
-        [Localized("PERIOD_UNLIMITED")]
-        Unlimited = 5,
-    }
-    #endregion
+    #endregion       
 
     #region FILTERRESULTDIRECTION
     /// <summary>
@@ -1176,7 +1125,7 @@ namespace SharedLib
         /// POSTGRE.
         /// </summary>
         [CanUserAssign(true)]
-        POSTGRE=5,
+        POSTGRE = 5,
     }
     #endregion
 
@@ -2001,68 +1950,7 @@ namespace SharedLib
         /// </summary>
         AgeRating = 4,
     }
-    #endregion
-
-    #region WEEKDAYS
-    /// <summary>
-    /// Week days.
-    /// </summary>
-    [Flags()]
-    public enum WeekDays
-    {
-        /// <summary>
-        /// None.
-        /// </summary>
-        None = 0,
-        /// <summary>
-        /// Sunday.
-        /// </summary>
-        Sunday = 1,
-        /// <summary>
-        /// Monday.
-        /// </summary>
-        Monday = 2,
-        /// <summary>
-        /// Tuesday.
-        /// </summary>
-        Tuesday = 4,
-        /// <summary>
-        /// Wednesday.
-        /// </summary>
-        Wednesday = 8,
-        /// <summary>
-        /// Thursday.
-        /// </summary>
-        Thursday = 16,
-        /// <summary>
-        /// Friday.
-        /// </summary>
-        Friday = 32,
-        /// <summary>
-        /// Saturday.
-        /// </summary>
-        Saturday = 64,
-    }
-    #endregion
-
-    #region BILLRATESTEPACTION
-    /// <summary>
-    /// Bill rate step actions.
-    /// </summary>
-    public enum BillRateStepAction
-    {
-        /// <summary>
-        /// Charge.
-        /// </summary>
-        [Localized("STEP_ACTION_CHARGE")]
-        Charge = 0,
-        /// <summary>
-        /// Loop to.
-        /// </summary>
-        [Localized("STEP_ACTION_LOOP_TO")]
-        LoopTo = 1,
-    }
-    #endregion
+    #endregion   
 
     #region DEPLOYOPTIONTYPE
     /// <summary>
@@ -2114,32 +2002,6 @@ namespace SharedLib
         Registry = 1,
     }
 
-    #endregion
-
-    #region PERSONALUSERFILEOPTIONTYPE
-    /// <summary>
-    /// Personal file options.
-    /// </summary>
-    [Flags()]
-    public enum PersonalUserFileOptionType
-    {
-        /// <summary>
-        /// None.
-        /// </summary>
-        None = 0,
-        /// <summary>
-        /// Cleanup.
-        /// </summary>
-        CleanUp = 1,
-        /// <summary>
-        /// Store.
-        /// </summary>
-        Store = 2,
-        /// <summary>
-        /// Include sub directories.
-        /// </summary>
-        IncludeSubDirectories = 4,
-    }
     #endregion
 
     #region EXECUTABLEOPTIONTYPE
@@ -2519,19 +2381,6 @@ namespace SharedLib
     }
     #endregion
 
-    #region PRODUCTBUNDLEOPTIONTYPE
-    /// <summary>
-    /// Defines how product behaves in a bundle.
-    /// </summary>
-    public enum ProductBundleOptionType
-    {
-        /// <summary>
-        /// None.
-        /// </summary>
-        None,
-    }
-    #endregion
-
     #region ORDEROPTIONTYPE
     /// <summary>
     /// Order options.
@@ -2590,47 +2439,6 @@ namespace SharedLib
         /// </summary>
         [Localized("OR")]
         Or = 1
-    }
-    #endregion
-
-    #region PRODUCTSORTOPTIONTYPE
-    /// <summary>
-    /// Product sort options.
-    /// </summary>
-    public enum ProductSortOptionType
-    {
-        /// <summary>
-        /// Default.
-        /// </summary>
-        [Localized("MANUAL")]
-        Default = 0,
-        /// <summary>
-        /// Name.
-        /// </summary>
-        [Localized("NAME")]
-        Name = 1,
-        /// <summary>
-        /// Created.
-        /// </summary>
-        [Localized("CREATION_TIME")]
-        Created = 2
-    }
-    #endregion
-
-    #region BILLRATEOPTIONTYPE
-    /// <summary>
-    /// Billing rate options.
-    /// </summary>
-    public enum BillRateOptionType
-    {
-        /// <summary>
-        /// None.
-        /// </summary>
-        None = 0,
-        /// <summary>
-        /// Is step based.
-        /// </summary>
-        IsStepBased = 1,
     }
     #endregion
 
@@ -2736,133 +2544,6 @@ namespace SharedLib
         Minute = 2,
     }
     #endregion    
-
-    #region DISCOUNTAMOUNTTYPE
-    /// <summary>
-    /// Discount amount types.
-    /// </summary>
-    public enum DiscountAmountType
-    {
-        /// <summary>
-        /// Discount fixed amount.
-        /// </summary>
-        Fixed = 0,
-        /// <summary>
-        /// Discount percentage.
-        /// </summary>
-        Percentage = 1,
-        /// <summary>
-        /// Discount bonus.
-        /// </summary>
-        Bonus = 2
-    }
-    #endregion
-
-    #region DISCOUNTINPUTTRIGGER
-    /// <summary>
-    /// Type of discount input trigger.
-    /// </summary>
-    public enum DiscountInputTrigger
-    {
-        /// <summary>
-        /// None.
-        /// </summary>
-        Unspecified = 0,
-        /// <summary>
-        /// Money.
-        /// </summary>
-        Money = 1,
-        /// <summary>
-        /// Prodcut count.
-        /// </summary>
-        Count = 2,
-    }
-    #endregion
-
-    #region DISCOUNTAMOUNTTRIGGER
-    /// <summary>
-    /// Type of amount triggers.
-    /// </summary>
-    public enum DiscountAmountTrigger
-    {
-        /// <summary>
-        /// Discount triggered by amount of specific item.
-        /// </summary>
-        Item = 0,
-        /// <summary>
-        /// Discount triggered by total amount of order.
-        /// </summary>
-        Order = 1,
-    }
-    #endregion
-
-    #region DISCOUNTTARGETTYPE
-    /// <summary>
-    /// Discount target type.
-    /// </summary>
-    public enum DiscountTargetType
-    {
-        /// <summary>
-        /// Unspecified.
-        /// </summary>
-        Unspecified = 0,
-        /// <summary>
-        /// Product groups.
-        /// </summary>
-        ProductGroups = 1,
-        /// <summary>
-        /// Product.
-        /// </summary>
-        Product = 2,
-    }
-    #endregion
-
-    #region DISCOUNTCALCTRIGGER
-    /// <summary>
-    /// Defines how the discount creteria is calculated.
-    /// </summary>
-    public enum DiscountCalcTrigger
-    {
-        /// <summary>
-        /// All dsicounted products must be of same.
-        /// </summary>
-        Product = 0,
-        /// <summary>
-        /// All discounted products must be from same group.
-        /// </summary>
-        ProductGroup = 1,
-        /// <summary>
-        /// Irrelavant of group or product type.
-        /// </summary>
-        Sum = 2,
-        /// <summary>
-        /// Total products bught independent of prodcuts targeted by discount.
-        /// </summary>
-        OrderSum = 3,
-    }
-    #endregion
-
-    #region PAYMENTMETHODOPTIONTYPE
-    /// <summary>
-    /// Payment method options.
-    /// </summary>
-    [Flags()]
-    public enum PaymentMethodOptionType
-    {
-        /// <summary>
-        /// None.
-        /// </summary>
-        None = 0,
-        /// <summary>
-        /// Indicates that method is non-fiscal and does not require a receipt.
-        /// </summary>
-        NonFiscal = 1,
-        /// <summary>
-        /// Indicates that method is used in fiscal printer as credit card.
-        /// </summary>
-        IsCreditCard = 2
-    }
-    #endregion
 
     #region PAYMENTMETHODTYPE
     /// <summary>
@@ -3082,242 +2763,7 @@ namespace SharedLib
         [Description("Registry")]
         RegistryScript,
     }
-    #endregion
-
-    #region TASKPROCESSOPTIONTYPE
-    /// <summary>
-    /// Task process options.
-    /// </summary>
-    [Flags()]
-    public enum TaskProcessOptionType
-    {
-        /// <summary>
-        /// None.
-        /// </summary>
-        None = 0,
-        /// <summary>
-        /// Wait.
-        /// </summary>
-        Wait = 1,
-        /// <summary>
-        /// No window.
-        /// </summary>
-        NoWindow = 2,
-    }
-    #endregion
-
-    #region TASKJUNCTIONOPTIONTYPE
-    /// <summary>
-    /// Task junction options.
-    /// </summary>
-    [Flags()]
-    public enum TaskJunctionOptionType
-    {
-        /// <summary>
-        /// None.
-        /// </summary>
-        None = 0,
-        /// <summary>
-        /// Delete destination.
-        /// </summary>
-        DeleteDestination = 1,
-    }
-    #endregion
-
-    #region TASKNOTIFICATIONOPTIONTYPE
-    /// <summary>
-    /// Task notification options.
-    /// </summary>
-    [Flags()]
-    public enum TaskNotificationOptionType
-    {
-        /// <summary>
-        /// None.
-        /// </summary>
-        None = 0,
-        /// <summary>
-        /// Wait.
-        /// </summary>
-        Wait = 1,
-    }
-    #endregion
-
-    #region PERSONALFILEACTIVATIONTYPE
-    /// <summary>
-    /// Personal file activation type.
-    /// </summary>
-    public enum PersonalFileActivationType
-    {
-        /// <summary>
-        /// Launch.
-        /// </summary>
-        [Localized("PERSONAL_FILE_ACTIVATION_TYPE_LAUNCH")]
-        Launch = 0,
-        /// <summary>
-        /// Login.
-        /// </summary>
-        [Localized("PERSONAL_FILE_ACTIVATION_TYPE_LOGIN")]
-        Login = 1,
-    }
-    #endregion
-
-    #region PERSONALFILEDEACTIVATIONTYPE
-    /// <summary>
-    /// Personal file de-activation type.
-    /// </summary>
-    public enum PersonalFileDeactivationType
-    {
-        /// <summary>
-        /// Logout.
-        /// </summary>
-        [Localized("LOGOUT")]
-        Logout = 0
-    }
-    #endregion
-
-    #region CLIENTTASKACTIVATIONTYPE
-    /// <summary>
-    /// Client task activation types.
-    /// </summary>
-    [Flags()]
-    public enum ClientTaskActivationType
-    {
-        /// <summary>
-        /// Disabled.
-        /// </summary>
-        [Obsolete()]
-        [Description("Disabled")]
-        Disabled = 0,
-        /// <summary>
-        /// Startup.
-        /// </summary>
-        [Description("Startup")]
-        Startup = 1,
-        /// <summary>
-        /// Shut down.
-        /// </summary>
-        [Description("Shutdown")]
-        Shutdown = 2,
-        /// <summary>
-        /// Login.
-        /// </summary>
-        [Description("Login")]
-        Login = 4,
-        /// <summary>
-        /// Logout.
-        /// </summary>
-        [Description("Logout")]
-        Logout = 8,
-    }
-    #endregion
-
-    #region EXECUTABLETASKACTIVATIONTYPE
-    /// <summary>
-    /// Executable task activation types.
-    /// </summary>
-    [Flags()]
-    public enum ExecutableTaskActivationType
-    {
-        /// <summary>
-        /// Pre launch/
-        /// </summary>
-        [Description("Pre Launch")]
-        PreLaunch = 16,
-        /// <summary>
-        /// Post deploy.
-        /// </summary>
-        [Description("Pre Deploy")]
-        PreDeploy = 32,
-        /// <summary>
-        /// Post termination.
-        /// </summary>
-        [Description("Post Termination")]
-        PostTermination = 64,
-        /// <summary>
-        /// Pre licenses management.
-        /// </summary>
-        [Description("Pre License Management")]
-        PreLicenseManagement = 128,
-    }
-    #endregion
-
-    #region NOTESEVERITY
-    /// <summary>
-    /// Note severity.
-    /// </summary>
-    public enum NoteSeverity
-    {
-        /// <summary>
-        /// Green.
-        /// </summary>
-        [Localized("NOTE_SEVIRITY_GREEN")]
-        Green = 0,
-        /// <summary>
-        /// Yellow.
-        /// </summary>
-        [Localized("NOTE_SEVIRITY_YELLOW")]
-        Yellow = 1,
-        /// <summary>
-        /// Red.
-        /// </summary>
-        [Localized("NOTE_SEVIRITY_RED")]
-        Red = 2,
-    }
-    #endregion
-
-    #region NOTEOPTIONS
-    /// <summary>
-    /// Note options.
-    /// </summary>
-    [Flags()]
-    public enum NoteOptions
-    {
-        /// <summary>
-        /// None.
-        /// </summary>
-        [Localized("NONE")]
-        None = 0,
-    }
-    #endregion
-
-    #region USERNOTEOPTIONS
-    /// <summary>
-    /// User note options.
-    /// </summary>
-    [Flags()]
-    public enum UserNoteOptions
-    {
-        /// <summary>
-        /// None.
-        /// </summary>
-        [Localized("NONE")]
-        None = 0,
-    }
-    #endregion
-
-    #region SHIFTOPTION
-    /// <summary>
-    /// Shift option.
-    /// </summary>
-    public enum ShiftOption
-    {
-        /// <summary>
-        /// Disabled.
-        /// </summary>
-        [Localized("SHIFT_OPTION_DISABLED")]
-        Disabled = 0,
-        /// <summary>
-        /// Optional.
-        /// </summary>
-        [Localized("SHIFT_OPTION_OPTIONAL")]
-        Optional = 1,
-        /// <summary>
-        /// Mandatory.
-        /// </summary>
-        [Localized("SHIFT_OPTION_MANDATORY")]
-        Mandatory = 2,
-    }
-    #endregion
+    #endregion 
 
     #region REGISTERTRANSACTIONTYPE
     /// <summary>
@@ -3335,19 +2781,6 @@ namespace SharedLib
         /// </summary>
         [Localized("PAY_OUT")]
         PayOut = 2
-    }
-    #endregion
-
-    #region REGISTEROPTIONS
-    /// <summary>
-    /// Register options.
-    /// </summary>
-    public enum RegisterOptions
-    {
-        /// <summary>
-        /// None option.
-        /// </summary>
-        None,
     }
     #endregion
 

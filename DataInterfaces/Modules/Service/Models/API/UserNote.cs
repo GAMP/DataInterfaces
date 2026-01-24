@@ -31,7 +31,7 @@ namespace ServerService.Web.Api.Controllers.Models
         /// </summary>
         [DataMember()]
         [ProtoMember(2)]
-        public UserNoteOptions UserNoteOptions
+        public int UserNoteOptions
         {
             get; set;
         }
@@ -57,17 +57,17 @@ namespace ServerService.Web.Api.Controllers.Models
         /// </summary>
         [DataMember()]
         [ProtoMember(4)]
-        public NoteOptions Options
+        public int Options
         {
             get; set;
         }
 
         /// <summary>
-        /// Gets or sets note sevirirty.
+        /// Gets or sets note severity.
         /// </summary>
         [DataMember()]
         [ProtoMember(5)]
-        public NoteSeverity Sevirity
+        public int Sevirity
         {
             get; set;
         }
