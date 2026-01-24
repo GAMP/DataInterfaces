@@ -69,6 +69,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\..\Gizmo.Client.Shared\Gizmo.Client.Shared\Gizmo.Client.Shared.csproj" />
 	  <ProjectReference Include="..\..\Gizmo.Shared\Gizmo.Shared.csproj" />
 	</ItemGroup>	
 
