@@ -4,40 +4,6 @@ using Gizmo;
 
 namespace SharedLib
 {
-    #region OBSOLETE
-
-    #region CONTAINERITEMEVENTTYPE
-    /// <summary>
-    /// Container event types.
-    /// </summary>
-    [Serializable()]
-    [Obsolete()]
-    public enum ContainerItemEventType
-    {
-        /// <summary>
-        /// Occours when item is added to container.
-        /// <remarks>NewItems propery contains added items.</remarks>
-        /// </summary>
-        Added = 0,
-        /// <summary>
-        /// Occours when shared item is unasigned.
-        /// <remarks>NewItems propery contains unasigned items.</remarks>
-        /// </summary>
-        UnAssigned = 4,
-        /// <summary>
-        /// Occours when item is removed from container.
-        /// <remarks>NewItems propery contains removed items.</remarks>
-        /// </summary>
-        Removed = 8,
-        /// <summary>
-        /// Occours when item is replaced/updated.
-        /// </summary>
-        Replaced = 16,
-    }
-    #endregion
-
-    #endregion
-
     #region ACTIVATIONTYPE
     /// <summary>
     /// Common activation deactivation types.
@@ -1668,6 +1634,34 @@ namespace SharedLib
     }
     #endregion
 
+    #region GLOBALTAXSYSTEMS
+    /// <summary>
+    /// Global tax system codes.
+    /// </summary>
+    public enum GlobalTaxSystems
+    {
+        [Localized("GLOBAL_TAX_SYSTEM_ΝΟΝΕ")]
+        None = 0,
+        [Localized("GLOBAL_TAX_SYSTEM_RUSSIA")]
+        Russia = 1
+    }
+    #endregion
+
+    #region SMTPSECURITY
+    /// <summary>
+    /// SMTP Security.
+    /// </summary>
+    public enum SMTPSecurity
+    {
+        [Localized("SMTP_SECURITY_NONE")]
+        None = 0,
+        [Localized("SMTP_SECURITY_SSL")]
+        SSL = 1,
+        [Localized("SMTP_SECURITY_STARTTLS")]
+        STARTTLS = 2
+    }
+    #endregion
+
     #region STORABLE ENUMERATIONS
 
     #region MODULEENUM
@@ -3247,25 +3241,6 @@ namespace SharedLib
     }
     #endregion
 
-    #region LOGICALOPERATOR
-    /// <summary>
-    /// Logical operator.
-    /// </summary>
-    public enum LogicalOperator
-    {
-        /// <summary>
-        /// And.
-        /// </summary>
-        [Localized("AND")]
-        And,
-        /// <summary>
-        /// Or.
-        /// </summary>
-        [Localized("OR")]
-        Or,
-    }
-    #endregion
-
     #region NOTESEVERITY
     /// <summary>
     /// Note severity.
@@ -3446,31 +3421,6 @@ namespace SharedLib
     }
     #endregion
 
-    #region WAITINGLINETIMEOUTOPTION
-    /// <summary>
-    /// Waiting line timeout options.
-    /// </summary>
-    [Flags()]
-    public enum WaitingLineTimeoutOption
-    {
-        /// <summary>
-        /// None.
-        /// </summary>
-        [Localized("WAITING_LINE_TIMEOUT_OPTION_NONE")]
-        None = 0,
-        /// <summary>
-        /// Remove.
-        /// </summary>
-        [Localized("WAITING_LINE_TIMEOUT_OPTION_REMOVE")]
-        Remove = 1,
-        /// <summary>
-        /// Next in line.
-        /// </summary>
-        [Localized("WAITING_LINE_TIMEOUT_OPTION_NEXT_IN_LINE")]
-        NextInLine = 2,
-    }
-    #endregion
-
     #region WAITINGLINESTATE
     /// <summary>
     /// Waiting line states.
@@ -3494,59 +3444,6 @@ namespace SharedLib
         Cancel = 1,
     }
     #endregion    
-
-    #region TOKENTYPE
-    /// <summary>
-    /// Security token types.
-    /// </summary>
-    public enum TokenType
-    {
-        /// <summary>
-        /// JWT Refresh token.
-        /// </summary>
-        JWTRefresh = 0,
-        /// <summary>
-        /// Email verification token.
-        /// </summary>
-        VerifyEmail = 1,
-        /// <summary>
-        /// Mobile phone verification token.
-        /// </summary>
-        VerifyMobilePhone = 2,
-        /// <summary>
-        /// Create account token.
-        /// </summary>
-        CreateAccount = 3,
-        /// <summary>
-        /// Reset password token.
-        /// </summary>
-        ResetPassword = 4,
-    }
-    #endregion
-
-    #region TOKENSTATUS
-    /// <summary>
-    /// Token status enumeration.
-    /// </summary>
-    public enum TokenStatus
-    {
-        /// <summary>
-        /// Token unused.
-        /// </summary>
-        [Localized("TOKEN_STATUS_UNUSED")]
-        Unused = 0,
-        /// <summary>
-        /// Token used.
-        /// </summary>
-        [Localized("TOKEN_STATUS_USED")]
-        Used = 1,
-        /// <summary>
-        /// Token revoked.
-        /// </summary>
-        [Localized("TOKEN_STATUS_REVOKED")]
-        Revoked = 2,
-    }
-    #endregion
 
     #region RESERVATIONSTATUS
     /// <summary>
@@ -3591,23 +3488,6 @@ namespace SharedLib
     }
     #endregion
 
-    #region VERIFICATIONSTATUS
-    /// <summary>
-    /// Verification status.
-    /// </summary>
-    public enum VerificationStatus
-    {
-        /// <summary>
-        /// Unverified.
-        /// </summary>
-        Unverified = 0,
-        /// <summary>
-        /// Verified.
-        /// </summary>
-        Verified = 1,
-    }
-    #endregion
-
     #region ORDERSOURCE
     /// <summary>
     /// Client order source.
@@ -3629,50 +3509,5 @@ namespace SharedLib
     }
     #endregion
 
-    #endregion
-    
-    #region SoundNotificationBalanceOptions
-    public enum SoundNotificationBalanceOptions : int
-    {
-        All = 0,
-        NegativeBalanceOnly = 1
-    }
-    #endregion
-
-    #region RFIDScanUserCardActions
-    public enum RFIDScanUserCardActions : int
-    {
-        OpenUserInfoWindow = 0,
-        OpenUserSalesWindow = 1,
-        OpenUserDepositWindow = 2
-    }
-    #endregion
-
-    #region GlobalTaxSystems
-    /// <summary>
-    /// Global tax system codes.
-    /// </summary>
-    public enum GlobalTaxSystems
-    {
-        [Localized("GLOBAL_TAX_SYSTEM_ΝΟΝΕ")]
-        None = 0,
-        [Localized("GLOBAL_TAX_SYSTEM_RUSSIA")]
-        Russia = 1
-    }
-    #endregion
-
-    #region SMTPSecurity
-    /// <summary>
-    /// SMTP Security.
-    /// </summary>
-    public enum SMTPSecurity
-    {
-        [Localized("SMTP_SECURITY_NONE")]
-        None = 0,
-        [Localized("SMTP_SECURITY_SSL")]
-        SSL = 1,
-        [Localized("SMTP_SECURITY_STARTTLS")]
-        STARTTLS = 2
-    }
-    #endregion
+    #endregion      
 }
