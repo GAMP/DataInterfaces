@@ -2552,37 +2552,7 @@ namespace SharedLib
     /// <summary>
     /// Known payment method types.
     /// </summary>
-    public enum PaymentMethodType
-    {
-        /// <summary>
-        /// Undefined.
-        /// </summary>
-        Undefined = 0,
 
-        /// <summary>
-        /// Cash payment.
-        /// </summary>
-        [Localized("PAYMENT_METHOD_CASH")]
-        Cash = -1,
-
-        /// <summary>
-        /// Credit card payment.
-        /// </summary>
-        [Localized("PAYMENT_METHOD_CREDIT_CARD")]
-        CreditCard = -2,
-
-        /// <summary>
-        /// Deposit balance payment.
-        /// </summary>
-        [Localized("PAYMENT_METHOD_DEPOSIT")]
-        Deposit = -3,
-
-        /// <summary>
-        /// Deposit points payment.
-        /// </summary>
-        [Localized("PAYMENT_METHOD_POINTS")]
-        Points = -4,
-    }
     #endregion
 
     #region DEPOSITTRANSACTIONTYPE
