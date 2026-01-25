@@ -1436,9 +1436,9 @@ namespace SharedLib.Configuration
         /// </summary>
         [Category("General")]
         [Description("Gets or sets user password recovery method.")]
-        [DefaultValue(Gizmo.UserRecoveryMethod.None)]
+        [DefaultValue(Gizmo.Server.UserRecoveryMethod.None)]
         [DataMember(Order = 8)]
-        public Gizmo.UserRecoveryMethod RecoveryMethod
+        public Gizmo.Server.UserRecoveryMethod RecoveryMethod
         {
             get; set;
         }
@@ -1461,10 +1461,10 @@ namespace SharedLib.Configuration
         /// </summary>
         [Category("General")]
         [Description("Gets or sets confirmation code characters.")]
-        [DefaultValue(Gizmo.KeyGenerationCharacters.Alphanumeric)]
+        [DefaultValue(Gizmo.Server.KeyGenerationCharacters.Alphanumeric)]
         [EnumValueValidation]
         [DataMember(Order = 10)]
-        public Gizmo.KeyGenerationCharacters ConfirmationCodeCharacters
+        public Gizmo.Server.KeyGenerationCharacters ConfirmationCodeCharacters
         {
             get; set;
         }
