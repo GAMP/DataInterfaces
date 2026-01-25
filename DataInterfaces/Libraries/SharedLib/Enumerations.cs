@@ -1632,7 +1632,23 @@ namespace SharedLib
     }
     #endregion
 
-    #region STORABLE ENUMERATIONS
+    #region APPOPTIONTYPE
+    /// <summary>
+    /// Application options.
+    /// </summary>
+    [Flags()]
+    public enum AppOptionType
+    {
+        /// <summary>
+        /// None.
+        /// </summary>
+        None = 0,
+        /// <summary>
+        /// Halt execution on any error.
+        /// </summary>
+        HaltOnError = 1,
+    }
+    #endregion
 
     #region MODULEENUM
     /// <summary>
@@ -1692,7 +1708,13 @@ namespace SharedLib
         /// </summary>
         Global = Client | Server | Manager,
     }
-    #endregion    
+    #endregion
+
+    #region STORABLE ENUMERATIONS
+
+
+
+
 
     #region LOGCATEGORIES
     /// <summary>
@@ -2156,24 +2178,6 @@ namespace SharedLib
         /// One time purchase.
         /// </summary>
         OneTimePurchase = 8192,
-    }
-    #endregion
-
-    #region APPOPTIONTYPE
-    /// <summary>
-    /// Application options.
-    /// </summary>
-    [Flags()]
-    public enum AppOptionType
-    {
-        /// <summary>
-        /// None.
-        /// </summary>
-        None = 0,
-        /// <summary>
-        /// Halt execution on any error.
-        /// </summary>
-        HaltOnError = 1,
     }
     #endregion
 
