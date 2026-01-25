@@ -1885,29 +1885,7 @@ namespace SharedLib
             UserInfoTypes.PostCode |
             UserInfoTypes.Sex,
     }
-    #endregion
-
-    #region SEX
-    /// <summary>
-    /// Sex enumeration.
-    /// </summary>
-    [Flags()]
-    public enum Sex
-    {
-        /// <summary>
-        /// Unspecified.
-        /// </summary>
-        Unspecified = 0,
-        /// <summary>
-        /// Male.
-        /// </summary>
-        Male = 1,
-        /// <summary>
-        /// Female.
-        /// </summary>
-        Female = 2,
-    }
-    #endregion
+    #endregion    
 
     #region USERSESSIONSTATE
     /// <summary>

@@ -140,7 +140,7 @@ namespace ServerService
         /// </summary>
         [DataMember()]
         [ProtoMember(11)]
-        public Sex Sex
+        public Gizmo.Web.Api.Models.Sex Sex
         {
             get;
             set;

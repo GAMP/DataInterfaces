@@ -142,7 +142,7 @@ namespace ServerService.Web.Api.Controllers.Models
         /// Optional sex.
         /// </summary>
         [DataMember()]
-        public Sex Sex
+        public Gizmo.Web.Api.Models.Sex Sex
         {
             get; set;
         }

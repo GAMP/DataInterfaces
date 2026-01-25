@@ -211,7 +211,7 @@ namespace ServerService.Web.Api.Controllers.Models
         /// </summary>
         [DataMember()]
         [ProtoMember(18)]
-        public Sex Sex
+        public Gizmo.Web.Api.Models.Sex Sex
         {
             get;
             set;

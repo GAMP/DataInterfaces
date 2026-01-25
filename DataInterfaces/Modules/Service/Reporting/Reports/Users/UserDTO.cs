@@ -105,7 +105,7 @@ namespace ServerService.Reporting.Reports.Users
         /// User's gender.
         /// </summary>
         [DataMember]
-        public Sex Sex { get; set; }
+        public Gizmo.Web.Api.Models.Sex Sex { get; set; }
 
         /// <summary>
         /// User is banned.
