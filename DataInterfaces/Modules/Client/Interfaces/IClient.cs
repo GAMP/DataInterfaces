@@ -47,7 +47,7 @@ namespace Client
         /// <summary>
         /// Occurs on input lock state change.
         /// </summary>
-        event EventHandler<Gizmo.Client.LockStateEventArgs> LockStateChange;
+        event EventHandler<Gizmo.Client.LockStateChangeEventArgs> LockStateChange;
 
         /// <summary>
         /// Occurs on client id change.
@@ -57,7 +57,7 @@ namespace Client
         /// <summary>
         /// Occurs on securtiy change.
         /// </summary>
-        event EventHandler<Gizmo.Client.SecurityStateArgs> SecurityStateChange;
+        event EventHandler<Gizmo.Client.SecurityStateChangeEventArgs> SecurityStateChange;
 
         /// <summary>
         /// Occurs on execution context collection change.
@@ -77,7 +77,7 @@ namespace Client
         /// <summary>
         /// Occurs on out of order state change.
         /// </summary>
-        event EventHandler<Gizmo.Client.OutOfOrderStateEventArgs> OutOfOrderStateChange;
+        event EventHandler<Gizmo.Client.OutOfOrderStateChangeEventArgs> OutOfOrderStateChange;
 
         /// <summary>
         /// Occurs once application was rated by user.
@@ -102,7 +102,7 @@ namespace Client
         /// <summary>
         /// Occurs on maintenace mode change.
         /// </summary>
-        event EventHandler<Gizmo.Client.MaintenanceEventArgs> MaintenanceModeChange;
+        event EventHandler<Gizmo.Client.MaintenanceChangeEventArgs> MaintenanceModeChange;
 
         /// <summary>
         /// Occurs on order status change.
@@ -219,7 +219,7 @@ namespace Client
         /// <summary>
         /// Gets the current user login state.
         /// </summary>
-        Gizmo.LoginState LoginState { get; }
+        Gizmo.Client.LoginState LoginState { get; }
 
         /// <summary>
         /// Gets if module shutdown or restart is initiated.
