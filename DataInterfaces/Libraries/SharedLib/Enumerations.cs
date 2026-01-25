@@ -2522,7 +2522,6 @@ namespace SharedLib
     }
     #endregion
 
-
     #region SCRIPTTYPES
     /// <summary>
     /// Task Script enumeration type.
@@ -2572,27 +2571,6 @@ namespace SharedLib
         /// </summary>
         [Localized("PAY_OUT")]
         PayOut = 2
-    }
-    #endregion
-
-    #region ORDERLINEPAYTYPE
-    /// <summary>
-    /// Order line payment type.
-    /// </summary>
-    public enum OrderLinePayType
-    {
-        /// <summary>
-        /// Mixed.
-        /// </summary>
-        Mixed = 2,
-        /// <summary>
-        /// Points.
-        /// </summary>
-        Points = 1,
-        /// <summary>
-        /// Cash.
-        /// </summary>
-        Cash = 0,
     }
     #endregion
 

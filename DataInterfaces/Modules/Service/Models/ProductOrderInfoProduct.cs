@@ -90,7 +90,7 @@ namespace ServerService
         /// </summary>
         [ProtoMember(8)]
         [DataMember()]
-        public OrderLinePayType PayType
+        public Gizmo.Web.Api.Models.OrderLinePayType PayType
         {
             get; set;
         }
