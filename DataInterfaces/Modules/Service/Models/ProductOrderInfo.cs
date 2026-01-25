@@ -60,7 +60,7 @@ namespace ServerService
         /// </summary>
         [ProtoMember(5)]
         [DataMember()]
-        public InvoiceStatus? InvoiceStatus
+        public Gizmo.Web.Api.Models.InvoiceStatus? InvoiceStatus
         {
             get; set;
         }

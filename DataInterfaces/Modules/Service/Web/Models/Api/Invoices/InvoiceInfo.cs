@@ -24,7 +24,7 @@ namespace ServerService.Web.Api.Controllers.Models
         /// Invoice status.
         /// </summary>
         [DataMember()]
-        public InvoiceStatus Status
+        public Gizmo.Web.Api.Models.InvoiceStatus Status
         {
             get;
             set;

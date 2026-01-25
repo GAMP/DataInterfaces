@@ -31,7 +31,7 @@ namespace ServerService.Web.Api.Controllers.Models
         /// </summary>
         [DataMember()]
         [ProtoMember(2)]
-        public InvoiceStatus Status
+        public Gizmo.Web.Api.Models.InvoiceStatus Status
         {
             get;
             set;
