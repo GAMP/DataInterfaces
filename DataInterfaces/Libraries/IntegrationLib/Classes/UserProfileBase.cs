@@ -30,7 +30,7 @@ namespace IntegrationLib
             birthDate,
             registered;
         protected Gizmo.Server.UserRoles role;
-        protected Gizmo.Sex sex = Gizmo.Sex.Male;
+        protected Gizmo.Web.Api.Models.Sex sex = Gizmo.Web.Api.Models.Sex.Male;
         protected bool isEnabled = true;
         protected bool canChangePassword;
         #endregion
@@ -236,7 +236,7 @@ namespace IntegrationLib
         /// Gets or sets users sex.
         /// </summary>
         [DataMember()]
-        public virtual Gizmo.Sex Sex
+        public virtual Gizmo.Web.Api.Models.Sex Sex
         {
             get { return sex; }
             set
@@ -325,7 +325,7 @@ namespace IntegrationLib
             MobilePhone = string.Empty;
             Phone = string.Empty;
             PostCode = string.Empty;
-            Sex = Gizmo.Sex.Unspecified;
+            Sex = Gizmo.Web.Api.Models.Sex.Unspecified;
             Role = Gizmo.Server.UserRoles.None;
             UserName = string.Empty;
             IsEnabled = false;
