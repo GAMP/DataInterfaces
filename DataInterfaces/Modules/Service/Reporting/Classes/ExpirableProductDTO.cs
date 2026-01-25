@@ -69,19 +69,19 @@ namespace ServerService.Reporting
         /// Expiration options.
         /// </summary>
         [DataMember()]
-        public ProductTimeExpirationOptionType ExpirationOptions { get; set; }
+        public Gizmo.Web.Api.Models.ProductTimeExpirationOptionType ExpirationOptions { get; set; }
 
         /// <summary>
         /// The product expires from options.
         /// </summary>
         [DataMember()]
-        public ExpireFromOptionType ExpireFromOptions { get; set; }
+        public Gizmo.Web.Api.Models.ExpireFromOptionType ExpireFromOptions { get; set; }
 
         /// <summary>
         /// Gets or sets expire after type.
         /// </summary>
         [DataMember()]
-        public ExpireAfterType ExpireAfterType { get; set; }
+        public Gizmo.Web.Api.Models.ExpireAfterType ExpireAfterType { get; set; }
 
         /// <summary>
         /// Gets or sets expire at day time minute.

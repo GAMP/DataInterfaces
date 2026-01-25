@@ -63,7 +63,7 @@ namespace ServerService.Web.Api.Controllers.Models
         /// </summary>
         [DataMember()]
         [ProtoMember(6)]
-        public PurchaseOptionType PurchaseOptions { get; set; }
+        public Gizmo.Web.Api.Models.PurchaseOptionType PurchaseOptions { get; set; }
 
         /// <summary>
         /// Gets or sets points.

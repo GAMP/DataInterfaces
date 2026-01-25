@@ -77,7 +77,7 @@ namespace ServerService.Web.Api.Controllers.Models
         /// </summary>
         [DataMember()]
         [ProtoMember(6)]
-        public ProductTimeExpirationOptionType ExpirationOptions
+        public Gizmo.Web.Api.Models.ProductTimeExpirationOptionType ExpirationOptions
         {
             get;
             set;
@@ -88,7 +88,7 @@ namespace ServerService.Web.Api.Controllers.Models
         /// </summary>
         [DataMember()]
         [ProtoMember(7)]
-        public ExpireFromOptionType ExpireFromOptions
+        public Gizmo.Web.Api.Models.ExpireFromOptionType ExpireFromOptions
         {
             get; set;
         }
@@ -119,7 +119,7 @@ namespace ServerService.Web.Api.Controllers.Models
         /// </summary>
         [DataMember()]
         [ProtoMember(12)]
-        public ExpireAfterType ExpireAfterType
+        public Gizmo.Web.Api.Models.ExpireAfterType ExpireAfterType
         {
             get; set;
         }

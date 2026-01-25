@@ -101,7 +101,7 @@ namespace ServerService
         /// </summary>
         [DataMember()]
         [ProtoMember(9)]
-        public PurchaseOptionType PurchaseOptions
+        public Gizmo.Web.Api.Models.PurchaseOptionType PurchaseOptions
         {
             get; set;
         }

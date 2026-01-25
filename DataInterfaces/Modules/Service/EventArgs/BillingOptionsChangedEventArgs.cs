@@ -17,7 +17,7 @@ namespace ServerService
         /// </summary>
         /// <param name="userId">User id.</param>
         /// <param name="options">Billing options.</param>
-        public BillingOptionsChangedEventArgs(int userId, BillingOption? options) : base(userId, UserChangeType.BillingOptions)
+        public BillingOptionsChangedEventArgs(int userId, Gizmo.Web.Api.Models.BillingOption? options) : base(userId, UserChangeType.BillingOptions)
         {
             Options = options;
         }
@@ -28,7 +28,7 @@ namespace ServerService
         /// Gets billing options.
         /// </summary>
         [DataMember()]
-        public BillingOption? Options
+        public Gizmo.Web.Api.Models.BillingOption? Options
         {
             get; protected set;
         }

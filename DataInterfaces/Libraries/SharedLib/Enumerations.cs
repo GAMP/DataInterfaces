@@ -1712,10 +1712,6 @@ namespace SharedLib
 
     #region STORABLE ENUMERATIONS
 
-
-
-
-
     #region LOGCATEGORIES
     /// <summary>
     /// Log categories.
@@ -2223,61 +2219,6 @@ namespace SharedLib
     }
     #endregion
 
-    #region CREDITLIMITOPTIONTYPE
-    /// <summary>
-    /// Credit limit options.
-    /// </summary>
-    [Flags()]
-    public enum CreditLimitOptionType
-    {
-        /// <summary>
-        /// None.
-        /// </summary>
-        None = 0,
-        /// <summary>
-        /// Enable per user credit limit.
-        /// </summary>
-        EnablePerUserCreditLimit = 2,
-        /// <summary>
-        /// Enables sales credit limit.
-        /// </summary>
-        SalesCreditLimited = 4,
-        /// <summary>
-        /// Enables unlimited sales credit limit.
-        /// </summary>
-        SalesCreditUnlimited = 8,
-        /// <summary>
-        /// Enables time credit limit.
-        /// </summary>
-        TimeCreditLimited = 16,
-        /// <summary>
-        /// Enables unlimitied time credit limit.
-        /// </summary>
-        TimeCreditUnlimited = 32,
-    }
-    #endregion
-
-    #region TIMEPOINTAWARDOPTIONTYPE
-    /// <summary>
-    /// Time product award options.
-    /// </summary>
-    public enum TimePointAwardOptionType
-    {
-        /// <summary>
-        /// None.
-        /// </summary>
-        None = 0,
-        /// <summary>
-        /// Time.
-        /// </summary>
-        Time = 1,
-        /// <summary>
-        /// Money.
-        /// </summary>
-        Money = 2
-    }
-    #endregion
-
     #region HOSTSTATE
     /// <summary>
     /// Host state.
@@ -2426,56 +2367,6 @@ namespace SharedLib
     }
     #endregion
 
-    #region PURCHASEOPTIONTYPE
-    /// <summary>
-    /// Points money option type.
-    /// </summary>
-    public enum PurchaseOptionType
-    {
-        /// <summary>
-        /// And.
-        /// </summary>
-        [Localized("AND")]
-        And = 0,
-        /// <summary>
-        /// Or.
-        /// </summary>
-        [Localized("OR")]
-        Or = 1
-    }
-    #endregion
-
-    #region PRODUCTTIMEEXPIRATIONOPTIONTYPE
-    /// <summary>
-    /// Product time expiration options.
-    /// </summary>
-    [Flags()]
-    public enum ProductTimeExpirationOptionType
-    {
-        /// <summary>
-        /// None.
-        /// </summary>
-        None = 0,
-        /// <summary>
-        /// At logout.
-        /// </summary>
-        ExpiresAtLogout = 1,
-        /// <summary>
-        /// At date.
-        /// </summary>
-        [Obsolete()]
-        ExpiresAtDate = 2,
-        /// <summary>
-        /// After time.
-        /// </summary>
-        ExpireAfterTime = 4,
-        /// <summary>
-        /// At day time.
-        /// </summary>
-        ExpireAtDayTime = 8,
-    }
-    #endregion
-
     #region PRODUCTTIMEUSAGEOPTIONTYPE
     /// <summary>
     /// Product time usage options.
@@ -2503,56 +2394,6 @@ namespace SharedLib
         /// </remarks>
         Reservation = 4,
     }
-    #endregion
-
-    #region EXPIREFROMOPTIONTYPE
-    /// <summary>
-    /// Expire from options.
-    /// </summary>
-    public enum ExpireFromOptionType
-    {
-        /// <summary>
-        /// Purchase.
-        /// </summary>
-        [Localized("EXPIRE_FROM_PURCHASE")]
-        Purchase = 0,
-        /// <summary>
-        /// Use.
-        /// </summary>
-        [Localized("EXPIRE_FROM_USE")]
-        Use = 1
-    }
-    #endregion
-
-    #region EXPIREAFTERTYPE
-    /// <summary>
-    /// Expire after types.
-    /// </summary>
-    public enum ExpireAfterType
-    {
-        /// <summary>
-        /// Day.
-        /// </summary>
-        [Localized("DAY_PLURAL")]
-        Day = 0,
-        /// <summary>
-        /// Hour.
-        /// </summary>
-        [Localized("HOUR_PLURAL")]
-        Hour = 1,
-        /// <summary>
-        /// Minute.
-        /// </summary>
-        [Localized("MINUTE_PLURAL")]
-        Minute = 2,
-    }
-    #endregion    
-
-    #region PAYMENTMETHODTYPE
-    /// <summary>
-    /// Known payment method types.
-    /// </summary>
-
     #endregion
 
     #region DEPOSITTRANSACTIONTYPE
@@ -2799,31 +2640,6 @@ namespace SharedLib
         /// </summary>
         [Localized("REFUND_STATUS_FULL")]
         Full,
-    }
-    #endregion
-
-    #region BILLINGOPTION
-    /// <summary>
-    /// Billing options.
-    /// </summary>
-    public enum BillingOption
-    {
-        /// <summary>
-        /// None.
-        /// </summary>
-        None = 0,
-        /// <summary>
-        /// Disable time offers.
-        /// </summary>
-        DisableTimeOffer = 1,
-        /// <summary>
-        /// Disable fixed time.
-        /// </summary>
-        DisableFixedTime = 2,
-        /// <summary>
-        /// Disable deposits.
-        /// </summary>
-        DisableDeposit = 4,
     }
     #endregion
 

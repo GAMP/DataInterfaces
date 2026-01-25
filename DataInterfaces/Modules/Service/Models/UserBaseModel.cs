@@ -1,5 +1,4 @@
 ﻿using ProtoBuf;
-using SharedLib;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
@@ -227,7 +226,7 @@ namespace ServerService
         /// </summary>
         [DataMember()]
         [ProtoMember(6)]
-        public virtual BillingOption? BillingOptions
+        public virtual Gizmo.Web.Api.Models.BillingOption? BillingOptions
         {
             get; set;
         }

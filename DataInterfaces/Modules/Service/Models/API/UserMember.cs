@@ -1,7 +1,5 @@
 ﻿using ProtoBuf;
-using SharedLib;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 
@@ -70,7 +68,7 @@ namespace ServerService.Web.Api.Controllers.Models
         /// </summary>
         [DataMember()]
         [ProtoMember(6)]
-        public BillingOption? BillingOptions
+        public Gizmo.Web.Api.Models.BillingOption? BillingOptions
         {
             get; set;
         }
