@@ -1,5 +1,4 @@
-﻿using SharedLib;
-using System;
+﻿using System;
 using System.Runtime.Serialization;
 
 namespace ServerService.Reporting
@@ -19,7 +18,7 @@ namespace ServerService.Reporting
         /// <summary>
         /// The type of the transaction.
         /// </summary>
-        public RegisterTransactionType TransactionType { get; set; }
+        public Gizmo.Web.Api.Models.RegisterTransactionType TransactionType { get; set; }
 
         /// <summary>
         /// The payment type name of the transaction.

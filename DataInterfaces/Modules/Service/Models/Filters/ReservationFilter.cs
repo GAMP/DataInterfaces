@@ -26,7 +26,7 @@ namespace ServerService
         /// Gets or sets desired reservation status.
         /// </summary>
         [DataMember(EmitDefaultValue = false)]
-        public ReservationStatus? Status
+        public Gizmo.Web.Api.Models.ReservationStatus? Status
         {
             get; set;
         }

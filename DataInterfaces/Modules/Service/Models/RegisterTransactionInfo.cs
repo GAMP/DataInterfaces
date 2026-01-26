@@ -1,5 +1,4 @@
 ﻿using ProtoBuf;
-using SharedLib;
 using System;
 using System.Runtime.Serialization;
 
@@ -39,7 +38,7 @@ namespace ServerService
         /// </summary>
         [DataMember()]
         [ProtoMember(3)]
-        public RegisterTransactionType Type
+        public Gizmo.Web.Api.Models.RegisterTransactionType Type
         {
             get; set;
         }

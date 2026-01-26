@@ -106,7 +106,7 @@ namespace ServerService
         /// </summary>
         [DataMember()]
         [ProtoMember(9)]
-        public ReservationStatus Status
+        public Gizmo.Web.Api.Models.ReservationStatus Status
         {
             get; set;
         }

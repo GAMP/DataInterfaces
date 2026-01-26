@@ -1,5 +1,4 @@
-﻿using SharedLib;
-using System;
+﻿using System;
 using System.Runtime.Serialization;
 
 namespace ServerService
@@ -14,7 +13,7 @@ namespace ServerService
         #region PROPERTIES
 
         [DataMember(EmitDefaultValue = false)]
-        public RegisterTransactionType? Type
+        public Gizmo.Web.Api.Models.RegisterTransactionType? Type
         {
             get; set;
         }
