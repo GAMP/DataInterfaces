@@ -105,6 +105,6 @@ namespace ServerService.Reporting
         public DateTime? UsePeriodEnd { get; set; }
 
         [DataMember()]
-        public PeriodOptionType UsePeriodOptions { get; set; }
+        public Gizmo.Web.Api.Models.PeriodOptionType UsePeriodOptions { get; set; }
     }
 }

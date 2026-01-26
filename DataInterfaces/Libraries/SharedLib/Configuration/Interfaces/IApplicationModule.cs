@@ -15,7 +15,7 @@
         /// <summary>
         /// Gets module type.
         /// </summary>
-        ModuleEnum ModuleType { get; set; }
+        Gizmo.Web.Api.Models.ModuleType ModuleType { get; set; }
 
         /// <summary>
         /// Gets module version.

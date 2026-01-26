@@ -27,7 +27,7 @@ namespace ServerService.Reporting
         /// Order source.
         /// </summary>
         [DataMember]
-        public OrderSource OrderSource { get; set; }
+        public Gizmo.Web.Api.Models.OrderSource OrderSource { get; set; }
 
         /// <summary>
         /// Order status.

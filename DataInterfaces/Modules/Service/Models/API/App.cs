@@ -112,7 +112,7 @@ namespace ServerService.Web.Api.Controllers.Models
         /// </summary>
         [DataMember()]
         [ProtoMember(9)]
-        public AppOptionType Options
+        public Gizmo.Web.Api.Models.AppOptionType Options
         {
             get;
             set;

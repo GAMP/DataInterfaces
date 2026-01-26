@@ -44,7 +44,7 @@ namespace ServerService.Web.Api.Controllers.Models
         /// </summary>
         [DataMember()]
         [ProtoMember(4)]
-        public HostState State { get; set; }
+        public Gizmo.Web.Api.Models.HostState State { get; set; }
 
         /// <summary>
         /// Gets or sets icon id.

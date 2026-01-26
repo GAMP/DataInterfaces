@@ -157,7 +157,7 @@ namespace ServerService.Web.Api.Controllers.Models
         /// </summary>
         [DataMember()]
         [ProtoMember(16)]
-        public OrderSource Source
+        public Gizmo.Web.Api.Models.OrderSource Source
         {
             get; set;
         }

@@ -1,7 +1,5 @@
 ﻿using ProtoBuf;
-using SharedLib;
 using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace ServerService.Web.Api.Controllers.Models
@@ -21,7 +19,7 @@ namespace ServerService.Web.Api.Controllers.Models
         /// </summary>
         [DataMember()]
         [ProtoMember(1)]
-        public BundleStockOptionType BundleStockOptions
+        public Gizmo.Web.Api.Models.BundleStockOptionType BundleStockOptions
         {
             get; set;
         }

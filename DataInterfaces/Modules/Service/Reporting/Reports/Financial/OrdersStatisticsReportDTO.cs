@@ -16,7 +16,7 @@ namespace ServerService.Reporting.Reports.Financial
         /// Filtered Order Source.
         /// </summary>
         [DataMember]
-        public OrderSource? OrderSource { get; set; }
+        public Gizmo.Web.Api.Models.OrderSource? OrderSource { get; set; }
 
         /// <summary>
         /// Filtered Order Status.

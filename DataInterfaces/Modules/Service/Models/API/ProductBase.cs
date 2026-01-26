@@ -92,7 +92,7 @@ namespace ServerService.Web.Api.Controllers.Models
         /// </summary>
         [DataMember()]
         [ProtoMember(10)]
-        public StockOptionType StockOptions
+        public Gizmo.Web.Api.Models.StockOptionType StockOptions
         {
             get;
             set;

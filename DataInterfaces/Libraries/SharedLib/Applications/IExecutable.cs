@@ -16,13 +16,13 @@ namespace SharedLib.Applications
     
         bool KillChildren { get; set; }
 
-        ApplicationModes Modes { get; set; }
+        Gizmo.Web.Api.Models.ApplicationModes Modes { get; set; }
 
         bool MonitorChildren { get; set; }
 
         bool MultiRun { get; set; }
 
-        RunMode RunMode { get; set; }
+        Gizmo.Web.Api.Models.RunMode RunMode { get; set; }
 
         string WorkingDirectory { get; set; }
 

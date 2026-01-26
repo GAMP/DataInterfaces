@@ -89,7 +89,7 @@ namespace ServerService.Web.Api.Controllers.Models
         /// </summary>
         [DataMember()]
         [ProtoMember(7)]
-        public GroupOverrides Overrides
+        public Gizmo.Web.Api.Models.GroupOverrides Overrides
         {
             get;
             set;
@@ -100,7 +100,7 @@ namespace ServerService.Web.Api.Controllers.Models
         /// </summary>
         [DataMember()]
         [ProtoMember(8)]
-        public UserGroupOptionType Options
+        public Gizmo.Web.Api.Models.UserGroupOptionType Options
         {
             get;
             set;

@@ -1,5 +1,4 @@
-﻿using SharedLib;
-using System;
+﻿using System;
 using System.Runtime.Serialization;
 
 namespace ServerService.Reporting.Reports.Financial
@@ -15,7 +14,7 @@ namespace ServerService.Reporting.Reports.Financial
         /// Filter Order Source.
         /// </summary>
         [DataMember]
-        public OrderSource? OrderSource { get; set; }
+        public Gizmo.Web.Api.Models.OrderSource? OrderSource { get; set; }
 
         /// <summary>
         /// Filter Order Status.

@@ -98,7 +98,7 @@ namespace ServerService.Web.Api.Controllers.Models
         /// </summary>
         [DataMember()]
         [ProtoMember(8)]
-        public ProductTimeUsageOptionType UsageOptions
+        public Gizmo.Web.Api.Models.ProductTimeUsageOptionType UsageOptions
         {
             get;
             set;

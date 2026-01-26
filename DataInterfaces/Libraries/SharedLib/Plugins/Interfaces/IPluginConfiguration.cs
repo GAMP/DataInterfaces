@@ -30,7 +30,7 @@
         /// <summary>
         /// Scope.
         /// </summary>
-        ModuleScopes Scope { get; set; } 
+        Gizmo.Web.Api.Models.ModuleScopes Scope { get; set; } 
 
         #endregion
     }
