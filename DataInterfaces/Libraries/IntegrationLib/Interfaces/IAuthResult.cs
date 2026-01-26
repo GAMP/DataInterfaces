@@ -1,5 +1,4 @@
-﻿using SharedLib;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace IntegrationLib
 {
@@ -8,8 +7,6 @@ namespace IntegrationLib
     /// </summary>
     public interface IAuthResult
     {
-        #region PROPERTIES
-
         /// <summary>
         /// Gets custom data dictionary.
         /// </summary>
@@ -29,7 +26,5 @@ namespace IntegrationLib
         /// Gets result.
         /// </summary>
         LoginResult Result { get; set; }
-
-        #endregion
     }
 }

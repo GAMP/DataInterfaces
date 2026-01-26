@@ -10,14 +10,9 @@ namespace ServerService
     /// </summary>
     public interface IGizmoService :
         IHostService,
-        IGizmoServiceLog,
         IGizmoDbContextProvider,
-        IReportsService,
-        IBackupService,
         IUserService
     {
-        #region FUNCTIONS
-        
         /// <summary>
         /// Schedules a user balance event.
         /// This event is used to notify modules of user balance change.
@@ -25,12 +20,8 @@ namespace ServerService
         /// <param name="userId">User id.</param>
         void ScheduleUserBalanceEvent(int? userId); 
 
-        #endregion
-
-        #region EVENTS
-
         /// <summary>
-        /// Occours on server startup.
+        /// Occurs on server startup.
         /// <remarks>
         /// This event is called once service is fully initialized.
         /// </remarks>
@@ -38,15 +29,13 @@ namespace ServerService
         event EventHandler<StartUpEventArgs> Startup;
 
         /// <summary>
-        /// Occours on service shutdown.
+        /// Occurs on service shutdown.
         /// </summary>
         event EventHandler<ShutDownEventArgs> Shutdown;
 
         /// <summary>
-        /// Occours on one of network connection change.
+        /// Occurs on one of network connection change.
         /// </summary>
-        event EventHandler<ConnectionChangedArgs> ConnectionChanged;
-
-        #endregion
+        event EventHandler<ConnectionChangedArgs> ConnectionChanged;      
     }      
 }

@@ -9,8 +9,6 @@ namespace ServerService
     /// </summary>
     public interface IUserService
     {
-        #region EVENTS
-
         /// <summary>
         /// Occurs on user state change.
         /// </summary>
@@ -41,9 +39,6 @@ namespace ServerService
         /// </summary>
         event EventHandler<UserBalanceCloseEventArgs> UserBalanceClose;
 
-        #endregion
-
-        #region FUNCTIONS
 
         /// <summary>
         /// Logins specified user.
@@ -92,7 +87,5 @@ namespace ServerService
         /// If credentials password value is null and specified <paramref name="password"/> is null then true is returned.
         /// </remarks>
         bool UserCredentialsValid(int userId, string password);
-
-        #endregion
     }
 }

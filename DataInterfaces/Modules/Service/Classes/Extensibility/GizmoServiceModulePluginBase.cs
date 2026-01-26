@@ -10,29 +10,25 @@ namespace ServerService
     public abstract class GizmoServiceModulePluginBase : GizmoServicePluginBase,
         IGizmoServiceModulePlugin
     {
-        #region VIRTUAL FUNCTIONS
-        
         /// <summary>
-        /// When overriden responsible of plugin initialization.
+        /// When overridden responsible of plugin initialization.
         /// </summary>
         public virtual void Initialize()
         {
         }
 
         /// <summary>
-        /// When overriden responsible of starting plugin.
+        /// When overridden responsible of starting plugin.
         /// </summary>
         public virtual void Start()
         {
         }
 
         /// <summary>
-        /// When overriden responsible of stopping plugin.
+        /// When overridden responsible of stopping plugin.
         /// </summary>
         public virtual void Stop()
         {
         } 
-
-        #endregion
     } 
 }
