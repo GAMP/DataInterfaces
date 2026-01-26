@@ -60,7 +60,7 @@ namespace ServerService
         /// </summary>
         [DataMember()]
         [ProtoMember(5)]
-        public WaitingLineState State
+        public Gizmo.Web.Api.Models.WaitingLineState State
         {
             get;
             set;
