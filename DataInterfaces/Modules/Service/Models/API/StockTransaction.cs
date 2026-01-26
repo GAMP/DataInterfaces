@@ -45,7 +45,7 @@ namespace ServerService.Web.Api.Controllers.Models
         /// </summary>
         [DataMember()]
         [ProtoMember(3)]
-        public StockTransactionType Type
+        public Gizmo.Web.Api.Models.StockTransactionType Type
         {
             get;
             set;

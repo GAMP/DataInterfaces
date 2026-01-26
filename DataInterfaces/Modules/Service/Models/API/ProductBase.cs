@@ -56,7 +56,7 @@ namespace ServerService.Web.Api.Controllers.Models
         /// </summary>
         [DataMember()]
         [ProtoMember(5)]
-        public OrderOptionType OrderOptions { get; set; }
+        public Gizmo.Web.Api.Models.OrderOptionType OrderOptions { get; set; }
 
         /// <summary>
         /// Gets or sets purchase options.

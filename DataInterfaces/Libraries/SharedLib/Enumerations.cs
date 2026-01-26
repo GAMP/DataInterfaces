@@ -1859,6 +1859,37 @@ namespace SharedLib
     }
     #endregion
 
+    #region STOCKOPTIONTYPE
+    /// <summary>
+    /// Stock options.
+    /// </summary>
+    [Flags()]
+    public enum StockOptionType
+    {
+        /// <summary>
+        /// None.
+        /// </summary>
+        None = 0,
+        /// <summary>
+        /// Enable stock.
+        /// </summary>
+        EnableStock = 1,
+        /// <summary>
+        /// Disallow out of stock sale.
+        /// </summary>
+        DisallowSaleIfOutOfStock = 2,
+        /// <summary>
+        /// Alert out of stock.
+        /// </summary>
+        Alert = 4,
+        /// <summary>
+        /// Target different product.
+        /// </summary>
+        TargetDifferentProduct = 8,
+    }
+    #endregion
+        
+
     #region STORABLE ENUMERATIONS
 
     #region LOGCATEGORIES
@@ -2280,81 +2311,7 @@ namespace SharedLib
         HasDateRange = 2,
     }
     #endregion
-
-    #region STOCKOPTIONTYPE
-    /// <summary>
-    /// Stock options.
-    /// </summary>
-    [Flags()]
-    public enum StockOptionType
-    {
-        /// <summary>
-        /// None.
-        /// </summary>
-        None = 0,
-        /// <summary>
-        /// Enable stock.
-        /// </summary>
-        EnableStock = 1,
-        /// <summary>
-        /// Disallow out of stock sale.
-        /// </summary>
-        DisallowSaleIfOutOfStock = 2,
-        /// <summary>
-        /// Alert out of stock.
-        /// </summary>
-        Alert = 4,
-        /// <summary>
-        /// Target different product.
-        /// </summary>
-        TargetDifferentProduct = 8,
-    }
-    #endregion
-
-    
-
-    #region ORDEROPTIONTYPE
-    /// <summary>
-    /// Order options.
-    /// </summary>
-    [Flags()]
-    public enum OrderOptionType
-    {
-        /// <summary>
-        /// None.
-        /// </summary>
-        None = 0,
-        /// <summary>
-        /// Client order disallowed.
-        /// </summary>
-        DisallowAllowOrder = 1,
-        /// <summary>
-        /// Disallow ability of order for non users.
-        /// </summary>
-        RestrictNonCustomers = 2,
-        /// <summary>
-        /// Restricts product sale.
-        /// </summary>
-        RestrictSale = 4,
-        /// <summary>
-        /// If the product is service.
-        /// </summary>
-        IsService = 8,
-        /// <summary>
-        /// If the product is marked product.
-        /// </summary>
-        IsMarkedProduct = 16,
-        /// <summary>
-        /// Requires preparation.
-        /// </summary>
-        RequiresPreparation = 32,
-        /// <summary>
-        /// If the product is excise product.
-        /// </summary>
-        IsExcise = 64,
-    }
-    #endregion
-
+ 
     #region PRODUCTTIMEUSAGEOPTIONTYPE
     /// <summary>
     /// Product time usage options.
@@ -2384,39 +2341,7 @@ namespace SharedLib
     }
     #endregion
 
-    #region STOCKTRANSACTIONTYPE
-    /// <summary>
-    /// Stock transaction type.
-    /// </summary>
-    public enum StockTransactionType
-    {
-        /// <summary>
-        /// Add.
-        /// </summary>
-        [Localized("STOCK_TRANSACTION_ADD")]
-        Add = 0,
-        /// <summary>
-        /// Remove.
-        /// </summary>
-        [Localized("STOCK_TRANSACTION_REMOVE")]
-        Remove = 1,
-        /// <summary>
-        /// Sale.
-        /// </summary>
-        [Localized("STOCK_TRANSACTION_SALE")]
-        Sale = 2,
-        /// <summary>
-        /// Set.
-        /// </summary>
-        [Localized("STOCK_TRANSACTION_SET")]
-        Set = 3,
-        /// <summary>
-        /// Return.
-        /// </summary>
-        [Localized("STOCK_TRANSACTION_RETURN")]
-        Return = 4,
-    }
-    #endregion
+
 
     #region SCRIPTTYPES
     /// <summary>
@@ -2449,9 +2374,7 @@ namespace SharedLib
         [Description("Registry")]
         RegistryScript,
     }
-    #endregion 
-
-  
+    #endregion   
 
     #endregion      
 }
