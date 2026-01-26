@@ -1400,9 +1400,9 @@ namespace SharedLib.Configuration
         /// </summary>
         [Category("General")]
         [Description("Gets or sets client registration verification method.")]
-        [DefaultValue(RegistrationVerificationMethod.None)]
+        [DefaultValue(Gizmo.Server.RegistrationVerificationMethod.None)]
         [DataMember(Order = 5)]
-        public RegistrationVerificationMethod VerificationMethod
+        public Gizmo.Server.RegistrationVerificationMethod VerificationMethod
         {
             get; set;
         }

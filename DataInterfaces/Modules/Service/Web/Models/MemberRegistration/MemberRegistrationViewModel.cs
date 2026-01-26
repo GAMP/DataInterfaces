@@ -1,5 +1,4 @@
 ﻿using ServerService.Web.Api.Controllers.Models;
-using SharedLib;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
@@ -18,10 +17,10 @@ namespace ServerService.Web.MemberRegistration.Models
         public bool IsWebRegistrationEnabled { get; set; }
 
         [DataMember]
-        public RegistrationVerificationMethod VerificationMethod { get; set; }
+        public Gizmo.Server.RegistrationVerificationMethod VerificationMethod { get; set; }
 
         [DataMember]
-        public UserInfoTypes RequiredUserInfo { get; set; }
+        public Gizmo.Web.Api.Models.UserInfoTypes RequiredUserInfo { get; set; }
 
         [DataMember]
         public IEnumerable<CountryInfo> Countries { get; set; }

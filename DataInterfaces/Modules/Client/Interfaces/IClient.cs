@@ -1,6 +1,5 @@
 ﻿using System;
 using CoreLib;
-using SharedLib;
 using IntegrationLib;
 #if WINDOWS
 using CoreLib.Hooking; 
@@ -9,6 +8,7 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Threading;
+using Gizmo.Web.Api.Models;
 
 namespace Client
 {
@@ -273,37 +273,6 @@ namespace Client
         /// </summary>
         void Restart();
 
-        ///// <summary>
-        ///// Shows notification window.
-        ///// </summary>
-
-        //[Obsolete()]
-        //MessageBoxResult NotifyUser(string message, string title, MessageBoxButton buttons, MessageBoxImage icon, bool dialog);
-
-        ///// <summary>
-        ///// Shows notification window.
-        ///// </summary>
-
-        //[Obsolete()]
-        //MessageBoxResult NotifyUser(string message, string title, bool dialog);
-
-        ///// <summary>
-        ///// Shows notification window.
-        ///// </summary>
-
-        //[Obsolete()]
-        //MessageBoxResult NotifyUser(string message, WindowShowParams parameters, out INotifyWindowViewModel splashModel);
-
-        /// <summary>
-        /// Creates notification model.
-        /// </summary>
-        /// <param name="message">Message.</param>
-        /// <param name="parameters">Parameters.</param>
-        /// <returns>Notification model instance.</returns>
-
-        //[Obsolete()]
-        //INotifyWindowViewModel CreateNotificationModel(string message, WindowShowParams parameters);
-
         /// <summary>
         /// Gets localized resource from current language dictionary.
         /// </summary>
@@ -341,7 +310,7 @@ namespace Client
         /// <remarks>
         /// By default null or empty passwords are allowed.
         /// </remarks>
-        Task<LoginResult> LoginAsync(string username, string password);
+        Task<IntegrationLib.LoginResult> LoginAsync(string username, string password);
 
         /// <summary>
         /// Logins user.
@@ -352,7 +321,7 @@ namespace Client
         /// <remarks>
         /// By default null or empty passwords are allowed.
         /// </remarks>
-        LoginResult Login(string username, string password);
+        IntegrationLib.LoginResult Login(string username, string password);
 
         /// <summary>
         /// Logins user.
@@ -360,7 +329,7 @@ namespace Client
         /// <param name="authHeaders">Authentication headers.</param>
         /// <param name="allowEmptyPasswords">Indicates if empty passwords should be allowed.</param>
         /// <returns>>Login result.</returns>
-        LoginResult Login(Dictionary<string, object> authHeaders, bool allowEmptyPasswords);
+        IntegrationLib.LoginResult Login(Dictionary<string, object> authHeaders, bool allowEmptyPasswords);
 
         /// <summary>
         /// Logs out current user asynchronously.
@@ -384,7 +353,7 @@ namespace Client
         /// </summary>
         /// <param name="message">Message.</param>
         /// <param name="category">Message category.</param>
-        void LogAdd(string message, LogCategories category);
+        void LogAdd(string message, LogCategory category);
 
         /// <summary>
         /// Adds a error message to log.
@@ -392,7 +361,7 @@ namespace Client
         /// <param name="message">Message.</param>
         /// <param name="ex">Exception.</param>
         /// <param name="category">Message category.</param>
-        void LogAddError(string message, Exception ex, LogCategories category);
+        void LogAddError(string message, Exception ex, LogCategory category);
 
         #endregion
 

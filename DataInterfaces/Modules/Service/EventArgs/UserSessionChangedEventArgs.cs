@@ -1,5 +1,4 @@
-﻿using SharedLib;
-using System;
+﻿using System;
 using System.Runtime.Serialization;
 
 namespace ServerService
@@ -20,7 +19,7 @@ namespace ServerService
         /// <param name="slot">Slot.</param>
         /// <param name="state">State.</param>
         /// <param name="span">Span.</param>
-        public UserSessionChangedEventArgs(int userId, int hostId, int slot, SessionState state, double span) : base(userId)
+        public UserSessionChangedEventArgs(int userId, int hostId, int slot, Gizmo.Web.Api.Models.UserSessionState state, double span) : base(userId)
         {
             State = state;
             Span = span;
@@ -35,7 +34,7 @@ namespace ServerService
         /// Gets new state.
         /// </summary>
         [DataMember()]
-        public SessionState State
+        public Gizmo.Web.Api.Models.UserSessionState State
         {
             get; protected set;
         }

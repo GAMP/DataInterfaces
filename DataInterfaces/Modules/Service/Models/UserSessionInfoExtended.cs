@@ -137,7 +137,7 @@ namespace ServerService
         /// Gets or sets session state.
         /// </summary>
         [DataMember()]
-        public SessionState SessionState
+        public Gizmo.Web.Api.Models.UserSessionState SessionState
         {
             get;
             set;

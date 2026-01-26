@@ -1,4 +1,5 @@
 ﻿using System;
+using Gizmo.Web.Api.Models;
 
 namespace SharedLib.Logging
 {
@@ -20,7 +21,7 @@ namespace SharedLib.Logging
         /// </summary>
         /// <param name="message">String message.</param>
         /// <param name="category">Log category.</param>
-        void LogAdd(string message, LogCategories category);
+        void LogAdd(string message, LogCategory category);
 
         /// <summary>
         /// Adds message to the log.
@@ -28,7 +29,7 @@ namespace SharedLib.Logging
         /// <param name="messgae">String message.</param>
         /// <param name="ex">Exception.</param>
         /// <param name="category">Log category.</param>
-        void LogAddError(string messgae, Exception ex, LogCategories category); 
+        void LogAddError(string messgae, Exception ex, LogCategory category); 
 
         #endregion
     }

@@ -42,7 +42,7 @@ namespace ServerService.Web.Api.Controllers.Models
         /// </summary>
         [DataMember()]
         [ProtoMember(3)]
-        public SessionState State
+        public Gizmo.Web.Api.Models.UserSessionState State
         {
             get;
             set;

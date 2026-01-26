@@ -1,4 +1,5 @@
 ﻿using System;
+using Gizmo.Web.Api.Models;
 
 namespace SharedLib
 {
@@ -143,7 +144,7 @@ namespace SharedLib
         /// <param name="endpoint">Endpoint.</param>
         /// <param name="type">Event type.</param>
         /// <param name="exception">Exception.</param>
-        public MessageLogEventArgs(string message, string endpoint, EventTypes type, Exception exception) :
+        public MessageLogEventArgs(string message, string endpoint, LogMessageType type, Exception exception) :
             this(message)
         {
             Endpoint = endpoint;
@@ -177,7 +178,7 @@ namespace SharedLib
         /// <summary>
         /// Gets event type.
         /// </summary>
-        public EventTypes EventType
+        public LogMessageType EventType
         {
             get;
             private set;

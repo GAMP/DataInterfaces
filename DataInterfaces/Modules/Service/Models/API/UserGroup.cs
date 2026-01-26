@@ -78,7 +78,7 @@ namespace ServerService.Web.Api.Controllers.Models
         /// </summary>
         [DataMember()]
         [ProtoMember(6)]
-        public UserInfoTypes RequiredUserInfo
+        public Gizmo.Web.Api.Models.UserInfoTypes RequiredUserInfo
         {
             get;
             set;

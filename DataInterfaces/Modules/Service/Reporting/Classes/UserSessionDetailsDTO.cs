@@ -63,7 +63,7 @@ namespace ServerService.Reporting
         /// The state of the session.
         /// </summary>
         [DataMember]
-        public SessionState State { get; set; }
+        public Gizmo.Web.Api.Models.UserSessionState State { get; set; }
 
     }
 }

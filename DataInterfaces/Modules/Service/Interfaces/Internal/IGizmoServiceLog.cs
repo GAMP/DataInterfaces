@@ -1,4 +1,4 @@
-﻿using SharedLib;
+﻿using Gizmo.Web.Api.Models;
 using System;
 
 namespace ServerService
@@ -16,28 +16,28 @@ namespace ServerService
         /// <param name="message">Message.</param>
         /// <param name="category">Category.</param>
         /// <param name="logType">Type.</param>
-        void LogAdd(string message, LogCategories category, EventTypes logType);
+        void LogAdd(string message, LogCategory category, LogMessageType logType);
 
         /// <summary>
         /// Adds information message.
         /// </summary>
         /// <param name="message">Message.</param>
         /// <param name="category">Category.</param>
-        void LogAddInformation(string message, LogCategories category);
+        void LogAddInformation(string message, LogMessageType category);
 
         /// <summary>
         /// Adds warning message.
         /// </summary>
         /// <param name="message">Message.</param>
         /// <param name="category">Category.</param>
-        void LogAddWarning(string message, LogCategories category);
+        void LogAddWarning(string message, LogCategory category);
 
         /// <summary>
         /// Adds event message.
         /// </summary>
         /// <param name="message">Message.</param>
         /// <param name="category">Category.</param>
-        void LogAddEvent(string message, LogCategories category);
+        void LogAddEvent(string message, LogCategory category);
 
         /// <summary>
         /// Adds error message.
@@ -45,14 +45,14 @@ namespace ServerService
         /// <param name="message">Message.</param>
         /// <param name="ex">Exception.</param>
         /// <param name="category">Category.</param>
-        void LogAddError(string message, Exception ex, LogCategories category);
+        void LogAddError(string message, Exception ex, LogCategory category);
 
         /// <summary>
         /// Adds log message.
         /// </summary>
         /// <param name="message">Message.</param>
         /// <param name="category">Category.</param>
-        void LogAddError(string message, LogCategories category);
+        void LogAddError(string message, LogCategory category);
 
         /// <summary>
         /// Removes all log entries from date time specified by <paramref name="time"/> parameter.

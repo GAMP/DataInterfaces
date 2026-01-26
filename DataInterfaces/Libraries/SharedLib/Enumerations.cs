@@ -695,25 +695,7 @@ namespace SharedLib
         [Localized("FILTER_BOTTOM")]
         Bottom,
     }
-    #endregion    
-
-    #region LICENSERESERVATIONTYPE
-    /// <summary>
-    /// License reservation types.
-    /// </summary>
-    [Flags]
-    public enum LicenseReservationType
-    {
-        /// <summary>
-        /// First available.
-        /// </summary>
-        FirstAvailable = 0,
-        /// <summary>
-        /// One from each.
-        /// </summary>
-        OneFromEach = 1,
-    }
-    #endregion
+    #endregion        
 
     #region LICENSESTATUS
     /// <summary>
@@ -1558,31 +1540,6 @@ namespace SharedLib
     }
     #endregion
 
-    #region REGISTRATIONVERIFICATIONMETHOD
-    /// <summary>
-    /// Registration verification methods.
-    /// </summary>
-    [Flags()]
-    public enum RegistrationVerificationMethod
-    {
-        /// <summary>
-        /// No verification.
-        /// </summary>
-        [Localized("REGISTER_VERIFICATION_METHOD_NONE")]
-        None = 0,
-        /// <summary>
-        /// Email verification.
-        /// </summary>
-        [Localized("REGISTER_VERIFICATION_METHOD_EMAIL_ADDRESS")]
-        Email = 1,
-        /// <summary>
-        /// Mobile phone verification.
-        /// </summary>
-        [Localized("REGISTER_VERIFICATION_METHOD_MOBILE_PHONE")]
-        MobilePhone = 2,
-    }
-    #endregion
-
     #region GLOBALTAXSYSTEMS
     /// <summary>
     /// Global tax system codes.
@@ -1888,266 +1845,46 @@ namespace SharedLib
         TargetDifferentProduct = 8,
     }
     #endregion
-        
 
-    #region STORABLE ENUMERATIONS
-
-    #region LOGCATEGORIES
+    #region PERIODOPTIONTYPE
     /// <summary>
-    /// Log categories.
+    /// Period options.
     /// </summary>
     [Flags()]
-    [Serializable()]
-    public enum LogCategories
+    public enum PeriodOptionType
     {
         /// <summary>
         /// None.
         /// </summary>
         None = 0,
         /// <summary>
-        /// Generic.
+        /// Has day time range.
         /// </summary>
-        Generic = 1,
+        HasDayTimeRange = 1,
         /// <summary>
-        /// Network.
+        /// Has date range.
         /// </summary>
-        Network = 2,
-        /// <summary>
-        /// Database.
-        /// </summary>
-        Database = 4,
-        /// <summary>
-        /// File system.
-        /// </summary>
-        FileSystem = 8,
-        /// <summary>
-        /// Task.
-        /// </summary>
-        Task = 16,
-        /// <summary>
-        /// Dispatcher.
-        /// </summary>
-        Dispatcher = 32,
-        /// <summary>
-        /// Command.
-        /// </summary>
-        Command = 64,
-        /// <summary>
-        /// Operation.
-        /// </summary>
-        Operation = 128,
-        /// <summary>
-        /// User interface.
-        /// </summary>
-        UserInterface = 256,
-        /// <summary>
-        /// Configuration.
-        /// </summary>
-        Configuration = 512,
-        /// <summary>
-        /// Subscription.
-        /// </summary>
-        Subscription = 1024,
-        /// <summary>
-        /// Trace.
-        /// </summary>
-        Trace = 2048,
-        /// <summary>
-        /// User.
-        /// </summary>
-        User = 4096,
-        /// <summary>
-        /// All.
-        /// </summary>
-        All = Generic | Network | Database | FileSystem | Task | Dispatcher | Command | Operation | UserInterface | Configuration | Subscription | Trace | User
+        HasDateRange = 2,
     }
     #endregion
 
-    #region EVENTTYPES
+    #region PERSONALUSERFILETYPE
     /// <summary>
-    /// Event Log types representation.
+    /// Personal user file types.
     /// </summary>
-    [Flags()]
-    [Serializable()]
-    public enum EventTypes
+    public enum PersonalUserFileType
     {
         /// <summary>
-        /// None.
+        /// File or directory.
         /// </summary>
-        None = 0,
+        File = 0,
         /// <summary>
-        /// Information.
+        /// Registry.
         /// </summary>
-        Information = 1,
-        /// <summary>
-        /// Warning.
-        /// </summary>
-        Warning = 2,
-        /// <summary>
-        /// Error.
-        /// </summary>
-        Error = 4,
-        /// <summary>
-        /// Event.
-        /// </summary>
-        Event = 8,
-        /// <summary>
-        /// All.
-        /// </summary>
-        All = Information | Warning | Error | Event
+        Registry = 1,
     }
+
     #endregion
-
-    #region USERINFOTYPES
-    /// <summary>
-    /// User personal information types.
-    /// </summary>
-    [Flags()]
-    public enum UserInfoTypes
-    {
-        /// <summary>
-        /// No information.
-        /// </summary>
-        None = 0,
-        /// <summary>
-        /// First Name.
-        /// </summary>
-        FirstName = 1,
-        /// <summary>
-        /// Last Name.
-        /// </summary>
-        LastName = 2,
-        /// <summary>
-        /// Birth date.
-        /// </summary>
-        BirthDate = 4,
-        /// <summary>
-        /// Address.
-        /// </summary>
-        Address = 8,
-        /// <summary>
-        /// City.
-        /// </summary>            
-        City = 16,
-        /// <summary>
-        /// Postal Code. Zip for United States.
-        /// </summary>
-        PostCode = 32,
-        /// <summary>
-        /// State.
-        /// </summary>
-        State = 64,
-        /// <summary>
-        /// Country.
-        /// </summary>
-        Country = 128,
-        /// <summary>
-        /// Email Address.
-        /// </summary>
-        Email = 256,
-        /// <summary>
-        /// Landline Phone Number.
-        /// </summary>
-        Phone = 512,
-        /// <summary>
-        /// Mobile Phone Number.
-        /// </summary>
-        Mobile = 1024,
-        /// <summary>
-        /// Users sex.
-        /// </summary>
-        Sex = 2048,
-        /// <summary>
-        /// Users password.
-        /// </summary>
-        Password = 4096,
-        /// <summary>
-        /// User Name.
-        /// </summary>
-        UserName = 8192,
-        /// <summary>
-        /// User group.
-        /// </summary>
-        UserGroup = 16384,
-        /// <summary>
-        /// All user information.
-        /// </summary>
-        UserInformation = UserInfoTypes.Address |
-            UserInfoTypes.City |
-            UserInfoTypes.Email |
-            UserInfoTypes.Email |
-            UserInfoTypes.FirstName |
-            UserInfoTypes.LastName |
-            UserInfoTypes.Mobile |
-            UserInfoTypes.Phone |
-            UserInfoTypes.PostCode |
-            UserInfoTypes.Sex,
-    }
-    #endregion    
-
-    #region USERSESSIONSTATE
-    /// <summary>
-    /// User session states.
-    /// </summary>
-    [Flags()]
-    public enum SessionState
-    {
-        /// <summary>
-        /// Session initialized.
-        /// </summary>
-        None = 0,
-        /// <summary>
-        /// Session is active.
-        /// </summary>
-        Active = 1,
-        /// <summary>
-        /// Session ended.
-        /// </summary>
-        Ended = 2,
-        /// <summary>
-        /// Session pending termination.
-        /// </summary>
-        Pending = 4 | Active,
-        /// <summary>
-        /// Session paused and pending activation.
-        /// </summary>
-        Paused = 8 | Active,
-        /// <summary>
-        /// Session is moving.
-        /// </summary>
-        Move = 16 | Active,
-        /// <summary>
-        /// Grace period.
-        /// </summary>
-        Grace = 32 | Active
-    }
-    #endregion
-
-    #region GROUPOVERRIDES
-    /// <summary>
-    /// Computer group configuration overrides.
-    /// </summary>
-    [Flags()]
-    public enum GroupOverrides
-    {
-        /// <summary>
-        /// None.
-        /// </summary>
-        None = 0,
-        /// <summary>
-        /// Applications.
-        /// </summary>
-        Applications = 1,
-        /// <summary>
-        /// Security.
-        /// </summary>
-        Security = 2,
-        /// <summary>
-        /// Age rating.
-        /// </summary>
-        AgeRating = 4,
-    }
-    #endregion   
 
     #region DEPLOYOPTIONTYPE
     /// <summary>
@@ -2183,70 +1920,60 @@ namespace SharedLib
     }
     #endregion
 
-    #region PERSONALUSERFILETYPE
+    #region GROUPOVERRIDES
     /// <summary>
-    /// Personal user file types.
-    /// </summary>
-    public enum PersonalUserFileType
-    {
-        /// <summary>
-        /// File or directory.
-        /// </summary>
-        File = 0,
-        /// <summary>
-        /// Registry.
-        /// </summary>
-        Registry = 1,
-    }
-
-    #endregion
-
-    #region EXECUTABLEOPTIONTYPE
-    /// <summary>
-    /// Executable options.
+    /// Computer group configuration overrides.
     /// </summary>
     [Flags()]
-    public enum ExecutableOptionType
+    public enum GroupOverrides
     {
         /// <summary>
         /// None.
         /// </summary>
         None = 0,
         /// <summary>
-        /// Auto launch.
+        /// Applications.
         /// </summary>
-        AutoLaunch = 1,
+        Applications = 1,
         /// <summary>
-        /// Monitor children.
+        /// Security.
         /// </summary>
-        MonitorChildren = 2,
+        Security = 2,
         /// <summary>
-        /// Multi run.
+        /// Age rating.
         /// </summary>
-        MultiRun = 4,
-        /// <summary>
-        /// Kill children.
-        /// </summary>
-        KillChildren = 8,
-        /// <summary>
-        /// Count all instances.
-        /// </summary>
-        [Obsolete("We dont use this anywhere")]
-        CountAllInstances = 16,
-        /// <summary>
-        /// Quick launch.
-        /// </summary>
-        QuickLaunch = 32,
-        /// <summary>
-        /// Shell execute.
-        /// </summary>
-        ShellExecute = 64,
-        /// <summary>
-        /// Ignore concurrent execution limit.
-        /// </summary>
-        IgnoreConcurrentExecutionLimit = 128,
+        AgeRating = 4,
     }
-    #endregion       
+    #endregion   
+
+    #region PRODUCTTIMEUSAGEOPTIONTYPE
+    /// <summary>
+    /// Product time usage options.
+    /// </summary>
+    [Flags()]
+    public enum ProductTimeUsageOptionType
+    {
+        /// <summary>
+        /// None.
+        /// </summary>
+        None = 0,
+        /// <summary>
+        /// Maximum usage.
+        /// </summary>
+        HasMaximumUsage = 1,
+        /// <summary>
+        /// Maximum daily usage.
+        /// </summary>
+        HasMaximumDailyUsage = 2,
+        /// <summary>
+        /// Reservation.
+        /// </summary>
+        /// <remarks>
+        /// Indicates that product can be used for reservations.
+        /// </remarks>
+        Reservation = 4,
+    }
+    #endregion
 
     #region USERGROUPOPTIONTYPE
     /// <summary>
@@ -2288,60 +2015,7 @@ namespace SharedLib
         /// </summary>
         DisallowLoginFromManager = 64,
     }
-    #endregion
-
-    #region PERIODOPTIONTYPE
-    /// <summary>
-    /// Period options.
-    /// </summary>
-    [Flags()]
-    public enum PeriodOptionType
-    {
-        /// <summary>
-        /// None.
-        /// </summary>
-        None = 0,
-        /// <summary>
-        /// Has day time range.
-        /// </summary>
-        HasDayTimeRange = 1,
-        /// <summary>
-        /// Has date range.
-        /// </summary>
-        HasDateRange = 2,
-    }
-    #endregion
- 
-    #region PRODUCTTIMEUSAGEOPTIONTYPE
-    /// <summary>
-    /// Product time usage options.
-    /// </summary>
-    [Flags()]
-    public enum ProductTimeUsageOptionType
-    {
-        /// <summary>
-        /// None.
-        /// </summary>
-        None = 0,
-        /// <summary>
-        /// Maximum usage.
-        /// </summary>
-        HasMaximumUsage = 1,
-        /// <summary>
-        /// Maximum daily usage.
-        /// </summary>
-        HasMaximumDailyUsage = 2,
-        /// <summary>
-        /// Reservation.
-        /// </summary>
-        /// <remarks>
-        /// Indicates that product can be used for reservations.
-        /// </remarks>
-        Reservation = 4,
-    }
-    #endregion
-
-
+    #endregion          
 
     #region SCRIPTTYPES
     /// <summary>
@@ -2374,7 +2048,23 @@ namespace SharedLib
         [Description("Registry")]
         RegistryScript,
     }
-    #endregion   
+    #endregion
 
-    #endregion      
+    #region LICENSERESERVATIONTYPE
+    /// <summary>
+    /// License reservation types.
+    /// </summary>
+    [Flags]
+    public enum LicenseReservationType
+    {
+        /// <summary>
+        /// First available.
+        /// </summary>
+        FirstAvailable = 0,
+        /// <summary>
+        /// One from each.
+        /// </summary>
+        OneFromEach = 1,
+    }
+    #endregion
 }

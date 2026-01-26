@@ -1,5 +1,4 @@
-﻿using SharedLib;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -28,7 +27,7 @@ namespace IntegrationLib
         /// </summary>
         /// <param name="result">Result.</param>
         /// <param name="identity">Identity.</param>
-        public AuthResult(LoginResult result, IUserIdentity identity) : this(result, identity, UserInfoTypes.None)
+        public AuthResult(LoginResult result, IUserIdentity identity) : this(result, identity, Gizmo.Web.Api.Models.UserInfoTypes.None)
         {
         }
 
@@ -38,7 +37,7 @@ namespace IntegrationLib
         /// <param name="result">Result.</param>
         /// <param name="identity">Identity.</param>
         /// <param name="requiredInfo">Required user info flags.</param>
-        public AuthResult(LoginResult result, IUserIdentity identity, UserInfoTypes requiredInfo)
+        public AuthResult(LoginResult result, IUserIdentity identity, Gizmo.Web.Api.Models.UserInfoTypes requiredInfo)
         {
             Identity = identity;
             Result = result;
@@ -79,7 +78,7 @@ namespace IntegrationLib
         /// Gets or sets user info required after authentication.
         /// </summary>
         [DataMember()]
-        public UserInfoTypes RequiredInfo
+        public Gizmo.Web.Api.Models.UserInfoTypes RequiredInfo
         {
             get;
             set;
@@ -112,7 +111,7 @@ namespace IntegrationLib
 
             //get base members
             Result = (LoginResult)info.GetValue(nameof(Result), typeof(LoginResult));
-            RequiredInfo = (UserInfoTypes)info.GetValue(nameof(RequiredInfo), typeof(UserInfoTypes));
+            RequiredInfo = (Gizmo.Web.Api.Models.UserInfoTypes)info.GetValue(nameof(RequiredInfo), typeof(Gizmo.Web.Api.Models.UserInfoTypes));
             Custom = (Dictionary<string, object>)info.GetValue(nameof(Custom), typeof(Dictionary<string, object>));
 
             if (info.MemberCount < 5)

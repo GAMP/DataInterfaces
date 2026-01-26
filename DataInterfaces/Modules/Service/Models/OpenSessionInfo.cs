@@ -60,7 +60,7 @@ namespace ServerService
         /// </summary>
         [DataMember()]
         [ProtoMember(5)]
-        public SessionState State
+        public Gizmo.Web.Api.Models.UserSessionState State
         {
             get; set;
         }

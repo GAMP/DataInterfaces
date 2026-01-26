@@ -23,7 +23,7 @@ namespace IntegrationLib
         /// <summary>
         /// Gets required info.
         /// </summary>
-        UserInfoTypes RequiredInfo { get; set; }
+        Gizmo.Web.Api.Models.UserInfoTypes RequiredInfo { get; set; }
 
         /// <summary>
         /// Gets result.
