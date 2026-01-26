@@ -33,7 +33,7 @@ namespace ServerService.Reporting
         /// Order status.
         /// </summary>
         [DataMember]
-        public OrderStatus OrderStatus { get; set; }
+        public Gizmo.Web.Api.Models.OrderStatus OrderStatus { get; set; }
 
         /// <summary>
         /// Order source name.

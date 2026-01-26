@@ -50,7 +50,7 @@ namespace ServerService
         /// Order status.
         /// </summary>
         [ProtoMember(4)]
-        public OrderStatus Status
+        public Gizmo.Web.Api.Models.OrderStatus Status
         {
             get;set;
         }

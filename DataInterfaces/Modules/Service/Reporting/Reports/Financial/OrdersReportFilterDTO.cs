@@ -21,7 +21,7 @@ namespace ServerService.Reporting.Reports.Financial
         /// Filter Order Status.
         /// </summary>
         [DataMember]
-        public OrderStatus? OrderStatus { get; set; }
+        public Gizmo.Web.Api.Models.OrderStatus? OrderStatus { get; set; }
 
         /// <summary>
         /// Filter Operator Id.

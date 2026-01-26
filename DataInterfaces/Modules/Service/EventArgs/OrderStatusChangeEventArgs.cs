@@ -1,5 +1,4 @@
-﻿using SharedLib;
-using System;
+﻿using System;
 using System.Runtime.Serialization;
 
 namespace ServerService
@@ -21,8 +20,8 @@ namespace ServerService
         /// <param name="oldStatus">Old status.</param>
         public OrderStatusChangeEventArgs(int userId,
             int orderId,
-            OrderStatus newStatus,
-            OrderStatus? oldStatus) : base(userId, orderId)
+            Gizmo.Web.Api.Models.OrderStatus newStatus,
+            Gizmo.Web.Api.Models.OrderStatus? oldStatus) : base(userId, orderId)
         {
             OrderId = orderId;
             NewStatus = newStatus;
@@ -36,7 +35,7 @@ namespace ServerService
         /// Gets new status.
         /// </summary>
         [DataMember()]
-        public OrderStatus NewStatus
+        public Gizmo.Web.Api.Models.OrderStatus NewStatus
         {
             get; set;
         }
@@ -45,7 +44,7 @@ namespace ServerService
         /// Gets old status.
         /// </summary>
         [DataMember()]
-        public OrderStatus? OldStatus
+        public Gizmo.Web.Api.Models.OrderStatus? OldStatus
         {
             get; set;
         }
