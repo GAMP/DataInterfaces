@@ -1,5 +1,4 @@
 ﻿using ProtoBuf;
-using SharedLib;
 using System;
 using System.Runtime.Serialization;
 
@@ -20,7 +19,7 @@ namespace ServerService.Web.Api.Controllers.Models
         /// </summary>
         [DataMember()]
         [ProtoMember(1)]
-        public LoyalityPointsTransactionType Type
+        public Gizmo.Web.Api.Models.PointsTransactionType Type
         {
             get;
             set;

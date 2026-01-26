@@ -41,7 +41,7 @@ namespace ServerService.Web.Api.Controllers.Models
         /// Transaction type.
         /// </summary>
         [DataMember()]
-        public SharedLib.LoyalityPointsTransactionType Type
+        public Gizmo.Web.Api.Models.PointsTransactionType Type
         {
             get;set;
         }

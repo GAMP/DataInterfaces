@@ -1,5 +1,4 @@
-﻿using SharedLib;
-using System;
+﻿using System;
 using System.Runtime.Serialization;
 
 namespace ServerService.Reporting
@@ -51,7 +50,7 @@ namespace ServerService.Reporting
         /// Refunded status of the invoice payment.
         /// </summary>
         [DataMember]
-        public RefundStatus RefundStatus { get; set; }
+        public Gizmo.Web.Api.Models.RefundStatus RefundStatus { get; set; }
 
         /// <summary>
         /// Refund method Id of the invoice payment.

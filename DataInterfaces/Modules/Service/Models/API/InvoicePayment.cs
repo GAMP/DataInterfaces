@@ -1,5 +1,4 @@
 ﻿using ProtoBuf;
-using SharedLib;
 using System;
 using System.Runtime.Serialization;
 
@@ -82,7 +81,7 @@ namespace ServerService.Web.Api.Controllers.Models
         /// </summary>
         [DataMember()]
         [ProtoMember(8)]
-        public RefundStatus RefundStatus
+        public Gizmo.Web.Api.Models.RefundStatus RefundStatus
         {
             get; set;
         }

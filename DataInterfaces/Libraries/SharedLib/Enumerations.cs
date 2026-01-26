@@ -2425,34 +2425,6 @@ namespace SharedLib
     }
     #endregion
 
-    #region LOYALITYPOINTSTRANSACTIONTYPE
-    /// <summary>
-    /// Loyality points transaction type.
-    /// </summary>
-    public enum LoyalityPointsTransactionType
-    {
-        /// <summary>
-        /// Points award.
-        /// </summary>
-        Award = 0,
-        /// <summary>
-        /// Points redeem.
-        /// </summary>
-        Redeem = 1,
-        /// <summary>
-        /// Points set.
-        /// </summary>
-        Set = 2,
-        /// <summary>
-        /// Points credited.
-        /// </summary>
-        Credit = 3,
-        /// <summary>
-        /// Points return transaction.
-        /// </summary>
-        Remove = 4,
-    }
-    #endregion
 
     #region STOCKTRANSACTIONTYPE
     /// <summary>
@@ -2521,30 +2493,7 @@ namespace SharedLib
     }
     #endregion 
 
-    #region REFUNDSTATUS
-    /// <summary>
-    /// Refund status.
-    /// </summary>
-    public enum RefundStatus
-    {
-        /// <summary>
-        /// None.
-        /// </summary>
-        [Localized("REFUND_STATUS_NONE")]
-        None,
-        /// <summary>
-        /// Partial.
-        /// </summary>
-        [Localized("REFUND_STATUS_PARTIAL")]
-        Partial,
-        /// <summary>
-        /// Full.
-        /// </summary>
-        [Localized("REFUND_STATUS_FULL")]
-        Full,
-    }
-    #endregion
-
+  
 
     #endregion      
 }
