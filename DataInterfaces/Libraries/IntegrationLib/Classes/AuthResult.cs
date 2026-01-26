@@ -8,7 +8,6 @@ namespace IntegrationLib
     /// <summary>
     /// Authentication result.
     /// </summary>
-    [DataContract()]
     [Serializable()]
     public class AuthResult : IAuthResult, ISerializable
     {
@@ -47,9 +46,9 @@ namespace IntegrationLib
         #endregion
 
         #region FIELDS
-        private Dictionary<string, object> custom;
+        private Dictionary<string, object> _custom;
         [NonSerialized()]
-        private IUserIdentity idenity;
+        private IUserIdentity _identity;
         #endregion
 
         #region PROPERTIES
@@ -60,8 +59,8 @@ namespace IntegrationLib
         [DataMember()]
         public IUserIdentity Identity
         {
-            get { return idenity; }
-            set { idenity = value; }
+            get { return _identity; }
+            set { _identity = value; }
         }
 
         /// <summary>
@@ -93,11 +92,11 @@ namespace IntegrationLib
         {
             get
             {
-                if (custom == null)
-                    custom = new Dictionary<string, object>();
-                return custom;
+                if (_custom == null)
+                    _custom = new Dictionary<string, object>();
+                return _custom;
             }
-            protected set { custom = value; }
+            protected set { _custom = value; }
         }
 
         #endregion
@@ -117,8 +116,8 @@ namespace IntegrationLib
             if (info.MemberCount < 5)
                 return;
 
-            //check if result is sucessfull
-            //if not we dont need to read any idenity properties to the serialization context
+            //check if result is successful
+            //if not we don't need to read any identity properties to the serialization context
             if (Result != LoginResult.Success)
                 return;
 
@@ -143,8 +142,8 @@ namespace IntegrationLib
             info.AddValue(nameof(RequiredInfo), RequiredInfo);
             info.AddValue(nameof(Custom), Custom);
 
-            //check if result is sucessfull
-            //if not we dont need to add any idenity properties to the serialization context
+            //check if result is successful
+            //if not we don't need to add any identity properties to the serialization context
             if (Result != LoginResult.Success || Identity == null)
                 return;
 
@@ -159,7 +158,7 @@ namespace IntegrationLib
 
         #region SerializableClaim
         [Serializable()]
-        public class SerializableClaim
+        public sealed class SerializableClaim
         {
             #region CONSTRUCTOR
 
@@ -179,8 +178,8 @@ namespace IntegrationLib
 
             #region FIELDS
 
-            string claimType;
-            string claimValue;
+            string _claimType;
+            string _claimValue;
 
             #endregion
 
@@ -188,14 +187,14 @@ namespace IntegrationLib
 
             public string Type
             {
-                get { return claimValue; }
-                protected set { claimValue = value; }
+                get { return _claimValue; }
+                protected set { _claimValue = value; }
             }
 
             public string Value
             {
-                get { return claimType; }
-                protected set { claimType = value; }
+                get { return _claimType; }
+                protected set { _claimType = value; }
             }
 
             #endregion
