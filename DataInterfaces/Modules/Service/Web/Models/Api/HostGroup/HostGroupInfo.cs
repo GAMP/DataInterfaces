@@ -44,7 +44,7 @@ namespace ServerService.Web.Api.Controllers.Models
         /// Options.
         /// </summary>
         [DataMember()]
-        public HostGroupOptionType Options
+        public Gizmo.Web.Api.Models.HostGroupOptionType Options
         {
             get;
             set;

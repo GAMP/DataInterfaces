@@ -20,7 +20,7 @@ namespace ServerService.Web.Api.Controllers.Models
         /// </summary>
         [DataMember()]
         [ProtoMember(1)]
-        public DepositTransactionType Type
+        public Gizmo.Web.Api.Models.DepositTransactionType Type
         {
             get;
             set;

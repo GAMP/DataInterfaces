@@ -99,7 +99,7 @@ namespace ServerService
         /// </summary>
         [DataMember()]
         [ProtoMember(9)]
-        public DepositTransactionType CurrentTransactionType
+        public Gizmo.Web.Api.Models.DepositTransactionType CurrentTransactionType
         {
             get;set;
         }
@@ -109,7 +109,7 @@ namespace ServerService
         /// </summary>
         [DataMember()]
         [ProtoMember(10)]
-        public DepositTransactionType? PreviousTransactionType
+        public Gizmo.Web.Api.Models.DepositTransactionType? PreviousTransactionType
         {
             get; set;
         }

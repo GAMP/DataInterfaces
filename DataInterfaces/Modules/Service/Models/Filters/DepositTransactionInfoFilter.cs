@@ -1,5 +1,4 @@
-﻿using SharedLib;
-using System;
+﻿using System;
 using System.Runtime.Serialization;
 
 namespace ServerService
@@ -17,7 +16,7 @@ namespace ServerService
         /// Deposit transaction type.
         /// </summary>
         [DataMember()]
-        public DepositTransactionType? Type
+        public Gizmo.Web.Api.Models.DepositTransactionType? Type
         {
             get; set;
         }
