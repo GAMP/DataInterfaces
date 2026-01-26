@@ -1710,6 +1710,155 @@ namespace SharedLib
     }
     #endregion
 
+    #region RUNMODES
+    /// <summary>
+    /// Run mode enumeration.
+    /// </summary>
+    public enum RunMode
+    {
+        /// <summary>
+        /// Full screen.
+        /// </summary>
+        [Localized("RUN_MODE_FULL_SCREEN")]
+        FullScreen = 0,
+        /// <summary>
+        /// Minimized.
+        /// </summary>
+        [Localized("RUN_MODE_MINIMIZED")]
+        Minimized = 1,
+        /// <summary>
+        /// Maximized.
+        /// </summary>
+        [Localized("RUN_MODE_MAXIMIZED")]
+        Maximized = 2,
+        /// <summary>
+        /// Hidden.
+        /// </summary>
+        [Localized("RUN_MODE_HIDDEN")]
+        Hidden = 3,
+        /// <summary>
+        /// Normal.
+        /// </summary>
+        [Localized("RUN_MODE_NORMAL")]
+        Normal = 4
+    }
+    #endregion
+
+    #region APPLICATIONMODES
+    /// <summary>
+    /// Game application modes.
+    /// </summary>
+    [Flags()]
+    public enum ApplicationModes
+    {
+        /// <summary>
+        /// None.
+        /// </summary>
+        DefaultMode = 0,
+        /// <summary>
+        /// Single player.
+        /// </summary>
+        SinglePlayer = 1,
+        /// <summary>
+        /// Online multiplayer.
+        /// </summary>
+        [IsGameModeAttibute()]
+        Online = 2,
+        /// <summary>
+        /// Lan Multiplayer.
+        /// </summary>
+        [IsGameModeAttibute()]
+        Multiplayer = 4,
+        /// <summary>
+        /// Settings.
+        /// </summary>
+        Settings = 8,
+        /// <summary>
+        /// Utility.
+        /// </summary>
+        Utility = 16,
+        /// <summary>
+        /// Game.
+        /// </summary>
+        Game = 32,
+        /// <summary>
+        /// Application.
+        /// </summary>
+        Application = 64,
+        /// <summary>
+        /// Free to play.
+        /// </summary>
+        FreeToPlay = 128,
+        /// <summary>
+        /// Requires subscription.
+        /// </summary>
+        RequiresSubscription = 256,
+        /// <summary>
+        /// Free trial.
+        /// </summary>
+        FreeTrial = 512,
+        /// <summary>
+        /// Split screen.
+        /// </summary>
+        [IsGameModeAttibute()]
+        SplitScreenMultiPlayer = 1024,
+        /// <summary>
+        /// Lan co-op.
+        /// </summary>
+        [IsGameModeAttibute()]
+        CoOpLan = 2048,
+        /// <summary>
+        /// Online co-op.
+        /// </summary>
+        [IsGameModeAttibute()]
+        CoOpOnline = 4096,
+        /// <summary>
+        /// One time purchase.
+        /// </summary>
+        OneTimePurchase = 8192,
+    }
+    #endregion
+
+    #region HOSTSTATE
+    /// <summary>
+    /// Host state.
+    /// </summary>
+    [Flags()]
+    public enum HostState
+    {
+        /// <summary>
+        /// Default state.
+        /// </summary>
+        InOrder = 0,
+        /// <summary>
+        /// Host is out of order.
+        /// </summary>
+        OutOfOrder = 1,
+        /// <summary>
+        /// Host is locked.
+        /// </summary>
+        IsLocked = 2,
+    }
+    #endregion
+
+    #region BUNDLESTOCKOPTIONTYPE
+    /// <summary>
+    /// Bundle stock options.
+    /// </summary>
+    [Flags()]
+    public enum BundleStockOptionType
+    {
+        /// <summary>
+        /// By default bundled products stock will be counted
+        /// </summary>
+        None = 0,
+        /// <summary>
+        /// Bundle has its own stock control.
+        /// </summary>
+        SelfStockCount = 1
+    }
+    #endregion
+
     #region STORABLE ENUMERATIONS
 
     #region LOGCATEGORIES
@@ -2066,116 +2215,7 @@ namespace SharedLib
         /// </summary>
         IgnoreConcurrentExecutionLimit = 128,
     }
-    #endregion
-
-    #region RUNMODES
-    /// <summary>
-    /// Run mode enumeration.
-    /// </summary>
-    public enum RunMode
-    {
-        /// <summary>
-        /// Full screen.
-        /// </summary>
-        [Localized("RUN_MODE_FULL_SCREEN")]
-        FullScreen = 0,
-        /// <summary>
-        /// Minimized.
-        /// </summary>
-        [Localized("RUN_MODE_MINIMIZED")]
-        Minimized = 1,
-        /// <summary>
-        /// Maximized.
-        /// </summary>
-        [Localized("RUN_MODE_MAXIMIZED")]
-        Maximized = 2,
-        /// <summary>
-        /// Hidden.
-        /// </summary>
-        [Localized("RUN_MODE_HIDDEN")]
-        Hidden = 3,
-        /// <summary>
-        /// Normal.
-        /// </summary>
-        [Localized("RUN_MODE_NORMAL")]
-        Normal = 4
-    }
-    #endregion
-
-    #region APPLICATIONMODES
-    /// <summary>
-    /// Game application modes.
-    /// </summary>
-    [Flags()]
-    public enum ApplicationModes
-    {
-        /// <summary>
-        /// None.
-        /// </summary>
-        DefaultMode = 0,
-        /// <summary>
-        /// Single player.
-        /// </summary>
-        SinglePlayer = 1,
-        /// <summary>
-        /// Online multiplayer.
-        /// </summary>
-        [IsGameModeAttibute()]
-        Online = 2,
-        /// <summary>
-        /// Lan Multiplayer.
-        /// </summary>
-        [IsGameModeAttibute()]
-        Multiplayer = 4,
-        /// <summary>
-        /// Settings.
-        /// </summary>
-        Settings = 8,
-        /// <summary>
-        /// Utility.
-        /// </summary>
-        Utility = 16,
-        /// <summary>
-        /// Game.
-        /// </summary>
-        Game = 32,
-        /// <summary>
-        /// Application.
-        /// </summary>
-        Application = 64,
-        /// <summary>
-        /// Free to play.
-        /// </summary>
-        FreeToPlay = 128,
-        /// <summary>
-        /// Requires subscription.
-        /// </summary>
-        RequiresSubscription = 256,
-        /// <summary>
-        /// Free trial.
-        /// </summary>
-        FreeTrial = 512,
-        /// <summary>
-        /// Split screen.
-        /// </summary>
-        [IsGameModeAttibute()]
-        SplitScreenMultiPlayer = 1024,
-        /// <summary>
-        /// Lan co-op.
-        /// </summary>
-        [IsGameModeAttibute()]
-        CoOpLan = 2048,
-        /// <summary>
-        /// Online co-op.
-        /// </summary>
-        [IsGameModeAttibute()]
-        CoOpOnline = 4096,
-        /// <summary>
-        /// One time purchase.
-        /// </summary>
-        OneTimePurchase = 8192,
-    }
-    #endregion
+    #endregion       
 
     #region USERGROUPOPTIONTYPE
     /// <summary>
@@ -2218,29 +2258,6 @@ namespace SharedLib
         DisallowLoginFromManager = 64,
     }
     #endregion
-
-    #region HOSTSTATE
-    /// <summary>
-    /// Host state.
-    /// </summary>
-    [Flags()]
-    public enum HostState
-    {
-        /// <summary>
-        /// Default state.
-        /// </summary>
-        InOrder = 0,
-        /// <summary>
-        /// Host is out of order.
-        /// </summary>
-        OutOfOrder = 1,
-        /// <summary>
-        /// Host is locked.
-        /// </summary>
-        IsLocked = 2,
-    }
-    #endregion
-
 
     #region PERIODOPTIONTYPE
     /// <summary>
@@ -2294,23 +2311,7 @@ namespace SharedLib
     }
     #endregion
 
-    #region BUNDLESTOCKOPTIONTYPE
-    /// <summary>
-    /// Bundle stock options.
-    /// </summary>
-    [Flags()]
-    public enum BundleStockOptionType
-    {
-        /// <summary>
-        /// By default bundled products stock will be counted
-        /// </summary>
-        None = 0,
-        /// <summary>
-        /// Bundle has its own stock control.
-        /// </summary>
-        SelfStockCount = 1
-    }
-    #endregion
+    
 
     #region ORDEROPTIONTYPE
     /// <summary>
@@ -2382,7 +2383,6 @@ namespace SharedLib
         Reservation = 4,
     }
     #endregion
-
 
     #region STOCKTRANSACTIONTYPE
     /// <summary>
