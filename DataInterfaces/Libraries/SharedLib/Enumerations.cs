@@ -568,6 +568,22 @@ namespace SharedLib
         [Description("PEGI")]
         PEGI = 3,
     }
+
+    public static class AgeRatingTypeExtensions
+    {
+        extension(AgeRatingType)
+        {
+            public static AgeRatingType FromAgeRating(int ageRating)
+                => ageRating switch
+                {
+                    > 0 => AgeRatingType.Manual,
+                    < 0 and >= -20 => AgeRatingType.PEGI,
+                    < -20 and >= -40 => AgeRatingType.ESRB,
+                    _ => AgeRatingType.None
+                };
+        }
+    }
+
     #endregion    
 
     #region PEGI
