@@ -689,10 +689,10 @@ namespace SharedLib.Configuration
         /// 0 MySQL 1 MSSQL
         /// </remarks>
         [Category("Database")]
-        [DefaultValue(DatabaseType.MSSQLEXPRESS)]
+        [DefaultValue(Gizmo.DAL.DatabaseType.MSSQLEXPRESS)]
         [Description("Specifies database type.")]
         [DataMember()]
-        public DatabaseType DbType
+        public Gizmo.DAL.DatabaseType DbType
         {
             get;
             set;

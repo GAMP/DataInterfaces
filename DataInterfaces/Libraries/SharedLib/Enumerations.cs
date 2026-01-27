@@ -1072,68 +1072,6 @@ namespace SharedLib
     }
     #endregion
 
-    #region DATABASETYPE
-    /// <summary>
-    /// Database types.
-    /// </summary>
-    public enum DatabaseType
-    {
-        /// <summary>
-        /// MYSQL.
-        /// </summary>
-        [CanUserAssign(false)]
-        MYSQL = 0,
-        /// <summary>
-        /// MSSQL EXPRESS.
-        /// </summary>
-        [CanUserAssign(true)]
-        MSSQLEXPRESS = 2,
-        /// <summary>
-        /// MS SQL.
-        /// </summary>
-        [CanUserAssign(true)]
-        MSSQL = 1,
-        /// <summary>
-        /// LOCAL DB.
-        /// </summary>
-        [CanUserAssign(false)]
-        LOCALDB = 3,
-        /// <summary>
-        /// SQL LITE.
-        /// </summary>
-        [CanUserAssign(false)]
-        SQLITE = 4,
-        /// <summary>
-        /// POSTGRE.
-        /// </summary>
-        [CanUserAssign(true)]
-        POSTGRE = 5,
-    }
-    #endregion
-
-    #region SQLSERVERAUTHENTICATION
-    /// <summary>
-    /// SQL server authentication types.
-    /// </summary>
-    public enum SQLServerAuthentication
-    {
-        /// <summary>
-        /// Unspecified.
-        /// </summary>
-        Unspecified = 0,
-        /// <summary>
-        /// Server.
-        /// </summary>
-        [CanUserAssign(true)]
-        Server = 1,
-        /// <summary>
-        /// Integrated.
-        /// </summary>
-        [CanUserAssign(true)]
-        Integrated = 2,
-    }
-    #endregion
-
     #region USERCHANGETYPE
     /// <summary>
     /// User change type.
