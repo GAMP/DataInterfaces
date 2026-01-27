@@ -373,7 +373,7 @@ namespace SharedLib.Configuration
         public ServiceConfig()
         {
             Network = new ServiceNetworkConfig();
-            Database = new ServiceDatabaseConfig();
+            Database = new Gizmo.DAL.ServiceDatabaseConfig();
             Web = new ServiceWebConfig();
             FileSystem = new ServiceFileSystemConfig();
             General = new ServiceGeneralConfig();
@@ -405,7 +405,7 @@ namespace SharedLib.Configuration
         [Category("Database")]
         [Description("Network configuration.")]
         [DataMember(Order = 1)]
-        public ServiceDatabaseConfig Database
+        public Gizmo.DAL.ServiceDatabaseConfig Database
         {
             get;
             set;
@@ -500,7 +500,6 @@ namespace SharedLib.Configuration
         {
             base.SetDefaults();
             Network.SetDefaults();
-            Database.SetDefaults();
             Web.SetDefaults();
             FileSystem.SetDefaults();
             General.SetDefaults();
@@ -673,58 +672,7 @@ namespace SharedLib.Configuration
         #endregion
     }
 
-    /// <summary>
-    /// Service database configuration class.
-    /// </summary>
-    [Serializable()]
-    [DataContract()]
-    public class ServiceDatabaseConfig : ConfigBase
-    {
-        #region PROPERTIES
 
-        /// <summary>
-        /// Gets or Sets type of this database.          
-        /// </summary>
-        /// <remarks>
-        /// 0 MySQL 1 MSSQL
-        /// </remarks>
-        [Category("Database")]
-        [DefaultValue(Gizmo.DAL.DatabaseType.MSSQLEXPRESS)]
-        [Description("Specifies database type.")]
-        [DataMember()]
-        public Gizmo.DAL.DatabaseType DbType
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Gets or sets database connection string.
-        /// </summary>
-        [Category("Database")]
-        [DefaultValue(null)]
-        [Description("Specifies database connection string.")]
-        [DataMember()]
-        public string DbConnectionString
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Database command timeout.
-        /// </summary>
-        [Category("Database")]
-        [DefaultValue(null)]
-        [Description("Specifies database command timeout.")]
-        [DataMember()]
-        public int? CommandTimeout
-        {
-            get; set;
-        }
-
-        #endregion
-    }
 
     /// <summary>
     /// Service general configuration class.
