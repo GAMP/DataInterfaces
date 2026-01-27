@@ -8,7 +8,7 @@
         /// <summary>
         /// Backup succeeded.
         /// </summary>
-        Sucess = 0,
+        Success = 0,
         /// <summary>
         /// Database not initialized.
         /// </summary>
