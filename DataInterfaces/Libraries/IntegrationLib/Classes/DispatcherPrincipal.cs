@@ -1,4 +1,6 @@
-﻿using SharedLib.Dispatcher;
+﻿using Gizmo.Server;
+using Gizmo.Server.Security;
+using SharedLib.Dispatcher;
 using System.Security.Claims;
 
 namespace IntegrationLib
@@ -9,7 +11,7 @@ namespace IntegrationLib
     /// <remarks>
     /// Provides means for accessing current identity based on calling dispatcher.
     /// </remarks>
-    public class DispatcherPrincipal : ClaimsPrincipal, IDispatcherPrincipal
+    public class DispatcherPrincipal : ClaimsPrincipal, IDispatcherPrincipal, IGizmoServerPrincipal
     {
         #region CONSTRUCTOR
 
@@ -22,7 +24,7 @@ namespace IntegrationLib
             : base(identity)
         {
             dispatcher.ThrowDispatcherNull();
-            Dispacther = dispatcher;
+            Dispatcher = dispatcher;
         }
 
         #endregion
@@ -32,7 +34,7 @@ namespace IntegrationLib
         /// <summary>
         /// Gets message dispatcher.
         /// </summary>
-        public IMessageDispatcher Dispacther
+        public IMessageDispatcher Dispatcher
         {
             get;
             private set;
@@ -45,6 +47,12 @@ namespace IntegrationLib
         {
             get { return Identity as IUserIdentity; }
         }
+
+        /// <inheritdoc/>
+        public UserRoles Role => UserIdentity?.UserId == null ? UserRoles.None : UserIdentity.Role;
+
+        /// <inheritdoc/>
+        public int? UserId => UserIdentity?.UserId ;
 
         #endregion
     }

@@ -12,7 +12,7 @@ namespace IntegrationLib
         /// <summary>
         /// Gets dispatcher.
         /// </summary>
-        IMessageDispatcher Dispacther { get; }
+        IMessageDispatcher Dispatcher { get; }
 
         /// <summary>
         /// Gets user identity.
