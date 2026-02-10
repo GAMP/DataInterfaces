@@ -18,7 +18,7 @@ namespace ServerService
         /// This event is used to notify modules of user balance change.
         /// </summary>
         /// <param name="userId">User id.</param>
-        void ScheduleUserBalanceEvent(int? userId); 
+        void ScheduleUserBalanceEvent(int userId); 
 
         /// <summary>
         /// Occurs on server startup.
