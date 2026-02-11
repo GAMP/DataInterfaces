@@ -1,15 +1,12 @@
 ﻿using SharedLib;
 using System;
-using System.Runtime.Serialization;
 
 namespace ServerService
 {
     /// <summary>
     /// User profile event arguments.
     /// </summary>
-    [Serializable()]
-    [DataContract()]
-    public class UserProfileEventArgs : UserProfileChangeEventArgs
+    public sealed class UserProfileEventArgs : UserProfileChangeEventArgs
     {
         #region CONSTRUCTOR
         /// <summary>
@@ -25,7 +22,7 @@ namespace ServerService
         #endregion
 
         #region FIELDS
-        private object userProfile;
+        private object _userProfile;
         #endregion
 
         #region PROPERTIES
@@ -33,11 +30,10 @@ namespace ServerService
         /// <summary>
         /// Gets user profile.
         /// </summary>
-        [DataMember()]
         public object UserProfile
         {
-            get { return userProfile; }
-            protected set { userProfile = value; }
+            get { return _userProfile; }
+            protected set { _userProfile = value; }
         }
 
         #endregion

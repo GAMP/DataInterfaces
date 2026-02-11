@@ -1,15 +1,11 @@
 ﻿using SharedLib;
-using System;
-using System.Runtime.Serialization;
 
 namespace ServerService
 {
     /// <summary>
     /// User state changed event args.
     /// </summary>
-    [Serializable()]
-    [DataContract()]
-    public class UserStateChangeEventArgs : UserIdEventArgsBase
+    public sealed class UserStateChangeEventArgs : UserIdEventArgsBase
     {
         #region CONSTRUCTOR
         /// <summary>
@@ -36,7 +32,6 @@ namespace ServerService
         public LoginState NewState
         {
             get;
-            protected set;
         }
 
         /// <summary>
@@ -45,7 +40,6 @@ namespace ServerService
         public LoginState OldState
         {
             get;
-            protected set;
         }
 
         /// <summary>
@@ -57,17 +51,6 @@ namespace ServerService
             private set;
         }
 
-        #endregion
-
-        #region OVERRIDES
-        /// <summary>
-        /// Converts to string.
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString()
-        {
-            return string.Format("User Id:{0} New State {1} Old State: {2}", this.UserId, this.NewState, this.OldState);
-        }
         #endregion
     }
 }

@@ -3,7 +3,7 @@
     /// <summary>
     /// Service settings change event args.
     /// </summary>
-    public class SettingsChangedEventArgs : System.EventArgs
+    public sealed class SettingsChangedEventArgs : System.EventArgs
     {
     }
 }

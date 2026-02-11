@@ -1,15 +1,11 @@
 ﻿using SharedLib;
-using System;
-using System.Runtime.Serialization;
 
 namespace ServerService
 {
     /// <summary>
     /// User smart card change event args.
     /// </summary>
-    [Serializable()]
-    [DataContract()]
-    public class UserSmartCardChangedEventArgs : UserProfileChangeEventArgs
+    public sealed class UserSmartCardChangedEventArgs : UserProfileChangeEventArgs
     {
         #region CONSTRUCTOR
         /// <summary>
@@ -31,7 +27,6 @@ namespace ServerService
         public string SmartCardUID
         {
             get;
-            protected set;
         }
 
         #endregion

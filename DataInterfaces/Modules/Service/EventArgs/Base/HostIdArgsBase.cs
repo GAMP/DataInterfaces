@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Runtime.Serialization;
 
 namespace ServerService
 {
     /// <summary>
     /// Base arguments for host events.
     /// </summary>
-    [Serializable()]
-    [DataContract()]
     public abstract class HostIdArgsBase : EventArgs
     {
         #region CONSTRUCTOR
@@ -26,7 +23,6 @@ namespace ServerService
         /// <summary>
         /// Gets host id.
         /// </summary>
-        [DataMember()]
         public int HostId
         {
             get;

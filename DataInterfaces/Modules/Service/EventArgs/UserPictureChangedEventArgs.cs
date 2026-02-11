@@ -1,15 +1,11 @@
 ﻿using SharedLib;
-using System;
-using System.Runtime.Serialization;
 
 namespace ServerService
 {
     /// <summary>
-    /// User pricture changed event args.
+    /// User picture changed event args.
     /// </summary>
-    [Serializable()]
-    [DataContract()]
-    public class UserPictureChangedEventArgs : UserProfileChangeEventArgs
+    public sealed class UserPictureChangedEventArgs : UserProfileChangeEventArgs
     {
         #region CONSTRUCTOR
         /// <summary>
@@ -31,7 +27,6 @@ namespace ServerService
         /// <summary>
         /// Gets old picture.
         /// </summary>
-        [DataMember()]
         public byte[] OldPicture
         {
             get;
@@ -41,7 +36,6 @@ namespace ServerService
         /// <summary>
         /// Gets new picture.
         /// </summary>
-        [DataMember()]
         public byte[] NewPicture
         {
             get;

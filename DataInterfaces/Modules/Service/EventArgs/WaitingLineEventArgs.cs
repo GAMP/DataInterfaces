@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 
 namespace ServerService
 {
     /// <summary>
     /// Waiting line event args.
     /// </summary>
-    [Serializable()]
-    [DataContract()]
-    public class WaitingLineEventArgs : EventArgs
+    public sealed class WaitingLineEventArgs : EventArgs
     {
         #region CONSTRUCTOR
 
@@ -31,7 +28,6 @@ namespace ServerService
         /// <summary>
         /// Gets or sets host group id.
         /// </summary>
-        [DataMember()]
         public int? HostGroupId
         {
             get; set;
@@ -40,7 +36,6 @@ namespace ServerService
         /// <summary>
         /// Gets affected lines.
         /// </summary>
-        [DataMember()]
         public IEnumerable<WaitingEntryInfo> ActiveEntries
         {
             get; set;

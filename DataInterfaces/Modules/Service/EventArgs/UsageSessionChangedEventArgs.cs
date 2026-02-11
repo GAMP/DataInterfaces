@@ -1,14 +1,9 @@
-﻿using System;
-using System.Runtime.Serialization;
-
-namespace ServerService
+﻿namespace ServerService
 {
     /// <summary>
     /// User usage session changed event args.
     /// </summary>
-    [Serializable()]
-    [DataContract()]
-    public class UsageSessionChangedEventArgs : UserIdEventArgsBase
+    public sealed class UsageSessionChangedEventArgs : UserIdEventArgsBase
     {
         #region CONSTRUCTOR
         /// <summary>
@@ -27,9 +22,8 @@ namespace ServerService
         #region PROPERTIES
 
         /// <summary>
-        /// Gets current time poroduct name.
+        /// Gets current time product name.
         /// </summary>
-        [DataMember()]
         public string CurrentTimeProduct
         {
             get;
@@ -39,7 +33,6 @@ namespace ServerService
         /// <summary>
         /// Gets current usage type.
         /// </summary>
-        [DataMember()]
         public UsageType CurrentUsageType
         {
             get;

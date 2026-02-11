@@ -1,15 +1,11 @@
 ﻿using SharedLib;
-using System;
-using System.Runtime.Serialization;
 
 namespace ServerService
 {
     /// <summary>
     /// User email changed event args.
     /// </summary>
-    [Serializable()]
-    [DataContract()]
-    public class UserEmailChangedEventArgs : UserProfileChangeEventArgs
+    public sealed class UserEmailChangedEventArgs : UserProfileChangeEventArgs
     {
         #region CONSTRUCTOR
         /// <summary>
@@ -31,7 +27,6 @@ namespace ServerService
         /// <summary>
         /// Gets new email value.
         /// </summary>
-        [DataMember()]
         public string NewEmail
         {
             get;
@@ -41,7 +36,6 @@ namespace ServerService
         /// <summary>
         /// Gets old email value.
         /// </summary>
-        [DataMember()]
         public string OldEmail
         {
             get;

@@ -1,18 +1,13 @@
-﻿using ProtoBuf;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
 
 namespace ServerService
 {
     /// <summary>
     /// Reservation change server event args.
     /// </summary>
-    [DataContract()]
-    [Serializable()]
-    [ProtoContract()]
-    public class ReservationEventArgs : EventArgs
+    public sealed class ReservationEventArgs : EventArgs
     {
         #region CONSTRUCTOR
         /// <summary>
@@ -45,8 +40,6 @@ namespace ServerService
         /// <summary>
         /// Gets reservation id.
         /// </summary>
-        [ProtoMember(1)]
-        [DataMember()]
         public int ReservationId
         {
             get; protected set;
@@ -55,8 +48,6 @@ namespace ServerService
         /// <summary>
         /// Gets reserved users.
         /// </summary>
-        [ProtoMember(2)]
-        [DataMember()]
         public HashSet<int> Users
         {
             get;set;
@@ -65,8 +56,6 @@ namespace ServerService
         /// <summary>
         /// Gets reserved hosts.
         /// </summary>
-        [ProtoMember(3)]
-        [DataMember()]
         public HashSet<int> Hosts
         {
             get;set;

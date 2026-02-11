@@ -1,15 +1,11 @@
 ﻿using SharedLib;
-using System;
-using System.Runtime.Serialization;
 
 namespace ServerService
 {
     /// <summary>
     /// User password changed event args.
     /// </summary>
-    [Serializable()]
-    [DataContract()]
-    public class UserPasswordChangedEventArgs : UserProfileChangeEventArgs
+    public sealed class UserPasswordChangedEventArgs : UserProfileChangeEventArgs
     {
         #region CONSTRUCTOR
         /// <summary>
@@ -29,7 +25,6 @@ namespace ServerService
         /// <summary>
         /// Gets new password value.
         /// </summary>
-        [DataMember()]
         public string NewPassword
         {
             get;
@@ -39,7 +34,6 @@ namespace ServerService
         /// <summary>
         /// Gets if user password equals to null or empty thus causing a password reset.
         /// </summary>
-        [DataMember()]
         public bool IsReset
         {
             get { return string.IsNullOrWhiteSpace(NewPassword); }

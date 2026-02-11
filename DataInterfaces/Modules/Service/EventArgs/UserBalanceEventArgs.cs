@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Runtime.Serialization;
 
 namespace ServerService
 {
     /// <summary>
     /// User balance change event args.
     /// </summary>
-    [Serializable()]
-    [DataContract()]
-    public class UserBalanceEventArgs : UserIdEventArgsBase
+    public sealed class UserBalanceEventArgs : UserIdEventArgsBase
     {
         #region CONSTRUCTOR
         /// <summary>
@@ -26,10 +23,9 @@ namespace ServerService
         /// <summary>
         /// Gets balance.
         /// </summary>
-        [DataMember()]
         public UserBalance Balance
         {
-            get; protected set;
+            get;
         }
         #endregion
     }

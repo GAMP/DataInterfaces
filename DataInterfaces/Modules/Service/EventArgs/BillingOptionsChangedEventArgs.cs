@@ -1,15 +1,11 @@
 ﻿using SharedLib;
-using System;
-using System.Runtime.Serialization;
 
 namespace ServerService
 {
     /// <summary>
     /// Billing option changed args.
     /// </summary>
-    [Serializable()]
-    [DataContract()]
-    public class BillingOptionsChangedEventArgs : UserProfileChangeEventArgs
+    public sealed class BillingOptionsChangedEventArgs : UserProfileChangeEventArgs
     {
         #region CONSTRUCTOR
         /// <summary>
@@ -27,10 +23,9 @@ namespace ServerService
         /// <summary>
         /// Gets billing options.
         /// </summary>
-        [DataMember()]
         public Gizmo.Web.Api.Models.BillingOption? Options
         {
-            get; protected set;
+            get;
         }
         #endregion
     }

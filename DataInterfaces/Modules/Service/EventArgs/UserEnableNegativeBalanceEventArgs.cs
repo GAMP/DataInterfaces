@@ -1,15 +1,11 @@
 ﻿using SharedLib;
-using System;
-using System.Runtime.Serialization;
 
 namespace ServerService
 {
     /// <summary>
     /// User enable negative balance event args.
     /// </summary>
-    [Serializable()]
-    [DataContract()]
-    public class UserEnableNegativeBalanceEventArgs : UserProfileChangeEventArgs
+    public sealed class UserEnableNegativeBalanceEventArgs : UserProfileChangeEventArgs
     {
         #region CONSTRUCTOR
         /// <summary>
@@ -27,10 +23,9 @@ namespace ServerService
         /// <summary>
         /// Gets if negative balance allowed for user.
         /// </summary>
-        [DataMember()]
         public bool? Enabled
         {
-            get; protected set;
+            get;
         }
         #endregion
     }

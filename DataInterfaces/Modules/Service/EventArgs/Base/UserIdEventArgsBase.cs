@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Runtime.Serialization;
 
 namespace ServerService
 {
     /// <summary>
     /// Base class for event args with user id.
     /// </summary>
-    [Serializable()]
-    [DataContract()]
     public abstract class UserIdEventArgsBase : EventArgs
     {
         #region CONSTRUCTOR
@@ -26,7 +23,6 @@ namespace ServerService
         /// <summary>
         /// Gets user id.
         /// </summary>
-        [DataMember()]
         public int UserId
         {
             get;

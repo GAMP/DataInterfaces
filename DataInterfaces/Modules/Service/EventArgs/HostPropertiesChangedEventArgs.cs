@@ -1,16 +1,12 @@
 ﻿using SharedLib;
-using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 
 namespace ServerService
 {
     /// <summary>
     /// Host properties changed event args.
     /// </summary>
-    [Serializable()]
-    [DataContract()]
-    public class HostPropertiesChangedEventArgs : HostIdArgsBase
+    public sealed class HostPropertiesChangedEventArgs : HostIdArgsBase
     {
         #region CONSTRUCTOR
 
@@ -43,7 +39,7 @@ namespace ServerService
         #endregion
 
         #region FIELDS
-        private IDictionary<HostPropertyType, object> properties;
+        private IDictionary<HostPropertyType, object> _properties;
         #endregion
 
         #region PROPERTIES
@@ -51,18 +47,16 @@ namespace ServerService
         /// <summary>
         /// Gets affected properties.
         /// </summary>
-        [DataMember()]
         public IDictionary<HostPropertyType, object> Properties
         {
             get
             {
-                if (properties == null)
-                    properties = new Dictionary<HostPropertyType, object>();
-                return properties;
+                _properties ??= new Dictionary<HostPropertyType, object>();
+                return _properties;
             }
             private set
             {
-                this.properties = value;
+                _properties = value;
             }
         }
 
@@ -81,7 +75,7 @@ namespace ServerService
         }
 
         /// <summary>
-        /// Gets the spcecified property.
+        /// Gets the specified property.
         /// </summary>
         /// <typeparam name="T">Object type of the property.</typeparam>
         /// <param name="type">HostPropertyType.</param>

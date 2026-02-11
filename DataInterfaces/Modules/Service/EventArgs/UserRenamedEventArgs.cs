@@ -1,14 +1,11 @@
 ﻿using SharedLib;
 using System;
-using System.Runtime.Serialization;
 
 namespace ServerService
 {
     /// <summary>
     /// User renamed event args.
     /// </summary>
-    [Serializable()]
-    [DataContract()]
     public class UserRenamedEventArgs : UserProfileChangeEventArgs
     {
         #region CONSTRUCTOR
@@ -42,7 +39,6 @@ namespace ServerService
         /// <summary>
         /// Gets new user name.
         /// </summary>
-        [DataMember()]
         public string NewUserName
         {
             get;
@@ -52,7 +48,6 @@ namespace ServerService
         /// <summary>
         /// Gets old user name.
         /// </summary>
-        [DataMember()]
         public string OldUserName
         {
             get;

@@ -1,14 +1,9 @@
-﻿using System;
-using System.Runtime.Serialization;
-
-namespace ServerService
+﻿namespace ServerService
 {
     /// <summary>
     /// User session changed event args.
     /// </summary>
-    [Serializable()]
-    [DataContract()]
-    public class UserSessionChangedEventArgs : UserIdEventArgsBase
+    public sealed class UserSessionChangedEventArgs : UserIdEventArgsBase
     {
         #region CONSTRUCTOR
         /// <summary>
@@ -33,28 +28,25 @@ namespace ServerService
         /// <summary>
         /// Gets new state.
         /// </summary>
-        [DataMember()]
         public Gizmo.Web.Api.Models.UserSessionState State
         {
-            get; protected set;
+            get;
         }
 
         /// <summary>
         /// Gets span.
         /// </summary>
-        [DataMember()]
         public double Span
         {
-            get; protected set;
+            get;
         }
 
         /// <summary>
         /// Gets slot.
         /// </summary>
-        [DataMember()]
         public int Slot
         {
-            get; protected set;
+            get;
         }
 
         /// <summary>
@@ -62,7 +54,7 @@ namespace ServerService
         /// </summary>
         public int HostId
         {
-            get; protected set;
+            get;
         }
 
         #endregion

@@ -1,15 +1,12 @@
 ﻿using SharedLib;
 using System;
-using System.Runtime.Serialization;
 
 namespace ServerService
 {
     /// <summary>
     /// User enabled event args.
     /// </summary>
-    [Serializable()]
-    [DataContract()]
-    public class UserEnabledChangedEventArgs : UserProfileChangeEventArgs
+    public sealed class UserEnabledChangedEventArgs : UserProfileChangeEventArgs
     {
         #region CONSTRUCTOR
 
@@ -35,17 +32,15 @@ namespace ServerService
          : base(userId, UserChangeType.Enabled)
         {
             Disabled = disabled;
-            EnableDate = enableDate;
-            DisabledDate = disabledDate;
+            _enableDate = enableDate;
+            _disabledDate = disabledDate;
         }
 
         #endregion
 
         #region FIELDS
-        [OptionalField(VersionAdded = 1)]
-        private DateTime? enableDate;
-        [OptionalField(VersionAdded = 1)]
-        private DateTime? disabledDate;
+        private readonly DateTime? _enableDate;
+        private readonly DateTime? _disabledDate;
         #endregion
 
         #region PROPERTIES
@@ -53,31 +48,25 @@ namespace ServerService
         /// <summary>
         /// Gets if user is disabled.
         /// </summary>
-        [DataMember()]
         public bool Disabled
         {
             get;
-            protected set;
         }
 
         /// <summary>
         /// Gets enable date.
         /// </summary>
-        [DataMember()]
         public DateTime? EnableDate
         {
-            get { return enableDate; }
-            protected set { enableDate = value; }
+            get { return _enableDate; }
         }
 
         /// <summary>
         /// Gets disabled date.
         /// </summary>
-        [DataMember()]
         public DateTime? DisabledDate
         {
-            get { return disabledDate; }
-            protected set { disabledDate = value; }
+            get { return _disabledDate; }
         }
 
         #endregion

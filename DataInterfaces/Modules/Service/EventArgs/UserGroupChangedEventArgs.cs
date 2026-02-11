@@ -1,15 +1,11 @@
 ﻿using SharedLib;
-using System;
-using System.Runtime.Serialization;
 
 namespace ServerService
 {
     /// <summary>
     /// User password changed event args.
     /// </summary>
-    [Serializable()]
-    [DataContract()]
-    public class UserGroupChangedEventArgs : UserProfileChangeEventArgs
+    public sealed class UserGroupChangedEventArgs : UserProfileChangeEventArgs
     {
         #region CONSTRUCTOR
         /// <summary>
@@ -31,21 +27,17 @@ namespace ServerService
         /// <summary>
         /// Gets old user group id.
         /// </summary>
-        [DataMember()]
         public int OldGroupId
         {
             get;
-            protected set;
         }
 
         /// <summary>
         /// Gets new user group id.
         /// </summary>
-        [DataMember()]
         public int NewGroupId
         {
             get;
-            protected set;
         }
 
         #endregion

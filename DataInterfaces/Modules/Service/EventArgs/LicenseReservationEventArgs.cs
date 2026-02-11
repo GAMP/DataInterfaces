@@ -1,15 +1,12 @@
 ﻿using IntegrationLib;
 using System;
-using System.Runtime.Serialization;
 
 namespace ServerService
 {
     /// <summary>
     /// Licenses reservation event args.
     /// </summary>
-    [Serializable()]
-    [DataContract()]
-    public class LicenseReservationEventArgs : EventArgs
+    public sealed class LicenseReservationEventArgs : EventArgs
     {
         #region CONSTRUCTOR
         /// <summary>
@@ -29,7 +26,6 @@ namespace ServerService
         /// <summary>
         /// Gets if reservation was released.
         /// </summary>
-        [DataMember()]
         public bool Released
         {
             get;
@@ -39,7 +35,6 @@ namespace ServerService
         /// <summary>
         /// Gets license reservation.
         /// </summary>
-        [DataMember()]
         public ILicenseReservation Reservation
         {
             get;
