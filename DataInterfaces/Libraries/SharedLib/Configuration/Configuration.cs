@@ -294,7 +294,7 @@ namespace SharedLib.Configuration
         /// </summary>
         [Category("Network")]
         [Description("Specifies TCP keep alive timeout.")]
-        [DefaultValue(1000)]
+        [DefaultValue(1000L)]
         [DataMember(Order = 1)]
         public virtual long KeepAliveTimeout
         {
@@ -307,7 +307,7 @@ namespace SharedLib.Configuration
         /// </summary>
         [Category("Network")]
         [Description("Specifies TCP keep alive period.")]
-        [DefaultValue(1000)]
+        [DefaultValue(1000L)]
         [DataMember(Order = 2)]
         public virtual long KeepAlivePeriod
         {
