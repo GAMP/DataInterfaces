@@ -10,7 +10,7 @@ namespace ServerService
     [Serializable()]
     [DataContract()]
     [ProtoContract()]
-    public class UserBalance : Gizmo.IUserBalance
+    public sealed class UserBalance : Gizmo.IUserBalance
     {
         #region CONSTRUCTOR
 

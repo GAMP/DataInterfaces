@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace ServerService
 {
     /// <summary>
-    /// Takse skip filter base.
+    /// Take skip filter base.
     /// </summary>
     [Serializable()]
     [DataContract()]
