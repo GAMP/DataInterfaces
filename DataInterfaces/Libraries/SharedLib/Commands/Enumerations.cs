@@ -406,6 +406,8 @@ namespace SharedLib.Commands
         AssistanceRequestAnyPendingGet = 80,
         AssistanceRequestPendingCancel = 81,
         GetCurrentUserGroupRequiredInfo = 82,
+        ReservationCurrentConfirmedGet = 83,
+        ReservationCurrentConfirmedSet = 84,
     }
     #endregion
 
