@@ -12,7 +12,7 @@ namespace SharedLib.Dispatcher
         /// <summary>
         /// Throws argument exception if specified dispatcher is null.
         /// </summary>
-        /// <param name="dispatcher">Dispathcer instance.</param>
+        /// <param name="dispatcher">Dispatcher instance.</param>
         public static void ThrowDispatcherNull(this IMessageDispatcher dispatcher)
         {
             if (dispatcher == null)
@@ -22,7 +22,7 @@ namespace SharedLib.Dispatcher
         /// <summary>
         /// Throws argument exception if current dispatcher is invalid.
         /// </summary>
-        /// <param name="dispatcher">Dispathcer instance.</param>
+        /// <param name="dispatcher">Dispatcher instance.</param>
         public static void ThrowIfInvalidDispatcher(this IMessageDispatcher dispatcher)
         {
             dispatcher.ThrowDispatcherNull();
