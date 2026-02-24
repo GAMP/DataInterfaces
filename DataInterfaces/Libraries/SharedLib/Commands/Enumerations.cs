@@ -408,6 +408,7 @@ namespace SharedLib.Commands
         GetCurrentUserGroupRequiredInfo = 82,
         ReservationCurrentConfirmedGet = 83,
         ReservationCurrentConfirmedSet = 84,
+        ReservationPayments = 85,
     }
     #endregion
 
