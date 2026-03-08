@@ -8,8 +8,6 @@ namespace CyClone.Core
     /// </summary>
     public interface IcyFileSystemInfo
     {
-        #region PROPERTIES
-
         /// <summary>
         /// Gets or sets attributes.
         /// </summary>
@@ -137,9 +135,6 @@ namespace CyClone.Core
         /// </summary>
         string RelativeDirectory { get; }
 
-        #endregion
-
-        #region FUNCTIONS
 
         /// <summary>
         /// Deletes file system entry.
@@ -153,14 +148,14 @@ namespace CyClone.Core
 
         /// <summary>
         /// Sets the current file info to the entry.
-        /// <remarks>File info includes File Times and File Atributes.</remarks>
+        /// <remarks>File info includes File Times and File Attributes.</remarks>
         /// </summary>
         void SetFileInfo();
 
         /// <summary>
         /// Sets the current attributes to the entry.
         /// </summary>
-        void SetAtributes();
+        void SetAttributes();
 
         /// <summary>
         /// Sets the current file times to the entry.
@@ -176,7 +171,7 @@ namespace CyClone.Core
         /// <summary>
         /// Gets file info.
         /// </summary>
-        /// <returns>True for sucess otherwise false.</returns>
+        /// <returns>True for success otherwise false.</returns>
         bool GetFileInfo();
 
         /// <summary>
@@ -185,7 +180,5 @@ namespace CyClone.Core
         /// <param name="item">File system entry.</param>
         /// <returns>True or false.</returns>
         bool IsEqual(IcyFileSystemInfo item);
-
-        #endregion
     }
 }
