@@ -200,9 +200,9 @@ namespace SharedLib.Dispatcher
         #region FUNCTIONS
 
         /// <summary>
-        /// Checks if the current operation command has exact paramters count.
+        /// Checks if the current operation command has exact parameters count.
         /// </summary>
-        /// <param name="count">Paramters count.</param>
+        /// <param name="count">Parameters count.</param>
         /// <returns>True or false.</returns>
         public bool HasParamsCount(int count)
         {
@@ -210,9 +210,9 @@ namespace SharedLib.Dispatcher
         }
 
         /// <summary>
-        /// Checks if the current operation command has a exact operation paramters count.
+        /// Checks if the current operation command has at least the specified number of operation parameters.
         /// </summary>
-        /// <param name="count">Paramters count.</param>
+        /// <param name="count">Minimum parameters count.</param>
         /// <returns>True or false.</returns>
         public bool HasOpParametersCount(int count)
         {
@@ -235,7 +235,7 @@ namespace SharedLib.Dispatcher
         /// Gets the parameter of type T at specified index.
         /// </summary>
         /// <typeparam name="T">Parameter type.</typeparam>
-        /// <param name="index">Paramter index.</param>
+        /// <param name="index">Parameter index.</param>
         /// <remarks>
         /// If there are no parameter at specified index default value of T type is returned.
         /// </remarks>
