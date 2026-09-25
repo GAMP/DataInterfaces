@@ -10,7 +10,7 @@ namespace System.Threading.Tasks
     public static class ParallelEx
     {
         /// <summary>
-        /// Invokes event handlers in parallel.
+        /// Invokes event handlers sequentially on the calling thread.
         /// </summary>
         /// <typeparam name="TEventArgs">Event args type.</typeparam>
         /// <param name="sender">Event sender.</param>
@@ -34,8 +34,12 @@ namespace System.Threading.Tasks
         }
 
         /// <summary>
-        /// Invokes event handlers in parallel.
+        /// Invokes event handlers sequentially on the calling thread.
         /// </summary>
+        /// <remarks>
+        /// Every handler is invoked even if a previous one throws, the exceptions are rethrown together once all handlers completed.
+        /// Handlers are not invoked in parallel, a handler running on another thread could not re-enter a lock held by the caller raising the event.
+        /// </remarks>
         /// <typeparam name="TEventArgs">Event args type.</typeparam>
         /// <param name="sender">Event sender.</param>
         /// <param name="invocationList">Event handlers list.</param>
@@ -51,8 +55,8 @@ namespace System.Threading.Tasks
             if (args == null)
                 throw new ArgumentNullException(nameof(args));
 
-            var exceptions = new ConcurrentQueue<Exception>();
-            Parallel.ForEach(invocationList, (e) =>
+            var exceptions = new List<Exception>();
+            foreach (var e in invocationList)
             {
                 try
                 {
@@ -60,9 +64,9 @@ namespace System.Threading.Tasks
                 }
                 catch (Exception ex)
                 {
-                    exceptions.Enqueue(ex);
+                    exceptions.Add(ex);
                 }
-            });
+            }
 
             if (exceptions.Count > 0) throw new AggregateException(exceptions);
         }
