@@ -1254,6 +1254,7 @@ namespace SharedLib
         /// <summary>
         /// Auto it script.
         /// </summary>
+        [Obsolete("AutoIt scripts are no longer supported.")]
         [CanUserAssign(true)]
         [Description("Autoit")]
         AutoItScript,
